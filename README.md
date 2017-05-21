@@ -1,2 +1,1 @@
-# wslu
-Windows Subsystem For Linux Utility
+# wslu - Windows 10 linux Subsystem Utility
