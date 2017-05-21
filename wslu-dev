@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+
+# wslu - Windows 10 linux Subsystem Utility
+
+# Copyright(c) 2017 Patrick Wu J M <wotingwu@live.com>
+
+# For more help for wslu, visit the following site:
+# http://garage.patrickwu.cf/wslu
+
+# data segment
+wslu_version=0.14
+
+## color
+red=`tput setaf 1`
+green=`tput setaf 2`
+brown=`tput setaf 3`
+blue=`tput setaf 4`
+purple=`tput setaf 5`
+cyan=`tput setaf 6`
+yellow=`tput setaf 7`
+bold=`tput bold`
+reset=`tput sgr0`
+
+## constant
+help="Windows 10 Linux Subsystem Utility
+Usage: wslu [version|help|package|system|fetch] <options>
+
+For more help for wslu, visit the following site:
+http://garage.patrickwu.cf/wslu"
+
+windows_build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
+
+## fetch
+hostname="$(hostname)"
+release="$(lsb_release -d -s)"
+kernel="$(uname -sr)"
+uptime="$(uptime -p | sed 's/up //')"
+packages="$((packages+=$(dpkg --get-selections | grep -cv deinstall$)))"
+build="Windows 10 Build $windows_build"
+shell="$(basename ${SHELL})"
+
+
+# commands
+## general
+if [[ "$1" == "version" ]]; then
+	if [[ "$2" == "-n" ]]; then
+		echo $wslu_version
+	else
+		echo "wslu v$wslu_version"
+	fi
+elif [[ "$1" == "help" ]]; then
+	echo -e "$help"
+## package segment
+elif [[ "$1" == "package" ]]; then
+	if  [[ "$2" == "count" ]]; then
+		echo $packages
+	else
+		echo -e "$help"
+	fi
+	
+## system segment
+elif [[ "$1" == "system" ]]; then
+	if  [[ "$2" == "-O" ]] || [[ "$2" == "--os-version" ]]; then
+		echo $build
+	else
+		echo "os: $windows_build"
+	fi
+## fetch segment
+elif [[ "$1" == "fetch" ]]; then
+	cat <<EOF
+
+${cyan} /\$\$      /\$\$  /\$\$\$\$\$\$  /\$\$       ${red}Windows 10 Linux Subsytem${reset}
+${cyan}| \$\$  /\$ | \$\$ /\$\$__  \$\$| \$\$	  ${red}${USER}${reset}@${red}${hostname}${reset}
+${cyan}| \$\$ /\$\$\$| \$\$| \$\$${reset}  ${cyan}\\__/| \$\$${reset}       ${red}BUILD:${reset}	${build}
+${cyan}| \$\$${reset}${cyan}/\$\$${reset} ${cyan}\$\$${reset} ${cyan}\$\$${reset}${cyan}|  \$\$\$\$\$\$${reset} ${cyan}| \$\$${reset}       ${red}RELEASE:${reset}	${release}
+${cyan}| \$\$\$\$${reset}${cyan}_  \$\$\$\$${reset} ${cyan}\\____  \$\$${reset}${cyan}| \$\$${reset}	  ${red}KERNEL:${reset}	${kernel}
+${cyan}| \$\$\$${reset}${cyan}/ \\  \$\$\$${reset} ${cyan}/\$\$${reset}  ${cyan}\\ \$\$${reset}${cyan}| \$\$${reset}	  ${red}UPTIME:${reset}	${uptime}
+${cyan}| \$\$${reset}${cyan}/   \\  \$\$${reset}${cyan}|  \$\$\$\$\$\$${reset}${cyan}/| \$\$\$\$\$\$\$\$${reset} ${red}SHELL:${reset}	${shell}
+${cyan}|__/     \\__/ \\______/ |________/${reset} ${red}PACKAGES:${reset}	${packages}
+
+EOF
+else
+	echo -e "$help"
+fi
+
