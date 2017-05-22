@@ -75,6 +75,16 @@ elif [[ "$1" == "help" ]]; then
 elif [[ "$1" == "package" ]]; then
 	if  [[ "$2" == "count" ]]; then
 		echo "Total Installed Package: $packages"
+	elif [[ "$2" == "install" ]]; then
+		if [[ -n $3 ]]; then
+			echo "${info}Adding repository..."
+			sudo add-apt-repository -y $3
+			echo "${info}Updating source..."
+			sudo apt-get update
+			echo "${info}Installation begin...."
+			sudo apt-get install -y $2
+			echo "${info}$2 installed."
+		fi
 	elif [[ "$2" == "shortcut" ]]; then
 		if [[ -n $3 ]]; then
 			cname="$3"
