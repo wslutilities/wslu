@@ -9,7 +9,7 @@
 # http://garage.patrickwu.cf/man/wslu
 
 # data segment
-wslu_version=0.15
+wslu_version=0.16
 
 ## color
 red=`tput setaf 1`
@@ -22,13 +22,20 @@ yellow=`tput setaf 7`
 bold=`tput bold`
 reset=`tput sgr0`
 
+## indicator
+info="[${cyan}info${reset}] "
+error="[${red}error${reset}] "
+warn="[${red}warn${reset}] "
+
+## constants
+help_short="wslu [help|version|shortcut|package|system|fetch] <options>"
 help="Windows 10 Linux Subsystem Utility
-Usage: wslu [version|help|package|system|fetch] <options>
+Usage: $help_short
 
 For more help for wslu, visit the following site:
 http://garage.patrickwu.cf/wslu"
 
-## Windows Side Data
+## Windows side data
 path_win()
 {
 	new_path="$(echo $1 | sed -e 's|\\|\\\\|g')"
@@ -44,7 +51,7 @@ tmp_path=`cmd.exe /k "echo %TMP% && exit" 2>&1`
 appdata_path=`cmd.exe /k "echo %USERPROFILE% && exit" 2>&1`
 windows_build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
 
-## fetch
+## system info
 hostname="$(hostname)"
 release="$(lsb_release -d -s)"
 kernel="$(uname -sr)"
@@ -104,6 +111,6 @@ ${cyan}|__/     \\__/ \\______/ |________/${reset} ${red}PACKAGES:${reset}	${pac
 
 EOF
 else
-	echo "$help"
+	echo "$help_short"
 fi
 
