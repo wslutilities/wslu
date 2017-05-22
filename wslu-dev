@@ -22,13 +22,26 @@ yellow=`tput setaf 7`
 bold=`tput bold`
 reset=`tput sgr0`
 
-## constant
 help="Windows 10 Linux Subsystem Utility
 Usage: wslu [version|help|package|system|fetch] <options>
 
 For more help for wslu, visit the following site:
 http://garage.patrickwu.cf/wslu"
 
+## Windows Side Data
+path_win()
+{
+	new_path="$(echo $1 | sed -e 's|\\|\\\\|g')"
+	echo $new_path
+}
+path_linux()
+{
+	new_path=`echo $1 | sed -e 's|\\|/|g' -e 's|^\([A-Za-z]\)\:/\(.*\)|/mnt/\L\1\E/\2|'`
+	echo $new_path
+}
+desktop_path=`reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Desktop" 2>&1 | sed -n 3p | awk '{ print $3 }'`
+tmp_path=`cmd.exe /k "echo %TMP% && exit" 2>&1`
+appdata_path=`cmd.exe /k "echo %USERPROFILE% && exit" 2>&1`
 windows_build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
 
 ## fetch
@@ -54,7 +67,13 @@ elif [[ "$1" == "help" ]]; then
 ## package segment
 elif [[ "$1" == "package" ]]; then
 	if  [[ "$2" == "count" ]]; then
-		echo $packages
+		echo "Total Installed Package: $packages"
+	elif [[ "$2" == "shortcut" ]]; then
+		if [[ -n $3 ]]; then
+			cname="$3"
+			dpath="$(path_win $desktop_path)"
+			powershell.exe '\$s=(New-Object -COM WScript.Shell).CreateShortcut('$dpath\\$cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \`\"DISPLAY=:0 $cname\`"\';\$s.Save();'
+		fi
 	else
 		echo -e "$help"
 	fi
