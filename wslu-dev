@@ -88,7 +88,7 @@ elif [[ "$1" == "package" ]]; then
 	else
 		echo -e "$help"
 	fi
-## shortcut
+## shortcut segment
 elif [[ "$1" == "shortcut" ]]; then
 	if [[ -n $2 ]]; then
 		cname="$2"
@@ -106,8 +106,12 @@ elif [[ "$1" == "shortcut" ]]; then
 elif [[ "$1" == "system" ]]; then
 	if  [[ "$2" == "-O" ]] || [[ "$2" == "--os-version" ]]; then
 		echo $build
+	elif  [[ "$2" == "-R" ]] || [[ "$2" == "--release" ]]; then
+		echo $release
+	elif  [[ "$2" == "-K" ]] || [[ "$2" == "--kernel" ]]; then
+		echo $kernel
 	else
-		echo "os: $windows_build"
+		echo "$release on $build (kernel:$kernel)"
 	fi
 ## fetch segment
 elif [[ "$1" == "fetch" ]]; then
