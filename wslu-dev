@@ -70,23 +70,28 @@ if [[ "$1" == "version" ]]; then
 		echo "wslu v$wslu_version"
 	fi
 elif [[ "$1" == "help" ]]; then
-	echo -e "$help"
+	echo "$help"
 ## package segment
 elif [[ "$1" == "package" ]]; then
-	if  [[ "$2" == "count" ]]; then
-		echo "Total Installed Package: $packages"
-	elif [[ "$2" == "install" ]]; then
+	if  [[ "$2" == "pulseaudio" ]]; then
+		echo "${warn}featue not implemented. Aborted"
+		exit 30
+	elif [[ "$2" == "vcxsrv" ]]; then
+		echo "${warn}featue not implemented. Aborted"
+		exit 30
+	else
 		if [[ -n $3 ]]; then
 			echo "${info}Adding repository..."
 			sudo add-apt-repository -y $3
 			echo "${info}Updating source..."
 			sudo apt-get update
-			echo "${info}Installation begin...."
+			echo "${info}Installing $2...."
 			sudo apt-get install -y $2
 			echo "${info}$2 installed."
-		fi
-	else
-		echo -e "$help"
+			exit
+		else
+			echo "${error} No input or invalid input, aborting"
+			exit 20
 	fi
 ## shortcut segment
 elif [[ "$1" == "shortcut" ]]; then
@@ -100,16 +105,19 @@ elif [[ "$1" == "shortcut" ]]; then
 		echo "${info}Create shortcut ${cname}.lnk successful"
 	else
 		echo "${error}No input, aborting"
-		exit 20
+		exit 21
 	fi
 ## system segment
 elif [[ "$1" == "system" ]]; then
+	
 	if  [[ "$2" == "-B" ]] || [[ "$2" == "--build" ]]; then
 		echo $build
 	elif  [[ "$2" == "-R" ]] || [[ "$2" == "--release" ]]; then
 		echo $release
 	elif  [[ "$2" == "-K" ]] || [[ "$2" == "--kernel" ]]; then
 		echo $kernel
+	elif  [[ "$2" == "-P" ]] || [[ "$2" == "--package" ]]; then
+		echo "Total Installed Package: $packages"
 	else
 		echo "$release on $build (kernel:$kernel)"
 	fi
@@ -129,5 +137,6 @@ ${cyan}|__/     \\__/ \\______/ |________/${reset} ${red}PACKAGES:${reset}	${pac
 EOF
 else
 	echo "$help_short"
+	exit 20
 fi
 
