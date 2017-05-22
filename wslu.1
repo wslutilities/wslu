@@ -1,4 +1,4 @@
-.TH WSLU "1" "May 2017" "0.15.0" "wslu User Manual"
+.TH WSLU "1" "May 2017" "0.15.0" "User Commands"
 
 .SH NAME
 wslu \- Windows 10 Linux Subsystem Utility
@@ -10,20 +10,38 @@ This is a series of utilities for Windows 10 Linux Subsystem, including easier t
 
 .SH COMMANDS
 .TP
-.B help
+.B help\fR, \fBh\fR
 print a simplified help.
 .TP
-.B version
+.B version, \fBv\fR
 print current version.
 .TP
 .B package
-package is a minimal package manager for installing special packages such as WSL pulseaudio and VcXsrv. Also, it provide some simple commands.
+package is a minimal package manager for installing special packages such as WSL pulseaudio and VcXsrv. Also, it provide some simple commands to install apps from thirdparty repos.
+.RS
+.TP
+.B count \fR [-n]
+
 .TP
 .B fetch
-the minimal screen fetch program for Windows 10 Linux Subsystem.
+the minimal screen fetch program inspired by \fBufetch\fR and \fBScreenFetch\fR. 
 .TP
 .B system
-the system information for Windows 10 Linux Subsystem.
+system will help print out the system information without any parameters. more options are following:
+.RS
+.TP
+\fB\-B\fR, \fB\-\-build\fR
+print Windows build information, for example: \fBWindows 10 Build 16193\fR
+.TP
+\fB\-K\fR, \fB\-\-kernel\fR
+print WSL kernel info, for example: \fBLinux 4.4.0\-43\-Microsoft\fR
+.TP
+\fB\-R\fR, \fB\-\-release\fR
+print WSL system release info, for example: \fBUbuntu 16.04.2 LTS\fR
+.RE
+.TP
+.B shortcut [appname]
+shortcut command help you create a shortcut on the Windows 10 Desktop. 
 
 
 .SH "SEE ALSO"
