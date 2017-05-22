@@ -85,20 +85,23 @@ elif [[ "$1" == "package" ]]; then
 			sudo apt-get install -y $2
 			echo "${info}$2 installed."
 		fi
-	elif [[ "$2" == "shortcut" ]]; then
-		if [[ -n $3 ]]; then
-			cname="$3"
-			tpath="$(path_win $tmp_path)"
-			dpath="$(path_linux $desktop_path)"
-			powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \`\"DISPLAY=:0 $cname\`\"';\$s.Save();"
-			tpath="$(path_linux $tmp_path)"
-
-			mv $tpath/$cname.lnk $dpath	
-		fi
 	else
 		echo -e "$help"
 	fi
-	
+## shortcut
+elif [[ "$1" == "shortcut" ]]; then
+	if [[ -n $2 ]]; then
+		cname="$2"
+		tpath="$(path_win $tmp_path)"
+		dpath="$(path_linux $desktop_path)"
+		powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \`\"DISPLAY=:0 $cname\`\"';\$s.Save();"
+		tpath="$(path_linux $tmp_path)"
+		mv $tpath/$cname.lnk $dpath
+		echo "${info}Create shortcut ${cname}.lnk successful"
+	else
+		echo "${error}No input, aborting"
+		exit 20
+	fi
 ## system segment
 elif [[ "$1" == "system" ]]; then
 	if  [[ "$2" == "-O" ]] || [[ "$2" == "--os-version" ]]; then
