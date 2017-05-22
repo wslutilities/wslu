@@ -117,7 +117,7 @@ elif [[ "$1" == "system" ]]; then
 	elif  [[ "$2" == "-K" ]] || [[ "$2" == "--kernel" ]]; then
 		echo $kernel
 	elif  [[ "$2" == "-P" ]] || [[ "$2" == "--package" ]]; then
-		echo "Total Installed Package: $packages"
+		echo $packages
 	else
 		echo "$release on $build (kernel:$kernel)"
 	fi

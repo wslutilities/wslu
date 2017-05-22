@@ -1,4 +1,4 @@
-.TH WSLU "1" "May 2017" "0.15.0" "User Commands"
+.TH WSLU "1" "May 2017" "0.16.0" "User Commands"
 
 .SH NAME
 wslu \- Windows 10 Linux Subsystem Utility
@@ -17,11 +17,18 @@ print a simplified help.
 print current version.
 .TP
 .B package
-package is a minimal package manager for installing special packages such as WSL pulseaudio and VcXsrv. Also, it provide some simple commands to install apps from thirdparty repos.
+package is a minimal package manager for installing special packages. Also, it provide some simple commands to install apps from third-party repositories.
 .RS
 .TP
-.B count \fR [-n]
-
+.B pulseaudio
+install pulseaudio to provide additional sound playing feature to WSL.
+.TP
+.B vcxsrv
+install vcxsrv to provide additional GUI feature to WSL.
+.TP
+[\tBthird-party packages\tR] [\tBrepository\tR]
+install a application with a certain third-party repository.
+.RE
 .TP
 .B fetch
 the minimal screen fetch program inspired by \fBufetch\fR and \fBScreenFetch\fR. 
@@ -38,6 +45,9 @@ print WSL kernel info, for example: \fBLinux 4.4.0\-43\-Microsoft\fR
 .TP
 \fB\-R\fR, \fB\-\-release\fR
 print WSL system release info, for example: \fBUbuntu 16.04.2 LTS\fR
+.TP
+\fB\-P\fR, \fB\-\-package\fR
+print total installed packages, for example: \fB1511\fR
 .RE
 .TP
 .B shortcut [appname]
@@ -59,10 +69,10 @@ feature not implemented.
 
 .SH "SEE ALSO"
 https://github.com/patrick330602/wslu
-http://garage.patrickwu.cf/man/wslu
 
 .SH AUTHOR
-Created and by Patrick Wu J M <wotingwu@live.com>
+Created by Patrick Wu J M <wotingwu@live.com>
+Pulseaudio and VcXsrv inspired by aseering/wsl_gui_autoinstall<https://github.com/aseering/wsl_gui_autoinstall> based on <https://github.com/Microsoft/BashOnWindows/issues/486>
 
 .SH REPORTING BUGS
 Report bugs to <https://github.com/patrick330602/wslu/issues>
