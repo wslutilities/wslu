@@ -128,6 +128,7 @@ elif [[ "$1" == "install" ]]; then
 		else
 			echo "${error} No input or invalid input, aborting"
 			exit 20
+		fi
 	fi
 ## shortcut segment
 elif [[ "$1" == "shortcut" ]]; then
