@@ -28,7 +28,7 @@ error="[${red}error${reset}] "
 warn="[${red}warn${reset}] "
 
 ## constants
-help_short="wslu [help|version|shortcut|package|system|fetch] <options>"
+help_short="wslu [help|version|shortcut|install|system|fetch] <options>"
 help="Windows 10 Linux Subsystem Utility
 Usage: $help_short
 
@@ -48,7 +48,7 @@ path_linux()
 }
 desktop_path=`reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Desktop" 2>&1 | sed -n 3p | awk '{ print $3 }' | sed -e 's|\s||g'`
 tmp_path=`cmd.exe /k "echo %TMP% && exit" 2>&1`
-appdata_path=`cmd.exe /k "echo %USERPROFILE% && exit" 2>&1`
+appdata_path=`cmd.exe /k "echo %APPDATA% && exit" 2>&1`
 windows_build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
 
 ## system info
@@ -72,10 +72,34 @@ if [[ "$1" == "version" ]]; then
 elif [[ "$1" == "help" ]]; then
 	echo "$help"
 ## package segment
-elif [[ "$1" == "package" ]]; then
+elif [[ "$1" == "install" ]]; then
 	if  [[ "$2" == "pulseaudio" ]]; then
-		echo "${warn}featue not implemented. Aborted"
-		exit 30
+		echo "${info}Adding repository..."
+		sudo add-apt-repository -y ppa:aseering/wsl-pulseaudio
+		tmp_version="$(lsb_release -c -s)"
+		if [[ "$tmp_version" == "xenial" ]]; then
+			echo "${info}Applying xenial version fix..."
+			sudo sed -i 's/xenial/trusty/' /etc/apt/sources.list.d/aseering-ubuntu-wsl-pulseaudio-xenial.list
+		fi
+		echo "${info}Updating source..."
+		sudo apt-get update
+		echo "${info}Installing PulseAudio Linux client..."
+		sudo apt-get install -y pulseaudio
+		tpath="$(path_linux $tmp_path)"
+		echo "${info}Downloading PulseAudio Windows client..."
+		wget -cO $tpath/pulseaudio.zip http://bosmans.ch/pulseaudio/pulseaudio-1.1.zip
+		echo "${info}Extracting files...."
+		unzip -o $tpath/pulseaudio.zip -d $tpath/pulseaudio
+		echo "${info}Installing PulseAudio Windows client..."
+		tpath="$(path_win $tmp_path)"
+		apath="$(path_win $appdata_path)"
+		xcopy.exe /e "$tpath\\pulseaudio" "$apath\\PulseAudio"
+		echo "${info}Setting PulseAudio to run at startup..."
+		apath_l="$(path_linux $appdata_path)"
+		echo "set ws=wscript.createobject(\"wscript.shell\")\r\n" > "$apath_l/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
+                echo "ws.run \"$apath\PulseAudio\bin\pulseaudio.exe --exit-idle-time=-1\",0\r\n" >> "$apath_l/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
+		echo "${info}PulseAudio installed."
+		exit
 	elif [[ "$2" == "vcxsrv" ]]; then
 		echo "${warn}featue not implemented. Aborted"
 		exit 30
