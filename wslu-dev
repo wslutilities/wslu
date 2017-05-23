@@ -66,16 +66,8 @@ shell="$(basename ${SHELL})"
 # commands
 ## general
 case $1 in
-	v|version)
-		if [[ "$2" == "-n" ]]; then
-			echo $wslu_version
-		else
-			echo "wslu v$wslu_version"
-		fi
-	;;
-	help)
-		echo "$help"
-	;;
+	v|version)echo "wslu v$wslu_version";;
+	h|help)echo "$help";;
 ## package segment
 	install)
 		if  [[ "$2" == "pulseaudio" ]]; then
