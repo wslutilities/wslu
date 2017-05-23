@@ -49,6 +49,7 @@ path_linux()
 desktop_path=`reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Desktop" 2>&1 | sed -n 3p | awk '{ print $3 }' | sed -e 's|\s||g'`
 tmp_path=`cmd.exe /k "echo %TMP% && exit" 2>&1`
 appdata_path=`cmd.exe /k "echo %APPDATA% && exit" 2>&1`
+programfile_path=`cmd.exe /k "echo %ProgramFiles% && exit" 2>&1`
 windows_build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
 
 ## system info
@@ -89,20 +90,31 @@ elif [[ "$1" == "install" ]]; then
 		echo "${info}Downloading PulseAudio Windows client..."
 		wget -cO $tpath/pulseaudio.zip http://bosmans.ch/pulseaudio/pulseaudio-1.1.zip
 		echo "${info}Extracting files...."
+		tpath="$(path_win $tmp_path)"
+		cmd.exe /k "md \"$tpath\\pulseaudio\" && exit" 
 		unzip -o $tpath/pulseaudio.zip -d $tpath/pulseaudio
 		echo "${info}Installing PulseAudio Windows client..."
-		tpath="$(path_win $tmp_path)"
 		apath="$(path_win $appdata_path)"
 		xcopy.exe /e "$tpath\\pulseaudio" "$apath\\PulseAudio"
 		echo "${info}Setting PulseAudio to run at startup..."
 		apath_l="$(path_linux $appdata_path)"
 		echo "set ws=wscript.createobject(\"wscript.shell\")\r\n" > "$apath_l/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
                 echo "ws.run \"$apath\PulseAudio\bin\pulseaudio.exe --exit-idle-time=-1\",0\r\n" >> "$apath_l/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
-		echo "${info}PulseAudio installed."
-		exit
+		echo "${info}Adding recommended settings..."
+		echo "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1\r\n" >> "$apath_l/PulseAudio/etc/pulse/default.pa"
+		echo "${info}PulseAudio installed. Restart to take effect."
 	elif [[ "$2" == "vcxsrv" ]]; then
-		echo "${warn}featue not implemented. Aborted"
-		exit 30
+		echo "${info}Downloading VcXsrv..."
+		tpath="$(path_linux $tmp_path)"
+		wget -cO $tpath/vcxsrv.exe http://downloads.sourceforge.net/project/vcxsrv/vcxsrv/1.19.2.0/vcxsrv-64.1.19.2.0.installer.exe
+		echo "${info}Setting VcXsrv to run at startup..."
+		apath="$(path_win $appdata_path)"
+		ppath="$(path_win $programfile_path)"
+		powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$apath\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\VcXsrv.lnk');\$s.TargetPath='$ppath\\VcXsrv\\vcxsrv.exe';\$s.Arguments=':0 -ac -terminate -lesspointer -multiwindow -clipboard -wgl';\$s.Save();"
+		echo "${info}Start installer."
+		tpath="$(path_win $tmp_path)"
+		cmd.exe /k "start \"$tpath\\VcXsrv.exe\" && exit"
+		echo "${info}PulseAudio installed. Restart to take effect."
 	else
 		if [[ -n $3 ]]; then
 			echo "${info}Adding repository..."
