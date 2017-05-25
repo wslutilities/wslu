@@ -102,15 +102,17 @@ case $1 in
 		elif [[ "$2" == "vcxsrv" ]]; then
 			echo "${info}Downloading VcXsrv..."
 			tpath="$(path_linux $tmp_path)"
+			if [[ -f $tpath/vcxsrv.exe ]]; then
+				rm -r $tpath/vcxsrv.exe
+			fi
 			wget -cO $tpath/vcxsrv.exe http://downloads.sourceforge.net/project/vcxsrv/vcxsrv/1.19.2.0/vcxsrv-64.1.19.2.0.installer.exe
 			echo "${info}Setting VcXsrv to run at startup..."
 			apath="$(path_win $appdata_path)"
 			ppath="$(path_win $programfile_path)"
 			powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$apath\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\VcXsrv.lnk');\$s.TargetPath='$ppath\\VcXsrv\\vcxsrv.exe';\$s.Arguments=':0 -ac -terminate -lesspointer -multiwindow -clipboard -wgl';\$s.Save();"
-			echo "${info}Start installer..."
+			echo "${info}Start installer. After Installation, please restart to take effect."
 			tpath="$(path_win $tmp_path)"
-			cmd.exe /k "start \"$tpath\\VcXsrv.exe\" && exit"
-			echo "${info}PulseAudio installed. Restart to take effect."
+			cmd.exe /k "start "$tpath\\VcXsrv.exe" && exit"
 		else
 			if [[ -n $3 ]]; then
 				echo "${info}Adding repository..."
