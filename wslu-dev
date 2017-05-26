@@ -71,13 +71,18 @@ case $1 in
 ## package segment
 	install)
 		if  [[ "$2" == "pulseaudio" ]]; then
-			echo "${info}Adding repository..."
-			sudo add-apt-repository -y ppa:aseering/wsl-pulseaudio
 			tmp_version="$(lsb_release -c -s)"
-			if [[ "$tmp_version" == "xenial" ]]; then
-				echo "${info}Applying xenial version fix..."
-				sudo sed -i 's/xenial/trusty/' /etc/apt/sources.list.d/aseering-ubuntu-wsl-pulseaudio-xenial.list
-			fi
+			case $tmp_version in
+				trusty)
+					echo "${info}Your are on $tmp_version. Adding corresponding repo..."
+					sudo add-apt-repository -y ppa:aseering/wsl-pulseaudio
+					;;
+				xenial) 
+					echo "${info}Your are on $tmp_version. Adding corresponding repo..."
+					sudo add-apt-repository -y ppa:therealkenc/wsl-pulseaudio
+					;;
+				*)	echo "${error}Unsupported distro. Aborted."; exit 40;;
+			esac
 			echo "${info}Updating source..."
 			sudo apt-get update
 			echo "${info}Installing PulseAudio Linux client..."
