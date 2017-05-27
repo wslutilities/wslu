@@ -47,9 +47,9 @@ path_linux()
 	echo $new_path
 }
 desktop_path=`reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Desktop" 2>&1 | sed -n 3p | awk '{ print $3 }' | sed -e 's|\s||g'`
-tmp_path=`cmd.exe /k "echo %TMP% && exit" 2>&1`
-appdata_path=`cmd.exe /k "echo %APPDATA% && exit" 2>&1`
-programfile_path=`cmd.exe /k "echo %ProgramFiles% && exit" 2>&1`
+tmp_path=`cd /mnt/c && cmd.exe /k "echo %TMP% && exit" 2>&1`
+appdata_path=`cd /mnt/c && cmd.exe /k "echo %APPDATA% && exit" 2>&1`
+programfile_path=`cd /mnt/c && cmd.exe /k "echo %ProgramFiles% && exit" 2>&1`
 windows_build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
 
 ## system info
