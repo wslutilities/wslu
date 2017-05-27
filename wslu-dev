@@ -115,10 +115,11 @@ case $1 in
 			cmd.exe /k "md \"$apath_win\\\\PulseAudio\" && exit"
 			xcopy.exe /e "$tpath_win\\\\pulseaudio" "$apath_win\\\\PulseAudio"
 			echo "${info}Setting PulseAudio to run at startup..."
-			echo "set ws=wscript.createobject(\"wscript.shell\")\r\n" > "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
-			echo "ws.run \"$appdata_path\PulseAudio\bin\pulseaudio.exe --exit-idle-time=-1\",0\r\n" >> "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
+			apath_trimmed="$(echo $appdata_path | tr -d '[:space:]')"
+			echo "set ws=wscript.createobject(\"wscript.shell\")" > "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
+			echo "ws.run \"$apath_trimmed\PulseAudio\bin\pulseaudio.exe --exit-idle-time=-1\",0" >> "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
 			echo "${info}Adding recommended settings..."
-			echo "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1\r\n" >> "$apath_linux/PulseAudio/etc/pulse/default.pa"
+			echo "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" >> "$apath_linux/PulseAudio/etc/pulse/default.pa"
 			echo "${info}PulseAudio installed. Restart to take effect."
 		# VcXsrv Installer
 		elif [[ "$2" == "vcxsrv" ]]; then
