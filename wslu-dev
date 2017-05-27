@@ -70,11 +70,25 @@ case $1 in
 	h|help)echo "$help";;
 ## package segment
 	install)
-		if  [[ "$2" == "pulseaudio" ]]; then
+		tmp_version="$(lsb_release -c -s)"
+		tpath_win="$(path_win $tmp_path)"
+		tpath_linux="$(path_linux $tmp_path)"
+		apath_win="$(path_win $appdata_path)"
+		apath_linux="$(path_linux $appdata_path)"
+		ppath_win="$(path_win $programfile_path)"
+		if [[ -n $3 ]]; then
+			echo "${info}Adding repository..."
+			sudo add-apt-repository -y $3
+			echo "${info}Updating source..."
+			sudo apt-get update
+			echo "${info}Installing $2...."
+			sudo apt-get install -y $2
+			echo "${info}$2 installed."
+			exit
+		elif  [[ "$2" == "pulseaudio" ]]; then
 			echo "${info}checking dependency..."
-			hash wget 2>/dev/null || echo "${warn}wget not installed. Installing..."; sudo apt-get install wget
-			hash unzip 2>/dev/null || echo "${warn}unzip not installed. Installing..."; sudo apt-get install unzip
-			tmp_version="$(lsb_release -c -s)"
+			hash wget 2>/dev/null || (echo "${warn}wget not installed. Installing..."; sudo apt-get install wget)
+			hash unzip 2>/dev/null || (echo "${warn}unzip not installed. Installing..."; sudo apt-get install unzip)
 			case $tmp_version in
 				trusty)
 					echo "${info}Your are on $tmp_version. Adding corresponding repo..."
@@ -90,52 +104,33 @@ case $1 in
 			sudo apt-get update
 			echo "${info}Installing PulseAudio Linux client..."
 			sudo apt-get install -y pulseaudio
-			tpath="$(path_linux $tmp_path)"
 			echo "${info}Downloading PulseAudio Windows client..."
-			wget -cO $tpath/pulseaudio.zip http://bosmans.ch/pulseaudio/pulseaudio-1.1.zip
+			wget -cO $tpath_linux/pulseaudio.zip http://bosmans.ch/pulseaudio/pulseaudio-1.1.zip
 			echo "${info}Extracting files...."
-			tpath="$(path_win $tmp_path)"
-			cmd.exe /k "md \"$tpath\\\\pulseaudio\" && exit"
-			tpath=""
-			unzip -o $tpath/pulseaudio.zip -d $tpath/pulseaudio
+			cmd.exe /k "md \"$tpath_win\\\\pulseaudio\" && exit"
+			unzip -o $tpath_linux/pulseaudio.zip -d $tpath_linux/pulseaudio
 			echo "${info}Installing PulseAudio Windows client..."
-			apath="$(path_win $appdata_path)"
-			xcopy.exe /e "$tpath\\pulseaudio" "$apath\\PulseAudio"
+			xcopy.exe /e "$tpath_win\\pulseaudio" "$apath_win\\PulseAudio"
 			echo "${info}Setting PulseAudio to run at startup..."
-			apath_l="$(path_linux $appdata_path)"
-			echo "set ws=wscript.createobject(\"wscript.shell\")\r\n" > "$apath_l/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
-			echo "ws.run \"$apath\PulseAudio\bin\pulseaudio.exe --exit-idle-time=-1\",0\r\n" >> "$apath_l/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
+			echo "set ws=wscript.createobject(\"wscript.shell\")\r\n" > "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
+			echo "ws.run \"$appdata_path\PulseAudio\bin\pulseaudio.exe --exit-idle-time=-1\",0\r\n" >> "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
 			echo "${info}Adding recommended settings..."
-			echo "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1\r\n" >> "$apath_l/PulseAudio/etc/pulse/default.pa"
+			echo "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1\r\n" >> "$apath_linux/PulseAudio/etc/pulse/default.pa"
 			echo "${info}PulseAudio installed. Restart to take effect."
+		# VcXsrv Installer
 		elif [[ "$2" == "vcxsrv" ]]; then
 			echo "${info}Downloading VcXsrv..."
-			tpath="$(path_linux $tmp_path)"
-			if [[ -f $tpath/vcxsrv.exe ]]; then
-				rm -r $tpath/vcxsrv.exe
+			if [[ -f $tpath_linux/vcxsrv.exe ]]; then
+				rm -r $tpath_linux/vcxsrv.exe
 			fi
-			wget -cO $tpath/vcxsrv.exe http://downloads.sourceforge.net/project/vcxsrv/vcxsrv/1.19.2.0/vcxsrv-64.1.19.2.0.installer.exe
+			wget -cO $tpath_linux/vcxsrv.exe http://downloads.sourceforge.net/project/vcxsrv/vcxsrv/1.19.2.0/vcxsrv-64.1.19.2.0.installer.exe
 			echo "${info}Setting VcXsrv to run at startup..."
-			apath="$(path_win $appdata_path)"
-			ppath="$(path_win $programfile_path)"
-			powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$apath\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\VcXsrv.lnk');\$s.TargetPath='$ppath\\VcXsrv\\vcxsrv.exe';\$s.Arguments=':0 -ac -terminate -lesspointer -multiwindow -clipboard -wgl';\$s.Save();"
+			powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$apath_win\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\VcXsrv.lnk');\$s.TargetPath='$ppath_win\\VcXsrv\\vcxsrv.exe';\$s.Arguments=':0 -ac -terminate -lesspointer -multiwindow -clipboard -wgl';\$s.Save();"
 			echo "${info}Start installer. After Installation, please restart to take effect."
-			tpath="$(path_win $tmp_path)"
-			cmd.exe /k "start "$tpath\\VcXsrv.exe" && exit"
+			cmd.exe /k "start "$tpath_win\\VcXsrv.exe" && exit"
 		else
-			if [[ -n $3 ]]; then
-				echo "${info}Adding repository..."
-				sudo add-apt-repository -y $3
-				echo "${info}Updating source..."
-				sudo apt-get update
-				echo "${info}Installing $2...."
-				sudo apt-get install -y $2
-				echo "${info}$2 installed."
-				exit
-			else
-				echo "${error} No input or invalid input, aborting"
-				exit 20
-			fi
+			echo "${error} No input or invalid input, aborting"
+			exit 20
 		fi
 	;;
 ## shortcut segment
