@@ -19,13 +19,15 @@ blue=`tput setaf 4`
 purple=`tput setaf 5`
 cyan=`tput setaf 6`
 yellow=`tput setaf 7`
+orange=`tput setaf 166`
 bold=`tput bold`
 reset=`tput sgr0`
 
 ## indicator
-info="[${cyan}info${reset}] "
-error="[${red}error${reset}] "
-warn="[${red}warn${reset}] "
+info="${green}[info]${reset} "
+error="${red}[error]${reset} "
+warn="${orange}[warn]${reset} "
+debug="${cyan}[debug]${reset} "
 
 ## constants
 help_short="wslu [help|version|shortcut|install|system|fetch] <options>"
