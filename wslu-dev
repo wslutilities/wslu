@@ -9,7 +9,7 @@
 # http://garage.patrickwu.cf/man/wslu
 
 # data segment
-wslu_version=0.16
+wslu_version=0.17
 
 ## color
 red=`tput setaf 1`
@@ -106,6 +106,8 @@ case $1 in
 			sudo apt-get update
 			echo "${info}Installing PulseAudio Linux client..."
 			sudo apt-get install -y pulseaudio
+			echo "${info}Applying PulseAusio Linux client fix..."
+			sudo sed -i 's/; default-server =/default-server = 127.0.0.1/' /etc/pulse/client.conf
 			echo "${info}Downloading PulseAudio Windows client..."
 			wget -cO $tpath_linux/pulseaudio.zip http://bosmans.ch/pulseaudio/pulseaudio-1.1.zip
 			echo "${info}Extracting files...."
@@ -116,11 +118,14 @@ case $1 in
 			xcopy.exe /e "$tpath_win\\\\pulseaudio" "$apath_win\\\\PulseAudio"
 			echo "${info}Setting PulseAudio to run at startup..."
 			apath_trimmed="$(echo $appdata_path | tr -d '[:space:]')"
-			echo "set ws=wscript.createobject(\"wscript.shell\")" > "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
+			echo "set ws=wscript.createobject(\"wscript.shell\")\r\n" > "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
 			echo "ws.run \"$apath_trimmed\PulseAudio\bin\pulseaudio.exe --exit-idle-time=-1\",0" >> "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
+			CR=$(printf '\r')
+			sed "s/\$/$CR/" "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
 			echo "${info}Adding recommended settings..."
 			echo "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" >> "$apath_linux/PulseAudio/etc/pulse/default.pa"
 			echo "${info}PulseAudio installed. Restart to take effect."
+			echo "${warn}DO NOT allow PulseAudio access to any of your networks if prompted."
 		# VcXsrv Installer
 		elif [[ "$2" == "vcxsrv" ]]; then
 			echo "${info}Downloading VcXsrv..."
@@ -132,6 +137,7 @@ case $1 in
 			powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$apath_win\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\VcXsrv.lnk');\$s.TargetPath='$ppath_win\\VcXsrv\\vcxsrv.exe';\$s.Arguments=':0 -ac -terminate -lesspointer -multiwindow -clipboard -wgl';\$s.Save();"
 			echo "${info}Start installer. After Installation, please restart to take effect."
 			cmd.exe /k "start "$tpath_win\\VcXsrv.exe" && exit"
+			echo "${warn}DO NOT allow VcXsrv access to any of your networks if prompted."
 		else
 			echo "${error} No input or invalid input, aborting"
 			exit 20
