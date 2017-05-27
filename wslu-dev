@@ -71,6 +71,9 @@ case $1 in
 ## package segment
 	install)
 		if  [[ "$2" == "pulseaudio" ]]; then
+			echo "${info}checking dependency..."
+			hash wget 2>/dev/null || echo "${warn}wget not installed. Installing..."; sudo apt-get install wget
+			hash unzip 2>/dev/null || echo "${warn}unzip not installed. Installing..."; sudo apt-get install unzip
 			tmp_version="$(lsb_release -c -s)"
 			case $tmp_version in
 				trusty)
@@ -92,7 +95,8 @@ case $1 in
 			wget -cO $tpath/pulseaudio.zip http://bosmans.ch/pulseaudio/pulseaudio-1.1.zip
 			echo "${info}Extracting files...."
 			tpath="$(path_win $tmp_path)"
-			cmd.exe /k "md \"$tpath\\pulseaudio\" && exit" 
+			cmd.exe /k "md \"$tpath\\\\pulseaudio\" && exit"
+			tpath=""
 			unzip -o $tpath/pulseaudio.zip -d $tpath/pulseaudio
 			echo "${info}Installing PulseAudio Windows client..."
 			apath="$(path_win $appdata_path)"
