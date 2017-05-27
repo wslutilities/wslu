@@ -118,7 +118,7 @@ case $1 in
 			xcopy.exe /e "$tpath_win\\\\pulseaudio" "$apath_win\\\\PulseAudio"
 			echo "${info}Setting PulseAudio to run at startup..."
 			apath_trimmed="$(echo $appdata_path | tr -d '[:space:]')"
-			echo "set ws=wscript.createobject(\"wscript.shell\")\r\n" > "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
+			echo -e "set ws=wscript.createobject(\"wscript.shell\")\r\n" > "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
 			echo "ws.run \"$apath_trimmed\PulseAudio\bin\pulseaudio.exe --exit-idle-time=-1\",0" >> "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
 			CR=$(printf '\r')
 			sed "s/\$/$CR/" "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
