@@ -112,7 +112,7 @@ case $1 in
 			cmd.exe /k "md \"$tpath_win\\\\pulseaudio\" && exit"
 			unzip -o $tpath_linux/pulseaudio.zip -d $tpath_linux/pulseaudio
 			echo "${info}Installing PulseAudio Windows client..."
-			cmd.exe /k "md \"$tpath_win\\\\PulseAudio\" && exit"
+			cmd.exe /k "md \"$apath_win\\\\PulseAudio\" && exit"
 			xcopy.exe /e "$tpath_win\\\\pulseaudio" "$apath_win\\\\PulseAudio"
 			echo "${info}Setting PulseAudio to run at startup..."
 			echo "set ws=wscript.createobject(\"wscript.shell\")\r\n" > "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
