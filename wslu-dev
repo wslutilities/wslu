@@ -35,7 +35,7 @@ help="Windows 10 Linux Subsystem Utility
 Usage: $help_short
 
 For more help for wslu, visit the following site:
-http://garage.patrickwu.cf/wslu"
+http://garage.patrickwu.cf/man/wslu"
 
 ## Windows side data
 path_win()
@@ -174,14 +174,14 @@ case $1 in
 	fetch)
 		cat <<EOF
 
-${cyan} /\$\$      /\$\$  /\$\$\$\$\$\$  /\$\$       ${red}Windows 10 Linux Subsytem${reset}
-${cyan}| \$\$  /\$ | \$\$ /\$\$__  \$\$| \$\$	  ${red}${USER}${reset}@${red}${hostname}${reset}
-${cyan}| \$\$ /\$\$\$| \$\$| \$\$${reset}  ${cyan}\\__/| \$\$${reset}       ${red}BUILD:${reset}	${build}
-${cyan}| \$\$${reset}${cyan}/\$\$${reset} ${cyan}\$\$${reset} ${cyan}\$\$${reset}${cyan}|  \$\$\$\$\$\$${reset} ${cyan}| \$\$${reset}       ${red}RELEASE:${reset}	${release}
-${cyan}| \$\$\$\$${reset}${cyan}_  \$\$\$\$${reset} ${cyan}\\____  \$\$${reset}${cyan}| \$\$${reset}	  ${red}KERNEL:${reset}	${kernel}
-${cyan}| \$\$\$${reset}${cyan}/ \\  \$\$\$${reset} ${cyan}/\$\$${reset}  ${cyan}\\ \$\$${reset}${cyan}| \$\$${reset}	  ${red}UPTIME:${reset}	${uptime}
-${cyan}| \$\$${reset}${cyan}/   \\  \$\$${reset}${cyan}|  \$\$\$\$\$\$${reset}${cyan}/| \$\$\$\$\$\$\$\$${reset} ${red}SHELL:${reset}	${shell}
-${cyan}|__/     \\__/ \\______/ |________/${reset} ${red}PACKAGES:${reset}	${packages}
+${cyan} /\$\$      /\$\$  /\$\$\$\$\$\$  /\$\$       ${red}${bold}Windows 10 Linux Subsytem${reset}
+${cyan}| \$\$  /\$ | \$\$ /\$\$__  \$\$| \$\$	  ${red}${bold}${USER}${reset}@${red}${bold}${hostname}${reset}
+${cyan}| \$\$ /\$\$\$| \$\$| \$\$${reset}  ${cyan}\\__/| \$\$${reset}       ${red}${bold}BUILD:${reset}	${build}
+${cyan}| \$\$${reset}${cyan}/\$\$${reset} ${cyan}\$\$${reset} ${cyan}\$\$${reset}${cyan}|  \$\$\$\$\$\$${reset} ${cyan}| \$\$${reset}       ${red}${bold}RELEASE:${reset}	${release}
+${cyan}| \$\$\$\$${reset}${cyan}_  \$\$\$\$${reset} ${cyan}\\____  \$\$${reset}${cyan}| \$\$${reset}	  ${red}${bold}KERNEL:${reset}	${kernel}
+${cyan}| \$\$\$${reset}${cyan}/ \\  \$\$\$${reset} ${cyan}/\$\$${reset}  ${cyan}\\ \$\$${reset}${cyan}| \$\$${reset}	  ${red}${bold}UPTIME:${reset}	${uptime}
+${cyan}| \$\$${reset}${cyan}/   \\  \$\$${reset}${cyan}|  \$\$\$\$\$\$${reset}${cyan}/| \$\$\$\$\$\$\$\$${reset} ${red}${bold}SHELL:${reset}	${shell}
+${cyan}|__/     \\__/ \\______/ |________/${reset} ${red}${bold}PACKAGES:${reset}	${packages}
 
 EOF
 	;;

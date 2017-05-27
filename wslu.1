@@ -1,4 +1,4 @@
-.TH WSLU "1" "May 2017" "0.16.0" "User Commands"
+.TH WSLU "1" "May 2017" "0.18.0" "User Commands"
 
 .SH NAME
 wslu \- Windows 10 Linux Subsystem Utility
@@ -6,7 +6,7 @@ wslu \- Windows 10 Linux Subsystem Utility
 .B wslu \fR<commands> [options]
 
 .SH DESCRIPTION
-This is a series of utilities for Windows 10 Linux Subsystem, including easier to enable sound, creating your favorite linux GUI application shortcuts on Windows 10 Desktop. 
+This is a series of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or  creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
 
 .SH COMMANDS
 .TP
@@ -21,10 +21,10 @@ install is a minimal package manager for installing special packages. Also, it p
 .RS
 .TP
 .B pulseaudio
-\fB[UNTESTED FEATURE]\fRinstall pulseaudio to provide additional sound playing feature to WSL. 
+install pulseaudio to provide additional sound playing feature to WSL. 
 .TP
 .B vcxsrv
-\fB[UNTESTED FEATURE]\fRinstall vcxsrv to provide additional GUI feature to WSL.
+install vcxsrv to provide additional GUI feature to WSL.
 .TP
 [\fBthird-party packages\fR] [\fBrepository\fR]
 install a application with a certain third-party repository.
@@ -66,13 +66,18 @@ input is invalid.
 .TP
 .B 30
 feature not implemented.
+.TP
+.B 31
+Unkown system input.
+.TP
+.B 32
+feature already installed.
 
 .SH "SEE ALSO"
 https://github.com/patrick330602/wslu
 
 .SH AUTHOR
-Created by Patrick Wu J M <wotingwu@live.com>
-Pulseaudio and VcXsrv inspired by aseering/wsl_gui_autoinstall<https://github.com/aseering/wsl_gui_autoinstall> based on <https://github.com/Microsoft/BashOnWindows/issues/486>
+Created by Patrick Wu J M <wotingwu@live.com> PulseAudio and VcXsrv Installation inspired by aseering/wsl_gui_autoinstall<https://github.com/aseering/wsl_gui_autoinstall>. PulseAudio packages belong to @aseering and @therealkenc from <https://github.com/Microsoft/BashOnWindows/issues/486>
 
 .SH REPORTING BUGS
 Report bugs to <https://github.com/patrick330602/wslu/issues>
