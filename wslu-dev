@@ -9,7 +9,7 @@
 # http://garage.patrickwu.cf/man/wslu
 
 # data segment
-wslu_version=0.18
+wslu_version=0.19
 
 ## color
 red=`tput setaf 1`
@@ -24,10 +24,10 @@ bold=`tput bold`
 reset=`tput sgr0`
 
 ## indicator
-info="${green}[info]${reset}${bold}:: "
-error="${red}[error]${reset}${bold}:: "
-warn="${orange}[warn]${reset}${bold}:: "
-debug="${cyan}[debug]${reset}${bold}:: "
+info="${green}[info]${reset}${bold}::"
+error="${red}[error]${reset}${bold}::"
+warn="${orange}[warn]${reset}${bold}::"
+debug="${cyan}[debug]${reset}${bold}::"
 
 ## constants
 help_short="wslu [help|version|shortcut|install|system|fetch] <options>"
@@ -40,18 +40,29 @@ http://garage.patrickwu.cf/man/wslu"
 ## Windows side data
 path_win()
 {
-	new_path="$(echo $1 | sed -e 's|\\|\\\\|g')"
+	new_path="$(echo $@ | sed -e 's|\\|\\\\|g')"
 	echo $new_path
 }
 path_linux()
 {
-	new_path="$(echo $1 | sed -e 's|\\|/|g' -e 's|^\([A-Za-z]\)\:/\(.*\)|/mnt/\L\1\E/\2|')"
+	new_path="$(echo $@ | sed -e 's|\\|/|g' -e 's|^\([A-Za-z]\)\:/\(.*\)|/mnt/\L\1\E/\2|')"
 	echo $new_path
 }
-desktop_path=`reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Desktop" 2>&1 | sed -n 3p | awk '{ print $3 }' | sed -e 's|\s||g'`
-tmp_path=`(cd /mnt/c && cmd.exe /k "echo %TMP% && exit") 2>&1`
-appdata_path=`(cd /mnt/c && cmd.exe /k "echo %APPDATA% && exit") 2>&1`
-programfile_path=`(cd /mnt/c && cmd.exe /k "echo %ProgramFiles% && exit") 2>&1`
+path_converter()
+{
+	new_path="$((cd /mnt/c && cmd.exe /k "echo $@ && exit") 2>&1)"
+	echo $new_path
+}
+reg_path_converter()
+{
+	new_path="$(reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "$1" 2>&1 | sed -n 3p | awk '{ print $3 }' | sed -e 's|\s||g')"
+	echo $new_path
+}
+desktop_path_not_converted="$(reg_path_converter 'Desktop')"
+desktop_path="$(path_converter $desktop_path_not_converted)"
+tmp_path="$(path_converter '%TMP%')"
+appdata_path="$(path_converter '%APPDATA%')"
+programfile_path="$(path_converter '%ProgramFiles%')"
 windows_build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
 
 ## system info
@@ -136,7 +147,7 @@ case $1 in
 			fi
 			wget -cO $tpath_linux/vcxsrv.exe http://downloads.sourceforge.net/project/vcxsrv/vcxsrv/1.19.2.0/vcxsrv-64.1.19.2.0.installer.exe
 			echo "${info}Setting VcXsrv to run at startup...${reset}"
-			powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$apath_win\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\VcXsrv.lnk');\$s.TargetPath='$ppath_win\\VcXsrv\\vcxsrv.exe';\$s.Arguments=':0 -ac -terminate -lesspointer -multiwindow -clipboard -wgl';\$s.Save();"
+			powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$apath_win\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\VcXsrv.lnk');\$s.TargetPath='\"$ppath_win\\VcXsrv\\vcxsrv.exe\"';\$s.Arguments=':0 -ac -terminate -lesspointer -multiwindow -clipboard -wgl';\$s.Save();"
 			echo "${info}Start installer. After Installation, please restart to take effect.${reset}"
 			cd /mnt/c && cmd.exe /k "start "$tpath_win\\VcXsrv.exe" && exit"
 			echo "${warn}DO NOT allow VcXsrv access to any of your networks if prompted.${reset}"
@@ -162,7 +173,7 @@ case $1 in
 	;;
 ## system segment
 	system)
-		case $2 in
+		case $2 in		
 			-B|--build)echo $build;;
 			-R|--release)echo $release;;
 			-K|--kernel)echo $kernel;;
@@ -185,6 +196,12 @@ ${cyan}|__/     \\__/ \\______/ |________/${reset} ${red}${bold}PACKAGES:${reset
 
 EOF
 	;;
+	path)
+	case $3 in
+		-W|--windows-double-backslash)updated_path="$(path_converter $2)";updated_path="$(path_win $updated_path)";echo $updated_path;;
+		-w|--windows)updated_path="$(path_converter $2)";echo $updated_path;;
+		-l|--linux)updated_path="$(path_converter $2)";updated_path="$(path_linux $updated_path)";echo $updated_path;;
+		*)updated_path="$(path_converter $2)";updated_path="$(path_linux $updated_path)";echo $updated_path;;
+	esac;;
 	*)echo "$help_short"; exit 20;;
 esac
-
