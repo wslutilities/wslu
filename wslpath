@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# wslpath - convert Windows path to use in WSL
+# wslpath - WSL Windows path Converter
 # Component of Windows 10 linux Subsystem Utility
 # <https://github.com/patrick330602/wslu>
 
@@ -8,11 +8,21 @@
 # For more help for wslu, visit the following site:
 # http://garage.patrickwu.cf/man/wslu/wslpath
 
-wslpath_version="01"
+wslpath_version="08"
 
 style=3
+reg_path=0
 set_path=""
+is_path_set=0
+. wslu --silent
 
+help_short="wslpath (-w|-d|-u|-m|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslpath (-h|-v|-R)"
+
+path_mixed()
+{
+	new_path="$(echo $@ | sed -e 's|\\|/|g')"
+	echo $new_path
+}
 path_win()
 {
 	new_path="$(echo $@ | sed -e 's|\\|\\\\|g')"
@@ -25,46 +35,87 @@ path_linux()
 }
 path_converter()
 {
-	new_path="$(cmd.exe /c "echo $@" 2>&1)"
+	new_path="$(cmd.exe /c "echo $@" 2>&1 | tr -d '\r')"
 	echo $new_path
 }
 reg_path_converter()
 {
-	new_path="$(reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "$1" 2>&1 | sed -n 3p | awk '{ print $3 }' | sed -e 's|\s||g')"
+	new_path="$(reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "$@" 2>&1 | sed -n 3p | sed -e "s/$@//" | sed -e 's/^[[:space:]]*//' | awk '{$1=""; sub("  ", " "); print}' | sed -e 's|\r||g')"
 	echo $new_path
 }
 style_path()
 {
-	case $style in
-		1)p="$@";;
-		2)p="$(path_win $@)";;
-		3)p="$(path_linux $@)";;
-	esac
-	echo $p
+	if [[ "$is_path_set" == "0" ]]; then
+		is_path_set=1
+		case $style in
+			1)p="$@";;
+			2)p="$(path_win $@)";;
+			3)p="$(path_linux $@)";;
+			4)p="$(path_mixed $@)";;
+		esac
+		echo $p
+	fi
 }
-desktop_path="$(path_converter $(reg_path_converter 'Desktop'))"
-startup_path="$(path_converter $())"
-tmp_path="$(path_converter '%TMP%')"
-appdata_path="$(path_converter '%APPDATA%')"
-programfile_path="$(path_converter '%ProgramFiles%')"
 
-args=$*
 
-case $args in
-# styles
-	-w|--windows)style=1;;
-	-d|--windows-double-slash)style=2;;
-	-u|--unix)style=3;;
-	#system location
-	-D|--desktop);;
-	-T|--temp);;
-	-S|--sysdir);;
-	-W|--windir);;
-	-s|--start-menu);;
-	-su|--startup);;
-
-	lol) echo "https://www.youtube.com/watch?v=zGXcLWyjpwQ"; exit 233;;
-	*)echo "";;
-esac
-
-echo $set_path
+if [[ $# -eq 0 ]]; then
+	echo -e "$help_short"
+	exit 20
+else
+	for args; do
+		case $args in
+			#styles
+			-w|--windows)style=1;;
+			-d|--windows-double-slash)style=2;;
+			-u|--unix)style=3;;
+			-m|--mixed)style=4;;
+			-r|--reg-data)reg_path=1;;
+			#system location
+			-D|--desktop)
+			set_path="$(style_path $(path_converter $(reg_path_converter 'Desktop')))";
+			break;;
+			-A|--appdata)
+			set_path="$(style_path $(path_converter '%APPDATA%'))"
+			break;;
+			-T|--temp)
+			set_path="$(style_path $(path_converter '%TMP%'))"
+			break;;
+			-S|--sysdir)
+			set_path="$(style_path $(path_converter 'C:\Windows\System32'))"
+			break;;
+			-W|--windir)
+			set_path="$(style_path $(path_converter 'C:\Windows\'))"
+			break;;
+			-s|--start-menu)
+			set_path="$(style_path $(path_converter $(reg_path_converter 'Start Menu')))"
+			break;;
+			-su|--startup)
+			set_path="$(style_path $(path_converter $(reg_path_converter 'Startup')))"
+			break;;
+			-H|--home)
+			set_path="$(style_path $(path_converter '%HOMEPATH%'))"
+			break;;
+			-P|--program-files)
+			set_path="$(style_path $(path_converter '%ProgramFiles%'))"
+			break;;
+			-h|--help) help $0 "$help_short"; exit;;
+			-v|--version) echo "wslpath v$wslu_version.$wslpath_version"; exit;;
+			-R|--avail-reg) echo "Available registery intput:"
+			reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /s | tail -n +3 | head -n -1 | sed -e "s|REG_EXPAND_SZ||g" | sed -e 's/ \+/ /g'
+			exit;;
+			*)
+			if [[ "$reg_path" == "1" ]]; then
+				set_path="$(style_path $(path_converter $(reg_path_converter $args)))"
+			else
+				set_path="$(style_path $(path_converter $args))"
+			fi				
+			break;;
+		esac
+	done
+fi
+if [[ "$is_path_set" == "0" ]]; then
+	echo "${error}No path input. Aborted."
+	exit 21
+else
+	echo $set_path
+fi

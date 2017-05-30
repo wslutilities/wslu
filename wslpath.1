@@ -1,35 +1,86 @@
-Output type options:
-  
-  -M, --mode            report on mode of file (currently binmode or textmode)
-  -u, --unix            (default) print Unix form of NAMEs (/cygdrive/c/winnt)
-  -w, --windows         print Windows form of NAMEs (C:\WINNT)
-  -t, --type TYPE       print TYPE form: 'dos', 'mixed', 'unix', or 'windows'
+.TH WSLPATH "1" "May 2017" "0.20.08" "User Commands"
 
-Path conversion options:
+.SH NAME
+wslpath \- Component of Windows 10 Linux Subsystem Utility
+.SH SYNOPSIS
+.B wslpath\fR (\-w|\-d|\-u|\-m|\-r) [\-D|\-A|\-T|\-S|\-W|\-s|\-su|\-H|\-P|...NAME...]
+.B wslpath\fR (\-h|\-v|\-R)
 
-  -a, --absolute        output absolute path
-  -l, --long-name       print Windows long form of NAMEs (with -w, -m only)
-  -p, --path            NAME is a PATH list (i.e., '/bin:/usr/bin')
-  -U, --proc-cygdrive   Emit /proc/cygdrive path instead of cygdrive prefix
-                        when converting Windows path to UNIX path.
-  -s, --short-name      print DOS (short) form of NAMEs (with -w, -m only)
-  -C, --codepage CP     print DOS, Windows, or mixed pathname in Windows
-                        codepage CP.  CP can be a numeric codepage identifier,
-                        or one of the reserved words ANSI, OEM, or UTF8.
-                        If this option is missing, cygpath defaults to the
-                        character set defined by the current locale.
+.SH DESCRIPTION
+This is a WSL Windows path Converter that can convert Windows path to other styles of path.
 
-System information:
+.SH COMMANDS
+Output Type Options:
+.RS
+.TP
+.B \-w\fR, \fB\-\-windows\fR
+print Windows form of path(C:\Windows\System32)
+.TP
+.B \-d\fR, \fB\-\-windows\-double\-slash\fR
+print Windows form of path with double backslash(C:\\Windows\\System32)
+.TP
+.B \-u\fR, \fB\-\-unix\fR
+print Unix form of path(/mnt/c/Windows/System32)
+.TP
+.B \-m\fR, \fB\-\-mixed\fR
+print Windows form of path(C:\Windows\System32)
+.TP
+.B \-r\fR, \fB\-\-reg-data\fR
+use the registry data to print path[wslpath \-R to know more]
+.RE
+System Path:
+.RS
+.TP
+.B \-D\fR, \fB\-\-desktop\fR
+print desktop path and exit
+.TP
+.B \-A\fR, \fB\-\-appdata\fR
+print AppData path(%APPDATA%) and exit
+.TP
+.B \-T\fR, \fB\-\-temp\fR
+print temp path(%TMP%) and exit
+.TP
+.B \-S\fR, \fB\-\-sysdir\fR
+print system path and exit
+.TP
+.B \-W\fR, \fB\-\-windir\fR
+print Windows path and exit
+.TP
+.B \-s\fR, \fB\-\-start\-menu\fR
+print Start Menu path and exit
+.TP
+.B \-su\fR, \fB\-\-startup\fR
+print Startup path and exit
+.TP
+.B \-H\fR, \fB\-\-home\fR
+print user home path(%HOMEPATH%) and exit
+.TP
+.B \-P\fR, \fB\-\-program-files\fR
+print Program Files path(%ProgramFiles%) and exit
+.RE
+Other Options:
+.RS
+.TP
+.B \-h\fR, \fB\-\-help\fR
+print a simple help
+.TP
+.B \-v\fR, \fB\-\-version\fR
+print current version
+.TP
+.B \-R\fR, \fB\-\-avail\-reg\fR
+print available registery input
+.RS 
 
-  -A, --allusers        use `All Users' instead of current user for -D, -P
-  -D, --desktop         output `Desktop' directory and exit
-  -H, --homeroot        output `Profiles' directory (home root) and exit
-  -O, --mydocs          output `My Documents' directory and exit
-  -P, --smprograms      output Start Menu `Programs' directory and exit
-  -S, --sysdir          output system directory and exit
-  -W, --windir          output `Windows' directory and exit
-  -F, --folder ID       output special folder with numeric ID and exit
+.SH "SEE ALSO"
+https://github.com/patrick330602/wslu
 
-Other options:
-  -h, --help            output usage information and exit
-  -V, --version         output version information and exit
+.SH AUTHOR
+Created by Patrick Wu J M <wotingwu@live.com>
+
+.SH REPORTING BUGS
+Report bugs to <https://github.com/patrick330602/wslu/issues>
+
+.SH COPYRIGHT
+This is free software; you can redistribute it and/or modify
+it under the terms of the GNU GPL version 3 or (at your option) any later version.
+There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

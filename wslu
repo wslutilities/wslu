@@ -9,60 +9,38 @@
 # http://garage.patrickwu.cf/man/wslu
 
 # data segment
-wslu_version=0.19
+export wslu_version=0.19
 
 ## color
-red=`tput setaf 1`
-green=`tput setaf 2`
-brown=`tput setaf 3`
-blue=`tput setaf 4`
-purple=`tput setaf 5`
-cyan=`tput setaf 6`
-yellow=`tput setaf 7`
-orange=`tput setaf 166`
-bold=`tput bold`
-reset=`tput sgr0`
+export red=`tput setaf 1`
+export green=`tput setaf 2`
+export brown=`tput setaf 3`
+export blue=`tput setaf 4`
+export purple=`tput setaf 5`
+export cyan=`tput setaf 6`
+export yellow=`tput setaf 7`
+export orange=`tput setaf 166`
+export bold=`tput bold`
+export reset=`tput sgr0`
 
 ## indicator
-info="${green}[info]${reset}${bold}::"
-error="${red}[error]${reset}${bold}::"
-warn="${orange}[warn]${reset}${bold}::"
-debug="${cyan}[debug]${reset}${bold}::"
+export info="${green}[info]${reset}"
+export error="${red}[error]${reset}"
+export warn="${orange}[warn]${reset}"
+export debug="${cyan}[debug]${reset}"
 
 ## constants
 help_short="wslu [help|version|shortcut|install|system|fetch] <options>"
-help="Windows 10 Linux Subsystem Utility
-Usage: $help_short
+function help()
+{
+	echo -e "`basename "$1"` - Component of Windows 10 Linux Subsystem Utility
+Usage: $2
 
-For more help for wslu, visit the following site:
-http://garage.patrickwu.cf/man/wslu"
+For more help for `basename "$1"`, visit the following site:
+http://garage.patrickwu.cf/man/wslu/`basename "$1"`"
+}
 
-## Windows side data
-path_win()
-{
-	new_path="$(echo $@ | sed -e 's|\\|\\\\|g')"
-	echo $new_path
-}
-path_linux()
-{
-	new_path="$(echo $@ | sed -e 's|\\|/|g' -e 's|^\([A-Za-z]\)\:/\(.*\)|/mnt/\L\1\E/\2|')"
-	echo $new_path
-}
-path_converter()
-{
-	new_path="$((cd /mnt/c && cmd.exe /k "echo $@ && exit") 2>&1)"
-	echo $new_path
-}
-reg_path_converter()
-{
-	new_path="$(reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "$1" 2>&1 | sed -n 3p | awk '{ print $3 }' | sed -e 's|\s||g')"
-	echo $new_path
-}
-desktop_path_not_converted="$(reg_path_converter 'Desktop')"
-desktop_path="$(path_converter $desktop_path_not_converted)"
-tmp_path="$(path_converter '%TMP%')"
-appdata_path="$(path_converter '%APPDATA%')"
-programfile_path="$(path_converter '%ProgramFiles%')"
+
 windows_build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
 
 ## system info
@@ -79,8 +57,8 @@ shell="$(basename ${SHELL})"
 # commands
 ## general
 case $1 in
-	v|version)echo "wslu v$wslu_version";;
-	h|help)echo "$help";;
+	v|version) echo "wslu v$wslu_version";;
+	h|help) help $0 "$help_short";;
 ## package segment
 	install)
 		tmp_version="$(lsb_release -c -s)"
@@ -196,12 +174,6 @@ ${cyan}|__/     \\__/ \\______/ |________/${reset} ${red}${bold}PACKAGES:${reset
 
 EOF
 	;;
-	path)
-	case $3 in
-		-W|--windows-double-backslash)updated_path="$(path_converter $2)";updated_path="$(path_win $updated_path)";echo $updated_path;;
-		-w|--windows)updated_path="$(path_converter $2)";echo $updated_path;;
-		-l|--linux)updated_path="$(path_converter $2)";updated_path="$(path_linux $updated_path)";echo $updated_path;;
-		*)updated_path="$(path_converter $2)";updated_path="$(path_linux $updated_path)";echo $updated_path;;
-	esac;;
+	--silent);;
 	*)echo "$help_short"; exit 20;;
 esac
