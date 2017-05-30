@@ -8,12 +8,11 @@
 # For more help for wslu, visit the following site:
 # http://garage.patrickwu.cf/man/wslu/wslpath
 
-wslpath_version="08"
+version="08"
 
 style=3
 reg_path=0
 set_path=""
-is_path_set=0
 . wslu --silent
 
 help_short="wslpath (-w|-d|-u|-m|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslpath (-h|-v|-R)"
@@ -45,16 +44,13 @@ reg_path_converter()
 }
 style_path()
 {
-	if [[ "$is_path_set" == "0" ]]; then
-		is_path_set=1
-		case $style in
-			1)p="$@";;
-			2)p="$(path_win $@)";;
-			3)p="$(path_linux $@)";;
-			4)p="$(path_mixed $@)";;
-		esac
-		echo $p
-	fi
+	case $style in
+		1)p="$@";;
+		2)p="$(path_win $@)";;
+		3)p="$(path_linux $@)";;
+		4)p="$(path_mixed $@)";;
+	esac
+	echo $p
 }
 
 
@@ -99,7 +95,7 @@ else
 			set_path="$(style_path $(path_converter '%ProgramFiles%'))"
 			break;;
 			-h|--help) help $0 "$help_short"; exit;;
-			-v|--version) echo "wslpath v$wslu_version.$wslpath_version"; exit;;
+			-v|--version) echo "wslpath v$wslu_version.$version"; exit;;
 			-R|--avail-reg) echo "Available registery intput:"
 			reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /s | tail -n +3 | head -n -1 | sed -e "s|REG_EXPAND_SZ||g" | sed -e 's/ \+/ /g'
 			exit;;
@@ -113,7 +109,7 @@ else
 		esac
 	done
 fi
-if [[ "$is_path_set" == "0" ]]; then
+if [[ "$set_path" == "" ]]; then
 	echo "${error}No path input. Aborted."
 	exit 21
 else
