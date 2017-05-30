@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+# wslpath - convert Windows path to use in WSL
+# Component of Windows 10 linux Subsystem Utility
+# <https://github.com/patrick330602/wslu>
+
+# Copyright(c) 2017 Patrick Wu J M <wotingwu@live.com>
+
+# For more help for wslu, visit the following site:
+# http://garage.patrickwu.cf/man/wslu/wslpath
+
+wslpath_version="01"
+
+style=3
+set_path=""
+
+path_win()
+{
+	new_path="$(echo $@ | sed -e 's|\\|\\\\|g')"
+	echo $new_path
+}
+path_linux()
+{
+	new_path="$(echo $@ | sed -e 's|\\|/|g' -e 's|^\([A-Za-z]\)\:/\(.*\)|/mnt/\L\1\E/\2|')"
+	echo $new_path
+}
+path_converter()
+{
+	new_path="$(cmd.exe /c "echo $@" 2>&1)"
+	echo $new_path
+}
+reg_path_converter()
+{
+	new_path="$(reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "$1" 2>&1 | sed -n 3p | awk '{ print $3 }' | sed -e 's|\s||g')"
+	echo $new_path
+}
+style_path()
+{
+	case $style in
+		1)p="$@";;
+		2)p="$(path_win $@)";;
+		3)p="$(path_linux $@)";;
+	esac
+	echo $p
+}
+desktop_path="$(path_converter $(reg_path_converter 'Desktop'))"
+startup_path="$(path_converter $())"
+tmp_path="$(path_converter '%TMP%')"
+appdata_path="$(path_converter '%APPDATA%')"
+programfile_path="$(path_converter '%ProgramFiles%')"
+
+args=$*
+
+case $args in
+# styles
+	-w|--windows)style=1;;
+	-d|--windows-double-slash)style=2;;
+	-u|--unix)style=3;;
+	#system location
+	-D|--desktop);;
+	-T|--temp);;
+	-S|--sysdir);;
+	-W|--windir);;
+	-s|--start-menu);;
+	-su|--startup);;
+
+	lol) echo "https://www.youtube.com/watch?v=zGXcLWyjpwQ"; exit 233;;
+	*)echo "";;
+esac
+
+echo $set_path
