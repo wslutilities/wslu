@@ -9,25 +9,24 @@
 # http://garage.patrickwu.cf/man/wslu
 
 # data segment
-export wslu_version=0.19
+wslu_version=0.19
 
 ## color
-export red=`tput setaf 1`
-export green=`tput setaf 2`
-export brown=`tput setaf 3`
-export blue=`tput setaf 4`
-export purple=`tput setaf 5`
-export cyan=`tput setaf 6`
-export yellow=`tput setaf 7`
-export orange=`tput setaf 166`
-export bold=`tput bold`
-export reset=`tput sgr0`
+red=`tput setaf 1`
+brown=`tput setaf 3`
+blue=`tput setaf 4`
+purple=`tput setaf 5`
+cyan=`tput setaf 6`
+yellow=`tput setaf 7`
+orange=`tput setaf 166`
+bold=`tput bold`
+reset=`tput sgr0`
 
 ## indicator
-export info="${green}[info]${reset}"
-export error="${red}[error]${reset}"
-export warn="${orange}[warn]${reset}"
-export debug="${cyan}[debug]${reset}"
+info="${green}[info]${reset}"
+error="${red}[error]${reset}"
+warn="${orange}[warn]${reset}"
+debug="${cyan}[debug]${reset}"
 
 ## constants
 help_short="wslu [help|version|shortcut|install|system|fetch] <options>"
@@ -40,25 +39,11 @@ For more help for `basename "$1"`, visit the following site:
 http://garage.patrickwu.cf/man/wslu/`basename "$1"`"
 }
 
-
-windows_build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
-
-## system info
-hostname="$(hostname)"
-release="$(lsb_release -d -s)"
-kernel="$(uname -sr)"
-uptime="$(uptime -p | sed 's/up //')"
-packages="$((packages+=$(dpkg --get-selections | grep -cv deinstall$)))"
-build="Windows 10 Build $windows_build"
-shell="$(basename ${SHELL})"
-
-##functions
-
 # commands
 ## general
 case $1 in
-	v|version) echo "wslu v$wslu_version";;
-	h|help) help $0 "$help_short";;
+	-v|--version) echo "wslu v$wslu_version";;
+	-h|--help) help $0 "$help_short";;
 ## package segment
 	install)
 		tmp_version="$(lsb_release -c -s)"
@@ -133,46 +118,6 @@ case $1 in
 			echo "${error} No input or invalid input, aborting${reset}"
 			exit 20
 		fi
-	;;
-## shortcut segment
-	shortcut)
-		if [[ -n $2 ]]; then
-			cname="$2"
-			tpath="$(path_win $tmp_path)"
-			dpath="$(path_linux $desktop_path)"
-			powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \`\"DISPLAY=:0 $cname\`\"';\$s.Save();"
-			tpath="$(path_linux $tmp_path)"
-			mv $tpath/$cname.lnk $dpath
-			echo "${info}Create shortcut ${cname}.lnk successful${reset}"
-		else
-			echo "${error}No input, aborting${reset}"
-			exit 21
-		fi
-	;;
-## system segment
-	system)
-		case $2 in		
-			-B|--build)echo $build;;
-			-R|--release)echo $release;;
-			-K|--kernel)echo $kernel;;
-			-P|--package)echo $packages;;
-			*)echo "$release on $build (kernel:$kernel)";;
-		esac
-	;;
-## fetch segment
-	fetch)
-		cat <<EOF
-
-${cyan} /\$\$      /\$\$  /\$\$\$\$\$\$  /\$\$       ${red}${bold}Windows 10 Linux Subsytem${reset}
-${cyan}| \$\$  /\$ | \$\$ /\$\$__  \$\$| \$\$	  ${red}${bold}${USER}${reset}@${red}${bold}${hostname}${reset}
-${cyan}| \$\$ /\$\$\$| \$\$| \$\$${reset}  ${cyan}\\__/| \$\$${reset}       ${red}${bold}BUILD:${reset}	${build}
-${cyan}| \$\$${reset}${cyan}/\$\$${reset} ${cyan}\$\$${reset} ${cyan}\$\$${reset}${cyan}|  \$\$\$\$\$\$${reset} ${cyan}| \$\$${reset}       ${red}${bold}RELEASE:${reset}	${release}
-${cyan}| \$\$\$\$${reset}${cyan}_  \$\$\$\$${reset} ${cyan}\\____  \$\$${reset}${cyan}| \$\$${reset}	  ${red}${bold}KERNEL:${reset}	${kernel}
-${cyan}| \$\$\$${reset}${cyan}/ \\  \$\$\$${reset} ${cyan}/\$\$${reset}  ${cyan}\\ \$\$${reset}${cyan}| \$\$${reset}	  ${red}${bold}UPTIME:${reset}	${uptime}
-${cyan}| \$\$${reset}${cyan}/   \\  \$\$${reset}${cyan}|  \$\$\$\$\$\$${reset}${cyan}/| \$\$\$\$\$\$\$\$${reset} ${red}${bold}SHELL:${reset}	${shell}
-${cyan}|__/     \\__/ \\______/ |________/${reset} ${red}${bold}PACKAGES:${reset}	${packages}
-
-EOF
 	;;
 	--silent);;
 	*)echo "$help_short"; exit 20;;

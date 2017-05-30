@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# wslsys - WSL System Information Printer
+# Component of Windows 10 linux Subsystem Utility
+# <https://github.com/patrick330602/wslu>
+
+# Copyright(c) 2017 Patrick Wu J M <wotingwu@live.com>
+
+# For more help for wslsys, visit the following site:
+# http://garage.patrickwu.cf/man/wslu/wslsys
+
+version="06"
+
+. wslu --silent
+
+help_short="wslusc (-h|-v|-S|-U|-B|-R|-K|-P)"
+
+build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
+release="$(lsb_release -d -s)"
+kernel="$(uname -sr)"
+uptime="$(uptime -p | sed 's/up //')"
+packages="$((packages+=$(dpkg --get-selections | grep -cv deinstall$)))"
+shell="$(basename ${SHELL})"
+
+for args; do
+    case $args in
+            -h|--help) help $0 "$help_short"; exit;;
+		    -v|--version) echo "wslpath v$wslu_version.$version"; exit;;
+            -S|--shell)echo $shell;exit;;
+            -U|--uptime)echo $uptime;exit;;
+			-B|--build)echo $build;exit;;
+			-R|--release)echo $release;exit;;
+			-K|--kernel)echo $kernel;exit;;
+			-P|--package)echo $packages;exit;;
+			*)echo -e "$release on Windows 10 Build $build (kernel:$kernel;uptime:$uptime;package:$packages;shell:$shell)";exit;;
+    esac
+done

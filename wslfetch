@@ -1,7 +1,32 @@
-# wslu - Windows 10 linux Subsystem Utility
+#!/usr/bin/env bash
+# wslfetch - WSL Screenshot Information Tool
+# Component of Windows 10 linux Subsystem Utility
 # <https://github.com/patrick330602/wslu>
 
 # Copyright(c) 2017 Patrick Wu J M <wotingwu@live.com>
 
-# For more help for wslu, visit the following site:
+# For more help for wslfetch, visit the following site:
 # http://garage.patrickwu.cf/man/wslu/wslfetch
+
+. wslu --silent
+
+hostname="$(hostname)"
+build=`wslsys -B`
+release=`wslsys -R`
+kernel=`wslsys -K`
+uptime=`wslsys -U`
+packages=`wslsys -P`
+shell=`wslsys -S`
+
+cat <<EOF
+
+${cyan} /\$\$      /\$\$  /\$\$\$\$\$\$  /\$\$       ${red}${bold}Windows 10 Linux Subsytem${reset}
+${cyan}| \$\$  /\$ | \$\$ /\$\$__  \$\$| \$\$	  ${red}${bold}${USER}${reset}@${red}${bold}${hostname}${reset}
+${cyan}| \$\$ /\$\$\$| \$\$| \$\$${reset}  ${cyan}\\__/| \$\$${reset}       ${red}${bold}BUILD:${reset}	${build}
+${cyan}| \$\$${reset}${cyan}/\$\$${reset} ${cyan}\$\$${reset} ${cyan}\$\$${reset}${cyan}|  \$\$\$\$\$\$${reset} ${cyan}| \$\$${reset}       ${red}${bold}RELEASE:${reset}	${release}
+${cyan}| \$\$\$\$${reset}${cyan}_  \$\$\$\$${reset} ${cyan}\\____  \$\$${reset}${cyan}| \$\$${reset}	  ${red}${bold}KERNEL:${reset}	${kernel}
+${cyan}| \$\$\$${reset}${cyan}/ \\  \$\$\$${reset} ${cyan}/\$\$${reset}  ${cyan}\\ \$\$${reset}${cyan}| \$\$${reset}	  ${red}${bold}UPTIME:${reset}	${uptime}
+${cyan}| \$\$${reset}${cyan}/   \\  \$\$${reset}${cyan}|  \$\$\$\$\$\$${reset}${cyan}/| \$\$\$\$\$\$\$\$${reset} ${red}${bold}SHELL:${reset}	${shell}
+${cyan}|__/     \\__/ \\______/ |________/${reset} ${red}${bold}PACKAGES:${reset}	${packages}
+
+EOF
