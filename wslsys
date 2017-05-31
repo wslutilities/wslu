@@ -24,7 +24,7 @@ shell="$(basename ${SHELL})"
 for args; do
     case $args in
             -h|--help) help $0 "$help_short"; exit;;
-		    -v|--version) echo "wslpath v$wslu_version.$version"; exit;;
+		    -v|--version) echo "wslsys v$wslu_version.$version"; exit;;
             -S|--shell)echo $shell;exit;;
             -U|--uptime)echo $uptime;exit;;
 			-B|--build)echo $build;exit;;

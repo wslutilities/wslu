@@ -54,4 +54,7 @@ ${cyan}|__/     \\__/ \\______/ |________/${reset} ${red}${bold}PACKAGES:${reset
 EOF
 line
 
-[[ "$is_splash" == "1" ]] && (sleep 2;clear)
+if [[ "$is_splash" == "1" ]]; then
+    sleep 2
+    clear
+fi
