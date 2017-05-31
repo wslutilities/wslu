@@ -1,0 +1,10 @@
+TP normal
+DP zsh git curl
+BG
+IF EXISTD $HOME/.oh-my-zsh
+PR WARN oh-my-zsh already installed, exiting
+EX 20
+ENDIF
+PR INFO Starting oh my zsh Installer...
+EX sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyr    ussell/oh-my-zsh/master/tools/install.sh)"
+ED
