@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+# wslpkg - WSL Package Installer
+# Component of Windows 10 linux Subsystem Utility
+# <https://github.com/patrick330602/wslu>
+
+# Copyright(c) 2017 Patrick Wu J M <wotingwu@live.com>
+
+# For more help for wslpkg, visit the following site:
+# http://garage.patrickwu.cf/man/wslu/wslpkg
+
+        tmp_version="$(lsb_release -c -s)"
+		tpath_win="$(path_win $tmp_path)"
+		tpath_linux="$(path_linux $tmp_path)"
+		apath_win="$(path_win $appdata_path)"
+		apath_linux="$(path_linux $appdata_path)"
+		ppath_win="$(path_win $programfile_path)"
+		
+		if [[ -n $3 ]]; then
+			echo "${info}Adding repository...${reset}"
+			sudo add-apt-repository -y $3
+			echo "${info}Updating source...${reset}"
+			sudo apt-get update
+			echo "${info}Installing $2....${reset}"
+			sudo apt-get install -y $2
+			echo "${info}$2 installed.${reset}"
+			exit
+		elif  [[ "$2" == "pulseaudio" ]]; then
+			[[ -d $apath_linux/PulseAudio ]] && (echo "${warn}PulseAudio already installed; Aborted."; exit 32)
+			echo "${info}checking dependency..."
+			hash wget 2>/dev/null || (echo "${warn}wget not installed. Installing...${reset}"; sudo apt-get install wget)
+			hash unzip 2>/dev/null || (echo "${warn}unzip not installed. Installing...${reset}"; sudo apt-get install unzip)
+			case $tmp_version in
+				trusty)
+					echo "${info}Your are on $tmp_version. Adding corresponding repo...${reset}"
+					sudo add-apt-repository -y ppa:aseering/wsl-pulseaudio
+					;;
+				xenial) 
+					echo "${info}Your are on $tmp_version. Adding corresponding repo...${reset}"
+					sudo add-apt-repository -y ppa:therealkenc/wsl-pulseaudio
+					;;
+				*)	echo "${error}Unsupported distro. Aborted.${reset}"; exit 31;;
+			esac
+			echo "${info}Updating source...${reset}"
+			sudo apt-get update
+			echo "${info}Installing PulseAudio Linux client...${reset}"
+			sudo apt-get install -y pulseaudio
+			echo "${info}Applying PulseAusio Linux client fix...${reset}"
+			sudo sed -i 's/; default-server =/default-server = 127.0.0.1/' /etc/pulse/client.conf
+			echo "${info}Downloading PulseAudio Windows client...${reset}"
+			wget -cO $tpath_linux/pulseaudio.zip http://bosmans.ch/pulseaudio/pulseaudio-1.1.zip
+			echo "${info}Extracting files....${reset}"
+			cmd.exe /k "md \"$tpath_win\\\\pulseaudio\" && exit"
+			unzip -o $tpath_linux/pulseaudio.zip -d $tpath_linux/pulseaudio
+			echo "${info}Installing PulseAudio Windows client...${reset}"
+			cmd.exe /k "md \"$apath_win\\\\PulseAudio\" && exit"
+			xcopy.exe /e "$tpath_win\\\\pulseaudio" "$apath_win\\\\PulseAudio"
+			echo "${info}Setting PulseAudio to run at startup...${reset}"
+			apath_trimmed="$(echo $appdata_path | tr -d '[:space:]')"
+			echo -e "set ws=wscript.createobject(\"wscript.shell\")\r\n" > "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
+			echo "ws.run \"$apath_trimmed\PulseAudio\bin\pulseaudio.exe --exit-idle-time=-1\",0" >> "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
+			CR=$(printf '\r')
+			sed "s/\$/$CR/" "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
+			echo "${info}Adding recommended settings...${reset}"
+			echo "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" >> "$apath_linux/PulseAudio/etc/pulse/default.pa"
+			echo "${info}PulseAudio installed. Restart to take effect.${reset}"
+			echo "${warn}DO NOT allow PulseAudio access to any of your networks if prompted.${reset}"
+		# VcXsrv Installer
+		elif [[ "$2" == "vcxsrv" ]]; then
+			echo "${info}Downloading VcXsrv...${reset}"
+			if [[ -f $tpath_linux/vcxsrv.exe ]]; then
+				rm -r $tpath_linux/vcxsrv.exe
+			fi
+			wget -cO $tpath_linux/vcxsrv.exe http://downloads.sourceforge.net/project/vcxsrv/vcxsrv/1.19.2.0/vcxsrv-64.1.19.2.0.installer.exe
+			echo "${info}Setting VcXsrv to run at startup...${reset}"
+			powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$apath_win\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\VcXsrv.lnk');\$s.TargetPath='\"$ppath_win\\VcXsrv\\vcxsrv.exe\"';\$s.Arguments=':0 -ac -terminate -lesspointer -multiwindow -clipboard -wgl';\$s.Save();"
+			echo "${info}Start installer. After Installation, please restart to take effect.${reset}"
+			cd /mnt/c && cmd.exe /k "start "$tpath_win\\VcXsrv.exe" && exit"
+			echo "${warn}DO NOT allow VcXsrv access to any of your networks if prompted.${reset}"
+		else
+			echo "${error} No input or invalid input, aborting${reset}"
+			exit 20
+		fi
