@@ -8,7 +8,13 @@
 # For more help for wslfetch, visit the following site:
 # http://garage.patrickwu.cf/man/wslu/wslfetch
 
+version=17
+
+is_line=0
+is_splash=0
 . wslu --silent
+
+help_short="wslfetch (-h|-v|-s|-l)"
 
 hostname="$(hostname)"
 build=`wslsys -B`
@@ -18,8 +24,25 @@ uptime=`wslsys -U`
 packages=`wslsys -P`
 shell=`wslsys -S`
 
-cat <<EOF
+line(){
+    if [[ "$is_line" == "1" ]]; then
+        printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
+    else
+        echo ""
+    fi
+}
 
+for args; do
+	case $args in
+        -h|--help) help $0 "$help_short"; exit;;
+		-v|--version) echo "wslpath v$wslu_version.$version"; exit;;
+        -s|--splash) is_splash=1;;
+        -l|--line) is_line=1;;
+    esac
+done
+
+line
+cat <<EOF
 ${cyan} /\$\$      /\$\$  /\$\$\$\$\$\$  /\$\$       ${red}${bold}Windows 10 Linux Subsytem${reset}
 ${cyan}| \$\$  /\$ | \$\$ /\$\$__  \$\$| \$\$	  ${red}${bold}${USER}${reset}@${red}${bold}${hostname}${reset}
 ${cyan}| \$\$ /\$\$\$| \$\$| \$\$${reset}  ${cyan}\\__/| \$\$${reset}       ${red}${bold}BUILD:${reset}	${build}
@@ -28,5 +51,7 @@ ${cyan}| \$\$\$\$${reset}${cyan}_  \$\$\$\$${reset} ${cyan}\\____  \$\$${reset}$
 ${cyan}| \$\$\$${reset}${cyan}/ \\  \$\$\$${reset} ${cyan}/\$\$${reset}  ${cyan}\\ \$\$${reset}${cyan}| \$\$${reset}	  ${red}${bold}UPTIME:${reset}	${uptime}
 ${cyan}| \$\$${reset}${cyan}/   \\  \$\$${reset}${cyan}|  \$\$\$\$\$\$${reset}${cyan}/| \$\$\$\$\$\$\$\$${reset} ${red}${bold}SHELL:${reset}	${shell}
 ${cyan}|__/     \\__/ \\______/ |________/${reset} ${red}${bold}PACKAGES:${reset}	${packages}
-
 EOF
+line
+
+[[ "$is_splash" == "1" ]] && (sleep 2;clear)
