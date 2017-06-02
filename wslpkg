@@ -61,7 +61,7 @@ case $1 in
 			echo "${info}Applying PulseAusio Linux client fix..."
 			sudo sed -i 's/; default-server =/default-server = 127.0.0.1/' /etc/pulse/client.conf
 			echo "${info}Downloading PulseAudio Windows client..."
-			wget -cO $tpath_linux/pulseaudio.zip http://bosmans.ch/pulseaudio/pulseaudio-1.1.zip
+			wget -cO $tpath_linux/pulseaudio.zip https://github.com/kitor/wsl/raw/master/pulse6.zip
 			echo "${info}Extracting files...."
 			cmd.exe /k "md \"$tpath_win\\\\pulseaudio\" && exit"
 			unzip -o $tpath_linux/pulseaudio.zip -d $tpath_linux/pulseaudio
