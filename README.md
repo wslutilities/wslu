@@ -1,4 +1,4 @@
-# wslu - Windows 10 linux Subsystem Utility
+# wslu - A collection of utilities for WSL
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update. 
 
 
