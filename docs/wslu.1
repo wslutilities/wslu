@@ -1,9 +1,9 @@
-.TH WSLU "1" "May 2017" "0.18.0" "User Commands"
+.TH WSLU "1" "May 2017" "1.0.2" "User Commands"
 
 .SH NAME
 wslu \- Windows 10 Linux Subsystem Utility
 .SH SYNOPSIS
-.B wslu \fR<commands> [options]
+.B wslu \fR(\-h|\-v|\-s)
 
 .SH "WHAT IS WSL?"
 WSL is short for "Windows Subsystem for Linux", which is a Linux Subsystem from Windows 10. WSL provides developers with a familiar Bash shell and Linux environment in which you can run most Linux command-line tools, directly on Windows, UNMODIFIED, without needing an entire Linux virtual machine. Currently we have Bash On Ubuntu On Windows 10, and more distro such as OpenSUSE and Fedora will be coming in the future.
@@ -13,25 +13,14 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as enabli
 
 .SH COMMANDS
 .TP
-.B help\fR, \fBh\fR
+.B \-h\fR, \fB\-\-help\fR
 print a simplified help.
 .TP
-.B version, \fBv\fR
+.B \-v\fR, \fB\-\-version\fR
 print current version.
 .TP
-.B install
-install is a minimal package manager for installing special packages. Also, it provide some simple commands to install apps from third-party repositories.
-.RS
-.TP
-.B pulseaudio
-install pulseaudio to provide additional sound playing feature to WSL. 
-.TP
-.B vcxsrv
-install vcxsrv to provide additional GUI feature to WSL.
-.TP
-[\fBthird-party packages\fR] [\fBrepository\fR]
-install a application with a certain third-party repository.
-.RE
+.B \-s\fR, \fB\-\-silence\fR
+No use. For internal use only.
 
 .SH ERROR CODE
 .TP

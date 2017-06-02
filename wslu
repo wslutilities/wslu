@@ -9,7 +9,7 @@
 # http://garage.patrickwu.cf/man/wslu
 
 # data segment
-wslu_version=0.21
+wslu_version=1.0
 
 ## color
 red=`tput setaf 1`

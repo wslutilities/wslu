@@ -17,11 +17,17 @@ help_short="wslpkg [add|remove] ..NAME... [REPO]\nwslpkg (-h|-v|-l)"
 tmp_version="$(lsb_release -c -s)"
 tpath_win=`wslpath -d -T`
 tpath_linux=`wslpath -u -T`
+apath_o=`wslpath -w -A`
 apath_win=`wslpath -d -A`
 apath_linux=`wslpath -u -A`
 ppath_win=`wslpath -d -P`
+spath_win=`wslpath -d -su`
 
-
+case $1 in
+	-h|--help) help $0 "$help_short"; exit;;
+	-v|--version) echo "wslpkg v$wslu_version.$version"; exit;;
+	-l|--list) echo -e "Available Special Package: \nPulseAudio\nVcXsrv\n"; exit;;
+	add)
 		if [[ -n $3 ]]; then
 			echo "${info}Adding repository..."
 			sudo add-apt-repository -y $3
@@ -31,6 +37,7 @@ ppath_win=`wslpath -d -P`
 			sudo apt-get install -y $2
 			echo "${info}$2 installed."
 			exit
+		# Install PulseAudio
 		elif  [[ "$2" == "pulseaudio" ]]; then
 			[[ -d $apath_linux/PulseAudio ]] && (echo "${warn}PulseAudio already installed; Aborted."; exit 32)
 			echo "${info}checking dependency..."
@@ -62,7 +69,6 @@ ppath_win=`wslpath -d -P`
 			cmd.exe /k "md \"$apath_win\\\\PulseAudio\" && exit"
 			xcopy.exe /e "$tpath_win\\\\pulseaudio" "$apath_win\\\\PulseAudio"
 			echo "${info}Setting PulseAudio to run at startup..."
-			apath_trimmed="$(echo $appdata_path | tr -d '[:space:]')"
 			echo -e "set ws=wscript.createobject(\"wscript.shell\")\r\n" > "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
 			echo "ws.run \"$apath_trimmed\PulseAudio\bin\pulseaudio.exe --exit-idle-time=-1\",0" >> "$apath_linux/Microsoft/Windows/Start Menu/Programs/Startup/start_pulseaudio.vbe"
 			CR=$(printf '\r')
@@ -87,3 +93,43 @@ ppath_win=`wslpath -d -P`
 			echo "${error} No input or invalid input, aborting"
 			exit 20
 		fi
+	remove)
+		if [[ -n $3 ]]; then
+			hash ppa-purge 2>/dev/null || (echo "${warn}ppa-purge not installed. Installing..."; sudo apt-get install ppa-purge)
+			echo "${info}Removing $2..."
+			sudo apt-get remove -y $2
+			echo "${info}Removing repository..."
+			sudo ppa-purge $3
+			echo "${info}Updating source..."
+			sudo apt-get update
+			echo "${info}$2 removed."
+			exit
+		elif  [[ "$2" == "pulseaudio" ]]; then
+			echo "${info}Removing PulseAudio Linux client..."
+			sudo apt-get remove -y pulseaudio
+			case $tmp_version in
+				trusty)
+					echo "${info}Your are on $tmp_version. Removing corresponding repo..."
+					sudo ppa-purge ppa:aseering/wsl-pulseaudio
+					;;
+				xenial) 
+					echo "${info}Your are on $tmp_version. Removing corresponding repo..."
+					sudo ppa-purge ppa:therealkenc/wsl-pulseaudio
+					;;
+			esac
+			echo "${info}Removing PulseAudio Windows client..."
+			cd /mnt/c && cmd.exe /c "del $tpath_win\\pulseaudio.zip"
+			cmd.exe /c "rmdir \"$tpath_win\\\\pulseaudio\" /s /q"
+			cmd.exe /c "rmdir \"$apath_win\\\\PulseAudio\" /s /q"
+			cd /mnt/c && cmd.exe /c "del $start_pulseaudio.vbe\\start_pulseaudio.vbe"
+			echo "${info}PulseAudio Removed."
+		elif [[ "$2" == "vcxsrv" ]]; then
+			echo "${info}removing extra files..."
+			cd /mnt/c && cmd.exe /c "del $apath_win\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\VcXsrv.lnk"
+			echo "${info}start uninstaller..."
+			cd /mnt/c && cmd.exe /c "start "$ppath_win\\uninstall.exe""
+		else
+			echo "${error} No input or invalid input, aborting"
+			exit 20
+		fi
+		

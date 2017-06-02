@@ -1,7 +1,8 @@
-.TH WSLSYS "1" "May 2017" "1.0.06" "User Commands"
+
+.TH WSLPKG "1" "May 2017" "2.0.06" "User Commands"
 
 .SH NAME
-wslsys \- Component of Windows 10 Linux Subsystem Utility
+wslpkg \- Component of Windows 10 Linux Subsystem Utility
 .SH SYNOPSIS
 .B wslusc\fR (\-h|\-v|\-S|\-U|\-B|\-R|\-K|\-P)
 
@@ -9,7 +10,14 @@ wslsys \- Component of Windows 10 Linux Subsystem Utility
 This is a WSL shortcut creator to create shortcut on Windows Desktop
 
 .SH COMMANDS
-Default will print out the overall system information. more options are following:
+.TP
+.B add\fR
+Install a special package. If repository is specified, it will install the package through the repository.
+.TP
+.B remove\fR
+Remove a special package. If repository is specified, it will remove the package through the repository.
+
+.SH OPTIONS
 .TP
 .B \-h\fR, \fB\-\-help\fR
 print a simple help
@@ -17,23 +25,16 @@ print a simple help
 .B \-v\fR, \fB\-\-version\fR
 print current version
 .TP
-\fB\-S\fR, \fB\-\-shell\fR
-print used shell
+\fB\-l\fR, \fB\-\-list\fR
+print the special packages that is able to be installed
+
+.SH "AVAILABLE PACKAGE"
 .TP
-\fB\-U\fR, \fB\-\-uptime\fR
-print current uptime
+.B pulseaudio
+install pulseaudio to provide additional sound playing feature to WSL. 
 .TP
-\fB\-B\fR, \fB\-\-build\fR
-print Windows build information
-.TP
-\fB\-K\fR, \fB\-\-kernel\fR
-print WSL kernel info
-.TP
-\fB\-R\fR, \fB\-\-release\fR
-print WSL system release info
-.TP
-\fB\-P\fR, \fB\-\-package\fR
-print total installed packages
+.B vcxsrv
+install vcxsrv to provide additional GUI feature to WSL.
 
 .SH "SEE ALSO"
 https://github.com/patrick330602/wslu
