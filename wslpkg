@@ -92,7 +92,7 @@ case $1 in
 		else
 			echo "${error} No input or invalid input, aborting"
 			exit 20
-		fi
+		fi;;
 	remove)
 		if [[ -n $3 ]]; then
 			hash ppa-purge 2>/dev/null || (echo "${warn}ppa-purge not installed. Installing..."; sudo apt-get install ppa-purge)
@@ -129,7 +129,9 @@ case $1 in
 			echo "${info}start uninstaller..."
 			cd /mnt/c && cmd.exe /c "start "$ppath_win\\uninstall.exe""
 		else
-			echo "${error} No input or invalid input, aborting"
+			echo "${error}No input or invalid input, aborting"
 			exit 20
-		fi
+		fi;;
+	*) echo "${error}No input or invalid input, aborting"; exit 20;;
+esac
 		
