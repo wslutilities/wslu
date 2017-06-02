@@ -2,8 +2,11 @@
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update. 
 
 
-# Install
+# Installation
+## Package
 Download the package from [release](https://github.com/patrick330602/wslu/releases) and install it using `sudo dpkg -i wslu*`.
+## Source
+clone the repository and install the package using `sudo make install`. To uninstall, run `sudo make uninstall`.
 
 # Feature
 ## wslusc

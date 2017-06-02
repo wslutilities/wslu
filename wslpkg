@@ -79,16 +79,20 @@ case $1 in
 			echo "${warn}DO NOT allow PulseAudio access to any of your networks if prompted."
 		# VcXsrv Installer
 		elif [[ "$2" == "vcxsrv" ]]; then
+			echo "${info}Tweaking system files..."
+			echo 'export DISPLAY=:0' >> ~/.bashrc
+			sudo sed -i "s$<listen>.*</listen>$<listen>tcp:host=localhost,port=0</listen>$" /etc/dbus-1/session.conf
 			echo "${info}Downloading VcXsrv..."
 			if [[ -f $tpath_linux/vcxsrv.exe ]]; then
 				rm -r $tpath_linux/vcxsrv.exe
 			fi
 			wget -cO $tpath_linux/vcxsrv.exe http://downloads.sourceforge.net/project/vcxsrv/vcxsrv/1.19.2.0/vcxsrv-64.1.19.2.0.installer.exe
 			echo "${info}Setting VcXsrv to run at startup..."
-			powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$apath_win\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\VcXsrv.lnk');\$s.TargetPath='\"$ppath_win\\VcXsrv\\vcxsrv.exe\"';\$s.Arguments=':0 -ac -terminate -lesspointer -multiwindow -clipboard -wgl';\$s.Save();"
+			cd /mnt/c && powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$apath_win\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\VcXsrv.lnk');\$s.TargetPath='\"$ppath_win\\VcXsrv\\vcxsrv.exe\"';\$s.Arguments=':0 -ac -terminate -lesspointer -multiwindow -clipboard -wgl';\$s.Save();"
 			echo "${info}Start installer. After Installation, please restart to take effect."
 			cd /mnt/c && cmd.exe /k "start "$tpath_win\\VcXsrv.exe" && exit"
-			echo "${warn}DO NOT allow VcXsrv access to any of your networks if prompted."
+			echo -e "${warn}DO NOT allow VcXsrv access to any of your networks if prompted."
+			Add
 		else
 			echo "${error} No input or invalid input, aborting"
 			exit 20

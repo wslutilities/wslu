@@ -8,7 +8,7 @@ MAN := $(wildcard docs/*.1)
 SBIN := $(wildcard $(INSPATH)/wsl*)
 SMAN := $(wildcard $(MANPATH)/*.1)
 all:
-	@echo "wslu doesn't need to be built. Run \`make install' in order to install it."
+	@echo "wslu doesn't need to be built. Run 'sudo make install' to install it."
 
 install :
 	install -m644 $(MAN) $(MANPATH)
