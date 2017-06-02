@@ -34,7 +34,7 @@ path_linux()
 }
 path_converter()
 {
-	new_path="$(cmd.exe /c "echo $@" 2>&1 | tr -d '\r')"
+	new_path="$((cd /mnt/c && cmd.exe /c "echo $@") 2>&1 | tr -d '\r')"
 	echo $new_path
 }
 reg_path_converter()
