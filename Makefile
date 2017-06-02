@@ -3,7 +3,7 @@ INSPATH=/usr/bin
 DOCPATH = /usr/share/doc/wslu
 MANPATH = /usr/share/man/man1
 
-BIN := $(wildcard bin/wsl*)
+BIN := $(wildcard wsl*)
 MAN := $(wildcard docs/*.1)
 SBIN := $(wildcard $(INSPATH)/wsl*)
 SMAN := $(wildcard $(MANPATH)/*.1)
