@@ -8,11 +8,11 @@
 # For more help for wslsys, visit the following site:
 # http://garage.patrickwu.cf/man/wslu/wslsys
 
-version="06"
+version="11"
 
 . wslu --silent
 
-help_short="wslusc (-h|-v|-S|-U|-B|-R|-K|-P)"
+help_short="wslusc (-h|-v|-S|-U|-b|-B|-fB|-R|-K|-P) -s"
 branch=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "BuildBranch" 2>&1 | sed -n 3p | sed -e "s/BuildBranch//" | sed -e 's/^[[:space:]]*//' | awk '{$1=""; sub("  ", " "); print}' | sed -e 's|\r||g'`
 build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
 full_build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "BuildLabEx" 2>&1 | sed -n 3p | sed -e "s/BuildLabEx//" | sed -e 's/^[[:space:]]*//' | awk '{$1=""; sub("  ", " "); print}' | sed -e 's|\r||g'`

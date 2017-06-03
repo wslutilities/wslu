@@ -1,15 +1,15 @@
-.TH WSLSYS "1" "May 2017" "1.0.06" "User Commands"
+.TH WSLSYS "1" "May 2017" "1.0.11" "User Commands"
 
 .SH NAME
 wslsys \- Component of Windows 10 Linux Subsystem Utility
 .SH SYNOPSIS
-.B wslsys\fR (\-h|\-v|\-S|\-U|\-B|\-R|\-K|\-P)
+.B wslsys\fR (\-h|\-v|\-S|\-U|\-b|\-B|\-fB|\-R|\-K|\-P) \-s
 
 .SH DESCRIPTION
 This is a WSL system information printer to print out some basic system information.
 
 .SH COMMANDS
-Default will print out the overall system information. more options are following:
+Default will print out the overall system information. more options are following(add \-s flag to print only value):
 .TP
 .B \-h\fR, \fB\-\-help\fR
 print a simple help
@@ -23,8 +23,14 @@ print used shell
 \fB\-U\fR, \fB\-\-uptime\fR
 print current uptime
 .TP
+\fB\-b\fR, \fB\-\-branch\fR
+print windows build information
+.TP
 \fB\-B\fR, \fB\-\-build\fR
 print Windows build information
+.TP
+\fB\-fB\fR, \fB\-\-full\-build\fR
+print full Windows build information
 .TP
 \fB\-K\fR, \fB\-\-kernel\fR
 print WSL kernel info
