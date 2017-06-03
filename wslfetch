@@ -17,12 +17,12 @@ is_splash=0
 help_short="wslfetch (-h|-v|-s|-l)"
 
 hostname="$(hostname)"
-build=`wslsys -B`
-release=`wslsys -R`
-kernel=`wslsys -K`
-uptime=`wslsys -U`
-packages=`wslsys -P`
-shell=`wslsys -S`
+branch=`wslsys -b -s`
+build=`wslsys -B -s`
+release=`wslsys -R -s`
+kernel=`wslsys -K -s`
+uptime=`wslsys -U -s`
+packages=`wslsys -P -s`
 
 line(){
     if [[ "$is_line" == "1" ]]; then
@@ -46,10 +46,10 @@ cat <<EOF
 ${cyan} /\$\$      /\$\$  /\$\$\$\$\$\$  /\$\$       ${red}${bold}Windows 10 Linux Subsytem${reset}
 ${cyan}| \$\$  /\$ | \$\$ /\$\$__  \$\$| \$\$	  ${red}${bold}${USER}${reset}@${red}${bold}${hostname}${reset}
 ${cyan}| \$\$ /\$\$\$| \$\$| \$\$${reset}  ${cyan}\\__/| \$\$${reset}       ${red}${bold}BUILD:${reset}	${build}
-${cyan}| \$\$${reset}${cyan}/\$\$${reset} ${cyan}\$\$${reset} ${cyan}\$\$${reset}${cyan}|  \$\$\$\$\$\$${reset} ${cyan}| \$\$${reset}       ${red}${bold}RELEASE:${reset}	${release}
-${cyan}| \$\$\$\$${reset}${cyan}_  \$\$\$\$${reset} ${cyan}\\____  \$\$${reset}${cyan}| \$\$${reset}	  ${red}${bold}KERNEL:${reset}	${kernel}
-${cyan}| \$\$\$${reset}${cyan}/ \\  \$\$\$${reset} ${cyan}/\$\$${reset}  ${cyan}\\ \$\$${reset}${cyan}| \$\$${reset}	  ${red}${bold}UPTIME:${reset}	${uptime}
-${cyan}| \$\$${reset}${cyan}/   \\  \$\$${reset}${cyan}|  \$\$\$\$\$\$${reset}${cyan}/| \$\$\$\$\$\$\$\$${reset} ${red}${bold}SHELL:${reset}	${shell}
+${cyan}| \$\$${reset}${cyan}/\$\$${reset} ${cyan}\$\$${reset} ${cyan}\$\$${reset}${cyan}|  \$\$\$\$\$\$${reset} ${cyan}| \$\$${reset}       ${red}${bold}BRANCH:${reset}	${branch}
+${cyan}| \$\$\$\$${reset}${cyan}_  \$\$\$\$${reset} ${cyan}\\____  \$\$${reset}${cyan}| \$\$${reset}	  ${red}${bold}RELEASE:${reset}	${release}
+${cyan}| \$\$\$${reset}${cyan}/ \\  \$\$\$${reset} ${cyan}/\$\$${reset}  ${cyan}\\ \$\$${reset}${cyan}| \$\$${reset}	  ${red}${bold}KERNEL:${reset}	${kernel}
+${cyan}| \$\$${reset}${cyan}/   \\  \$\$${reset}${cyan}|  \$\$\$\$\$\$${reset}${cyan}/| \$\$\$\$\$\$\$\$${reset} ${red}${bold}UPTIME:${reset}	${uptime}
 ${cyan}|__/     \\__/ \\______/ |________/${reset} ${red}${bold}PACKAGES:${reset}	${packages}
 EOF
 line
