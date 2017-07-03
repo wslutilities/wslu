@@ -13,6 +13,7 @@ all:
 install :
 	install -m644 $(MAN) $(MANPATH)
 	install $(BIN) $(INSPATH)
+	sudo apt-get install -y bc
 
 uninstall : 
 	rm -f $(SBIN)

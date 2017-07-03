@@ -42,5 +42,5 @@ case $1 in
 		-R|--release) printer "release: $release" $2;exit;;
 		-K|--kernel) printer "kernel: $kernel" $2;exit;;
 		-P|--package) printer "total package: $packages" $2;exit;;
-		*) echo -e "$release on Windows 10 Build $full_build (kernel:$kernel;uptime:$uptime;package:$packages;system install date: $installdate)";exit;;
+		*) echo -e "$release on Windows 10 Build$full_build (kernel:$kernel; uptime:$uptime; package:$packages; system install date:$installdate)";exit;;
 esac
