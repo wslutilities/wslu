@@ -23,6 +23,10 @@ apath_linux=`wslpath -u -A`
 ppath_win=`wslpath -d -P`
 spath_win=`wslpath -d -su`
 
+if [[ -f /etc/SuSE-release ]]; then
+	echo "${error}wslpkg currently do not support openSUSE. Exited"
+	exit 40
+fi
 case $1 in
 	-h|--help) help $0 "$help_short"; exit;;
 	-v|--version) echo "wslpkg v$wslu_version.$version"; exit;;
