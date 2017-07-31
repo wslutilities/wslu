@@ -24,6 +24,45 @@ kernel=`wslsys -K -s`
 uptime=`wslsys -U -s`
 packages=`wslsys -P -s`
 
+case "$distro" in
+	'ubuntu')
+		t="${red}"
+		full_text=(
+            "${red}                 .-.      "
+            "           .-'\`\`${red}(|||)     "
+            "${orange}        ,\`\\${reset} \    ${red}\`-\`${reset}.     "
+            "${orange}       /   \\${reset} '\`\`-.   \`    "
+            "   .-.${orange}    ,${reset}       \`___:   "
+            "  (:::)${orange}   :${reset}        ${red}___    ${reset}"
+            "   \`-\`${orange}    \`${reset}       ${red},   :   ${reset}"
+            "${orange}       \\   / ${red},..-\`   , ${reset}   "
+            "${orange}        \`./ ${red}/    ${orange}.-.\`     ${reset}"
+            "${red}           \`-..-${orange}(   )     ${reset}"
+            "${orange}                 \`-\`      ${reset}"
+);;
+	'opensuse' | 'sles')
+        t="${cyan}${bold}"
+        full_text=(
+            "${cyan} /\$\$      /\$\$  /\$\$\$\$\$\$  /\$\$       "
+            "${cyan}| \$\$  /\$ | \$\$ /\$\$__  \$\$| \$\$	  "
+            "${cyan}| \$\$ /\$\$\$| \$\$| \$\$${reset}  ${cyan}\\__/| \$\$${reset}       "
+            "${cyan}| \$\$${reset}${cyan}/\$\$${reset} ${cyan}\$\$${reset} ${cyan}\$\$${reset}${cyan}|  \$\$\$\$\$\$${reset} ${cyan}| \$\$${reset}       "
+            "${cyan}| \$\$\$\$${reset}${cyan}_  \$\$\$\$${reset} ${cyan}\\____  \$\$${reset}${cyan}| \$\$${reset}	  "
+            "${cyan}| \$\$\$${reset}${cyan}/ \\  \$\$\$${reset} ${cyan}/\$\$${reset}  ${cyan}\\ \$\$${reset}${cyan}| \$\$${reset}	  "
+            "${cyan}| \$\$${reset}${cyan}/   \\  \$\$${reset}${cyan}|  \$\$\$\$\$\$${reset}${cyan}/| \$\$\$\$\$\$\$\$${reset} "
+            "${cyan}|__/     \\__/ \\______/ |________/${reset} "
+            );;
+esac
+
+info_text=("${t}Windows 10 Linux Subsytem${reset}"
+"${t}${USER}${reset}@${t}${hostname}${reset}"
+"${t}BUILD:${reset}	${build}"
+"${t}BRANCH:${reset}	${branch}"
+"${t}RELEASE:${reset}	${release}"
+"${t}KERNEL:${reset}	${kernel}"
+"${t}UPTIME:${reset}	${uptime}"
+"${t}PACKAGES:${reset}	${packages}")
+
 line(){
     if [[ "$is_line" == "1" ]]; then
         printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
@@ -31,6 +70,9 @@ line(){
         echo ""
     fi
 }
+
+info_length=${#info_text[@]}
+full_length=${#full_text[@]}
 
 for args; do
 	case $args in
@@ -42,16 +84,15 @@ for args; do
 done
 
 line
-cat <<EOF
-${cyan} /\$\$      /\$\$  /\$\$\$\$\$\$  /\$\$       ${red}${bold}Windows 10 Linux Subsytem${reset}
-${cyan}| \$\$  /\$ | \$\$ /\$\$__  \$\$| \$\$	  ${red}${bold}${USER}${reset}@${red}${bold}${hostname}${reset}
-${cyan}| \$\$ /\$\$\$| \$\$| \$\$${reset}  ${cyan}\\__/| \$\$${reset}       ${red}${bold}BUILD:${reset}	${build}
-${cyan}| \$\$${reset}${cyan}/\$\$${reset} ${cyan}\$\$${reset} ${cyan}\$\$${reset}${cyan}|  \$\$\$\$\$\$${reset} ${cyan}| \$\$${reset}       ${red}${bold}BRANCH:${reset}	${branch}
-${cyan}| \$\$\$\$${reset}${cyan}_  \$\$\$\$${reset} ${cyan}\\____  \$\$${reset}${cyan}| \$\$${reset}	  ${red}${bold}RELEASE:${reset}	${release}
-${cyan}| \$\$\$${reset}${cyan}/ \\  \$\$\$${reset} ${cyan}/\$\$${reset}  ${cyan}\\ \$\$${reset}${cyan}| \$\$${reset}	  ${red}${bold}KERNEL:${reset}	${kernel}
-${cyan}| \$\$${reset}${cyan}/   \\  \$\$${reset}${cyan}|  \$\$\$\$\$\$${reset}${cyan}/| \$\$\$\$\$\$\$\$${reset} ${red}${bold}UPTIME:${reset}	${uptime}
-${cyan}|__/     \\__/ \\______/ |________/${reset} ${red}${bold}PACKAGES:${reset}	${packages}
-EOF
+# use for loop to read all values and indexes
+for (( i=0; i<${full_length}; i++ ));
+do
+    tmp=""
+    if [[ $i -le ${info_length} ]]; then
+        tmp="${info_text[$i]}"
+    fi
+    echo -e "${full_text[$i]}${tmp}"
+done
 line
 
 if [[ "$is_splash" == "1" ]]; then

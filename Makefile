@@ -17,3 +17,9 @@ install :
 uninstall : 
 	rm -f $(SBIN)
 	rm -f $(SMAN)
+
+reinstall:
+	rm -f $(SBIN)
+	rm -f $(SMAN)
+	install -m644 $(MAN) $(MANPATH)
+	install $(BIN) $(INSPATH)

@@ -12,14 +12,24 @@
 wslu_version=1.0
 
 ## color
-red=`tput setaf 1`
-green=`tput setaf 2`
-brown=`tput setaf 3`
-blue=`tput setaf 4`
-purple=`tput setaf 5`
-cyan=`tput setaf 6`
-yellow=`tput setaf 7`
-orange=`tput setaf 166`
+black='\e[0m\e[30m'
+red='\e[0m\e[31m'
+green='\e[0m\e[32m'
+brown='\e[0m\e[33m'
+blue='\e[0m\e[34m'
+purple='\e[0m\e[35m'
+cyan='\e[0m\e[36m'
+yellow='\e[0m\e[1;33m'
+white='\e[0m\e[1;37m'
+dark_gray='\e[0m\e[1;30m'
+light_red='\e[0m\e[1;31m'
+light_green='\e[0m\e[1;32m'
+light_blue='\e[0m\e[1;34m'
+light_purple='\e[0m\e[1;35m'
+light_cyan='\e[0m\e[1;36m'
+light_gray='\e[0m\e[37m'
+orange='\e[38;5;202m'
+light_orange='\e[38;5;214m'
 bold=`tput bold`
 reset=`tput sgr0`
 
