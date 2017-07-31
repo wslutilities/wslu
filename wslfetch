@@ -26,21 +26,69 @@ packages=`wslsys -P -s`
 
 case "$distro" in
 	'ubuntu')
-		t="${red}"
+		t="${red}${bold}"
 		full_text=(
-            "${red}                 .-.      "
-            "           .-'\`\`${red}(|||)     "
-            "${orange}        ,\`\\${reset} \    ${red}\`-\`${reset}.     "
-            "${orange}       /   \\${reset} '\`\`-.   \`    "
-            "   .-.${orange}    ,${reset}       \`___:   "
-            "  (:::)${orange}   :${reset}        ${red}___    ${reset}"
-            "   \`-\`${orange}    \`${reset}       ${red},   :   ${reset}"
-            "${orange}       \\   / ${red},..-\`   , ${reset}   "
-            "${orange}        \`./ ${red}/    ${orange}.-.\`     ${reset}"
-            "${red}           \`-..-${orange}(   )     ${reset}"
-            "${orange}                 \`-\`      ${reset}"
-);;
-	'opensuse' | 'sles')
+"${red}                          ./+o+-      ${reset}"
+"${white}                  yyyyy. ${red}'yyyyyy+     ${reset}"
+"${white}              .;//+/////h ${red}yyyyyyo     ${reset}"
+"${orange}           .++ ${white}.:/++++++/-${red}.\`sss/\`     ${reset}"
+"${orange}         .:++o: ${white}\`\++++++++/:---:/-    ${reset}"
+"${orange}        o:+o+:++. ${white}\`\`\`\`\`'-/ooo+++++\   ${reset}"
+"${orange}       .:+o:+o/.          ${white}\`+sssooo+\  ${reset}"
+"${white}  .++/+ ${orange}+oo+o:\`             ${white}\sssooo;  ${reset}"
+"${white} /+++//+: ${orange}oo+o               ${red}\`\`\`\`\`\`\`  ${reset}"
+"${white} \+/+o+++ ${orange}o++o               ${red}ydddhh+  ${reset}"
+"${white}  .++.o+ ${orange}+oo+:\`             ${red}/dddhhh;  ${reset}"
+"${orange}       .+.o+oo:.           ${red}oddhhhh+   ${reset}"
+"${orange}        \+.++o+o\` ${red}-,,,,.:ohdhhhhh+    ${reset}"
+"${orange}         \`:o+++  ${red}ohhhhhhhhyo++os:     ${reset}"
+"${orange}           .o: ${red}.syhhhhhhh'${orange}.oo++o.     ${reset}"
+"${red}               /osyyyyyyy${orange}.oooo+++\    ${reset}"
+"${red}                   \`\`\`\`\` ${orange}+oo+++o:/    ${reset}"
+"${orange}                          \`oo++'\`     ${reset}");;
+	'opensuse')
+        t="${light_green}${bold}"
+        fulloutput=(
+"${light_gray}             .;ldkO0000Okdl;.               ${reset}"
+"${light_gray}         .;d00xl:^''''''^:ok00d;.           ${reset}"
+"${light_gray}       .d00l'                'o00d.         ${reset}"
+"${light_gray}     .d0Kd'${light_green}  Okxol:;,.          ${light_gray}:O0d.       ${reset}"
+"${light_gray}    .OK${light_green}KKK0kOKKKKKKKKKKOxo:,      ${light_gray}lKO.      ${reset}"
+"${light_gray}   ,0K${light_green}KKKKKKKKKKKKKKK0P^${light_gray},,,${light_green}^dx:${light_gray}    ;00,     ${reset}"
+"${light_gray}  .OK${light_green}KKKKKKKKKKKKKKKk'${light_gray}.oOPPb.${light_green}'0k.${light_gray}   cKO.    ${reset}"
+"${light_gray}  :KK${light_green}KKKKKKKKKKKKKKK: ${light_gray}kKx..dd ${light_green}lKd${light_gray}   'OK:    ${reset}"
+"${light_gray}  dKK${light_green}KKKKKKKKKOx0KKKd ${light_gray}^0KKKO' ${light_green}kKKc${light_gray}   dKd    ${reset}"
+"${light_gray}  dKK${light_green}KKKKKKKKKK;.;oOKx,..${light_gray}^${light_green}..;kKKK0.${light_gray}  dKd    ${reset}"
+"${light_gray}  :KK${light_green}KKKKKKKKKK0o;...^cdxxOK0O/^^'  ${light_gray}.0K:    ${reset}"
+"${light_gray}   kKK${light_green}KKKKKKKKKKKKK0x;,,......,;od  ${light_gray}lKk     ${reset}"
+"${light_gray}   '0K${light_green}KKKKKKKKKKKKKKKKKKKK00KKOo^  ${light_gray}c00'     ${reset}"
+"${light_gray}    'kK${light_green}KKOxddxkOO00000Okxoc;''   ${light_gray}.dKk'      ${reset}"
+"${light_gray}      l0Ko.                    .c00l'       ${reset}"
+"${light_gray}       'l0Kk:.              .;xK0l'         ${reset}"
+"${light_gray}          'lkK0xl:;,,,,;:ldO0kl'            ${reset}"
+"${light_gray}              '^:ldxkkkkxdl:^'              ${reset}")
+    'sles')
+        t="${green}${bold}"
+        full_text=(
+"${green}             .;ldkO0000Okdl;.               ${reset}"
+"${green}         .;d00xl:^''''''^:ok00d;.           ${reset}"
+"${green}       .d00l'                'o00d.         ${reset}"
+"${green}     .d0Kd'  Okxol:;,.          :O0d.       ${reset}"
+"${green}    .OKKKK0kOKKKKKKKKKKOxo:,      lKO.      ${reset}"
+"${green}   ,0KKKKKKKKKKKKKKKK0P^,,,^dx:    ;00,     ${reset}"
+"${green}  .OKKKKKKKKKKKKKKKKk'.oOPPb.'0k.   cKO.    ${reset}"
+"${green}  :KKKKKKKKKKKKKKKKK: kKx..dd lKd   'OK:    ${reset}"
+"${green}  dKKKKKKKKKKKOx0KKKd ^0KKKO' kKKc   dKd    ${reset}"
+"${green}  dKKKKKKKKKKKK;.;oOKx,..^..;kKKK0.  dKd    ${reset}"
+"${green}  :KKKKKKKKKKKK0o;...^cdxxOK0O/^^'  .0K:    ${reset}"
+"${green}   kKKKKKKKKKKKKKKK0x;,,......,;od  lKk     ${reset}"
+"${green}   '0KKKKKKKKKKKKKKKKKKKKK00KKOo^  c00'     ${reset}"
+"${green}    'kKKKOxddxkOO00000Okxoc;''   .dKk'      ${reset}"
+"${green}      l0Ko.                    .c00l'       ${reset}"
+"${green}       'l0Kk:.              .;xK0l'         ${reset}"
+"${green}          'lkK0xl:;,,,,;:ldO0kl'            ${reset}"
+"${green}              '^:ldxkkkkxdl:^'              ${reset}")
+    *)
         t="${cyan}${bold}"
         full_text=(
             "${cyan} /\$\$      /\$\$  /\$\$\$\$\$\$  /\$\$       "
