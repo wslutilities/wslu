@@ -20,7 +20,16 @@ installdate=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /
 release="$(lsb_release -ds | sed -e 's/"//g')"
 kernel="$(uname -sr)"
 uptime="$(uptime -p | sed 's/up //')"
-packages="$((packages+=$(dpkg --get-selections | grep -cv deinstall$)))"
+
+case "$distro" in
+	'ubuntu')
+		uptime="$(uptime -p | sed 's/up //')"
+		packages="$((packages+=$(dpkg --get-selections | grep -cv deinstall$)))";;
+	'opensuse'|'sles')
+		uptime="$(uptime | awk '{$1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF="";sub(","," minutes");sub(":"," hours, "); print}' | sed "s/  //")"
+		packages="$(rpm -qa | wc -l)"
+		;;
+esac
 
 printer()
 {

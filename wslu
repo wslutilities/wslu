@@ -33,13 +33,13 @@ debug="${cyan}[debug]${reset}"
 help_short="wslu (-h|-v|-s)"
 
 ## basic distro detection
-distro = "$(lsb_release -ds | sed -e 's/"//g')"
+distro="$(lsb_release -ds | sed -e 's/"//g')"
 if [[ "$distro" == Ubuntu* ]]; then
-	distro = "ubuntu"
+	distro="ubuntu"
 elif [[ "$distro" == openSUSE* ]]; then
-	distro = "opensuse"
+	distro="opensuse"
 elif [[ "$distro" == SUSE* ]]; then
-	distro = "sles"
+	distro="sles"
 fi
 
 function help()
