@@ -3,25 +3,31 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as enabli
 
 
 ## Installation
-### Package
+
+**Depedency:**
+`bc`
+
+**Install from package:**
+
 Download the package from [release](https://github.com/patrick330602/wslu/releases) and install it using `sudo dpkg -i wslu*`.
-### Source
+**Install from source:**
+
 clone the repository and install the package using `sudo make install`. To uninstall, run `sudo make uninstall`.
 
 ## Feature
-### wslusc
+**wslusc**
 This is a WSL shortcut creator to create shortcut on your Windows 10 Desktop. 
 
-### wslsys
+**wslsys**
 This is a WSL system information printer to print out some basic system information.
 
-### wslpkg 
+**wslpkg** 
 This is WSL Package Installer, which is a minimal package manager for installing special packages. Also, it provide some simple commands to install apps from third-party repositories.
 
-### wslfetch
+**wslfetch**
 This is a WSL Screenshoot Information Tool to print information in a elegant way.
 
-### wslpath
+**wslpath**
 This is a WSL Windows path Converter that can convert Windows path to other styles of path.
 
 ## Credit
