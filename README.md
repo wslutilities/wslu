@@ -6,8 +6,9 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as enabli
 **Depedency:**
 
 - `bc` if you want to use `wslsys`;
-- `lsb-release` if you are using OpenSUSE and SUSE Linux Enterprise Server(SLES).
-
+- `lsb-release` and `hostname` if you are using OpenSUSE and SUSE Linux Enterprise Server(SLES).
+  > **why?**
+  > The WSL version of OpenSUSE and SUSE Linux Enterprise Server(SLES) is simplified too much so that they do not contain this basic feature. 
 **Ubuntu**
 
 Download the package from [release](https://github.com/patrick330602/wslu/releases) and install it using `sudo dpkg -i wslu*`.
