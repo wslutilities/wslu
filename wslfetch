@@ -48,7 +48,7 @@ case "$distro" in
 "${orange}                          \`oo++'\`     ${reset}");;
 	'opensuse')
         t="${light_green}${bold}"
-        fulloutput=(
+        full_text=(
 "${light_gray}             .;ldkO0000Okdl;.               ${reset}"
 "${light_gray}         .;d00xl:^''''''^:ok00d;.           ${reset}"
 "${light_gray}       .d00l'                'o00d.         ${reset}"
