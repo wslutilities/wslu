@@ -66,7 +66,7 @@ case "$distro" in
 "${light_gray}      l0Ko.                    .c00l'       ${reset}"
 "${light_gray}       'l0Kk:.              .;xK0l'         ${reset}"
 "${light_gray}          'lkK0xl:;,,,,;:ldO0kl'            ${reset}"
-"${light_gray}              '^:ldxkkkkxdl:^'              ${reset}")
+"${light_gray}              '^:ldxkkkkxdl:^'              ${reset}");;
     'sles')
         t="${green}${bold}"
         full_text=(
@@ -87,7 +87,7 @@ case "$distro" in
 "${green}      l0Ko.                    .c00l'       ${reset}"
 "${green}       'l0Kk:.              .;xK0l'         ${reset}"
 "${green}          'lkK0xl:;,,,,;:ldO0kl'            ${reset}"
-"${green}              '^:ldxkkkkxdl:^'              ${reset}")
+"${green}              '^:ldxkkkkxdl:^'              ${reset}");;
     *)
         t="${cyan}${bold}"
         full_text=(
