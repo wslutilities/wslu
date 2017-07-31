@@ -1,15 +1,17 @@
 # wslu - A collection of utilities for WSL
-This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update. Not fully supported in OpenSUSE.
-
+This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update. Not fully supported in OpenSUSE and SUSE Linux Enterprise Server(SLES).
 
 ## Installation
 
 **Depedency:**
-`bc`
 
-**Install from package:**
+- `bc` if you want to use `wslsys`;
+- `lsb-release` if you are using OpenSUSE and SUSE Linux Enterprise Server(SLES).
+
+**Ubuntu**
 
 Download the package from [release](https://github.com/patrick330602/wslu/releases) and install it using `sudo dpkg -i wslu*`.
+
 **Install from source:**
 
 clone the repository and install the package using `sudo make install`. To uninstall, run `sudo make uninstall`.

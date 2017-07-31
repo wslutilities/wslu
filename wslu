@@ -32,6 +32,16 @@ debug="${cyan}[debug]${reset}"
 ## constants
 help_short="wslu (-h|-v|-s)"
 
+## basic distro detection
+distro = "$(lsb_release -ds | sed -e 's/"//g')"
+if [[ "$distro" == Ubuntu* ]]; then
+	distro = "ubuntu"
+elif [[ "$distro" == openSUSE* ]]; then
+	distro = "opensuse"
+elif [[ "$distro" == SUSE* ]]; then
+	distro = "sles"
+fi
+
 function help()
 {
 	echo -e "`basename "$1"` - Component of Windows 10 Linux Subsystem Utility
