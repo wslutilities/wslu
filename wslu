@@ -9,27 +9,27 @@
 # http://garage.patrickwu.cf/man/wslu
 
 # data segment
-wslu_version=1.0
+wslu_version=1.1
 
 ## color
-black='\e[0m\e[30m'
-red='\e[0m\e[31m'
-green='\e[0m\e[32m'
-brown='\e[0m\e[33m'
-blue='\e[0m\e[34m'
-purple='\e[0m\e[35m'
-cyan='\e[0m\e[36m'
-yellow='\e[0m\e[1;33m'
-white='\e[0m\e[1;37m'
-dark_gray='\e[0m\e[1;30m'
-light_red='\e[0m\e[1;31m'
-light_green='\e[0m\e[1;32m'
-light_blue='\e[0m\e[1;34m'
-light_purple='\e[0m\e[1;35m'
-light_cyan='\e[0m\e[1;36m'
-light_gray='\e[0m\e[37m'
-orange='\e[38;5;202m'
-light_orange='\e[38;5;214m'
+black=`echo -e '\e[30m'`
+red=`echo -e '\e[31m'`
+green=`echo -e '\e[32m'`
+brown=`echo -e '\e[33m'`
+blue=`echo -e '\e[34m'`
+purple=`echo -e '\e[35m'`
+cyan=`echo -e '\e[36m'`
+yellow=`echo -e '\e[1;33m'`
+white=`echo -e '\e[1;37m'`
+dark_gray=`echo -e '\e[1;30m'`
+light_red=`echo -e '\e[1;31m'`
+light_green=`echo -e '\e[1;32m'`
+light_blue=`echo -e '\e[1;34m'`
+light_purple=`echo -e '\e[1;35m'`
+light_cyan=`echo -e '\e[1;36m'`
+light_gray=`echo -e '\e[37m'`
+orange=`echo -e '\e[38;5;202m'`
+light_orange=`echo -e '\e[38;5;214m'`
 bold=`tput bold`
 reset=`tput sgr0`
 

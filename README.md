@@ -1,21 +1,25 @@
 # wslu - A collection of utilities for WSL
-This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update. Not fully supported in OpenSUSE and SUSE Linux Enterprise Server(SLES).
+This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update. 
+
+**Currently supported Distro:**
+- Ubuntu 16.04(Legacy)
+- Ubuntu (Store)
+- OpenSUSE
+- SUSE Linux Enterprise Server(SLES)
 
 ## Installation
 
-**Depedency:**
-
-- `bc` if you want to use `wslsys`;
-- `lsb-release` and `hostname` if you are using OpenSUSE and SUSE Linux Enterprise Server(SLES).
-  > **Why?**
-  >
-  > The WSL version of OpenSUSE and SUSE Linux Enterprise Server(SLES) is simplified too much so that they do not contain this basic feature. 
-
 **Ubuntu**
 
-Download the package from [release](https://github.com/patrick330602/wslu/releases) and install it using `sudo dpkg -i wslu*`.
+1. Install dependencies: `sudo apt install bc`
+2. Download the package from [release](https://github.com/patrick330602/wslu/releases) and install it using `sudo dpkg -i wslu*`.
 
-**Install from source:**
+**OpenSUSE/SLES**
+
+1. Install dependencies: `sudo zypper install bc lsb-release hostname`
+2. Download the package from [release](https://github.com/patrick330602/wslu/releases) and install it using `sudo rpm -ivh wslu*`.
+
+**Source**
 
 clone the repository and install the package using `sudo make install`. To uninstall, run `sudo make uninstall`.
 

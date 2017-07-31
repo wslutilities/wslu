@@ -8,7 +8,7 @@
 # For more help for wslfetch, visit the following site:
 # http://garage.patrickwu.cf/man/wslu/wslfetch
 
-version=17
+version=23
 
 is_line=0
 is_splash=0
@@ -29,23 +29,23 @@ case "$distro" in
 		t="${red}${bold}"
 		full_text=(
 "${red}                          ./+o+-      ${reset}"
-"${white}                  yyyyy. ${red}'yyyyyy+     ${reset}"
-"${white}              .;//+/////h ${red}yyyyyyo     ${reset}"
-"${orange}           .++ ${white}.:/++++++/-${red}.\`sss/\`     ${reset}"
-"${orange}         .:++o: ${white}\`\++++++++/:---:/-    ${reset}"
-"${orange}        o:+o+:++. ${white}\`\`\`\`\`'-/ooo+++++\   ${reset}"
-"${orange}       .:+o:+o/.          ${white}\`+sssooo+\  ${reset}"
-"${white}  .++/+ ${orange}+oo+o:\`             ${white}\sssooo;  ${reset}"
-"${white} /+++//+: ${orange}oo+o               ${red}\`\`\`\`\`\`\`  ${reset}"
-"${white} \+/+o+++ ${orange}o++o               ${red}ydddhh+  ${reset}"
-"${white}  .++.o+ ${orange}+oo+:\`             ${red}/dddhhh;  ${reset}"
-"${orange}       .+.o+oo:.           ${red}oddhhhh+   ${reset}"
-"${orange}        \+.++o+o\` ${red}-,,,,.:ohdhhhhh+    ${reset}"
-"${orange}         \`:o+++  ${red}ohhhhhhhhyo++os:     ${reset}"
-"${orange}           .o: ${red}.syhhhhhhh'${orange}.oo++o.     ${reset}"
-"${red}               /osyyyyyyy${orange}.oooo+++\    ${reset}"
-"${red}                   \`\`\`\`\` ${orange}+oo+++o:/    ${reset}"
-"${orange}                          \`oo++'\`     ${reset}");;
+"${reset}                  yyyyy. ${red}'yyyyyy+     ${reset}"
+"${reset}              .;//+/////h ${red}yyyyyyo     ${reset}"
+"${yellow}           .++ ${reset}.:/++++++/-${red}.\`sss/\`     ${reset}"
+"${yellow}         .:++o: ${reset}\`\++++++++/:---:/-    ${reset}"
+"${yellow}        o:+o+:++. ${reset}\`\`\`\`\`'-/ooo+++++\   ${reset}"
+"${yellow}       .:+o:+o/.          ${reset}\`+sssooo+\  ${reset}"
+"${reset}  .++/+ ${yellow}+oo+o:\`             ${reset}\sssooo;  ${reset}"
+"${reset} /+++//+: ${yellow}oo+o                        ${reset}"
+"${reset} \+/+o+++ ${yellow}o++o               ${red}ydddhh+  ${reset}"
+"${reset}  .++.o+ ${yellow}+oo+:\`             ${red}/dddhhh;  ${reset}"
+"${yellow}       .+.o+oo:.           ${red}oddhhhh+   ${reset}"
+"${yellow}        \+.++o+o\` ${red}-,,,,.:ohdhhhhh+    ${reset}"
+"${yellow}         \`:o+++  ${red}ohhhhhhhhyo++os:     ${reset}"
+"${yellow}           .o: ${red}.syhhhhhhh'${yellow}.oo++o.     ${reset}"
+"${red}               /osyyyyyyy${yellow}.oooo+++\    ${reset}"
+"${red}                   \`\`\`\`\` ${yellow}+oo+++o:/    ${reset}"
+"${yellow}                          \`oo++'\`     ${reset}");;
 	'opensuse')
         t="${light_green}${bold}"
         full_text=(
