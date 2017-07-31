@@ -19,7 +19,6 @@ full_build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v
 installdate=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "InstallDate" | egrep -o "(0x|0X)[a-fA-F0-9]+" | xargs printf "%d\n" | bc | xargs -I '{}' date --date="@{}"`
 release="$(lsb_release -ds | sed -e 's/"//g')"
 kernel="$(uname -sr)"
-uptime="$(uptime -p | sed 's/up //')"
 
 case "$distro" in
 	'ubuntu')
