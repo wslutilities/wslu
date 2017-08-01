@@ -12,12 +12,12 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as enabli
 **Ubuntu**
 
 1. Install dependencies: `sudo apt install bc`
-2. Download the package from [release](https://github.com/patrick330602/wslu/releases) and install it using `sudo dpkg -i wslu*`.
+2. Download the `.deb` package from [release](https://github.com/patrick330602/wslu/releases) and install it using `sudo dpkg -i wslu*`.
 
 **OpenSUSE/SLES**
 
 1. Install dependencies: `sudo zypper install bc lsb-release hostname`
-2. Download the package from [release](https://github.com/patrick330602/wslu/releases) and install it using `sudo rpm -ivh wslu*`.
+2. Download the `.rpm` package from [release](https://github.com/patrick330602/wslu/releases) and install it using `sudo rpm -ivh "wslu*"`.
 
 **Source**
 
