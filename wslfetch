@@ -14,7 +14,7 @@ is_line=0
 is_splash=0
 . wslu --silent
 
-help_short="wslfetch (-h|-v|-s|-l)"
+help_short="wslfetch (-h|-v|-s|-l|-c)"
 
 hostname="$(hostname)"
 branch=`wslsys -b -s`

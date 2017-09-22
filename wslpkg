@@ -22,10 +22,9 @@ apath_win=`wslpath -d -A`
 apath_linux=`wslpath -u -A`
 ppath_win=`wslpath -d -P`
 spath_win=`wslpath -d -su`
-
-if [[ -f /etc/SuSE-release ]]; then
-	echo "${error}wslpkg currently do not support openSUSE. Exited"
-	exit 40
+if [[ $distro == "opensuse" ]] || [[$distro == "sles" ]]; then
+	echo "${warn} Unsupported Distros. Please use ubuntu for this utility. Exiting."
+	exit 1
 fi
 case $1 in
 	-h|--help) help $0 "$help_short"; exit;;
