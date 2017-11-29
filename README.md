@@ -1,4 +1,6 @@
 # wslu - A collection of utilities for WSL
+
+[![GitHub license](https://img.shields.io/github/license/patrick330602/wslu.svg)](https://github.com/patrick330602/wslu/blob/master/LICENSE) [![GitHub (pre-)release](https://img.shields.io/github/release/qubyte/rubidium/all.svg)](https://github.com/patrick330602/wslu)
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update. 
 
 **Currently supported Distro:**
@@ -11,7 +13,7 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as enabli
 
 **Ubuntu**
 
-1. Install dependencies: `sudo apt install build-essential bc`
+1. Install dependencies: `sudo apt install build-essential bc ppa-purge`
 2. Download the `.deb` package from [release](https://github.com/patrick330602/wslu/releases) and install it using `sudo dpkg -i wslu*`.
 
 **OpenSUSE/SLES**
