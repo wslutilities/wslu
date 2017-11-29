@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+echo -e "wslu configuration begins."
+if [[ ! -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
+	echo "Your distro do not support WSL Interopability. Confiuration Aborted."
+	exit 1
+fi
+distro="$(lsb_release -ds | sed -e 's/"//g')"
+build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
+echo -e "Distro: $distro"
+echo -e "Build: $build\n"
+if [[ "$distro" == Ubuntu* ]]; then
+	distro="ubuntu"
+elif [[ "$distro" == openSUSE* ]]; then
+	distro="opensuse"
+elif [[ "$distro" == SUSE* ]]; then
+	distro="sles"
+fi
+
+echo -e "WSL Interopability\n*********************"
+cat /proc/sys/fs/binfmt_misc/WSLInterop
+echo ""
+
+echo -e "\n\ntesting cmd.exe..."
+cmd.exe /c ver
+if [[ $? -eq 0 ]]; then
+	echo "cmd.exe can be invoked."
+else
+	echo "cmd.exe failed to launch."
+	exit 1
+fi
+echo -e "\ntesting powershell.exe..."
+powershell.exe Get-Host
+if [[ $? -eq 0 ]]; then
+	echo "powershell.exe can be invoked."
+else
+	echo "powershell.exe failed to launch."
+	exit 1
+fi
+
+ppep="`powershell.exe Get-ExecutionPolicy 2>&1 | tail -n1 | sed 's/\r$//'`"
+echo -e "Powershell Execution Policy: $ppep"
+if [[ "$ppep" = "Restricted" ]]; then
+cat << EOF
+***************************************
+               WARNING
+***************************************
+The execution policy for powershell.exe
+is set to Restricted. You should set P-
+owershell Execution Policy to Unrestri-
+cted with a Powershell Prompt with Adm-
+inistrator right:
+
+   Set-ExecutionPolicy Unrestricted
+
+Due to the limitation, it is not possi-
+ble to invoke this command from Bash P-
+rompt.
+EOF
+fi
+
+echo -e "\nInstall dependencies..."
+case "$distro" in
+	'ubuntu')
+		sudo apt install build-essential bc ppa-purge wget unzip -y
+		;;
+	'opensuse')
+		sudo zypper -n install bc lsb-release hostname wget unzip
+		;;
+	'sles')
+		sudo zypper -n install bc lsb-release hostname wget unzip
+		;;
+esac
+
+echo -e "\nPre-checking compelete. Installing..."
+sudo make install

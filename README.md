@@ -1,6 +1,7 @@
 # wslu - A collection of utilities for WSL
 
 [![GitHub license](https://img.shields.io/github/license/patrick330602/wslu.svg)](https://github.com/patrick330602/wslu/blob/master/LICENSE) [![GitHub (pre-)release](https://img.shields.io/github/release/qubyte/rubidium/all.svg)](https://github.com/patrick330602/wslu)
+
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update. 
 
 **Currently supported Distro:**
@@ -23,7 +24,7 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as enabli
 
 **Source**
 
-clone the repository and install the package using `sudo make install`. To uninstall, run `sudo make uninstall`.
+clone the repository and install the package using `chmod +x install; ./install`. To uninstall, run `sudo make uninstall`.
 
 ## Feature
 **wslusc**
