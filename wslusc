@@ -28,9 +28,9 @@ if [[ "$cname" != "" ]]; then
 	tpath=`wslpath -d -T`
 	dpath=`wslpath -D`
 	if [[ "$is_gui" == "1" ]]; then
-		powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \`\"DISPLAY=:0 $cname\`\"';\$s.Save();"
+		powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \"DISPLAY=:0 $cname\"';\$s.Save();"
 	else
-		powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \`\"$cname\`\"';\$s.Save();"
+		powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \"$cname\"';\$s.Save();"
 	fi
 	tpath=`wslpath -T`
 	mv $tpath/$cname.lnk $dpath
