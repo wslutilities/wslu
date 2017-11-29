@@ -23,7 +23,7 @@ apath_linux=`wslpath -u -A`
 ppath_win=`wslpath -d -P`
 spath_win=`wslpath -d -su`
 if [[ $distro == "opensuse" ]] || [[$distro == "sles" ]]; then
-	echo "${warn} Unsupported Distros. Please use ubuntu for this utility. Exiting."
+	echo "${warn} Incompatible with OpenSUSE and SUSE Linux Enterprise Server. Action Aborted."
 	exit 1
 fi
 case $1 in
@@ -43,9 +43,6 @@ case $1 in
 		# Install PulseAudio
 		elif  [[ "$2" == "pulseaudio" ]]; then
 			[[ -d $apath_linux/PulseAudio ]] && (echo "${warn}PulseAudio already installed; Aborted."; exit 32)
-			echo "${info}checking dependency..."
-			hash wget 2>/dev/null || (echo "${warn}wget not installed. Installing..."; sudo apt-get install wget)
-			hash unzip 2>/dev/null || (echo "${warn}unzip not installed. Installing..."; sudo apt-get install unzip)
 			case $tmp_version in
 				trusty)
 					echo "${info}Your are on $tmp_version. Adding corresponding repo..."
@@ -95,7 +92,6 @@ case $1 in
 			echo "${info}Start installer. After Installation, please restart to take effect."
 			cd /mnt/c && cmd.exe /k "start "$tpath_win\\VcXsrv.exe" && exit"
 			echo -e "${warn}DO NOT allow VcXsrv access to any of your networks if prompted."
-			Add
 		else
 			echo "${error} No input or invalid input, aborting"
 			exit 20
