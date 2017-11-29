@@ -39,6 +39,15 @@ This is a WSL Screenshoot Information Tool to print information in a elegant way
 **wslpath**
 This is a WSL Windows path Converter that can convert Windows path to other styles of path.
 
+## Extras
+
+### ZSH theme
+this is a zsh theme specifically designed by me for WSL originally called `dealer`, a nice and minimal theme for your WSL. The file is in `extras` folder.
+
+Here is a preview:
+
+[![asciicast](https://asciinema.org/a/150053.png)](https://asciinema.org/a/150053)
+
 ## Credit
 PulseAudio and VcXsrv Installation inspired by aseering/wsl_gui_autoinstall<https://github.com/aseering/wsl_gui_autoinstall>.
 
