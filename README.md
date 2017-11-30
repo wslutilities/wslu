@@ -1,6 +1,6 @@
 # wslu - A collection of utilities for WSL
 
-[![GitHub license](https://img.shields.io/github/license/patrick330602/wslu.svg)](https://github.com/patrick330602/wslu/blob/master/LICENSE) [![GitHub (pre-)release](https://img.shields.io/github/release/qubyte/rubidium/all.svg)](https://github.com/patrick330602/wslu)
+[![Wiki](https://img.shields.io/badge/Wiki-wslu-blue.svg)](https://github.com/patrick330602/wslu/wiki) [![GitHub license](https://img.shields.io/github/license/patrick330602/wslu.svg)](https://github.com/patrick330602/wslu/blob/master/LICENSE) [![GitHub (pre-)release](https://img.shields.io/github/release/qubyte/rubidium/all.svg)](https://github.com/patrick330602/wslu)
 
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update. 
 
@@ -42,18 +42,10 @@ This is a WSL Screenshoot Information Tool to print information in a elegant way
 **wslpath**
 This is a WSL Windows path Converter that can convert Windows path to other styles of path.
 
-## Extras
+# License
 
-### ZSH theme
-this is a zsh theme specifically designed by me for WSL originally called `dealer`, a nice and minimal theme for your WSL. The file is in `extras` folder.
+This is free software; you can redistribute it and/or modify
 
-Here is a preview:
+it under the terms of the GNU GPL version 3 or (at your option) any later version.
 
-[![asciicast](https://asciinema.org/a/150053.png)](https://asciinema.org/a/150053)
-
-## Credit
-PulseAudio and VcXsrv Installation inspired by aseering/wsl_gui_autoinstall<https://github.com/aseering/wsl_gui_autoinstall>.
-
-PulseAudio Linux packages belong to @aseering and @therealkenc from <https://github.com/Microsoft/BashOnWindows/issues/486>.
-
-PulseAudio 6 Windows package provided by @kitor. 
+There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
