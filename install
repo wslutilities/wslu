@@ -20,7 +20,7 @@ function wsl_interop {
 	echo ""
 }
 function wslu_test {
-	tests/bats/libexec/bats tests/wslpath.bats
+	tests/bats-core/libexec/bats tests/wslpath.bats
 }
 function wsl_cmd {
 	echo -e "\n\ntesting cmd.exe..."
@@ -65,6 +65,8 @@ EOF
 }
 case $1 in
 	--test)
+	wslu_test
+	;;
 	--interop-check)
 	wsl_interop
 	wsl_cmd

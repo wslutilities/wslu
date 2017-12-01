@@ -46,6 +46,7 @@
 }
 
 @test "wslpath - No parameter - Linux DirPath" {
+  skip "WIP feature"
   run wslpath "/mnt/c/Windows"
   [ "${lines[0]}" = "C:\\Windows" ]
 }
