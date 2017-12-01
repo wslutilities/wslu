@@ -71,7 +71,6 @@ case $1 in
 	wsl_interop
 	wsl_cmd
 	wsl_powershell
-	break
 	;;
 	-U|--uninstall)
 	for f in /usr/share/man/man1/wsl*; do
@@ -82,7 +81,6 @@ case $1 in
     	sudo rm -f $f;
 		echo "rm -f $f";
 	done
-	break
 	;;
 	-r|--reinstall)
 	for f in /usr/share/man/man1/wsl*; do
