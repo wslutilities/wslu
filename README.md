@@ -10,23 +10,8 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as enabli
 - OpenSUSE
 - SUSE Linux Enterprise Server(SLES)
 
-## Installation
-
-**Ubuntu**
-
-1. Install dependencies: `sudo apt install build-essential bc ppa-purge wget unzip`
-2. Download the `.deb` package from [release](https://github.com/patrick330602/wslu/releases) and install it using `sudo dpkg -i wslu*`.
-
-**OpenSUSE/SLES**
-
-1. Install dependencies: `sudo zypper install bc lsb-release hostname wget unzip`
-2. Download the `.rpm` package from [release](https://github.com/patrick330602/wslu/releases) and install it using `sudo rpm -ivh "wslu*"`.
-
-**Source**
-
-clone the repository and install the package using `chmod +x install; ./install`. To uninstall, run `sudo make uninstall`.
-
 ## Feature
+
 **wslusc**
 This is a WSL shortcut creator to create shortcut on your Windows 10 Desktop. 
 
@@ -41,6 +26,10 @@ This is a WSL Screenshoot Information Tool to print information in a elegant way
 
 **wslpath**
 This is a WSL Windows path Converter that can convert Windows path to other styles of path.
+
+## Installation
+
+Check [Wiki](https://github.com/patrick330602/wslu/wiki/Installation) for Installation.
 
 # License
 
