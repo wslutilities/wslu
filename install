@@ -107,7 +107,7 @@ case $1 in
 	echo -e "wslu configuration begins."
 	wsl_interop
 	wsl_cmd
-	wsl-powershell
+	wsl_powershell
 	echo -e "\nInstall dependencies..."
 	case "$distro" in
 		'ubuntu')
@@ -126,7 +126,6 @@ case $1 in
     	sudo install $f /usr/bin;
 		echo "exec $f copied to /usr/bin";
 	done
-	break
 	;;
 esac
  
