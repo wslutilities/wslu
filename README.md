@@ -33,8 +33,8 @@ Check [Wiki](https://github.com/patrick330602/wslu/wiki/Installation) for Instal
 
 # License
 
+<pre>
 This is free software; you can redistribute it and/or modify
-
 it under the terms of the GNU GPL version 3 or (at your option) any later version.
-
 There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+</pre>
