@@ -30,7 +30,7 @@ case "$distro" in
 		;;
 esac
 
-printer()
+function printer
 {
 	if [[ $2 != "-s" ]]; then
 		echo $1

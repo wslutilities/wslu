@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
-echo -e "wslu configuration begins."
+
 if [[ ! -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
-	echo "Your distro do not support WSL Interopability. Confiuration Aborted."
+	echo "Your distro do not support WSL Interopability. Installation Aborted."
 	exit 1
 fi
+
 distro="$(lsb_release -ds | sed -e 's/"//g')"
-build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
-echo -e "Distro: $distro"
-echo -e "Build: $build\n"
 if [[ "$distro" == Ubuntu* ]]; then
 	distro="ubuntu"
 elif [[ "$distro" == openSUSE* ]]; then
@@ -16,31 +14,38 @@ elif [[ "$distro" == SUSE* ]]; then
 	distro="sles"
 fi
 
-echo -e "WSL Interopability\n*********************"
-cat /proc/sys/fs/binfmt_misc/WSLInterop
-echo ""
+function wsl_interop {
+	echo -e "WSL Interopability\n*********************"
+	cat /proc/sys/fs/binfmt_misc/WSLInterop
+	echo ""
+}
+function wslu_test {
+	tests/bats/libexec/bats tests/wslpath.bats
+}
+function wsl_cmd {
+	echo -e "\n\ntesting cmd.exe..."
+	cmd.exe /c ver
+	if [[ $? -eq 0 ]]; then
+		echo "cmd.exe can be invoked."
+	else
+		echo "cmd.exe failed to launch."
+		exit 1
+	fi
+}
 
-echo -e "\n\ntesting cmd.exe..."
-cmd.exe /c ver
-if [[ $? -eq 0 ]]; then
-	echo "cmd.exe can be invoked."
-else
-	echo "cmd.exe failed to launch."
-	exit 1
-fi
-echo -e "\ntesting powershell.exe..."
-powershell.exe Get-Host
-if [[ $? -eq 0 ]]; then
-	echo "powershell.exe can be invoked."
-else
-	echo "powershell.exe failed to launch."
-	exit 1
-fi
-
-ppep="`powershell.exe Get-ExecutionPolicy 2>&1 | tail -n1 | sed 's/\r$//'`"
-echo -e "Powershell Execution Policy: $ppep"
-if [[ "$ppep" = "Restricted" ]]; then
-cat << EOF
+function wsl_powershell {
+	echo -e "\ntesting powershell.exe..."
+	powershell.exe Get-Host
+	if [[ $? -eq 0 ]]; then
+		echo "powershell.exe can be invoked."
+	else
+		echo "powershell.exe failed to launch."
+		exit 1
+	fi
+	ppep="`powershell.exe Get-ExecutionPolicy 2>&1 | tail -n1 | sed 's/\r$//'`"
+	echo -e "Powershell Execution Policy: $ppep"
+	if [[ "$ppep" = "Restricted" ]]; then
+		cat << EOF
 ***************************************
                WARNING
 ***************************************
@@ -56,20 +61,70 @@ Due to the limitation, it is not possi-
 ble to invoke this command from Bash P-
 rompt.
 EOF
-fi
-
-echo -e "\nInstall dependencies..."
-case "$distro" in
-	'ubuntu')
-		sudo apt install build-essential bc ppa-purge wget unzip -y
-		;;
-	'opensuse')
-		sudo zypper -n install bc lsb-release hostname wget unzip
-		;;
-	'sles')
-		sudo zypper -n install bc lsb-release hostname wget unzip
-		;;
+	fi
+}
+case $1 in
+	--test)
+	--interop-check)
+	wsl_interop
+	wsl_cmd
+	wsl_powershell
+	break
+	;;
+	-U|--uninstall)
+	for f in /usr/share/man/man1/wsl*; do
+    	sudo rm -f $f;
+		echo "rm -f $f"; 
+	done
+	for f in /usr/bin/wsl*; do
+    	sudo rm -f $f;
+		echo "rm -f $f";
+	done
+	break
+	;;
+	-r|--reinstall)
+	for f in /usr/share/man/man1/wsl*; do
+    	sudo rm -f $f;
+		echo "rm -f $f"; 
+	done
+	for f in /usr/bin/wsl*; do
+    	sudo rm -f $f;
+		echo "rm -f $f";
+	done
+	for f in src/docs/*.1; do
+    	sudo install -m644 $f /usr/share/man/man1;
+		echo "Manpage $f copied to /usr/share/man/man1";
+	done
+	for f in src/wsl*; do
+    	sudo install $f /usr/bin;
+		echo "exec $f copied to /usr/bin";
+	done
+	break
+	;;
+	*)
+	echo -e "wslu configuration begins."
+	wsl_interop
+	wsl_cmd
+	wsl-powershell
+	echo -e "\nInstall dependencies..."
+	case "$distro" in
+		'ubuntu')
+			sudo apt install build-essential bc ppa-purge wget unzip -y
+			;;
+		'opensuse'|'sles')
+			sudo zypper -n install bc lsb-release hostname wget unzip
+			;;
+	esac
+	echo -e "\nPre-checking compelete. Installing..."
+	for f in src/docs/*.1; do
+    	sudo install -m644 $f /usr/share/man/man1;
+		echo "Manpage $f copied to /usr/share/man/man1";
+	done
+	for f in src/wsl*; do
+    	sudo install $f /usr/bin;
+		echo "exec $f copied to /usr/bin";
+	done
+	break
+	;;
 esac
-
-echo -e "\nPre-checking compelete. Installing..."
-sudo make install
+ 
