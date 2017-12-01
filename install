@@ -5,12 +5,12 @@ if [[ ! -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
 	exit 1
 fi
 
-distro="$(lsb_release -ds | sed -e 's/"//g')"
+distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME="//g')"
 if [[ "$distro" == Ubuntu* ]]; then
 	distro="ubuntu"
 elif [[ "$distro" == openSUSE* ]]; then
 	distro="opensuse"
-elif [[ "$distro" == SUSE* ]]; then
+elif [[ "$distro" == SLES* ]]; then
 	distro="sles"
 fi
 
