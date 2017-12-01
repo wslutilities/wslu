@@ -112,6 +112,7 @@ case $1 in
 			;;
 		'opensuse')
 			sudo zypper -n install bc lsb-release hostname wget unzip
+			;;
 		'sles')
 			sudo zypper -n install bc lsb-release wget unzip
 			;;
