@@ -110,8 +110,10 @@ case $1 in
 		'ubuntu')
 			sudo apt install build-essential bc ppa-purge wget unzip -y
 			;;
-		'opensuse'|'sles')
+		'opensuse')
 			sudo zypper -n install bc lsb-release hostname wget unzip
+		'sles')
+			sudo zypper -n install bc lsb-release wget unzip
 			;;
 	esac
 	echo -e "\nPre-checking compelete. Installing..."
