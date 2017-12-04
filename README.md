@@ -29,7 +29,7 @@ This is a WSL Windows path Converter that can convert Windows path to other styl
 
 ## Installation
 
-> CAUTION: please remove the old packages if you have installed, they will damage your manpage installation!
+> CAUTION: please remove the old packages if you have installed, they will damage your manpage folder!
 
 TO install, just run the following command in the bash prompt:
 
