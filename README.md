@@ -29,7 +29,13 @@ This is a WSL Windows path Converter that can convert Windows path to other styl
 
 ## Installation
 
-Check [Wiki](https://github.com/patrick330602/wslu/wiki/Installation) for Installation.
+> CAUTION: please remove the old packages if you have installed, they will damage your manpage installation!
+
+TO install, just run the following command in the bash prompt:
+
+`curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/install.sh | bash`
+
+More detailed information can be found in Wiki.
 
 # License
 
