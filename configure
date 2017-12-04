@@ -23,7 +23,7 @@ function wsl_interop {
 }
 
 function wslu_test {
-	extras/bats/libexec/bats tests/wslu.bats tests/wslsys.bats tests/wslusc.bats tests/wslpath.bats
+	extras/bats/libexec/bats tests/wslu.bats tests/wslsys.bats tests/wslusc.bats tests/wslpath.bats tests/wslfetch.bats tests/wslpkg.bats 
 }
 
 function wsl_cmd {

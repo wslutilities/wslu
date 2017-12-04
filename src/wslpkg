@@ -29,7 +29,7 @@ fi
 case $1 in
 	-h|--help) help $0 "$help_short"; exit;;
 	-v|--version) echo "wslpkg v$wslu_version.$version"; exit;;
-	-l|--list) echo -e "Available Special Package: \nPulseAudio\nVcXsrv\n"; exit;;
+	-l|--list) echo -e "Available Special Package:\nPulseAudio\nVcXsrv\n"; exit;;
 	add)
 		if [[ -n $3 ]]; then
 			echo "${info}Adding repository..."
