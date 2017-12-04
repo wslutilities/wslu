@@ -22,7 +22,7 @@ apath_win=`wslpath -d -A`
 apath_linux=`wslpath -u -A`
 ppath_win=`wslpath -d -P`
 spath_win=`wslpath -d -su`
-if [[ $distro == "opensuse" ]] || [[$distro == "sles" ]]; then
+if [[ $distro == "opensuse" ]] || [[ $distro == "sles" ]]; then
 	echo "${warn} Incompatible with OpenSUSE and SUSE Linux Enterprise Server. Action Aborted."
 	exit 1
 fi
