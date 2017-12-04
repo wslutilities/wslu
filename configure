@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+CURRENT_PATH="$(pwd)"
+
 if [[ ! -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
 	echo "Your distro do not support WSL Interopability. Installation Aborted."
 	exit 1
@@ -19,11 +21,13 @@ function wsl_interop {
 	cat /proc/sys/fs/binfmt_misc/WSLInterop
 	echo ""
 }
+
 function wslu_test {
-	extras/bats/libexec/bats tests/wslpath.bats
+	extras/bats/libexec/bats tests/wslu.bats tests/wslsys.bats tests/wslusc.bats tests/wslpath.bats
 }
+
 function wsl_cmd {
-	echo -e "\n\ntesting cmd.exe..."
+	echo -e "\ntesting cmd.exe..."
 	cmd.exe /c ver
 	if [[ $? -eq 0 ]]; then
 		echo "cmd.exe can be invoked."
@@ -63,6 +67,44 @@ rompt.
 EOF
 	fi
 }
+
+function wsl_reg {
+	echo -e "\ntesting reg.exe..."
+	reg.exe /? 
+	if [[ $? -eq 0 ]]; then
+		echo "reg.exe can be invoked."
+	else
+		echo "reg.exe failed to launch."
+		exit 1
+	fi
+}
+
+function uninstallation {
+	for f in /usr/share/man/man1/wsl*; do
+    	sudo rm -f $f;
+		echo "rm -f $f"; 
+	done
+	for f in /usr/bin/wsl*; do
+    	sudo rm -f $f;
+		echo "rm -f $f";
+	done
+}
+
+function installation {
+	for f in src/docs/*.1; do
+		bname="$(basename $f)"
+    		sudo ln -s $CURRENT_PATH/$f /usr/share/man/man1/$bname;
+		echo "Manpage $f linked to /usr/share/man/man1/$bname";
+	done
+	for f in src/wsl*; do
+		bname="$(basename $f)"
+    		sudo ln -s $CURRENT_PATH/$f /usr/bin/$bname;
+		echo "exec $f linked to /usr/bin/$bname";
+	done
+	sudo ln -s $CURRENT_PATH/configure /usr/bin/wsluconfig
+	echo "this file(./configure) has linked to /usr/bin/wsluconfig."
+}
+
 case $1 in
 	--test)
 	wslu_test
@@ -71,40 +113,25 @@ case $1 in
 	wsl_interop
 	wsl_cmd
 	wsl_powershell
+	wsl_reg
 	;;
-	-U|--uninstall)
-	for f in /usr/share/man/man1/wsl*; do
-    	sudo rm -f $f;
-		echo "rm -f $f"; 
-	done
-	for f in /usr/bin/wsl*; do
-    	sudo rm -f $f;
-		echo "rm -f $f";
-	done
+	-u|--uninstall)
+	uninstallation
+	;;
+	-p|--purge)
+	uninstallation
+	rm -rf ~/.wslu
 	;;
 	-r|--reinstall)
-	for f in /usr/share/man/man1/wsl*; do
-    	sudo rm -f $f;
-		echo "rm -f $f"; 
-	done
-	for f in /usr/bin/wsl*; do
-    	sudo rm -f $f;
-		echo "rm -f $f";
-	done
-	for f in src/docs/*.1; do
-    	sudo install -m644 $f /usr/share/man/man1;
-		echo "Manpage $f copied to /usr/share/man/man1";
-	done
-	for f in src/wsl*; do
-    	sudo install $f /usr/bin;
-		echo "exec $f copied to /usr/bin";
-	done
+	uninstallation
+	installation
 	;;
-	*)
+	-i|--install)
 	echo -e "wslu configuration begins."
 	wsl_interop
 	wsl_cmd
 	wsl_powershell
+	wsl_reg
 	echo -e "\nInstall dependencies..."
 	case "$distro" in
 		'ubuntu')
@@ -118,14 +145,7 @@ case $1 in
 			;;
 	esac
 	echo -e "\nPre-checking compelete. Installing..."
-	for f in src/docs/*.1; do
-    	sudo install -m644 $f /usr/share/man/man1;
-		echo "Manpage $f copied to /usr/share/man/man1";
-	done
-	for f in src/wsl*; do
-    	sudo install $f /usr/bin;
-		echo "exec $f copied to /usr/bin";
-	done
+	installation
 	;;
 esac
  
