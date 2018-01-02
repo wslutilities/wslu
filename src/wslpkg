@@ -15,13 +15,13 @@ version="26"
 help_short="wslpkg [add|remove] ..NAME... [REPO]\nwslpkg (-h|-v|-l)"
 
 tmp_version="$(lsb_release -c -s)"
-tpath_win=`wslpath -d -T`
-tpath_linux=`wslpath -u -T`
-apath_o=`wslpath -w -A`
-apath_win=`wslpath -d -A`
-apath_linux=`wslpath -u -A`
-ppath_win=`wslpath -d -P`
-spath_win=`wslpath -d -su`
+tpath_win=`wslupath -d -T`
+tpath_linux=`wslupath -u -T`
+apath_o=`wslupath -w -A`
+apath_win=`wslupath -d -A`
+apath_linux=`wslupath -u -A`
+ppath_win=`wslupath -d -P`
+spath_win=`wslupath -d -su`
 if [[ $distro == "opensuse" ]] || [[ $distro == "sles" ]]; then
 	echo "${warn} Incompatible with OpenSUSE and SUSE Linux Enterprise Server. Action Aborted."
 	exit 1

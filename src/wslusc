@@ -20,19 +20,19 @@ for args; do
 	case $args in
 		-g|--gui)is_gui=1;;
 		-h|--help) help $0 "$help_short"; exit;;
-		-v|--version) echo "wslpath v$wslu_version.$version"; exit;;
+		-v|--version) echo "wslupath v$wslu_version.$version"; exit;;
 		*) cname=$args;;
 	esac
 done
 if [[ "$cname" != "" ]]; then
-	tpath=`wslpath -d -T`
-	dpath=`wslpath -D`
+	tpath=`wslupath -d -T`
+	dpath=`wslupath -D`
 	if [[ "$is_gui" == "1" ]]; then
 		powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \"cd ~ && DISPLAY=:0 $cname\"';\$s.Save();"
 	else
 		powershell.exe "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \"cd ~ && $cname\"';\$s.Save();"
 	fi
-	tpath=`wslpath -T`
+	tpath=`wslupath -T`
 	mv $tpath/$cname.lnk $dpath
 	echo "${info}Create shortcut ${cname}.lnk successful"
 else
