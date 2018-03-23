@@ -46,6 +46,10 @@ help_short="wslu (-h|-v|-s)"
 distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME="//g')"
 if [[ "$distro" == Ubuntu* ]]; then
 	distro="ubuntu"
+elif [[ "$distro" = *Debian* ]]; then
+	distro="debian"
+elif [[ "$distro" == *Kali* ]]; then
+	distro="kali"
 elif [[ "$distro" == openSUSE* ]]; then
 	distro="opensuse"
 elif [[ "$distro" == SLES* ]]; then
