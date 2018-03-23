@@ -10,11 +10,27 @@ fi
 distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME="//g')"
 if [[ "$distro" == Ubuntu* ]]; then
 	distro="ubuntu"
+elif [[ "$distro" = *Debian* ]]; then
+	distro="debian"
+elif [[ "$distro" == *Kali* ]]; then
+	distro="kali"
 elif [[ "$distro" == openSUSE* ]]; then
 	distro="opensuse"
 elif [[ "$distro" == SLES* ]]; then
 	distro="sles"
 fi
+
+
+function legacy_rm {
+	echo "removing legacy packages..."
+	case $distro in
+		ubuntu|kali|debian)
+			sudo apt -y purge wslu;;
+		opensuse|sles)
+			sudo zypper -n un wslu;;
+	esac
+	echo "remove legacy documents..."
+}
 
 function wsl_interop {
 	echo -e "WSL Interopability\n*********************"
@@ -142,6 +158,12 @@ case $1 in
 			;;
 		'sles')
 			sudo zypper -n install bc lsb-release wget unzip
+			;;
+		'debian')
+			sudo apt -y install build-essential bc wget unzip lsb-release
+			;;
+		'kali')
+			sudo apt -y install build-essential bc wget unzip lsb-release
 			;;
 	esac
 	echo -e "\nPre-checking compelete. Installing..."
