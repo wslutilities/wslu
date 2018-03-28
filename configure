@@ -30,7 +30,7 @@ function legacy_rm {
 			sudo zypper -n un wslu;;
 	esac
 	echo "remove legacy documents..."
-	
+	sudo rm -rf /usr/share/man/man1/wsl*
 }
 
 function wsl_interop {
