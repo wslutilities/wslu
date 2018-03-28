@@ -21,7 +21,7 @@ release="$(lsb_release -ds | sed -e 's/"//g')"
 kernel="$(uname -sr)"
 
 case "$distro" in
-	'ubuntu')
+	'ubuntu'|'kali'|'debian')
 		uptime="$(uptime -p | sed 's/up //')"
 		packages="$((packages+=$(dpkg --get-selections | grep -cv deinstall$)))";;
 	'opensuse'|'sles')

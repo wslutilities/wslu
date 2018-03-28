@@ -9,6 +9,8 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as enabli
 - Ubuntu (Store)
 - OpenSUSE
 - SUSE Linux Enterprise Server(SLES)
+- Debian GNU/Linux
+- Kali Linux
 
 ## Feature
 
@@ -24,7 +26,7 @@ This is WSL Package Installer, which is a minimal package manager for installing
 **wslfetch**
 This is a WSL Screenshoot Information Tool to print information in a elegant way.
 
-**wslpath**
+**wslupath**
 This is a WSL Windows path Converter that can convert Windows path to other styles of path.
 
 ## Installation
