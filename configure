@@ -10,7 +10,7 @@ fi
 distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME="//g')"
 if [[ "$distro" == Ubuntu* ]]; then
 	distro="ubuntu"
-elif [[ "$distro" = *Debian* ]]; then
+elif [[ "$distro" == *Debian* ]]; then
 	distro="debian"
 elif [[ "$distro" == *Kali* ]]; then
 	distro="kali"
@@ -30,6 +30,7 @@ function legacy_rm {
 			sudo zypper -n un wslu;;
 	esac
 	echo "remove legacy documents..."
+	
 }
 
 function wsl_interop {
@@ -107,18 +108,13 @@ function uninstallation {
 }
 
 function installation {
-	for f in src/docs/*.1; do
-		bname="$(basename $f)"
-    		sudo ln -s $CURRENT_PATH/$f /usr/share/man/man1/$bname;
-		echo "Manpage $f linked to /usr/share/man/man1/$bname";
-	done
 	for f in src/wsl*; do
 		bname="$(basename $f)"
     		sudo ln -s $CURRENT_PATH/$f /usr/bin/$bname;
 		echo "exec $f linked to /usr/bin/$bname";
 	done
-	sudo ln -s $CURRENT_PATH/configure /usr/bin/wsluconfig
-	echo "this file(./configure) has linked to /usr/bin/wsluconfig."
+
+	echo "Installation Completed. If you want to configure wslu, please run `wsluconf`."
 }
 
 case $1 in
