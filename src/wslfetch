@@ -47,7 +47,8 @@ case "$distro" in
 "${red}                   \`\`\`\`\` ${yellow}+oo+++o:/    ${reset}"
 "${yellow}                          \`oo++'\`     ${reset}");;
 	'debian')
-fulloutput=(
+	t="${light_red}${bold}"
+	fulloutput=(
 "${white}         _,met\$\$\$\$\$gg.          ${reset}"
 "${white}      ,g\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$P.       ${reset}"
 "${white}    ,g\$\$P\"\"       \"\"\"Y\$\$.\".     ${reset}"
@@ -66,6 +67,30 @@ fulloutput=(
 "${white}            \`\"Y\$b._             ${reset}"
 "${white}                \`\"\"\"\"           ${reset}"
 "${white}                                ${reset}");;
+	'kali')
+	t="${light_blue}${bold}"
+		fulloutput=(
+"${light_blue}..............                                  "
+"${light_blue}            ..,;:ccc,.                          ${reset}"
+"${light_blue}          ......''';lxO.                        ${reset}"
+"${light_blue}.....''''..........,:ld;                        ${reset}"
+"${light_blue}           .';;;:::;,,.x,                       ${reset}"
+"${light_blue}      ..'''.            0Xxoc:,.  ...           ${reset}"
+"${light_blue}  ....                ,ONkc;,;cokOdc',.         ${reset}"
+"${light_blue} .                   OMo           ':${black}dd${light_blue}o.       ${reset}"
+"${light_blue}                    dMc               :OO;      ${reset}"
+"${light_blue}                    0M.                 .:o.    ${reset}"
+"${light_blue}                    ;Wd                         ${reset}"
+"${light_blue}                     ;XO,                       ${reset}"
+"${light_blue}                       ,d0Odlc;,..              ${reset}"
+"${light_blue}                           ..',;:cdOOd::,.      ${reset}"
+"${light_blue}                                    .:d;.':;.   ${reset}"
+"${light_blue}                                       'd,  .'  ${reset}"
+"${light_blue}                                         ;l   ..${reset}"
+"${light_blue}                                          .o    ${reset}"
+"${light_blue}                                            c   ${reset}"
+"${light_blue}                                            .'  ${reset}"
+"${light_blue}                                             .  ${reset}");;
 	'opensuse')
         t="${light_green}${bold}"
         full_text=(
