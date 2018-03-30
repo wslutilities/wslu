@@ -113,7 +113,8 @@ function installation {
     		sudo ln -s $CURRENT_PATH/$f /usr/bin/$bname;
 		echo "exec $f linked to /usr/bin/$bname";
 	done
-
+	sudo ln -s $CURRENT_PATH/configure /usr/bin/wsluconf
+	echo "this file(./configure) has linked to /usr/bin/wsluconf."
 	echo "Installation Completed. If you want to configure wslu, please run `wsluconf`."
 }
 
