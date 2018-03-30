@@ -48,7 +48,7 @@ case "$distro" in
 "${yellow}                          \`oo++'\`     ${reset}");;
 	'debian')
 	t="${light_red}${bold}"
-	fulloutput=(
+	full_text=(
 "${white}         _,met\$\$\$\$\$gg.          ${reset}"
 "${white}      ,g\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$P.       ${reset}"
 "${white}    ,g\$\$P\"\"       \"\"\"Y\$\$.\".     ${reset}"
@@ -69,7 +69,7 @@ case "$distro" in
 "${white}                                ${reset}");;
 	'kali')
 	t="${light_blue}${bold}"
-		fulloutput=(
+	full_text=(
 "${light_blue}..............                                  "
 "${light_blue}            ..,;:ccc,.                          ${reset}"
 "${light_blue}          ......''';lxO.                        ${reset}"
