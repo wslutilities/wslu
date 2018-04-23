@@ -4,8 +4,8 @@
 
 teardown() {
   echo "removal for temporary shortcuts"
-  rm -rf "`src/wslpath -D`/test1.lnk"
-  rm -rf "`src/wslpath -D`/test2.lnk"
+  rm -rf "`src/wslupath -D`/test1.lnk"
+  rm -rf "`src/wslupath -D`/test2.lnk"
 
 }
 
@@ -32,10 +32,10 @@ teardown() {
 
 @test "wslusc - without GUI" {
   run src/wslusc test1
-  [ -f "`src/wslpath -D`/test1.lnk" ]
+  [ -f "`src/wslupath -D`/test1.lnk" ]
 }
 
 @test "wslusc - with GUI" {
   run src/wslusc -x test2
-  [ -f "`src/wslpath -D`/test2.lnk" ]
+  [ -f "`src/wslupath -D`/test2.lnk" ]
 }
