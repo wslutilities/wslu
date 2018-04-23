@@ -5,7 +5,6 @@
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
 
 **Currently supported Distro:**
-- Ubuntu 16.04(Legacy)
 - Ubuntu (Store)
 - OpenSUSE
 - SUSE Linux Enterprise Server(SLES)
@@ -28,6 +27,10 @@ This is a WSL Screenshoot Information Tool to print information in a elegant way
 
 **wslupath**
 This is a WSL Windows path Converter that can convert Windows path to other styles of path.
+
+**wsluconf**
+
+This is a tool to help set up wslu.
 
 ## Installation
 
