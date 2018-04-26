@@ -49,7 +49,7 @@ case "$distro" in
 	'debian')
 	t="${light_red}${bold}"
 	full_text=(
-"${white}         _,met\$\$\$\$\$gg.                ${reset}"
+"${white}         _,met\$\$\$\$\$gg.               ${reset}"
 "${white}      ,g\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$P.            ${reset}"
 "${white}    ,g\$\$P\"\"       \"\"\"Y\$\$.\".          ${reset}"
 "${white}   ,\$\$P'              \`\$\$\$.          ${reset}"
