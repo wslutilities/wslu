@@ -8,7 +8,7 @@
 # For more help for wslfetch, visit the following site:
 # http://garage.patrickwu.cf/man/wslu/wslfetch
 
-version=24
+version=25
 
 is_line=0
 is_splash=0
@@ -54,8 +54,8 @@ case "$distro" in
 "${white}    ,g\$\$P\"\"       \"\"\"Y\$\$.\".          ${reset}"
 "${white}   ,\$\$P'              \`\$\$\$.          ${reset}"
 "${white}  ',\$\$P       ,ggs.     \`\$\$b:        ${reset}"
-"${white}  \`d\$\$'     ,\$P\"\'   ${light_red}.${white}    \$\$\$         ${reset}"
-"${white}   \$\$P      d\$\'     ${light_red},${white}    \$\$P         ${reset}"
+"${white}  \`d\$\$'     ,\$P\"\'   ${light_red}.${white}    \$\$\$        ${reset}"
+"${white}   \$\$P      d\$\'     ${light_red},${white}    \$\$P        ${reset}"
 "${white}   \$\$:      \$\$.   ${light_red}-${white}    ,d\$\$'         ${reset}"
 "${white}   \$\$\;      Y\$b._   _,d\$P'          ${reset}"
 "${white}   Y\$\$.    ${light_red}\`.${white}\`\"Y\$\$\$\$P\"'              ${reset}"
