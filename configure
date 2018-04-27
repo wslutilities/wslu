@@ -119,10 +119,10 @@ function installation {
 }
 
 case $1 in
-	--test)
+	-t|--test)
 	wslu_test
 	;;
-	--interop-check)
+	-c|--interop-check)
 	wsl_interop
 	wsl_cmd
 	wsl_powershell
