@@ -34,13 +34,16 @@ This is a tool to help set up wslu.
 
 ## Installation
 
-> CAUTION: please remove the old packages if you have installed, they will damage your manpage folder!
+<del>TO install, just run the following command in the bash prompt:</del>
+<del>`curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/extras/scripts/install.sh | bash`</del>
 
-TO install, just run the following command in the bash prompt:
+Latest version is not suggested to be installed now. the installation is being modified. please use the release version of installation script:
 
-`curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/extras/scripts/install.sh | bash`
-
-More detailed information can be found in Wiki.
+```
+git clone --branch v1.2 https://github.com/patrick330602/wslu.git ~/.wslu
+cd ~/.wslu
+./configure -i
+```
 
 ## License
 
