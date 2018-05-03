@@ -3,10 +3,7 @@
 # Component of Windows 10 linux Subsystem Utility
 # <https://github.com/patrick330602/wslu>
 
-# Copyright(c) 2017 Patrick Wu J M <wotingwu@live.com>
-
-# For more help for wslu, visit the following site:
-# http://garage.patrickwu.cf/man/wslu/wslupath
+# Copyright(c) 2018 Patrick Wu J M <wotingwu@live.com>
 
 version="08"
 

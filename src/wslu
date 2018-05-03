@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
-
 # wslu - Windows 10 linux Subsystem Utility Core
+# Component of Windows 10 linux Subsystem Utility
 # <https://github.com/patrick330602/wslu>
 
-# Copyright(c) 2017 Patrick Wu J M <wotingwu@live.com>
-
-# For more help for wslu, visit the following site:
-# http://garage.patrickwu.cf/man/wslu
+# Copyright(c) 2018 Patrick Wu J M <wotingwu@live.com>
 
 # data segment
-wslu_version=1.1
+wslu_version=1.3
 
 ## color
 black=`echo -e '\e[30m'`
