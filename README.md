@@ -28,10 +28,6 @@ This is a WSL Screenshoot Information Tool to print information in a elegant way
 **wslupath**
 This is a WSL Windows path Converter that can convert Windows path to other styles of path.
 
-**wsluconf**
-
-This is a tool to help set up wslu.
-
 ## Installation
 
 <del>TO install, just run the following command in the bash prompt:</del>
