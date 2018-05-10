@@ -63,6 +63,8 @@ else
 	exit 1
 fi
 
+git clone https://github.com/patrick330602/wslu.git ~/.wslu
+cd ~/.wslu
 git submodule init
 git submodule update
 extras/bats/libexec/bats tests/wslu.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslfetch.bats tests/wslpkg.bats 
@@ -74,4 +76,4 @@ for f in src/wsl*; do
 done
 sudo ln -s $CURRENT_PATH/configure /usr/bin/wsluconf
 echo "this file(./configure) has linked to /usr/bin/wsluconf."
-echo "Installation Completed. If you want to configure wslu, please run 'wsluconf'."
+echo "Installation Completed. Thank you for using wslu!"
