@@ -44,7 +44,12 @@ install -m 755 wsl* ${RPM_BUILD_ROOT}/usr/bin
 rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
-%attr(755,root,root) /usr/bin/wsl*
+%attr(755,root,root) /usr/bin/wslu
+%attr(755,root,root) /usr/bin/wslusc
+%attr(755,root,root) /usr/bin/wslfetch
+%attr(755,root,root) /usr/bin/wslpkg
+%attr(755,root,root) /usr/bin/wslsys
+%attr(755,root,root) /usr/bin/wslupath
 %changelog
 * Fri May 11 2018 patrick330602 <wotingwu@live.com>
 - First rpm build of wslu.
