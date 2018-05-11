@@ -1,0 +1,8 @@
+Package: wslu
+Architecture: all
+Maintainer: patrick330602 <wotingwu@live.com>
+Depends: git, build-essential, bc, ppa-purge, wget, unzip, lsb-release
+Priority: optional
+Version: 1.3
+Description: A collection of utilities for Windows 10 Linux Subsystem
+This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
