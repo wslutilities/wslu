@@ -39,17 +39,17 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as enabli
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p ${RPM_BUILD_ROOT}/usr/bin
-install -m 755 wsl* ${RPM_BUILD_ROOT}/usr/bin
+install -m 755 wsl* ${RPM_BUILD_ROOT}%{_bindir}
 %clean
 rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
-%attr(755,root,root) /usr/bin/wslu
-%attr(755,root,root) /usr/bin/wslusc
-%attr(755,root,root) /usr/bin/wslfetch
-%attr(755,root,root) /usr/bin/wslpkg
-%attr(755,root,root) /usr/bin/wslsys
-%attr(755,root,root) /usr/bin/wslupath
+%attr(755,root,root) %{_bindir}/wslu
+%attr(755,root,root) %{_bindir}/wslusc
+%attr(755,root,root) %{_bindir}/wslfetch
+%attr(755,root,root) %{_bindir}/wslpkg
+%attr(755,root,root) %{_bindir}/wslsys
+%attr(755,root,root) %{_bindir}/wslupath
 %changelog
 * Fri May 11 2018 patrick330602 <wotingwu@live.com>
 - First rpm build of wslu.
