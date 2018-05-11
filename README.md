@@ -30,16 +30,22 @@ This is a WSL Windows path Converter that can convert Windows path to other styl
 
 ## Installation
 
-<del>TO install, just run the following command in the bash prompt:</del>
-<del>`curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/extras/scripts/install.sh | bash`</del>
+Detailed installation is on Wiki/Installation.
 
-Latest version is not suggested to be installed now. the installation is being modified. please use the release version of installation script:
+### install from Git
 
-```
-git clone --branch v1.2 https://github.com/patrick330602/wslu.git ~/.wslu
-cd ~/.wslu
-./configure -i
-```
+To install, just run the following command in the bash prompt:
+`curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/extras/scripts/install.sh | bash`
+
+### install using package
+
+**for Ubuntu/Debian/Kali Linux:**
+
+Download the .deb package from release and install it using `sudo dpkg -i wslu*`.
+
+**for OpenSUSE/SLES:**
+
+Download the .rpm package from release and install it using `sudo rpm -ivh "wslu*"`.
 
 ## License
 
