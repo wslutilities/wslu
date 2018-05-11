@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
-BUILD_DIR=`mktemp --tmpdir --directory pkg-debian.XXXX`
+BUILD_DIR=`mktemp --tmpdir --directory wslu-build-debian.XXXX`
 CURRENT_DIR=`pwd`
 
-mkdir $BUILD_DIR/DEBIAN/
-mkdir $BUILD_DIR/usr/
-mkdir $BUILD_DIR/usr/bin/
+mkdir -p $BUILD_DIR/{DEBIAN/, usr/bin/}
 
 cat <<EOF >>$BUILD_DIR/DEBIAN/control
 Package: wslu
