@@ -50,4 +50,4 @@ rm -rf $RPM_BUILD_ROOT
 EOF
 
 cd ~/rpm_wslu/SPECS
-rpmbuild -ba hello-$BUILD_VER.spec
+rpmbuild -ba wslu-$BUILD_VER.spec
