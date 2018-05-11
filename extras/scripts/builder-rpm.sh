@@ -37,11 +37,11 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as enabli
 %build
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p ${RPM_BUILD_ROOT}/usr/bin
-install -m 755 wsl* ${RPM_BUILD_ROOT}%{_bindir}
+rm -rf \$RPM_BUILD_ROOT
+mkdir -p \${RPM_BUILD_ROOT}/usr/bin
+install -m 755 wsl* \${RPM_BUILD_ROOT}%{_bindir}
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf \$RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %attr(755,root,root) %{_bindir}/wslu
