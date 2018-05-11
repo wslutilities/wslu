@@ -28,6 +28,7 @@ Name: wslu
 Version: $BUILD_VER
 Release: 1
 Source: wslu-$BUILD_VER.tar.gz
+Requires: bc lsb-release hostname wget unzip
 URL: https://github.com/patrick330602/wslu/
 License: GPL
 %description
