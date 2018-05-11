@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-
-CURRENT_PATH="$(pwd)"
-
 if [[ ! -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
 	echo "Your distro do not support WSL Interopability. Installation Aborted."
 	exit 1
@@ -45,6 +42,33 @@ echo -e "\nWSL Interopability\n*********************"
 cat /proc/sys/fs/binfmt_misc/WSLInterop
 echo ""
 
+echo -e "\ntesting powershell.exe..."
+powershell.exe Get-Host
+if [[ $? -eq 0 ]]; then
+	echo "powershell.exe can be invoked."
+else
+	echo "powershell.exe failed to launch."
+	exit 1
+fi
+ppep="`powershell.exe Get-ExecutionPolicy 2>&1 | tail -n1 | sed 's/\r$//'`"
+echo -e "Powershell Execution Policy: $ppep"
+if [[ "$ppep" = "Restricted" ]]; then
+	cat << EOF
+***************************************
+               WARNING
+***************************************
+The execution policy for powershell.exe
+is set to Restricted. You should set P-
+owershell Execution Policy to Unrestri-
+cted with a Powershell Prompt with Adm-
+inistrator right:
+   Set-ExecutionPolicy Unrestricted
+Due to the limitation, it is not possi-
+ble to invoke this command from Bash P-
+rompt.
+EOF
+fi
+
 echo -e "\ntesting cmd.exe..."
 cmd.exe /c ver
 if [[ $? -eq 0 ]]; then
@@ -63,8 +87,9 @@ else
 	exit 1
 fi
 
-git clone https://github.com/patrick330602/wslu.git ~/.wslu
-cd ~/.wslu
+git clone https://github.com/patrick330602/wslu.git 
+cd wslu
+CURRENT_PATH="$(pwd)"
 git submodule init
 git submodule update
 extras/bats/libexec/bats tests/wslu.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslfetch.bats tests/wslpkg.bats 
@@ -74,6 +99,13 @@ for f in src/wsl*; do
    		sudo ln -s $CURRENT_PATH/$f /usr/bin/$bname;
 	echo "exec $f linked to /usr/bin/$bname";
 done
-sudo ln -s $CURRENT_PATH/configure /usr/bin/wsluconf
-echo "this file(./configure) has linked to /usr/bin/wsluconf."
-echo "Installation Completed. Thank you for using wslu!"
+
+cat <<EOF
+Installation Completed. 
+
+Keep in remind that the installation m-
+ethod is different from installing fro-
+m package; DO NOT INSTALL PACKAGE VERS-
+ION AFTERWARDS. IT WILL BREAK YOUR INS-
+TALLATION.
+EOF
