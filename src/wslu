@@ -59,7 +59,7 @@ function help
 Usage: $2
 
 For more help for `basename "$1"`, visit the following site:
-http://garage.patrickwu.cf/man/wslu/`basename "$1"`"
+https://github.com/patrick330602/wslu/wiki/`basename "$1"`"
 }
 
 # commands
