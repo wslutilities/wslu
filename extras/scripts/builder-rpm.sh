@@ -27,6 +27,7 @@ Summary: Windows 10 Linux Subsystem Utilities
 Name: wslu
 Version: $BUILD_VER
 Release: 1
+Source: wslu-$BUILD_VER.tar.gz
 URL: https://github.com/patrick330602/wslu/
 License: GPL
 %description
