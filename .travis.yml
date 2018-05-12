@@ -1,0 +1,8 @@
+os:linux
+language: sh
+before_script:
+- sudo apt-get update -qq
+- sudo apt-get install -qq build-essential rpm
+script:
+- cd extras/scripts/
+- ./buulder-deb.sh
