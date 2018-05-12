@@ -12,7 +12,7 @@
   [ "${lines[0]}" = "wslu - Component of Windows 10 Linux Subsystem Utility" ]
   [ "${lines[1]}" = "Usage: wslu (-h|-v|-s)" ]
   [ "${lines[2]}" = "For more help for wslu, visit the following site:" ]
-  [ "${lines[3]}" = "http://garage.patrickwu.cf/man/wslu/wslu" ]
+  [ "${lines[3]}" = "https://github.com/patrick330602/wslu/wiki/wslu" ]
 }
 
 @test "wslu - Help - Alt." {
@@ -20,7 +20,7 @@
   [ "${lines[0]}" = "wslu - Component of Windows 10 Linux Subsystem Utility" ]
   [ "${lines[1]}" = "Usage: wslu (-h|-v|-s)" ]
   [ "${lines[2]}" = "For more help for wslu, visit the following site:" ]
-  [ "${lines[3]}" = "http://garage.patrickwu.cf/man/wslu/wslu" ]
+  [ "${lines[3]}" = "https://github.com/patrick330602/wslu/wiki/wslu" ]
 }
 
 @test "wslu - Silent" {

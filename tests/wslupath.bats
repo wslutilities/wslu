@@ -14,7 +14,7 @@
   [ "${lines[1]}" = "Usage: wslupath (-w|-d|-u|-m|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]" ]
   [ "${lines[2]}" = "wslupath (-h|-v|-R)" ]
   [ "${lines[3]}" = "For more help for wslupath, visit the following site:" ]
-  [ "${lines[4]}" = "http://garage.patrickwu.cf/man/wslu/wslupath" ]
+  [ "${lines[4]}" = "https://github.com/patrick330602/wslu/wiki/wslupath" ]
 }
 
 @test "wslupath - Help - Alt." {
@@ -23,7 +23,7 @@
   [ "${lines[1]}" = "Usage: wslupath (-w|-d|-u|-m|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]" ]
   [ "${lines[2]}" = "wslupath (-h|-v|-R)" ]
   [ "${lines[3]}" = "For more help for wslupath, visit the following site:" ]
-  [ "${lines[4]}" = "http://garage.patrickwu.cf/man/wslu/wslupath" ]
+  [ "${lines[4]}" = "https://github.com/patrick330602/wslu/wiki/wslupath" ]
 }
 @test "wslupath - Available Registery" {
   run src/wslupath --avail-reg

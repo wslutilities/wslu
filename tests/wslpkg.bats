@@ -11,7 +11,7 @@
   [ "${lines[1]}" = "Usage: wslpkg [add|remove] ..NAME... [REPO]" ]
   [ "${lines[2]}" = "wslpkg (-h|-v|-l)" ]
   [ "${lines[3]}" = "For more help for wslpkg, visit the following site:" ]
-  [ "${lines[4]}" = "http://garage.patrickwu.cf/man/wslu/wslpkg" ]
+  [ "${lines[4]}" = "https://github.com/patrick330602/wslu/wiki/wslpkg" ]
 }
 
 
@@ -21,7 +21,7 @@
   [ "${lines[1]}" = "Usage: wslpkg [add|remove] ..NAME... [REPO]" ]
   [ "${lines[2]}" = "wslpkg (-h|-v|-l)" ]
   [ "${lines[3]}" = "For more help for wslpkg, visit the following site:" ]
-  [ "${lines[4]}" = "http://garage.patrickwu.cf/man/wslu/wslpkg" ]
+  [ "${lines[4]}" = "https://github.com/patrick330602/wslu/wiki/wslpkg" ]
 }
 
 @test "wslpkg - Package Listing" {
