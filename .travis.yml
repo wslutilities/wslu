@@ -5,4 +5,5 @@ before_script:
 - sudo apt-get install -qq build-essential rpm
 script:
 - cd extras/scripts/
-- ./builder-deb.sh
+- sudo bash -x ./builder-deb.sh
+- sudo bash -x ./builder-rpm.sh
