@@ -11,7 +11,9 @@ cat <<EOF >>$BUILD_DIR/DEBIAN/control
 Package: wslu
 Architecture: all
 Maintainer: patrick330602 <wotingwu@live.com>
-Depends: git, build-essential, bc, ppa-purge, wget, unzip, lsb-release
+Depends: bc, wget, unzip, lsb-release
+Recommends: git
+Suggests: ppa-purge, build-essential
 Priority: optional
 Version: $BUILD_VER
 Description: A collection of utilities for Windows 10 Linux Subsystem
@@ -28,6 +30,6 @@ find $BUILD_DIR/usr/bin -type f -exec chmod 0555 {} \;
 
 cd $CURRENT_DIR/../../release/debian
 
-dpkg -b $BUILD_DIR/ wslu-${BUILD_VER}.deb
+sudo dpkg -b $BUILD_DIR/ wslu-${BUILD_VER}.deb
 
 rm -rf $BUILD_DIR
