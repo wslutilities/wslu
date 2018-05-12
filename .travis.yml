@@ -5,4 +5,4 @@ before_script:
 - sudo apt-get install -qq build-essential rpm
 script:
 - cd extras/scripts/
-- ./buulder-deb.sh
+- ./builder-deb.sh
