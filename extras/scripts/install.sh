@@ -27,8 +27,11 @@ echo "You are using: $distro"
 
 echo "Installing dependencies...."
 case "$distro" in
-	'ubuntu'|'debian'|'kali')
+	'ubuntu')
 		sudo apt install -y git build-essential bc ppa-purge wget unzip lsb-release
+		;;
+	'debian'|'kali')
+		sudo apt install -y git build-essential bc wget unzip lsb-release
 		;;
 	'opensuse')
 		sudo zypper -n install git bc lsb-release hostname wget unzip
@@ -103,9 +106,5 @@ done
 cat <<EOF
 Installation Completed. 
 
-Keep in remind that the installation m-
-ethod is different from installing fro-
-m package; DO NOT INSTALL PACKAGE VERS-
-ION AFTERWARDS. IT WILL BREAK YOUR INS-
-TALLATION.
+Keep in remind that the installation method is different from installing from the package; DO NOT INSTALL PACKAGE VERSION AFTERWARDS. IT WILL BREAK YOUR INSTALLATION.
 EOF
