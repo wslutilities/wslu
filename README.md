@@ -32,12 +32,18 @@ This is a WSL Windows path Converter that can convert Windows path to other styl
 
 Detailed installation is on Wiki/Installation.
 
-### install from Git
+### Via Package Manager 
+
+`wslu` is now part of [wsl-translinux](https://github.com/cerebrate/wsl-translinux) apt repository. 
+
+Following the guidelines [Here](https://github.com/cerebrate/wsl-translinux/blob/master/README.md) to add the repository. Then you can simply run `sudo apt install wslu` to install `wslu`.
+
+### Via Git
 
 To install, just run the following command in the bash prompt:
 `curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/extras/scripts/install.sh | bash`
 
-### install using package
+### Via Package
 
 **for Ubuntu/Debian/Kali Linux:**
 
