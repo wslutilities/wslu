@@ -5,7 +5,7 @@
 
 # Copyleft 2018 Patrick Wu J M <wotingwu@live.com>
 
-version="26"
+version="27"
 
 . wslu --silent
 
@@ -78,7 +78,6 @@ case $1 in
 		elif [[ "$2" == "vcxsrv" ]]; then
 			echo "${info}Tweaking system files..."
 			echo 'export DISPLAY=:0' >> ~/.bashrc
-			sudo sed -i "s$<listen>.*</listen>$<listen>tcp:host=localhost,port=0</listen>$" /etc/dbus-1/session.conf
 			echo "${info}Downloading VcXsrv..."
 			if [[ -f $tpath_linux/vcxsrv.exe ]]; then
 				rm -r $tpath_linux/vcxsrv.exe
@@ -134,4 +133,3 @@ case $1 in
 		fi;;
 	*) echo "${error}No input or invalid input, aborting"; exit 20;;
 esac
-		
