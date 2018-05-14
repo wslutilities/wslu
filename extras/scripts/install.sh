@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+ORI_PATH="$(pwd)"
+
 if [[ ! -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
 	echo "Your distro do not support WSL Interopability. Installation Aborted."
 	exit 1
@@ -99,9 +101,15 @@ else
 	exit 1
 fi
 
-git clone https://github.com/patrick330602/wslu.git 
-cd wslu
-CURRENT_PATH="$(pwd)"
+if [ `pwd | grep wslu` ]; then
+	cd ../../
+	CURRENT_PATH="$(pwd)"
+else
+	git clone https://github.com/patrick330602/wslu.git 
+	cd wslu
+	CURRENT_PATH="$(pwd)"
+fi
+
 git submodule init
 git submodule update
 extras/bats/libexec/bats tests/wslu.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslfetch.bats tests/wslpkg.bats 
