@@ -6,7 +6,7 @@
 # Copyleft 2018 Patrick Wu J M <wotingwu@live.com>
 
 # data segment
-wslu_version=1.3
+wslu_version=1.4
 
 ## color
 black=`echo -e '\e[30m'`
