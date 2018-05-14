@@ -53,6 +53,12 @@ elif [[ "$distro" == SLES* ]]; then
 	distro="sles"
 fi
 
+function ins_locate
+{
+	[ -L /usr/bin/wslu ] && echo "$(dirname $(readlink -f /usr/bin/wslu))" || echo "/usr/bin"
+}
+
+
 function help
 {
 	echo -e "`basename "$1"` - Component of Windows 10 Linux Subsystem Utility
