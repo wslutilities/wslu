@@ -125,3 +125,5 @@ Installation Completed.
 
 Keep in remind that the installation method is different from installing from the package; DO NOT INSTALL PACKAGE VERSION AFTERWARDS. IT WILL BREAK YOUR INSTALLATION.
 EOF
+
+cd $ORI_PATH
