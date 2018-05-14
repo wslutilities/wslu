@@ -34,7 +34,7 @@ Detailed installation is on Wiki/Installation.
 
 ### Via Package Manager 
 
-`wslu` is now part of [wsl-translinux](https://github.com/cerebrate/wsl-translinux) apt repository. 
+`wslu` is now on [wsl-translinux](https://github.com/cerebrate/wsl-translinux) apt repository. 
 
 Following the guidelines [Here](https://github.com/cerebrate/wsl-translinux/blob/master/README.md) to add the repository. Then you can simply run `sudo apt install wslu` to install `wslu`.
 
