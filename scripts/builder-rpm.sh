@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-BUILD_VER=`grep 'version=' ../../src/wslu | cut -d'=' -f 2 | xargs`
+BUILD_VER=`grep 'version=' ../src/wslu | cut -d'=' -f 2 | xargs`
 CURRENT_DIR=`pwd`
 
 mkdir -p ~/rpm_wslu/{BUILD/,RPMS/,SOURCES/,SPECS/,SRPMS/}
 
 
 mkdir ~/rpm_wslu/SOURCES/wslu-$BUILD_VER
-cp ../../src/wsl* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER
+cp ../src/wsl* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER
 cd ~/rpm_wslu/SOURCES
 tar -czvf wslu-${BUILD_VER}.tar.gz wslu-$BUILD_VER
 rm -rf tmp
@@ -59,6 +59,6 @@ EOF
 cd ~/rpm_wslu/SPECS
 sudo rpmbuild -ba wslu-$BUILD_VER.spec
 
-#cp ~/rpm_wslu/RPMS/x86_64/*.rpm $CURRENT_DIR/../../release/rpm/
-#cp ~/rpm_wslu/SRPMS/*.rpm $CURRENT_DIR/../../release/rpm/
-#sudo rm -rf ~/rpm_wslu/
+cp ~/rpm_wslu/RPMS/x86_64/*.rpm $CURRENT_DIR/../release/rpm/
+cp ~/rpm_wslu/SRPMS/*.rpm $CURRENT_DIR/../release/rpm/
+sudo rm -rf ~/rpm_wslu/
