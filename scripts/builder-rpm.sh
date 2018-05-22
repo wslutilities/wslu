@@ -62,3 +62,4 @@ sudo rpmbuild -ba wslu-$BUILD_VER.spec
 cp ~/rpm_wslu/RPMS/x86_64/*.rpm $CURRENT_DIR/../release/rpm/
 cp ~/rpm_wslu/SRPMS/*.rpm $CURRENT_DIR/../release/rpm/
 sudo rm -rf ~/rpm_wslu/
+cd $CURRENT_DIR

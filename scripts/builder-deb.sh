@@ -33,3 +33,4 @@ cd $CURRENT_DIR/../release/debian
 sudo dpkg -b $BUILD_DIR/ wslu-${BUILD_VER}.deb
 
 rm -rf $BUILD_DIR
+cd $CURRENT_DIR
