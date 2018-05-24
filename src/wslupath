@@ -14,11 +14,6 @@ set_path=""
 
 help_short="wslupath (-O|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslupath (-h|-v|-R)"
 
-function path_mixed
-{
-	new_path="$(echo $@ | sed -e 's|\\|/|g')"
-	echo $new_path
-}
 
 function path_win
 {
@@ -44,15 +39,6 @@ function reg_path_converter
 	echo $new_path
 }
 
-function style_path
-{
-	case $style in
-		1)p="$(general_converter $@)";;
-		2)p="$@";;
-	esac
-	echo $p
-}
-
 function general_converter
 {
 	target="$@"
@@ -63,6 +49,15 @@ function general_converter
 	else
 		p="$@"
 	fi
+	echo $p
+}
+
+function style_path
+{
+	case $style in
+		1)p="$(general_converter $@)";;
+		2)p="$@";;
+	esac
 	echo $p
 }
 
@@ -113,7 +108,7 @@ else
 			if [[ "$reg_path" == "1" ]]; then
 				set_path="$(style_path $(path_converter $(reg_path_converter $args)))"
 			else
-				set_path="$(general_converter $(path_converter $args))"
+				set_path="$(style_path $(path_converter $args))"
 			fi				
 			break;;
 		esac
