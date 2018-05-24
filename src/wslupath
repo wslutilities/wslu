@@ -7,12 +7,12 @@
 
 version="08"
 
-style=3
+style=1
 reg_path=0
 set_path=""
 . wslu --silent
 
-help_short="wslupath (-w|-d|-u|-m|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslupath (-h|-v|-R)"
+help_short="wslupath (-O|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslupath (-h|-v|-R)"
 
 function path_mixed
 {
@@ -47,14 +47,24 @@ function reg_path_converter
 function style_path
 {
 	case $style in
-		1)p="$@";;
-		2)p="$(path_win $@)";;
-		3)p="$(path_linux $@)";;
-		4)p="$(path_mixed $@)";;
+		1)p="$(general_converter $@)";;
+		2)p="$@";;
 	esac
 	echo $p
 }
 
+function general_converter
+{
+	target="$@"
+	if [[ $target =~ ^[A-Z]:(\\[^:\\]+)*(\\)?$ ]]; then
+		p="$(path_linux $@)"
+	elif [[ $target =~ ^^[A-Z]:(/[^:/]+)*(/)?$ ]]; then
+		p="$(path_win $@)"
+	else
+		p="$@"
+	fi
+	echo $p
+}
 
 if [[ $# -eq 0 ]]; then
 	echo -e "$help_short"
@@ -63,12 +73,8 @@ else
 	for args; do
 		case $args in
 			#styles
-			-w|--windows)style=1;;
-			-d|--windows-double-slash)style=2;;
-			-u|--unix)style=3;;
-			-m|--mixed)style=4;;
 			-r|--reg-data)reg_path=1;;
-
+			-O|--original)style=2;;
 			## system location
 
 			-D|--desktop)
@@ -107,7 +113,7 @@ else
 			if [[ "$reg_path" == "1" ]]; then
 				set_path="$(style_path $(path_converter $(reg_path_converter $args)))"
 			else
-				set_path="$(style_path $(path_converter $args))"
+				set_path="$(general_converter $(path_converter $args))"
 			fi				
 			break;;
 		esac
