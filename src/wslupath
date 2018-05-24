@@ -17,6 +17,7 @@ help_short="wslupath (-O|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslupath 
 
 function path_win
 {
+	# TODO: Change this function to convert linux path to Windows path
 	new_path="$(echo $@ | sed -e 's|\\|\\\\|g')"
 	echo $new_path
 }
@@ -47,7 +48,7 @@ function general_converter
 	elif [[ $target =~ ^^[A-Z]:(/[^:/]+)*(/)?$ ]]; then
 		p="$(path_win $@)"
 	else
-		p="$@"
+		p="${error} No path form detected: $@."
 	fi
 	echo $p
 }
