@@ -110,9 +110,11 @@ else
 	CURRENT_PATH="$(pwd)"
 fi
 
+PATH="$CURRENT_PATH/src:$PATH"
 git submodule init
 git submodule update
 extras/bats/libexec/bats tests/wslu.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslfetch.bats tests/wslpkg.bats 
+PATH=$(getconf PATH)
 
 for f in src/wsl*; do
 	bname="$(basename $f)"
