@@ -102,7 +102,7 @@ else
 fi
 
 if [ `pwd | grep wslu` ]; then
-	cd ../../
+	cd ../
 	CURRENT_PATH="$(pwd)"
 else
 	git clone https://github.com/patrick330602/wslu.git 
