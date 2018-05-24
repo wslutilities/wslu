@@ -103,7 +103,7 @@ else
 			-h|--help) help $0 "$help_short"; exit;;
 			-v|--version) echo "wslpath v$wslu_version.$version"; exit;;
 			-R|--avail-reg) echo "Available registery input:"
-			reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /s | tail -n +3 | head -n -1 | sed -e "s|REG_EXPAND_SZ||g" | sed -e 's/ \+/ /g'
+			reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /s | tail -n +3 | head -n -1 | sed -e "s|REG_EXPAND_SZ||g" | sed -e 's/ \+/ /g' -e 's/^ //g'
 			exit;;
 			*)
 			if [[ "$reg_path" == "1" ]]; then
