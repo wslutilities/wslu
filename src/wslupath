@@ -12,8 +12,13 @@ reg_path=0
 set_path=""
 . wslu --silent
 
-help_short="wslupath (-O|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslupath (-h|-v|-R)"
+help_short="wslupath (|-d|-O|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslupath (-h|-v|-R)"
 
+function path_double_dash
+{
+	new_path="$(echo $@ | sed -e 's|\\|\\\\|g')"
+	echo $new_path
+}
 
 function path_win
 {
@@ -30,7 +35,7 @@ function path_linux
 
 function path_converter
 {
-	new_path="$((cd /mnt/c && cmd.exe /c "echo $@") 2>&1 | tr -d '\r')"
+	new_path=`(cd /mnt/c && cmd.exe /c "echo $@") 2>&1 | tr -d "\r"`
 	echo $new_path
 }
 
@@ -59,6 +64,7 @@ function style_path
 	case $style in
 		1)p="$(general_converter $@)";;
 		2)p="$@";;
+		3)p="$(path_double_dash $@)";;
 	esac
 	echo $p
 }
@@ -72,6 +78,7 @@ else
 			#styles
 			-r|--reg-data)reg_path=1;;
 			-O|--original)style=2;;
+			-d|--doubledash-dir)style=3;;
 			## system location
 
 			-D|--desktop)
