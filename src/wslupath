@@ -45,7 +45,7 @@ function general_converter
 	target="$@"
 	if [[ $target =~ ^[A-Z]:(\\[^:\\]+)*(\\)?$ ]]; then
 		p="$(path_linux $@)"
-	elif [[ $target =~ ^^[A-Z]:(/[^:/]+)*(/)?$ ]]; then
+	elif [[ $target =~ ^\/mnt\/[A-Za-z](\/[^:/]+)*(\/)?$ ]]; then
 		p="$(path_win $@)"
 	else
 		p="${error} No path form detected: $@."
