@@ -23,6 +23,10 @@ if [[ $distro == "opensuse" ]] || [[ $distro == "sles" ]]; then
 	echo "${warn} Incompatible with OpenSUSE and SUSE Linux Enterprise Server. Action Aborted."
 	exit 1
 fi
+
+echo "${error} wslpkg is way too dangerous to use. Action aborted."
+exit 30
+
 case $1 in
 	-h|--help) help $0 "$help_short"; exit;;
 	-v|--version) echo "wslpkg v$wslu_version.$version"; exit;;
