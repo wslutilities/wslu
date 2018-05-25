@@ -48,7 +48,8 @@ function general_converter
 	elif [[ $target =~ ^\/mnt\/[A-Za-z](\/[^:/]+)*(\/)?$ ]]; then
 		p="$(path_win $@)"
 	else
-		p="${error} No path form detected: $@."
+		echo "${error} No proper path form detected: $@."
+		exit 20
 	fi
 	echo $p
 }
