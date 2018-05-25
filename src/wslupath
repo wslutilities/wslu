@@ -18,7 +18,7 @@ help_short="wslupath (-O|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslupath 
 function path_win
 {
 	# TODO: Change this function to convert linux path to Windows path
-	new_path="$(echo $@ | sed -e 's|\\|\\\\|g')"
+	new_path="$(echo $@ | sed -e 's|/|\\|g' -e 's|^\\mnt\\\([A-Za-z]\)\\|\L\1\E:\\|')"
 	echo $new_path
 }
 
@@ -45,7 +45,7 @@ function general_converter
 	target="$@"
 	if [[ $target =~ ^[A-Z]:(\\[^:\\]+)*(\\)?$ ]]; then
 		p="$(path_linux $@)"
-	elif [[ $target =~ ^\/mnt\/[A-Za-z](\/[^:/]+)*(\/)?$ ]]; then
+	elif [[ $target =~ ^/mnt/[A-Za-z](/[^/]+)*(/)?$ ]]; then
 		p="$(path_win $@)"
 	else
 		echo "${error} No proper path form detected: $@."
@@ -110,7 +110,7 @@ else
 			if [[ "$reg_path" == "1" ]]; then
 				set_path="$(style_path $(path_converter $(reg_path_converter $args)))"
 			else
-				set_path="$(style_path $(path_converter $args))"
+				set_path="$(style_path $args)"
 			fi				
 			break;;
 		esac
