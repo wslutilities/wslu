@@ -3,7 +3,7 @@ BUILD_DIR=`mktemp --tmpdir --directory wslu-build-debian.XXXX`
 BUILD_VER=`grep 'version=' ../src/wslu | cut -d'=' -f 2 | xargs`
 CURRENT_DIR=`pwd`
 
-mkdir $BUILD_DIR/{DEBIAN/,usr/,usr/bin/, usr/share/, usr/share/wslu/}
+mkdir $BUILD_DIR/{DEBIAN/,usr/,usr/bin/,usr/share/,usr/share/wslu/}
 
 touch $BUILD_DIR/DEBIAN/control
 
