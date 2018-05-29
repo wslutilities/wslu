@@ -3,7 +3,7 @@ BUILD_DIR=`mktemp --tmpdir --directory wslu-build-debian.XXXX`
 BUILD_VER=`grep 'version=' ../src/wslu | cut -d'=' -f 2 | xargs`
 CURRENT_DIR=`pwd`
 
-mkdir $BUILD_DIR/{DEBIAN/,usr/,usr/bin/}
+mkdir $BUILD_DIR/{DEBIAN/,usr/,usr/bin/, usr/share/, usr/share/wslu/}
 
 touch $BUILD_DIR/DEBIAN/control
 
@@ -21,12 +21,14 @@ Description: A collection of utilities for Windows 10 Linux Subsystem
 EOF
 
 cp ../src/wsl* $BUILD_DIR/usr/bin/
+cp ../src/etc/* $BUILD_DIR/usr/share/wslu/
 
 cd $BUILD_DIR
 find . -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEBIAN.*' -printf '%P ' | xargs md5sum > DEBIAN/md5sums
 
 find $BUILD_DIR -type d -exec chmod 0755 {} \;
 find $BUILD_DIR/usr/bin -type f -exec chmod 0555 {} \;
+find $BUILD_DIR/usr/share/wslu/ -type f -exec chmod 0555 {} \;
 
 cd $CURRENT_DIR/../release/debian
 
