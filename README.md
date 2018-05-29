@@ -21,6 +21,7 @@ This is a WSL system information printer to print out some basic system informat
 
 **wslpkg**
 This is WSL Package Installer, which is a minimal package manager for installing special packages. Also, it provide some simple commands to install apps from third-party repositories.
+> `wslpkg` will be temporarily absent from 1.4 release
 
 **wslfetch**
 This is a WSL Screenshoot Information Tool to print information in a elegant way.
