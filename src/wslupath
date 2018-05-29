@@ -12,7 +12,7 @@ reg_path=0
 set_path=""
 . wslu --silent
 
-help_short="wslupath (|-d|-O|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslupath (-h|-v|-R)"
+help_short="wslupath (-dOr) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslupath (-h|-v|-R)"
 
 function path_double_dash
 {

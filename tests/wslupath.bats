@@ -3,7 +3,7 @@
 #wslupath testing
 @test "wslupath - No parameter" {
   run src/wslupath
-  [ "${lines[0]}" = "wslupath (-w|-d|-u|-m|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]" ]
+  [ "${lines[0]}" = "wslupath (-dOr) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]" ]
   [ "${lines[1]}" = "wslupath (-h|-v|-R)" ]
   [ "$status" -eq 20 ]
 }
@@ -11,7 +11,7 @@
 @test "wslupath - Help" {
   run src/wslupath --help
   [ "${lines[0]}" = "wslupath - Component of Windows 10 Linux Subsystem Utility" ]
-  [ "${lines[1]}" = "Usage: wslupath (-w|-d|-u|-m|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]" ]
+  [ "${lines[1]}" = "Usage: wslupath (-dOr) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]" ]
   [ "${lines[2]}" = "wslupath (-h|-v|-R)" ]
   [ "${lines[3]}" = "For more help for wslupath, visit the following site:" ]
   [ "${lines[4]}" = "https://github.com/patrick330602/wslu/wiki/wslupath" ]
@@ -20,7 +20,7 @@
 @test "wslupath - Help - Alt." {
   run src/wslupath -h
   [ "${lines[0]}" = "wslupath - Component of Windows 10 Linux Subsystem Utility" ]
-  [ "${lines[1]}" = "Usage: wslupath (-w|-d|-u|-m|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]" ]
+  [ "${lines[1]}" = "Usage: wslupath (-dOr) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]" ]
   [ "${lines[2]}" = "wslupath (-h|-v|-R)" ]
   [ "${lines[3]}" = "For more help for wslupath, visit the following site:" ]
   [ "${lines[4]}" = "https://github.com/patrick330602/wslu/wiki/wslupath" ]
