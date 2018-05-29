@@ -9,7 +9,7 @@ mkdir ~/rpm_wslu/SOURCES/wslu-$BUILD_VER
 cp ../src/wsl* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER
 cd ~/rpm_wslu/SOURCES
 tar -czvf wslu-${BUILD_VER}.tar.gz wslu-$BUILD_VER
-rm -rf tmp
+rm -rf wslu-$BUILD_VER
 
 cat <<EOF >> ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
 %define packager       patrick330602 <wotingwu@live.com>
