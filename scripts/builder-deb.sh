@@ -13,7 +13,7 @@ Architecture: all
 Maintainer: patrick330602 <wotingwu@live.com>
 Depends: bc, wget, unzip, lsb-release
 Recommends: git
-Suggests: ppa-purge, build-essential
+Suggests: build-essential
 Priority: optional
 Version: $BUILD_VER
 Description: A collection of utilities for Windows 10 Linux Subsystem
