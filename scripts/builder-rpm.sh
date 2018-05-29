@@ -48,12 +48,13 @@ rm -rf \$RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/wslu
 %attr(755,root,root) %{_bindir}/wslusc
 %attr(755,root,root) %{_bindir}/wslfetch
-%attr(755,root,root) %{_bindir}/wslpkg
 %attr(755,root,root) %{_bindir}/wslsys
 %attr(755,root,root) %{_bindir}/wslupath
 %changelog
-* Fri May 11 2018 patrick330602 <wotingwu@live.com>
-- First rpm build of wslu.
+* Fri June 1 2018 patrick330602 <wotingwu@live.com>
+- dynamic path conversion, remove unneeded parameter and code cleanup in wslupath;
+- add -NoProfile -Noninteractive switches to the invocation of powershell.exe in wslusc;
+- absence of wslpkg; will be added back in future release. 
 EOF
 
 cd ~/rpm_wslu/SPECS
