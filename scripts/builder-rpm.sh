@@ -51,7 +51,7 @@ rm -rf \$RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/wslsys
 %attr(755,root,root) %{_bindir}/wslupath
 %changelog
-* Fri June 1 2018 patrick330602 <wotingwu@live.com>
+* Sat Jun 16 2018 patrick330602 <wotingwu@live.com>
 - dynamic path conversion, remove unneeded parameter and code cleanup in wslupath;
 - add -NoProfile -Noninteractive switches to the invocation of powershell.exe in wslusc;
 - absence of wslpkg; will be added back in future release. 
