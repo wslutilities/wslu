@@ -10,7 +10,7 @@ touch $BUILD_DIR/DEBIAN/control
 cat <<EOF >>$BUILD_DIR/DEBIAN/control
 Package: wslu
 Architecture: all
-Maintainer: patrick330602 <wotingwu@live.com>
+Maintainer: Patrick Wu <wotingwu@live.com>
 Depends: bc, wget, unzip, lsb-release
 Recommends: git
 Suggests: build-essential
