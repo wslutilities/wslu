@@ -1,13 +1,14 @@
 
 <p align="center">
   <img width="300" height="300" src="extras/icon.png">
+  <h1>wslu</h1><br/>
+  <h2>A collection of utilities for WSL</h2><br/>
+
+<a href="https://github.com/patrick330602/wslu/wiki"><img alt="Wiki" src="https://img.shields.io/badge/Wiki-wslu-blue.svg"/></a>
+<a href="https://github.com/patrick330602/wslu/blob/master/LICENSE"><img alt="GIthub license" src="https://img.shields.io/github/license/patrick330602/wslu.svg"/></a>
+<a href="https://github.com/patrick330602/wslu/releases"><img alt="GitHub (pre-)release" src="https://img.shields.io/github/release/patrick330602/wslu/all.svg"/></a>
+<a href="https://travis-ci.org/patrick330602/wslu"><img alt="Travis branch" src="https://img.shields.io/travis/patrick330602/wslu/master.svg"/></a>
 </p>
-
-# <center>wslu - A collection of utilities for WSL</center>
-
-<center>
-[![Wiki](https://img.shields.io/badge/Wiki-wslu-blue.svg)](https://github.com/patrick330602/wslu/wiki) [![GitHub license](https://img.shields.io/github/license/patrick330602/wslu.svg)](https://github.com/patrick330602/wslu/blob/master/LICENSE) [![GitHub (pre-)release](https://img.shields.io/github/release/patrick330602/wslu/all.svg)](https://github.com/patrick330602/wslu) [![Travis branch](https://img.shields.io/travis/patrick330602/wslu/master.svg)](https://travis-ci.org/patrick330602/wslu)
-</center>
 
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
 
