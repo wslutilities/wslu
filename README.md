@@ -5,11 +5,15 @@
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
 
 **Currently supported Distro:**
-- Ubuntu (Store)
+- Ubuntu
+- Ubuntu 16.04
+- Ubuntu 18.04
 - OpenSUSE
 - SUSE Linux Enterprise Server(SLES)
 - Debian GNU/Linux
 - Kali Linux
+
+Legacy Ubuntu is no longer supporting.
 
 ## Feature
 
@@ -18,10 +22,6 @@ This is a WSL shortcut creator to create shortcut on your Windows 10 Desktop.
 
 **wslsys**
 This is a WSL system information printer to print out some basic system information.
-
-**wslpkg**
-This is WSL Package Installer, which is a minimal package manager for installing special packages. Also, it provide some simple commands to install apps from third-party repositories.
-> `wslpkg` will be temporarily absent from 1.4 release
 
 **wslfetch**
 This is a WSL Screenshoot Information Tool to print information in a elegant way.
@@ -33,26 +33,46 @@ This is a WSL Windows path Converter that can convert Windows path to other styl
 
 Detailed installation is on Wiki/Installation.
 
-### Via Package Manager 
+### For Ubuntu/Debian
 
-`wslu` is now on [wsl-translinux](https://github.com/cerebrate/wsl-translinux) apt repository. 
+Run following commands:
+```bash
+sudo apt install software-properties-common apt-transport-https
+wget -O - https://apt.patrickwu.ml/pkapt.key | sudo apt-key add -
+sudo add-apt-repository https://apt.patrickwu.ml/
+sudo apt update
+sudo apt install wslu
+```
 
-Following the guidelines [Here](https://github.com/cerebrate/wsl-translinux/blob/master/README.md) to add the repository. Then you can simply run `sudo apt install wslu` to install `wslu`.
+Or you can download the .deb package from release and install it using `sudo dpkg -i wslu*`.
 
-### Via Git
+### For Kali Linux
+
+Run following commands:
+```bash
+sudo apt install apt-transport-https
+wget -O - https://apt.patrickwu.ml/pkapt.key | sudo apt-key add -
+sudo echo "deb https://apt.patrickwu.ml/ kali main" >> /etc/apt/sources.list 
+sudo apt update
+sudo apt install wslu
+```
+
+Or you can download the .deb package from release and install it using `sudo dpkg -i wslu*`.
+
+### For OpenSUSE/SLES
+
+```bash
+sudo zypper ar -G https://rpm.patrickwu.ml/ ruapm
+sudo zypper ref
+sudo zypper in wslu
+```
+
+Or you can download the .rpm package from release and install it using `sudo rpm -ivh "wslu*"`.
+
+### Surce Code
 
 To install, just run the following command in the bash prompt:
 `curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/extras/scripts/install.sh | bash`
-
-### Via Package
-
-**for Ubuntu/Debian/Kali Linux:**
-
-Download the .deb package from release and install it using `sudo dpkg -i wslu*`.
-
-**for OpenSUSE/SLES:**
-
-Download the .rpm package from release and install it using `sudo rpm -ivh "wslu*"`.
 
 ## License
 
