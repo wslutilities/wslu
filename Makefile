@@ -11,9 +11,9 @@ all:
 		cat $(HEADER) $$file > $(OUTPATH)/`basename $$file`; \
 		mv $(OUTPATH)/`basename $$file` $(OUTPATH)/`basename $$file .sh`; \
 	done
-
+	chmod +x $(OUTPATH)/*
 clean:
-	rm out
+	rm -rf $(OUTPATH)
 
 test:
 	PATH="$$CURRENT_PATH/src:$$CURRENT_PATH/out:$$PATH"
