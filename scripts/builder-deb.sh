@@ -5,10 +5,9 @@ CURRENT_DIR=`pwd`
 
 mkdir $BUILD_DIR/{DEBIAN/,usr/,usr/bin/,usr/share/,usr/share/wslu/,usr/lib,usr/lib/mime,/usr/lib/mime/packages/}
 
-touch $BUILD_DIR/DEBIAN/postinst
-touch $BUILD_DIR/DEBIAN/prerm
-touch $BUILD_DIR/DEBIAN/changelog
-touch $BUILD_DIR/DEBIAN/control
+touch $BUILD_DIR/DEBIAN/{postinst,prerm,changelog,control}
+
+chmod 755 $BUILD_DIR/DEBIAN/{postinst,prerm}
 
 cat <<EOF >>$BUILD_DIR/DEBIAN/postinst
 #!/usr/bin/env bash
@@ -57,7 +56,7 @@ find $BUILD_DIR -type d -exec chmod 0755 {} \;
 find $BUILD_DIR/usr/ -type f -exec chmod 0555 {} \;
 find $BUILD_DIR/usr/lib/mime/packages/ -type f -exec chmod 644 {} \;
 
-mkdir $CURRENT_DIR/../target
+[ -d $CURRENT_DIR/../target ] || mkdir $CURRENT_DIR/../target
 cd $CURRENT_DIR/../target/
 
 sudo dpkg -b $BUILD_DIR/ wslu-${BUILD_VER}.deb
