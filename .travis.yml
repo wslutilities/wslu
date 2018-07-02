@@ -4,6 +4,8 @@ before_script:
 - sudo apt-get update -qq
 - sudo apt-get install -qq build-essential rpm
 script:
+- make
+- chmod +x out/*
 - cd scripts/
 - sudo bash -x ./builder-deb.sh
 - sudo bash -x ./builder-rpm.sh
