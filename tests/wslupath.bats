@@ -46,11 +46,24 @@
 }
 
 @test "wslupath - No parameter - Linux DirPath" {
-  skip "WIP feature"
   run out/wslupath "/mnt/c/Windows"
-  [ "${lines[0]}" = "C:\\Windows" ]
+  [ "${lines[0]}" = "c:\\Windows" ]
 }
 
+@test "wslupath - /w DoubleDash - Windows Double DirPath" {
+  run out/wslupath -d "C:\\Windows"
+  [ "${lines[0]}" = "C:\\\\Windows" ]
+}
+
+@test "wslupath - /w DoubleDash - Windows DirPath" {
+  run out/wslupath -d "C:\Windows"
+  [ "${lines[0]}" = "C:\\\\Windows" ]
+}
+
+@test "wslupath - /w DoubleDash - Linux DirPath" {
+  run out/wslupath -d "/mnt/c/Windows"
+  [ "${lines[0]}" = "/mnt/c/Windows" ]
+}
 @test "wslupath - /w parameter - No Input" {
   run out/wslupath -d
   [ "${status}" -eq 21 ]
