@@ -5,8 +5,22 @@ CURRENT_DIR=`pwd`
 
 mkdir $BUILD_DIR/{DEBIAN/,usr/,usr/bin/,usr/share/,usr/share/wslu/,usr/lib,usr/lib/mime,/usr/lib/mime/packages/}
 
+touch $BUILD_DIR/DEBIAN/postinst
+touch $BUILD_DIR/DEBIAN/prerm
 touch $BUILD_DIR/DEBIAN/changelog
 touch $BUILD_DIR/DEBIAN/control
+
+cat <<EOF >>$BUILD_DIR/DEBIAN/postinst
+#!/usr/bin/env bash
+update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 100
+update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 100
+EOF
+
+cat <<EOF >>$BUILD_DIR/DEBIAN/prerm
+#!/usr/bin/env bash
+update-alternatives --remove x-www-browser /usr/bin/wslview
+update-alternatives --remove www-browser /usr/bin/wslview
+EOF
 
 cat <<EOF >>$BUILD_DIR/DEBIAN/changelog
 wslu ($BUILD_VER) stable; urgency=low
