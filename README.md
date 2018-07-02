@@ -1,8 +1,8 @@
 <div align="center">
 
-# wslu - A collection of utilities for WSL
-
 <img width="200" height="200" src="extras/icon.png">
+
+# wslu - A collection of utilities for WSL
 
 [![Wiki](https://img.shields.io/badge/Wiki-wslu-blue.svg)](https://github.com/patrick330602/wslu/wiki) [![GitHub license](https://img.shields.io/github/license/patrick330602/wslu.svg)](https://github.com/patrick330602/wslu/blob/master/LICENSE) [![GitHub (pre-)release](https://img.shields.io/github/release/patrick330602/wslu/all.svg)](https://github.com/patrick330602/wslu) [![Travis branch](https://img.shields.io/travis/patrick330602/wslu/master.svg)](https://travis-ci.org/patrick330602/wslu)
 
