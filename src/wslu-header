@@ -1,9 +1,21 @@
 #!/usr/bin/env bash
-# wslu - Windows 10 linux Subsystem Utility Core
+# wslu - Windows 10 linux Subsystem Utility
 # Component of Windows 10 linux Subsystem Utility
 # <https://github.com/patrick330602/wslu>
-
-# Copyleft 2018 Patrick Wu J M <wotingwu@live.com>
+# Copyright (C) 2018 Patrick Wu
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # data segment
 wslu_version=1.4
@@ -67,12 +79,3 @@ Usage: $2
 For more help for `basename "$1"`, visit the following site:
 https://github.com/patrick330602/wslu/wiki/`basename "$1"`"
 }
-
-# commands
-## general
-case $1 in
-	-v|--version) echo "wslu v$wslu_version";;
-	-h|--help) help $0 "$help_short";;
-	-s|--silent);;
-	*)echo "$help_short"; exit 20;;
-esac

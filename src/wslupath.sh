@@ -1,16 +1,8 @@
-#!/usr/bin/env bash
-# wslupath - WSL Windows path Converter
-# Component of Windows 10 linux Subsystem Utility
-# <https://github.com/patrick330602/wslu>
-
-# Copyleft 2018 Patrick Wu J M <wotingwu@live.com>
-
 version="08"
 
 style=1
 reg_path=0
 set_path=""
-. wslu --silent
 
 help_short="wslupath (-dOr) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslupath (-h|-v|-R)"
 
@@ -35,7 +27,7 @@ function path_linux
 
 function path_converter
 {
-	new_path=`(cd /mnt/c && cmd.exe /c "echo $@") 2>&1 | tr -d "\r"`
+	new_path=`cmd.exe /c "echo $@" 2>&1 | tr -d "\r"`
 	echo $new_path
 }
 
@@ -94,7 +86,7 @@ else
 			set_path="$(style_path $(path_converter 'C:\Windows\System32'))"
 			break;;
 			-W|--windir)
-			set_path="$(style_path $(path_converter 'C:\Windows\'))"
+			set_path="$(style_path $(path_converter 'C:\Windows'))"
 			break;;
 			-s|--start-menu)
 			set_path="$(style_path $(path_converter $(reg_path_converter 'Start Menu')))"

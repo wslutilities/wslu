@@ -110,13 +110,16 @@ else
 	CURRENT_PATH="$(pwd)"
 fi
 
-PATH="$CURRENT_PATH/src:$PATH"
+make
+chmod +x $CURRENT_PATH/out/*
+
+PATH="$CURRENT_PATH/src:$CURRENT_PATH/out:$PATH"  
 git submodule init
 git submodule update
-extras/bats/libexec/bats tests/wslu.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslfetch.bats tests/wslpkg.bats 
+extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslfetch.bats tests/wslpkg.bats 
 PATH=$(getconf PATH)
 
-for f in src/wsl*; do
+for f in out/wsl*; do
 	bname="$(basename $f)"
    		sudo ln -s $CURRENT_PATH/$f /usr/bin/$bname;
 	echo "exec $f linked to /usr/bin/$bname";

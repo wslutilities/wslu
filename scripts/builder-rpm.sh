@@ -6,7 +6,7 @@ mkdir -p ~/rpm_wslu/{BUILD/,RPMS/,SOURCES/,SPECS/,SRPMS/}
 
 
 mkdir ~/rpm_wslu/SOURCES/wslu-$BUILD_VER
-cp ../src/wsl* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER
+cp ../out/wsl* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER
 cd ~/rpm_wslu/SOURCES
 tar -czvf wslu-${BUILD_VER}.tar.gz wslu-$BUILD_VER
 rm -rf wslu-$BUILD_VER

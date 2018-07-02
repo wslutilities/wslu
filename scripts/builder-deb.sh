@@ -20,8 +20,8 @@ Description: A collection of utilities for Windows 10 Linux Subsystem
  This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
 EOF
 
-cp ../src/wsl* $BUILD_DIR/usr/bin/
-cp ../src/etc/* $BUILD_DIR/usr/share/wslu/
+cp ../out/wsl* $BUILD_DIR/usr/bin/
+cp ../out/etc/* $BUILD_DIR/usr/share/wslu/
 
 cd $BUILD_DIR
 find . -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEBIAN.*' -printf '%P ' | xargs md5sum > DEBIAN/md5sums
