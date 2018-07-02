@@ -1,10 +1,3 @@
-#!/usr/bin/env bash
-# wslusc - WSL shortcut creator
-# Component of Windows 10 linux Subsystem Utility
-# <https://github.com/patrick330602/wslu>
-
-# Copyrleft 2018 Patrick Wu J M <wotingwu@live.com>
-
 version="03"
 
 cname=""

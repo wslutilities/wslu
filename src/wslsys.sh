@@ -1,13 +1,4 @@
-#!/usr/bin/env bash
-# wslsys - WSL System Information Printer
-# Component of Windows 10 linux Subsystem Utility
-# <https://github.com/patrick330602/wslu>
-
-# Copyleft 2018 Patrick Wu J M <wotingwu@live.com>
-
 version="18"
-
-. wslu --silent
 
 help_short="wslsys (-h|-v|-S|-U|-b|-B|-fB|-R|-K|-P) -s"
 branch=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "BuildBranch" 2>&1 | sed -n 3p | sed -e "s/BuildBranch//" | sed -e 's/^[[:space:]]*//' | awk '{$1=""; sub("  ", " "); print}' | sed -e 's|\r||g'`

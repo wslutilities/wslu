@@ -1,16 +1,8 @@
-#!/usr/bin/env bash
-# wslupath - WSL Windows path Converter
-# Component of Windows 10 linux Subsystem Utility
-# <https://github.com/patrick330602/wslu>
-
-# Copyleft 2018 Patrick Wu J M <wotingwu@live.com>
-
 version="08"
 
 style=1
 reg_path=0
 set_path=""
-. wslu --silent
 
 help_short="wslupath (-dOr) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslupath (-h|-v|-R)"
 

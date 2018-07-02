@@ -1,16 +1,7 @@
-#!/usr/bin/env bash
-# wslfetch - WSL Screenshot Information Tool
-# Component of Windows 10 linux Subsystem Utility
-# <https://github.com/patrick330602/wslu>
-
-# Copyleft 2018 Patrick Wu J M <wotingwu@live.com>
-
 version=25
 
 is_line=0
 is_splash=0
-. wslu --silent
-
 help_short="wslfetch (-h|-v|-s|-l|-c)"
 
 hostname="$(hostname)"
