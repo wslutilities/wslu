@@ -4,18 +4,18 @@
 
 teardown() {
   echo "removal for temporary shortcuts"
-  rm -rf "`src/wslupath -D`/test1.lnk"
-  rm -rf "`src/wslupath -D`/test2.lnk"
+  rm -rf "`out/wslupath -D`/test1.lnk"
+  rm -rf "`out/wslupath -D`/test2.lnk"
 
 }
 
 @test "wslusc - No parameter" {
-  run src/wslusc
+  run out/wslusc
   [ "$status" -eq 21 ]
 }
 
 @test "wslusc - Help" {
-  run src/wslusc --help
+  run out/wslusc --help
   [ "${lines[0]}" = "wslusc - Component of Windows 10 Linux Subsystem Utility" ]
   [ "${lines[1]}" = "Usage: wslusc (-g|-h|-v) ..NAME..." ]
   [ "${lines[2]}" = "For more help for wslusc, visit the following site:" ]
@@ -23,7 +23,7 @@ teardown() {
 }
 
 @test "wslusc - Help - Alt." {
-  run src/wslusc -h
+  run out/wslusc -h
   [ "${lines[0]}" = "wslusc - Component of Windows 10 Linux Subsystem Utility" ]
   [ "${lines[1]}" = "Usage: wslusc (-g|-h|-v) ..NAME..." ]
   [ "${lines[2]}" = "For more help for wslusc, visit the following site:" ]
@@ -31,11 +31,11 @@ teardown() {
 }
 
 @test "wslusc - without GUI" {
-  run src/wslusc test1
-  [ -f "`src/wslupath -D`/test1.lnk" ]
+  run out/wslusc test1
+  [ -f "`out/wslupath -D`/test1.lnk" ]
 }
 
 @test "wslusc - with GUI" {
-  run src/wslusc -x test2
-  [ -f "`src/wslupath -D`/test2.lnk" ]
+  run out/wslusc -x test2
+  [ -f "`out/wslupath -D`/test2.lnk" ]
 }

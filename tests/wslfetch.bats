@@ -2,12 +2,12 @@
 
 #wslsys testing
 @test "wslfetch - No parameter" {
-  run src/wslfetch
+  run out/wslfetch
   [ "$status" -eq 0 ]
 }
 
 @test "wslfetch - Help" {
-  run src/wslfetch --help
+  run out/wslfetch --help
   [ "${lines[0]}" = "wslfetch - Component of Windows 10 Linux Subsystem Utility" ]
   [ "${lines[1]}" = "Usage: wslfetch (-h|-v|-s|-l|-c)" ]
   [ "${lines[2]}" = "For more help for wslfetch, visit the following site:" ]
@@ -15,7 +15,7 @@
 }
 
 @test "wslfetch - Help - Alt." {
-  run src/wslfetch -h
+  run out/wslfetch -h
   [ "${lines[0]}" = "wslfetch - Component of Windows 10 Linux Subsystem Utility" ]
   [ "${lines[1]}" = "Usage: wslfetch (-h|-v|-s|-l|-c)" ]
   [ "${lines[2]}" = "For more help for wslfetch, visit the following site:" ]
