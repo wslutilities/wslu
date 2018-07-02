@@ -15,5 +15,5 @@ all:
 clean:
 	rm out
 
-
-
+test:
+	extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslfetch.bats

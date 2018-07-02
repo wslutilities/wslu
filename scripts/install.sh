@@ -116,7 +116,7 @@ chmod +x $CURRENT_PATH/out/*
 PATH="$CURRENT_PATH/src:$CURRENT_PATH/out:$PATH"  
 git submodule init
 git submodule update
-extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslfetch.bats tests/wslpkg.bats 
+extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslfetch.bats 
 PATH=$(getconf PATH)
 
 for f in out/wsl*; do
@@ -124,6 +124,11 @@ for f in out/wsl*; do
    		sudo ln -s $CURRENT_PATH/$f /usr/bin/$bname;
 	echo "exec $f linked to /usr/bin/$bname";
 done
+
+sudo cp $CURRENT_PATH/src/mime/* /usr/lib/mime/packages/
+[ -d /usr/share/wslu ] || sudo mkdir /usr/share/wslu 
+sudo cp $CURRENT_PATH/src/etc/* /usr/share/wslu
+
 
 cat <<EOF
 Installation Completed. 
