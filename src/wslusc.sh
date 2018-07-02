@@ -2,7 +2,6 @@ version="03"
 
 cname=""
 is_gui=0
-. wslu --silent
 
 help_short="wslusc (-g|-h|-v) ..NAME..."
 
