@@ -125,6 +125,11 @@ for f in out/wsl*; do
 	echo "exec $f linked to /usr/bin/$bname";
 done
 
+sudo cp $CURRENT_PATH/src/mime/* /usr/lib/mime/packages/
+[ -d /usr/share/wslu ] || sudo mkdir /usr/share/wslu 
+sudo cp $CURRENT_PATH/src/etc/* /usr/share/wslu
+
+
 cat <<EOF
 Installation Completed. 
 
