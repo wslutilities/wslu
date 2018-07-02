@@ -52,6 +52,6 @@
 }
 
 @test "wslupath - /w parameter - No Input" {
-  run out/wslupath -w
+  run out/wslupath -d
   [ "${status}" -eq 21 ]
 }
