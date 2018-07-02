@@ -27,7 +27,7 @@ function path_linux
 
 function path_converter
 {
-	new_path=`(cd /mnt/c && cmd.exe /c "echo $@") 2>&1 | tr -d "\r"`
+	new_path=`cmd.exe /c "echo $@" 2>&1 | tr -d "\r"`
 	echo $new_path
 }
 
@@ -86,7 +86,7 @@ else
 			set_path="$(style_path $(path_converter 'C:\Windows\System32'))"
 			break;;
 			-W|--windir)
-			set_path="$(style_path $(path_converter 'C:\Windows\'))"
+			set_path="$(style_path $(path_converter 'C:\Windows'))"
 			break;;
 			-s|--start-menu)
 			set_path="$(style_path $(path_converter $(reg_path_converter 'Start Menu')))"
