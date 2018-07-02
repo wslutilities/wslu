@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # data segment
-wslu_version=1.4
+wslu_version=1.5
 
 ## color
 black=`echo -e '\e[30m'`
