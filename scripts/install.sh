@@ -92,15 +92,6 @@ else
 	exit 1
 fi
 
-echo -e "\ntesting xcopy.exe..."
-xcopy.exe /? 
-if [[ $? -eq 0 ]]; then
-	echo "xcopy.exe can be invoked."
-else
-	echo "xcopy.exe failed to launch."
-	exit 1
-fi
-
 if [ `pwd | grep wslu` ]; then
 	cd ../
 	CURRENT_PATH="$(pwd)"
