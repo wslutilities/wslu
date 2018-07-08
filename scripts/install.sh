@@ -120,6 +120,9 @@ sudo cp $CURRENT_PATH/src/mime/* /usr/lib/mime/packages/
 [ -d /usr/share/wslu ] || sudo mkdir /usr/share/wslu 
 sudo cp $CURRENT_PATH/src/etc/* /usr/share/wslu
 
+sudo update-mime
+sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 100
+sudo update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 100
 
 cat <<EOF
 Installation Completed. 
