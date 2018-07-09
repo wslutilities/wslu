@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-BUILD_VER=`grep 'version=' ../src/wslu | cut -d'=' -f 2 | xargs`
+BUILD_VER=`grep 'version=' ../src/wslu-header | cut -d'=' -f 2 | xargs`
 CURRENT_DIR=`pwd`
 
 mkdir -p ~/rpm_wslu/{BUILD/,RPMS/,SOURCES/,SPECS/,SRPMS/}
@@ -60,11 +60,11 @@ fi
 rm -rf \$RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
-%attr(755,root,root) %{_bindir}/wslu
 %attr(755,root,root) %{_bindir}/wslusc
 %attr(755,root,root) %{_bindir}/wslfetch
 %attr(755,root,root) %{_bindir}/wslsys
 %attr(755,root,root) %{_bindir}/wslupath
+%attr(755,root,root) %{_bindir}wslview
 %attr(555,root,root) /usr/share/wslu
 %changelog
 * Sat Jun 16 2018 patrick330602 <wotingwu@live.com>
