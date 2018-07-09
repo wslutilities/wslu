@@ -4,7 +4,7 @@
 
 # wslu - A collection of utilities for WSL
 
-[![Wiki](https://img.shields.io/badge/Wiki-wslu-blue.svg)](https://github.com/patrick330602/wslu/wiki) [![GitHub license](https://img.shields.io/github/license/patrick330602/wslu.svg)](https://github.com/patrick330602/wslu/blob/master/LICENSE) [![GitHub (pre-)release](https://img.shields.io/github/release/patrick330602/wslu/all.svg)](https://github.com/patrick330602/wslu) [![Travis branch](https://img.shields.io/travis/patrick330602/wslu/master.svg)](https://travis-ci.org/patrick330602/wslu)
+[![Wiki](https://img.shields.io/badge/Wiki-wslu-blue.svg?style=flat-square)](https://github.com/patrick330602/wslu/wiki) [![GitHub license](https://img.shields.io/github/license/patrick330602/wslu.svg?style=flat-square)](https://github.com/patrick330602/wslu/blob/master/LICENSE) [![GitHub (pre-)release](https://img.shields.io/github/release/patrick330602/wslu/all.svg?style=flat-square)](https://github.com/patrick330602/wslu) [![Travis branch](https://img.shields.io/travis/patrick330602/wslu/master.svg?style=flat-square)](https://travis-ci.org/patrick330602/wslu)
 
 </div>
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
@@ -34,9 +34,12 @@ This is a WSL Screenshoot Information Tool to print information in a elegant way
 **wslupath**
 This is a WSL Windows path Converter that can convert Windows path to other styles of path.
 
+**wslview**
+This is a wrapper for explorer.exe so that you can open website in your default browser in Windows
+
 ## Installation
 
-Detailed installation is on Wiki/Installation.
+Detailed installation is in Wiki/Installation.
 
 ### For Ubuntu/Debian
 
@@ -77,7 +80,7 @@ Or you can download the .rpm package from release and install it using `sudo rpm
 ### Surce Code
 
 To install, just run the following command in the bash prompt:
-`curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/extras/scripts/install.sh | bash`
+`curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/extras/scripts/install.sh | bash` 
 
 ## License
 

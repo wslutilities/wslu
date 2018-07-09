@@ -8,3 +8,5 @@ echo "rm -rf /usr/share/wslu"
 sudo rm -f /usr/lib/mime/packages/wslview
 echo "rm -f /usr/lib/mimepackages/wslview"
 sudo update-mime
+sudo update-alternatives --remove x-www-browser /usr/bin/wslview
+sudo update-alternatives --remove www-browser /usr/bin/wslview
