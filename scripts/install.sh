@@ -92,15 +92,6 @@ else
 	exit 1
 fi
 
-echo -e "\ntesting xcopy.exe..."
-xcopy.exe /? 
-if [[ $? -eq 0 ]]; then
-	echo "xcopy.exe can be invoked."
-else
-	echo "xcopy.exe failed to launch."
-	exit 1
-fi
-
 if [ `pwd | grep wslu` ]; then
 	cd ../
 	CURRENT_PATH="$(pwd)"
@@ -129,6 +120,9 @@ sudo cp $CURRENT_PATH/src/mime/* /usr/lib/mime/packages/
 [ -d /usr/share/wslu ] || sudo mkdir /usr/share/wslu 
 sudo cp $CURRENT_PATH/src/etc/* /usr/share/wslu
 
+sudo update-mime
+sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 100
+sudo update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 100
 
 cat <<EOF
 Installation Completed. 

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-BUILD_VER=`grep 'version=' ../src/wslu | cut -d'=' -f 2 | xargs`
+BUILD_VER=`grep 'version=' ../src/wslu-header | cut -d'=' -f 2 | xargs`
 CURRENT_DIR=`pwd`
 
 mkdir -p ~/rpm_wslu/{BUILD/,RPMS/,SOURCES/,SPECS/,SRPMS/}
 
 
-mkdir -p ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/{etc, mime}
+mkdir -p ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/{etc,mime}
 cp ../out/wsl* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER
 cp ../src/etc/* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/etc
 cp ../src/mime/* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/mime
@@ -51,26 +51,30 @@ install -m 555 etc/runHidden.vbs \${RPM_BUILD_ROOT}/usr/share/wslu
 
 %post
 %{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 100
+%{_sbindir}/update-alternatives --install %{_bindir}/x-www-browser x-www-browser %{_bindir}/wslview 100
+
 
 %postun
 if [ $1 -eq 0 ] ; then
   %{_sbindir}/update-alternatives --remove www-browser %{_bindir}/wslview
+  %{_sbindir}/update-alternatives --remove x-www-browser %{_bindir}/wslview
 fi  
 %clean
 rm -rf \$RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
-%attr(755,root,root) %{_bindir}/wslu
 %attr(755,root,root) %{_bindir}/wslusc
 %attr(755,root,root) %{_bindir}/wslfetch
 %attr(755,root,root) %{_bindir}/wslsys
 %attr(755,root,root) %{_bindir}/wslupath
-%attr(555,root,root) /usr/share/wslu
+%attr(755,root,root) %{_bindir}/wslview
+%attr(555,root,root) /usr/share/wslu/runHidden.vbs
 %changelog
-* Sat Jun 16 2018 patrick330602 <wotingwu@live.com>
-- dynamic path conversion, remove unneeded parameter and code cleanup in wslupath;
-- add -NoProfile -Noninteractive switches to the invocation of powershell.exe in wslusc;
-- absence of wslpkg; will be added back in future release. 
+* Tue Jul 10 2018 patrick330602 <wotingwu@live.com>
+- wslpkg will not be included anymore;
+- fixed a bug in wslupath which produce cmd.exe no longer print proper path address;
+- wslview is now part of wslu;
+- huge change on building structure.
 EOF
 
 cd ~/rpm_wslu/SPECS

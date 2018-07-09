@@ -24,11 +24,12 @@ EOF
 cat <<EOF >>$BUILD_DIR/DEBIAN/changelog
 wslu ($BUILD_VER) stable; urgency=low
 
- * dynamic path conversion, remove unneeded parameter and code cleanup in wslupath;
- * add -NoProfile -Noninteractive switches to the invocation of powershell.exe in wslusc. 
- * absence of wslpkg; will be added back in future release.
+ * wslpkg will not be included anymore;
+ * fixed a bug in wslupath which produce cmd.exe no longer print proper path address;
+ * wslview is now part of wslu;
+ * huge change on building structure.
 
--- Patrick Wu <wotingwu@live.com>  Sat, 16 Jun 2018 12:00:00 +0800
+-- Patrick Wu <wotingwu@live.com>  Tue, 10 Jul 2018 12:00:00 +0800
 
 EOF
 
