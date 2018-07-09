@@ -51,10 +51,13 @@ install -m 555 etc/runHidden.vbs \${RPM_BUILD_ROOT}/usr/share/wslu
 
 %post
 %{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 100
+%{_sbindir}/update-alternatives --install %{_bindir}/x-www-browser x-www-browser %{_bindir}/wslview 100
+
 
 %postun
 if [ $1 -eq 0 ] ; then
   %{_sbindir}/update-alternatives --remove www-browser %{_bindir}/wslview
+  %{_sbindir}/update-alternatives --remove x-www-browser %{_bindir}/wslview
 fi  
 %clean
 rm -rf \$RPM_BUILD_ROOT
