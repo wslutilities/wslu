@@ -67,10 +67,11 @@ rm -rf \$RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}wslview
 %attr(555,root,root) /usr/share/wslu
 %changelog
-* Sat Jun 16 2018 patrick330602 <wotingwu@live.com>
-- dynamic path conversion, remove unneeded parameter and code cleanup in wslupath;
-- add -NoProfile -Noninteractive switches to the invocation of powershell.exe in wslusc;
-- absence of wslpkg; will be added back in future release. 
+* Tue Jul 10 2018 patrick330602 <wotingwu@live.com>
+- wslpkg will not be included anymore;
+- fixed a bug in wslupath which produce cmd.exe no longer print proper path address;
+- wslview is now part of wslu;
+- huge change on building structure.
 EOF
 
 cd ~/rpm_wslu/SPECS
