@@ -5,7 +5,7 @@ CURRENT_DIR=`pwd`
 mkdir -p ~/rpm_wslu/{BUILD/,RPMS/,SOURCES/,SPECS/,SRPMS/}
 
 
-mkdir -p ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/{etc, mime}
+mkdir -p ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/{etc,mime}
 cp ../out/wsl* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER
 cp ../src/etc/* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/etc
 cp ../src/mime/* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/mime
