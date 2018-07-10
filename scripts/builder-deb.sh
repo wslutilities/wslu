@@ -22,7 +22,7 @@ update-alternatives --remove www-browser /usr/bin/wslview
 EOF
 
 cat <<EOF >>$BUILD_DIR/DEBIAN/changelog
-wslu ($BUILD_VER) stable; urgency=low
+wslu ($BUILD_VER-2) stable; urgency=low
 
  * wslpkg will not be included anymore;
  * fixed a bug in wslupath which produce cmd.exe no longer print proper path address;
@@ -41,7 +41,7 @@ Depends: bc, wget, unzip, lsb-release
 Recommends: git
 Suggests: build-essential
 Priority: optional
-Version: $BUILD_VER
+Version: $BUILD_VER-2
 Description: A collection of utilities for Windows 10 Linux Subsystem
  This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
 EOF
