@@ -28,7 +28,7 @@ cat <<EOF >> ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
 Summary: Windows 10 Linux Subsystem Utilities
 Name: wslu
 Version: $BUILD_VER
-Release: 1
+Release: 2
 Source: wslu-$BUILD_VER.tar.gz
 Requires: bc lsb-release wget unzip
 Requires(post): %{_sbindir}/update-alternatives
@@ -74,7 +74,8 @@ rm -rf \$RPM_BUILD_ROOT
 - wslpkg will not be included anymore;
 - fixed a bug in wslupath which produce cmd.exe no longer print proper path address;
 - wslview is now part of wslu;
-- huge change on building structure.
+- huge change on building structure;
+- fixes a bug in wslusc (closes #11).
 EOF
 
 cd ~/rpm_wslu/SPECS
