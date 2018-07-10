@@ -17,8 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# data segment
-wslu_version=1.5
+# global config
+wslu_version=1.6
 
 ## color
 black=`echo -e '\e[30m'`
