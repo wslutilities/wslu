@@ -81,7 +81,7 @@ EOF
 cd ~/rpm_wslu/SPECS
 sudo rpmbuild -ba wslu-$BUILD_VER.spec
 
-[ -d $CURRENT_DIR/../target ] || target
+[ -d $CURRENT_DIR/../target ] || mkdir $CURRENT_DIR/../target
 cp ~/rpm_wslu/RPMS/x86_64/*.rpm $CURRENT_DIR/../target/
 cp ~/rpm_wslu/SRPMS/*.rpm $CURRENT_DIR/../target/
 sudo rm -rf ~/rpm_wslu/
