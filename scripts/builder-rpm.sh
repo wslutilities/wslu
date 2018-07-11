@@ -28,7 +28,7 @@ cat <<EOF >> ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
 Summary: Windows 10 Linux Subsystem Utilities
 Name: wslu
 Version: $BUILD_VER
-Release: 2
+Release: 1
 Source: wslu-$BUILD_VER.tar.gz
 Requires: bc lsb-release wget unzip
 Requires(post): %{_sbindir}/update-alternatives
