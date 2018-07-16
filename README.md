@@ -57,7 +57,7 @@ Or you can download the .deb package from release and install it using `sudo dpk
 ### For OpenSUSE/SLES
 
 ```bash
-sudo zypper ar -G https://rpm.patrickwu.ml/ ruapm
+sudo zypper ar https://rpm.patrickwu.ml/ ruapm
 sudo zypper ref
 sudo zypper in wslu
 ```
