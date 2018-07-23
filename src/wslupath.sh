@@ -95,7 +95,7 @@ else
 			set_path="$(style_path $(path_converter $(reg_path_converter 'Startup')))"
 			break;;
 			-H|--home)
-			set_path="$(style_path $(path_converter '%HOMEPATH%'))"
+			set_path="$(style_path $(path_converter '%HOMEDRIVE%%HOMEPATH%'))"
 			break;;
 			-P|--program-files)
 			set_path="$(style_path $(path_converter '%ProgramFiles%'))"
