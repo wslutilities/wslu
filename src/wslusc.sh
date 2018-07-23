@@ -44,6 +44,16 @@ if [[ "$cname" != "" ]]; then
 			exit 30
 		fi
 	fi
+	if [[ "$is_icon" == "1" ]]; then
+		ext="${iconpath##*.}"
+		if [[ ! "$ext" == "ico" ]]; then
+			echo "${error} wslusc only support creating shortcut using .ico icon. Aborted."
+			exit 22
+		fi
+		echo "${info} You choose to use custom icon: $iconpath. Processing..."
+		cp $iconpath $script_location
+		iconpath="$script_location_win\\$(basename $iconpath)"
+	fi
 	if [[ "$is_gui" == "1" ]]; then
 		powershell.exe -NoProfile -NonInteractive -Command "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs bash.exe -c \"cd ~ && DISPLAY=:0 $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
 	else
