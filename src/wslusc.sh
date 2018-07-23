@@ -1,4 +1,4 @@
-version="09"
+version="10"
 
 cname=""
 iconpath="`wslupath -d -H`\\wslu\\wsl.ico"
@@ -7,13 +7,13 @@ is_gui=0
 
 help_short="wslusc (-i|-g|-h|-v) ..NAME..."
 
-for args; do
+while [ $1 ]; do
 	case $1 in
 		-i|--icon)shift;is_icon=1;iconpath=$1;shift;;
 		-g|--gui)is_gui=1;shift;;
 		-h|--help) help $0 "$help_short"; exit;;
 		-v|--version) echo "wslupath v$wslu_version.$version"; exit;;
-		*) cname=$1;;
+		*) cname=$1;shift;;
 	esac
 done
 if [[ "$cname" != "" ]]; then
