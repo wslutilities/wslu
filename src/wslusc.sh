@@ -18,11 +18,13 @@ if [[ "$cname" != "" ]]; then
 	dpath=`wslupath -D`
 	new_cname=`basename $cname`
 	if [[ "$is_gui" == "1" ]]; then
-		script_location="`wslupath -H`/wslu/runHidden.vbs"
-		if [[ -f $script_location ]]; then
-			mkdir `wslupath -H`/wslu/
+		script_location="`wslupath -H`/wslu"
+		if [[ ! -f $script_location/runHidden.vbs ]]; then
+			echo "${info} runHidden.vbs not found in Windows directory. Copying right now..."
+			[[ -d $script_location ]] || mkdir $script_location
 			if [[ -f /usr/share/wslu/runHidden.vbs ]]; then
 				cp /usr/share/wslu/runHidden.vbs $script_location
+				echo "${info} runHidden.vbs copied. Located at $script_location."
 			else
 				echo "${error} runHidden.vbs not found. Failed to copy."
 				exit 30
