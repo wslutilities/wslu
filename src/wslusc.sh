@@ -18,6 +18,16 @@ if [[ "$cname" != "" ]]; then
 	dpath=`wslupath -D`
 	new_cname=`basename $cname`
 	if [[ "$is_gui" == "1" ]]; then
+		script_location="`wslupath -H`/wslu/runHidden.vbs"
+		if [[ -f $script_location ]]; then
+			mkdir `wslupath -H`/wslu/
+			if [[ -f /usr/share/wslu/runHidden.vbs ]]; then
+				cp /usr/share/wslu/runHidden.vbs $script_location
+			else
+				echo "${error} runHidden.vbs not found. Failed to copy."
+				exit 30
+			fi
+		fi
 		powershell.exe -NoProfile -NonInteractive -Command "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \"cd ~ && DISPLAY=:0 $cname\"';\$s.Save();"
 	else
 		powershell.exe -NoProfile -NonInteractive -Command "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \"cd ~ && $cname\"';\$s.Save();"
