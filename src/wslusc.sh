@@ -1,4 +1,4 @@
-version="07"
+version="09"
 
 cname=""
 iconpath="`wslupath -d -H`\\wslu\\wsl.ico"
