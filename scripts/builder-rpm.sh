@@ -69,6 +69,7 @@ rm -rf \$RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/wslupath
 %attr(755,root,root) %{_bindir}/wslview
 %attr(555,root,root) /usr/share/wslu/runHidden.vbs
+%attr(555,root,root) /usr/share/wslu/wsl.ico
 %changelog
 * Tue Jul 10 2018 patrick330602 <wotingwu@live.com>
 - wslpkg will not be included anymore;
