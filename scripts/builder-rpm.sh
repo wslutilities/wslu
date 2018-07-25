@@ -71,12 +71,10 @@ rm -rf \$RPM_BUILD_ROOT
 %attr(555,root,root) /usr/share/wslu/runHidden.vbs
 %attr(555,root,root) /usr/share/wslu/wsl.ico
 %changelog
-* Tue Jul 10 2018 patrick330602 <wotingwu@live.com>
-- wslpkg will not be included anymore;
-- fixed a bug in wslupath which produce cmd.exe no longer print proper path address;
-- wslview is now part of wslu;
-- huge change on building structure;
-- fixes a bug in wslusc (closes #11).
+* Wed Jul 25 2018 patrick330602 <wotingwu@live.com>
+- fix a typo in wslfetch;
+- fixed a bug in wslupath with -H parameter;
+- wslusc update: icon support and hidden command prompt for GUI application;
 EOF
 
 cd ~/rpm_wslu/SPECS
