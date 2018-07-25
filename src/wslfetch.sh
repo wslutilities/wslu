@@ -135,7 +135,7 @@ case "$distro" in
             );;
 esac
 
-info_text=("${t}Windows 10 Linux Subsytem${reset}"
+info_text=("${t}Windows 10 Linux Subsystem${reset}"
 "${t}${USER}${reset}@${t}${hostname}${reset}"
 "${t}BUILD:${reset}	${build}"
 "${t}BRANCH:${reset}	${branch}"
