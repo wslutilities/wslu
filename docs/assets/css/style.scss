@@ -1,0 +1,15 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.navi {
+height: auto !important;
+background: transparent !important;
+border-radius: 0px !important;
+border: 0px !important;
+}
+
+.navi li {
+border-right: 0px !important;
+}
