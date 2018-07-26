@@ -47,6 +47,7 @@ mkdir -p \${RPM_BUILD_ROOT}/usr/bin
 mkdir -p \${RPM_BUILD_ROOT}/usr/share/wslu
 mkdir -p \${RPM_BUILD_ROOT}/usr/lib/mime/packages
 install -m 755 wsl* \${RPM_BUILD_ROOT}%{_bindir}
+install -m 555 etc/wsl.ico \${RPM_BUILD_ROOT}/usr/share/wslu
 install -m 555 etc/runHidden.vbs \${RPM_BUILD_ROOT}/usr/share/wslu
 
 %post
@@ -55,7 +56,7 @@ install -m 555 etc/runHidden.vbs \${RPM_BUILD_ROOT}/usr/share/wslu
 
 
 %postun
-if [ $1 -eq 0 ] ; then
+if [ $1 -eq 0 ]; then
   %{_sbindir}/update-alternatives --remove www-browser %{_bindir}/wslview
   %{_sbindir}/update-alternatives --remove x-www-browser %{_bindir}/wslview
 fi  
