@@ -1,30 +1,19 @@
-### For Ubuntu/Debian
+# Installation
+
+## For Ubuntu/Debian/Kali Linux
 
 Run following commands:
 ```bash
-sudo apt install software-properties-common apt-transport-https
+sudo apt install lsb-release apt-transport-https
 wget -O - https://apt.patrickwu.ml/pkapt.key | sudo apt-key add -
-sudo add-apt-repository https://apt.patrickwu.ml/
+echo "deb https://apt.patrickwu.ml/ `lsb_release -c -s` main" | sudo tee -a /etc/apt/sources.list
 sudo apt update
 sudo apt install wslu
 ```
 
 Or you can download the .deb package from release and install it using `sudo dpkg -i wslu*`.
 
-### For Kali Linux
-
-Run following commands:
-```bash
-sudo apt install apt-transport-https
-wget -O - https://apt.patrickwu.ml/pkapt.key | sudo apt-key add -
-sudo echo "deb https://apt.patrickwu.ml/ kali main" >> /etc/apt/sources.list 
-sudo apt update
-sudo apt install wslu
-```
-
-Or you can download the .deb package from release and install it using `sudo dpkg -i wslu*`.
-
-### For OpenSUSE/SLES
+## For OpenSUSE/SLES
 
 ```bash
 sudo zypper ar -G https://rpm.patrickwu.ml/ ruapm
@@ -34,7 +23,7 @@ sudo zypper in wslu
 
 Or you can download the .rpm package from release and install it using `sudo rpm -ivh "wslu*"`.
 
-### Install from `wsl-translinux`
+## Install from `wsl-translinux`
 
 `wslu` is part of [wsl-translinux](https://github.com/cerebrate/wsl-translinux) apt repository. 
 
@@ -42,12 +31,17 @@ Following the guidelines [Here](https://github.com/cerebrate/wsl-translinux/blob
 
 However, with lack of support, I moved my packages to my own apt repository.
 
-### Install from source code
+## Install from source code
 
 To install, just run the following command in the bash prompt:
-`curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/extras/scripts/install.sh | bash`
+
+```bash
+curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/extras/scripts/install.sh | bash
+```
 
 To uninstall, run `uninstall.sh` in `extras/scripts` and remove the folder.
+
+## Older version
 
 ### Install version 1.2
 
