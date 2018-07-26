@@ -28,7 +28,7 @@ cat <<EOF >> ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
 Summary: Windows 10 Linux Subsystem Utilities
 Name: wslu
 Version: $BUILD_VER
-Release: 2
+Release: 1
 Source: wslu-$BUILD_VER.tar.gz
 Requires: bc lsb-release wget unzip
 Requires(post): %{_sbindir}/update-alternatives
@@ -47,6 +47,7 @@ mkdir -p \${RPM_BUILD_ROOT}/usr/bin
 mkdir -p \${RPM_BUILD_ROOT}/usr/share/wslu
 mkdir -p \${RPM_BUILD_ROOT}/usr/lib/mime/packages
 install -m 755 wsl* \${RPM_BUILD_ROOT}%{_bindir}
+install -m 555 etc/wsl.ico \${RPM_BUILD_ROOT}/usr/share/wslu
 install -m 555 etc/runHidden.vbs \${RPM_BUILD_ROOT}/usr/share/wslu
 
 %post
@@ -55,7 +56,7 @@ install -m 555 etc/runHidden.vbs \${RPM_BUILD_ROOT}/usr/share/wslu
 
 
 %postun
-if [ $1 -eq 0 ] ; then
+if [ $1 -eq 0 ]; then
   %{_sbindir}/update-alternatives --remove www-browser %{_bindir}/wslview
   %{_sbindir}/update-alternatives --remove x-www-browser %{_bindir}/wslview
 fi  
@@ -69,13 +70,12 @@ rm -rf \$RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/wslupath
 %attr(755,root,root) %{_bindir}/wslview
 %attr(555,root,root) /usr/share/wslu/runHidden.vbs
+%attr(555,root,root) /usr/share/wslu/wsl.ico
 %changelog
-* Tue Jul 10 2018 patrick330602 <wotingwu@live.com>
-- wslpkg will not be included anymore;
-- fixed a bug in wslupath which produce cmd.exe no longer print proper path address;
-- wslview is now part of wslu;
-- huge change on building structure;
-- fixes a bug in wslusc (closes #11).
+* Wed Jul 25 2018 patrick330602 <wotingwu@live.com>
+- fix a typo in wslfetch;
+- fixed a bug in wslupath with -H parameter;
+- wslusc update: icon support and hidden command prompt for GUI application;
 EOF
 
 cd ~/rpm_wslu/SPECS
