@@ -1,3 +1,5 @@
+# Extras 
+
 ## Error Code
 
 | error code | description |
@@ -11,3 +13,11 @@
 | 32 | feature not implemented. |
 | 33 | required component do not exist. |
 | 40 | Unknown system input. |
+
+## Legacy Documentations
+
+- [Contribution](https://wslu.patrickwu.ml/extras/legacy-contri.html)
+- [Installation](https://wslu.patrickwu.ml/extras/legacy-inst.html)
+- [Beta Release Manual](https://wslu.patrickwu.ml/extras/beta-manual.html)
+
+

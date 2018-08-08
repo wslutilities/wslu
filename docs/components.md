@@ -1,12 +1,12 @@
 # Manual
 
-- [wslfetch](man/wslfetch.html)
-- [wslusc](man/wslusc.html)
-- [wslsys](man/wslsys.html)
-- [wslupath](man/wslupath.html)
-- [wslview](man/wslview.html)
+- [wslfetch](https://wslu.patrickwu.ml/man/wslfetch.html)
+- [wslusc](https://wslu.patrickwu.ml/man/wslusc.html)
+- [wslsys](https://wslu.patrickwu.ml/man/wslsys.html)
+- [wslupath](https://wslu.patrickwu.ml/man/wslupath.html)
+- [wslview](https://wslu.patrickwu.ml/man/wslview.html)
 
 ## Deprecated
 
-- [wslu](man/wslu.html)
-- [wslpkg](man/wslpkg.html)
+- [wslu](https://wslu.patrickwu.ml/man/wslu.html)
+- [wslpkg](https://wslu.patrickwu.ml/man/wslpkg.html)

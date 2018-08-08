@@ -2,7 +2,7 @@
 
 ## Start
 
-Install `wslu` using [source code](https://github.com/patrick330602/wslu/wiki/Installation#install-from-source-code). Everything will set-up automatically.
+Install `wslu` using source code. Everything will set-up automatically.
 
 ## Build Structure
 
