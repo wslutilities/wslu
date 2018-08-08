@@ -8,7 +8,7 @@ for args; do
 	case $args in
 		-h|--help) help $0 "$help_short"; exit;;
 		-v|--version) echo "wslview v$wslu_version.$version"; exit;;
-		*) lname=$args;;
+		*) lname="$lname$args";;
 	esac
 done
 
