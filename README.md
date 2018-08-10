@@ -36,7 +36,7 @@ This is a WSL Screenshoot Information Tool to print information in a elegant way
 This is a WSL Windows path Converter that can convert Windows path to other styles of path.
 
 **wslview**
-This is a wrapper for explorer.exe so that you can open website in your default browser in Windows
+*(Experimental)*This is a wrapper for explorer.exe so that you can open website in your default browser in Windows.
 
 ## Installation
 
