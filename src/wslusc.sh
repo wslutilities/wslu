@@ -55,9 +55,9 @@ if [[ "$cname" != "" ]]; then
 		iconpath="$script_location_win\\$(basename $iconpath)"
 	fi
 	if [[ "$is_gui" == "1" ]]; then
-		powershell.exe -NoProfile -NonInteractive -Command "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs bash.exe -c \"cd ~ && DISPLAY=:0 $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
+		powershell.exe -NoProfile -NonInteractive -Command "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs bash.exe -c \"cd ~ && DISPLAY=:0 $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
 	else
-		powershell.exe -NoProfile -NonInteractive -Command "\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \"cd ~ && $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
+		powershell.exe -NoProfile -NonInteractive -Command "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \"cd ~ && $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
 	fi
 	tpath=`wslupath -T`
 	mv $tpath/$new_cname.lnk $dpath

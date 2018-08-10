@@ -48,7 +48,7 @@ cat /proc/sys/fs/binfmt_misc/WSLInterop
 echo ""
 
 echo -e "\ntesting powershell.exe..."
-powershell.exe Get-Host
+powershell.exe -NoProfile -NonInteractive -Command Get-History
 if [[ $? -eq 0 ]]; then
 	echo "powershell.exe can be invoked."
 else
