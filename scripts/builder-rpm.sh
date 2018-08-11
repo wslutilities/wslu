@@ -34,7 +34,7 @@ Requires: bc lsb-release wget unzip
 Requires(post): %{_sbindir}/update-alternatives
 Requires(postun): %{_sbindir}/update-alternatives
 URL: https://github.com/patrick330602/wslu/
-License: GPL
+License: GPLv3+
 %description
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
 %prep
