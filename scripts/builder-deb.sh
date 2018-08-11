@@ -11,8 +11,8 @@ chmod 755 $BUILD_DIR/DEBIAN/{postinst,prerm}
 
 cat <<EOF >>$BUILD_DIR/DEBIAN/postinst
 #!/usr/bin/env bash
-update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 100
-update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 100
+update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 1
+update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 1
 EOF
 
 cat <<EOF >>$BUILD_DIR/DEBIAN/prerm
