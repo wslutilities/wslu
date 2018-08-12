@@ -4,11 +4,11 @@
 
 # wslu - A collection of utilities for WSL
 
-[![Wiki](https://img.shields.io/badge/Wiki-wslu-blue.svg)](https://github.com/patrick330602/wslu/wiki)
+[![Wiki](https://img.shields.io/badge/Wiki-wslu-blue.svg)](https://wslu.patrickwu.ml/)
 [![GitHub license](https://img.shields.io/github/license/patrick330602/wslu.svg)](https://github.com/patrick330602/wslu/blob/master/LICENSE)
-[![GitHub (pre-)release](https://img.shields.io/github/release/patrick330602/wslu/all.svg?style=flat-square)](https://github.com/patrick330602/wslu)
-[![Travis branch](https://img.shields.io/travis/patrick330602/wslu/master.svg?style=flat-square)](https://travis-ci.org/patrick330602/wslu)
-
+[![GitHub (pre-)release](https://img.shields.io/github/release/patrick330602/wslu/all.svg)](https://github.com/patrick330602/wslu)
+[![Travis branch](https://img.shields.io/travis/patrick330602/wslu/master.svg)](https://travis-ci.org/patrick330602/wslu)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_shield)
 
 </div>
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
@@ -39,7 +39,7 @@ This is a WSL Screenshoot Information Tool to print information in a elegant way
 This is a WSL Windows path Converter that can convert Windows path to other styles of path.
 
 **wslview**
-This is a wrapper for explorer.exe so that you can open website in your default browser in Windows
+*(Experimental)*This is a wrapper for explorer.exe so that you can open website in your default browser in Windows.
 
 ## Installation
 
@@ -80,3 +80,6 @@ This is free software; you can redistribute it and/or modify
 it under the terms of the GNU GPL version 3 or (at your option) any later version.
 There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </pre>
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_large)
