@@ -4,12 +4,13 @@
 
 # wslu - A collection of utilities for WSL
 
-[![Wiki](https://img.shields.io/badge/Wiki-wslu-blue.svg)](https://wslu.patrickwu.ml/)
-[![GitHub license](https://img.shields.io/github/license/patrick330602/wslu.svg)](https://github.com/patrick330602/wslu/blob/master/LICENSE)
-[![GitHub (pre-)release](https://img.shields.io/github/release/patrick330602/wslu/all.svg)](https://github.com/patrick330602/wslu)
-[![Travis branch](https://img.shields.io/travis/patrick330602/wslu/master.svg)](https://travis-ci.org/patrick330602/wslu)
+[![Wiki](https://badgen.net/badge//Wiki/cyan?icon=terminal)](https://wslu.patrickwu.ml/)
+[![GitHub license](https://badgen.net/github/license/patrick330602/wslu?icon=github)](https://github.com/patrick330602/wslu/blob/master/LICENSE)
+[![GitHub (pre-)release](https://badgen.net/github/release/patrick330602/wslu?icon=github)](https://github.com/patrick330602/wslu)
+[![Travis master](https://badgen.net/travis/patrick330602/wslu/master?label=master&icon=travis)](https://travis-ci.org/patrick330602/wslu)
+[![Travis develop](https://badgen.net/travis/patrick330602/wslu/develop?label=develop&icon=travis)](https://travis-ci.org/patrick330602/wslu)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_shield)
-[![Donate](https://img.shields.io/badge/Donate-Paypal-blue.svg)](https://www.paypal.me/callmepk/)
+[![Donate](https://badgen.net/badge/Donate/Paypal/purple)](https://www.paypal.me/callmepk/)
 
 </div>
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
