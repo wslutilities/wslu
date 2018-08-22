@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 BUILD_DIR=`mktemp --tmpdir --directory wslu-build-debian.XXXX`
+BUILD_DIR_WSLVIEW=`mktemp --tmpdir --directory wslview-build-debian.XXXX`
 BUILD_VER=`grep 'version=' ../src/wslu-header | cut -d'=' -f 2 | xargs`
 CURRENT_DIR=`pwd`
 
@@ -22,7 +23,7 @@ update-alternatives --remove www-browser /usr/bin/wslview
 EOF
 
 cat <<EOF >>$BUILD_DIR/DEBIAN/changelog
-wslu ($BUILD_VER-2) stable; urgency=low
+wslu ($BUILD_VER-1) stable; urgency=low
 
  * fix a typo in wslfetch;
  * fixed a bug in wslupath with -H parameter;
@@ -40,7 +41,7 @@ Depends: bc, wget, unzip, lsb-release
 Recommends: git
 Suggests: build-essential
 Priority: optional
-Version: $BUILD_VER-2
+Version: $BUILD_VER-1
 Description: A collection of utilities for Windows 10 Linux Subsystem
  This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
 EOF
