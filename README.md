@@ -5,10 +5,10 @@
 # wslu - A collection of utilities for WSL
 
 [![Wiki](https://badgen.net/badge//Wiki/cyan?icon=terminal)](https://wslu.patrickwu.ml/)
-[![GitHub license](https://badgen.net/github/license/patrick330602/wslu?icon=github)](https://github.com/patrick330602/wslu/blob/master/LICENSE)
-[![GitHub (pre-)release](https://badgen.net/github/release/patrick330602/wslu?icon=github)](https://github.com/patrick330602/wslu)
-[![Travis master](https://badgen.net/travis/patrick330602/wslu/master?label=master&icon=travis)](https://travis-ci.org/patrick330602/wslu)
-[![Travis develop](https://badgen.net/travis/patrick330602/wslu/develop?label=develop&icon=travis)](https://travis-ci.org/patrick330602/wslu)
+[![GitHub license](https://badgen.net/github/license/wslutilities/wslu?icon=github)](https://github.com/wslutilities/wslu/blob/master/LICENSE)
+[![GitHub (pre-)release](https://badgen.net/github/release/wslutilities/wslu?icon=github)](https://github.com/wslutilities/wslu)
+[![Travis master](https://badgen.net/travis/wslutilities/wslu/master?label=master&icon=travis)](https://travis-ci.org/patrick330602/wslu)
+[![Travis develop](https://badgen.net/travis/wslutilities/wslu/develop?label=develop&icon=travis)](https://travis-ci.org/patrick330602/wslu)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_shield)
 [![Donate](https://badgen.net/badge/Donate/Paypal/purple)](https://www.paypal.me/callmepk/)
 
