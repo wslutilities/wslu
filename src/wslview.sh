@@ -21,7 +21,7 @@ for args; do
 done
 
 if [[ "$lname" != "" ]]; then
-	explorer.exe "$lname"
+	powershell.exe Start "$lname"
 else
 	echo "${error}No input, aborting"
 	exit 21
