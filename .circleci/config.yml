@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ubuntu:trusty
+		steps:
+			-	sudo apt-get update -qq
+			- sudo apt-get install -qq build-essential rpm
+			- make
+			- cd scripts/
+			- sudo bash -x ./builder-deb.sh
+			- sudo bash -x ./builder-rpm.sh
