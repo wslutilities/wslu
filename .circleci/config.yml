@@ -1,12 +1,11 @@
 version: 2
 jobs:
-jobs:
   build:
     docker:
       - image: patrick330602/fake_wsl_env 
     steps:
       - checkout
-	  - run apt -y update
-	  - run apt -y install apt-utils mime-support
+      - run apt -y update
+      - run apt -y install apt-utils mime-support
       - run cd scripts
       - run ./install.sh
