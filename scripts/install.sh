@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 ORI_PATH="$(pwd)"
 
-if [[ ! -f /etc/fake-wsl-release ]]; then
+if [[ -f /etc/fake-wsl-release ]]; then
 	echo "You are using fake WSL Environment. This is for building and testing only."
 elif [[ ! -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
 	echo "Your distro do not support WSL Interopability. Installation Aborted."
@@ -44,10 +44,11 @@ case "$distro" in
 		sudo zypper -n install git bc lsb-release wget unzip
 		;;
 esac
-
-echo -e "\nWSL Interopability\n*********************"
-cat /proc/sys/fs/binfmt_misc/WSLInterop
-echo ""
+if [[ ! -f /etc/fake-wsl-release ]]; then
+	echo -e "\nWSL Interopability\n*********************"
+	cat /proc/sys/fs/binfmt_misc/WSLInterop
+	echo ""
+fi
 
 echo -e "\ntesting powershell.exe..."
 powershell.exe -NoProfile -NonInteractive -Command Get-History
