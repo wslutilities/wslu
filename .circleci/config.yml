@@ -40,3 +40,9 @@ jobs:
       - run: cd ..
       - store_artifacts:
             path: target/*
+workflows:
+  version: 2
+  build_and_generate:
+    jobs:
+      - buildsource
+      - buildpkg
