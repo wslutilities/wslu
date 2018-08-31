@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 ORI_PATH="$(pwd)"
 
-if [[ ! -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
+if [[ ! -f /etc/fake-wsl-release ]]; then
+	echo "You are using fake WSL Environment. This is for building and testing only."
+elif [[ ! -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
 	echo "Your distro do not support WSL Interopability. Installation Aborted."
 	exit 1
 fi
