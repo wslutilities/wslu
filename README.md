@@ -1,6 +1,4 @@
-<div align="center">
-
-<img width="200" height="200" src="extras/icon.png">
+<img width="100" height="100" align="right" src="extras/icon.png">
 
 # wslu - A collection of utilities for WSL
 
@@ -14,7 +12,6 @@
 [![Twitter](https://badgen.net/badge//Twitter/blue&icon=twitter)](https://twitter.com/patrick330602)
 [![Donate](https://badgen.net/badge/Donate/Paypal/purple)](https://www.paypal.me/callmepk/)
 
-</div>
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
 
 **Currently supported Distro:**
