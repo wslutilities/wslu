@@ -22,8 +22,8 @@ jobs:
       - run:
           name: Install Pre-requisites
           command: |
-            apt-get update -qq
-            apt-get install -qq build-essential rpm sudo
+            sudo apt-get update -qq
+            sudo apt-get install -qq build-essential rpm sudo
       - run:
           name: Build
           command: |
@@ -32,11 +32,11 @@ jobs:
       - run:
           name: Debian Package
           command: |
-            bash -x ./builder-deb.sh
+            sudo bash -x ./builder-deb.sh
       - run:
           name: RPM Package
           command: |
-            bash -x ./builder-rpm.sh
+            sudo bash -x ./builder-rpm.sh
       - run: cd ..
       - store_artifacts:
             path: target/*
