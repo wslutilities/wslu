@@ -55,4 +55,4 @@ workflows:
     jobs:
       - buildsource
       - builddeb
-			- buildrpm
+      - buildrpm
