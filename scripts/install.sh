@@ -31,17 +31,14 @@ echo "You are using: $distro"
 
 echo "Installing dependencies...."
 case "$distro" in
-	'ubuntu')
-		sudo apt install -y git build-essential bc ppa-purge wget unzip lsb-release
-		;;
-	'debian'|'kali')
-		sudo apt install -y git build-essential bc wget unzip lsb-release
+	'ubuntu'|'debian'|'kali')
+		sudo apt install -y git build-essential bc wget unzip lsb-release make
 		;;
 	'opensuse')
-		sudo zypper -n install git bc lsb-release hostname wget unzip
+		sudo zypper -n install git bc lsb-release hostname wget unzip make
 		;;
 	'sles')
-		sudo zypper -n install git bc lsb-release wget unzip
+		sudo zypper -n install git bc lsb-release wget unzip make
 		;;
 esac
 if [[ ! -f /etc/fake-wsl-release ]]; then
