@@ -4,12 +4,14 @@
 
 # wslu - A collection of utilities for WSL
 
-[![Wiki](https://badgen.net/badge//Wiki/cyan?icon=terminal)](https://wslu.patrickwu.ml/)
-[![GitHub license](https://badgen.net/github/license/wslutilities/wslu?icon=github)](https://github.com/wslutilities/wslu/blob/master/LICENSE)
-[![GitHub (pre-)release](https://badgen.net/github/release/wslutilities/wslu?icon=github)](https://github.com/wslutilities/wslu)
-[![Travis master](https://badgen.net/travis/wslutilities/wslu/master?label=master&icon=travis)](https://travis-ci.org/patrick330602/wslu)
-[![Travis develop](https://badgen.net/travis/wslutilities/wslu/develop?label=develop&icon=travis)](https://travis-ci.org/patrick330602/wslu)
+[![Wiki](https://badgen.net/badge//Wiki/blue?icon=terminal)](https://wslu.patrickwu.ml/)
+[![GitHub license](https://badgen.net/github/license/wslutilities/wslu?icon=github&label=&color=cyan)](https://github.com/wslutilities/wslu/blob/master/LICENSE)
+[![GitHub (pre-)release](https://badgen.net/github/release/wslutilities/wslu?icon=github&label=&color=yellow)](https://github.com/wslutilities/wslu)
+[![GitLab page](https://badgen.net/badge//Gitlab/orange?icon=gitlab)](https://gitlab.com/callmepk/wslu)
+[![Circle CI master](https://badgen.net/circleci/github/wslutilities/wslu/master?label=master&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/master)
+[![Circle CI develop](https://badgen.net/circleci/github/wslutilities/wslu/develop?label=develop&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/develop)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_shield)
+[![Twitter](https://badgen.net/badge//Twitter/blue&icon=twitter)](https://twitter.com/patrick330602)
 [![Donate](https://badgen.net/badge/Donate/Paypal/purple)](https://www.paypal.me/callmepk/)
 
 </div>
