@@ -1,0 +1,10 @@
+buildpkg:
+  before_script:
+    - apt-get update -qq
+    - apt-get install -qq build-essential rpm
+
+  script:
+    - make
+    - cd scripts/
+    - bash -x ./builder-deb.sh
+    - bash -x ./builder-rpm.sh
