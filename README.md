@@ -2,14 +2,12 @@
 
 # wslu - A collection of utilities for WSL
 
-[![Wiki](https://badgen.net/badge//Wiki/blue?icon=terminal)](https://wslu.patrickwu.ml/)
 [![GitHub license](https://badgen.net/github/license/wslutilities/wslu?icon=github&label=&color=cyan)](https://github.com/wslutilities/wslu/blob/master/LICENSE)
 [![GitHub (pre-)release](https://badgen.net/github/release/wslutilities/wslu?icon=github&label=&color=yellow)](https://github.com/wslutilities/wslu)
 [![GitLab page](https://badgen.net/badge//Gitlab/orange?icon=gitlab)](https://gitlab.com/callmepk/wslu)
 [![Circle CI master](https://badgen.net/circleci/github/wslutilities/wslu/master?label=master&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/master)
 [![Circle CI develop](https://badgen.net/circleci/github/wslutilities/wslu/develop?label=develop&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/develop)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_shield)
-[![Twitter](https://badgen.net/badge//Twitter/blue&icon=twitter)](https://twitter.com/patrick330602)
 [![Donate](https://badgen.net/badge/Donate/Paypal/purple)](https://www.paypal.me/callmepk/)
 
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
@@ -40,7 +38,7 @@ This is a WSL Screenshoot Information Tool to print information in a elegant way
 This is a WSL Windows path Converter that can convert Windows path to other styles of path.
 
 **wslview**
-*(Experimental)*This is a wrapper for explorer.exe so that you can open website in your default browser in Windows.
+This is a fake WSL browser that can help you open link in default Windows browser.
 
 ## Installation
 
@@ -73,6 +71,10 @@ Or you can download the .rpm package from release and install it using `sudo rpm
 
 To install, just run the following command in the bash prompt:
 `curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/extras/scripts/install.sh | bash` 
+
+## Contribution
+
+Check `CONTRIBUTION.md`.
 
 ## License
 
