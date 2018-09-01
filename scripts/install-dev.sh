@@ -9,7 +9,7 @@ elif [[ ! -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
 fi
 
 cat << EOF
-Wslu Installation
+WSLU
 ---------------
 Windows 10 Linux Subsystem Utilities
 EOF
@@ -47,6 +47,14 @@ if [[ ! -f /etc/fake-wsl-release ]]; then
 	echo ""
 fi
 
+echo -e "\ntesting powershell.exe..."
+powershell.exe -NoProfile -NonInteractive -Command Get-History
+if [[ $? -eq 0 ]]; then
+	echo "powershell.exe can be invoked."
+else
+	echo "powershell.exe failed to launch."
+	exit 1
+fi
 ppep="`powershell.exe Get-ExecutionPolicy 2>&1 | tail -n1 | sed 's/\r$//'`"
 echo -e "Powershell Execution Policy: $ppep"
 if [[ "$ppep" = "Restricted" ]]; then
@@ -66,23 +74,47 @@ rompt.
 EOF
 fi
 
+echo -e "\ntesting cmd.exe..."
+cmd.exe /c ver
+if [[ $? -eq 0 ]]; then
+	echo "cmd.exe can be invoked."
+else
+	echo "cmd.exe failed to launch."
+	exit 1
+fi
+
+echo -e "\ntesting reg.exe..."
+reg.exe /?
+if [[ $? -eq 0 ]]; then
+	echo "reg.exe can be invoked."
+else
+	echo "reg.exe failed to launch."
+	exit 1
+fi
+
 if [ `pwd | grep wslu` ]; then
 	cd ../
 	CURRENT_PATH="$(pwd)"
 else
 	git clone https://github.com/patrick330602/wslu.git
 	cd wslu
+	git checkout develop
 	CURRENT_PATH="$(pwd)"
 fi
 
 make
 chmod +x $CURRENT_PATH/out/*
 
+PATH="$CURRENT_PATH/src:$CURRENT_PATH/out:$PATH"
+git submodule init
+git submodule update
+extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslfetch.bats
+PATH=$(getconf PATH)
 
 for f in out/wsl*; do
 	bname="$(basename $f)"
    		sudo ln -s $CURRENT_PATH/$f /usr/bin/$bname;
-	echo "$bname Installed.";
+	echo "exec $f linked to /usr/bin/$bname";
 done
 
 sudo cp $CURRENT_PATH/src/mime/* /usr/lib/mime/packages/
@@ -94,7 +126,7 @@ sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin
 sudo update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 1
 
 cat <<EOF
-Installation Completed.
+Installation Completed. Develop Environment is set up.
 
 Keep in remind that the installation method is different from installing from the package; DO NOT INSTALL PACKAGE VERSION AFTERWARDS. IT WILL BREAK YOUR INSTALLATION.
 EOF
