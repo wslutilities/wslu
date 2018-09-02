@@ -76,10 +76,9 @@ jobs:
             path: /tmp/pkgs
 workflows:
   version: 2
-  build_and_generate:
+  build-and-generate:
    jobs:
       - buildsource
       - builddevsource
       - builddeb
       - buildrpm
- 

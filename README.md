@@ -1,4 +1,4 @@
-<img width="100" height="100" align="right" src="extras/icon.png">
+<img width="150" height="150" align="right" src="extras/icon.png">
 
 # wslu - A collection of utilities for WSL
 
