@@ -74,7 +74,11 @@ To install, just run the following command in the bash prompt:
 
 ## Contribution
 
-Check `CONTRIBUTION.md`.
+Check [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Code of Conduct
+
+Check [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -84,5 +88,6 @@ it under the terms of the GNU GPL version 3 or (at your option) any later versio
 There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </pre>
 
+for long version, check [LICENSE](LICENSE).
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_large)
