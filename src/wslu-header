@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # global config
-wslu_version=1.6
+wslu_version=1.7
 
 ## color
 black=`echo -e '\e[30m'`
@@ -67,7 +67,7 @@ fi
 
 function ins_locate
 {
-	[ -L /usr/bin/wslu ] && echo "$(dirname $(readlink -f /usr/bin/wslu))" || echo "/usr/bin"
+	[ -L /usr/bin/wslsys ] && echo "$(dirname $(readlink -f /usr/bin/wslsys))" || echo "/usr/bin"
 }
 
 

@@ -28,13 +28,13 @@ cat <<EOF >> ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
 Summary: Windows 10 Linux Subsystem Utilities
 Name: wslu
 Version: $BUILD_VER
-Release: 1
+Release: 2
 Source: wslu-$BUILD_VER.tar.gz
 Requires: bc lsb-release wget unzip
 Requires(post): %{_sbindir}/update-alternatives
 Requires(postun): %{_sbindir}/update-alternatives
 URL: https://github.com/patrick330602/wslu/
-License: GPL
+License: GPLv3+
 %description
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
 %prep
@@ -51,8 +51,8 @@ install -m 555 etc/wsl.ico \${RPM_BUILD_ROOT}/usr/share/wslu
 install -m 555 etc/runHidden.vbs \${RPM_BUILD_ROOT}/usr/share/wslu
 
 %post
-%{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 100
-%{_sbindir}/update-alternatives --install %{_bindir}/x-www-browser x-www-browser %{_bindir}/wslview 100
+%{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 1
+%{_sbindir}/update-alternatives --install %{_bindir}/x-www-browser x-www-browser %{_bindir}/wslview 1
 
 
 %postun

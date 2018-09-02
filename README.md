@@ -1,13 +1,15 @@
-<div align="center">
-
-<img width="200" height="200" src="extras/icon.png">
+<img width="150" height="150" align="right" src="extras/icon.png">
 
 # wslu - A collection of utilities for WSL
 
-[![Wiki](https://img.shields.io/badge/Wiki-wslu-blue.svg)](https://wslu.patrickwu.ml/) [![GitHub license](https://img.shields.io/github/license/patrick330602/wslu.svg)](https://github.com/patrick330602/wslu/blob/master/LICENSE) [![GitHub (pre-)release](https://img.shields.io/github/release/patrick330602/wslu/all.svg)](https://github.com/patrick330602/wslu) [![Travis branch](https://img.shields.io/travis/patrick330602/wslu/master.svg)](https://travis-ci.org/patrick330602/wslu)
+[![GitHub license](https://badgen.net/github/license/wslutilities/wslu?icon=github&label=&color=cyan)](https://github.com/wslutilities/wslu/blob/master/LICENSE)
+[![GitHub (pre-)release](https://badgen.net/github/release/wslutilities/wslu?icon=github&label=&color=yellow)](https://github.com/wslutilities/wslu)
+[![GitLab page](https://badgen.net/badge//Gitlab/orange?icon=gitlab)](https://gitlab.com/callmepk/wslu)
+[![Circle CI master](https://badgen.net/circleci/github/wslutilities/wslu/master?label=master&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/master)
+[![Circle CI develop](https://badgen.net/circleci/github/wslutilities/wslu/develop?label=develop&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/develop)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_shield)
+[![Donate](https://badgen.net/badge/Donate/Paypal/purple)](https://www.paypal.me/callmepk/)
 
-</div>
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
 
 **Currently supported Distro:**
@@ -36,7 +38,7 @@ This is a WSL Screenshoot Information Tool to print information in a elegant way
 This is a WSL Windows path Converter that can convert Windows path to other styles of path.
 
 **wslview**
-*(Experimental)*This is a wrapper for explorer.exe so that you can open website in your default browser in Windows.
+This is a fake WSL browser that can help you open link in default Windows browser.
 
 ## Installation
 
@@ -70,6 +72,14 @@ Or you can download the .rpm package from release and install it using `sudo rpm
 To install, just run the following command in the bash prompt:
 `curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/extras/scripts/install.sh | bash` 
 
+## Contribution
+
+Check [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Code of Conduct
+
+Check [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
 ## License
 
 <pre>
@@ -78,5 +88,6 @@ it under the terms of the GNU GPL version 3 or (at your option) any later versio
 There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </pre>
 
+for long version, check [LICENSE](LICENSE).
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_large)

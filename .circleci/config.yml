@@ -1,0 +1,84 @@
+version: 2
+jobs:
+  buildsource:
+    docker:
+      - image: patrick330602/fake_wsl_env
+    branches:
+      only:
+        - master
+    steps:
+      - checkout
+      - run:
+          name: Install Pre-requisites
+          command: |
+            apt-get update -qq
+            apt-get install -qq apt-utils mime-support sudo
+      - run:
+          name: Install via Source Code
+          command: |
+            cd scripts/
+            bash -x ./install.sh
+  builddevsource:
+    docker:
+      - image: patrick330602/fake_wsl_env
+    branches:
+      only:
+        - develop
+    steps:
+      - checkout
+      - run:
+          name: Install Pre-requisites
+          command: |
+            apt-get update -qq
+            apt-get install -qq apt-utils mime-support sudo
+      - run:
+          name: Install via Source Code
+          command: |
+            cd scripts/
+            bash -x ./install-dev.sh
+  builddeb:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Install Pre-requisites
+          command: |
+            sudo apt-get update -qq
+            sudo apt-get install -qq build-essential rpm sudo
+      - run:
+          name: Build Package
+          command: |
+            make
+            cd scripts
+            sudo bash -x ./builder-deb.sh
+            mkdir -p /tmp/pkgs
+            mv ../target/* /tmp/pkgs
+      - store_artifacts:
+            path: /tmp/pkgs
+  buildrpm:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Install Pre-requisites
+          command: |
+            sudo apt-get update -qq
+            sudo apt-get install -qq build-essential rpm sudo
+      - run:
+          name: Build Package
+          command: |
+            make
+            cd scripts
+            sudo bash -x ./builder-rpm.sh
+            mkdir -p /tmp/pkgs
+            mv ../target/* /tmp/pkgs
+      - store_artifacts:
+            path: /tmp/pkgs
+workflows:
+  version: 2
+  build-and-generate:
+   jobs:
+      - buildsource
+      - builddevsource
+      - builddeb
+      - buildrpm

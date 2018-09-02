@@ -1,35 +1,25 @@
 #!/usr/bin/env bash
 BUILD_DIR=`mktemp --tmpdir --directory wslu-build-debian.XXXX`
+BUILD_DIR_WSLVIEW=`mktemp --tmpdir --directory wslview-build-debian.XXXX`
 BUILD_VER=`grep 'version=' ../src/wslu-header | cut -d'=' -f 2 | xargs`
 CURRENT_DIR=`pwd`
 
 mkdir $BUILD_DIR/{DEBIAN/,usr/,usr/bin/,usr/share/,usr/share/wslu/,usr/lib,usr/lib/mime,/usr/lib/mime/packages/}
 
-touch $BUILD_DIR/DEBIAN/{postinst,prerm,changelog,control}
+touch $BUILD_DIR/DEBIAN/{postinst,prerm,control}
 
 chmod 755 $BUILD_DIR/DEBIAN/{postinst,prerm}
 
 cat <<EOF >>$BUILD_DIR/DEBIAN/postinst
 #!/usr/bin/env bash
-update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 100
-update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 100
+update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 1
+update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 1
 EOF
 
 cat <<EOF >>$BUILD_DIR/DEBIAN/prerm
 #!/usr/bin/env bash
 update-alternatives --remove x-www-browser /usr/bin/wslview
 update-alternatives --remove www-browser /usr/bin/wslview
-EOF
-
-cat <<EOF >>$BUILD_DIR/DEBIAN/changelog
-wslu ($BUILD_VER-1) stable; urgency=low
-
- * fix a typo in wslfetch;
- * fixed a bug in wslupath with -H parameter;
- * wslusc update: icon support and hidden command prompt for GUI application;
-
--- Patrick Wu <wotingwu@live.com>  Wed, 25 Jul 2018 12:00:00 +0800
-
 EOF
 
 cat <<EOF >>$BUILD_DIR/DEBIAN/control
