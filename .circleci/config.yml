@@ -3,6 +3,9 @@ jobs:
   buildsource:
     docker:
       - image: patrick330602/fake_wsl_env
+    branches:
+      only:
+        - master
     steps:
       - checkout
       - run:
@@ -15,6 +18,24 @@ jobs:
           command: |
             cd scripts/
             bash -x ./install.sh
+  builddevsource:
+    docker:
+      - image: patrick330602/fake_wsl_env
+    branches:
+      only:
+        - develop
+    steps:
+      - checkout
+      - run:
+          name: Install Pre-requisites
+          command: |
+            apt-get update -qq
+            apt-get install -qq apt-utils mime-support sudo
+      - run:
+          name: Install via Source Code
+          command: |
+            cd scripts/
+            bash -x ./install-dev.sh
   builddeb:
     machine: true
     steps:
@@ -30,8 +51,10 @@ jobs:
             make
             cd scripts
             sudo bash -x ./builder-deb.sh
+            mkdir -p /tmp/pkgs
+            mv target/* /tmp/pkgs
       - store_artifacts:
-            path: target/*
+            path: /tmp/pkgs
   buildrpm:
     machine: true
     steps:
@@ -47,12 +70,17 @@ jobs:
             make
             cd scripts
             sudo bash -x ./builder-rpm.sh
+            mkdir -p /tmp/pkgs
+            mv target/* /tmp/pkgs
       - store_artifacts:
-            path: target/*
+            path: /tmp/pkgs
 workflows:
   version: 2
-  build_and_generate:
-    jobs:
+  build:
+   jobs:
       - buildsource
+      - builddevsource
+  generate:
+    jobs:
       - builddeb
       - buildrpm
