@@ -46,7 +46,7 @@ jobs:
             cd scripts
             sudo bash -x ./builder-deb.sh
             mkdir -p /tmp/pkgs
-            mv ../target/* /tmp/pkgs
+            sudo mv ../target/* /tmp/pkgs
       - store_artifacts:
             path: /tmp/pkgs
   buildrpm:
@@ -65,7 +65,7 @@ jobs:
             cd scripts
             sudo bash -x ./builder-rpm.sh
             mkdir -p /tmp/pkgs
-            mv ../target/* /tmp/pkgs
+            sudo mv ../target/* /tmp/pkgs
       - store_artifacts:
             path: /tmp/pkgs
 workflows:
