@@ -3,9 +3,6 @@ jobs:
   buildsource:
     docker:
       - image: patrick330602/fake_wsl_env
-    branches:
-      only:
-        - master
     steps:
       - checkout
       - run:
@@ -21,9 +18,6 @@ jobs:
   builddevsource:
     docker:
       - image: patrick330602/fake_wsl_env
-    branches:
-      only:
-        - develop
     steps:
       - checkout
       - run:
