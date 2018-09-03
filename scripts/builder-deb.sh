@@ -2,6 +2,7 @@
 BUILD_DIR=`mktemp --tmpdir --directory wslu-build-debian.XXXX`
 BUILD_DIR_WSLVIEW=`mktemp --tmpdir --directory wslview-build-debian.XXXX`
 BUILD_VER=`grep 'version=' ../src/wslu-header | cut -d'=' -f 2 | xargs`
+DATE=`date +%Y%m%d%H%M%S`
 CURRENT_DIR=`pwd`
 
 mkdir $BUILD_DIR/{DEBIAN/,usr/,usr/bin/,usr/share/,usr/share/wslu/,usr/lib,usr/lib/mime,/usr/lib/mime/packages/}
@@ -30,7 +31,7 @@ Depends: bc, wget, unzip, lsb-release
 Recommends: git
 Suggests: build-essential
 Priority: optional
-Version: $BUILD_VER-1
+Version: $BUILD_VER-0~$DATE
 Description: A collection of utilities for Windows 10 Linux Subsystem
  This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
 EOF
@@ -49,7 +50,7 @@ find $BUILD_DIR/usr/lib/mime/packages/ -type f -exec chmod 644 {} \;
 [ -d $CURRENT_DIR/../target ] || mkdir $CURRENT_DIR/../target
 cd $CURRENT_DIR/../target/
 
-sudo dpkg -b $BUILD_DIR/ wslu-${BUILD_VER}.deb
+sudo dpkg -b $BUILD_DIR/ wslu-${BUILD_VER}-${DATE}.deb
 
 rm -rf $BUILD_DIR
 cd $CURRENT_DIR
