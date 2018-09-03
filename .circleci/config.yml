@@ -30,7 +30,7 @@ jobs:
           command: |
             cd scripts/
             bash -x ./install-dev.sh
-  builddeb:
+  genpkg:
     machine: true
     steps:
       - checkout
@@ -45,24 +45,6 @@ jobs:
             make
             cd scripts
             sudo bash -x ./builder-deb.sh
-            mkdir -p /tmp/pkgs
-            sudo mv ../target/* /tmp/pkgs
-      - store_artifacts:
-            path: /tmp/pkgs
-  buildrpm:
-    machine: true
-    steps:
-      - checkout
-      - run:
-          name: Install Pre-requisites
-          command: |
-            sudo apt-get update -qq
-            sudo apt-get install -qq build-essential rpm sudo
-      - run:
-          name: Build Package
-          command: |
-            make
-            cd scripts
             sudo bash -x ./builder-rpm.sh
             mkdir -p /tmp/pkgs
             sudo mv ../target/* /tmp/pkgs
@@ -70,9 +52,17 @@ jobs:
             path: /tmp/pkgs
 workflows:
   version: 2
-  build-and-generate:
+  build:
    jobs:
       - buildsource
       - builddevsource
-      - builddeb
-      - buildrpm
+  nightlybuild:
+    triggers:
+       - schedule:
+           cron: "0 0 * * *"
+           filters:
+             branches:
+               only:
+                 - develop
+    jobs:
+      - genpkg
