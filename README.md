@@ -17,22 +17,22 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as enabli
 - Ubuntu 16.04
 - Ubuntu 18.04
 - OpenSUSE
-- SUSE Linux Enterprise Server(SLES)
+- SUSE Linux Enterprise Server (SLES)
 - Debian GNU/Linux
 - Kali Linux
 
-Legacy Ubuntu is no longer supporting.
+Legacy Ubuntu is no longer supported.
 
 ## Feature
 
 **wslusc**
-This is a WSL shortcut creator to create shortcut on your Windows 10 Desktop.
+This is a WSL shortcut creator to create a shortcut on your Windows 10 Desktop.
 
 **wslsys**
 This is a WSL system information printer to print out some basic system information.
 
 **wslfetch**
-This is a WSL Screenshoot Information Tool to print information in a elegant way.
+This is a WSL Screenshoot Information Tool to print information in an elegant way.
 
 **wslupath**
 This is a WSL Windows path Converter that can convert Windows path to other styles of path.
@@ -67,12 +67,12 @@ sudo zypper in wslu
 
 Or you can download the .rpm package from release and install it using `sudo rpm -ivh "wslu*"`.
 
-### Surce Code
+### Source Code
 
 To install, just run the following command in the bash prompt:
 `curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/extras/scripts/install.sh | bash` 
 
-## Contribution
+## Contributing
 
 Check [CONTRIBUTING.md](CONTRIBUTING.md).
 
