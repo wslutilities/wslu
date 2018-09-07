@@ -55,7 +55,7 @@ workflows:
   build:
    jobs:
       - buildsource
-      - builddevsource
+      - builddevsoure
   nightlybuild:
     triggers:
        - schedule:
