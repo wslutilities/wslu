@@ -32,13 +32,10 @@ echo "You are using: $distro"
 echo "Installing dependencies...."
 case "$distro" in
 	'ubuntu'|'debian'|'kali')
-		sudo apt install -y git build-essential bc wget unzip lsb-release make
+		sudo apt install -y git build-essential bc wget unzip make
 		;;
-	'opensuse')
-		sudo zypper -n install git bc lsb-release hostname wget unzip make
-		;;
-	'sles')
-		sudo zypper -n install git bc lsb-release wget unzip make
+	'opensuse'|'sles')
+		sudo zypper -n install git bc wget unzip make
 		;;
 esac
 if [[ ! -f /etc/fake-wsl-release ]]; then

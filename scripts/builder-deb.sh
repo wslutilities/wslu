@@ -27,7 +27,7 @@ cat <<EOF >>$BUILD_DIR/DEBIAN/control
 Package: wslu
 Architecture: all
 Maintainer: Patrick Wu <wotingwu@live.com>
-Depends: bc, wget, unzip, lsb-release
+Depends: bc, wget, unzip
 Recommends: git
 Suggests: build-essential
 Priority: optional
