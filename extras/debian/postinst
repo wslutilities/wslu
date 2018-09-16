@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 1
+update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 1
