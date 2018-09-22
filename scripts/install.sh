@@ -37,7 +37,7 @@ case "$distro" in
 		sudo apt install -y git build-essential bc wget unzip make
 		;;
 	'opensuse'|'sles')
-		sudo apt purge wslu
+		sudo zypper rm wslu
 		sudo zypper -n install git bc wget unzip make
 		;;
 esac
