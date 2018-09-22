@@ -9,8 +9,8 @@ elif [[ ! -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
 fi
 
 cat << EOF
-Wslu Installation
----------------
+wslu installation for developers
+----------------------------------
 Windows 10 Linux Subsystem Utilities
 EOF
 

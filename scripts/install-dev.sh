@@ -9,13 +9,14 @@ elif [[ ! -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
 fi
 
 cat << EOF
-WSLU
----------------
-Windows 10 Linux Subsystem Utilities
+wslu installation for developers
+---------------------------------
 EOF
 
 distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME="//g')"
-if [[ "$distro" == Ubuntu* ]]; then
+if [[ "$distro" == *WLinux* ]]; then
+	distro="wlinux"
+elif [[ "$distro" == Ubuntu* ]]; then
 	distro="ubuntu"
 elif [[ "$distro" == *Debian* ]]; then
 	distro="debian"
@@ -31,7 +32,7 @@ echo "You are using: $distro"
 
 echo "Installing dependencies...."
 case "$distro" in
-	'ubuntu'|'debian'|'kali')
+	'ubuntu'|'debian'|'kali'|'wlinux')
 		sudo apt install -y git build-essential bc wget unzip make
 		;;
 	'opensuse'|'sles')
@@ -110,22 +111,22 @@ PATH=$(getconf PATH)
 
 for f in out/wsl*; do
 	bname="$(basename $f)"
-   		sudo ln -s $CURRENT_PATH/$f /usr/bin/$bname;
-	echo "exec $f linked to /usr/bin/$bname";
+   		sudo ln -s $CURRENT_PATH/$f /usr/bin/$bname-dev;
+	echo "exec $f linked to /usr/bin/$bname-dev";
 done
 
-sudo cp $CURRENT_PATH/src/mime/* /usr/lib/mime/packages/
-[ -d /usr/share/wslu ] || sudo mkdir /usr/share/wslu
-sudo cp $CURRENT_PATH/src/etc/* /usr/share/wslu
+sudo cp $CURRENT_PATH/src/mime/wslview /usr/lib/mime/packages/wslview-dev
+sudo sed 's/wslview/wslview-dev/g' /usr/lib/mime/packages/wslview-dev
+echo "mime file copied"
+[ -d /usr/share/wslu-dev ] || sudo mkdir /usr/share/wslu-dev
+sudo cp $CURRENT_PATH/src/etc/* /usr/share/wslu-dev
 
 sudo update-mime
-sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 1
-sudo update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 1
+sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview-dev 10
+sudo update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview-dev 10
 
 cat <<EOF
-Installation Completed. Develop Environment is set up.
-
-Keep in remind that the installation method is different from installing from the package; DO NOT INSTALL PACKAGE VERSION AFTERWARDS. IT WILL BREAK YOUR INSTALLATION.
+Installation Completed. Development environment is set up for wslu.
 EOF
 
 cd $ORI_PATH

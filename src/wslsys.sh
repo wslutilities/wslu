@@ -16,7 +16,7 @@ minutes=$((${uptime}/60%60))
 uptime="${days}d ${hours}h ${minutes}m"
 
 case "$distro" in
-	'ubuntu'|'kali'|'debian')
+	'ubuntu'|'kali'|'debian'|'wlinux')
 		packages="$((packages+=$(dpkg --get-selections | grep -cv deinstall$)))";;
 	'opensuse'|'sles')
 		packages="$(rpm -qa | wc -l)"

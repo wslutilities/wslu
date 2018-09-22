@@ -67,9 +67,13 @@ elif [[ "$distro" == SLES* ]]; then
 	distro="sles"
 fi
 
-function ins_locate
+function isdev
 {
-	[ -L /usr/bin/wslsys ] && echo "$(dirname $(readlink -f /usr/bin/wslsys))" || echo "/usr/bin"
+	if [[ `basename $1` == *-dev ]]; then
+		return 0
+	else
+		return 1
+	fi
 }
 
 
