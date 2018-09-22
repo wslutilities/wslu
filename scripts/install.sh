@@ -33,9 +33,11 @@ echo "You are using: $distro"
 echo "Installing dependencies...."
 case "$distro" in
 	'ubuntu'|'debian'|'kali'|'wlinux')
+		sudo apt purge wslu
 		sudo apt install -y git build-essential bc wget unzip make
 		;;
 	'opensuse'|'sles')
+		sudo apt purge wslu
 		sudo zypper -n install git bc wget unzip make
 		;;
 esac
@@ -122,7 +124,7 @@ sudo cp $CURRENT_PATH/src/etc/* /usr/share/wslu
 
 sudo update-mime
 sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 10
-sudo update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview- 10
+sudo update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 10
 
 cat <<EOF
 Installation Completed. Development environment is set up for wslu.

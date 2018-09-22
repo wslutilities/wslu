@@ -21,9 +21,6 @@ if [[ "$cname" != "" ]]; then
 	dpath=`wslupath -D`
 	script_location="`wslupath -H`/wslu"
 	localfile_path="/usr/share/wslu"
-	if [[ isdev ]]; then
-		localfile_path="/usr/share/wslu-dev"
-	fi
 	script_location_win="`wslupath -d -H`\\wslu"
 	new_cname=`basename $cname`
 	if [[ ! -f $script_location/wsl.ico ]]; then

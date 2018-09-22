@@ -48,9 +48,6 @@ error="${red}[error]${reset}"
 warn="${orange}[warn]${reset}"
 debug="${cyan}[debug]${reset}"
 
-## constants
-help_short="wslu (-h|-v|-s)"
-
 ## basic distro detection
 distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME="//g')"
 if [[ "$distro" == *WLinux* ]]; then
@@ -67,15 +64,6 @@ elif [[ "$distro" == SLES* ]]; then
 	distro="sles"
 fi
 
-function isdev
-{
-	if [[ `basename $1` == *-dev ]]; then
-		return 0
-	else
-		return 1
-	fi
-}
-
 
 function help
 {
@@ -85,9 +73,4 @@ Usage: $2
 For more help for `basename "$1"`, visit the following site:
 https://github.com/patrick330602/wslu/wiki/`basename "$1"`"
 }
-
-execsys="wslsys"
-if [[ isdev $0 ]]; then
-	execsys="wslsys-dev"
-fi
 
