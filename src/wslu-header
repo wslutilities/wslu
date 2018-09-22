@@ -49,7 +49,7 @@ warn="${orange}[warn]${reset}"
 debug="${cyan}[debug]${reset}"
 
 ## basic distro detection
-distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME="//g')"
+distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME=\"//g')"
 if [[ "$distro" == *WLinux* ]]; then
 	distro=wlinux
 elif [[ "$distro" == Ubuntu* ]]; then
@@ -71,5 +71,5 @@ function help
 Usage: $2"
 }
 
-no_longer_use_but_might_use_it_in_the_future="For more help for `basename "$1"`, visit the following site: https://github.com/patrick330602/wslu/wiki/`basename "$1"`"
+#no_longer_use_but_might_use_it_in_the_future="For more help for `basename "$1"`, visit the following site: https://github.com/patrick330602/wslu/wiki/`basename "$1"`"
 

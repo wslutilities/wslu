@@ -102,13 +102,13 @@ else
 	CURRENT_PATH="$(pwd)"
 fi
 
-sudo make
-sudo chmod +x $CURRENT_PATH/out/*
+make
+chmod +x $CURRENT_PATH/out/*
 
 PATH="$CURRENT_PATH/src:$CURRENT_PATH/out:$PATH"
 git submodule init
 git submodule update
-extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslfetch.bats
+extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslfetch.bats tests/wslview.bats
 PATH=$(getconf PATH)
 
 for f in out/wsl*; do
