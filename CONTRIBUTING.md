@@ -13,12 +13,17 @@ curl -o- https://raw.githubusercontent.com/wslutilities/wslu/develop/scripts/ins
 ```
 wslu
 |-src
+|  |-mime/wslview: mime file for wslview
+|  |-etc
+|  |  |-wsl.ico: default icon for wslusc
+|  |  \-runHidden.vbs: script for wslusc
 |  |-wslu-header: Header file of all script
 |  \-<components>.sh: Components of script
 |-scripts: scripts used for building, installing and uninstalling
 |-tests: location for script tests
 \-extras
-   \-bats: testing utility
+   |-bats: testing utility
+   \-debian: stuff for 
 ```
 
 ## Build

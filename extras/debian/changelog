@@ -1,3 +1,11 @@
+wslu (1.8-0) stable; urgency=low
+
+    * less dependent on lsb-release/hostname/uptime/uname.
+    * add support for WLinux.
+    * install and build scripts update.
+
+ -- Patrick Wu <wotingwu@live.com>  Sun, 23 Sep 2018 12:00:00 +0800
+
 wslu (1.7-0) stable; urgency=low
 
     * wslview out of experimental stage.
