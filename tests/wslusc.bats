@@ -17,17 +17,13 @@ teardown() {
 @test "wslusc - Help" {
   run out/wslusc --help
   [ "${lines[0]}" = "wslusc - Component of Windows 10 Linux Subsystem Utility" ]
-  [ "${lines[1]}" = "Usage: wslusc (-g|-h|-v) ..NAME..." ]
-  [ "${lines[2]}" = "For more help for wslusc, visit the following site:" ]
-  [ "${lines[3]}" = "https://github.com/patrick330602/wslu/wiki/wslusc" ]
+  [ "${lines[1]}" = "Usage: wslusc (-i|-g|-h|-v) ...NAME..." ]
 }
 
 @test "wslusc - Help - Alt." {
   run out/wslusc -h
   [ "${lines[0]}" = "wslusc - Component of Windows 10 Linux Subsystem Utility" ]
-  [ "${lines[1]}" = "Usage: wslusc (-g|-h|-v) ..NAME..." ]
-  [ "${lines[2]}" = "For more help for wslusc, visit the following site:" ]
-  [ "${lines[3]}" = "https://github.com/patrick330602/wslu/wiki/wslusc" ]
+  [ "${lines[1]}" = "Usage: wslusc (-i|-g|-h|-v) ...NAME..." ]
 }
 
 @test "wslusc - without GUI" {
@@ -36,6 +32,6 @@ teardown() {
 }
 
 @test "wslusc - with GUI" {
-  run out/wslusc -x test2
+  run out/wslusc -g test2
   [ -f "`out/wslupath -D`/test2.lnk" ]
 }

@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # global config
-wslu_version=1.7
+wslu_version=1.8
 
 ## color
 black=`echo -e '\e[30m'`
@@ -48,12 +48,11 @@ error="${red}[error]${reset}"
 warn="${orange}[warn]${reset}"
 debug="${cyan}[debug]${reset}"
 
-## constants
-help_short="wslu (-h|-v|-s)"
-
 ## basic distro detection
-distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME="//g')"
-if [[ "$distro" == Ubuntu* ]]; then
+distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME=\"//g')"
+if [[ "$distro" == *WLinux* ]]; then
+	distro=wlinux
+elif [[ "$distro" == Ubuntu* ]]; then
 	distro="ubuntu"
 elif [[ "$distro" = *Debian* ]]; then
 	distro="debian"
@@ -65,17 +64,12 @@ elif [[ "$distro" == SLES* ]]; then
 	distro="sles"
 fi
 
-function ins_locate
-{
-	[ -L /usr/bin/wslsys ] && echo "$(dirname $(readlink -f /usr/bin/wslsys))" || echo "/usr/bin"
-}
-
 
 function help
 {
 	echo -e "`basename "$1"` - Component of Windows 10 Linux Subsystem Utility
-Usage: $2
-
-For more help for `basename "$1"`, visit the following site:
-https://github.com/patrick330602/wslu/wiki/`basename "$1"`"
+Usage: $2"
 }
+
+#no_longer_use_but_might_use_it_in_the_future="For more help for `basename "$1"`, visit the following site: https://github.com/patrick330602/wslu/wiki/`basename "$1"`"
+

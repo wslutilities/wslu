@@ -30,7 +30,7 @@ Name: wslu
 Version: $BUILD_VER
 Release: 2
 Source: wslu-$BUILD_VER.tar.gz
-Requires: bc lsb-release wget unzip
+Requires: bc wget unzip
 Requires(post): %{_sbindir}/update-alternatives
 Requires(postun): %{_sbindir}/update-alternatives
 URL: https://github.com/patrick330602/wslu/

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+update-alternatives --remove x-www-browser /usr/bin/wslview
+update-alternatives --remove www-browser /usr/bin/wslview

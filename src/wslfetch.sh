@@ -1,10 +1,10 @@
-version=25
+version=26
 
 is_line=0
 is_splash=0
 help_short="wslfetch (-h|-v|-s|-l|-c)"
 
-hostname="$(hostname)"
+hostname=$(</etc/hostname)
 branch=`wslsys -b -s`
 build=`wslsys -B -s`
 release=`wslsys -R -s`

@@ -1,11 +1,11 @@
-version="10"
+version="14"
 
 cname=""
 iconpath="`wslupath -d -H`\\wslu\\wsl.ico"
 is_icon=0
 is_gui=0
 
-help_short="wslusc (-i|-g|-h|-v) ..NAME..."
+help_short="wslusc (-i|-g|-h|-v) ...NAME..."
 
 while [ $1 ]; do
 	case $1 in
@@ -20,13 +20,14 @@ if [[ "$cname" != "" ]]; then
 	tpath=`wslupath -d -T`
 	dpath=`wslupath -D`
 	script_location="`wslupath -H`/wslu"
+	localfile_path="/usr/share/wslu"
 	script_location_win="`wslupath -d -H`\\wslu"
 	new_cname=`basename $cname`
 	if [[ ! -f $script_location/wsl.ico ]]; then
 		echo "${info} Default wslusc icon \"wsl.ico\" not found in Windows directory. Copying right now..."
 		[[ -d $script_location ]] || mkdir $script_location
-		if [[ /usr/share/wslu/wsl.ico ]]; then
-			cp /usr/share/wslu/wsl.ico $script_location
+		if [[ $localfile_path/wsl.ico ]]; then
+			cp $localfile_path/wsl.ico $script_location
 			echo "${info} Default wslusc icon \"wsl.ico\" copied. Located at $script_location."
 		else
 			echo "${error} runHidden.vbs not found. Failed to copy."
@@ -36,8 +37,8 @@ if [[ "$cname" != "" ]]; then
 	if [[ ! -f $script_location/runHidden.vbs ]]; then
 		echo "${info} runHidden.vbs not found in Windows directory. Copying right now..."
 		[[ -d $script_location ]] || mkdir $script_location
-		if [[ -f /usr/share/wslu/runHidden.vbs ]]; then
-			cp /usr/share/wslu/runHidden.vbs $script_location
+		if [[ -f $localfile_path/runHidden.vbs ]]; then
+			cp $localfile_path/runHidden.vbs $script_location
 			echo "${info} runHidden.vbs copied. Located at $script_location."
 		else
 			echo "${error} runHidden.vbs not found. Failed to copy."

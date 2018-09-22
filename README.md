@@ -10,7 +10,7 @@
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_shield)
 [![Donate](https://badgen.net/badge/Donate/Paypal/purple)](https://www.paypal.me/callmepk/)
 
-This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
+This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
 
 **Currently supported Distro:**
 - Ubuntu
@@ -20,6 +20,7 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as enabli
 - SUSE Linux Enterprise Server (SLES)
 - Debian GNU/Linux
 - Kali Linux
+- **WLinux**
 
 Legacy Ubuntu is no longer supported.
 
@@ -42,7 +43,9 @@ This is a fake WSL browser that can help you open link in default Windows browse
 
 ## Installation
 
-Detailed installation is in Wiki/Installation.
+### For WLinux
+
+Preinstalled in WLinux.
 
 ### For Ubuntu/Debian/Kali Linux
 
@@ -66,11 +69,6 @@ sudo zypper in wslu
 ```
 
 Or you can download the .rpm package from release and install it using `sudo rpm -ivh "wslu*"`.
-
-### Source Code
-
-To install, just run the following command in the bash prompt:
-`curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/extras/scripts/install.sh | bash` 
 
 ## Contributing
 
