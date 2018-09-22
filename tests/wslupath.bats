@@ -13,8 +13,6 @@
   [ "${lines[0]}" = "wslupath - Component of Windows 10 Linux Subsystem Utility" ]
   [ "${lines[1]}" = "Usage: wslupath (-dOr) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]" ]
   [ "${lines[2]}" = "wslupath (-h|-v|-R)" ]
-  [ "${lines[3]}" = "For more help for wslupath, visit the following site:" ]
-  [ "${lines[4]}" = "https://github.com/patrick330602/wslu/wiki/wslupath" ]
 }
 
 @test "wslupath - Help - Alt." {
@@ -22,8 +20,6 @@
   [ "${lines[0]}" = "wslupath - Component of Windows 10 Linux Subsystem Utility" ]
   [ "${lines[1]}" = "Usage: wslupath (-dOr) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]" ]
   [ "${lines[2]}" = "wslupath (-h|-v|-R)" ]
-  [ "${lines[3]}" = "For more help for wslupath, visit the following site:" ]
-  [ "${lines[4]}" = "https://github.com/patrick330602/wslu/wiki/wslupath" ]
 }
 @test "wslupath - Available Registery" {
   run out/wslupath --avail-reg

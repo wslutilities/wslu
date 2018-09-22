@@ -15,21 +15,6 @@ jobs:
           command: |
             cd scripts/
             bash -x ./install.sh
-  builddevsource:
-    docker:
-      - image: patrick330602/fake_wsl_env
-    steps:
-      - checkout
-      - run:
-          name: Install Pre-requisites
-          command: |
-            apt-get update -qq
-            apt-get install -qq apt-utils mime-support sudo
-      - run:
-          name: Install via Source Code
-          command: |
-            cd scripts/
-            bash -x ./install-dev.sh
   genpkg:
     machine: true
     steps:
@@ -38,7 +23,7 @@ jobs:
           name: Install Pre-requisites
           command: |
             sudo apt-get update -qq
-            sudo apt-get install -qq build-essential rpm sudo
+            sudo apt-get install -qq build-essential rpm sudo dh-make devscripts
       - run:
           name: Build Package
           command: |
@@ -55,7 +40,7 @@ workflows:
   build:
    jobs:
       - buildsource
-      - builddevsource
+      - genpkg
   nightlybuild:
     triggers:
        - schedule:

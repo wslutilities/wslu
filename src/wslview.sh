@@ -2,7 +2,7 @@ version="02"
 
 lname=""
 
-help_short="wslview (-u|-r|-h|-v) ..LINK..."
+help_short="wslview (-u|-r|-h|-v) ...LINK..."
 
 for args; do
 	case $args in
