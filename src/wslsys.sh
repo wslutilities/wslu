@@ -1,4 +1,4 @@
-version="22"
+version="25"
 
 help_short="wslsys (-h|-v|-S|-U|-b|-B|-fB|-R|-K|-P) -s"
 branch=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "BuildBranch" 2>&1 | sed -n 3p | sed -e "s/BuildBranch//" | sed -e 's/^[[:space:]]*//' | awk '{$1=""; sub("  ", " "); print}' | sed -e 's|\r||g'`

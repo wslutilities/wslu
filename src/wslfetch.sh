@@ -2,7 +2,7 @@ version=26
 
 is_line=0
 is_splash=0
-help_short="wslfetch (-h|-v|-s|-l|-c)"
+help_short="$0 (-h|-v|-s|-l|-c)"
 
 hostname=$(</etc/hostname)
 branch=`wslsys -b -s`

@@ -5,7 +5,7 @@
 running the following to get started:
 
 ```bash
-curl -o- https://raw.githubusercontent.com/wslutilities/wslu/develop/scripts/install-dev.sh | bash
+curl -o- https://raw.githubusercontent.com/wslutilities/wslu/develop/scripts/install.sh | bash
 ```
 
 ## Build Structure

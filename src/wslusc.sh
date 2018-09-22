@@ -5,7 +5,7 @@ iconpath="`wslupath -d -H`\\wslu\\wsl.ico"
 is_icon=0
 is_gui=0
 
-help_short="wslusc (-i|-g|-h|-v) ..NAME..."
+help_short="$0 (-i|-g|-h|-v) ..NAME..."
 
 while [ $1 ]; do
 	case $1 in

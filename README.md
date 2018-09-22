@@ -20,6 +20,7 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as enabli
 - SUSE Linux Enterprise Server(SLES)
 - Debian GNU/Linux
 - Kali Linux
+- WLinux
 
 Legacy Ubuntu is no longer supporting.
 
@@ -42,15 +43,17 @@ This is a fake WSL browser that can help you open link in default Windows browse
 
 ## Installation
 
-Detailed installation is in Wiki/Installation.
+### For WLinux
+
+Preinstalled in WLinux.
 
 ### For Ubuntu/Debian/Kali Linux
 
 Run following commands:
 ```bash
-sudo apt install lsb-release apt-transport-https
+sudo apt install apt-transport-https
 wget -O - https://api.patrickwu.ml/public.key | sudo apt-key add -
-echo "deb https://apt.patrickwu.ml/ `lsb_release -c -s` main" | sudo tee -a /etc/apt/sources.list 
+echo "deb https://apt.patrickwu.ml/ stable main" | sudo tee -a /etc/apt/sources.list 
 sudo apt update
 sudo apt install wslu
 ```
@@ -66,11 +69,6 @@ sudo zypper in wslu
 ```
 
 Or you can download the .rpm package from release and install it using `sudo rpm -ivh "wslu*"`.
-
-### Surce Code
-
-To install, just run the following command in the bash prompt:
-`curl -o- https://raw.githubusercontent.com/patrick330602/wslu/master/extras/scripts/install.sh | bash` 
 
 ## Contribution
 

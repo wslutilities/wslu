@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # global config
-wslu_version=1.7
+wslu_version=1.8
 
 ## color
 black=`echo -e '\e[30m'`
@@ -85,3 +85,9 @@ Usage: $2
 For more help for `basename "$1"`, visit the following site:
 https://github.com/patrick330602/wslu/wiki/`basename "$1"`"
 }
+
+execsys="wslsys"
+if [[ isdev $0 ]]; then
+	execsys="wslsys-dev"
+fi
+
