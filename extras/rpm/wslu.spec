@@ -1,6 +1,6 @@
 %define packager       patrick330602 <wotingwu@live.com>
 
-%define _topdir        $HOME/rpm_wslu
+%define _topdir        ~/rpm_wslu
 %define _tmppath       /var/tmp
  
 %define _rpmtopdir     %{_topdir}
