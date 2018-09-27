@@ -8,14 +8,14 @@ customname=""
 
 help_short="wslusc (-n|-i|-g|-h|-v) ...COMMAND..."
 
-while [ $1 ]; do
+while [ "$1" != "" ]; do
 	case $1 in
 		-i|--icon)shift;is_icon=1;iconpath=$1;shift;;
 		-n|--name)shift;customname=$1;shift;;
 		-g|--gui)is_gui=1;shift;;
 		-h|--help) help $0 "$help_short"; exit;;
-		-v|--version) echo "wslupath v$wslu_version.$version"; exit;;
-		*) cname=$1;shift;;
+		-v|--version) echo "wslusc v$wslu_version.$version"; exit;;
+		*) cname=$@;break;;
 	esac
 done
 if [[ "$cname" != "" ]]; then
@@ -25,9 +25,9 @@ if [[ "$cname" != "" ]]; then
 	localfile_path="/usr/share/wslu"
 	script_location_win="`wslupath -d -H`\\wslu"
 	
-	raw_command=( $(basename $cname) )
+	raw_command=( $(basename "$cname") )
 	new_cname="${raw[1]}"
-	if [[ ! "$customname" == "" ]]; then
+	if [[ "$customname" != "" ]]; then
 		new_cname=$customname
 	fi
 
