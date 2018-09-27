@@ -14,7 +14,7 @@ cp ../extras/rpm/wslu.spec ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
 
 # Modifying the files
 sed -i s/BUILDVERPLACEHOLDER/$BUILD_VER/g ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
-sed -i s|HOMEPLACEHOLDER|$HOME|g ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
+sed -i "s|HOMEPLACEHOLDER|$HOME|g" ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
 
 # Build tarball
 cd ~/rpm_wslu/SOURCES
