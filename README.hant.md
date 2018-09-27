@@ -1,8 +1,8 @@
 <div style="text-align: center;">
 
-<img width="200" height="200" src="extras/icon.png">
+<img width="120" height="120" src="extras/icon.png">
 
-# wslu - A collection of utilities for WSL
+# wslu - 一套Windows 10 Linux子系統工具組
 
 [![GitHub license](https://badgen.net/github/license/wslutilities/wslu?icon=github&label=&color=cyan)](https://github.com/wslutilities/wslu/blob/master/LICENSE)
 [![GitHub (pre-)release](https://badgen.net/github/release/wslutilities/wslu?icon=github&label=&color=yellow)](https://github.com/wslutilities/wslu)
@@ -11,50 +11,50 @@
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_shield)
 [![Donate](https://badgen.net/badge/Donate/Paypal/purple)](https://www.paypal.me/callmepk/)
 
-English | [简体中文](README.hans.md) | [繁體中文](README.hant.md)
+[English](README.md) | [简体中文](README.hans.md) | 繁體中文
 
 </div>
 
-This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
+這是一套適用於Windows 10 Linux子系統的工具組，可以在Windows 10 Linux子系統下完成諸如將Windows路徑轉換為WSL專屬路徑或者建立你最喜愛的Linux程式桌面快捷方式等工作。需要Windows 10創造者更新或更高。
 
-**Currently supported Distro:**
+**目前支援的Linux發行版：**
 - Ubuntu
-- Ubuntu 16.04 LTS
-- Ubuntu 18.04 LTS
+- Ubuntu 16.04
+- Ubuntu 18.04
 - OpenSUSE
 - SUSE Linux Enterprise Server (SLES)
 - Debian GNU/Linux
 - Kali Linux
 - [WLinux](https://afflnk.microsoft.com/c/1291904/433017/7593?u=https%3A%2F%2Fwww.microsoft.com%2Fstore%2FproductId%2F9NV1GV1PXZ6P)
 
-Legacy Ubuntu is no longer supported.
+舊版Ubuntu不再被支援。
 
-## Feature
+## 功能
 
 **wslusc**
-This is a WSL shortcut creator to create a shortcut on your Windows 10 Desktop.
+這是用於建立Linux程式Windows桌面捷徑的工具。
 
 **wslsys**
-This is a WSL system information printer to print out system informations from Windows 10 or Linux.
+這是可以展示Windows和Linux下的系統資訊的工具。
 
 **wslfetch**
-This is a WSL Screenshoot Information Tool to print information in an elegant way.
+這是類似於screenfetch的系統資訊展示工具。
 
 **wslupath**
-This is a WSL Windows path Converter that can convert Windows path to other styles of path.
+這是用於轉換Windows/WSL路徑的工具。
 
 **wslview**
-This is a fake WSL browser that can help you open link in default Windows browser.
+這是一個將Windows預設網路瀏覽器繫結為WSL網路瀏覽器的包裝工具。
 
-## Installation
+## 安裝
 
-### For WLinux
+### WLinux
 
-Preinstalled in WLinux.
+WLinux已內建。
 
-### For Ubuntu/Debian/Kali Linux
+### Ubuntu/Debian/Kali Linux
 
-Run following commands:
+執行以下命令:
 ```bash
 sudo apt install apt-transport-https
 wget -O - https://api.patrickwu.ml/public.key | sudo apt-key add -
@@ -63,28 +63,37 @@ sudo apt update
 sudo apt install wslu
 ```
 
-Or you can download the .deb package from release and install it using `sudo dpkg -i wslu*`.
+或者你可以從Releases介面下載.deb進行安裝：`sudo dpkg -i wslu*`。
 
-### For OpenSUSE/SLES
+### OpenSUSE/SLES
 
-Run following commands:
+執行以下命令:執行以下命令:
 ```bash
 sudo zypper ar https://rpm.patrickwu.ml/ ruapm
 sudo zypper ref
 sudo zypper in wslu
 ```
 
-Or you can download the .rpm package from release and install it using `sudo rpm -ivh "wslu*"`.
+或者你可以從Releases介面下載.rpm進行安裝：`sudo rpm -ivh "wslu*"`。
 
-## Contributing
+## 貢獻（英文）
 
-Check [CONTRIBUTING.md](CONTRIBUTING.md).
+請檢視[CONTRIBUTING.md](CONTRIBUTING.md)。
 
-## Code of Conduct
+## 行為守則（英文）
 
-Check [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+請檢視[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)。
 
-## License
+## 後記
+
+發現過了100個star也沒加中文README。。。反而給[隔壁項目]()加了中文README，給自己扇幾個耳光先(￣ε(#￣)☆╰╮o(￣皿￣///)
+
+做項目不易，請我喝杯咖啡唄 (*´﹃`)
+| 微信支付 | 支付寶 |
+| ------- | ----- |
+| ![微信支付](https://patrickwu.ml/images/base/wechatpay.jpg) | ![支付寶](https://patrickwu.ml/images/base/alipay.jpg) |
+
+## 許可（英文）
 
 <pre>
 This is free software; you can redistribute it and/or modify
@@ -92,6 +101,7 @@ it under the terms of the GNU GPL version 3 or (at your option) any later versio
 There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </pre>
 
-for long version, check [LICENSE](LICENSE).
+更長版本請檢視[LICENSE](LICENSE)。
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_large)
+
