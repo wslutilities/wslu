@@ -1,6 +1,6 @@
-<div style="text-align: center;">
+<p align="center">
 
-<img width="120" height="120" src="extras/icon.png">
+<img width="150" height="150" src="extras/icon.png">
 
 # wslu - 一套Windows 10 Linux子系統工具組
 
@@ -13,7 +13,7 @@
 
 [English](README.md) | [简体中文](README.hans.md) | 繁體中文
 
-</div>
+</p>
 
 這是一套適用於Windows 10 Linux子系統的工具組，可以在Windows 10 Linux子系統下完成諸如將Windows路徑轉換為WSL專屬路徑或者建立你最喜愛的Linux程式桌面快捷方式等工作。需要Windows 10創造者更新或更高。
 
@@ -86,12 +86,12 @@ sudo zypper in wslu
 
 ## 後記
 
-發現過了100個star也沒加中文README。。。反而給[隔壁項目]()加了中文README，給自己扇幾個耳光先(￣ε(#￣)☆╰╮o(￣皿￣///)
+發現過了100個star也沒加中文README。。。反而給[隔壁項目](https://afflnk.microsoft.com/c/1291904/433017/7593?u=https%3A%2F%2Fwww.microsoft.com%2Fstore%2FproductId%2F9NV1GV1PXZ6P)加了中文README，給自己扇幾個耳光先(￣ε(#￣)☆╰╮o(￣皿￣///)
 
-做項目不易，請我喝杯咖啡唄 (*´﹃`)
+做項目不易，請我喝杯咖啡唄 (*´﹃\`)
 | 微信支付 | 支付寶 |
-| ------- | ----- |
-| ![微信支付](https://patrickwu.ml/images/base/wechatpay.jpg) | ![支付寶](https://patrickwu.ml/images/base/alipay.jpg) |
+| :-------: | :-----: |
+| <img width="300" height="300" src="https://patrickwu.ml/images/base/wechatpay.jpg"> | <img width="300" height="300" src="https://patrickwu.ml/images/base/alipay.jpg"> |
 
 ## 許可（英文）
 
