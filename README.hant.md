@@ -1,4 +1,4 @@
-<p align="center">
+<div align="center">
 
 <img width="150" height="150" src="extras/icon.png">
 
@@ -13,7 +13,7 @@
 
 [English](README.md) | [简体中文](README.hans.md) | 繁體中文
 
-</p>
+</div>
 
 這是一套適用於Windows 10 Linux子系統的工具組，可以在Windows 10 Linux子系統下完成諸如將Windows路徑轉換為WSL專屬路徑或者建立你最喜愛的Linux程式桌面快捷方式等工作。需要Windows 10創造者更新或更高。
 

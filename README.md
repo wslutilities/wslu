@@ -1,4 +1,4 @@
-<p align="cdenter">
+<div align="cdenter">
 
 <img width="150" height="150" src="extras/icon.png">
 
@@ -13,7 +13,7 @@
 
 English | [简体中文](README.hans.md) | [繁體中文](README.hant.md)
 
-</p>
+</div>
 
 This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
 
