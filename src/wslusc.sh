@@ -1,15 +1,17 @@
-version="14"
+version="16"
 
 cname=""
 iconpath="`wslupath -d -H`\\wslu\\wsl.ico"
 is_icon=0
 is_gui=0
+customname=""
 
-help_short="wslusc (-i|-g|-h|-v) ...NAME..."
+help_short="wslusc (-n|-i|-g|-h|-v) ...COMMAND..."
 
 while [ $1 ]; do
 	case $1 in
 		-i|--icon)shift;is_icon=1;iconpath=$1;shift;;
+		-n|--name)shift;customname=$1;shift;;
 		-g|--gui)is_gui=1;shift;;
 		-h|--help) help $0 "$help_short"; exit;;
 		-v|--version) echo "wslupath v$wslu_version.$version"; exit;;
@@ -22,8 +24,13 @@ if [[ "$cname" != "" ]]; then
 	script_location="`wslupath -H`/wslu"
 	localfile_path="/usr/share/wslu"
 	script_location_win="`wslupath -d -H`\\wslu"
+	
 	raw_command=( $(basename $cname) )
 	new_cname="${raw[1]}"
+	if [[ ! "$customname" == "" ]]; then
+		new_cname=$customname
+	fi
+
 	if [[ ! -f $script_location/wsl.ico ]]; then
 		echo "${info} Default wslusc icon \"wsl.ico\" not found in Windows directory. Copying right now..."
 		[[ -d $script_location ]] || mkdir $script_location
@@ -35,6 +42,7 @@ if [[ "$cname" != "" ]]; then
 			exit 30
 		fi
 	fi
+	
 	if [[ ! -f $script_location/runHidden.vbs ]]; then
 		echo "${info} runHidden.vbs not found in Windows directory. Copying right now..."
 		[[ -d $script_location ]] || mkdir $script_location
@@ -46,6 +54,7 @@ if [[ "$cname" != "" ]]; then
 			exit 30
 		fi
 	fi
+	
 	if [[ "$is_icon" == "1" ]]; then
 		ext="${iconpath##*.}"
 		if [[ ! "$ext" == "ico" ]]; then
@@ -56,6 +65,7 @@ if [[ "$cname" != "" ]]; then
 		cp $iconpath $script_location
 		iconpath="$script_location_win\\$(basename $iconpath)"
 	fi
+	
 	if [[ "$is_gui" == "1" ]]; then
 		powershell.exe -NoProfile -NonInteractive -Command "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs bash.exe -c \"cd ~ && DISPLAY=:0 $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
 	else
