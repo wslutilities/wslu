@@ -90,8 +90,8 @@ sudo zypper in wslu
 
 做项目不易，请我喝杯咖啡呗 (*´﹃\`)
 | 微信支付 | 支付宝 |
-| :-------: | :-----: |
-| <img width="300" height="300" src="https://patrickwu.ml/images/base/wechatpay.jpg"> | <img width="300" height="300" src="https://patrickwu.ml/images/base/alipay.jpg"> |
+:-------: | :-----:
+<img width="300" height="300" src="https://patrickwu.ml/images/base/wechatpay.jpg"> | <img width="300" height="300" src="https://patrickwu.ml/images/base/alipay.jpg">
 
 ## 许可（英文）
 
