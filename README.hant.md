@@ -89,6 +89,7 @@ sudo zypper in wslu
 發現過了100個star也沒加中文README。。。反而給[隔壁項目](https://afflnk.microsoft.com/c/1291904/433017/7593?u=https%3A%2F%2Fwww.microsoft.com%2Fstore%2FproductId%2F9NV1GV1PXZ6P)加了中文README，給自己扇幾個耳光先(￣ε(#￣)☆╰╮o(￣皿￣///)
 
 做項目不易，請我喝杯咖啡唄 (*´﹃\`)
+
 | 微信支付 | 支付寶 |
 :-------: | :-----:
 <img width="300" height="300" src="https://patrickwu.ml/images/base/wechatpay.jpg"> | <img width="300" height="300" src="https://patrickwu.ml/images/base/alipay.jpg">
