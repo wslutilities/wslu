@@ -22,7 +22,8 @@ if [[ "$cname" != "" ]]; then
 	script_location="`wslupath -H`/wslu"
 	localfile_path="/usr/share/wslu"
 	script_location_win="`wslupath -d -H`\\wslu"
-	new_cname=`basename $cname`
+	raw_command=( $(basename $cname) )
+	new_cname="${raw[1]}"
 	if [[ ! -f $script_location/wsl.ico ]]; then
 		echo "${info} Default wslusc icon \"wsl.ico\" not found in Windows directory. Copying right now..."
 		[[ -d $script_location ]] || mkdir $script_location
