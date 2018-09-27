@@ -10,7 +10,7 @@ mkdir -p ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/{etc,mime}
 cp ../out/wsl* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER
 cp ../src/etc/* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/etc
 cp ../src/mime/* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/mime
-cp ../etc/rpm/wslu.spec ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
+cp ../extras/rpm/wslu.spec ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
 
 # Modifying the files
 sed -i s/BUILDVERPLACEHOLDER/$BUILD_VER/g ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec

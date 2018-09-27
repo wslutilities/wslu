@@ -1,4 +1,4 @@
-<div align="cdenter">
+<div align="center">
 
 <img width="150" height="150" src="extras/icon.png">
 

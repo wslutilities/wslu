@@ -5,12 +5,13 @@ DATE=`date +%Y%m%d%H%M%S`
 CURRENT_DIR=`pwd`
 
 # Creating folders
-mkdir -p $BUILD_DIR/{DEBIAN/,usr/bin/,usr/share/wslu/,/usr/lib/mime/packages/}
+mkdir -p $BUILD_DIR/{DEBIAN/,usr/bin/,usr/share/wslu/,usr/lib/mime/packages/}
 
 # copy files to build folder
 cp $CURRENT_DIR/../out/wsl* $BUILD_DIR/usr/bin/
 cp $CURRENT_DIR/../src/etc/* $BUILD_DIR/usr/share/wslu/
 cp $CURRENT_DIR/../src/mime/* $BUILD_DIR/usr/lib/mime/packages
+cp $CURRENT_DIR/../extras/debian/* $BUILD_DIR/DEBIAN
 
 # modifying the files
 sed -i s/VERSIONPLACEHOLDER/$BUILD_VER/g $BUILD_DIR/DEBIAN/control
