@@ -11,6 +11,9 @@ fi
 cat << EOF
 wslu installation for developers
 ---------------------------------
+This is not a installer for normal user.
+It provides completed development envir-
+-onment of wslu, procede with caution. 
 EOF
 
 distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME="//g')"
@@ -34,11 +37,11 @@ echo "Installing dependencies...."
 case "$distro" in
 	'ubuntu'|'debian'|'kali'|'wlinux')
 		sudo apt purge wslu
-		sudo apt install -y git build-essential bc wget unzip make
+		sudo apt install -y git build-essential bc wget unzip make ruby-ronn
 		;;
 	'opensuse'|'sles')
 		sudo zypper rm wslu
-		sudo zypper -n install git bc wget unzip make
+		sudo zypper -n install git bc wget unzip make rubygem-ronn
 		;;
 esac
 if [[ ! -f /etc/fake-wsl-release ]]; then
