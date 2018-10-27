@@ -60,8 +60,8 @@ WLinux已内置。
 运行以下命令:
 ```bash
 sudo apt install apt-transport-https
-wget -O - https://api.patrickwu.ml/public.key | sudo apt-key add -
-echo "deb https://apt.patrickwu.ml/ stable main" | sudo tee -a /etc/apt/sources.list 
+wget -O - https://api.patrickwu.space/public.key | sudo apt-key add -
+echo "deb https://apt.patrickwu.space/ stable main" | sudo tee -a /etc/apt/sources.list 
 sudo apt update
 sudo apt install wslu
 ```
@@ -72,7 +72,7 @@ sudo apt install wslu
 
 运行以下命令:
 ```bash
-sudo zypper ar https://rpm.patrickwu.ml/ ruapm
+sudo zypper ar https://rpm.patrickwu.space/ ruapm
 sudo zypper ref
 sudo zypper in wslu
 ```

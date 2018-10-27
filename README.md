@@ -58,8 +58,8 @@ Preinstalled in WLinux.
 Run following commands:
 ```bash
 sudo apt install apt-transport-https
-wget -O - https://api.patrickwu.ml/public.key | sudo apt-key add -
-echo "deb https://apt.patrickwu.ml/ stable main" | sudo tee -a /etc/apt/sources.list 
+wget -O - https://api.patrickwu.space/public.key | sudo apt-key add -
+echo "deb https://apt.patrickwu.space/ stable main" | sudo tee -a /etc/apt/sources.list 
 sudo apt update
 sudo apt install wslu
 ```
@@ -70,7 +70,7 @@ Or you can download the .deb package from release and install it using `sudo dpk
 
 Run following commands:
 ```bash
-sudo zypper ar https://rpm.patrickwu.ml/ ruapm
+sudo zypper ar https://rpm.patrickwu.space/ ruapm
 sudo zypper ref
 sudo zypper in wslu
 ```
@@ -99,6 +99,6 @@ WSL Utilites is a hobby project of mine. Your donation will definitely help the 
 
 ## License
 
-This project uses [LGPLv3](LICENSE)License.
+This project uses [LGPLv3](LICENSE) License.
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_large)
