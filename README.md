@@ -18,14 +18,16 @@ English | [简体中文](README.hans.md) | [繁體中文](README.hant.md)
 This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
 
 **Currently supported Distro:**
+- [WLinux](https://afflnk.microsoft.com/c/1291904/433017/7593?u=https%3A%2F%2Fwww.microsoft.com%2Fstore%2FproductId%2F9NV1GV1PXZ6P)
 - Ubuntu
 - Ubuntu 16.04 LTS
 - Ubuntu 18.04 LTS
-- OpenSUSE
-- SUSE Linux Enterprise Server (SLES)
+- OpenSUSE Leap 42
+- OpenSUSE Leap 15.0
+- SUSE Linux Enterprise Server 12
+- SUSE Linux Enterprise Server 15
 - Debian GNU/Linux
 - Kali Linux
-- [WLinux](https://afflnk.microsoft.com/c/1291904/433017/7593?u=https%3A%2F%2Fwww.microsoft.com%2Fstore%2FproductId%2F9NV1GV1PXZ6P)
 
 Legacy Ubuntu is no longer supported.
 
@@ -86,12 +88,6 @@ Check [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ## License
 
-<pre>
-This is free software; you can redistribute it and/or modify
-it under the terms of the GNU GPL version 3 or (at your option) any later version.
-There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-</pre>
-
-for long version, check [LICENSE](LICENSE).
+This project uses [LGPLv3](LICENSE)License.
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_large)

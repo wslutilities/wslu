@@ -18,14 +18,17 @@
 这是一套适用于Windows 10 Linux子系统的工具组，可以在Windows 10 Linux子系统下完成诸如将Windows路径转换为WSL专属路径或者创建你最喜爱的Linux程序桌面快捷方式等工作。需要Windows 10创造者更新或更高。
 
 **目前支持的Linux发行版：**
+- [WLinux](https://afflnk.microsoft.com/c/1291904/433017/7593?u=https%3A%2F%2Fwww.microsoft.com%2Fstore%2FproductId%2F9NV1GV1PXZ6P)
 - Ubuntu
-- Ubuntu 16.04
-- Ubuntu 18.04
-- OpenSUSE
-- SUSE Linux Enterprise Server (SLES)
+- Ubuntu 16.04 LTS
+- Ubuntu 18.04 LTS
+- OpenSUSE Leap 42
+- OpenSUSE 15.0
+- SUSE Linux Enterprise Server 12
+- SUSE Linux Enterprise Server 15 
 - Debian GNU/Linux
 - Kali Linux
-- [WLinux](https://afflnk.microsoft.com/c/1291904/433017/7593?u=https%3A%2F%2Fwww.microsoft.com%2Fstore%2FproductId%2F9NV1GV1PXZ6P)
+
 
 旧版Ubuntu不再被支持。
 
@@ -86,23 +89,16 @@ sudo zypper in wslu
 
 ## 后记
 
-发现过了100个star也没加中文README。。。反而给[隔壁项目](https://afflnk.microsoft.com/c/1291904/433017/7593?u=https%3A%2F%2Fwww.microsoft.com%2Fstore%2FproductId%2F9NV1GV1PXZ6P)加了中文README，给自己扇几个耳光先(￣ε(#￣)☆╰╮o(￣皿￣///)
-
 做项目不易，请我喝杯咖啡呗 (*´﹃\`)
 
 | 微信支付 | 支付宝 |
 :-------: | :-----:
 <img width="300" height="300" src="https://patrickwu.ml/images/base/wechatpay.jpg"> | <img width="300" height="300" src="https://patrickwu.ml/images/base/alipay.jpg">
 
+
 ## 许可（英文）
 
-<pre>
-This is free software; you can redistribute it and/or modify
-it under the terms of the GNU GPL version 3 or (at your option) any later version.
-There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-</pre>
-
-更长版本请查看[LICENSE](LICENSE)。
+本应用使用了[LGPLv3](LICENSE)许可。
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_large)
 

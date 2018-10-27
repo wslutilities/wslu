@@ -17,8 +17,8 @@ Source: wslu-BUILDVERPLACEHOLDER.tar.gz
 Requires: bc imagemagick
 Requires(post): %{_sbindir}/update-alternatives
 Requires(postun): %{_sbindir}/update-alternatives
-URL: https://github.com/patrick330602/wslu/
-License: GPLv3+
+URL: https://github.com/wslutilities/wslu/
+License: LGPLv3
 %description
 This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
 %prep

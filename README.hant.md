@@ -18,14 +18,16 @@
 這是一套適用於Windows 10 Linux子系統的工具組，可以在Windows 10 Linux子系統下完成諸如將Windows路徑轉換為WSL專屬路徑或者建立你最喜愛的Linux程式桌面快捷方式等工作。需要Windows 10創造者更新或更高。
 
 **目前支援的Linux發行版：**
+- [WLinux](https://afflnk.microsoft.com/c/1291904/433017/7593?u=https%3A%2F%2Fwww.microsoft.com%2Fstore%2FproductId%2F9NV1GV1PXZ6P)
 - Ubuntu
-- Ubuntu 16.04
-- Ubuntu 18.04
-- OpenSUSE
-- SUSE Linux Enterprise Server (SLES)
+- Ubuntu 16.04 LTS
+- Ubuntu 18.04 LTS
+- OpenSUSE Leap 42
+- OpenSUSE Leap 15.0
+- SUSE Linux Enterprise Server 12
+- SUSE Linux Enterprise Server 15
 - Debian GNU/Linux
 - Kali Linux
-- [WLinux](https://afflnk.microsoft.com/c/1291904/433017/7593?u=https%3A%2F%2Fwww.microsoft.com%2Fstore%2FproductId%2F9NV1GV1PXZ6P)
 
 舊版Ubuntu不再被支援。
 
@@ -86,8 +88,6 @@ sudo zypper in wslu
 
 ## 後記
 
-發現過了100個star也沒加中文README。。。反而給[隔壁項目](https://afflnk.microsoft.com/c/1291904/433017/7593?u=https%3A%2F%2Fwww.microsoft.com%2Fstore%2FproductId%2F9NV1GV1PXZ6P)加了中文README，給自己扇幾個耳光先(￣ε(#￣)☆╰╮o(￣皿￣///)
-
 做項目不易，請我喝杯咖啡唄 (*´﹃\`)
 
 | 微信支付 | 支付寶 |
@@ -96,13 +96,7 @@ sudo zypper in wslu
 
 ## 許可（英文）
 
-<pre>
-This is free software; you can redistribute it and/or modify
-it under the terms of the GNU GPL version 3 or (at your option) any later version.
-There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-</pre>
-
-更長版本請檢視[LICENSE](LICENSE)。
+本項目使用[LGPLv3](LICENSE)許可。
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_large)
 
