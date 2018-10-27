@@ -9,7 +9,6 @@
 [![Circle CI master](https://badgen.net/circleci/github/wslutilities/wslu/master?label=master&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/master)
 [![Circle CI develop](https://badgen.net/circleci/github/wslutilities/wslu/develop?label=develop&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/develop)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_shield)
-[![Donate](https://badgen.net/badge/Donate/Paypal/purple)](https://www.paypal.me/callmepk/)
 
 English | [简体中文](README.hans.md) | [繁體中文](README.hant.md)
 
@@ -85,6 +84,18 @@ Check [CONTRIBUTING.md](CONTRIBUTING.md).
 ## Code of Conduct
 
 Check [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
+## Donation
+
+WSL Utilites is a hobby project of mine. Your donation will definitely help the continuous development of this project!
+
+[![Sponsor](https://opencollective.com/wslu/tiers/sponsor/badge.svg?label=Sponsor&color=brightgreen)](https://opencollective.com/wslu)
+[![Backer](https://opencollective.com/wslu/tiers/backer/badge.svg?label=Backer&color=brightgreen)](https://opencollective.com/wslu)
+[![Paypal](https://badgen.net/badge/Donate/Paypal/purple)](https://www.paypal.me/callmepk/)
+
+| WeChat Pay | Alipay |
+:-------: | :-----:
+<img width="300" height="300" src="https://patrickwu.space/images/base/wechatpay.jpg"> | <img width="300" height="300" src="https://patrickwu.space/images/base/alipay.jpg">
 
 ## License
 

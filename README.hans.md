@@ -87,13 +87,17 @@ sudo zypper in wslu
 
 请查看[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)。
 
-## 后记
+## 捐助
 
-做项目不易，请我喝杯咖啡呗 (*´﹃\`)
+WSL Utilites是一套个人业余开发的项目。你的捐助可以让这个项目持续开发下去！ 
+
+[![Sponsor](https://opencollective.com/wslu/tiers/sponsor/badge.svg?label=捐助者&color=brightgreen)](https://opencollective.com/wslu)
+[![Backer](https://opencollective.com/wslu/tiers/backer/badge.svg?label=赞助者&color=brightgreen)](https://opencollective.com/wslu)
+[![Paypal](https://badgen.net/badge/捐助/Paypal/purple)](https://www.paypal.me/callmepk/)
 
 | 微信支付 | 支付宝 |
 :-------: | :-----:
-<img width="300" height="300" src="https://patrickwu.ml/images/base/wechatpay.jpg"> | <img width="300" height="300" src="https://patrickwu.ml/images/base/alipay.jpg">
+<img width="300" height="300" src="https://patrickwu.space/images/base/wechatpay.jpg"> | <img width="300" height="300" src="https://patrickwu.space/images/base/alipay.jpg"> 
 
 
 ## 许可（英文）

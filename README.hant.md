@@ -9,7 +9,7 @@
 [![Circle CI master](https://badgen.net/circleci/github/wslutilities/wslu/master?label=master&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/master)
 [![Circle CI develop](https://badgen.net/circleci/github/wslutilities/wslu/develop?label=develop&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/develop)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_shield)
-[![Donate](https://badgen.net/badge/Donate/Paypal/purple)](https://www.paypal.me/callmepk/)
+
 
 [English](README.md) | [简体中文](README.hans.md) | 繁體中文
 
@@ -86,13 +86,17 @@ sudo zypper in wslu
 
 請檢視[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)。
 
-## 後記
+## 捐助
 
-做項目不易，請我喝杯咖啡唄 (*´﹃\`)
+WSL Utilites是一套個人業餘開發的項目。你的捐助可以讓這個項目持續開發下去！ 
+
+[![Sponsor](https://opencollective.com/wslu/tiers/sponsor/badge.svg?label=捐助者&color=brightgreen)](https://opencollective.com/wslu)
+[![Backer](https://opencollective.com/wslu/tiers/backer/badge.svg?label=贊助者&color=brightgreen)](https://opencollective.com/wslu)
+[![Paypal](https://badgen.net/badge/捐助/Paypal/purple)](https://www.paypal.me/callmepk/)
 
 | 微信支付 | 支付寶 |
 :-------: | :-----:
-<img width="300" height="300" src="https://patrickwu.ml/images/base/wechatpay.jpg"> | <img width="300" height="300" src="https://patrickwu.ml/images/base/alipay.jpg">
+<img width="300" height="300" src="https://patrickwu.space/images/base/wechatpay.jpg"> | <img width="300" height="300" src="https://patrickwu.space/images/base/alipay.jpg"> 
 
 ## 許可（英文）
 
