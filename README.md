@@ -80,14 +80,6 @@ sudo zypper in wslu
 
 Or you can download the .rpm package from release and install it using `sudo rpm -ivh "wslu*"`.
 
-## Contributing
-
-Check [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Code of Conduct
-
-Check [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
-
 ## Contributors
 
 This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].

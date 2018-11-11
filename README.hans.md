@@ -10,6 +10,8 @@
 [![Circle CI develop](https://badgen.net/circleci/github/wslutilities/wslu/develop?label=develop&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/develop)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_shield)
 [![Donate](https://badgen.net/badge/Donate/Paypal/purple)](https://www.paypal.me/callmepk/)
+[![Backers on Open Collective](https://opencollective.com/wslu/backers/badge.svg)](#backers)
+[![Sponsors on Open Collective](https://opencollective.com/wslu/sponsors/badge.svg)](#sponsors) 
 
 [English](README.md) | 简体中文 | [繁體中文](README.hant.md)
 
@@ -79,25 +81,33 @@ sudo zypper in wslu
 
 或者你可以从Releases界面下载.rpm进行安装：`sudo rpm -ivh "wslu*"`。
 
-## 贡献（英文）
+## 贡献者
 
-请查看[CONTRIBUTING.md](CONTRIBUTING.md)。
+没有你们，这个项目不可能存在。[[为这项目作出贡献](CONTRIBUTING.md)]。
+<img src="https://opencollective.com/wslu/contributors.svg?width=890&button=false" />
 
-## 行为守则（英文）
 
-请查看[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)。
+## 支持者
 
-## 捐助
+感谢所有的支持者！ 🙏 [[成为支持者](tps://opencollective.com/wslu#backer)]。
 
-WSL Utilites是一套个人业余开发的项目。你的捐助可以让这个项目持续开发下去！ 
+<a href="https://opencollective.com/wslu#backers" target="_blank"><img src="https://opencollective.com/wslu/backers.svg?width=890"></a>
 
-[![Sponsor](https://opencollective.com/wslu/tiers/sponsor/badge.svg?label=捐助者&color=brightgreen)](https://opencollective.com/wslu)
-[![Backer](https://opencollective.com/wslu/tiers/backer/badge.svg?label=赞助者&color=brightgreen)](https://opencollective.com/wslu)
-[![Paypal](https://badgen.net/badge/捐助/Paypal/purple)](https://www.paypal.me/callmepk/)
 
-| 微信支付 | 支付宝 |
-:-------: | :-----:
-<img width="300" height="300" src="https://patrickwu.space/images/base/wechatpay.jpg"> | <img width="300" height="300" src="https://patrickwu.space/images/base/alipay.jpg"> 
+## 赞助者
+
+支持这个项目，成为赞助者。你的logo和网站链接会在此显示。[[成为赞助者](https://opencollective.com/wslu#sponsor)]。
+
+<a href="https://opencollective.com/wslu/sponsor/0/website" target="_blank"><img src="https://opencollective.com/wslu/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/wslu/sponsor/1/website" target="_blank"><img src="https://opencollective.com/wslu/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/wslu/sponsor/2/website" target="_blank"><img src="https://opencollective.com/wslu/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/wslu/sponsor/3/website" target="_blank"><img src="https://opencollective.com/wslu/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/wslu/sponsor/4/website" target="_blank"><img src="https://opencollective.com/wslu/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/wslu/sponsor/5/website" target="_blank"><img src="https://opencollective.com/wslu/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/wslu/sponsor/6/website" target="_blank"><img src="https://opencollective.com/wslu/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/wslu/sponsor/7/website" target="_blank"><img src="https://opencollective.com/wslu/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/wslu/sponsor/8/website" target="_blank"><img src="https://opencollective.com/wslu/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/wslu/sponsor/9/website" target="_blank"><img src="https://opencollective.com/wslu/sponsor/9/avatar.svg"></a>
 
 
 ## 许可（英文）
