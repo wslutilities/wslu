@@ -1,6 +1,11 @@
-# Contribution
+# Contributing
 
-## Setup
+We love pull requests from everyone. By participating in this project, you
+agree to abide by [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## Code COntribution
+
+### Setup
 
 running the following to get started:
 
@@ -8,7 +13,7 @@ running the following to get started:
 curl -o- https://raw.githubusercontent.com/wslutilities/wslu/develop/scripts/install.sh | bash
 ```
 
-## Build Structure
+### Build Structure
 
 ```
 wslu
@@ -23,20 +28,23 @@ wslu
 |-tests: location for script tests
 \-extras
    |-bats: testing utility
-   \-debian: stuff for 
+   |-debian: files for building .deb
+   |-rpm: files for building .rpm
+   |-arch: files for building Arch Linux packages
+   \-alpine: files for building Alpine Linux packages
 ```
 
-## Build
+### Build
 
 run `make` to build executable to `out` folder.
 run `make clean` to clean `out` folder.
 run `make test` to run tests.
 
-## Test
+### Test
 
 `wslu` use [bats](https://github.com/bats-core/bats-core) for testing. Please refer to [its guide](https://github.com/bats-core/bats-core#writing-tests) to write tests.
 
-## Build Packages
+### Build Packages
 
 For Debian Package, run:
 ```bash
@@ -51,6 +59,16 @@ sudo ./builder-rpm.sh
 ```
 
 It is suggested to do such action in Ubuntu 14.04 LTS or its corresponding environment.
+
+### Push Requests
+
+Make sure that the code changed is tested on:
+- one of the Debian-based distro;
+- one of SUSE;
+- one of Arch distro;
+- one of Alpine distro.
+
+Then create Pull requests [here]().
 
 
 ## Financial contributions
