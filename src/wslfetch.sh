@@ -100,6 +100,34 @@ case "$distro" in
 "${light_gray}       'l0Kk:.              .;xK0l'             ${reset}"
 "${light_gray}          'lkK0xl:;,,,,;:ldO0kl'                ${reset}"
 "${light_gray}              '^:ldxkkkkxdl:^'                  ${reset}");;
+    'wlinux')
+        t="${yellow}${bold}"
+        full_text=(
+"${yellow}        777++++++++++++++++++++++77        ${reset}"
+"${yellow}        7++++++++++++++++++++++++++7       ${reset}"
+"${yellow}      7++++++++++++++++++++++++++++++77    ${reset}"
+"${yellow}     7++++++++++++++,,,=++++++++++++++7    ${reset}"
+"${yellow}   7++++++++++++++,,,,,,,++++++++++++++?   ${reset}"
+"${yellow}  7?++++++++++++++,,,,.,,,++++++++++++++?7 ${reset}"
+"${yellow}  7++++++++++++++++,,+.+,,+++++++++++++++7 ${reset}"
+"${yellow}  ++++++++++++++++,++++:,,++++++++++++++++ ${reset}"
+"${yellow}  ++++++++++++++++,,,:++,,++++++++++++++++ ${reset}"
+"${yellow}  +++++++++++++++,+=,+++,,.+++++++++++++++ ${reset}"
+"${yellow}  ++++++++++++++,.+++++++,.,++++++++++++++ ${reset}"
+"${yellow}  +++++++++++++,,+++++++++,,,+++++++++++++ ${reset}"
+"${yellow}  ++++++++++++.,++++++++++,,,,++++++++++++ ${reset}"
+"${yellow}  +++++++++++=,,++++++++++,,,,++++++++++++ ${reset}"
+"${yellow}  +++++++++++,,:++++++++++.,,,++++++++++++ ${reset}"
+"${yellow}  ++++++++++=+++,++++++++++,,+,+++++++++++ ${reset}"
+"${yellow}  ++++++++=++++++,,++++++.+++++=++++++++++ ${reset}"
+"${yellow}  7+++++++++++++++++++++,,++++++,++++++++7 ${reset}"
+"${yellow}   7++++++=,++++++.,,,,,,,+++,++++++++++7  ${reset}"
+"${yellow}   77+++++++++++..++++++=~,,+++++++++++7   ${reset}"
+"${yellow}     7+++++++++++++++++++++++++++++++=77   ${reset}"
+"${yellow}     777++++++++++++++++++++++++++++777    ${reset}"
+"${yellow}       777++++++++++++++++++++++++777      ${reset}"
+"${yellow}          77=+++++++++++++++++++777        ${reset}"
+"${yellow}             777++++++++++++7777    	     ${reset}");;
     'sles')
         t="${green}${bold}"
         full_text=(
@@ -121,6 +149,31 @@ case "$distro" in
 "${green}       'l0Kk:.              .;xK0l'         ${reset}"
 "${green}          'lkK0xl:;,,,,;:ldO0kl'            ${reset}"
 "${green}              '^:ldxkkkkxdl:^'              ${reset}");;
+    'wlinux')
+	t="${light_orange}${bold}"
+	full_text=(
+"${light_orange}                 _.._                 ${reset}"
+"${light_orange}              .-'    \`-.              ${reset}"
+"${light_orange}             :          ;             ${reset}"
+"${light_orange}             ; ,_    _, ;             ${reset}"
+"${light_orange}             : \\{\"  \"}/ :             ${reset}"
+"${light_orange}            ,'.'\"=..=''.'.            ${reset}"
+"${light_orange}           ; / \      / \ ;           ${reset}"
+"${light_orange}         .' ;   '.__.'   ; '.         ${reset}"
+"${light_orange}      .-' .'              '. '-.      ${reset}"
+"${light_orange}    .'   ;                  ;   '.    ${reset}"
+"${light_orange}   /    /                    \    \   ${reset}"
+"${light_orange}  ;    ;                      ;    ;  ${reset}"
+"${light_orange}  ;   \`-._                  _.-'   ;  ${reset}"
+"${light_orange}   ;      ""--.        .--""      ;   ${reset}"
+"${light_orange}    '.    _    ;      ;    _    .'    ${reset}"
+"${light_orange}    {""..' '._.-.    .-._.' '..""}    ${reset}"
+"${light_orange}     \           ;  ;           /     ${reset}"
+"${light_orange}      :         :    :         :      ${reset}"
+"${light_orange}      :         :.__.:         :      ${reset}"
+"${light_orange}       \       /\"-..-\"\       /       ${reset}"
+"${light_orange}        '-.__.'        '.__.-'        ${reset}");;
+
     *)
         t="${cyan}${bold}"
         full_text=(
@@ -134,6 +187,7 @@ case "$distro" in
             "${cyan}|__/     \\__/ \\______/ |________/${reset} "
             );;
 esac
+
 
 info_text=("${t}Windows 10 Linux Subsystem${reset}"
 "${t}${USER}${reset}@${t}${hostname}${reset}"

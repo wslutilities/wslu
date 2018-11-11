@@ -5,35 +5,32 @@ DATE=`date +%Y%m%d%H%M%S`
 CURRENT_DIR=`pwd`
 
 # Creating folders
-mkdir -p $BUILD_DIR/wslu-$BUILD_VER/{debian,debian/source,src,src/etc,src/mime}
-
-# Build wslu
-cd $CURRENT_DIR/../
-make
+mkdir -p $BUILD_DIR/{DEBIAN/,usr/bin/,usr/share/wslu/,usr/lib/mime/packages/}
 
 # copy files to build folder
-cp out/* $BUILD_DIR/wslu-$BUILD_VER/src/
-cp src/etc/* $BUILD_DIR/wslu-$BUILD_VER/src/etc/
-cp src/mime/* $BUILD_DIR/wslu-$BUILD_VER/src/mime/
-cp extras/debian/* $BUILD_DIR/wslu-$BUILD_VER/debian
+cp $CURRENT_DIR/../out/wsl* $BUILD_DIR/usr/bin/
+cp $CURRENT_DIR/../src/etc/* $BUILD_DIR/usr/share/wslu/
+cp $CURRENT_DIR/../src/mime/* $BUILD_DIR/usr/lib/mime/packages
+cp $CURRENT_DIR/../extras/debian/* $BUILD_DIR/DEBIAN
 
 # modifying the files
-sed -i s/VERSIONPLACEHOLDER/$BUILD_VER/g $BUILD_DIR/wslu-$BUILD_VER/debian/control
-sed -i s/DATEPLACEHOLDER/$DATE/g $BUILD_DIR/wslu-$BUILD_VER/debian/control
-chmod 755 $BUILD_DIR/wslu-$BUILD_VER/debian/{postinst,prerm,rules}
+sed -i s/VERSIONPLACEHOLDER/$BUILD_VER/g $BUILD_DIR/DEBIAN/control
+sed -i s/DATEPLACEHOLDER/$DATE/g $BUILD_DIR/DEBIAN/control
+chmod 755 $BUILD_DIR/DEBIAN/{postinst,prerm}
 
-# Build packages
-cd $BUILD_DIR/wslu-$BUILD_VER/
-dpkg-buildpackage -rsudo -us -uc
+# export md5 hashes
+cd $BUILD_DIR
+find . -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEBIAN.*' -printf '%P ' | xargs md5sum > DEBIAN/md5sums
 
-# Move built packages
-[ -d $CURRENT_DIR/../target/debian ] || mkdir -p $CURRENT_DIR/../target/debian
-cd $CURRENT_DIR/../target/debian
-cp -r $BUILD_DIR/*.dsc .
-cp -r $BUILD_DIR/*.deb .
-cp -r $BUILD_DIR/*.tar.gz .
-cp -r $BUILD_DIR/*.buildinfo .
-cp -r $BUILD_DIR/*.changes .
+# setting permissions
+find $BUILD_DIR -type d -exec chmod 0755 {} \;
+find $BUILD_DIR/usr/ -type f -exec chmod 0555 {} \;
+find $BUILD_DIR/usr/lib/mime/packages/ -type f -exec chmod 644 {} \;
+
+# build
+[ -d $CURRENT_DIR/../target ] || mkdir $CURRENT_DIR/../target
+cd $CURRENT_DIR/../target/
+sudo dpkg -b $BUILD_DIR/ wslu-${BUILD_VER}.deb
 
 # CLeanup everything
 rm -rf $BUILD_DIR

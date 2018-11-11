@@ -1,10 +1,10 @@
 version="25"
 
 help_short="wslsys (-h|-v|-S|-U|-b|-B|-fB|-R|-K|-P) -s"
-branch=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "BuildBranch" 2>&1 | sed -n 3p | sed -e "s/BuildBranch//" | sed -e 's/^[[:space:]]*//' | awk '{$1=""; sub("  ", " "); print}' | sed -e 's|\r||g'`
-build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
-full_build=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "BuildLabEx" 2>&1 | sed -n 3p | sed -e "s/BuildLabEx//" | sed -e 's/^[[:space:]]*//' | awk '{$1=""; sub("  ", " "); print}' | sed -e 's|\r||g'`
-installdate=`reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "InstallDate" | egrep -o "(0x|0X)[a-fA-F0-9]+" | xargs printf "%d\n" | bc | xargs -I '{}' date --date="@{}"`
+branch=`/mnt/c/Windows/System32/reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "BuildBranch" 2>&1 | sed -n 3p | sed -e "s/BuildBranch//" | sed -e 's/^[[:space:]]*//' | awk '{$1=""; sub("  ", " "); print}' | sed -e 's|\r||g'`
+build=`/mnt/c/Windows/System32/reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
+full_build=`/mnt/c/Windows/System32/reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "BuildLabEx" 2>&1 | sed -n 3p | sed -e "s/BuildLabEx//" | sed -e 's/^[[:space:]]*//' | awk '{$1=""; sub("  ", " "); print}' | sed -e 's|\r||g'`
+installdate=`/mnt/c/Windows/System32/reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "InstallDate" | egrep -o "(0x|0X)[a-fA-F0-9]+" | xargs printf "%d\n" | bc | xargs -I '{}' date --date="@{}"`
 release="$(cat /etc/os-release | grep "PRETTY_NAME=" | sed -e 's/PRETTY_NAME=//g' -e 's/"//g')"
 kernel="$(</proc/sys/kernel/ostype) $(</proc/sys/kernel/osrelease)"
 
