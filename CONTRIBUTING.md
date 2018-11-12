@@ -49,17 +49,17 @@ run `make test` to run tests.
 
 For Debian Package, run:
 ```bash
-cd script
+cd extras/script
 sudo ./builder-deb.sh
 ```
 
 For RPM Package, run:
 ```bash
-cd script
+cd extras/script
 sudo ./builder-rpm.sh
 ```
 
-It is suggested to do such action in Ubuntu 14.04 LTS or its corresponding environment.
+It is suggested to do such action in Ubuntu 16.04 LTS or its corresponding environment.
 
 ### Push Requests
 
