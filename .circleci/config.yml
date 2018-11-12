@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Install via Source Code
           command: |
-            cd scripts/
+            cd extras/scripts/
             bash -x ./install.sh
   genpkg:
     machine: true
@@ -28,7 +28,7 @@ jobs:
           name: Build Package
           command: |
             make
-            cd scripts
+            cd extras/scripts
             sudo bash -x ./builder-deb.sh
             sudo bash -x ./builder-rpm.sh
             mkdir -p /tmp/pkgs
