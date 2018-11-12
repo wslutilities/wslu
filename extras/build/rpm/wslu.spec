@@ -54,7 +54,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(555,root,root) /usr/share/wslu/runHidden.vbs
 %attr(555,root,root) /usr/share/wslu/wsl.ico
 %changelog
-* Wed Jul 25 2018 patrick330602 <wotingwu@live.com>
-- fix a typo in wslfetch;
-- fixed a bug in wslupath with -H parameter;
-- wslusc update: icon support and hidden command prompt for GUI application;
+* Mon Nov 12 2018 patrick330602 <wotingwu@live.com>
+- wslusc: add env and name param;
+- wslusc: add icon conversion feature(.svg/.png);
+- wslfetch: add WLinux ASCII art;
+- project: improved structure/license change;
+- project: build structure minor change;
+- project: new improved multilingual README.
+

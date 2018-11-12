@@ -3,14 +3,14 @@
 We love pull requests from everyone. By participating in this project, you
 agree to abide by [Code of Conduct](CODE_OF_CONDUCT.md).
 
-## Code COntribution
+## Code contributions
 
 ### Setup
 
-running the following to get started:
+**DO NOT `git clone`.** Running the following to get started:
 
 ```bash
-curl -o- https://raw.githubusercontent.com/wslutilities/wslu/develop/scripts/install.sh | bash
+curl -o- https://raw.githubusercontent.com/wslutilities/wslu/develop/extras/scripts/install.sh | bash
 ```
 
 ### Build Structure
@@ -24,14 +24,15 @@ wslu
 |  |  \-runHidden.vbs: script for wslusc
 |  |-wslu-header: Header file of all script
 |  \-<components>.sh: Components of script
-|-scripts: scripts used for building, installing and uninstalling
 |-tests: location for script tests
 \-extras
    |-bats: testing utility
-   |-debian: files for building .deb
-   |-rpm: files for building .rpm
-   |-arch: files for building Arch Linux packages
-   \-alpine: files for building Alpine Linux packages
+   |-scripts: scripts used for building, installing and uninstalling
+   \-build
+      |-debian: files for building .deb
+      |-rpm: files for building .rpm
+      |-arch: files for building Arch Linux packages
+      \-alpine: files for building Alpine Linux packages
 ```
 
 ### Build
@@ -68,7 +69,7 @@ Make sure that the code changed is tested on:
 - one of Arch distro;
 - one of Alpine distro.
 
-Then create Pull requests [here]().
+Then create Pull requests [here](https://github.com/wslutilities/wslu/compare).
 
 
 ## Financial contributions
