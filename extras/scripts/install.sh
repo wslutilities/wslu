@@ -11,6 +11,9 @@ fi
 cat << EOF
 wslu installation for developers
 ---------------------------------
+This is not a installer for normal user.
+It provides completed development envir-
+-onment of wslu, procede with caution. 
 EOF
 
 distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME="//g')"
@@ -33,12 +36,12 @@ echo "You are using: $distro"
 echo "Installing dependencies...."
 case "$distro" in
 	'ubuntu'|'debian'|'kali'|'wlinux')
-		sudo apt purge wslu
-		sudo apt install -y git build-essential bc wget unzip make
+		sudo apt purge wlinux-wslu wslu
+		sudo apt install -y git build-essential bc wget unzip make ruby-ronn imagemagick
 		;;
 	'opensuse'|'sles')
 		sudo zypper rm wslu
-		sudo zypper -n install git bc wget unzip make
+		sudo zypper -n install git bc wget unzip make rubygem-ronn imagemagick
 		;;
 esac
 if [[ ! -f /etc/fake-wsl-release ]]; then
@@ -63,14 +66,15 @@ if [[ "$ppep" = "Restricted" ]]; then
                WARNING
 ***************************************
 The execution policy for powershell.exe
-is set to Restricted. You should set P-
-owershell Execution Policy to Unrestri-
-cted with a Powershell Prompt with Adm-
-inistrator right:
+should not be Restricted. You should se
+t Powershell Execution Policy to Unrest
+ricted with a Powershell Prompt with Ad
+ministrator right:
+
    Set-ExecutionPolicy Unrestricted
-Due to the limitation, it is not possi-
-ble to invoke this command from Bash P-
-rompt.
+
+Due to the limitation, it is not possib
+le to invoke this command from WSL.
 EOF
 fi
 
@@ -93,7 +97,7 @@ else
 fi
 
 if [ `pwd | grep wslu` ]; then
-	cd ../
+	cd ../../
 	CURRENT_PATH="$(pwd)"
 else
 	git clone https://github.com/patrick330602/wslu.git

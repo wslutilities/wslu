@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Install via Source Code
           command: |
-            cd scripts/
+            cd extras/scripts/
             bash -x ./install.sh
   genpkg:
     machine: true
@@ -23,16 +23,16 @@ jobs:
           name: Install Pre-requisites
           command: |
             sudo apt-get update -qq
-            sudo apt-get install -qq build-essential rpm sudo dh-make devscripts
+            sudo apt-get install -qq build-essential rpm sudo
       - run:
           name: Build Package
           command: |
             make
-            cd scripts
+            cd extras/scripts
             sudo bash -x ./builder-deb.sh
             sudo bash -x ./builder-rpm.sh
             mkdir -p /tmp/pkgs
-            sudo mv ../target/* /tmp/pkgs
+            sudo mv ../../target/* /tmp/pkgs
       - store_artifacts:
             path: /tmp/pkgs
 workflows:

@@ -1,3 +1,0 @@
-src/wsl* /usr/bin
-src/etc/* usr/share/wslu
-src/mime/* usr/lib/mime/packages

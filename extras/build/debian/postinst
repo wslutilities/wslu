@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 1
+update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 1
+
+cat << EOF
+***************************************
+               WARNING
+***************************************
+The execution policy for powershell.exe
+should not be Restricted. You should se
+t Powershell Execution Policy to Unrest
+ricted with a Powershell Prompt with Ad
+ministrator right:
+
+   Set-ExecutionPolicy Unrestricted
+
+Due to the limitation, it is not possib
+le to invoke this command from WSL.
+EOF

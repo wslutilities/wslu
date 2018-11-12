@@ -100,6 +100,27 @@ case "$distro" in
 "${light_gray}       'l0Kk:.              .;xK0l'             ${reset}"
 "${light_gray}          'lkK0xl:;,,,,;:ldO0kl'                ${reset}"
 "${light_gray}              '^:ldxkkkkxdl:^'                  ${reset}");;
+    'wlinux')
+        t="${light_orange}${bold}"
+        full_text=(
+"${light_orange}  ++++++++++++++++++++++++++++++++  ${reset}"
+"${light_orange}  ++++++++++++++,,,=++++++++++++++  ${reset}"
+"${light_orange}  ++++++++++++,,,,,,,+++++++++++++  ${reset}"
+"${light_orange}  ++++++++++++,,,,.,,,++++++++++++  ${reset}"
+"${light_orange}  +++++++++++++,,+.+,,++++++++++++  ${reset}"
+"${light_orange}  ++++++++++++,++++:,,++++++++++++  ${reset}"
+"${light_orange}  ++++++++++++,,,:++,,++++++++++++  ${reset}"
+"${light_orange}  +++++++++++,+=,+++,,.+++++++++++  ${reset}"
+"${light_orange}  ++++++++++,.+++++++,.,++++++++++  ${reset}"
+"${light_orange}  +++++++++,,+++++++++,,,+++++++++  ${reset}"
+"${light_orange}  ++++++++.,++++++++++,,,,++++++++  ${reset}"
+"${light_orange}  +++++++=,,++++++++++,,,,++++++++  ${reset}"
+"${light_orange}  +++++++,,:++++++++++.,,,++++++++  ${reset}"
+"${light_orange}  ++++++=+++,++++++++++,,+,+++++++  ${reset}"
+"${light_orange}  ++++=++++++,,++++++.+++++=++++++  ${reset}"
+"${light_orange}  ++++++++++++++++++,,++++++,+++++  ${reset}"
+"${light_orange}  ++++=,++++++.,,,,,,,+++,++++++++  ${reset}"
+"${light_orange}  ++++++++++..++++++=~,,++++++++++  ${reset}");;
     'sles')
         t="${green}${bold}"
         full_text=(
@@ -134,6 +155,7 @@ case "$distro" in
             "${cyan}|__/     \\__/ \\______/ |________/${reset} "
             );;
 esac
+
 
 info_text=("${t}Windows 10 Linux Subsystem${reset}"
 "${t}${USER}${reset}@${t}${hostname}${reset}"
