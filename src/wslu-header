@@ -68,8 +68,8 @@ fi
 function help
 {
 	echo -e "`basename "$1"` - Component of Windows 10 Linux Subsystem Utility
-Usage: $2"
-}
+Usage: $2
 
-#no_longer_use_but_might_use_it_in_the_future="For more help for `basename "$1"`, visit the following site: https://github.com/patrick330602/wslu/wiki/`basename "$1"`"
+For more help for `basename "$1"`, visit the following site: https://github.com/patrick330602/wslu/wiki/`basename "$1"`"
+}
 
