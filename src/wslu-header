@@ -19,7 +19,6 @@
 
 # global variables
 wslu_version=1.10
-interop_prefix=${interop_prefix:-"if [ -f /etc/wsl.conf ]; then awk -F '=' '/root/ {print $2}' /etc/wsl.conf; else echo '/mnt/'; fi"}
 
 ## color
 black=`echo -e '\e[30m'`
@@ -55,7 +54,7 @@ if [[ "$distro" == *WLinux* ]]; then
 	distro=wlinux
 elif [[ "$distro" == Ubuntu* ]]; then
 	distro="ubuntu"
-elif [[ "$distro" = *Debian* ]]; then
+elif [[ "$distro" == *Debian* ]]; then
 	distro="debian"
 elif [[ "$distro" == *Kali* ]]; then
 	distro="kali"
@@ -74,5 +73,15 @@ Usage: $2
 For more help for `basename "$1"`, visit the following site: https://github.com/patrick330602/wslu/wiki/`basename "$1"`"
 }
 
-
-
+function interop_prefix {
+	if [ -f /etc/wsl.conf ]; then
+		tmp=$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf)
+		if [ "$tmp" == "" ]; then
+			echo "/mnt/"
+		else
+			echo $tmp
+		fi
+	else
+		echo "/mnt/"
+	fi
+}
