@@ -17,8 +17,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# global config
+# global variables
 wslu_version=1.10
+interop_prefix=${interop_prefix:-"if [ -f /etc/wsl.conf ]; then awk -F '=' '/root/ {print $2}' /etc/wsl.conf; else echo '/mnt/'; fi"}
 
 ## color
 black=`echo -e '\e[30m'`
@@ -65,11 +66,13 @@ elif [[ "$distro" == SLES* ]]; then
 fi
 
 
-function help
-{
+# functions
+function help {
 	echo -e "`basename "$1"` - Component of Windows 10 Linux Subsystem Utility
 Usage: $2
 
 For more help for `basename "$1"`, visit the following site: https://github.com/patrick330602/wslu/wiki/`basename "$1"`"
 }
+
+
 
