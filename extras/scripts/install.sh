@@ -36,11 +36,11 @@ echo "You are using: $distro"
 echo "Installing dependencies...."
 case "$distro" in
 	'ubuntu'|'debian'|'kali'|'wlinux')
-		sudo apt purge wlinux-wslu wslu
+		sudo apt purge -y wlinux-wslu wslu
 		sudo apt install -y git build-essential bc wget unzip make ruby-ronn imagemagick
 		;;
 	'opensuse'|'sles')
-		sudo zypper rm wslu
+		sudo zypper -n rm wslu
 		sudo zypper -n install git bc wget unzip make rubygem-ronn imagemagick
 		;;
 esac
@@ -78,24 +78,6 @@ le to invoke this command from WSL.
 EOF
 fi
 
-echo -e "\ntesting cmd.exe..."
-cmd.exe /c ver
-if [[ $? -eq 0 ]]; then
-	echo "cmd.exe can be invoked."
-else
-	echo "cmd.exe failed to launch."
-	exit 1
-fi
-
-echo -e "\ntesting reg.exe..."
-reg.exe /?
-if [[ $? -eq 0 ]]; then
-	echo "reg.exe can be invoked."
-else
-	echo "reg.exe failed to launch."
-	exit 1
-fi
-
 if [ `pwd | grep wslu` ]; then
 	cd ../../
 	CURRENT_PATH="$(pwd)"
@@ -117,8 +99,8 @@ PATH=$(getconf PATH)
 
 for f in out/wsl*; do
 	bname="$(basename $f)"
-   		sudo ln -s $CURRENT_PATH/$f /usr/bin/$bname;
-	echo "exec $f linked to /usr/bin/$bname";
+	sudo ln -s $CURRENT_PATH/$f /usr/bin/$bname
+	echo "exec $f linked to /usr/bin/$bname"
 done
 
 sudo cp $CURRENT_PATH/src/mime/wslview /usr/lib/mime/packages/wslview
