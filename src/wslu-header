@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # global config
-wslu_version=1.9
+wslu_version=1.10
 
 ## color
 black=`echo -e '\e[30m'`
