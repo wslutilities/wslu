@@ -44,7 +44,7 @@ This is a WSL system information printer to print out system informations from W
 **wslfetch**
 This is a WSL Screenshoot Information Tool to print information in an elegant way.
 
-**wslupath**
+**wslvar**
 This is a WSL Windows path Converter that can convert Windows path to other styles of path.
 
 **wslview**
