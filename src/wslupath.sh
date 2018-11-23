@@ -33,7 +33,7 @@ function path_converter
 
 function reg_path_converter
 {
-	new_path="$(/mnt/c/Windows/System32/reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "$@" 2>&1 | sed -n 3p | sed -e "s/$@//" | sed -e 's/^[[:space:]]*//' | awk '{$1=""; sub("  ", " "); print}' | sed -e 's|\r||g')"
+	new_path="$(winps_exec '(Get-ItemProperty "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders")."$@"')"
 	echo $new_path
 }
 
@@ -103,7 +103,7 @@ else
 			-h|--help) help $0 "$help_short"; exit;;
 			-v|--version) echo "wslpath v$wslu_version.$version"; exit;;
 			-R|--avail-reg) echo "Available registery input:"
-			/mnt/c/Windows/System32/reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /s | tail -n +3 | head -n -1 | sed -e "s|REG_EXPAND_SZ||g" | sed -e 's/ \+/ /g' -e 's/^ //g'
+			winps_exec "Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders'"| tail -n +3 | head -n -10
 			exit;;
 			*)
 			if [[ "$reg_path" == "1" ]]; then

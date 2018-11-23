@@ -21,7 +21,7 @@ for args; do
 done
 
 if [[ "$lname" != "" ]]; then
-	powershell.exe Start "$lname"
+	winps_exec Start "$lname"
 else
 	echo "${error}No input, aborting"
 	exit 21
