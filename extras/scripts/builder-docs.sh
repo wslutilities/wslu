@@ -2,9 +2,8 @@
 git clone https://github.com/wslutilities/wslu.wiki.git
 
 OUTPATH="../../gendocs"
-SOURCES=(wslfetch wslsys wslupath wslusc)
+SOURCES=(wslfetch wslsys wslupath wslusc wslview)
 BUILD_TIME="$(date +%Y-%m-%d)"
-BUILD_VER=`grep 'wslu_version=' ../../src/wslu-header | cut -d'=' -f 2 | xargs`
 
 [ -d $OUTPATH ] || mkdir $OUTPATH
 for file in "${SOURCES[@]}"; do
@@ -14,7 +13,7 @@ for file in "${SOURCES[@]}"; do
     rm wslu.wiki/${file}.html
 
     mv wslu.wiki/${file} wslu.wiki/${file}.1
-    sed -i "s|.TH \"$NAME_CAP\" \"\"|.TH \"$NAME_CAP\" \"$BUILD_VER\"|" wslu.wiki/${file}.1
+    sed -i "s|.TH \"$NAME_CAP\" \"\"|.TH \"$NAME_CAP\" \"1\"|" wslu.wiki/${file}.1
     sed -i 's|.SH "NAME"||' wslu.wiki/${file}.1
     sed -i 's|\\fBwslfetch\\fR||' wslu.wiki/${file}.1
     sed -i 's|Manpage Name|NAME|' wslu.wiki/${file}.1

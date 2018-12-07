@@ -40,6 +40,7 @@ wslu
 run `make` to build executable to `out` folder.
 run `make clean` to clean `out` folder.
 run `make test` to run tests.
+run `cd extras/scripts && ./builder-docs.sh` to build docs.
 
 ### Test
 

@@ -7,6 +7,9 @@ CURRENT_DIR=`pwd`
 # Creating folders
 mkdir -p $BUILD_DIR/{DEBIAN/,usr/bin/,usr/share/wslu/,usr/lib/mime/packages/}
 
+# build documents
+bash builder-docs.sh
+
 # copy files to build folder
 cp $CURRENT_DIR/../../out/wsl* $BUILD_DIR/usr/bin/
 cp $CURRENT_DIR/../../src/etc/* $BUILD_DIR/usr/share/wslu/

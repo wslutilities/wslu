@@ -45,7 +45,7 @@
 **wslfetch**
 这是类似于screenfetch的系统信息展示工具。
 
-**wslupath**
+**wslvar**
 这是用于转换Windows/WSL路径的工具。
 
 **wslview**
@@ -112,7 +112,7 @@ sudo zypper in wslu
 
 ## 许可（英文）
 
-本应用使用了[LGPLv3](LICENSE)许可。
+本应用使用了[GPLv3](LICENSE)许可。
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_large)
 

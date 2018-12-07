@@ -110,6 +110,6 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 
 ## License
 
-This project uses [LGPLv3](LICENSE) License.
+This project uses [GPLv3](LICENSE) License.
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_large)
