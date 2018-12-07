@@ -20,28 +20,14 @@
 这是一套适用于Windows 10 Linux子系统的工具组，可以在Windows 10 Linux子系统下完成诸如将Windows路径转换为WSL专属路径或者创建你最喜爱的Linux程序桌面快捷方式等工作。需要Windows 10创造者更新或更高。
 
 **目前支持的Linux发行版：**
-- [WLinux][1]和其[企业版][2]
-- Ubuntu[最新版][3]，[16.04 LTS][4]和[18.04 LTS][5]
-- OpenSUSE Leap [42][6]和[15.0][7]
-- SUSE Linux Enterprise Server [12][8]和[15][9]
-- [Debian GNU/Linux][10]
-- [Kali Linux][11]
-- 通过[ArchWSL][12]实现的Arch Linux
-- 通过[AlpineWSL][13]或[Alpine WSL][14]实现的Alpine Linux
-[1]: https://www.microsoft.com/store/productId/9NV1GV1PXZ6P
-[2]: https://www.microsoft.com/store/productId/9N8LP0X93VCP
-[3]: https://www.microsoft.com/store/productId/9NBLGGH4MSV6
-[4]: https://www.microsoft.com/store/productId/9PJN388HP8C9
-[5]: https://www.microsoft.com/store/productId/9N9TNGVNDL3Q
-[6]: https://www.microsoft.com/store/productId/9NJVJTS82TJX
-[7]: https://www.microsoft.com/store/productId/9N1TB6FPVJ8C
-[8]: https://www.microsoft.com/store/productId/9P32MWBH6CNS
-[9]: https://www.microsoft.com/store/productId/9PMW35D7FNLX
-[10]: https://www.microsoft.com/store/productId/9MSVKQC78PK6
-[11]: https://www.microsoft.com/store/productId/9PKR34TNCV07
-[12]: https://github.com/yuk7/ArchWSL
-[13]: https://github.com/yuk7/AlpineWSL
-[14]: https://www.microsoft.com/store/productId/9P804CRF0395
+- [WLinux](https://www.microsoft.com/store/productId/9NV1GV1PXZ6P)和其[企业版](https://www.microsoft.com/store/productId/9N8LP0X93VCP)
+- Ubuntu[最新版](https://www.microsoft.com/store/productId/9NBLGGH4MSV6)，[16.04 LTS](https://www.microsoft.com/store/productId/9PJN388HP8C9)和[18.04 LTS](https://www.microsoft.com/store/productId/9N9TNGVNDL3Q)
+- OpenSUSE Leap [42](https://www.microsoft.com/store/productId/9NJVJTS82TJX)和[15.0](https://www.microsoft.com/store/productId/9N1TB6FPVJ8C)
+- SUSE Linux Enterprise Server [12](https://www.microsoft.com/store/productId/9P32MWBH6CNS)和[15](https://www.microsoft.com/store/productId/9PMW35D7FNLX)
+- [Debian GNU/Linux](https://www.microsoft.com/store/productId/9MSVKQC78PK6)
+- [Kali Linux](https://www.microsoft.com/store/productId/9PKR34TNCV07)
+- 通过[ArchWSL](https://github.com/yuk7/ArchWSL)实现的Arch Linux
+- 通过[AlpineWSL](https://github.com/yuk7/AlpineWSL)或[Alpine WSL](https://www.microsoft.com/store/productId/9P804CRF0395)实现的Alpine Linux
 
 
 旧版Ubuntu不再被支持。
@@ -123,6 +109,8 @@ sudo zypper in wslu
 
 
 ## 许可（英文）
+
+<img width="150" src="https://www.gnu.org/graphics/gplv3-with-text-136x68.png">
 
 本应用使用了[GPLv3](LICENSE)许可。
 
