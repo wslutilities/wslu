@@ -142,6 +142,25 @@ case "$distro" in
 "${green}       'l0Kk:.              .;xK0l'         ${reset}"
 "${green}          'lkK0xl:;,,,,;:ldO0kl'            ${reset}"
 "${green}              '^:ldxkkkkxdl:^'              ${reset}");;
+    'alpine')
+        t="${blue}${bold}"
+        full_text=(
+"${light_blue}        .................          ${reset}"
+"${light_blue}       ∴::::::::::::::::∴         ${reset}"
+"${light_blue}      ∴::::::::::::::::::∴        ${reset}"
+"${light_blue}     ∴::::::::::::::::::::∴       ${reset}"
+"${light_blue}    ∴:::::::. :::::':::::::∴      ${reset}"
+"${light_blue}   ∴:::::::.   ;::; ::::::::∴     ${reset}"
+"${light_blue}  ∴::::::;      ∵    :::::::∴    ${reset}"
+"${light_blue} ∴:::::.     .         .::::::∴   ${reset}"
+"${light_blue}  ::::::     :::.    .    ::::::   ${reset}"
+"${light_blue} ∵::::     ::::::.  ::.   ::::∵   ${reset}"
+"${light_blue}  ∵:..   .:;::::::: :::.  :::∵    ${reset}"
+"${light_blue}   ∵::::::::::::::::::::::::∵     ${reset}"
+"${light_blue}    ∵::::::::::::::::::::::∵      ${reset}"
+"${light_blue}     ∵::::::::::::::::::::∵       ${reset}"
+"${light_blue}       ::::::::::::::::::::        ${reset}"
+"${light_blue}       ∵::::::::::::::::∵         ${reset}");;
     *)
         t="${cyan}${bold}"
         full_text=(
@@ -164,7 +183,9 @@ info_text=("${t}Windows 10 Linux Subsystem${reset}"
 "${t}RELEASE:${reset}	${release}"
 "${t}KERNEL:${reset}	${kernel}"
 "${t}UPTIME:${reset}	${uptime}"
-"${t}PACKAGES:${reset}	${packages}")
+"${t}PACKAGES:${reset}	${packages}"
+""
+"")
 
 line(){
     if [[ "$is_line" == "1" ]]; then

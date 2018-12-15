@@ -39,8 +39,8 @@ light_cyan=`echo -e '\e[1;36m'`
 light_gray=`echo -e '\e[37m'`
 orange=`echo -e '\e[38;5;202m'`
 light_orange=`echo -e '\e[38;5;214m'`
-bold=`tput bold`
-reset=`tput sgr0`
+bold=`echo -e '\033[1m'`
+reset=`echo -e '\033(B\033[m'`
 
 ## indicator
 info="${green}[info]${reset}"
@@ -88,4 +88,6 @@ elif [[ "$distro" == openSUSE* ]]; then
 	distro="opensuse"
 elif [[ "$distro" == SLES* ]]; then
 	distro="sles"
+elif [[ "$distro" == Alpine* ]]; then
+	distro="alpine"
 fi

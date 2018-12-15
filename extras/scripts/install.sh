@@ -29,6 +29,8 @@ elif [[ "$distro" == openSUSE* ]]; then
 	distro="opensuse"
 elif [[ "$distro" == SLES* ]]; then
 	distro="sles"
+elif [[ "$distro" == Alpine* ]]; then
+	distro="alpine"
 fi
 
 echo "You are using: $distro"
@@ -43,6 +45,8 @@ case "$distro" in
 		sudo zypper -n rm wslu
 		sudo zypper -n install git bc wget unzip make rubygem-ronn imagemagick
 		;;
+	'alpine')
+	    sudo apk add git bc wget unzip make bash-completion ;;
 esac
 if [[ ! -f /etc/fake-wsl-release ]]; then
 	echo -e "\nWSL Interopability\n*********************"
@@ -51,7 +55,7 @@ if [[ ! -f /etc/fake-wsl-release ]]; then
 fi
 
 echo -e "\ntesting powershell.exe..."
-powershell.exe -NoProfile -NonInteractive -Command Get-History
+/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -Command Get-History
 if [[ $? -eq 0 ]]; then
 	echo "powershell.exe can be invoked."
 else
@@ -103,12 +107,14 @@ for f in out/wsl*; do
 	echo "exec $f linked to /usr/bin/$bname"
 done
 
-sudo cp $CURRENT_PATH/src/mime/wslview /usr/lib/mime/packages/wslview
-echo "mime file copied"
+if [[ "$distro" != "alpine" ]]; then
+	sudo cp $CURRENT_PATH/src/mime/wslview /usr/lib/mime/packages/wslview
+	sudo update-mime
+	echo "mime file copied"
+fi
+
 [ -d /usr/share/wslu ] || sudo mkdir /usr/share/wslu
 sudo cp $CURRENT_PATH/src/etc/* /usr/share/wslu
-
-sudo update-mime
 sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 10
 sudo update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 10
 
