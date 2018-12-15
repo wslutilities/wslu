@@ -54,8 +54,10 @@ if [[ ! -f /etc/fake-wsl-release ]]; then
 	echo ""
 fi
 
+### Powershell Testing
 echo -e "\ntesting powershell.exe..."
-/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -Command Get-History
+PATH="/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:$PATH"
+powershell.exe -NoProfile -NonInteractive -Command Get-History
 if [[ $? -eq 0 ]]; then
 	echo "powershell.exe can be invoked."
 else
@@ -81,6 +83,8 @@ Due to the limitation, it is not possib
 le to invoke this command from WSL.
 EOF
 fi
+PATH=$(getconf PATH)
+
 
 if [ `pwd | grep wslu` ]; then
 	cd ../../

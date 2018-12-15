@@ -24,6 +24,9 @@ wslu_version=1.10
 LC_ALL=C
 LANG=C
 
+# MAKE SURE INTEROP IS ENABLED
+echo 1 > /proc/sys/fs/binfmt_misc/WSLInterop
+
 ## color
 black=`echo -e '\e[30m'`
 red=`echo -e '\e[31m'`
