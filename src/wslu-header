@@ -20,6 +20,10 @@
 # Version
 wslu_version=1.10
 
+# Speed up script by not using unicode.
+LC_ALL=C
+LANG=C
+
 ## color
 black=`echo -e '\e[30m'`
 red=`echo -e '\e[31m'`

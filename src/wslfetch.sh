@@ -1,4 +1,4 @@
-version=26
+version=28
 
 is_line=0
 is_splash=0
@@ -185,7 +185,7 @@ info_text=("${t}Windows 10 Linux Subsystem${reset}"
 "${t}UPTIME:${reset}	${uptime}"
 "${t}PACKAGES:${reset}	${packages}"
 ""
-"")
+"   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}")
 
 line(){
     if [[ "$is_line" == "1" ]]; then

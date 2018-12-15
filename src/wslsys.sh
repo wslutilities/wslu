@@ -1,4 +1,4 @@
-version="26"
+version="27"
 
 help_short="wslsys (-h|-v|-S|-U|-b|-B|-fB|-R|-K|-P) -s"
 branch=`winps_exec "(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').'BuildBranch'"`
