@@ -11,6 +11,7 @@ mkdir -p $BUILD_DIR/{DEBIAN/,usr/bin/,usr/share/wslu/,usr/lib/mime/packages/}
 bash builder-docs.sh
 
 # copy files to build folder
+cp $CURRENT_DIR/../../gendocs/* $BUILD_DIR/usr/share/man/man1
 cp $CURRENT_DIR/../../out/wsl* $BUILD_DIR/usr/bin/
 cp $CURRENT_DIR/../../src/etc/* $BUILD_DIR/usr/share/wslu/
 cp $CURRENT_DIR/../../src/mime/* $BUILD_DIR/usr/lib/mime/packages
@@ -35,6 +36,6 @@ find $BUILD_DIR/usr/lib/mime/packages/ -type f -exec chmod 644 {} \;
 cd $CURRENT_DIR/../../target/
 sudo dpkg -b $BUILD_DIR/ wslu-${BUILD_VER}.deb
 
-# CLeanup everything
+# Cleanup everything
 rm -rf $BUILD_DIR
 cd $CURRENT_DIR

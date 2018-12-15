@@ -30,9 +30,11 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p ${RPM_BUILD_ROOT}/usr/bin
 mkdir -p ${RPM_BUILD_ROOT}/usr/share/wslu
 mkdir -p ${RPM_BUILD_ROOT}/usr/lib/mime/packages
+mkdir -p ${RPM_BUILD_ROOT}/usr/share/man/man1
 install -m 755 wsl* ${RPM_BUILD_ROOT}%{_bindir}
 install -m 555 etc/wsl.ico ${RPM_BUILD_ROOT}/usr/share/wslu
 install -m 555 etc/runHidden.vbs ${RPM_BUILD_ROOT}/usr/share/wslu
+install -m 555 docs/*.1 ${RPM_BUILD_ROOT}/usr/share/man/man1
 
 %post
 %{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 1
@@ -53,6 +55,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/wslview
 %attr(555,root,root) /usr/share/wslu/runHidden.vbs
 %attr(555,root,root) /usr/share/wslu/wsl.ico
+%attr(555,root,root) /usr/share/man/man1/wslusc.1
+%attr(555,root,root) /usr/share/man/man1/wslfetch.1
+%attr(555,root,root) /usr/share/man/man1/wslsys.1
+%attr(555,root,root) /usr/share/man/man1/wslupath.1
+%attr(555,root,root) /usr/share/man/man1/wslview.1
 %changelog
 * Mon Nov 12 2018 patrick330602 <wotingwu@live.com>
 - wslusc: add env and name param;
