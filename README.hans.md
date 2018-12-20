@@ -17,19 +17,6 @@
 
 这是一套适用于Windows 10 Linux子系统的工具组，可以在Windows 10 Linux子系统下完成诸如将Windows路径转换为WSL专属路径或者创建你最喜爱的Linux程序桌面快捷方式等工作。需要Windows 10创造者更新或更高。
 
-**目前支持的Linux发行版：**
-- [WLinux](https://www.microsoft.com/store/productId/9NV1GV1PXZ6P)和其[企业版](https://www.microsoft.com/store/productId/9N8LP0X93VCP)
-- Ubuntu[最新版](https://www.microsoft.com/store/productId/9NBLGGH4MSV6)，[16.04 LTS](https://www.microsoft.com/store/productId/9PJN388HP8C9)和[18.04 LTS](https://www.microsoft.com/store/productId/9N9TNGVNDL3Q)
-- OpenSUSE Leap [42](https://www.microsoft.com/store/productId/9NJVJTS82TJX)和[15.0](https://www.microsoft.com/store/productId/9N1TB6FPVJ8C)
-- SUSE Linux Enterprise Server [12](https://www.microsoft.com/store/productId/9P32MWBH6CNS)和[15](https://www.microsoft.com/store/productId/9PMW35D7FNLX)
-- [Debian GNU/Linux](https://www.microsoft.com/store/productId/9MSVKQC78PK6)
-- [Kali Linux](https://www.microsoft.com/store/productId/9PKR34TNCV07)
-- 通过[ArchWSL](https://github.com/yuk7/ArchWSL)实现的Arch Linux
-- 通过[AlpineWSL](https://github.com/yuk7/AlpineWSL)或[Alpine WSL](https://www.microsoft.com/store/productId/9P804CRF0395)实现的Alpine Linux
-
-
-旧版Ubuntu不再被支持。
-
 ## 功能
 
 **wslusc**
