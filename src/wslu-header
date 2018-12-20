@@ -97,4 +97,6 @@ elif [[ "$distro" == SLES* ]]; then
 	distro="sles"
 elif [[ "$distro" == Alpine* ]]; then
 	distro="alpine"
+elif [[ "$distro" == Arch* ]]; then
+	distro="archlinux"
 fi

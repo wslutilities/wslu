@@ -164,6 +164,28 @@ case "$distro" in
 "${light_blue}     ∵::::::::::::::::::::∵       ${reset}"
 "${light_blue}      ::::::::::::::::::::        ${reset}"
 "${light_blue}       ∵::::::::::::::::∵         ${reset}");;
+    'archlinux')
+        t="${light_cyan}${bold}"
+        full_text=(
+"${light_cyan}                   -\`                 "
+"${light_cyan}                  .o+\`                ${reset}"
+"${light_cyan}                 \`ooo/                ${reset}"
+"${light_cyan}                \`+oooo:               ${reset}"
+"${light_cyan}               \`+oooooo:              ${reset}"
+"${light_cyan}               -+oooooo+:             ${reset}"
+"${light_cyan}             \`/:-:++oooo+:            ${reset}"
+"${light_cyan}            \`/++++/+++++++:           ${reset}"
+"${light_cyan}           \`/++++++++++++++:          ${reset}"
+"${light_cyan}          \`/+++o${cyan}oooooooo${light_cyan}oooo/\`        ${reset}"
+"${cyan}         ${light_cyan}./${cyan}ooosssso++osssssso${light_cyan}+\`       ${reset}"
+"${cyan}        .oossssso-\`\`\`\`/ossssss+\`      ${reset}"
+"${cyan}       -osssssso.      :ssssssso.     ${reset}"
+"${cyan}      :osssssss/        osssso+++.    ${reset}"
+"${cyan}     /ossssssss/        +ssssooo/-    ${reset}"
+"${cyan}   \`/ossssso+/:-        -:/+osssso+-  ${reset}"
+"${cyan}  \`+sso+:-\`                 \`.-/+oso: ${reset}"
+"${cyan} \`++:.                           \`-/+/${reset}"
+"${cyan} .\`                                 \`/${reset}");;
     *)
         t="${cyan}${bold}"
         full_text=(

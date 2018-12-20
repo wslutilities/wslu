@@ -22,6 +22,8 @@ case "$distro" in
 		packages="$(rpm -qa | wc -l)";;
 	'alpine')
 		packages=$(apk info | wc -l);;
+	'archlinux')
+	    packages=$(pacman -Qq | wc -l);;
 esac
 
 function printer

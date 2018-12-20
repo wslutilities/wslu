@@ -18,7 +18,7 @@ EOF
 
 distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME="//g')"
 if [[ "$distro" == *WLinux* ]]; then
-	distro="wlinux"
+	distro=wlinux
 elif [[ "$distro" == Ubuntu* ]]; then
 	distro="ubuntu"
 elif [[ "$distro" == *Debian* ]]; then
@@ -31,6 +31,8 @@ elif [[ "$distro" == SLES* ]]; then
 	distro="sles"
 elif [[ "$distro" == Alpine* ]]; then
 	distro="alpine"
+elif [[ "$distro" == Arch* ]]; then
+	distro="archlinux"
 fi
 
 echo "You are using: $distro"
@@ -46,7 +48,9 @@ case "$distro" in
 		sudo zypper -n install git bc wget unzip make rubygem-ronn imagemagick
 		;;
 	'alpine')
-	    sudo apk add git bc wget unzip make bash-completion ;;
+	    sudo apk add git bc wget unzip make bash-completion;;
+	'archlinux')
+		sudo pacman -Syyu git bc wget unzip make bash-completion;;
 esac
 if [[ ! -f /etc/fake-wsl-release ]]; then
 	echo -e "\nWSL Interopability\n*********************"
