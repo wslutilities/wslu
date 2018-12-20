@@ -109,22 +109,7 @@ git submodule update
 extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslfetch.bats tests/wslview.bats
 PATH=$(getconf PATH)
 
-for f in out/wsl*; do
-	bname="$(basename $f)"
-	sudo ln -s $CURRENT_PATH/$f /usr/bin/$bname
-	echo "exec $f linked to /usr/bin/$bname"
-done
-
-if [[ "$distro" != "alpine" ]]; then
-	sudo cp $CURRENT_PATH/src/mime/wslview /usr/lib/mime/packages/wslview
-	sudo update-mime
-	echo "mime file copied"
-fi
-
-[ -d /usr/share/wslu ] || sudo mkdir /usr/share/wslu
-sudo cp $CURRENT_PATH/src/etc/* /usr/share/wslu
-sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 10
-sudo update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 10
+sudo make install
 
 cat <<EOF
 Installation Completed. Development environment is set up for wslu.

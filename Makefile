@@ -12,6 +12,29 @@ all:
 		mv $(OUTPATH)/`basename $$file` $(OUTPATH)/`basename $$file .sh`; \
 	done
 	chmod +x $(OUTPATH)/*
+
+install:
+	for f in out/wsl*; do
+		bname=`basename $$f`
+		ln -s $$CURRENT_PATH/$$f /usr/bin/$$bname
+	done
+	cp src/mime/wslview /usr/lib/mime/packages/wslview
+	update-mime
+	[ -d /usr/share/wslu ] || mkdir -p /usr/share/wslu
+	cp src/etc/* /usr/share/wslu
+	update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 10
+	update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 10
+
+uninstall: 
+	for f in /usr/bin/wsl*; do
+    	sudo rm -f $$f;
+	done
+	rm -rf /usr/share/wslu
+	rm -f /usr/lib/mime/packages/wslview
+	update-mime
+	update-alternatives --remove x-www-browser /usr/bin/wslview
+	update-alternatives --remove www-browser /usr/bin/wslview
+
 clean:
 	rm -rf $(OUTPATH)
 
