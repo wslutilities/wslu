@@ -17,19 +17,6 @@ English | [简体中文](README.hans.md) | [繁體中文](README.hant.md)
 
 This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
 
-**Currently supported Distro:**
-- [WLinux](https://www.microsoft.com/store/productId/9NV1GV1PXZ6P) and its [Enterprise Edition](https://www.microsoft.com/store/productId/9N8LP0X93VCP)
-- Ubuntu [Latest](https://www.microsoft.com/store/productId/9NBLGGH4MSV6), [16.04 LTS](https://www.microsoft.com/store/productId/9PJN388HP8C9) and [18.04 LTS](https://www.microsoft.com/store/productId/9N9TNGVNDL3Q)
-- OpenSUSE Leap [42](https://www.microsoft.com/store/productId/9NJVJTS82TJX) and [15.0](https://www.microsoft.com/store/productId/9N1TB6FPVJ8C)
-- SUSE Linux Enterprise Server [12](https://www.microsoft.com/store/productId/9P32MWBH6CNS) and [15](https://www.microsoft.com/store/productId/9PMW35D7FNLX)
-- [Debian GNU/Linux](https://www.microsoft.com/store/productId/9MSVKQC78PK6)
-- [Kali Linux](https://www.microsoft.com/store/productId/9PKR34TNCV07)
-- Arch Linux via [ArchWSL](https://github.com/yuk7/ArchWSL)
-- Alpine Linux via [AlpineWSL](https://github.com/yuk7/AlpineWSL) or [Alpine WSL](https://www.microsoft.com/store/productId/9P804CRF0395)
-
-
-Legacy Ubuntu is no longer supported.
-
 ## Feature
 
 **wslusc**

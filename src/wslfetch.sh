@@ -148,21 +148,21 @@ case "$distro" in
     'alpine')
         t="${blue}${bold}"
         full_text=(
-"${light_blue}        .................          ${reset}"
+"${light_blue}        ................          ${reset}"
 "${light_blue}       ∴::::::::::::::::∴         ${reset}"
 "${light_blue}      ∴::::::::::::::::::∴        ${reset}"
 "${light_blue}     ∴::::::::::::::::::::∴       ${reset}"
 "${light_blue}    ∴:::::::. :::::':::::::∴      ${reset}"
 "${light_blue}   ∴:::::::.   ;::; ::::::::∴     ${reset}"
-"${light_blue}  ∴::::::;      ∵    :::::::∴    ${reset}"
+"${light_blue}  ∴::::::;      ∵     :::::::∴    ${reset}"
 "${light_blue} ∴:::::.     .         .::::::∴   ${reset}"
-"${light_blue}  ::::::     :::.    .    ::::::   ${reset}"
+"${light_blue} ::::::     :::.    .    ::::::   ${reset}"
 "${light_blue} ∵::::     ::::::.  ::.   ::::∵   ${reset}"
 "${light_blue}  ∵:..   .:;::::::: :::.  :::∵    ${reset}"
 "${light_blue}   ∵::::::::::::::::::::::::∵     ${reset}"
 "${light_blue}    ∵::::::::::::::::::::::∵      ${reset}"
 "${light_blue}     ∵::::::::::::::::::::∵       ${reset}"
-"${light_blue}       ::::::::::::::::::::        ${reset}"
+"${light_blue}      ::::::::::::::::::::        ${reset}"
 "${light_blue}       ∵::::::::::::::::∵         ${reset}");;
     *)
         t="${cyan}${bold}"

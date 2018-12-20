@@ -24,8 +24,8 @@ wslu_version=2.0
 LC_ALL=C
 LANG=C
 
-# MAKE SURE INTEROP IS ENABLED
-echo 1 > /proc/sys/fs/binfmt_misc/WSLInterop
+# checking interopability
+cat /proc/sys/fs/binfmt_misc/WSLInterop | grep enabled >/dev/null || (echo "WSL Interopability is disabled. Please enable it before using WSL."; exit 1)
 
 ## color
 black=`echo -e '\e[30m'`
