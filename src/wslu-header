@@ -84,7 +84,7 @@ function winps_exec {
 ## basic distro detection
 distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME=\"//g')"
 if [[ "$distro" == *WLinux* ]]; then
-	distro=wlinux
+	distro="wlinux"
 elif [[ "$distro" == Ubuntu* ]]; then
 	distro="ubuntu"
 elif [[ "$distro" == *Debian* ]]; then
