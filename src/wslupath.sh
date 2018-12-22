@@ -33,8 +33,7 @@ function path_converter
 
 function reg_path_converter
 {
-	new_path="$(winps_exec '(Get-ItemProperty "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders")."$@"')"
-	echo $new_path
+	winps_exec "(Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders').'$@'" | cat
 }
 
 function general_converter
