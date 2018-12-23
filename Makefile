@@ -14,9 +14,9 @@ all:
 	chmod +x $(OUTPATH)/*
 
 install:
-	for f in out/wsl*; do
-		bname=`basename $$f`
-		ln -s $$CURRENT_PATH/$$f /usr/bin/$$bname
+	for f in out/wsl*; do \
+		bname=`basename $$f`; \
+		ln -s $$CURRENT_PATH/$$f /usr/bin/$$bname; \
 	done
 	cp src/mime/wslview /usr/lib/mime/packages/wslview
 	update-mime
@@ -26,8 +26,8 @@ install:
 	update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 10
 
 uninstall: 
-	for f in /usr/bin/wsl*; do
-    	sudo rm -f $$f;
+	for f in /usr/bin/wsl*; do \
+    	rm -f $$f; \
 	done
 	rm -rf /usr/share/wslu
 	rm -f /usr/lib/mime/packages/wslview

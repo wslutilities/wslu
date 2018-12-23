@@ -1,20 +1,37 @@
 version: 2
 jobs:
-  buildsource:
+  test:
     docker:
       - image: patrick330602/fake_wsl_env
     steps:
       - checkout
       - run:
-          name: Install Pre-requisites
+          name: Pre-Testing Setup
           command: |
             apt-get update -qq
             apt-get install -qq apt-utils mime-support sudo
+            bash -x ./configure.sh
       - run:
-          name: Install via Source Code
+          name: Test
           command: |
-            cd extras/scripts/
-            bash -x ./install.sh
+            make
+            make test
+  build:
+    docker:
+      - image: patrick330602/fake_wsl_env
+    steps:
+      - checkout
+      - run:
+          name: Pre-Testing Setup
+          command: |
+            apt-get update -qq
+            apt-get install -qq apt-utils mime-support sudo
+            bash -x ./configure.sh
+      - run:
+          name: Test
+          command: |
+            make
+            sudo make install
   genpkg:
     machine: true
     steps:
@@ -39,7 +56,8 @@ workflows:
   version: 2
   build:
    jobs:
-      - buildsource
+      - test
+      - build
       - genpkg
   nightlybuild:
     triggers:
