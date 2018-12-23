@@ -4,6 +4,7 @@ OUTPATH = out
 
 SOURCES := $(wildcard src/*.sh)
 ETC := $(wildcard src/etc/*)
+OUTFILES := $(wildcard out/*)
 
 all:
 	[ -d $(OUTPATH) ] || mkdir $(OUTPATH)
@@ -14,9 +15,8 @@ all:
 	chmod +x $(OUTPATH)/*
 
 install:
-	for f in out/wsl*; do \
-		bname=`basename $$f`; \
-		ln -s $$CURRENT_PATH/$$f /usr/bin/$$bname; \
+	for file in $(OUTFILES); do \
+		ln -s $(OUT)/$$file /usr/bin/`basename $$f`; \
 	done
 	cp src/mime/wslview /usr/lib/mime/packages/wslview
 	update-mime
