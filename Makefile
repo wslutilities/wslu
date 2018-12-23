@@ -16,7 +16,7 @@ all:
 
 install:
 	for file in $(OUTFILES); do \
-		ln -s $(OUT)/$$file /usr/bin/`basename $$file`; \
+		cp $(OUT)/$$file /usr/bin/`basename $$file`; \
 	done
 	cp src/mime/wslview /usr/lib/mime/packages/wslview
 	update-mime
