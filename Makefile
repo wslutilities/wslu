@@ -1,10 +1,12 @@
 AUTOMAKE_OPTIONS = foreign
 HEADER = src/wslu-header
 OUTPATH = out
+CURPATH = $(shell pwd)
 
 SOURCES := $(wildcard src/*.sh)
 ETC := $(wildcard src/etc/*)
 OUTFILES := $(wildcard out/*)
+INSTEDEXES := $(wildcard /usr/bin/wsl*)
 
 all:
 	[ -d $(OUTPATH) ] || mkdir $(OUTPATH)
@@ -16,7 +18,7 @@ all:
 
 install:
 	for file in $(OUTFILES); do \
-		cp $(OUT)/$$file /usr/bin/`basename $$file`; \
+		ln -s $(CURPATH)/$$file /usr/bin/`basename $$file`; \
 	done
 	cp src/mime/wslview /usr/lib/mime/packages/wslview
 	update-mime
@@ -26,7 +28,7 @@ install:
 	update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 10
 
 uninstall: 
-	for f in /usr/bin/wsl*; do \
+	for f in $(INSTEDEXES); do \
     	rm -f $$f; \
 	done
 	rm -rf /usr/share/wslu
@@ -41,3 +43,4 @@ clean:
 test:
 	PATH="$$CURRENT_PATH/src:$$CURRENT_PATH/out:$$PATH"
 	extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslfetch.bats tests/wslview.bats
+	
