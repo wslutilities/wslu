@@ -43,21 +43,27 @@ fi
 PATH=$(getconf PATH)
 }
 
-function preinst_check {
+function pkg_inst {
 distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME="//g')"
 if [[ "$distro" == *WLinux* ]] || [[ "$distro" == Ubuntu* ]] || [[ "$distro" == *Debian* ]] || [[ "$distro" == *Kali* ]]; then
 	sudo apt purge -y wlinux-wslu wslu
-	sudo apt install -y git build-essential bc wget unzip make ruby-ronn imagemagick
+	sudo apt install -y git build-essential bc wget unzip make ronn imagemagick
 elif [[ "$distro" == openSUSE* ]] || [[ "$distro" == SLES* ]]; then
 	sudo zypper -n rm wslu
-	sudo zypper -n install git bc wget unzip make rubygem-ronn imagemagick
+	sudo zypper -n install git bc wget unzip make ronn imagemagick
 elif [[ "$distro" == Alpine* ]]; then
-	sudo apk add git bc wget unzip make bash-completion imagemagick
+	sudo apk add git bc wget unzip make bash-completion ronn imagemagick
 elif [[ "$distro" == Arch* ]]; then
-	sudo pacman -Syyu git bc wget unzip make bash-completion imagemagick
+	sudo pacman -Syyu git bc wget unzip make bash-completion ronn imagemagick
 fi
 }
 
-env_check
-prsh_check
-preinst_check
+for args; do
+	case $args in
+		-e|--env) env_check; exit;;
+		-p|--prsh) prsh_check; exit;;
+		-P|--pkg) pkg_inst; exit;;
+		*) env_check; prsh_check; pkg_inst; exit;;
+	esac
+done
+
