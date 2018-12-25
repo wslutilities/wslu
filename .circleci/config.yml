@@ -24,13 +24,13 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Pre-Testing Setup
+          name: Pre-building Setup
           command: |
             apt-get update -qq
             apt-get install -qq apt-utils mime-support sudo
             bash -x ./configure.sh -a
       - run:
-          name: Install
+          name: Build and Install
           command: |
             make
             sudo make install
