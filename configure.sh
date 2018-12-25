@@ -63,7 +63,8 @@ for args; do
 		-e|--env) env_check; exit;;
 		-p|--prsh) prsh_check; exit;;
 		-P|--pkg) pkg_inst; exit;;
-		*) env_check; prsh_check; pkg_inst; exit;;
+		-a|--all) env_check; prsh_check; pkg_inst; exit;;
+		*) exit 1;;
 	esac
 done
 

@@ -10,7 +10,7 @@ jobs:
           command: |
             apt-get update -qq
             apt-get install -qq apt-utils mime-support sudo
-            bash -x ./configure.sh
+            bash -x ./configure.sh -a
       - run:
           name: Test
           command: |
@@ -28,7 +28,7 @@ jobs:
           command: |
             apt-get update -qq
             apt-get install -qq apt-utils mime-support sudo
-            bash -x ./configure.sh
+            bash -x ./configure.sh -a
       - run:
           name: Test
           command: |
