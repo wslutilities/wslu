@@ -7,8 +7,8 @@ help_short="wslview (-u|-r|-h|-v) ...LINK..."
 for args; do
 	case $args in
 		-r|--register) 
-		sudo update-alternatives --install /usr/bin/x-www-browser /usr/bin/wslview 1
-		sudo update-alternatives --install /usr/bin/www-browser /usr/bin/wslview 1
+		sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 1
+		sudo update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 1
 		exit;;
 		-u|--unregister)
 		sudo update-alternatives --remove x-www-browser /usr/bin/wslview
