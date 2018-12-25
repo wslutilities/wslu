@@ -30,7 +30,7 @@ jobs:
             apt-get install -qq apt-utils mime-support sudo
             bash -x ./configure.sh -a
       - run:
-          name: Test
+          name: Install
           command: |
             make
             sudo make install

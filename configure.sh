@@ -47,10 +47,10 @@ function pkg_inst {
 distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME="//g')"
 if [[ "$distro" == *WLinux* ]] || [[ "$distro" == Ubuntu* ]] || [[ "$distro" == *Debian* ]] || [[ "$distro" == *Kali* ]]; then
 	sudo apt purge -y wlinux-wslu wslu
-	sudo apt install -y git build-essential bc wget unzip make ronn imagemagick
+	sudo apt install -y git build-essential bc wget unzip make ruby-ronn imagemagick
 elif [[ "$distro" == openSUSE* ]] || [[ "$distro" == SLES* ]]; then
 	sudo zypper -n rm wslu
-	sudo zypper -n install git bc wget unzip make ronn imagemagick
+	sudo zypper -n install git bc wget unzip make rubygem-ronn imagemagick
 elif [[ "$distro" == Alpine* ]]; then
 	sudo apk add git bc wget unzip make bash-completion ronn imagemagick
 elif [[ "$distro" == Arch* ]]; then
