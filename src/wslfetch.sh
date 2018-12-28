@@ -186,6 +186,29 @@ case "$distro" in
 "${cyan}  \`+sso+:-\`                 \`.-/+oso: ${reset}"
 "${cyan} \`++:.                           \`-/+/${reset}"
 "${cyan} .\`                                 \`/${reset}");;
+        'scil')
+            t="${light_blue}${bold}"
+            full_text=(
+"${light_blue}                  =/;;/-                    "
+"${light_blue}                 +:    //                   ${reset}"
+"${light_blue}                /;      /;                  ${reset}"
+"${light_blue}               -X        H.                 ${reset}"
+"${light_blue} .//;;;:;;-,   X=        :+   .-;:=;:;#;.   ${reset}"
+"${light_blue} M-       ,=;;;#:,      ,:#;;:=,       ,@   ${reset}"
+"${light_blue} :#           :#.=/++++/=.$=           #=   ${reset}"
+"${light_blue}  ,#;         #/:+/;,,/++:+/         ;+.    ${reset}"
+"${light_blue}    ,+/.    ,;@+,        ,#H;,    ,/+,      ${reset}"
+"${light_blue}       ;+;;/= @.  ${light_red}.H${white}#${light_red}#X   ${light_blue}-X :///+;         ${reset}"
+"${light_blue}       ;+=;;;.@,  ${white}.X${light_red}M${white}@$.  ${light_blue}=X.//;=#/.        ${reset}"
+"${light_blue}    ,;:      :@#=        =\$H:     .+#-      ${reset}"
+"${light_blue}  ,#=         #;-///==///-//         =#,    ${reset}"
+"${light_blue} ;+           :#-;;;:;;;;-X-           +:   ${reset}"
+"${light_blue} @-      .-;;;;M-        =M/;;;-.      -X   ${reset}"
+"${light_blue}  :;;::;;-.    #-        :+    ,-;;-;:==    ${reset}"
+"${light_blue}               ,X        H.                 ${reset}"
+"${light_blue}                ;/      #=                  ${reset}"
+"${light_blue}                 //    +;                   ${reset}"
+"${light_blue}                  '////'                    ${reset}");;
     *)
         t="${cyan}${bold}"
         full_text=(
@@ -208,7 +231,6 @@ info_text=("${t}Windows 10 Linux Subsystem${reset}"
 "${t}RELEASE:${reset}	${release}"
 "${t}KERNEL:${reset}	${kernel}"
 "${t}UPTIME:${reset}	${uptime}"
-"${t}PACKAGES:${reset}	${packages}"
 ""
 "   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}")
 

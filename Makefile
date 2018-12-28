@@ -20,6 +20,7 @@ install:
 	for file in $(OUTFILES); do \
 		ln -s $(CURPATH)/$$file /usr/bin/`basename $$file`; \
 	done
+	[ -d /usr/lib/mime/packages ] || mkdir -p /usr/lib/mime/packages
 	cp src/mime/wslview /usr/lib/mime/packages/wslview
 	update-mime
 	[ -d /usr/share/wslu ] || mkdir -p /usr/share/wslu

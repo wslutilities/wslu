@@ -18,7 +18,7 @@ uptime="${days}d ${hours}h ${minutes}m"
 case "$distro" in
 	'ubuntu'|'kali'|'debian'|'wlinux')
 		packages="$((packages+=$(dpkg --get-selections | grep -cv deinstall$)))";;
-	'opensuse'|'sles')
+	'opensuse'|'sles'|'scil')
 		packages="$(rpm -qa | wc -l)";;
 	'alpine')
 		packages=$(apk info | wc -l);;

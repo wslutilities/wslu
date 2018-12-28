@@ -99,4 +99,6 @@ elif [[ "$distro" == Alpine* ]]; then
 	distro="alpine"
 elif [[ "$distro" == Arch* ]]; then
 	distro="archlinux"
+elif [[ "$distro" == Scientific* ]]; then
+	distro="scil"
 fi
