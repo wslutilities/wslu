@@ -43,27 +43,23 @@ Preinstalled in WLinux.
 
 ### For Ubuntu/Debian/Kali Linux
 
-Run following commands:
+You can download the `.deb` package from release and install it using `sudo dpkg -i wslu*`.
+
+### For OpenSUSE/SLES/WLinux Enterpruse/Fedora Remix
+
+You can download the `.rpm` package from release and install it using `sudo rpm -ivh "wslu*"`.
+
+## For other distribution
+
+run the following code in your preferred distro:
+
 ```bash
-sudo apt install apt-transport-https
-wget -O - https://api.patrickwu.space/public.key | sudo apt-key add -
-echo "deb https://apt.patrickwu.space/ stable main" | sudo tee -a /etc/apt/sources.list 
-sudo apt update
-sudo apt install wslu
+git clone https://github.com/wslutilities/wslu ~/.wslu
+cd ~/.wslu
+./configure.sh -a
+make
+sudo make install
 ```
-
-Or you can download the .deb package from release and install it using `sudo dpkg -i wslu*`.
-
-### For OpenSUSE/SLES
-
-Run following commands:
-```bash
-sudo zypper ar https://rpm.patrickwu.space/ ruapm
-sudo zypper ref
-sudo zypper in wslu
-```
-
-Or you can download the .rpm package from release and install it using `sudo rpm -ivh "wslu*"`.
 
 ## Contributors
 
