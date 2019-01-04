@@ -1,4 +1,4 @@
-version="27"
+version="28"
 
 help_short="wslsys (-h|-v|-S|-U|-b|-B|-fB|-R|-K|-P) -s"
 branch=`winps_exec "(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').'BuildBranch'"`
@@ -18,7 +18,7 @@ uptime="${days}d ${hours}h ${minutes}m"
 case "$distro" in
 	'ubuntu'|'kali'|'debian'|'wlinux')
 		packages="$((packages+=$(dpkg --get-selections | grep -cv deinstall$)))";;
-	'opensuse'|'sles'|'scilinux')
+	'opensuse'|'sles'|'scilinux'|'fedora')
 		packages="$(rpm -qa | wc -l)";;
 	'alpine')
 		packages=$(apk info | wc -l);;

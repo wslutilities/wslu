@@ -57,6 +57,8 @@ elif [[ "$distro" == Arch* ]]; then
 	sudo pacman -Syyu git bc wget unzip make bash-completion ronn imagemagick
 elif [[ "$distro" == Scientific* ]]; then
 	sudo yum install git bc wget unzip make bash-completion imagemagick
+elif [[ "$distro" == *Fedora* ]]; then
+	sudo dnf install git bc wget unzip make bash-completion ImageMagick
 fi
 }
 

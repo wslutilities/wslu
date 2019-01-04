@@ -1,4 +1,4 @@
-version=28
+version=38
 
 is_line=0
 is_splash=0
@@ -209,6 +209,27 @@ case "$distro" in
 "${light_blue}                ;/      #=                  ${reset}"
 "${light_blue}                 //    +;                   ${reset}"
 "${light_blue}                  '////'                    ${reset}");;
+    'fedora')
+        t="${light_blue}${bold}"
+        full_text=(
+"${light_blue}           /:-------------:\         ${reset}"
+"${light_blue}        :-------------------::       ${reset}"
+"${light_blue}      :-----------${white}/shhOHbmp${light_blue}---:\\     ${reset}"
+"${light_blue}    /-----------${white}omMMMNNNMMD  ${light_blue}---:    ${reset}"
+"${light_blue}   :-----------${white}sMMMMNMNMP${light_blue}.    ---:   ${reset}"
+"${light_blue}  :-----------${white}:MMMdP${light_blue}-------    ---\  ${reset}"
+"${light_blue} ,------------${white}:MMMd${light_blue}--------    ---:  ${reset}"
+"${light_blue} :------------${white}:MMMd${light_blue}-------    .---:  ${reset}"
+"${light_blue} :----    ${white}oNMMMMMMMMMNho${light_blue}     .----:  ${reset}"
+"${light_blue} :--     .${white}+shhhMMMmhhy++${light_blue}   .------/  ${reset}"
+"${light_blue} :-    -------${white}:MMMd${light_blue}--------------:   ${reset}"
+"${light_blue} :-   --------${white}/MMMd${light_blue}-------------;    ${reset}"
+"${light_blue} :-    ------${white}/hMMMy${light_blue}------------:     ${reset}"
+"${light_blue} :--${white} :dMNdhhdNMMNo${light_blue}------------;      ${reset}"
+"${light_blue} :---${white}:sdNMMMMNds:${light_blue}------------:       ${reset}"
+"${light_blue} :------${white}:://:${light_blue}-------------::         ${reset}"
+"${light_blue} :---------------------://           ${reset}"
+"${light_blue}                                     ${reset}");;
     *)
         t="${cyan}${bold}"
         full_text=(
