@@ -29,7 +29,6 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as conver
 rm -rf $RPM_BUILD_ROOT
 mkdir -p ${RPM_BUILD_ROOT}/usr/bin
 mkdir -p ${RPM_BUILD_ROOT}/usr/share/wslu
-mkdir -p ${RPM_BUILD_ROOT}/usr/lib/mime/packages
 mkdir -p ${RPM_BUILD_ROOT}/usr/share/man/man1
 install -m 755 wsl* ${RPM_BUILD_ROOT}%{_bindir}
 install -m 555 etc/wsl.ico ${RPM_BUILD_ROOT}/usr/share/wslu

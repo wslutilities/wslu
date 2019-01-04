@@ -14,7 +14,6 @@ bash builder-docs.sh
 cp $CURRENT_DIR/../../gendocs/* $BUILD_DIR/usr/share/man/man1
 cp $CURRENT_DIR/../../out/wsl* $BUILD_DIR/usr/bin/
 cp $CURRENT_DIR/../../src/etc/* $BUILD_DIR/usr/share/wslu/
-cp $CURRENT_DIR/../../src/mime/* $BUILD_DIR/usr/lib/mime/packages
 cp $CURRENT_DIR/../build/debian/* $BUILD_DIR/DEBIAN
 
 # modifying the files
@@ -29,7 +28,6 @@ find . -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEB
 # setting permissions
 find $BUILD_DIR -type d -exec chmod 0755 {} \;
 find $BUILD_DIR/usr/ -type f -exec chmod 0555 {} \;
-find $BUILD_DIR/usr/lib/mime/packages/ -type f -exec chmod 644 {} \;
 
 # build
 [ -d $CURRENT_DIR/../../target ] || mkdir $CURRENT_DIR/../../target

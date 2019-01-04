@@ -4,14 +4,13 @@ CURRENT_DIR=`pwd`
 
 # Creating folders
 mkdir -p ~/rpm_wslu/{BUILD/,RPMS/,SOURCES/,SPECS/,SRPMS/}
-mkdir -p ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/{etc,mime,docs}
+mkdir -p ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/{etc,docs}
 
 # build documents
 bash builder-docs.sh
 # Copy files to build folder
 cp ../../out/wsl* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER
 cp ../../src/etc/* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/etc
-cp ../../src/mime/* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/mime
 cp ../../gendocs/* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/docs
 cp ../build/rpm/wslu.spec ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
 

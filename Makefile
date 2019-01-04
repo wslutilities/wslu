@@ -21,8 +21,6 @@ install:
 		ln -s $(CURPATH)/$$file /usr/bin/`basename $$file`; \
 	done
 	[ -d /usr/lib/mime/packages ] || mkdir -p /usr/lib/mime/packages
-	cp src/mime/wslview /usr/lib/mime/packages/wslview
-	update-mime
 	[ -d /usr/share/wslu ] || mkdir -p /usr/share/wslu
 	cp src/etc/* /usr/share/wslu
 	update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 10
@@ -33,8 +31,6 @@ uninstall:
     	rm -f $$f; \
 	done
 	rm -rf /usr/share/wslu
-	rm -f /usr/lib/mime/packages/wslview
-	update-mime
 	update-alternatives --remove x-www-browser /usr/bin/wslview
 	update-alternatives --remove www-browser /usr/bin/wslview
 
