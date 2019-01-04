@@ -86,22 +86,16 @@ function winps_exec {
 
 ## basic distro detection
 distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME=\"//g')"
-if [[ "$distro" == *WLinux* ]]; then
-	distro="wlinux"
-elif [[ "$distro" == Ubuntu* ]]; then
-	distro="ubuntu"
-elif [[ "$distro" == *Debian* ]]; then
-	distro="debian"
-elif [[ "$distro" == *Kali* ]]; then
-	distro="kali"
-elif [[ "$distro" == openSUSE* ]]; then
-	distro="opensuse"
-elif [[ "$distro" == SLES* ]]; then
-	distro="sles"
-elif [[ "$distro" == Alpine* ]]; then
-	distro="alpine"
-elif [[ "$distro" == Arch* ]]; then
-	distro="archlinux"
-elif [[ "$distro" == Scientific* ]]; then
-	distro="scil"
-fi
+case $distro in
+    *WLinux*) distro="wlinux";;
+    Ubuntu*) distro="ubuntu";;
+    *Debian*) distro="debian";;
+    *Kali*) distro="kali";;
+    openSUSE*) distro="opensuse";;
+    SLES*) distro="sles";;
+    Alpine*) distro="alpine";;
+    Arch*) distro="archlinux";;
+    Scientific*) distro="scilinux";;
+    *Fedora*) distro="fedora";;
+    *) distro="unknown";;
+esac
