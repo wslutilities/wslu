@@ -17,7 +17,7 @@ function del_reg_alt {
 
 function add_reg_alt {
 	if [ "$distro" == "archlinux" ] || [ "$distro" == "alpine" ]; then
-		echo "${error}Unsupported distro for this action. Aborted. "
+		echo "${error}Unsupported action for this distro. Aborted. "
 		exit 34
 	else
 		sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 1
