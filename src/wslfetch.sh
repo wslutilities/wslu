@@ -186,7 +186,7 @@ case "$distro" in
 "${cyan}  \`+sso+:-\`                 \`.-/+oso: ${reset}"
 "${cyan} \`++:.                           \`-/+/${reset}"
 "${cyan} .\`                                 \`/${reset}");;
-        'scil')
+        'scilinux')
             t="${light_blue}${bold}"
             full_text=(
 "${light_blue}                  =/;;/-                    "
