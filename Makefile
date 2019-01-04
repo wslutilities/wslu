@@ -23,16 +23,12 @@ install:
 	[ -d /usr/lib/mime/packages ] || mkdir -p /usr/lib/mime/packages
 	[ -d /usr/share/wslu ] || mkdir -p /usr/share/wslu
 	cp src/etc/* /usr/share/wslu
-	update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 10
-	update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 10
 
 uninstall: 
 	for f in $(INSTEDEXES); do \
     	rm -f $$f; \
 	done
 	rm -rf /usr/share/wslu
-	update-alternatives --remove x-www-browser /usr/bin/wslview
-	update-alternatives --remove www-browser /usr/bin/wslview
 
 clean:
 	rm -rf $(OUTPATH)
