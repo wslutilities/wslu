@@ -234,9 +234,9 @@ info_text=("${t}Windows 10 Linux Subsystem${reset}"
 ""
 "   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}")
 
-line(){
+function line() {
     if [[ "$is_line" == "1" ]]; then
-        printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
+        yes -- ${@:-=} | tr -d $'\n' | head -c $COLUMNS
     else
         echo ""
     fi
