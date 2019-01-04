@@ -26,8 +26,7 @@ case "$distro" in
 	    packages=$(pacman -Qq | wc -l);;
 esac
 
-function printer
-{
+function printer {
 	if [[ $2 != "-s" ]]; then
 		echo $1
 	else

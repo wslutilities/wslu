@@ -6,38 +6,32 @@ set_path=""
 
 help_short="wslupath (-dOr) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslupath (-h|-v|-R)"
 
-function path_double_dash
-{
+function path_double_dash {
 	new_path="$(echo $@ | sed -e 's|\\|\\\\|g')"
 	echo $new_path
 }
 
-function path_win
-{
+function path_win {
 	# TODO: Change this function to convert linux path to Windows path
 	new_path="$(echo $@ | sed -e 's|/|\\|g' -e 's|^\\mnt\\\([A-Za-z]\)\\|\L\1\E:\\|')"
 	echo $new_path
 }
 
-function path_linux
-{
+function path_linux {
 	new_path="$(echo $@ | sed -e 's|\\|/|g' -e 's|^\([A-Za-z]\)\:/\(.*\)|/mnt/\L\1\E/\2|')"
 	echo $new_path
 }
 
-function path_converter
-{
+function path_converter {
 	new_path=`cmd.exe /c "echo $@" 2>&1 | tr -d "\r"`
 	echo $new_path
 }
 
-function reg_path_converter
-{
+function reg_path_converter {
 	winps_exec "(Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders').'$@'" | cat
 }
 
-function general_converter
-{
+function general_converter {
 	target="$@"
 	if [[ $target =~ ^[A-Z]:(\\[^:\\]+)*(\\)?$ ]]; then
 		p="$(path_linux $@)"
@@ -50,8 +44,7 @@ function general_converter
 	echo $p
 }
 
-function style_path
-{
+function style_path {
 	case $style in
 		1)p="$(general_converter $@)";;
 		2)p="$@";;
