@@ -4,7 +4,7 @@ style=1
 reg_path=0
 set_path=""
 
-help_short="wslvar (-w) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslvar (-h|-v|-R)"
+help_short="wslvar (-r|-e) ...NAME...\nwslvar (-h|-v|-R|-E)"
 
 function path_double_dash {
 	new_path="$(echo $@ | sed -e 's|\\|\\\\|g')"
@@ -16,5 +16,9 @@ function call_reg {
 }
 
 function call_env {
-	winps_exec "(Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders').'$@'" | cat
+	winps_exec "Write-Output \$Env:$@" | cat
+}
+
+function cl_destoryer {
+
 }
