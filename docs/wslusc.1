@@ -10,12 +10,12 @@
 wslusc \- Component of Windows 10 Linux Subsystem Utility
 .
 .SH "Synopsis"
-\fBwslusc (\-g|\-h|\-v) \.\.NAME\.\.\.\fR
+\fBwslusc (\-e|\-n|\-i|\-g|\-h|\-v) \.\.\.COMMAND\.\.\.\fR
 .
 .SH "Description"
 This is a WSL shortcut creator to create shortcut on Windows Desktop
 .
-.SH "Commands"
+.SH "COMMANDS"
 \fB\-h, \-\-help\fR \- print a simple help
 .
 .P
@@ -23,3 +23,24 @@ This is a WSL shortcut creator to create shortcut on Windows Desktop
 .
 .P
 \fB\-g, \-\-gui\fR \- create a shortcut that links to a GUI application
+.
+.P
+\fB\-i, \-\-icon\fR \- add an icon to the Windows Shortcut\. Supports \fB\.ico\fR/\fB\.png\fR/\fB\.svg\fR\.
+.
+.P
+\fB\-n, \-\-name\fR \- add a different name other than the command name\.
+.
+.P
+\fB\-e, \-\-env\fR \- add a custom environment to your command\. For example, if you want HiDPI support for a GTK app, add \fBexport GDK_SCALE=2;\fR in your command, like this: \fBwslusc \.\.\. \-e "export GDK_SCALE=2;" \.\.\.\fR
+.
+.SH "SEE ALSO"
+https://github\.com/wslutilities/wslu
+.
+.SH "AUTHOR"
+Created by Patrick Wu \fIwotingwu@live\.com\fR
+.
+.SH "REPORTING BUGS"
+Report bugs to \fIhttps://github\.com/wslutilities/wslu/issues\fR
+.
+.SH "COPYRIGHT"
+This is free software; you can redistribute it and/or modify it under the terms of the GNU GPL version 3 or (at your option) any later version\. There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\.
