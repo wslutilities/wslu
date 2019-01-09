@@ -1,4 +1,4 @@
-version="01"
+version="02"
 
 var_type=1
 
@@ -25,10 +25,10 @@ function cl_destoryer {
 }
 
 function caller {
-	case $style in
-		1)p="$(cl_destoryer $(call_sys $@))";;
-		2)p="$(cl_destoryer $(call_shell $@))";;
-		*)echo "${error}Invalid variable type. Aborted."; exit ;;
+	case $var_type in
+		1) p="$(cl_destoryer $(call_sys $@))";;
+		2) p="$(cl_destoryer $(call_shell $@))";;
+		*) echo "${error}Invalid variable type. Aborted."; exit 22;;
 	esac
 	echo $p
 }
@@ -40,8 +40,8 @@ while [ "$1" != "" ]; do
 		-S|--getsys) view_sys; exit;;
 		-L|--getshell) view_shell; exit;;
 		-h|--help) help $0 "$help_short"; exit;;
-		-v|--version) echo "wslusc v$wslu_version.$version"; exit 22;;
-		*) echo "$(caller \"$@\")";break;;
+		-v|--version) echo "wslusc v$wslu_version.$version"; exit;;
+		*) caller "$@"; exit;;
 	esac
 done
 
