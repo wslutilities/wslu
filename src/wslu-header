@@ -67,6 +67,10 @@ Usage: $2
 For more help for `basename "$1"`, visit the following site: https://github.com/patrick330602/wslu/wiki/`basename "$1"`"
 }
 
+function double_dash_p {
+	echo "$(echo $@ | sed -e 's|\\|\\\\|g')"
+}
+
 function interop_prefix {
 	if [ -f /etc/wsl.conf ]; then
 		tmp=$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf)

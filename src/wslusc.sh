@@ -1,7 +1,7 @@
 version="28"
 
 cname=""
-iconpath="`wslupath -d -H`\\wslu\\wsl.ico"
+iconpath="$(double_dash_p $(wslvar -s USERPROFILE))\\wslu\\wsl.ico"
 is_icon=0
 is_gui=0
 customname=""
@@ -21,18 +21,16 @@ while [ "$1" != "" ]; do
 	esac
 done
 if [[ "$cname" != "" ]]; then
-	tpath=`wslupath -d -T`
-	dpath=`wslupath -D`
-	script_location="`wslupath -H`/wslu"
+	tpath=$(double_dash_p $(wslvar -s TMP))
+	dpath=$(wslpath $(wslvar -l Desktop))
+	script_location="$(wslpath $(wslvar -s USERPROFILE))/wslu"
 	localfile_path="/usr/share/wslu"
-	script_location_win="`wslupath -d -H`\\wslu"
+	script_location_win="$(double_dash_p $(wslvar -s USERPROFILE))\\wslu"
 	
 	raw_command=( $(basename "$cname") )
 	new_cname="${raw[1]}"
 	if [[ "$customname" != "" ]]; then
 		new_cname=$customname
-	else
-		new_cname=$cname
 	fi
 	
 	# Check default icon location
@@ -89,7 +87,7 @@ if [[ "$cname" != "" ]]; then
 	else
 		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \"cd ~; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
 	fi
-	tpath="`wslupath -T`/$new_cname.lnk"
+	tpath="$(wslpath $(wslvar -s TMP))/$new_cname.lnk"
 	mv "$tpath" "$dpath"
 	echo "${info} Create shortcut ${new_cname}.lnk successful"
 else
