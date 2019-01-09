@@ -27,8 +27,7 @@ if [[ "$cname" != "" ]]; then
 	localfile_path="/usr/share/wslu"
 	script_location_win="$(double_dash_p $(wslvar -s USERPROFILE))\\wslu"
 	
-	raw_command=( $(basename "$cname") )
-	new_cname="${raw[1]}"
+	new_cname=$(basename $(echo "$cname" | awk '{print $1}'))
 	if [[ "$customname" != "" ]]; then
 		new_cname=$customname
 	fi
