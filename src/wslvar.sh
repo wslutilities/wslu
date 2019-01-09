@@ -1,4 +1,4 @@
-version="02"
+version="03"
 
 var_type=1
 
@@ -25,12 +25,17 @@ function cl_destoryer {
 }
 
 function caller {
-	case $var_type in
-		1) p="$(cl_destoryer $(call_sys $@))";;
-		2) p="$(cl_destoryer $(call_shell $@))";;
-		*) echo "${error}Invalid variable type. Aborted."; exit 22;;
-	esac
-	echo $p
+	if [ "$@" != "" ]; then
+		case $var_type in
+			1) p="$(cl_destoryer $(call_sys $@))";;
+			2) p="$(cl_destoryer $(call_shell $@))";;
+			*) echo "${error}Invalid variable type. Aborted."; exit 22;;
+		esac
+		echo $p
+	else
+		echo "${error} No Input. Aborted."
+		exit 21
+	fi
 }
 
 while [ "$1" != "" ]; do
