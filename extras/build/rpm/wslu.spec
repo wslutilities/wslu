@@ -33,7 +33,7 @@ mkdir -p ${RPM_BUILD_ROOT}/usr/share/man/man1
 install -m 755 wsl* ${RPM_BUILD_ROOT}%{_bindir}
 install -m 555 etc/wsl.ico ${RPM_BUILD_ROOT}/usr/share/wslu
 install -m 555 etc/runHidden.vbs ${RPM_BUILD_ROOT}/usr/share/wslu
-install -m 555 docs/*.1 ${RPM_BUILD_ROOT}/usr/share/man/man1
+install -m 555 docs/wsl* ${RPM_BUILD_ROOT}/usr/share/man/man1
 
 %post
 %{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 1
