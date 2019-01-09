@@ -61,20 +61,25 @@ if [[ "$cname" != "" ]]; then
 		icon_filename="$(basename $iconpath)"
 		ext="${iconpath##*.}"
 
-		echo "${info} You choose to use custom icon: $iconpath. Processing..."
-		cp $iconpath $script_location
+		if [[ ! -f $iconpath ]]; then
+			iconpath="$(double_dash_p $(wslvar -s USERPROFILE))\\wslu\\wsl.ico"
+			echo "${info} Icon not found. Back to default icon..."
+		else
+			echo "${info} You choose to use custom icon: $iconpath. Processing..."
+			cp $iconpath $script_location
 		
-		if [[ "$ext" != "ico" ]]; then
-			if [[ "$ext" == "svg" ]] || [[ "$ext" == "png" ]]; then
-				echo "${info} Converting $ext icon to ico..."
-				convert "$script_location/$icon_filename" -resize 256X256 "$script_location/${icon_filename%.$ext}.ico"
-				icon_filename="${icon_filename%.$ext}.ico"
-			else
-				echo "${error} wslusc only support creating shortcut using .png/.svg/.ico icon. Aborted."
-				exit 22
+			if [[ "$ext" != "ico" ]]; then
+				if [[ "$ext" == "svg" ]] || [[ "$ext" == "png" ]]; then
+					echo "${info} Converting $ext icon to ico..."
+					convert "$script_location/$icon_filename" -resize 256X256 "$script_location/${icon_filename%.$ext}.ico"
+					icon_filename="${icon_filename%.$ext}.ico"
+				else
+					echo "${error} wslusc only support creating shortcut using .png/.svg/.ico icon. Aborted."
+					exit 22
+				fi
 			fi
+			iconpath="$script_location_win\\$icon_filename"
 		fi
-		iconpath="$script_location_win\\$icon_filename"
 	fi
 	
 	if [[ "$customenv" != "" ]]; then
