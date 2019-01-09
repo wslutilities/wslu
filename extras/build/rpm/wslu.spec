@@ -47,20 +47,21 @@ install -m 555 docs/*.1 ${RPM_BUILD_ROOT}/usr/share/man/man1
 rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
-%attr(755,root,root) %{_bindir}/wslusc
-%attr(755,root,root) %{_bindir}/wslfetch
-%attr(755,root,root) %{_bindir}/wslsys
-%attr(755,root,root) %{_bindir}/wslupath
-%attr(755,root,root) %{_bindir}/wslview
-%attr(755,root,root) %{_bindir}/wslvar
-%attr(555,root,root) /usr/share/wslu/runHidden.vbs
-%attr(555,root,root) /usr/share/wslu/wsl.ico
-%attr(555,root,root) /usr/share/man/man1/wslusc.1
-%attr(555,root,root) /usr/share/man/man1/wslfetch.1
-%attr(555,root,root) /usr/share/man/man1/wslsys.1
-%attr(555,root,root) /usr/share/man/man1/wslupath.1
-%attr(555,root,root) /usr/share/man/man1/wslvar.1
-%attr(555,root,root) /usr/share/man/man1/wslview.1
+%{_bindir}/wslusc
+%{_bindir}/wslfetch
+%{_bindir}/wslsys
+%{_bindir}/wslupath
+%{_bindir}/wslview
+%{_bindir}/wslvar
+/usr/share/wslu/runHidden.vbs
+/usr/share/wslu/wsl.ico
+/usr/share/man/man1/wslusc.1
+/usr/share/man/man1/wslfetch.1
+/usr/share/man/man1/wslsys.1
+/usr/share/man/man1/wslupath.1
+/usr/share/man/man1/wslvar.1
+/usr/share/man/man1/wslview.1
+
 %changelog
 * Sat Jan 12 2019 patrick330602 <wotingwu@live.com>
 - Please check https://github.com/wslutilities/wslu/releases/lstest for changelog
