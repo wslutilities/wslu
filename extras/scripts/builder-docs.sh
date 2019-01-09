@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 git clone https://github.com/wslutilities/wslu.wiki.git
 
-OUTPATH="../../gendocs"
+OUTPATH="../../docs"
 SOURCES=(wslfetch wslsys wslupath wslusc wslview wslvar)
 BUILD_TIME="$(date +%Y-%m-%d)"
 
