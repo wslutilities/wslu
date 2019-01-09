@@ -30,6 +30,7 @@ set +x
 # checking interopability
 cat /proc/sys/fs/binfmt_misc/WSLInterop | grep enabled >/dev/null || (echo "WSL Interopability is disabled. Please enable it before using WSL."; exit 1)
 
+# variables
 ## color
 black=`echo -e '\e[30m'`
 red=`echo -e '\e[31m'`
@@ -88,7 +89,14 @@ function winps_exec {
 	$(interop_prefix)c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -Command $@
 }
 
-## basic distro detection
+# when --debug, debug.
+if [ "$1" == "--debug" ]; then
+	echo "${debug}Debug Mode Enabled."
+	shift
+	set -x
+fi
+
+# basic distro detection
 distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME=\"//g')"
 case $distro in
     *WLinux*) distro="wlinux";;
