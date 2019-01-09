@@ -28,7 +28,7 @@ bash builder-docs.sh
 # Copy files to build folder
 cp ../../out/wsl* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER
 cp ../../src/etc/* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/etc
-cp ../../gendocs/* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/docs
+cp ../../docs/* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/docs
 cp ../build/rpm/wslu.spec ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
 
 # Modifying the files

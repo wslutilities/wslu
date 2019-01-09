@@ -18,7 +18,7 @@ Requires: bc imagemagick
 Requires(post): %{_sbindir}/update-alternatives
 Requires(postun): %{_sbindir}/update-alternatives
 URL: https://github.com/wslutilities/wslu/
-License: LGPLv3
+License: GPLv3
 %description
 This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
 %prep
@@ -52,19 +52,16 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/wslsys
 %attr(755,root,root) %{_bindir}/wslupath
 %attr(755,root,root) %{_bindir}/wslview
+%attr(755,root,root) %{_bindir}/wslvar
 %attr(555,root,root) /usr/share/wslu/runHidden.vbs
 %attr(555,root,root) /usr/share/wslu/wsl.ico
 %attr(555,root,root) /usr/share/man/man1/wslusc.1
 %attr(555,root,root) /usr/share/man/man1/wslfetch.1
 %attr(555,root,root) /usr/share/man/man1/wslsys.1
 %attr(555,root,root) /usr/share/man/man1/wslupath.1
+%attr(555,root,root) /usr/share/man/man1/wslvar.1
 %attr(555,root,root) /usr/share/man/man1/wslview.1
 %changelog
-* Mon Nov 12 2018 patrick330602 <wotingwu@live.com>
-- wslusc: add env and name param;
-- wslusc: add icon conversion feature(.svg/.png);
-- wslfetch: add WLinux ASCII art;
-- project: improved structure/license change;
-- project: build structure minor change;
-- project: new improved multilingual README.
+* Mon Jan 12 2019 patrick330602 <wotingwu@live.com>
+- Please check https://github.com/wslutilities/wslu/releases/lstest for changelog
 

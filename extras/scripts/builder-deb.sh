@@ -24,11 +24,8 @@ CURRENT_DIR=`pwd`
 # Creating folders
 mkdir -p $BUILD_DIR/{DEBIAN/,usr/bin/,usr/share/wslu/,usr/lib/mime/packages/}
 
-# build documents
-bash builder-docs.sh
-
 # copy files to build folder
-cp $CURRENT_DIR/../../gendocs/* $BUILD_DIR/usr/share/man/man1
+cp $CURRENT_DIR/../../docs/* $BUILD_DIR/usr/share/man/man1
 cp $CURRENT_DIR/../../out/wsl* $BUILD_DIR/usr/bin/
 cp $CURRENT_DIR/../../src/etc/* $BUILD_DIR/usr/share/wslu/
 cp $CURRENT_DIR/../build/debian/* $BUILD_DIR/DEBIAN
