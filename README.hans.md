@@ -31,7 +31,7 @@
 这是类似于screenfetch的系统信息展示工具。
 
 **wslvar**
-这是用于转换Windows/WSL路径的工具。
+这是可以帮助你获取Windows系统常量的工具。
 
 **wslview**
 这是一个将Windows默认网络浏览器绑定为WSL网络浏览器的包装工具。

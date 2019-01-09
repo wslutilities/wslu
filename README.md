@@ -31,7 +31,7 @@ This is a WSL system information printer to print out system informations from W
 This is a WSL Screenshoot Information Tool to print information in an elegant way.
 
 **wslvar**
-This is a WSL Windows path Converter that can convert Windows path to other styles of path.
+This is a WSL tool to help you get Windows system environment variables.
 
 **wslview**
 This is a fake WSL browser that can help you open link in default Windows browser.
