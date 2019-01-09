@@ -19,7 +19,7 @@
 git clone https://github.com/wslutilities/wslu.wiki.git
 
 OUTPATH="../../gendocs"
-SOURCES=(wslfetch wslsys wslupath wslusc wslview)
+SOURCES=(wslfetch wslsys wslupath wslusc wslview wslvar)
 BUILD_TIME="$(date +%Y-%m-%d)"
 
 [ -d $OUTPATH ] || mkdir $OUTPATH

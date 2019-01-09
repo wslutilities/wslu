@@ -24,9 +24,7 @@ link:
 	cp src/etc/* /usr/share/wslu
 
 install:
-	for file in $(OUTFILES); do \
-		cp $(CURPATH)/$$file /usr/bin/`basename $$file`; \
-	done
+	install -m755 out/* /usr/bin
 	[ -d /usr/share/wslu ] || mkdir -p /usr/share/wslu
 	cp src/etc/* /usr/share/wslu
 
