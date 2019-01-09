@@ -1,24 +1,49 @@
 version="01"
 
-style=1
-reg_path=0
-set_path=""
+var_type=1
 
-help_short="wslvar (-r|-e) ...NAME...\nwslvar (-h|-v|-R|-E)"
+help_short="wslvar (-s|-l) ...NAME...\nwslvar (-h|-v|-S|-L)"
 
-function path_double_dash {
-	new_path="$(echo $@ | sed -e 's|\\|\\\\|g')"
-	echo $new_path
-}
-
-function call_reg {
+function call_shell {
 	winps_exec "(Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders').'$@'" | cat
 }
 
-function call_env {
+function view_shell {
+	winps_exec "Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders'"| tail -n +3 | head -n -10
+}
+
+function call_sys {
 	winps_exec "Write-Output \$Env:$@" | cat
 }
 
-function cl_destoryer {
-
+function view_sys {
+	winps_exec "Get-ChildItem env:" | tail -n +2 | head -n -2
 }
+
+function cl_destoryer {
+	echo "$@" | tr -d "\r"
+}
+
+function caller {
+	case $style in
+		1)p="$(cl_destoryer $(call_sys $@))";;
+		2)p="$(cl_destoryer $(call_shell $@))";;
+		*)echo "${error}Invalid variable type. Aborted."; exit ;;
+	esac
+	echo $p
+}
+
+while [ "$1" != "" ]; do
+	case "$1" in
+		-s|--sys) var_type=1; shift;;
+		-l|--shell) var_type=2; shift;;
+		-S|--getsys) view_sys; exit;;
+		-L|--getshell) view_shell; exit;;
+		-h|--help) help $0 "$help_short"; exit;;
+		-v|--version) echo "wslusc v$wslu_version.$version"; exit 22;;
+		*) echo "$(caller \"$@\")";break;;
+	esac
+done
+
+exit 21
+
