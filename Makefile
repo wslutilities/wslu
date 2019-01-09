@@ -25,7 +25,7 @@ link:
 	for file in $(MANFILES); do \
 		ln -s $(CURPATH)/$$file /usr/share/man/man1/`basename $$file`; \
 	done
-	ln -s src/etc /usr/share/wslu
+	ln -s $(CURPATH)/src/etc /usr/share/wslu
 
 install:
 	install -m755 out/* /usr/bin
