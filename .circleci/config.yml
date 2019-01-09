@@ -1,23 +1,5 @@
 version: 2
 jobs:
-  test:
-    docker:
-      - image: patrick330602/fake_wsl_env
-    steps:
-      - checkout
-      - run:
-          name: Pre-Testing Setup
-          command: |
-            apt-get update -qq
-            apt-get install -qq apt-utils mime-support sudo
-            bash -x ./configure.sh -a
-      - run:
-          name: Test
-          command: |
-            git submodule init
-            git submodule update
-            make
-            make test
   build:
     docker:
       - image: patrick330602/fake_wsl_env
@@ -58,7 +40,6 @@ workflows:
   version: 2
   build:
    jobs:
-      - test
       - build
       - genpkg
   nightlybuild:
