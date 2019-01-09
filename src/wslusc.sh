@@ -34,7 +34,7 @@ if [[ "$cname" != "" ]]; then
 	
 	# Check default icon location
 	if [[ ! -f $script_location/wsl.ico ]]; then
-		echo "${info} Default wslusc icon \"wsl.ico\" not found in Windows directory. Copying right now..."
+		echo "${warn} Default wslusc icon \"wsl.ico\" not found in Windows directory. Copying right now..."
 		[[ -d $script_location ]] || mkdir $script_location
 		if [[ $localfile_path/wsl.ico ]]; then
 			cp $localfile_path/wsl.ico $script_location
@@ -46,7 +46,7 @@ if [[ "$cname" != "" ]]; then
 	fi
 	# Check presence of runHidden.vbs 
 	if [[ ! -f $script_location/runHidden.vbs ]]; then
-		echo "${info} runHidden.vbs not found in Windows directory. Copying right now..."
+		echo "${warn} runHidden.vbs not found in Windows directory. Copying right now..."
 		[[ -d $script_location ]] || mkdir $script_location
 		if [[ -f $localfile_path/runHidden.vbs ]]; then
 			cp $localfile_path/runHidden.vbs $script_location
@@ -63,7 +63,7 @@ if [[ "$cname" != "" ]]; then
 
 		if [[ ! -f $iconpath ]]; then
 			iconpath="$(double_dash_p $(wslvar -s USERPROFILE))\\wslu\\wsl.ico"
-			echo "${info} Icon not found. Back to default icon..."
+			echo "${warn} Icon not found. Reset to default icon..."
 		else
 			echo "${info} You choose to use custom icon: $iconpath. Processing..."
 			cp $iconpath $script_location
