@@ -4,9 +4,11 @@ OUTPATH = out
 CURPATH = $(shell pwd)
 
 SOURCES := $(wildcard src/*.sh)
-ETC := $(wildcard src/etc/*)
+ETCFILES := $(wildcard src/etc/*)
 OUTFILES := $(wildcard out/*)
+MANFILES := $(wildcard docs/*)
 INSTEDEXES := $(wildcard /usr/bin/wsl*)
+INSTEDMANS := $(wildcard /usr/share/man/man1/wsl*)
 
 all:
 	[ -d $(OUTPATH) ] || mkdir $(OUTPATH)
@@ -20,16 +22,22 @@ link:
 	for file in $(OUTFILES); do \
 		ln -s $(CURPATH)/$$file /usr/bin/`basename $$file`; \
 	done
-	[ -d /usr/share/wslu ] || mkdir -p /usr/share/wslu
-	cp src/etc/* /usr/share/wslu
+	for file in $(MANFILES); do \
+		ln -s $(CURPATH)/$$file /usr/share/man/man1/`basename $$file`; \
+	done
+	ln -s src/etc /usr/share/wslu
 
 install:
 	install -m755 out/* /usr/bin
+	install -m644 docs/* /usr/share/man/man1
 	[ -d /usr/share/wslu ] || mkdir -p /usr/share/wslu
 	cp src/etc/* /usr/share/wslu
 
 uninstall: 
 	for f in $(INSTEDEXES); do \
+    	rm -f $$f; \
+	done
+	for f in $(INSTEDMANS); do \
     	rm -f $$f; \
 	done
 	rm -rf /usr/share/wslu
