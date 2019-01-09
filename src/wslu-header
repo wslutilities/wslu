@@ -57,7 +57,7 @@ reset=`echo -e '\033(B\033[m'`
 info="${green}[info]${reset}"
 error="${red}[error]${reset}"
 warn="${orange}[warn]${reset}"
-debug="${cyan}[debug]${reset}"
+debug="${orange}${bold}[debug]${reset}"
 
 # functions
 
