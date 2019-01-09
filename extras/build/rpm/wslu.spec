@@ -62,6 +62,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(555,root,root) /usr/share/man/man1/wslvar.1
 %attr(555,root,root) /usr/share/man/man1/wslview.1
 %changelog
-* Mon Jan 12 2019 patrick330602 <wotingwu@live.com>
+* Sat Jan 12 2019 patrick330602 <wotingwu@live.com>
 - Please check https://github.com/wslutilities/wslu/releases/lstest for changelog
 
