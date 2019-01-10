@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  installtests:
     docker:
       - image: patrick330602/fake_wsl_env
     steps:
@@ -9,14 +9,30 @@ jobs:
           name: Pre-building Setup
           command: |
             apt-get update -qq
-            apt-get install -qq apt-utils mime-support sudo
+            apt-get install -qq apt-utils sudo
             bash -x ./configure.sh -a
       - run:
           name: Build and Install
           command: |
             make
             sudo make install
-  genpkg:
+  linktests:
+    docker:
+      - image: patrick330602/fake_wsl_env
+    steps:
+      - checkout
+      - run:
+          name: Pre-building Setup
+          command: |
+            apt-get update -qq
+            apt-get install -qq apt-utils sudo
+            bash -x ./configure.sh -a
+      - run:
+          name: Build and Link
+          command: |
+            make
+            sudo make link
+  debbuilds:
     machine: true
     steps:
       - checkout
@@ -24,13 +40,32 @@ jobs:
           name: Install Pre-requisites
           command: |
             sudo apt-get update -qq
-            sudo apt-get install -qq build-essential rpm sudo
+            sudo apt-get install -qq apt-utils build-essential rpm sudo
       - run:
           name: Build Package
           command: |
             make
             cd extras/scripts
             sudo bash -x ./builder-deb.sh
+            mkdir -p /tmp/pkgs
+            sudo mv ../../target/* /tmp/pkgs
+      - store_artifacts:
+            path: /tmp/pkgs
+  rpmbuilds:
+    docker:
+      - image: opensuse:latest
+    steps:
+      - checkout
+      - run:
+          name: Install Pre-requisites
+          command: |
+            zypper update -n
+            zypper -n install make rpm sudo
+      - run:
+          name: Build Package
+          command: |
+            make
+            cd extras/scripts
             sudo bash -x ./builder-rpm.sh
             mkdir -p /tmp/pkgs
             sudo mv ../../target/* /tmp/pkgs
