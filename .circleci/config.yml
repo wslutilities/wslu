@@ -79,8 +79,8 @@ workflows:
       - linktests
   build:
    jobs:
-      - debbuild
-      - rpmbuild
+      - debbuilds
+      - rpmbuilds
   nightlybuild:
     triggers:
        - schedule:
@@ -90,4 +90,5 @@ workflows:
                only:
                  - develop
     jobs:
-      - genpkg
+      - debbuilds
+      - rpmbuilds
