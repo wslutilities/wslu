@@ -73,10 +73,14 @@ jobs:
             path: /tmp/pkgs
 workflows:
   version: 2
+  tests:
+    jobs:
+      - installtests
+      - linktests
   build:
    jobs:
-      - build
-      - genpkg
+      - debbuild
+      - rpmbuild
   nightlybuild:
     triggers:
        - schedule:
