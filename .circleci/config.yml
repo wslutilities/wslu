@@ -60,7 +60,7 @@ jobs:
           name: Install Pre-requisites
           command: |
             zypper update -n
-            zypper -n install make rpm sudo
+            zypper install -n make rpm sudo
       - run:
           name: Build Package
           command: |
