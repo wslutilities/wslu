@@ -60,21 +60,34 @@ PATH=$(getconf PATH)
 }
 
 function pkg_inst {
-distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME="//g')"
-if [[ "$distro" == *WLinux* ]] || [[ "$distro" == Ubuntu* ]] || [[ "$distro" == *Debian* ]] || [[ "$distro" == *Kali* ]]; then
-	sudo apt purge -y wslu
-	sudo apt install -y git bc wget unzip make imagemagick
-elif [[ "$distro" == openSUSE* ]] || [[ "$distro" == SLES* ]]; then
-	sudo zypper -n rm wslu
-	sudo zypper -n install git bc wget unzip make imagemagick
-elif [[ "$distro" == Alpine* ]]; then
-	sudo apk add git bc wget unzip make bash-completion imagemagick
-elif [[ "$distro" == Arch* ]]; then
-	sudo pacman -Syyu git bc wget unzip make bash-completion imagemagick
-elif [[ "$distro" == Scientific* ]]; then
-	sudo yum install -y git bc wget unzip make bash-completion imagemagick
+distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME=\"//g')"
+case $distro in
+	*WLinux*|Ubuntu*|*Debian*|*Kali*)
+		sudo apt purge -y wslu
+		sudo apt install -y git bc wget unzip make imagemagick
+		;;
+	openSUSE*|SLES*)
+		sudo zypper -n rm wslu
+		sudo zypper -n install git bc wget unzip make imagemagick
+		;;
+	Alpine*)
+		sudo apk add git bc wget unzip make bash-completion imagemagick
+		;;
+    Arch*)
+		sudo pacman -Syyu git bc wget unzip make bash-completion imagemagick
+		;;
+    Scientific*)
+		sudo yum install -y git bc wget unzip make bash-completion imagemagick
+		;;
+    *Fedora*)
+		sudo dnf install -y git bc wget unzip make bash-completion ImageMagick
+		;;
+    *) exit 1;;
+esac
+
+	
 elif [[ "$distro" == *Fedora* ]]; then
-	sudo dnf install -y git bc wget unzip make bash-completion ImageMagick
+	
 fi
 }
 
