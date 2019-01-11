@@ -29,7 +29,7 @@ link:
 
 install:
 	install -m755 out/* /usr/bin
-	install -m644 docs/* /usr/share/man/man1
+	install -m555 docs/* /usr/share/man/man1
 	[ -d /usr/share/wslu ] || mkdir -p /usr/share/wslu
 	cp src/etc/* /usr/share/wslu
 

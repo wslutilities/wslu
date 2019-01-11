@@ -62,20 +62,28 @@ PATH=$(getconf PATH)
 function pkg_inst {
 distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME="//g')"
 if [[ "$distro" == *WLinux* ]] || [[ "$distro" == Ubuntu* ]] || [[ "$distro" == *Debian* ]] || [[ "$distro" == *Kali* ]]; then
-	sudo apt purge -y wlinux-wslu wslu
-	sudo apt install -y git build-essential bc wget unzip make imagemagick
+	sudo apt purge -y wslu
+	sudo apt install -y git bc wget unzip make imagemagick
 elif [[ "$distro" == openSUSE* ]] || [[ "$distro" == SLES* ]]; then
 	sudo zypper -n rm wslu
 	sudo zypper -n install git bc wget unzip make imagemagick
 elif [[ "$distro" == Alpine* ]]; then
-	sudo apk add git bc wget unzip make bash-completion ronn imagemagick
+	sudo apk add git bc wget unzip make bash-completion imagemagick
 elif [[ "$distro" == Arch* ]]; then
-	sudo pacman -Syyu git bc wget unzip make bash-completion ronn imagemagick
+	sudo pacman -Syyu git bc wget unzip make bash-completion imagemagick
 elif [[ "$distro" == Scientific* ]]; then
-	sudo yum install git bc wget unzip make bash-completion imagemagick
+	sudo yum install -y git bc wget unzip make bash-completion imagemagick
 elif [[ "$distro" == *Fedora* ]]; then
-	sudo dnf install git bc wget unzip make bash-completion ImageMagick
+	sudo dnf install -y git bc wget unzip make bash-completion ImageMagick
 fi
+}
+
+function main_inst {
+env_check
+prsh_check
+pkg_inst
+make
+sudo make install
 }
 
 for args; do
@@ -83,8 +91,9 @@ for args; do
 		-e|--env) env_check; exit;;
 		-p|--prsh) prsh_check; exit;;
 		-P|--pkg) pkg_inst; exit;;
-		-a|--all) env_check; prsh_check; pkg_inst; exit;;
+		-i|--install) main_inst; exit;;
 		*) exit 1;;
 	esac
 done
 
+env_check; prsh_check; pkg_inst
