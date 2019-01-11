@@ -84,11 +84,6 @@ case $distro in
 		;;
     *) exit 1;;
 esac
-
-	
-elif [[ "$distro" == *Fedora* ]]; then
-	
-fi
 }
 
 function main_inst {
