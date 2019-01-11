@@ -10,7 +10,7 @@ jobs:
           command: |
             apt-get update -qq
             apt-get install -qq apt-utils sudo
-            bash -x ./configure.sh -a
+            bash -x ./configure.sh
       - run:
           name: Build and Install
           command: |
@@ -26,7 +26,7 @@ jobs:
           command: |
             apt-get update -qq
             apt-get install -qq apt-utils sudo
-            bash -x ./configure.sh -a
+            bash -x ./configure.sh
       - run:
           name: Build and Link
           command: |
@@ -60,7 +60,7 @@ jobs:
           name: Install Pre-requisites
           command: |
             yum update -y
-            yum install -y make rpm sudo
+            yum install -y findutils make rpm rpmbuild sudo
       - run:
           name: Build Package
           command: |
