@@ -41,9 +41,10 @@ cp -a docs/wsl* ${RPM_BUILD_ROOT}%{_mandir}/man1
 %postun
 %{_sbindir}/update-alternatives --remove www-browser %{_bindir}/wslview
 %{_sbindir}/update-alternatives --remove x-www-browser %{_bindir}/wslview
- 
+
 %clean
 rm -rf $RPM_BUILD_ROOT
+
 %files
 %defattr(-,root,root)
 %{_bindir}/wslusc
