@@ -54,12 +54,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wslvar
 /usr/share/wslu/runHidden.vbs
 /usr/share/wslu/wsl.ico
-%{_mandir}/man1/wslusc.1
-%{_mandir}/man1/wslfetch.1
-%{_mandir}/man1/wslsys.1
-%{_mandir}/man1/wslupath.1
-%{_mandir}/man1/wslvar.1
-%{_mandir}/man1/wslview.1
+%{_mandir}/man1/
 
 %changelog
 * Sat Jan 12 2019 patrick330602 <wotingwu@live.com>
