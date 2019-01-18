@@ -14,7 +14,7 @@ Name: wslu
 Version: BUILDVERPLACEHOLDER
 Release: 1
 Source: wslu-BUILDVERPLACEHOLDER.tar.gz
-Requires: bc imagemagick
+Requires: bc ImageMagick
 Requires(post): %{_sbindir}/update-alternatives
 Requires(postun): %{_sbindir}/update-alternatives
 URL: https://github.com/wslutilities/wslu/
