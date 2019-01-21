@@ -1,13 +1,16 @@
 version="28"
 
 help_short="wslsys (-h|-v|-S|-U|-b|-B|-fB|-R|-K|-P) -s"
+
+## Windows 10 information
 branch=`winps_exec "(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').'BuildBranch'"`
 build=`winps_exec "(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').'CurrentBuild'"`
 full_build=`winps_exec "(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').'BuildLabEx'"`
 installdate=`winps_exec "(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').'InstallDate'"`
+
+## WSL information
 release="$(cat /etc/os-release | grep "PRETTY_NAME=" | sed -e 's/PRETTY_NAME=//g' -e 's/"//g')"
 kernel="$(</proc/sys/kernel/ostype) $(</proc/sys/kernel/osrelease)"
-
 uptime=$(</proc/uptime)
 uptime=${uptime//.*}
 days=$((${uptime}/86400))
@@ -15,6 +18,7 @@ hours=$((${uptime}/3600%24))
 minutes=$((${uptime}/60%60))
 uptime="${days}d ${hours}h ${minutes}m"
 
+### WSL package information
 case "$distro" in
 	'ubuntu'|'kali'|'debian'|'wlinux')
 		packages="$((packages+=$(dpkg --get-selections | grep -cv deinstall$)))";;
@@ -26,6 +30,12 @@ case "$distro" in
 	    packages=$(pacman -Qq | wc -l);;
 esac
 
+## fedora remix specific information
+if [ "$distro" == "fedora" ]; then
+    release="Fedora Remix $(cat /etc/os-release | grep -e "^VERSION=" | sed -e 's/\"//g' | sed -e 's/VERSION=//g')"
+fi
+
+## Simple printer defined for fetching information
 function printer {
 	if [[ $2 != "-s" ]]; then
 		echo $1

@@ -82,6 +82,7 @@ case $distro in
     *Fedora*)
 		sudo dnf install -y git bc wget unzip make bash-completion ImageMagick
 		;;
+	*Generic*) [ "fedora" == "$(cat /etc/os-release | grep -e "LIKE=" | sed -e 's/ID_LIKE=//g')" ] && sudo dnf install -y git || exit 1;;
     *) exit 1;;
 esac
 }

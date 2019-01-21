@@ -109,5 +109,6 @@ case $distro in
     Arch*) distro="archlinux";;
     Scientific*) distro="scilinux";;
     *Fedora*) distro="fedora";;
+	*Generic*) [ "fedora" == "$(cat /etc/os-release | grep -e "LIKE=" | sed -e 's/ID_LIKE=//g')" ] && distro="fedora" || distro="unknown";;
     *) distro="unknown";;
 esac
