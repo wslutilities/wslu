@@ -7,7 +7,7 @@ is_gui=0
 customname=""
 customenv=""
 
-help_short="wslusc (-e|-n|-i|-g|-h|-v) ...COMMAND..."
+help_short="wslusc (--env <PATH>|--name <NAME>|--icon <ICO FILE>|--gui|--help|--version) <COMMAND>"
 
 while [ "$1" != "" ]; do
 	case "$1" in
