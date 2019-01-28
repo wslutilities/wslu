@@ -53,7 +53,7 @@ jobs:
             path: /tmp/pkgs
   rpmbuilds:
     docker:
-      - image: fedora:latest
+      - image: centos:latest
     steps:
       - checkout
       - run:
