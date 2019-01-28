@@ -29,6 +29,7 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as conver
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p ${RPM_BUILD_ROOT}/usr/bin
+mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man1
 install -m555 -d ${RPM_BUILD_ROOT}/usr/share/wslu
 install -m755 wsl* ${RPM_BUILD_ROOT}%{_bindir}
 install -m555 docs/wsl* ${RPM_BUILD_ROOT}%{_mandir}/man1
