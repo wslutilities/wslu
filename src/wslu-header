@@ -62,7 +62,7 @@ debug="${orange}${bold}[debug]${reset}"
 # functions
 
 function help {
-	echo -e "`basename "$1"` - Part of wslutilities, a set of utilities for Windows 10 Windows Subsystem for Linux 
+	echo -e "`basename "$1"` - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux
 Usage: $2
 
 For more help for `basename "$1"`, visit the following site: https://github.com/wslutilities/wslu/wiki/`basename "$1"`"

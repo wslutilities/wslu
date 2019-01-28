@@ -12,7 +12,7 @@
 @test "wslupath - Help" {
   skip "Deprecated"
   run out/wslupath --help
-  [ "${lines[0]}" = "wslupath - Component of Windows 10 Linux Subsystem Utility" ]
+  [ "${lines[0]}" = "wslupath - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
   [ "${lines[1]}" = "Usage: wslupath (-dOr) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]" ]
   [ "${lines[2]}" = "wslupath (-h|-v|-R)" ]
 }
@@ -20,7 +20,7 @@
 @test "wslupath - Help - Alt." {
   skip "Deprecated"
   run out/wslupath -h
-  [ "${lines[0]}" = "wslupath - Component of Windows 10 Linux Subsystem Utility" ]
+  [ "${lines[0]}" = "wslupath - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
   [ "${lines[1]}" = "Usage: wslupath (-dOr) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]" ]
   [ "${lines[2]}" = "wslupath (-h|-v|-R)" ]
 }

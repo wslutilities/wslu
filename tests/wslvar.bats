@@ -8,14 +8,14 @@
 
 @test "wslvar - Help" {
   run out/wslvar --help
-  [ "${lines[0]}" = "wslvar - Component of Windows 10 Linux Subsystem Utility" ]
+  [ "${lines[0]}" = "wslvar - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
   [ "${lines[1]}" = "Usage: wslvar (-s|-l) ...NAME..." ]
   [ "${lines[2]}" = "wslvar (-h|-v|-S|-L)" ]
 }
 
 @test "wslvar - Help - Alt." {
   run out/wslvar -h
-  [ "${lines[0]}" = "wslvar - Component of Windows 10 Linux Subsystem Utility" ]
+  [ "${lines[0]}" = "wslvar - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
   [ "${lines[1]}" = "Usage: wslvar (-s|-l) ...NAME..." ]
   [ "${lines[2]}" = "wslvar (-h|-v|-S|-L)" ]
 }

@@ -8,12 +8,12 @@
 
 @test "wslsys - Help" {
   run out/wslsys --help
-  [ "${lines[0]}" = "wslsys - Component of Windows 10 Linux Subsystem Utility" ]
+  [ "${lines[0]}" = "wslsys - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
   [ "${lines[1]}" = "Usage: wslsys (-h|-v|-S|-U|-b|-B|-fB|-R|-K|-P) -s" ]
 }
 
 @test "wslsys - Help - Alt." {
   run out/wslsys -h
-  [ "${lines[0]}" = "wslsys - Component of Windows 10 Linux Subsystem Utility" ]
+  [ "${lines[0]}" = "wslsys - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
   [ "${lines[1]}" = "Usage: wslsys (-h|-v|-S|-U|-b|-B|-fB|-R|-K|-P) -s" ]
 }
