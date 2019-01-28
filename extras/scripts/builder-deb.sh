@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 BUILD_DIR=`mktemp --tmpdir --directory wslu-build-debian.XXXX`
 BUILD_VER=`grep 'version=' ../../src/wslu-header | cut -d'=' -f 2 | xargs`
-DATE=`date +%Y%m%d%H%M%S`
+#DATE=`date +%Y%m%d%H%M%S`
 CURRENT_DIR=`pwd`
 
 # Creating folders
@@ -32,7 +32,7 @@ cp $CURRENT_DIR/../build/debian/* $BUILD_DIR/DEBIAN
 
 # modifying the files
 sed -i s/VERSIONPLACEHOLDER/$BUILD_VER/g $BUILD_DIR/DEBIAN/control
-sed -i s/DATEPLACEHOLDER/$DATE/g $BUILD_DIR/DEBIAN/control
+#sed -i s/DATEPLACEHOLDER/$DATE/g $BUILD_DIR/DEBIAN/control
 chmod 755 $BUILD_DIR/DEBIAN/{postinst,prerm}
 
 # export md5 hashes
