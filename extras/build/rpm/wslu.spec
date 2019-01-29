@@ -21,16 +21,19 @@ URL: https://github.com/wslutilities/wslu/
 License: GPLv3
 %description
 This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
+%global debug_package %{nil}
 %prep
 %setup
 %build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p ${RPM_BUILD_ROOT}/usr/bin
-install -m555 -d ${RPM_BUILD_ROOT}/usr/share/wslu
+mkdir -p ${RPM_BUILD_ROOT}/usr/share/wslu
+mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man1
 install -m755 wsl* ${RPM_BUILD_ROOT}%{_bindir}
-cp -a etc/* ${RPM_BUILD_ROOT}/usr/share/wslu
+install -m555 etc/wsl.ico ${RPM_BUILD_ROOT}/usr/share/wslu
+install -m555 etc/runHidden.vbs ${RPM_BUILD_ROOT}/usr/share/wslu
+install -m555 docs/wsl* ${RPM_BUILD_ROOT}%{_mandir}/man1
 
 %post
 %{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 1
@@ -53,6 +56,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wslvar
 /usr/share/wslu/runHidden.vbs
 /usr/share/wslu/wsl.ico
+%{_mandir}/man1/wslusc.1
+%{_mandir}/man1/wslfetch.1
+%{_mandir}/man1/wslsys.1
+%{_mandir}/man1/wslupath.1
+%{_mandir}/man1/wslvar.1
+%{_mandir}/man1/wslview.1
 
 %changelog
 * Sat Jan 12 2019 patrick330602 <wotingwu@live.com>
