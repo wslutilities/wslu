@@ -21,7 +21,6 @@ URL: https://github.com/wslutilities/wslu/
 License: GPLv3
 %description
 This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
-%global debug_package %{nil}
 %prep
 %setup
 %build
@@ -29,10 +28,8 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as conver
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p ${RPM_BUILD_ROOT}/usr/bin
-mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man1
 install -m555 -d ${RPM_BUILD_ROOT}/usr/share/wslu
 install -m755 wsl* ${RPM_BUILD_ROOT}%{_bindir}
-install -m555 docs/wsl* ${RPM_BUILD_ROOT}%{_mandir}/man1
 cp -a etc/* ${RPM_BUILD_ROOT}/usr/share/wslu
 
 %post
@@ -56,7 +53,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wslvar
 /usr/share/wslu/runHidden.vbs
 /usr/share/wslu/wsl.ico
-%{_mandir}/man1/
 
 %changelog
 * Sat Jan 12 2019 patrick330602 <wotingwu@live.com>
