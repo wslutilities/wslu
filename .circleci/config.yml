@@ -52,15 +52,14 @@ jobs:
       - store_artifacts:
             path: /tmp/pkgs
   rpmbuilds:
-    docker:
-      - image: opensuse:latest
+    machine: true
     steps:
       - checkout
       - run:
           name: Install Pre-requisites
           command: |
-            zypper update -n
-            zypper install -n make rpm sudo
+            sudo apt-get update -qq
+            sudo apt-get install -qq apt-utils build-essential sudo rpm
       - run:
           name: Build Package
           command: |
