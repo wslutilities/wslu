@@ -53,14 +53,14 @@ jobs:
             path: /tmp/pkgs
   rpmbuilds:
     docker:
-      - image: centos:latest
+      - image: opensuse:latest
     steps:
       - checkout
       - run:
           name: Install Pre-requisites
           command: |
-            yum update -y
-            yum install -y findutils make rpm rpm-build sudo
+            zypper update -n
+            zypper install -n make rpm sudo
       - run:
           name: Build Package
           command: |
