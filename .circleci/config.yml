@@ -52,6 +52,18 @@ jobs:
             sudo mv ../../target/* /tmp/pkgs
       - store_artifacts:
             path: /tmp/pkgs
+  deploydeb:
+    docker:
+      - image: circleci/ruby:2.3-jessie
+    steps:
+      - attach_workspace:
+         at: /tmp/pkgs
+      - run:
+          name: Install packageloud cli
+          command: gem install package_cloud
+      - run:
+          name: Push deb package
+          command: package_cloud push whitewaterfoundry/wlinux-setup/debian/buster /tmp/pkgs/*.deb
 workflows:
   version: 2
   tests:
