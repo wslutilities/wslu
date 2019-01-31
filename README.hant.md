@@ -44,27 +44,15 @@ WLinux已內建。
 
 ### Ubuntu/Debian/Kali Linux
 
-執行以下命令:
-```bash
-sudo apt install apt-transport-https
-wget -O - https://api.patrickwu.space/public.key | sudo apt-key add -
-echo "deb https://apt.patrickwu.space/ stable main" | sudo tee -a /etc/apt/sources.list 
-sudo apt update
-sudo apt install wslu
-```
+你可以從Releases介面下載`.deb`進行安裝：`sudo dpkg -i wslu*`。
 
-或者你可以從Releases介面下載.deb進行安裝：`sudo dpkg -i wslu*`。
+### OpenSUSE/SLES/WLinux Enterprise/Fedora Remix
 
-### OpenSUSE/SLES
+你可以從Releases介面下載`.rpm`進行安裝：`sudo rpm -ivh "wslu*"`。
 
-執行以下命令:執行以下命令:
-```bash
-sudo zypper ar https://rpm.patrickwu.space/ ruapm
-sudo zypper ref
-sudo zypper in wslu
-```
+### 其他Distro
 
-或者你可以從Releases介面下載.rpm進行安裝：`sudo rpm -ivh "wslu*"`。
+執行以下命令： `curl -sL https://wslu.patrickwu.space/install | bash`
 
 ## 貢獻者
 

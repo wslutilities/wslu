@@ -52,15 +52,7 @@ You can download the `.rpm` package from release and install it using `sudo rpm 
 
 ## For other distribution
 
-run the following code in your preferred distro:
-
-```bash
-git clone https://github.com/wslutilities/wslu ~/.wslu
-cd ~/.wslu
-./configure.sh -a
-make
-sudo make install
-```
+run the following command in your preferred distro: `curl -sL https://wslu.patrickwu.space/install | bash`
 
 ## Contributors
 
