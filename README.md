@@ -50,7 +50,7 @@ You can download the `.deb` package from release and install it using `sudo dpkg
 
 You can download the `.rpm` package from release and install it using `sudo rpm -ivh "wslu*"`.
 
-## For other distribution
+### For other distribution
 
 run the following command in your preferred distro: `curl -sL https://wslu.patrickwu.space/install | bash`
 
