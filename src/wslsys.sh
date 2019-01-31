@@ -27,12 +27,12 @@ case "$distro" in
 	'alpine')
 		packages=$(apk info | wc -l);;
 	'archlinux')
-	    packages=$(pacman -Qq | wc -l);;
+		packages=$(pacman -Qq | wc -l);;
 esac
 
 ## fedora remix specific information
 if [ "$distro" == "fedora" ]; then
-    release="Fedora Remix $(cat /etc/os-release | grep -e "^VERSION=" | sed -e 's/\"//g' | sed -e 's/VERSION=//g')"
+	release="Fedora Remix $(cat /etc/os-release | grep -e "^VERSION=" | sed -e 's/\"//g' | sed -e 's/VERSION=//g')"
 fi
 
 ## Simple printer defined for fetching information
@@ -45,8 +45,8 @@ function printer {
 }
 
 case $1 in
-        -h|--help) help $0 "$help_short"; exit;;
-	    -v|--version) echo "wslsys v$wslu_version.$version"; exit;;
+		-h|--help) help $0 "$help_short"; exit;;
+		-v|--version) echo "wslu v$wslu_version; wslsys v$version"; exit;;
 		-I|--sys-installdate) printer "Release Install Date: $installdate" $2;exit;;
 		-b|--branch) printer "Branch: $branch" $2;exit;;
 		-B|--build) printer "Build: $build" $2;exit;;

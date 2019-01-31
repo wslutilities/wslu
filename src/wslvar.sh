@@ -45,7 +45,7 @@ while [ "$1" != "" ]; do
 		-S|--getsys) view_sys; exit;;
 		-L|--getshell) view_shell; exit;;
 		-h|--help) help $0 "$help_short"; exit;;
-		-v|--version) echo "wslusc v$wslu_version.$version"; exit;;
+		-v|--version) echo "wslu v$wslu_version; wslvar v$version"; exit;;
 		*) caller "$@"; exit;;
 	esac
 done

@@ -16,7 +16,7 @@ while [ "$1" != "" ]; do
 		-e|--env)shift;customenv=$1;shift;;
 		-g|--gui)is_gui=1;shift;;
 		-h|--help) help $0 "$help_short"; exit;;
-		-v|--version) echo "wslusc v$wslu_version.$version"; exit;;
+		-v|--version) echo "wslu v$wslu_version; wslusc v$version"; exit;;
 		*) cname=$@;break;;
 	esac
 done

@@ -93,7 +93,7 @@ else
 			set_path="$(style_path $(path_converter '%ProgramFiles%'))"
 			break;;
 			-h|--help) help $0 "$help_short"; exit;;
-			-v|--version) echo "wslpath v$wslu_version.$version"; exit;;
+			-v|--version)echo "wslu v$wslu_version; wslupath v$version"; exit;;
 			-R|--avail-reg) echo "Available registery input:"
 			winps_exec "Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders'"| tail -n +3 | head -n -10
 			exit;;

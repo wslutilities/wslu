@@ -31,7 +31,7 @@ for args; do
 		-r|--register) add_reg_alt;;
 		-u|--unregister) del_reg_alt;;
 		-h|--help) help $0 "$help_short"; exit;;
-		-v|--version) echo "wslview v$wslu_version.$version"; exit;;
+		-v|--version) echo "wslu v$wslu_version; wslview v$version"; exit;;
 		*) lname="$lname$args";;
 	esac
 done
