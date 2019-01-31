@@ -10,7 +10,7 @@ The execution policy for powershell.exe
 should not be Restricted. You should se
 t Powershell Execution Policy to Unrest
 ricted with a Powershell Prompt with Ad
-ministrator right:
+ministrator permission:
 
    Set-ExecutionPolicy Unrestricted
 

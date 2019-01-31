@@ -6,39 +6,32 @@ set_path=""
 
 help_short="wslupath (-dOr) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslupath (-h|-v|-R)"
 
-function path_double_dash
-{
+function path_double_dash {
 	new_path="$(echo $@ | sed -e 's|\\|\\\\|g')"
 	echo $new_path
 }
 
-function path_win
-{
+function path_win {
 	# TODO: Change this function to convert linux path to Windows path
 	new_path="$(echo $@ | sed -e 's|/|\\|g' -e 's|^\\mnt\\\([A-Za-z]\)\\|\L\1\E:\\|')"
 	echo $new_path
 }
 
-function path_linux
-{
+function path_linux {
 	new_path="$(echo $@ | sed -e 's|\\|/|g' -e 's|^\([A-Za-z]\)\:/\(.*\)|/mnt/\L\1\E/\2|')"
 	echo $new_path
 }
 
-function path_converter
-{
+function path_converter {
 	new_path=`cmd.exe /c "echo $@" 2>&1 | tr -d "\r"`
 	echo $new_path
 }
 
-function reg_path_converter
-{
-	new_path="$(/mnt/c/Windows/System32/reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "$@" 2>&1 | sed -n 3p | sed -e "s/$@//" | sed -e 's/^[[:space:]]*//' | awk '{$1=""; sub("  ", " "); print}' | sed -e 's|\r||g')"
-	echo $new_path
+function reg_path_converter {
+	winps_exec "(Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders').'$@'" | cat
 }
 
-function general_converter
-{
+function general_converter {
 	target="$@"
 	if [[ $target =~ ^[A-Z]:(\\[^:\\]+)*(\\)?$ ]]; then
 		p="$(path_linux $@)"
@@ -51,8 +44,7 @@ function general_converter
 	echo $p
 }
 
-function style_path
-{
+function style_path {
 	case $style in
 		1)p="$(general_converter $@)";;
 		2)p="$@";;
@@ -101,9 +93,9 @@ else
 			set_path="$(style_path $(path_converter '%ProgramFiles%'))"
 			break;;
 			-h|--help) help $0 "$help_short"; exit;;
-			-v|--version) echo "wslpath v$wslu_version.$version"; exit;;
+			-v|--version)echo "wslu v$wslu_version; wslupath v$version"; exit;;
 			-R|--avail-reg) echo "Available registery input:"
-			/mnt/c/Windows/System32/reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /s | tail -n +3 | head -n -1 | sed -e "s|REG_EXPAND_SZ||g" | sed -e 's/ \+/ /g' -e 's/^ //g'
+			winps_exec "Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders'"| tail -n +3 | head -n -10
 			exit;;
 			*)
 			if [[ "$reg_path" == "1" ]]; then

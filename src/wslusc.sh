@@ -1,13 +1,13 @@
 version="28"
 
 cname=""
-iconpath="`wslupath -d -H`\\wslu\\wsl.ico"
+iconpath="$(double_dash_p $(wslvar -s USERPROFILE))\\wslu\\wsl.ico"
 is_icon=0
 is_gui=0
 customname=""
 customenv=""
 
-help_short="wslusc (-e|-n|-i|-g|-h|-v) ...COMMAND..."
+help_short="wslusc (--env <PATH>|--name <NAME>|--icon <ICO FILE>|--gui|--help|--version) <COMMAND>"
 
 while [ "$1" != "" ]; do
 	case "$1" in
@@ -16,28 +16,25 @@ while [ "$1" != "" ]; do
 		-e|--env)shift;customenv=$1;shift;;
 		-g|--gui)is_gui=1;shift;;
 		-h|--help) help $0 "$help_short"; exit;;
-		-v|--version) echo "wslusc v$wslu_version.$version"; exit;;
+		-v|--version) echo "wslu v$wslu_version; wslusc v$version"; exit;;
 		*) cname=$@;break;;
 	esac
 done
 if [[ "$cname" != "" ]]; then
-	tpath=`wslupath -d -T`
-	dpath=`wslupath -D`
-	script_location="`wslupath -H`/wslu"
+	tpath=$(double_dash_p $(wslvar -s TMP))
+	dpath=$(wslpath $(wslvar -l Desktop))
+	script_location="$(wslpath $(wslvar -s USERPROFILE))/wslu"
 	localfile_path="/usr/share/wslu"
-	script_location_win="`wslupath -d -H`\\wslu"
+	script_location_win="$(double_dash_p $(wslvar -s USERPROFILE))\\wslu"
 	
-	raw_command=( $(basename "$cname") )
-	new_cname="${raw[1]}"
+	new_cname=$(basename $(echo "$cname" | awk '{print $1}'))
 	if [[ "$customname" != "" ]]; then
 		new_cname=$customname
-	else
-		new_cname=$cname
 	fi
 	
 	# Check default icon location
 	if [[ ! -f $script_location/wsl.ico ]]; then
-		echo "${info} Default wslusc icon \"wsl.ico\" not found in Windows directory. Copying right now..."
+		echo "${warn} Default wslusc icon \"wsl.ico\" not found in Windows directory. Copying right now..."
 		[[ -d $script_location ]] || mkdir $script_location
 		if [[ $localfile_path/wsl.ico ]]; then
 			cp $localfile_path/wsl.ico $script_location
@@ -49,7 +46,7 @@ if [[ "$cname" != "" ]]; then
 	fi
 	# Check presence of runHidden.vbs 
 	if [[ ! -f $script_location/runHidden.vbs ]]; then
-		echo "${info} runHidden.vbs not found in Windows directory. Copying right now..."
+		echo "${warn} runHidden.vbs not found in Windows directory. Copying right now..."
 		[[ -d $script_location ]] || mkdir $script_location
 		if [[ -f $localfile_path/runHidden.vbs ]]; then
 			cp $localfile_path/runHidden.vbs $script_location
@@ -64,20 +61,25 @@ if [[ "$cname" != "" ]]; then
 		icon_filename="$(basename $iconpath)"
 		ext="${iconpath##*.}"
 
-		echo "${info} You choose to use custom icon: $iconpath. Processing..."
-		cp $iconpath $script_location
+		if [[ ! -f $iconpath ]]; then
+			iconpath="$(double_dash_p $(wslvar -s USERPROFILE))\\wslu\\wsl.ico"
+			echo "${warn} Icon not found. Reset to default icon..."
+		else
+			echo "${info} You choose to use custom icon: $iconpath. Processing..."
+			cp $iconpath $script_location
 		
-		if [[ "$ext" != "ico" ]]; then
-			if [[ "$ext" == "svg" ]] || [[ "$ext" == "png" ]]; then
-				echo "${info} Converting $ext icon to ico..."
-				convert "$script_location/$icon_filename" -resize 256X256 "$script_location/${icon_filename%.$ext}.ico"
-				icon_filename="${icon_filename%.$ext}.ico"
-			else
-				echo "${error} wslusc only support creating shortcut using .png/.svg/.ico icon. Aborted."
-				exit 22
+			if [[ "$ext" != "ico" ]]; then
+				if [[ "$ext" == "svg" ]] || [[ "$ext" == "png" ]]; then
+					echo "${info} Converting $ext icon to ico..."
+					convert "$script_location/$icon_filename" -resize 256X256 "$script_location/${icon_filename%.$ext}.ico"
+					icon_filename="${icon_filename%.$ext}.ico"
+				else
+					echo "${error} wslusc only support creating shortcut using .png/.svg/.ico icon. Aborted."
+					exit 22
+				fi
 			fi
+			iconpath="$script_location_win\\$icon_filename"
 		fi
-		iconpath="$script_location_win\\$icon_filename"
 	fi
 	
 	if [[ "$customenv" != "" ]]; then
@@ -85,11 +87,11 @@ if [[ "$cname" != "" ]]; then
 	fi
 
 	if [[ "$is_gui" == "1" ]]; then
-		/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -Command "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs bash.exe -c \"cd ~; export DISPLAY=:0; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
+		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs bash.exe -c \"cd ~; export DISPLAY=:0; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
 	else
-		/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -Command "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \"cd ~; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
+		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \"cd ~; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
 	fi
-	tpath="`wslupath -T`/$new_cname.lnk"
+	tpath="$(wslpath $(wslvar -s TMP))/$new_cname.lnk"
 	mv "$tpath" "$dpath"
 	echo "${info} Create shortcut ${new_cname}.lnk successful"
 else
