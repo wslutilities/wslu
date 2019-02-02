@@ -21,7 +21,7 @@ BUILD_VER=`grep 'version=' ../../src/wslu-header | cut -d'=' -f 2 | xargs`
 EXTRA="~$(date +%Y%m%d%H%M%S)"
 CURRENT_DIR=`pwd`
 
-
+# nightly build handler
 if [ "$1" != "--nightly" ]; then
     EXTRA=""
 fi

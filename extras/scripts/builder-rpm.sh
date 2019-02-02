@@ -17,7 +17,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 BUILD_VER=`grep 'version=' ../../src/wslu-header | cut -d'=' -f 2 | xargs`
+EXTRA="~$(date +%Y%m%d%H%M%S)"
 CURRENT_DIR=`pwd`
+
+# nightly build handler
+if [ "$1" != "--nightly" ]; then
+    EXTRA=""
+fi
 
 # Creating folders
 mkdir -p ~/rpm_wslu/{BUILD/,RPMS/,SOURCES/,SPECS/,SRPMS/}
@@ -31,6 +37,7 @@ cp ../build/rpm/wslu.spec ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
 
 # Modifying the files
 sed -i s/BUILDVERPLACEHOLDER/$BUILD_VER/g ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
+sed -i s/NIGHTLYBUILDPLACEHOLDER/$EXTRAS/g ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
 sed -i "s|HOMEPLACEHOLDER|$HOME|g" ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
 
 # Build tarball
