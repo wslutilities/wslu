@@ -63,7 +63,17 @@ jobs:
           command: gem install package_cloud
       - run:
           name: Push deb package
-          command: package_cloud push whitewaterfoundry/wlinux-setup/debian/buster /tmp/pkgs/*.deb
+          command: |
+            package_cloud push whitewaterfoundry/wslu/debian/stretch /tmp/pkgs/*.deb
+            package_cloud push whitewaterfoundry/wslu/debian/buster /tmp/pkgs/*.deb
+            package_cloud push whitewaterfoundry/wslu/ubuntu/xenial /tmp/pkgs/*.deb
+            package_cloud push whitewaterfoundry/wslu/ubuntu/bionic /tmp/pkgs/*.deb
+            package_cloud push whitewaterfoundry/wslu/sles/12.0 /tmp/pkgs/*.rpm
+            package_cloud push whitewaterfoundry/wslu/sles/15.0 /tmp/pkgs/*.rpm
+            package_cloud push whitewaterfoundry/wslu/opensuse/42.3 /tmp/pkgs/*.rpm
+            package_cloud push whitewaterfoundry/wslu/opensuse/15.0 /tmp/pkgs/*.rpm
+            package_cloud push whitewaterfoundry/wslu/fedora/29 /tmp/pkgs/*.rpm
+            package_cloud push whitewaterfoundry/wslu/scientific/7 /tmp/pkgs/*.rpm
 workflows:
   version: 2
   tests:
