@@ -62,6 +62,9 @@ jobs:
       - attach_workspace:
           at: /tmp/pkgs
       - run:
+          name: List contents of /tmp/pkgs/* for debugging
+          command: ls -a /tmp/pkgs/*       
+      - run:
           name: Install packageloud cli
           command: gem install package_cloud
       - run:
