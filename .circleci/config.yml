@@ -52,6 +52,9 @@ jobs:
             sudo mv ../../target/* /tmp/pkgs
       - store_artifacts:
             path: /tmp/pkgs
+      - persist_to_workspace:
+            root: /tmp/pkgs
+            paths: .
   deploydeb:
     docker:
       - image: circleci/ruby:2.3-jessie
@@ -62,8 +65,32 @@ jobs:
           name: Install packageloud cli
           command: gem install package_cloud
       - run:
-          name: Push deb package
+          name: Push deb package for debian buster
           command: package_cloud push whitewaterfoundry/wlinux-setup/debian/buster /tmp/pkgs/*.deb
+      - run:
+          name: Push deb package for debian stretch
+          command: package_cloud push whitewaterfoundry/wlinux-setup/debian/stretch /tmp/pkgs/*.deb         
+      - run:
+          name: Push deb package for ubuntu bionic
+          command: package_cloud push whitewaterfoundry/wlinux-setup/ubuntu/bionic /tmp/pkgs/*.deb
+      - run:
+          name: Push deb package for ubuntu cosmic
+          command: package_cloud push whitewaterfoundry/wlinux-setup/ubuntu/cosmic /tmp/pkgs/*.deb
+       - run:
+          name: Push rpm package for fedora
+          command: package_cloud push whitewaterfoundry/wlinux-setup/fedora/29 /tmp/pkgs/*.rpm
+       - run:
+          name: Push rpm package for enterprise linux
+          command: package_cloud push whitewaterfoundry/wlinux-setup/el/7 /tmp/pkgs/*.rpm
+       - run:
+          name: Push rpm package for scientific linux
+          command: package_cloud push whitewaterfoundry/wlinux-setup/scientific/7 /tmp/pkgs/*.rpm           
+       - run:
+          name: Push rpm package for sles 15
+          command: package_cloud push whitewaterfoundry/wlinux-setup/sles/15.0 /tmp/pkgs/*.rpm
+        - run:
+          name: Push rpm package for opensuse 15
+          command: package_cloud push whitewaterfoundry/wlinux-setup/opensuse/15.0 /tmp/pkgs/*.rpm         
 workflows:
   version: 2
   tests:
