@@ -59,6 +59,8 @@ jobs:
     docker:
       - image: circleci/ruby:2.3-jessie
     steps:
+      - attach_workspace:
+          at: /tmp/pkgs
       - run:
           name: Install packageloud cli
           command: gem install package_cloud
@@ -74,19 +76,19 @@ jobs:
       - run:
           name: Push deb package for ubuntu cosmic
           command: package_cloud push whitewaterfoundry/wlinux-setup/ubuntu/cosmic /tmp/pkgs/*.deb
-       - run:
+      - run:
           name: Push rpm package for fedora 29
           command: package_cloud push whitewaterfoundry/wlinux-setup/fedora/29 /tmp/pkgs/*.rpm
-       - run:
+      - run:
           name: Push rpm package for enterprise linux 7
           command: package_cloud push whitewaterfoundry/wlinux-setup/el/7 /tmp/pkgs/*.rpm
-       - run:
+      - run:
           name: Push rpm package for scientific linux 7
           command: package_cloud push whitewaterfoundry/wlinux-setup/scientific/7 /tmp/pkgs/*.rpm           
-       - run:
+      - run:
           name: Push rpm package for sles 15
           command: package_cloud push whitewaterfoundry/wlinux-setup/sles/15.0 /tmp/pkgs/*.rpm
-        - run:
+      - run:
           name: Push rpm package for opensuse 15
           command: package_cloud push whitewaterfoundry/wlinux-setup/opensuse/15.0 /tmp/pkgs/*.rpm         
 workflows:
