@@ -60,10 +60,7 @@ jobs:
       - image: circleci/ruby:2.3-jessie
     steps:
       - attach_workspace:
-          at: /tmp/pkgs
-      - run:
-          name: List contents of /tmp/pkgs/* for debugging
-          command: ls -a /tmp/pkgs/*       
+          at: /tmp/pkgs    
       - run:
           name: Install packageloud cli
           command: gem install package_cloud
@@ -103,7 +100,9 @@ workflows:
   build:
    jobs:
       - pkgbuilds
-      - deploypkg
+      - deploypkg:
+          requires: 
+            - pkgbuilds
   nightlybuild:
     triggers:
        - schedule:
