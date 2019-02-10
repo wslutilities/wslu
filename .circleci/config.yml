@@ -73,6 +73,7 @@ workflows:
   build:
    jobs:
       - pkgbuilds
+      - deploydeb
   nightlybuild:
     triggers:
        - schedule:
