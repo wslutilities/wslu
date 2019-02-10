@@ -1,4 +1,4 @@
-version=26
+version=38
 
 is_line=0
 is_splash=0
@@ -80,8 +80,8 @@ case "$distro" in
 "${light_blue}                                            .'     ${reset}"
 "${light_blue}                                             .     ${reset}");;
 	'opensuse')
-        t="${light_green}${bold}"
-        full_text=(
+	t="${light_green}${bold}"
+	full_text=(
 "${light_gray}             .;ldkO0000Okdl;.                   ${reset}"
 "${light_gray}         .;d00xl:^''''''^:ok00d;.               ${reset}"
 "${light_gray}       .d00l'                'o00d.             ${reset}"
@@ -100,30 +100,33 @@ case "$distro" in
 "${light_gray}       'l0Kk:.              .;xK0l'             ${reset}"
 "${light_gray}          'lkK0xl:;,,,,;:ldO0kl'                ${reset}"
 "${light_gray}              '^:ldxkkkkxdl:^'                  ${reset}");;
-    'wlinux')
-        t="${light_orange}${bold}"
-        full_text=(
-"${light_orange}  ++++++++++++++++++++++++++++++++  ${reset}"
-"${light_orange}  ++++++++++++++,,,=++++++++++++++  ${reset}"
-"${light_orange}  ++++++++++++,,,,,,,+++++++++++++  ${reset}"
-"${light_orange}  ++++++++++++,,,,.,,,++++++++++++  ${reset}"
-"${light_orange}  +++++++++++++,,+.+,,++++++++++++  ${reset}"
-"${light_orange}  ++++++++++++,++++:,,++++++++++++  ${reset}"
-"${light_orange}  ++++++++++++,,,:++,,++++++++++++  ${reset}"
-"${light_orange}  +++++++++++,+=,+++,,.+++++++++++  ${reset}"
-"${light_orange}  ++++++++++,.+++++++,.,++++++++++  ${reset}"
-"${light_orange}  +++++++++,,+++++++++,,,+++++++++  ${reset}"
-"${light_orange}  ++++++++.,++++++++++,,,,++++++++  ${reset}"
-"${light_orange}  +++++++=,,++++++++++,,,,++++++++  ${reset}"
-"${light_orange}  +++++++,,:++++++++++.,,,++++++++  ${reset}"
-"${light_orange}  ++++++=+++,++++++++++,,+,+++++++  ${reset}"
-"${light_orange}  ++++=++++++,,++++++.+++++=++++++  ${reset}"
-"${light_orange}  ++++++++++++++++++,,++++++,+++++  ${reset}"
-"${light_orange}  ++++=,++++++.,,,,,,,+++,++++++++  ${reset}"
-"${light_orange}  ++++++++++..++++++=~,,++++++++++  ${reset}");;
-    'sles')
-        t="${green}${bold}"
-        full_text=(
+	'wlinux')
+	t="${light_orange}${bold}"
+	full_text=(
+"${light_orange}                 _.._                 ${reset}"
+"${light_orange}              .-'    \`-.              ${reset}"
+"${light_orange}             :          ;             ${reset}"
+"${light_orange}             ; ,_    _, ;             ${reset}"
+"${light_orange}             : \\{\"  \"}/ :             ${reset}"
+"${light_orange}            ,'.'\"=..=''.'.            ${reset}"
+"${light_orange}           ; / \      / \ ;           ${reset}"
+"${light_orange}         .' ;   '.__.'   ; '.         ${reset}"
+"${light_orange}      .-' .'              '. '-.      ${reset}"
+"${light_orange}    .'   ;                  ;   '.    ${reset}"
+"${light_orange}   /    /                    \    \   ${reset}"
+"${light_orange}  ;    ;                      ;    ;  ${reset}"
+"${light_orange}  ;   \`-._                  _.-'   ;  ${reset}"
+"${light_orange}   ;      ""--.        .--""      ;   ${reset}"
+"${light_orange}    '.    _    ;      ;    _    .'    ${reset}"
+"${light_orange}    {""..' '._.-.    .-._.' '..""}    ${reset}"
+"${light_orange}     \           ;  ;           /     ${reset}"
+"${light_orange}      :         :    :         :      ${reset}"
+"${light_orange}      :         :.__.:         :      ${reset}"
+"${light_orange}       \       /\"-..-\"\       /       ${reset}"
+"${light_orange}        '-.__.'        '.__.-'        ${reset}");;
+	'sles')
+	t="${green}${bold}"
+	full_text=(
 "${green}             .;ldkO0000Okdl;.               ${reset}"
 "${green}         .;d00xl:^''''''^:ok00d;.           ${reset}"
 "${green}       .d00l'                'o00d.         ${reset}"
@@ -142,18 +145,102 @@ case "$distro" in
 "${green}       'l0Kk:.              .;xK0l'         ${reset}"
 "${green}          'lkK0xl:;,,,,;:ldO0kl'            ${reset}"
 "${green}              '^:ldxkkkkxdl:^'              ${reset}");;
-    *)
-        t="${cyan}${bold}"
-        full_text=(
-            "${cyan} /\$\$      /\$\$  /\$\$\$\$\$\$  /\$\$       "
-            "${cyan}| \$\$  /\$ | \$\$ /\$\$__  \$\$| \$\$	  "
-            "${cyan}| \$\$ /\$\$\$| \$\$| \$\$${reset}  ${cyan}\\__/| \$\$${reset}       "
-            "${cyan}| \$\$${reset}${cyan}/\$\$${reset} ${cyan}\$\$${reset} ${cyan}\$\$${reset}${cyan}|  \$\$\$\$\$\$${reset} ${cyan}| \$\$${reset}       "
-            "${cyan}| \$\$\$\$${reset}${cyan}_  \$\$\$\$${reset} ${cyan}\\____  \$\$${reset}${cyan}| \$\$${reset}	  "
-            "${cyan}| \$\$\$${reset}${cyan}/ \\  \$\$\$${reset} ${cyan}/\$\$${reset}  ${cyan}\\ \$\$${reset}${cyan}| \$\$${reset}	  "
-            "${cyan}| \$\$${reset}${cyan}/   \\  \$\$${reset}${cyan}|  \$\$\$\$\$\$${reset}${cyan}/| \$\$\$\$\$\$\$\$${reset} "
-            "${cyan}|__/     \\__/ \\______/ |________/${reset} "
-            );;
+	'alpine')
+	t="${blue}${bold}"
+	full_text=(
+"${light_blue}        ................          ${reset}"
+"${light_blue}       ∴::::::::::::::::∴         ${reset}"
+"${light_blue}      ∴::::::::::::::::::∴        ${reset}"
+"${light_blue}     ∴::::::::::::::::::::∴       ${reset}"
+"${light_blue}    ∴:::::::. :::::':::::::∴      ${reset}"
+"${light_blue}   ∴:::::::.   ;::; ::::::::∴     ${reset}"
+"${light_blue}  ∴::::::;      ∵     :::::::∴    ${reset}"
+"${light_blue} ∴:::::.     .         .::::::∴   ${reset}"
+"${light_blue} ::::::     :::.    .    ::::::   ${reset}"
+"${light_blue} ∵::::     ::::::.  ::.   ::::∵   ${reset}"
+"${light_blue}  ∵:..   .:;::::::: :::.  :::∵    ${reset}"
+"${light_blue}   ∵::::::::::::::::::::::::∵     ${reset}"
+"${light_blue}    ∵::::::::::::::::::::::∵      ${reset}"
+"${light_blue}     ∵::::::::::::::::::::∵       ${reset}"
+"${light_blue}      ::::::::::::::::::::        ${reset}"
+"${light_blue}       ∵::::::::::::::::∵         ${reset}");;
+	'archlinux')
+	t="${light_cyan}${bold}"
+	full_text=(
+"${light_cyan}                   -\`                 "
+"${light_cyan}                  .o+\`                ${reset}"
+"${light_cyan}                 \`ooo/                ${reset}"
+"${light_cyan}                \`+oooo:               ${reset}"
+"${light_cyan}               \`+oooooo:              ${reset}"
+"${light_cyan}               -+oooooo+:             ${reset}"
+"${light_cyan}             \`/:-:++oooo+:            ${reset}"
+"${light_cyan}            \`/++++/+++++++:           ${reset}"
+"${light_cyan}           \`/++++++++++++++:          ${reset}"
+"${light_cyan}          \`/+++o${cyan}oooooooo${light_cyan}oooo/\`        ${reset}"
+"${cyan}         ${light_cyan}./${cyan}ooosssso++osssssso${light_cyan}+\`       ${reset}"
+"${cyan}        .oossssso-\`\`\`\`/ossssss+\`      ${reset}"
+"${cyan}       -osssssso.      :ssssssso.     ${reset}"
+"${cyan}      :osssssss/        osssso+++.    ${reset}"
+"${cyan}     /ossssssss/        +ssssooo/-    ${reset}"
+"${cyan}   \`/ossssso+/:-        -:/+osssso+-  ${reset}"
+"${cyan}  \`+sso+:-\`                 \`.-/+oso: ${reset}"
+"${cyan} \`++:.                           \`-/+/${reset}"
+"${cyan} .\`                                 \`/${reset}");;
+	'scilinux')
+	t="${light_blue}${bold}"
+	full_text=(
+"${light_blue}                  =/;;/-                    "
+"${light_blue}                 +:    //                   ${reset}"
+"${light_blue}                /;      /;                  ${reset}"
+"${light_blue}               -X        H.                 ${reset}"
+"${light_blue} .//;;;:;;-,   X=        :+   .-;:=;:;#;.   ${reset}"
+"${light_blue} M-       ,=;;;#:,      ,:#;;:=,       ,@   ${reset}"
+"${light_blue} :#           :#.=/++++/=.$=           #=   ${reset}"
+"${light_blue}  ,#;         #/:+/;,,/++:+/         ;+.    ${reset}"
+"${light_blue}    ,+/.    ,;@+,        ,#H;,    ,/+,      ${reset}"
+"${light_blue}       ;+;;/= @.  ${light_red}.H${white}#${light_red}#X   ${light_blue}-X :///+;         ${reset}"
+"${light_blue}       ;+=;;;.@,  ${white}.X${light_red}M${white}@$.  ${light_blue}=X.//;=#/.        ${reset}"
+"${light_blue}    ,;:      :@#=        =\$H:     .+#-      ${reset}"
+"${light_blue}  ,#=         #;-///==///-//         =#,    ${reset}"
+"${light_blue} ;+           :#-;;;:;;;;-X-           +:   ${reset}"
+"${light_blue} @-      .-;;;;M-        =M/;;;-.      -X   ${reset}"
+"${light_blue}  :;;::;;-.    #-        :+    ,-;;-;:==    ${reset}"
+"${light_blue}               ,X        H.                 ${reset}"
+"${light_blue}                ;/      #=                  ${reset}"
+"${light_blue}                 //    +;                   ${reset}"
+"${light_blue}                  '////'                    ${reset}");;
+	'fedora')
+	t="${light_blue}${bold}"
+	full_text=(
+"${light_blue}           /:-------------:\         ${reset}"
+"${light_blue}        :-------------------::       ${reset}"
+"${light_blue}      :-----------${white}/shhOHbmp${light_blue}---:\\     ${reset}"
+"${light_blue}    /-----------${white}omMMMNNNMMD  ${light_blue}---:    ${reset}"
+"${light_blue}   :-----------${white}sMMMMNMNMP${light_blue}.    ---:   ${reset}"
+"${light_blue}  :-----------${white}:MMMdP${light_blue}-------    ---\  ${reset}"
+"${light_blue} ,------------${white}:MMMd${light_blue}--------    ---:  ${reset}"
+"${light_blue} :------------${white}:MMMd${light_blue}-------    .---:  ${reset}"
+"${light_blue} :----    ${white}oNMMMMMMMMMNho${light_blue}     .----:  ${reset}"
+"${light_blue} :--     .${white}+shhhMMMmhhy++${light_blue}   .------/  ${reset}"
+"${light_blue} :-    -------${white}:MMMd${light_blue}--------------:   ${reset}"
+"${light_blue} :-   --------${white}/MMMd${light_blue}-------------;    ${reset}"
+"${light_blue} :-    ------${white}/hMMMy${light_blue}------------:     ${reset}"
+"${light_blue} :--${white} :dMNdhhdNMMNo${light_blue}------------;      ${reset}"
+"${light_blue} :---${white}:sdNMMMMNds:${light_blue}------------:       ${reset}"
+"${light_blue} :------${white}:://:${light_blue}-------------::         ${reset}"
+"${light_blue} :---------------------://           ${reset}"
+"${light_blue}                                     ${reset}");;
+	*)
+	t="${cyan}${bold}"
+	full_text=(
+"${cyan} /\$\$      /\$\$  /\$\$\$\$\$\$  /\$\$       "
+"${cyan}| \$\$  /\$ | \$\$ /\$\$__  \$\$| \$\$	  "
+"${cyan}| \$\$ /\$\$\$| \$\$| \$\$${reset}  ${cyan}\\__/| \$\$${reset}       "
+"${cyan}| \$\$${reset}${cyan}/\$\$${reset} ${cyan}\$\$${reset} ${cyan}\$\$${reset}${cyan}|  \$\$\$\$\$\$${reset} ${cyan}| \$\$${reset}       "
+"${cyan}| \$\$\$\$${reset}${cyan}_  \$\$\$\$${reset} ${cyan}\\____  \$\$${reset}${cyan}| \$\$${reset}	  "
+"${cyan}| \$\$\$${reset}${cyan}/ \\  \$\$\$${reset} ${cyan}/\$\$${reset}  ${cyan}\\ \$\$${reset}${cyan}| \$\$${reset}	  "
+"${cyan}| \$\$${reset}${cyan}/   \\  \$\$${reset}${cyan}|  \$\$\$\$\$\$${reset}${cyan}/| \$\$\$\$\$\$\$\$${reset} "
+"${cyan}|__/     \\__/ \\______/ |________/${reset} ");;
 esac
 
 
@@ -164,14 +251,15 @@ info_text=("${t}Windows 10 Linux Subsystem${reset}"
 "${t}RELEASE:${reset}	${release}"
 "${t}KERNEL:${reset}	${kernel}"
 "${t}UPTIME:${reset}	${uptime}"
-"${t}PACKAGES:${reset}	${packages}")
+""
+"   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}")
 
-line(){
-    if [[ "$is_line" == "1" ]]; then
-        printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
-    else
-        echo ""
-    fi
+function line() {
+	if [[ "$is_line" == "1" ]]; then
+		yes -- ${@:-=} | tr -d $'\n' | head -c $COLUMNS
+	else
+		echo ""
+	fi
 }
 
 info_length=${#info_text[@]}
@@ -179,26 +267,26 @@ full_length=${#full_text[@]}
 
 for args; do
 	case $args in
-        -h|--help) help $0 "$help_short"; exit;;
-		-v|--version) echo "wslpath v$wslu_version.$version"; exit;;
-        -s|--splash) is_splash=1;;
-        -l|--line) is_line=1;;
-    esac
+		-h|--help) help $0 "$help_short"; exit;;
+		-v|--version) echo "wslu v$wslu_version; wslfetch v$version"; exit;;
+		-s|--splash) is_splash=1;;
+		-l|--line) is_line=1;;
+	esac
 done
 
 line
 # use for loop to read all values and indexes
 for (( i=0; i<${full_length}; i++ ));
 do
-    tmp=""
-    if [[ $i -le ${info_length} ]]; then
-        tmp="${info_text[$i]}"
-    fi
-    echo -e "${full_text[$i]}${tmp}"
+	tmp=""
+	if [[ $i -le ${info_length} ]]; then
+		tmp="${info_text[$i]}"
+	fi
+	echo -e "${full_text[$i]}${tmp}"
 done
 line
 
 if [[ "$is_splash" == "1" ]]; then
-    sleep 2
-    clear
+	sleep 2
+	clear
 fi

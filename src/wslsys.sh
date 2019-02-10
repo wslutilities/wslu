@@ -1,13 +1,16 @@
-version="25"
+version="28"
 
 help_short="wslsys (-h|-v|-S|-U|-b|-B|-fB|-R|-K|-P) -s"
-branch=`/mnt/c/Windows/System32/reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "BuildBranch" 2>&1 | sed -n 3p | sed -e "s/BuildBranch//" | sed -e 's/^[[:space:]]*//' | awk '{$1=""; sub("  ", " "); print}' | sed -e 's|\r||g'`
-build=`/mnt/c/Windows/System32/reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "CurrentBuild" 2>&1 | egrep -o '([0-9]{5})'`
-full_build=`/mnt/c/Windows/System32/reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "BuildLabEx" 2>&1 | sed -n 3p | sed -e "s/BuildLabEx//" | sed -e 's/^[[:space:]]*//' | awk '{$1=""; sub("  ", " "); print}' | sed -e 's|\r||g'`
-installdate=`/mnt/c/Windows/System32/reg.exe query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "InstallDate" | egrep -o "(0x|0X)[a-fA-F0-9]+" | xargs printf "%d\n" | bc | xargs -I '{}' date --date="@{}"`
+
+## Windows 10 information
+branch=`winps_exec "(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').'BuildBranch'"`
+build=`winps_exec "(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').'CurrentBuild'"`
+full_build=`winps_exec "(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').'BuildLabEx'"`
+installdate=`winps_exec "(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').'InstallDate'"`
+
+## WSL information
 release="$(cat /etc/os-release | grep "PRETTY_NAME=" | sed -e 's/PRETTY_NAME=//g' -e 's/"//g')"
 kernel="$(</proc/sys/kernel/ostype) $(</proc/sys/kernel/osrelease)"
-
 uptime=$(</proc/uptime)
 uptime=${uptime//.*}
 days=$((${uptime}/86400))
@@ -15,16 +18,25 @@ hours=$((${uptime}/3600%24))
 minutes=$((${uptime}/60%60))
 uptime="${days}d ${hours}h ${minutes}m"
 
+### WSL package information
 case "$distro" in
 	'ubuntu'|'kali'|'debian'|'wlinux')
 		packages="$((packages+=$(dpkg --get-selections | grep -cv deinstall$)))";;
-	'opensuse'|'sles')
-		packages="$(rpm -qa | wc -l)"
-		;;
+	'opensuse'|'sles'|'scilinux'|'fedora')
+		packages="$(rpm -qa | wc -l)";;
+	'alpine')
+		packages=$(apk info | wc -l);;
+	'archlinux')
+		packages=$(pacman -Qq | wc -l);;
 esac
 
-function printer
-{
+## fedora remix specific information
+if [ "$distro" == "fedora" ]; then
+	release="Fedora Remix $(cat /etc/os-release | grep -e "^VERSION=" | sed -e 's/\"//g' | sed -e 's/VERSION=//g')"
+fi
+
+## Simple printer defined for fetching information
+function printer {
 	if [[ $2 != "-s" ]]; then
 		echo $1
 	else
@@ -33,8 +45,8 @@ function printer
 }
 
 case $1 in
-        -h|--help) help $0 "$help_short"; exit;;
-	    -v|--version) echo "wslsys v$wslu_version.$version"; exit;;
+		-h|--help) help $0 "$help_short"; exit;;
+		-v|--version) echo "wslu v$wslu_version; wslsys v$version"; exit;;
 		-I|--sys-installdate) printer "Release Install Date: $installdate" $2;exit;;
 		-b|--branch) printer "Branch: $branch" $2;exit;;
 		-B|--build) printer "Build: $build" $2;exit;;

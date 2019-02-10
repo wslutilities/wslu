@@ -1,0 +1,84 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "WSLUPATH" "1" "January 2019" "Patrick Wu" "WSLUPATH"
+.
+
+\fBwslupath\fR
+.
+.SH "NAME"
+wslupath(DEPRECATED) \- Component of Windows 10 Linux Subsystem Utility
+.
+.SH "SYNOPSIS"
+\fBwslupath (\-w|\-d|\-u|\-m|\-r) [\-D|\-A|\-T|\-S|\-W|\-s|\-su|\-H|\-P|\.\.\.NAME\.\.\.]\fR
+.
+.P
+\fBwslupath (\-h|\-v|\-R)\fR
+.
+.SH "DESCRIPTION"
+This is a WSL Windows path Converter that can convert Windows path to other styles of path\.
+.
+.SH "COMMANDS"
+.
+.SS "Output Type Options"
+\fB\-w, \-\-windows\fR \- print Windows form of path(C:\eWindows\eSystem32)
+.
+.P
+\fB\-d, \-\-windows\-double\-slash\fR \- print Windows form of path with double backslash(C:\e\eWindows\e\eSystem32)
+.
+.P
+\fB\-u, \-\-unix\fR \- print Unix form of path(/mnt/c/Windows/System32)
+.
+.P
+\fB\-m, \-\-mixed\fR \- print Windows form of path(C:WindowsSystem32)
+.
+.P
+\fB\-r, \-\-reg\-data\fR \- use the registry data to print path[wslpath \-R to know more]
+.
+.SS "System Path"
+\fB\-D, \-\-desktop\fR \- print desktop path and exit
+.
+.P
+\fB\-A, \-\-appdata\fR \- print AppData path(%APPDATA%) and exit
+.
+.P
+\fB\-T, \-\-temp\fR \- print temp path(%TMP%) and exit
+.
+.P
+\fB\-S, \-\-sysdir\fR \- print system path and exit
+.
+.P
+\fB\-W, \-\-windir\fR \- print Windows path and exit
+.
+.P
+\fB\-s, \-\-start\-menu\fR \- print Start Menu path and exit
+.
+.P
+\fB\-su, \-\-startup\fR \- print Startup path and exit
+.
+.P
+\fB\-H, \-\-home\fR \- print user home path(%HOMEPATH%) and exit
+.
+.P
+\fB\-P, \-\-program\-files\fR \- print Program Files path(%ProgramFiles%) and exit
+.
+.SS "Other Options"
+\fB\-h, \-\-help\fR \- print a simple help
+.
+.P
+\fB\-v, \-\-version\fR \- print current version
+.
+.P
+\fB\-R, \-\-avail\-reg\fR \- print available registry input
+.
+.SH "SEE ALSO"
+https://github\.com/wslutilities/wslu
+.
+.SH "AUTHOR"
+Created by Patrick Wu \fIwotingwu@live\.com\fR
+.
+.SH "REPORTING BUGS"
+Report bugs to \fIhttps://github\.com/wslutilities/wslu/issues\fR
+.
+.SH "COPYRIGHT"
+This is free software; you can redistribute it and/or modify it under the terms of the GNU GPL version 3 or (at your option) any later version\. There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE\.

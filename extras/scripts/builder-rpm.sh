@@ -1,15 +1,32 @@
 #!/usr/bin/env bash
+# builder-rpm.sh
+# scripts of wslu
+# <https://github.com/wslutilities/wslu>
+# Copyright (C) 2019 Patrick Wu
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 BUILD_VER=`grep 'version=' ../../src/wslu-header | cut -d'=' -f 2 | xargs`
 CURRENT_DIR=`pwd`
 
 # Creating folders
 mkdir -p ~/rpm_wslu/{BUILD/,RPMS/,SOURCES/,SPECS/,SRPMS/}
-mkdir -p ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/{etc,mime}
+mkdir -p ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/{etc,docs}
 
 # Copy files to build folder
 cp ../../out/wsl* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER
 cp ../../src/etc/* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/etc
-cp ../../src/mime/* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/mime
+cp ../../docs/* ~/rpm_wslu/SOURCES/wslu-$BUILD_VER/docs
 cp ../build/rpm/wslu.spec ~/rpm_wslu/SPECS/wslu-$BUILD_VER.spec
 
 # Modifying the files
