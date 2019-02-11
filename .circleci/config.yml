@@ -55,6 +55,26 @@ jobs:
       - persist_to_workspace:
             root: /tmp/pkgs
             paths: .
+  nightlypkgbuilds:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Install Pre-requisites
+          command: |
+            sudo apt-get update -qq
+            sudo apt-get install -qq apt-utils build-essential rpm
+      - run:
+          name: Build Package
+          command: |
+            make
+            cd extras/scripts
+            sudo bash -x ./builder-deb.sh --nightly
+            sudo bash -x ./builder-rpm.sh --nightly
+            mkdir -p /tmp/pkgs
+            sudo mv ../../target/* /tmp/pkgs
+      - store_artifacts:
+            path: /tmp/pkgs
   deploypkg:
     docker:
       - image: circleci/ruby:2.3-jessie
@@ -71,11 +91,11 @@ jobs:
           name: Push deb package for debian stretch
           command: package_cloud push whitewaterfoundry/wslu/debian/stretch /tmp/pkgs/*.deb --skip-errors
       - run:
+          name: Push deb package for ubuntu xenial
+          command: package_cloud push whitewaterfoundry/wslu/ubuntu/xenial /tmp/pkgs/*.deb --skip-errors
+      - run:
           name: Push deb package for ubuntu bionic
           command: package_cloud push whitewaterfoundry/wslu/ubuntu/bionic /tmp/pkgs/*.deb --skip-errors
-      - run:
-          name: Push deb package for ubuntu cosmic
-          command: package_cloud push whitewaterfoundry/wslu/ubuntu/cosmic /tmp/pkgs/*.deb --skip-errors
       - run:
           name: Push rpm package for fedora 29
           command: package_cloud push whitewaterfoundry/wslu/fedora/29 /tmp/pkgs/*.rpm --skip-errors
@@ -86,8 +106,14 @@ jobs:
           name: Push rpm package for scientific linux 7
           command: package_cloud push whitewaterfoundry/wslu/scientific/7 /tmp/pkgs/*.rpm --skip-errors
       - run:
+          name: Push rpm package for sles 12
+          command: package_cloud push whitewaterfoundry/wslu/sles/12.0 /tmp/pkgs/*.rpm --skip-errors
+      - run:
           name: Push rpm package for sles 15
           command: package_cloud push whitewaterfoundry/wslu/sles/15.0 /tmp/pkgs/*.rpm --skip-errors
+      - run:
+          name: Push rpm package for opensuse 15
+          command: package_cloud push whitewaterfoundry/wslu/opensuse/15.0 /tmp/pkgs/*.rpm --skip-errors
       - run:
           name: Push rpm package for opensuse 15
           command: package_cloud push whitewaterfoundry/wslu/opensuse/15.0 /tmp/pkgs/*.rpm --skip-errors
@@ -112,4 +138,4 @@ workflows:
                only:
                  - develop
     jobs:
-      - pkgbuilds
+      - nightlypkgbuilds
