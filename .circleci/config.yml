@@ -131,7 +131,7 @@ workflows:
              branches:
                only:
                  - master
-     jobs:
+    jobs:
       - pkgbuilds
       - deploypkg:
           requires: 
