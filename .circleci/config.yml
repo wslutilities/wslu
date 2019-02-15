@@ -76,9 +76,6 @@ jobs:
       - store_artifacts:
             path: /tmp/pkgs
   deploypkg:
-    branches:
-      only:
-        - master
     docker:
       - image: circleci/ruby:2.3-jessie
     steps:
@@ -128,6 +125,13 @@ workflows:
       - linktests
   build:
    jobs:
+      - triggers:
+       - schedule:
+           cron: "0 0 * * *"
+           filters:
+             branches:
+               only:
+                 - master
       - pkgbuilds
       - deploypkg:
           requires: 
