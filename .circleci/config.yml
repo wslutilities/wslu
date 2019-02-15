@@ -124,14 +124,14 @@ workflows:
       - installtests
       - linktests
   build:
-   jobs:
-      - triggers:
-       - schedule:
+    triggers:
+      - schedule:
            cron: "0 0 * * *"
            filters:
              branches:
                only:
                  - master
+     jobs:
       - pkgbuilds
       - deploypkg:
           requires: 
