@@ -101,22 +101,22 @@ jobs:
           command: package_cloud push whitewaterfoundry/wslu/fedora/29 /tmp/pkgs/*.x86_64.rpm --skip-errors
       - run:
           name: Push rpm package for enterprise linux 7
-          command: package_cloud push whitewaterfoundry/wslu/el/7 /tmp/pkgs/*.x86_64.rpm --skip-errors
+          command: package_cloud push whitewaterfoundry/wslu/el/7 /tmp/pkgs/*.rpm --skip-errors
       - run:
           name: Push rpm package for scientific linux 7
-          command: package_cloud push whitewaterfoundry/wslu/scientific/7 /tmp/pkgs/*.x86_64.rpm --skip-errors
+          command: package_cloud push whitewaterfoundry/wslu/scientific/7 /tmp/pkgs/*.rpm --skip-errors
       - run:
           name: Push rpm package for sles 12
-          command: package_cloud push whitewaterfoundry/wslu/sles/12.0 /tmp/pkgs/*.x86_64.rpm --skip-errors
+          command: package_cloud push whitewaterfoundry/wslu/sles/12.0 /tmp/pkgs/*.rpm --skip-errors
       - run:
           name: Push rpm package for sles 15
-          command: package_cloud push whitewaterfoundry/wslu/sles/15.0 /tmp/pkgs/*.x86_64.rpm --skip-errors
+          command: package_cloud push whitewaterfoundry/wslu/sles/15.0 /tmp/pkgs/*.rpm --skip-errors
       - run:
           name: Push rpm package for opensuse 42.3
-          command: package_cloud push whitewaterfoundry/wslu/opensuse/42.3 /tmp/pkgs/*.x86_64.rpm --skip-errors
+          command: package_cloud push whitewaterfoundry/wslu/opensuse/42.3 /tmp/pkgs/*.rpm --skip-errors
       - run:
           name: Push rpm package for opensuse 15
-          command: package_cloud push whitewaterfoundry/wslu/opensuse/15.0 /tmp/pkgs/*.x86_64.rpm --skip-errors
+          command: package_cloud push whitewaterfoundry/wslu/opensuse/15.0 /tmp/pkgs/*.rpm --skip-errors
 workflows:
   version: 2
   tests:
@@ -124,7 +124,14 @@ workflows:
       - installtests
       - linktests
   build:
-   jobs:
+    triggers:
+      - schedule:
+           cron: "0 0 * * *"
+           filters:
+             branches:
+               only:
+                 - master
+    jobs:
       - pkgbuilds
       - deploypkg:
           requires: 
