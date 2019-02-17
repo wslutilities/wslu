@@ -11,32 +11,13 @@ function path_double_dash {
 	echo $new_path
 }
 
-function path_win {
-	# TODO: Change this function to convert linux path to Windows path
-	new_path="$(echo $@ | sed -e 's|/|\\|g' -e 's|^\\mnt\\\([A-Za-z]\)\\|\L\1\E:\\|')"
-	echo $new_path
-}
-
-function path_linux {
-	new_path="$(echo $@ | sed -e 's|\\|/|g' -e 's|^\([A-Za-z]\)\:/\(.*\)|/mnt/\L\1\E/\2|')"
-	echo $new_path
-}
-
-function path_converter {
-	new_path=`cmd.exe /c "echo $@" 2>&1 | tr -d "\r"`
-	echo $new_path
-}
-
-function reg_path_converter {
-	winps_exec "(Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders').'$@'" | cat
-}
-
 function general_converter {
 	target="$@"
+
 	if [[ $target =~ ^[A-Z]:(\\[^:\\]+)*(\\)?$ ]]; then
-		p="$(path_linux $@)"
-	elif [[ $target =~ ^/mnt/[A-Za-z](/[^/]+)*(/)?$ ]]; then
-		p="$(path_win $@)"
+		p=$(wslpath -u "${target}")
+	elif [[ $target =~ ^$(interop_prefix)[A-Za-z](/[^/]+)*(/)?$ ]]; then
+		p=$(wslpath -w "${target}")
 	else
 		echo "${error} No proper path form detected: $@."
 		exit 20
@@ -66,40 +47,40 @@ else
 			## system location
 
 			-D|--desktop)
-			set_path="$(style_path $(path_converter $(reg_path_converter 'Desktop')))"
+			set_path="$(style_path $(wslvar -l 'Desktop'))"
 			break;;
 			-A|--appdata)
-			set_path="$(style_path $(path_converter '%APPDATA%'))"
+			set_path="$(style_path $(wslvar -s APPDATA))"
 			break;;
 			-T|--temp)
-			set_path="$(style_path $(path_converter '%TMP%'))"
+			set_path="$(style_path $(wslvar -s TMP))"
 			break;;
 			-S|--sysdir)
-			set_path="$(style_path $(path_converter 'C:\Windows\System32'))"
+			set_path="$(style_path $(wslvar -s windir)\\System32)"
 			break;;
 			-W|--windir)
-			set_path="$(style_path $(path_converter 'C:\Windows'))"
+			set_path="$(style_path $(wslvar -s windir))"
 			break;;
 			-s|--start-menu)
-			set_path="$(style_path $(path_converter $(reg_path_converter 'Start Menu')))"
+			set_path="$(style_path $(wslvar -l 'Start Menu'))"
 			break;;
 			-su|--startup)
-			set_path="$(style_path $(path_converter $(reg_path_converter 'Startup')))"
+			set_path="$(style_path $(wslvar -l 'Startup'))"
 			break;;
 			-H|--home)
-			set_path="$(wslpath -u $(wslvar HOMEDRIVE)$(wslvar HOMEPATH))"
+			set_path="$(style_path $(wslvar HOMEDRIVE)$(wslvar HOMEPATH))"
 			break;;
 			-P|--program-files)
-			set_path="$(style_path $(path_converter '%ProgramFiles%'))"
+			set_path="$(style_path $(wslvar -s ProgramFiles))"
 			break;;
 			-h|--help) help $0 "$help_short"; exit;;
 			-v|--version)echo "wslu v$wslu_version; wslupath v$version"; exit;;
 			-R|--avail-reg) echo "Available registery input:"
-			winps_exec "Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders'"| tail -n +3 | head -n -10
+			wslvar -L
 			exit;;
 			*)
 			if [[ "$reg_path" == "1" ]]; then
-				set_path="$(style_path $(path_converter $(reg_path_converter $args)))"
+				set_path="$(style_path $(wslvar -l $args))"
 			else
 				set_path="$(style_path $args)"
 			fi				
