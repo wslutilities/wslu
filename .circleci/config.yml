@@ -98,7 +98,7 @@ jobs:
           command: package_cloud push whitewaterfoundry/wslu/ubuntu/bionic /tmp/pkgs/*.deb --skip-errors
       - run:
           name: Push rpm package for fedora 29
-          command: package_cloud push whitewaterfoundry/wslu/fedora/29 /tmp/pkgs/*.x86_64.rpm --skip-errors
+          command: package_cloud push whitewaterfoundry/wslu/fedora/29 /tmp/pkgs/*.rpm --skip-errors
       - run:
           name: Push rpm package for enterprise linux 7
           command: package_cloud push whitewaterfoundry/wslu/el/7 /tmp/pkgs/*.rpm --skip-errors
@@ -123,7 +123,10 @@ workflows:
     jobs:
       - installtests
       - linktests
-  build:
+  buildtests:
+    jobs:
+      - pkgbuilds
+  buildanddeploy:
     triggers:
       - schedule:
            cron: "0 0 * * *"
