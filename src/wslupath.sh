@@ -1,4 +1,8 @@
-version="08"
+version="09"
+
+##########   CAUTION   ###########
+## wslupath is a legacy cli for backward compatbility.
+## Use it unless it is necessary.
 
 style=1
 reg_path=0
@@ -83,11 +87,12 @@ else
 				set_path="$(style_path $(wslvar -l $args))"
 			else
 				set_path="$(style_path $args)"
-			fi				
+			fi
 			break;;
 		esac
 	done
 fi
+
 if [[ "$set_path" == "" ]]; then
 	echo "${error}No path input. Aborted."
 	exit 21
