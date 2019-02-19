@@ -2,7 +2,7 @@ version=38
 
 is_line=0
 is_splash=0
-help_short="wslfetch (-h|-v|-s|-l|-c)"
+help_short="wslfetch (--help|--version|--splash|--line)"
 
 for args; do
 	case $args in
