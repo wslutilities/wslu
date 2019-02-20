@@ -2,7 +2,7 @@ version="05"
 
 lname=""
 
-help_short="wslview (-u|-r|-h|-v) ...LINK..."
+help_short="wslview (--register|--unregister|--help|--version) [LINK]"
 
 function del_reg_alt {
 	if [ "$distro" == "archlinux" ] || [ "$distro" == "alpine" ]; then
