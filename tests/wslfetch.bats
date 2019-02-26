@@ -9,11 +9,11 @@
 @test "wslfetch - Help" {
   run out/wslfetch --help
   [ "${lines[0]}" = "wslfetch - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
-  [ "${lines[1]}" = "Usage: wslfetch (-h|-v|-s|-l|-c)" ]
+  [ "${lines[1]}" = "Usage: wslfetch (--help|--version|--splash|--line)" ]
 }
 
 @test "wslfetch - Help - Alt." {
   run out/wslfetch -h
   [ "${lines[0]}" = "wslfetch - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
-  [ "${lines[1]}" = "Usage: wslfetch (-h|-v|-s|-l|-c)" ]
+  [ "${lines[1]}" = "Usage: wslfetch (--help|--version|--splash|--line)" ]
 }

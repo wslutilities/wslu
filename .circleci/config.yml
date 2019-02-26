@@ -52,27 +52,93 @@ jobs:
             sudo mv ../../target/* /tmp/pkgs
       - store_artifacts:
             path: /tmp/pkgs
-  deploydeb:
+      - persist_to_workspace:
+            root: /tmp/pkgs
+            paths: .
+  nightlypkgbuilds:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Install Pre-requisites
+          command: |
+            sudo apt-get update -qq
+            sudo apt-get install -qq apt-utils build-essential rpm
+      - run:
+          name: Build Package
+          command: |
+            make
+            cd extras/scripts
+            sudo bash -x ./builder-deb.sh --nightly
+            sudo bash -x ./builder-rpm.sh --nightly
+            mkdir -p /tmp/pkgs
+            sudo mv ../../target/* /tmp/pkgs
+      - store_artifacts:
+            path: /tmp/pkgs
+  deploypkg:
     docker:
       - image: circleci/ruby:2.3-jessie
     steps:
       - attach_workspace:
-         at: /tmp/pkgs
+          at: /tmp/pkgs    
       - run:
           name: Install packageloud cli
           command: gem install package_cloud
       - run:
-          name: Push deb package
-          command: package_cloud push whitewaterfoundry/wlinux-setup/debian/buster /tmp/pkgs/*.deb
+          name: Push deb package for debian buster
+          command: package_cloud push whitewaterfoundry/wslu/debian/buster /tmp/pkgs/*.deb --skip-errors
+      - run:
+          name: Push deb package for debian stretch
+          command: package_cloud push whitewaterfoundry/wslu/debian/stretch /tmp/pkgs/*.deb --skip-errors
+      - run:
+          name: Push deb package for ubuntu xenial
+          command: package_cloud push whitewaterfoundry/wslu/ubuntu/xenial /tmp/pkgs/*.deb --skip-errors
+      - run:
+          name: Push deb package for ubuntu bionic
+          command: package_cloud push whitewaterfoundry/wslu/ubuntu/bionic /tmp/pkgs/*.deb --skip-errors
+      - run:
+          name: Push rpm package for fedora 29
+          command: package_cloud push whitewaterfoundry/wslu/fedora/29 /tmp/pkgs/*.rpm --skip-errors
+      - run:
+          name: Push rpm package for enterprise linux 7
+          command: package_cloud push whitewaterfoundry/wslu/el/7 /tmp/pkgs/*.rpm --skip-errors
+      - run:
+          name: Push rpm package for scientific linux 7
+          command: package_cloud push whitewaterfoundry/wslu/scientific/7 /tmp/pkgs/*.rpm --skip-errors
+      - run:
+          name: Push rpm package for sles 12
+          command: package_cloud push whitewaterfoundry/wslu/sles/12.0 /tmp/pkgs/*.rpm --skip-errors
+      - run:
+          name: Push rpm package for sles 15
+          command: package_cloud push whitewaterfoundry/wslu/sles/15.0 /tmp/pkgs/*.rpm --skip-errors
+      - run:
+          name: Push rpm package for opensuse 42.3
+          command: package_cloud push whitewaterfoundry/wslu/opensuse/42.3 /tmp/pkgs/*.rpm --skip-errors
+      - run:
+          name: Push rpm package for opensuse 15
+          command: package_cloud push whitewaterfoundry/wslu/opensuse/15.0 /tmp/pkgs/*.rpm --skip-errors
 workflows:
   version: 2
   tests:
     jobs:
       - installtests
       - linktests
-  build:
-   jobs:
+  buildtests:
+    jobs:
       - pkgbuilds
+  buildanddeploy:
+    triggers:
+      - schedule:
+           cron: "0 0 * * *"
+           filters:
+             branches:
+               only:
+                 - master
+    jobs:
+      - pkgbuilds
+      - deploypkg:
+          requires: 
+            - pkgbuilds
   nightlybuild:
     triggers:
        - schedule:
@@ -82,4 +148,4 @@ workflows:
                only:
                  - develop
     jobs:
-      - pkgbuilds
+      - nightlypkgbuilds

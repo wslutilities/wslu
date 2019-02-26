@@ -11,7 +11,7 @@
 %define _srcrpmdir     %{_rpmtopdir}/SRPMS
 Summary: Windows 10 Linux Subsystem Utilities
 Name: wslu
-Version: BUILDVERPLACEHOLDER
+Version: BUILDVERPLACEHOLDERNIGHTLYBUILDPLACEHOLDER
 Release: 1
 Source: wslu-BUILDVERPLACEHOLDER.tar.gz
 Requires: bc ImageMagick

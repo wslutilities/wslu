@@ -2,7 +2,16 @@ version=38
 
 is_line=0
 is_splash=0
-help_short="wslfetch (-h|-v|-s|-l|-c)"
+help_short="wslfetch (--help|--version|--splash|--line)"
+
+for args; do
+	case $args in
+		-h|--help) help $0 "$help_short"; exit;;
+		-v|--version) echo "wslu v$wslu_version; wslfetch v$version"; exit;;
+		-s|--splash) is_splash=1;;
+		-l|--line) is_line=1;;
+	esac
+done
 
 hostname=$(</etc/hostname)
 branch=`wslsys -b -s`
@@ -264,15 +273,6 @@ function line() {
 
 info_length=${#info_text[@]}
 full_length=${#full_text[@]}
-
-for args; do
-	case $args in
-		-h|--help) help $0 "$help_short"; exit;;
-		-v|--version) echo "wslu v$wslu_version; wslfetch v$version"; exit;;
-		-s|--splash) is_splash=1;;
-		-l|--line) is_line=1;;
-	esac
-done
 
 line
 # use for loop to read all values and indexes
