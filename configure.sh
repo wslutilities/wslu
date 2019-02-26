@@ -64,23 +64,23 @@ distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME=\"//g')"
 case $distro in
 	*WLinux*|Ubuntu*|*Debian*|*Kali*)
 		sudo apt purge -y wslu
-		sudo apt install -y git bc wget unzip make imagemagick
+		sudo apt install -y git bc gzip make imagemagick
 		;;
 	openSUSE*|SLES*)
 		sudo zypper -n rm wslu
-		sudo zypper -n install git bc wget unzip make imagemagick
+		sudo zypper -n install git bc gzip make imagemagick
 		;;
 	Alpine*)
-		sudo apk add git bc wget unzip make bash-completion imagemagick
+		sudo apk add git bc gzip make bash-completion imagemagick
 		;;
     Arch*)
-		sudo pacman -Syyu git bc wget unzip make bash-completion imagemagick
+		sudo pacman -Syyu git bc gzip make bash-completion imagemagick
 		;;
     Scientific*)
-		sudo yum install -y git bc wget unzip make bash-completion imagemagick
+		sudo yum install -y git bc gzip make bash-completion imagemagick
 		;;
     *Fedora*)
-		sudo dnf install -y git bc wget unzip make bash-completion ImageMagick
+		sudo dnf install -y git bc gzip make bash-completion ImageMagick
 		;;
 	*Generic*) [ "fedora" == "$(cat /etc/os-release | grep -e "LIKE=" | sed -e 's/ID_LIKE=//g')" ] && sudo dnf install -y git || exit 1;;
     *) exit 1;;
