@@ -64,6 +64,7 @@ You can download the `.apk` package from release and install it using `sudo apk 
 ### Other distributions
 
 > **⚠ Not Recommend**
+> 
 > `curl | bash` method is not secure. [Related article](https://sandstorm.io/news/2015-09-24-is-curl-bash-insecure-pgp-verified-install)
 
 Run the following command in your preferred distro: `curl -sL https://wslu.patrickwu.space/install | bash`
