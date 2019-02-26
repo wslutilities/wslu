@@ -34,6 +34,7 @@ for file in "${SOURCES[@]}"; do
     sed -i 's|.SH "NAME"||' wslu.wiki/${file}.1
     sed -i 's|\\fBwslfetch\\fR||' wslu.wiki/${file}.1
     sed -i 's|Manpage Name|NAME|' wslu.wiki/${file}.1
-    mv wslu.wiki/${file}.1 $OUTPATH
+    gzip wslu.wiki/${file}.1
+    mv wslu.wiki/${file}.1.gz $OUTPATH
 done
 rm -rf wslu.wiki
