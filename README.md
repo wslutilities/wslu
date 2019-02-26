@@ -22,37 +22,51 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as conver
 ## Feature
 
 **wslusc**
-This is a WSL shortcut creator to create a shortcut on your Windows 10 Desktop.
+A WSL shortcut creator to create a shortcut on your Windows 10 Desktop.
 
 **wslsys**
-This is a WSL system information printer to print out system informations from Windows 10 or Linux.
+A WSL system information printer to print out system informations from Windows 10 or Linux.
 
 **wslfetch**
-This is a WSL Screenshoot Information Tool to print information in an elegant way.
+A WSL Screenshoot Information Tool to print information in an elegant way.
 
 **wslvar**
-This is a WSL tool to help you get Windows system environment variables.
+A WSL tool to help you get Windows system environment variables.
 
 **wslview**
-This is a fake WSL browser that can help you open link in default Windows browser.
+A fake WSL browser that can help you open link in default Windows browser.
+
+**wslupath** ⚠ *Deprecated*
+A WSL tool to convert path styles.
 
 ## Installation
 
-### For WLinux
+### WLinux/Fedora Remix
 
-Preinstalled in WLinux.
+Preinstalled in WLinux and Fedora Remix for WSL.
 
-### For Ubuntu/Debian/Kali Linux
+### Ubuntu/Debian/Kali Linux
 
 You can download the `.deb` package from release and install it using `sudo dpkg -i wslu*`.
 
-### For OpenSUSE/SLES/WLinux Enterpruse/Fedora Remix
+### OpenSUSE/SLES/WLinux Enterprise
 
 You can download the `.rpm` package from release and install it using `sudo rpm -ivh "wslu*"`.
 
-### For other distribution
+### Arch Linux
 
-run the following command in your preferred distro: `curl -sL https://wslu.patrickwu.space/install | bash`
+wslu is live on [AUR](https://aur.archlinux.org/packages/wslu/). You can download *PKGBUILD* and install manually or install via PKGBUILD helpers like yay.
+
+### Alpine Linux
+
+You can download the `.apk` package from release and install it using `sudo apk add "wslu*"`.
+
+### Other distributions
+
+> **⚠ Not Recommend**
+> `curl | bash` method is not secure. [Related article](https://sandstorm.io/news/2015-09-24-is-curl-bash-insecure-pgp-verified-install)
+
+Run the following command in your preferred distro: `curl -sL https://wslu.patrickwu.space/install | bash`
 
 ## Contributors
 
