@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Version
-wslu_version=2.0.0rc1
+wslu_version=2.0.0rc2
 
 # Speed up script by not using unicode.
 LC_ALL=C
