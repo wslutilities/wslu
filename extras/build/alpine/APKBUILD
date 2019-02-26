@@ -10,8 +10,8 @@ depends="bc bash-completion imagemagick"
 makedepends="make"
 install=""
 subpackages=""
-source="${pkgname}-${pkgver}.tar.gz::https://github.com/wslutilities/wslu/archive/v2.0.0rc1.tar.gz"
-builddir="$srcdir/wslu-2.0.0rc1"
+source="${pkgname}-${pkgver}.tar.gz::https://github.com/wslutilities/wslu/archive/v2.0.0rc2.tar.gz"
+builddir="$srcdir/wslu-2.0.0rc2"
 build() {
         cd "$builddir"
         make
