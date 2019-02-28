@@ -17,6 +17,19 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+function interop_prefix {
+	if [ -f /etc/wsl.conf ]; then
+		tmp=$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf)
+		if [ "$tmp" == "" ]; then
+			echo "/mnt/"
+		else
+			echo $tmp
+		fi
+	else
+		echo "/mnt/"
+	fi
+}
+
 function env_check {
 if [ -f /etc/fake-wsl-release ]
 then
@@ -29,7 +42,7 @@ fi
 }
 
 function prsh_check {
-PATH="/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:$PATH"
+PATH="$(interop_prefix)c/Windows/System32/WindowsPowerShell/v1.0/:$PATH"
 powershell.exe -NoProfile -NonInteractive -Command Get-History
 if [[ $? -eq 0 ]]; then
 	echo "powershell.exe can be invoked."
