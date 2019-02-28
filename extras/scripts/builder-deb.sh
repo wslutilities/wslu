@@ -29,7 +29,7 @@ if [[ "$1" != "--nightly" ]]; then
 fi
 
 # Creating folders
-mkdir -p "$BUILD_DIR"/{DEBIAN/,usr/bin/,usr/share/wslu/,usr/lib/mime/packages/}
+mkdir -p "$BUILD_DIR"/{DEBIAN/,usr/bin/,usr/share/wslu/,usr/share/man/man1,usr/lib/mime/packages/}
 
 # copy files to build folder
 cp "$CURRENT_DIR"/../../docs/* "$BUILD_DIR"/usr/share/man/man1/
