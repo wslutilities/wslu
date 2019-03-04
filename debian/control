@@ -3,7 +3,8 @@ Section: admin
 Priority: optional
 Maintainer: Balint Reczey <rbalint@ubuntu.com>
 Build-Depends: bats,
-               debhelper (>= 10)
+               debhelper (>= 10),
+               dh-exec
 Standards-Version: 4.3.0.3
 Homepage: https://wslu.patrickwu.space/
 
@@ -12,6 +13,7 @@ Architecture: all
 Depends: ${misc:Depends},
          bc,
          imagemagick
+Provides: www-browser
 Description: collection of utilities for the Windows 10 Linux Subsystem
  This is a collection of utilities for the Windows 10 Linux Subsystem, such
  as for converting Linux paths to a Windows paths or creating Linux application

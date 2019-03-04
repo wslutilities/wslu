@@ -1,0 +1,4 @@
+src/etc/* usr/share/wslu
+src/mime/* usr/lib/mime/packages
+src/wslu-header usr/bin
+out/* usr/bin
