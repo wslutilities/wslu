@@ -4,7 +4,9 @@ Priority: optional
 Maintainer: Balint Reczey <rbalint@ubuntu.com>
 Build-Depends: bats,
                debhelper (>= 10),
-               dh-exec
+               dh-exec,
+               imagemagick,
+               inkscape
 Standards-Version: 4.3.0.3
 Homepage: https://wslu.patrickwu.space/
 
