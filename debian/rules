@@ -3,6 +3,10 @@
 %:
 	dh $@
 
+override_dh_auto_configure:
+	chmod -x src/mime/wslview src/etc/runHidden.vbs
+	dh_auto_configure
+
 override_dh_auto_test:
 	chmod +x tests/wslview.bats
 	(export PATH=out:$$PATH; export TERM=xterm; for t in $$(ls tests/*.bats | egrep -v '(fetch|sys|wslusc)'); do $$t || exit 1; done)
