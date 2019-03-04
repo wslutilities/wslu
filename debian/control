@@ -2,7 +2,8 @@ Source: wslu
 Section: admin
 Priority: optional
 Maintainer: Balint Reczey <rbalint@ubuntu.com>
-Build-Depends: debhelper (>= 10)
+Build-Depends: bats,
+               debhelper (>= 10)
 Standards-Version: 4.3.0.3
 Homepage: https://wslu.patrickwu.space/
 
