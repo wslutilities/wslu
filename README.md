@@ -59,7 +59,7 @@ wslu is live on [AUR](https://aur.archlinux.org/packages/wslu/). You can downloa
 
 ### Alpine Linux
 
-You can download the `.apk` package from release and install it using `sudo apk add "wslu*"`.
+You can download the `.apk` package from release and install it using `sudo apk add --allow-untrusted "wslu*"`.
 
 ### Other distributions
 
