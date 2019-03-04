@@ -1,0 +1,19 @@
+Source: wslu
+Section: admin
+Priority: optional
+Maintainer: Balint Reczey <rbalint@ubuntu.com>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 4.3.0.3
+Homepage: https://wslu.patrickwu.space/
+
+Package: wslu
+Architecture: all
+Depends: ${misc:Depends},
+         bc,
+         imagemagick
+Description: collection of utilities for the Windows 10 Linux Subsystem
+ This is a collection of utilities for the Windows 10 Linux Subsystem, such
+ as for converting Linux paths to a Windows paths or creating Linux application
+ shortcuts on the Windows 10 Desktop.
+ .
+ Requires Windows 10 Creators Update and higher.
