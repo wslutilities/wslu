@@ -1,5 +1,5 @@
-wslu (1.9+dfsg1-0ubuntu1) UNRELEASED; urgency=medium
+wslu (1.9+dfsg1-0ubuntu1) disco; urgency=medium
 
   * Initial release
 
- -- Balint Reczey <rbalint@ubuntu.com>  Mon, 04 Mar 2019 13:32:34 +0100
+ -- Balint Reczey <rbalint@ubuntu.com>  Mon, 04 Mar 2019 23:32:34 +0100
