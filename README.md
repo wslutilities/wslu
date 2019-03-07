@@ -45,11 +45,25 @@ A WSL tool to convert path styles.
 
 Preinstalled in WLinux and Fedora Remix for WSL.
 
-### Ubuntu/Debian/Kali Linux
+### For Debian-based systems(Ubuntu/Debian/Kali Linux)
 
 You can download the `.deb` package from release and install it using `sudo dpkg -i wslu*`.
 
-### OpenSUSE/SLES/WLinux Enterprise
+#### Ubuntu/Debian
+
+You can use the following command for easy installation:
+
+```
+curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.deb.sh | sudo bash
+```
+
+### For RPM-based systems(OpenSUSE/SLES/WLinux Enterprise)
+
+You can use the following command for easy installation:
+
+```
+curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.rpm.sh | sudo bash
+```
 
 You can download the `.rpm` package from release and install it using `sudo rpm -ivh "wslu*"`.
 
@@ -74,8 +88,10 @@ Run the following command in your preferred distro: `curl -sL https://wslu.patri
 This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
 <img src="https://opencollective.com/wslu/contributors.svg?width=890&button=false" />
 
-## License
+## License & Credits
 
 <img width="150" src="https://www.gnu.org/graphics/gplv3-with-text-136x68.png">
 
 This project uses [GPLv3](LICENSE) License.
+
+Tux logo used in `\src\etc\wsl.ico` was originally made by Larry Ewing in the Gimp and re-illustrated in vector by Garrett LeSage, using Inkscape.
