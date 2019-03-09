@@ -55,7 +55,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wslview
 %{_bindir}/wslvar
 /usr/share/wslu/
-%docs /usr/share/man/man1
+%doc /usr/share/man/man1
 
 %changelog
 * Sat Jan 12 2019 patrick330602 <wotingwu@live.com>
