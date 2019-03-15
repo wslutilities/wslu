@@ -22,46 +22,76 @@
 ## 功能
 
 **wslusc**
-這是用於建立Linux程式Windows桌面捷徑的工具。
+用於建立 Linux 程式的 Windows 桌面快捷方式的工具。
 
 **wslsys**
-這是可以展示Windows和Linux下的系統資訊的工具。
+展示 Windows 和 Linux 下的系統資訊的工具。
 
 **wslfetch**
-這是類似於screenfetch的系統資訊展示工具。
+類似於 screenfetch 的系統資訊展示工具。
 
 **wslvar**
-這是可以幫助你獲取Windows系統常量的工具。
+可以幫助你獲取 Windows 系統常量的工具。
 
 **wslview**
-這是一個將Windows預設網路瀏覽器繫結為WSL網路瀏覽器的包裝工具。
+將 Windows 預設網路瀏覽器繫結為WSL網路瀏覽器的包裝工具。
+
+**wslupath** ⚠ *已棄用*
+可以轉換不同類型路徑的工具。
 
 ## 安裝
 
-### WLinux
+### WLinux/Fedora Remix
 
-WLinux已內建。
+已內建。
 
-### Ubuntu/Debian/Kali Linux
+### 基於Debian的分發版(Ubuntu/Debian/Kali Linux)
 
-你可以從Releases介面下載`.deb`進行安裝：`sudo dpkg -i wslu*`。
+你可以從 Releases 介面下載`.deb`進行安裝：`sudo dpkg -i wslu*`。
 
-### OpenSUSE/SLES/WLinux Enterprise/Fedora Remix
+#### Ubuntu/Debian
 
-你可以從Releases介面下載`.rpm`進行安裝：`sudo rpm -ivh "wslu*"`。
+你可以用以下命令進行安裝：
 
-### 其他Distro
+```
+curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.deb.sh | sudo bash
+```
 
-執行以下命令： `curl -sL https://wslu.patrickwu.space/install | bash`
+### 基於RPM的分發版(OpenSUSE/SLES/WLinux企業版)
+
+你可以用以下命令進行安裝：
+
+```
+curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.rpm.sh | sudo bash
+```
+
+你也可以從 Releases 介面下載`.rpm`進行安裝：`sudo rpm -ivh "wslu*"`。
+
+### Arch Linux
+
+wslu 已在 [AUR](https://aur.archlinux.org/packages/wslu/) 庫中。你可以下載 *PKGBUILD* 手動安裝或者使用 AUR 助手（比如 yay）進行安裝。
+
+### Alpine Linux
+
+你可以從 Releases 介面下載`.apk`進行安裝：`sudo apk add --allow-untrusted "wslu*"`.
+
+### 其他發行版
+
+> **⚠ 不建議**
+> 
+> `curl | bash`這種方法並不安全。 [相關文章](https://sandstorm.io/news/2015-09-24-is-curl-bash-insecure-pgp-verified-install)
+
+在你想要安裝的發行版下執行一下命令：`curl -sL https://wslu.patrickwu.space/install | bash`
 
 ## 貢獻者
 
 沒有你們，這個項目不可能存在。[[為這項目作出貢獻](CONTRIBUTING.md)]。
 <img src="https://opencollective.com/wslu/contributors.svg?width=890&button=false" />
 
-## 許可（英文）
+## 許可及版權（英文）
 
 <img width="150" src="https://www.gnu.org/graphics/gplv3-with-text-136x68.png">
 
-本項目使用[GPLv3](LICENSE)許可。
+本應用使用了 [GPLv3](LICENSE) 許可。
 
+在`\src\etc\wsl.ico`使用的 Tux 圖示由 Larry Ewing 用 Gimp 創造，由 Garrett LeSage 使用 Inkscape 進行向量重繪。

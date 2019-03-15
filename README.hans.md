@@ -17,52 +17,82 @@
 
 </div>
 
-这是一套适用于Windows 10 Linux子系统的工具组，可以在Windows 10 Linux子系统下完成诸如将Windows路径转换为WSL专属路径或者创建你最喜爱的Linux程序桌面快捷方式等工作。需要Windows 10创造者更新或更高。
+这是一套适用于 Windows 10 Linux 子系统的工具组，可以在 Windows 10 Linux 子系统下完成诸如将 Windows 路径转换为 WSL 专属路径或者创建你最喜爱的 Linux 程序桌面快捷方式等工作。需要 Windows 10 创造者更新或更高。
 
 ## 功能
 
 **wslusc**
-这是用于创建Linux程序的Windows桌面快捷方式的工具。
+用于创建 Linux 程序的 Windows 桌面快捷方式的工具。
 
 **wslsys**
-这是可以展示Windows和Linux下的系统信息的工具。
+展示 Windows 和 Linux 下的系统信息的工具。
 
 **wslfetch**
-这是类似于screenfetch的系统信息展示工具。
+类似于 screenfetch 的系统信息展示工具。
 
 **wslvar**
-这是可以帮助你获取Windows系统常量的工具。
+可以帮助你获取 Windows 系统常量的工具。
 
 **wslview**
-这是一个将Windows默认网络浏览器绑定为WSL网络浏览器的包装工具。
+将 Windows 默认网络浏览器绑定为WSL网络浏览器的包装工具。
+
+**wslupath** ⚠ *已弃用*
+可以转换不同类型路径的工具。
 
 ## 安装
 
-### WLinux
+### WLinux/Fedora Remix
 
-WLinux已内置。
+已内置。
 
-### Ubuntu/Debian/Kali Linux
+### 基于Debian的分发版(Ubuntu/Debian/Kali Linux)
 
-你可以从Releases界面下载`.deb`进行安装：`sudo dpkg -i wslu*`。
+你可以从 Releases 界面下载`.deb`进行安装：`sudo dpkg -i wslu*`。
 
-### OpenSUSE/SLES/WLinux Enterprise/Fedora Remix
+#### Ubuntu/Debian
 
-你可以从Releases界面下载`.rpm`进行安装：`sudo rpm -ivh "wslu*"`。
+你可以用以下命令进行安装：
 
-### 其他Distro
+```
+curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.deb.sh | sudo bash
+```
 
-运行以下命令： `curl -sL https://wslu.patrickwu.space/install | bash`
+### 基于RPM的分发版(OpenSUSE/SLES/WLinux企业版)
+
+你可以用以下命令进行安装：
+
+```
+curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.rpm.sh | sudo bash
+```
+
+你也可以从 Releases 界面下载`.rpm`进行安装：`sudo rpm -ivh "wslu*"`。
+
+### Arch Linux
+
+wslu 已在 [AUR](https://aur.archlinux.org/packages/wslu/) 库中。你可以下载 *PKGBUILD* 手动安装或者使用 AUR 助手（比如 yay）进行安装。
+
+### Alpine Linux
+
+你可以从 Releases 界面下载`.apk`进行安装：`sudo apk add --allow-untrusted "wslu*"`.
+
+### 其他发行版
+
+> **⚠ 不建议**
+> 
+> `curl | bash`这种方法并不安全。 [相关文章](https://sandstorm.io/news/2015-09-24-is-curl-bash-insecure-pgp-verified-install)
+
+在你想要安装的发行版下运行一下命令：`curl -sL https://wslu.patrickwu.space/install | bash`
 
 ## 贡献者
 
 没有你们，这个项目不可能存在。[[为这项目作出贡献](CONTRIBUTING.md)]。
 <img src="https://opencollective.com/wslu/contributors.svg?width=890&button=false" />
 
-
-## 许可（英文）
+## 许可及版权（英文）
 
 <img width="150" src="https://www.gnu.org/graphics/gplv3-with-text-136x68.png">
 
-本应用使用了[GPLv3](LICENSE)许可。
+本应用使用了 [GPLv3](LICENSE) 许可。
+
+在`\src\etc\wsl.ico`使用的 Tux 图标由 Larry Ewing 用 Gimp 创造，由 Garrett LeSage 使用 Inkscape 进行矢量重绘。
 
