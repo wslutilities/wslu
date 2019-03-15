@@ -63,3 +63,4 @@ EOF
 fi
 }
 
+env_check
