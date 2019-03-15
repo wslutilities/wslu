@@ -58,6 +58,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc /usr/share/man/man1/
 
 %changelog
-* Sat Jan 12 2019 patrick330602 <wotingwu@live.com>
-- Please check https://github.com/wslutilities/wslu/releases/lstest for changelog
+* Fri Mar 15 2019 patrick330602 <wotingwu@live.com>
+- Please check https://github.com/wslutilities/wslu/releases/latest for changelog
 
