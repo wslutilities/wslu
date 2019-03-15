@@ -14,7 +14,7 @@ git submodule init
 git submodule update
 ./configure.sh -a
 make
-sudo make install
+sudo make link
 ```
 
 ### Build Structure
@@ -74,7 +74,7 @@ cd extras/script
 sudo ./builder-rpm.sh
 ```
 
-It is suggested to do such action in Ubuntu 16.04 LTS or its corresponding environment.
+It is suggested to execute those commands in Ubuntu 16.04 LTS or its corresponding environment.
 
 ### Push Requests
 
