@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash
+#
 # builder-deb.sh
 # scripts of wslu
 # <https://github.com/wslutilities/wslu>
@@ -16,25 +17,36 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# get documentation from online
 git clone https://github.com/wslutilities/wslu.wiki.git
 
 OUTPATH="../../docs"
 SOURCES=(wslfetch wslsys wslupath wslusc wslview wslvar)
 BUILD_TIME="$(date +%Y-%m-%d)"
 
-[ -d $OUTPATH ] || mkdir $OUTPATH
+[[ -d "$OUTPATH" ]] || mkdir "$OUTPATH"
+
 for file in "${SOURCES[@]}"; do
     NAME_CAP="$(echo $file | tr '[:lower:]' '[:upper:]')"
 
-    ronn --manual=$NAME_CAP --organization="Patrick Wu" --date=$BUILD_TIME wslu.wiki/${file}.md
-    rm wslu.wiki/${file}.html
+    # generate base files using ronn
+    ronn --manual=$NAME_CAP --organization="Patrick Wu" --date="$BUILD_TIME" wslu.wiki/"$file".md
 
-    mv wslu.wiki/${file} wslu.wiki/${file}.1
-    sed -i "s|.TH \"$NAME_CAP\" \"\"|.TH \"$NAME_CAP\" \"1\"|" wslu.wiki/${file}.1
-    sed -i 's|.SH "NAME"||' wslu.wiki/${file}.1
-    sed -i 's|\\fBwslfetch\\fR||' wslu.wiki/${file}.1
-    sed -i 's|Manpage Name|NAME|' wslu.wiki/${file}.1
-    gzip wslu.wiki/${file}.1
-    mv wslu.wiki/${file}.1.gz $OUTPATH
+    # cleanup folder for file modification
+    rm wslu.wiki/"$file".html
+    mv wslu.wiki/"$file" wslu.wiki/"$file".1
+
+    # Manpage Modification
+    sed -i "s|.TH \"$NAME_CAP\" \"\"|.TH \"$NAME_CAP\" \"1\"|" wslu.wiki/"$file".1
+    sed -i 's|.SH "NAME"||' wslu.wiki/"$file".1
+    sed -i 's|\\fBwslfetch\\fR||' wslu.wiki/"$file".1
+    sed -i 's|Manpage Name|NAME|' wslu.wiki/"$file".1
+
+    # gzip file and move to the destination
+    gzip wslu.wiki/"$file".1
+    mv wslu.wiki/"$file".1.gz "$OUTPATH"
 done
+
+# cleanup temp files
 rm -rf wslu.wiki

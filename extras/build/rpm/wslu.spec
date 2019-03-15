@@ -1,4 +1,4 @@
-%define packager       patrick330602 <wotingwu@live.com>
+%define packager       Patrick Wu <wotingwu@live.com>
 
 %define _topdir        HOMEPLACEHOLDER/rpm_wslu
 %define _tmppath       /var/tmp
@@ -30,9 +30,10 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as conver
 rm -rf $RPM_BUILD_ROOT
 mkdir -p ${RPM_BUILD_ROOT}%{_bindir}
 mkdir -p ${RPM_BUILD_ROOT}/usr/share/wslu
+mkdir -p ${RPM_BUILD_ROOT}/usr/share/man/man1
 install -m755 wsl* ${RPM_BUILD_ROOT}%{_bindir}
-install -m555 etc/wsl.ico ${RPM_BUILD_ROOT}/usr/share/wslu
-install -m555 etc/runHidden.vbs ${RPM_BUILD_ROOT}/usr/share/wslu
+install -m555 etc/* ${RPM_BUILD_ROOT}/usr/share/wslu
+install -m555 docs/* ${RPM_BUILD_ROOT}/usr/share/man/man1
 
 %post
 %{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 1
@@ -53,10 +54,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wslupath
 %{_bindir}/wslview
 %{_bindir}/wslvar
-/usr/share/wslu/runHidden.vbs
-/usr/share/wslu/wsl.ico
+/usr/share/wslu/
+%doc /usr/share/man/man1/
 
 %changelog
-* Sat Jan 12 2019 patrick330602 <wotingwu@live.com>
-- Please check https://github.com/wslutilities/wslu/releases/lstest for changelog
+* Fri Mar 15 2019 patrick330602 <wotingwu@live.com>
+- Please check https://github.com/wslutilities/wslu/releases/latest for changelog
 
