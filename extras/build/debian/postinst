@@ -59,6 +59,7 @@ Your distro do not support WSL Interopa
 bility. Instalation will proceed, but w
 slu will not work as intended.
 EOF
+else
    prsh_check
 fi
 }
