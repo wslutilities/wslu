@@ -49,8 +49,7 @@ rm -rf wslu-"$BUILD_VER"
 
 # Build
 cd ~/rpm_wslu/SPECS
-sudo rpmbuild -ba --target x86_64 wslu-"$BUILD_VER".spec
-sudo rpmbuild -ba --target arm64 wslu-"$BUILD_VER".spec
+sudo rpmbuild -ba --target noarch wslu-"$BUILD_VER".spec
 
 # Copy packages
 [[ -d "$CURRENT_DIR"/../../target ]] || mkdir "$CURRENT_DIR"/../../target
