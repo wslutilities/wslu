@@ -11,4 +11,9 @@ override_dh_auto_install: src/etc/wsl.ico
 	dh_auto_install
 
 override_dh_auto_test:
-	(export PATH=out:$$PATH; export TERM=xterm; for t in $$(ls tests/*.bats | egrep -v '(fetch|sys|wslusc)'); do bats $$t || exit 1; done)
+	if (test -f /proc/sys/fs/binfmt_misc/WSLInterop && grep -q enabled /proc/sys/fs/binfmt_misc/WSLInterop); then \
+		mkdir -p extras/bats/libexec && ln -s /usr/bin/bats extras/bats/libexec/ &&\
+		dh_auto_test ; \
+	else \
+		env PATH=out:$$PATH:$$src TERM=xterm; bats tests/header.bats ; \
+	fi
