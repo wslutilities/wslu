@@ -19,4 +19,4 @@ override_dh_auto_test:
 	fi
 
 override_dh_clean:
-	dh_clean debian/cof_orange_hex_*/.png debian/wsl.ico
+	dh_clean debian/cof_orange_hex_*/.png debian/wsl.ico extras/bats/libexec/
