@@ -1,1 +1,2 @@
 0001-Skip-interop-check-in-scripts.patch
+0002-Makefile-Honor-DESTDIR.patch
