@@ -12,8 +12,8 @@ Homepage: https://wslu.patrickwu.space/
 Package: wslu
 Architecture: all
 Depends: ${misc:Depends},
-         bc,
-         imagemagick
+         bc
+Suggests: imagemagick
 Provides: www-browser
 Description: collection of utilities for the Windows 10 Linux Subsystem
  This is a collection of utilities for the Windows 10 Linux Subsystem, such

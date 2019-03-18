@@ -1,0 +1,30 @@
+From: Balint Reczey <balint.reczey@canonical.com>
+Date: Tue, 19 Mar 2019 00:02:10 +0100
+Subject: Print error message when convert is not found
+
+---
+ src/wslusc.sh | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/src/wslusc.sh b/src/wslusc.sh
+index e70a45d..7bafd19 100644
+--- a/src/wslusc.sh
++++ b/src/wslusc.sh
+@@ -70,6 +70,17 @@ if [[ "$cname" != "" ]]; then
+ 		
+ 			if [[ "$ext" != "ico" ]]; then
+ 				if [[ "$ext" == "svg" ]] || [[ "$ext" == "png" ]]; then
++					if ! type convert > /dev/null 2>&1; then
++						echo "The 'convert' command is needed for converting the icon."
++						if [ -x /usr/lib/command-not-found ]; then
++							echo " It can be installed with:" >&2
++							echo "" >&2
++							/usr/lib/command-not-found convert 2>&1 | egrep -v '(not found|^$)' >&2
++						else
++							echo "It can usally be found in the imagemagick package, please install it."
++						fi
++						exit 22
++					fi
+ 					echo "${info} Converting $ext icon to ico..."
+ 					convert "$script_location/$icon_filename" -resize 256X256 "$script_location/${icon_filename%.$ext}.ico"
+ 					icon_filename="${icon_filename%.$ext}.ico"
