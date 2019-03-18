@@ -3,7 +3,7 @@ Section: admin
 Priority: optional
 Maintainer: Balint Reczey <rbalint@ubuntu.com>
 Build-Depends: bats,
-               debhelper (>= 10),
+               debhelper (>= 9),
                imagemagick,
                inkscape
 Standards-Version: 4.3.0.3
