@@ -1,12 +1,25 @@
-wslu (2.0.0-0ubuntu1) UNRELEASED; urgency=medium
+wslu (2.0.0-0ubuntu1) disco; urgency=medium
 
   * New upstream release
   * Include src/etc/wsl.ico again in original source.
-    The problematic image was replaced by upstream with one with DFSG-free license.
+    The problematic image was replaced by upstream with one with DFSG-free
+    license.
   * debian/gbp.conf: Set upstream tag format
   * debian/copyright: Update copyright info
+  * Stop shipping mime info for wslview.
+    Also drop fixing executable bits of runHidden.vbs
+  * Fix running tests
+  * Skip interop check in scripts
+  * Run full test suite in WSL environments and only a subset on Linux
+  * Makefile: Honor DESTDIR
+  * debian/dirs: Create install dirs
+  * Keep installing the Ubuntu logo as the default for shortcuts
+    Using the logo of the distribution makes it visible which WSL
+    installation will run the command executed by the shortcut.
+  * Stop build-depending on dh-exec, it is not needed anymore
+  * Fix one test failing on Windows
 
- -- Balint Reczey <rbalint@ubuntu.com>  Mon, 18 Mar 2019 12:16:23 +0100
+ -- Balint Reczey <rbalint@ubuntu.com>  Mon, 18 Mar 2019 13:32:59 +0100
 
 wslu (1.9+dfsg1-0ubuntu1) disco; urgency=medium
 
