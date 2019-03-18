@@ -1,7 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: wslu
 Source: https://github.com/wslutilities/wslu
-Files-Excluded: src/etc/wsl.ico
 
 Files: *
 Copyright: 2018, Patrick Wu
