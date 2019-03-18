@@ -1,3 +1,9 @@
+wslu (2.0.0-0ubuntu2~18.04.0) bionic; urgency=medium
+
+  * Rebuild for Bionic (LP: #1818673)
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Tue, 19 Mar 2019 00:04:28 +0100
+
 wslu (2.0.0-0ubuntu2) disco; urgency=medium
 
   * Only Suggest imagemagick and print error message when convert is missing
