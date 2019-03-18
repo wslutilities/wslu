@@ -1,2 +1,3 @@
 0001-Skip-interop-check-in-scripts.patch
 0002-Makefile-Honor-DESTDIR.patch
+0003-Fix-one-test-failing-on-Windows.patch

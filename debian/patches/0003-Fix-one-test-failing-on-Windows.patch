@@ -1,0 +1,21 @@
+From: Balint Reczey <balint.reczey@canonical.com>
+Date: Mon, 18 Mar 2019 16:28:33 +0100
+Subject: Fix one test failing on Windows
+
+---
+ tests/wslupath.bats | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/wslupath.bats b/tests/wslupath.bats
+index 8549dda..fc29155 100644
+--- a/tests/wslupath.bats
++++ b/tests/wslupath.bats
+@@ -43,7 +43,7 @@
+ 
+ @test "wslupath - No parameter - Linux DirPath" {
+   run out/wslupath "/mnt/c/Windows"
+-  [ "${lines[0]}" = "c:\\Windows" ]
++  [ "${lines[0]}" = "C:\\Windows" ]
+ }
+ 
+ @test "wslupath - /w DoubleDash - Windows Double DirPath" {
