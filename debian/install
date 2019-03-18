@@ -1,3 +1,1 @@
-src/etc/* usr/share/wslu
-src/wslu-header usr/bin
-out/* usr/bin
+debian/wsl.ico usr/share/wslu

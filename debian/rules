@@ -3,11 +3,11 @@
 %:
 	dh $@
 
-src/etc/wsl.ico: debian/cof_orange_hex.svg
+debian/wsl.ico: debian/cof_orange_hex.svg
 	for i in 16 32 48 64 128 256; do inkscape --export-area=40:40:385:385 -w $$i -h $$i -f debian/cof_orange_hex.svg -e debian/cof_orange_hex_$$i.png ; done
-	convert debian/cof_orange_hex_*.png src/etc/wsl.ico
+	convert debian/cof_orange_hex_*.png debian/wsl.ico
 
-override_dh_auto_install: src/etc/wsl.ico
+override_dh_auto_install: debian/wsl.ico
 	dh_auto_install
 
 override_dh_auto_test:
@@ -17,3 +17,6 @@ override_dh_auto_test:
 	else \
 		env PATH=out:$$PATH:$$src TERM=xterm; bats tests/header.bats ; \
 	fi
+
+override_dh_clean:
+	dh_clean debian/cof_orange_hex_*/.png debian/wsl.ico
