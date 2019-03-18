@@ -1,16 +1,20 @@
 # Contributing
 
-We love pull requests from everyone. By participating in this project, you
-agree to abide by [Code of Conduct](CODE_OF_CONDUCT.md).
+We love pull requests from everyone. By participating in this project, you agree to abide by [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Code contributions
 
 ### Setup
 
-**DO NOT `git clone`.** Running the following to get started:
-
+Run the following to get started:
 ```bash
-curl -o- https://raw.githubusercontent.com/wslutilities/wslu/develop/extras/scripts/install.sh | bash
+git clone https://github.com/wslutilities/wslu
+git checkout develop
+git submodule init
+git submodule update
+./configure.sh -a
+make
+sudo make link
 ```
 
 ### Build Structure
@@ -27,7 +31,7 @@ wslu
 |-tests: location for script tests
 \-extras
    |-bats: testing utility
-   |-scripts: scripts used for building, installing and uninstalling
+   |-scripts: scripts used for building
    \-build
       |-debian: files for building .deb
       |-rpm: files for building .rpm
@@ -35,11 +39,22 @@ wslu
       \-alpine: files for building Alpine Linux packages
 ```
 
-### Build
+### configure.sh
+
+`configure.sh` is the script to complete some preprocessing task. Following parameter is available:
+- `-e,  --env` -- Environment Check, check whether it is using Fake WSL Environment, normal Linux or WSL.
+- `-p, --prsh` -- Check Status of `powershell.exe`.
+- `-P,  --pkg` -- Install Needed Packages required by your system for building.
+- `-a,  --all` -- Do everything at the top.
+
+### Build & Install
 
 run `make` to build executable to `out` folder.
 run `make clean` to clean `out` folder.
 run `make test` to run tests.
+run `make install` to install to `/usr/bin/`. Requires to run as `sudo`.
+run `make uninstall` to uninstall. Requires to run as `sudo`.
+run `cd extras/scripts && ./builder-docs.sh` to build docs to `gendocs`.
 
 ### Test
 
@@ -59,15 +74,11 @@ cd extras/script
 sudo ./builder-rpm.sh
 ```
 
-It is suggested to do such action in Ubuntu 16.04 LTS or its corresponding environment.
+It is suggested to execute those commands in Ubuntu 16.04 LTS or its corresponding environment.
 
 ### Push Requests
 
-Make sure that the code changed is tested on:
-- one of the Debian-based distro;
-- one of SUSE;
-- one of Arch distro;
-- one of Alpine distro.
+Make sure that the code changed is tested.
 
 Then create Pull requests [here](https://github.com/wslutilities/wslu/compare).
 
@@ -76,10 +87,6 @@ Then create Pull requests [here](https://github.com/wslutilities/wslu/compare).
 
 We also welcome financial contributions in full transparency on our [open collective](https://opencollective.com/wslu).
 Anyone can file an expense. If the expense makes sense for the development of the community, it will be "merged" in the ledger of our open collective by the core contributors and the person who filed the expense will be reimbursed.
-
-
-## Credits
-
 
 ### Contributors
 

@@ -1,9 +1,8 @@
 Package: wslu
 Architecture: all
 Maintainer: Patrick Wu <wotingwu@live.com>
-Version: VERSIONPLACEHOLDER-0~DATEPLACEHOLDER
+Version: VERSIONPLACEHOLDER-0NIGHTLYBUILDPLACEHOLDER
 Priority: optional
 Depends: bc, imagemagick
-Conflicts: wlinux-wslu
 Description: A collection of utilities for Windows 10 Linux Subsystem
  This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
