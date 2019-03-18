@@ -1,0 +1,25 @@
+From: Balint Reczey <balint.reczey@canonical.com>
+Date: Mon, 18 Mar 2019 12:54:24 +0100
+Subject: Skip interop check in scripts
+
+Interoperability changes are not persistent between sessions and scripts
+are still useful without interoperability set.
+
+The check is also failing the tests when the package is built on Linux
+---
+ src/wslu-header | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/wslu-header b/src/wslu-header
+index c632b8c..b770315 100644
+--- a/src/wslu-header
++++ b/src/wslu-header
+@@ -28,7 +28,7 @@ LANG=C
+ set +x
+ 
+ # checking interopability
+-cat /proc/sys/fs/binfmt_misc/WSLInterop | grep enabled >/dev/null || (echo "WSL Interopability is disabled. Please enable it before using WSL."; exit 1)
++#cat /proc/sys/fs/binfmt_misc/WSLInterop | grep enabled >/dev/null || (echo "WSL Interopability is disabled. Please enable it before using WSL."; exit 1)
+ 
+ # variables
+ ## color
