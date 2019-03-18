@@ -1,3 +1,13 @@
+wslu (2.0.0-0ubuntu1) UNRELEASED; urgency=medium
+
+  * New upstream release
+  * Include src/etc/wsl.ico again in original source.
+    The problematic image was replaced by upstream with one with DFSG-free license.
+  * debian/gbp.conf: Set upstream tag format
+  * debian/copyright: Update copyright info
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Mon, 18 Mar 2019 12:16:23 +0100
+
 wslu (1.9+dfsg1-0ubuntu1) disco; urgency=medium
 
   * Initial release
