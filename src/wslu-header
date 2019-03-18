@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # wslu - Windows 10 linux Subsystem Utility
 # Component of Windows 10 linux Subsystem Utility
-# <https://github.com/patrick330602/wslu>
-# Copyright (C) 2018 Patrick Wu
+# <https://github.com/wslutilities/wslu>
+# Copyright (C) 2019 Patrick Wu
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,9 +17,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# global config
-wslu_version=1.9
+# Version
+wslu_version=2.0.0
 
+# Speed up script by not using unicode.
+LC_ALL=C
+LANG=C
+
+# force bash to not showing code manually.
+set +x
+
+# checking interopability
+cat /proc/sys/fs/binfmt_misc/WSLInterop | grep enabled >/dev/null || (echo "WSL Interopability is disabled. Please enable it before using WSL."; exit 1)
+
+# variables
 ## color
 black=`echo -e '\e[30m'`
 red=`echo -e '\e[31m'`
@@ -39,37 +50,65 @@ light_cyan=`echo -e '\e[1;36m'`
 light_gray=`echo -e '\e[37m'`
 orange=`echo -e '\e[38;5;202m'`
 light_orange=`echo -e '\e[38;5;214m'`
-bold=`tput bold`
-reset=`tput sgr0`
+bold=`echo -e '\033[1m'`
+reset=`echo -e '\033(B\033[m'`
 
 ## indicator
 info="${green}[info]${reset}"
 error="${red}[error]${reset}"
 warn="${orange}[warn]${reset}"
-debug="${cyan}[debug]${reset}"
+debug="${orange}${bold}[debug]${reset}"
 
-## basic distro detection
-distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME=\"//g')"
-if [[ "$distro" == *WLinux* ]]; then
-	distro=wlinux
-elif [[ "$distro" == Ubuntu* ]]; then
-	distro="ubuntu"
-elif [[ "$distro" = *Debian* ]]; then
-	distro="debian"
-elif [[ "$distro" == *Kali* ]]; then
-	distro="kali"
-elif [[ "$distro" == openSUSE* ]]; then
-	distro="opensuse"
-elif [[ "$distro" == SLES* ]]; then
-	distro="sles"
-fi
+# functions
 
+function help {
+	echo -e "`basename "$1"` - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux
+Usage: $2
 
-function help
-{
-	echo -e "`basename "$1"` - Component of Windows 10 Linux Subsystem Utility
-Usage: $2"
+For more help for `basename "$1"`, visit the following site: https://github.com/wslutilities/wslu/wiki/`basename "$1"`"
 }
 
-#no_longer_use_but_might_use_it_in_the_future="For more help for `basename "$1"`, visit the following site: https://github.com/patrick330602/wslu/wiki/`basename "$1"`"
+function double_dash_p {
+	echo "$(echo $@ | sed -e 's|\\|\\\\|g')"
+}
 
+function interop_prefix {
+	if [ -f /etc/wsl.conf ]; then
+		tmp=$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf)
+		if [ "$tmp" == "" ]; then
+			echo "/mnt/"
+		else
+			echo $tmp
+		fi
+	else
+		echo "/mnt/"
+	fi
+}
+
+function winps_exec {
+	$(interop_prefix)c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -Command $@
+}
+
+# when --debug, debug.
+if [ "$1" == "--debug" ]; then
+	echo "${debug}Debug Mode Enabled."
+	shift
+	set -x
+fi
+
+# basic distro detection
+distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME=\"//g')"
+case $distro in
+    *WLinux*) distro="wlinux";;
+    Ubuntu*) distro="ubuntu";;
+    *Debian*) distro="debian";;
+    *Kali*) distro="kali";;
+    openSUSE*) distro="opensuse";;
+    SLES*) distro="sles";;
+    Alpine*) distro="alpine";;
+    Arch*) distro="archlinux";;
+    Scientific*) distro="scilinux";;
+    *Fedora*) distro="fedora";;
+	*Generic*) [ "fedora" == "$(cat /etc/os-release | grep -e "LIKE=" | sed -e 's/ID_LIKE=//g')" ] && distro="fedora" || distro="unknown";;
+    *) distro="unknown";;
+esac

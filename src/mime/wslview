@@ -1,2 +1,0 @@
-application/www-browser; /usr/bin/wslview "%s"; priority=5
-text/html; /usr/bin/wslview "%s"; priority=6
