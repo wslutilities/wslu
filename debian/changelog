@@ -1,3 +1,9 @@
+wslu (2.0.0-0ubuntu2~18.10.0) cosmic; urgency=medium
+
+  * Rebuild for Cosmic (LP: #1818673)
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Tue, 19 Mar 2019 11:04:18 +0100
+
 wslu (2.0.0-0ubuntu2) disco; urgency=medium
 
   * Only Suggest imagemagick and print error message when convert is missing
