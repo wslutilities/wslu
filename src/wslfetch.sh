@@ -109,6 +109,32 @@ case "$distro" in
 "${light_gray}       'l0Kk:.              .;xK0l'             ${reset}"
 "${light_gray}          'lkK0xl:;,,,,;:ldO0kl'                ${reset}"
 "${light_gray}              '^:ldxkkkkxdl:^'                  ${reset}");;
+	'pengwin')
+	t="${purple}${bold}"
+	full_text=(
+"${light_purple}                                      -///:-.\`                        ${reset}"
+"${light_purple}                                       \`://////-\`                     ${reset}"
+"${light_purple}                                         -//+${purple}ooso${light_purple}+.                   ${reset}"
+"${purple}                                          :${purple}yyyyyyyy${light_purple}/                  ${reset}"
+"${purple}                                           syyyyyyyy+                 ${reset}"
+"${purple}                                           /yyyyyyyyy-                ${reset}"
+"${purple}                                           -yyyyyyyyys                ${reset}"
+"${purple}                         \`.:/+osssoo+:-\`   /yyyyyyyyyy                ${reset}"
+"${purple}                      \`-+syyyyyyyyyyyyo+:\` syyyyyyyyys                ${reset}"
+"${purple}                     -oyyyyyyyyyyyo/-\`\`   /yyyyyyyyyy/                ${reset}"
+"${purple}                   \`oyyyyyyyyyys/.      \`/yyyyyyyyyys\`                ${reset}"
+"${purple}                  \`syyyyyyyyyy+.      \`-oyyyyyyyyyyo\`                 ${reset}"
+"${purple}                  oyyyyyyyyyy/     \`./syyyyyyyyyyy/\`                  ${reset}"
+"${purple}                 .yyyyyyyyyy+ \`.-/+syyyyyyyyyyys/.                    ${reset}"
+"${purple}                 :yyyyyyyyyy\` \`:+ssyyyyyyysso/-\`                      ${reset}"
+"${purple}                 :yyyyyyyyys      \`..----..\`                          ${reset}"
+"${purple}                 \`yyyyyyyyys                                          ${reset}"
+"${purple}                  /yyyyyyyyy.                                         ${reset}"
+"${purple}                   /yyyyyyyy+                                         ${reset}"
+"${light_purple}                    :${purple}syyyyss${light_purple}+-                                        ${reset}"
+"${light_purple}                     \`-/${purple}+${light_purple}/////-                                       ${reset}"
+"${light_purple}                        \`-://///.                                     ${reset}"
+"${light_purple}                            \`...-\`                                    ${reset}");;
 	'wlinux')
 	t="${light_orange}${bold}"
 	full_text=(
