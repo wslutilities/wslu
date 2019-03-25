@@ -1,7 +1,7 @@
-version="28"
+version="30"
 
 cname=""
-iconpath="$(double_dash_p $(wslvar -s USERPROFILE))\\wslu\\wsl.ico"
+iconpath="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu\\wsl.ico"
 is_icon=0
 is_gui=0
 customname=""
@@ -15,19 +15,19 @@ while [ "$1" != "" ]; do
 		-n|--name)shift;customname=$1;shift;;
 		-e|--env)shift;customenv=$1;shift;;
 		-g|--gui)is_gui=1;shift;;
-		-h|--help) help $0 "$help_short"; exit;;
+		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslusc v$version"; exit;;
-		*) cname=$@;break;;
+		*) cname="$*";break;;
 	esac
 done
 if [[ "$cname" != "" ]]; then
-	tpath=$(double_dash_p $(wslvar -s TMP))
-	dpath=$(wslpath $(wslvar -l Desktop))
-	script_location="$(wslpath $(wslvar -s USERPROFILE))/wslu"
+	tpath=$(double_dash_p "$(wslvar -s TMP)")
+	dpath=$(wslpath "$(wslvar -l Desktop)")
+	script_location="$(wslpath "$(wslvar -s USERPROFILE)")/wslu"
 	localfile_path="/usr/share/wslu"
-	script_location_win="$(double_dash_p $(wslvar -s USERPROFILE))\\wslu"
+	script_location_win="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu"
 	
-	new_cname=$(basename $(echo "$cname" | awk '{print $1}'))
+	new_cname=$(basename "$(echo "$cname" | awk '{print $1}')")
 	if [[ "$customname" != "" ]]; then
 		new_cname=$customname
 	fi
@@ -36,7 +36,7 @@ if [[ "$cname" != "" ]]; then
 	if [[ ! -f $script_location/wsl.ico ]]; then
 		echo "${warn} Default wslusc icon \"wsl.ico\" not found in Windows directory. Copying right now..."
 		[[ -d $script_location ]] || mkdir $script_location
-		if [[ $localfile_path/wsl.ico ]]; then
+		if [[ -f $localfile_path/wsl.ico ]]; then
 			cp $localfile_path/wsl.ico $script_location
 			echo "${info} Default wslusc icon \"wsl.ico\" copied. Located at $script_location."
 		else
