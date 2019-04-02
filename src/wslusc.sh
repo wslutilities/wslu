@@ -34,13 +34,13 @@ if [[ "$cname" != "" ]]; then
 	
 	# Cleanup and remove old folder
 	script_old_location="$(wslpath "$(wslvar -s USERPROFILE)")/wslu"
-	[[ -d $script_old_location ]] && rm -rf $script_old_location
+	[[ -d $script_old_location ]] && rm -rf "$script_old_location"
 	# Check default icon location
 	if [[ ! -f $script_location/wsl.ico ]]; then
 		echo "${warn} Default wslusc icon \"wsl.ico\" not found in Windows directory. Copying right now..."
 		[[ -d $script_location ]] || mkdir "$script_location"
 		if [[ -f $localfile_path/wsl.ico ]]; then
-			cp $localfile_path/wsl.ico $script_location
+			cp "$localfile_path"/wsl.ico "$script_location"
 			echo "${info} Default wslusc icon \"wsl.ico\" copied. Located at $script_location."
 		else
 			echo "${error} runHidden.vbs not found. Failed to copy."
@@ -50,9 +50,9 @@ if [[ "$cname" != "" ]]; then
 	# Check presence of runHidden.vbs 
 	if [[ ! -f $script_location/runHidden.vbs ]]; then
 		echo "${warn} runHidden.vbs not found in Windows directory. Copying right now..."
-		[[ -d $script_location ]] || mkdir $script_location
+		[[ -d $script_location ]] || mkdir "$script_location"
 		if [[ -f $localfile_path/runHidden.vbs ]]; then
-			cp $localfile_path/runHidden.vbs $script_location
+			cp "$localfile_path"/runHidden.vbs "$script_location"
 			echo "${info} runHidden.vbs copied. Located at $script_location."
 		else
 			echo "${error} runHidden.vbs not found. Failed to copy."
