@@ -8,7 +8,7 @@ function interop_prefix {
 		if [ "$tmp" == "" ]; then
 			echo "/mnt/"
 		else
-			echo $tmp
+			echo "$tmp"
 		fi
 	else
 		echo "/mnt/"
@@ -17,7 +17,7 @@ function interop_prefix {
 
 function prsh_check {
 PATH="$(interop_prefix)c/Windows/System32/WindowsPowerShell/v1.0/:$PATH"
-ppep="`powershell.exe Get-ExecutionPolicy 2>&1 | tail -n1 | sed 's/\r$//'`"
+ppep="$(powershell.exe Get-ExecutionPolicy 2>&1 | tail -n1 | sed 's/\r$//')"
 echo -e "Powershell Execution Policy: $ppep"
 if [[ "$ppep" = "Restricted" ]]; then
 	cat << EOF
@@ -39,7 +39,6 @@ fi
 PATH=$(getconf PATH)
 }
 
-function env_check {
 if [ -f /etc/fake-wsl-release ]
 then
 	cat << EOF
@@ -62,6 +61,3 @@ EOF
 else
    prsh_check
 fi
-}
-
-env_check
