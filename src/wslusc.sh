@@ -23,19 +23,22 @@ done
 if [[ "$cname" != "" ]]; then
 	tpath=$(double_dash_p "$(wslvar -s TMP)")
 	dpath=$(wslpath "$(wslvar -l Desktop)")
-	script_location="$(wslpath "$(wslvar -s USERPROFILE)")/wslu"
+	script_location="$(wslpath "$(wslvar -s USERPROFILE)")/.wslu"
 	localfile_path="/usr/share/wslu"
-	script_location_win="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu"
+	script_location_win="$(double_dash_p "$(wslvar -s USERPROFILE)")\\.wslu"
 	
 	new_cname=$(basename "$(echo "$cname" | awk '{print $1}')")
 	if [[ "$customname" != "" ]]; then
 		new_cname=$customname
 	fi
 	
+	# Cleanup and remove old folder
+	script_old_location="$(wslpath "$(wslvar -s USERPROFILE)")/wslu"
+	[[ -d $script_old_location ]] && rm -rf $script_old_location
 	# Check default icon location
 	if [[ ! -f $script_location/wsl.ico ]]; then
 		echo "${warn} Default wslusc icon \"wsl.ico\" not found in Windows directory. Copying right now..."
-		[[ -d $script_location ]] || mkdir $script_location
+		[[ -d $script_location ]] || mkdir "$script_location"
 		if [[ -f $localfile_path/wsl.ico ]]; then
 			cp $localfile_path/wsl.ico $script_location
 			echo "${info} Default wslusc icon \"wsl.ico\" copied. Located at $script_location."
@@ -58,15 +61,15 @@ if [[ "$cname" != "" ]]; then
 	fi
 
 	if [[ "$is_icon" == "1" ]]; then
-		icon_filename="$(basename $iconpath)"
+		icon_filename="$(basename "$iconpath")"
 		ext="${iconpath##*.}"
 
 		if [[ ! -f $iconpath ]]; then
-			iconpath="$(double_dash_p $(wslvar -s USERPROFILE))\\wslu\\wsl.ico"
+			iconpath="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu\\wsl.ico"
 			echo "${warn} Icon not found. Reset to default icon..."
 		else
 			echo "${info} You choose to use custom icon: $iconpath. Processing..."
-			cp $iconpath $script_location
+			cp "$iconpath" "$script_location"
 		
 			if [[ "$ext" != "ico" ]]; then
 				if [[ "$ext" == "svg" ]] || [[ "$ext" == "png" ]]; then
@@ -91,7 +94,7 @@ if [[ "$cname" != "" ]]; then
 	else
 		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \"cd ~; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
 	fi
-	tpath="$(wslpath $(wslvar -s TMP))/$new_cname.lnk"
+	tpath="$(wslpath "$(wslvar -s TMP)")/$new_cname.lnk"
 	mv "$tpath" "$dpath"
 	echo "${info} Create shortcut ${new_cname}.lnk successful"
 else
