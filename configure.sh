@@ -75,6 +75,9 @@ PATH=$(getconf PATH)
 function pkg_inst {
 distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME=\"//g')"
 case $distro in
+  *Pengwin*)
+		sudo dpkg --force-depends --remove wslu
+		sudo apt install -y git bc gzip make imagemagick
 	*WLinux*|Ubuntu*|*Debian*|*Kali*)
 		sudo apt purge -y wslu
 		sudo apt install -y git bc gzip make imagemagick
