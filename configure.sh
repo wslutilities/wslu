@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 # configure.sh
 # configure script for wslu
 # <https://github.com/wslutilities/wslu>
@@ -23,7 +23,7 @@ function interop_prefix {
 		if [ "$tmp" == "" ]; then
 			echo "/mnt/"
 		else
-			echo $tmp
+			echo "$tmp"
 		fi
 	else
 		echo "/mnt/"
@@ -43,14 +43,13 @@ fi
 
 function prsh_check {
 PATH="$(interop_prefix)c/Windows/System32/WindowsPowerShell/v1.0/:$PATH"
-powershell.exe -NoProfile -NonInteractive -Command Get-History
-if [[ $? -eq 0 ]]; then
+if powershell.exe -NoProfile -NonInteractive -Command Get-History; then
 	echo "powershell.exe can be invoked."
 else
 	echo "powershell.exe failed to launch."
 	exit 1
 fi
-ppep="`powershell.exe Get-ExecutionPolicy 2>&1 | tail -n1 | sed 's/\r$//'`"
+ppep="$(powershell.exe Get-ExecutionPolicy 2>&1 | tail -n1 | sed 's/\r$//')"
 echo -e "Powershell Execution Policy: $ppep"
 if [[ "$ppep" = "Restricted" ]]; then
 	cat << EOF
@@ -73,11 +72,12 @@ PATH=$(getconf PATH)
 }
 
 function pkg_inst {
-distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME=\"//g')"
+distro="$(head -n1 /etc/os-release | sed -e 's/NAME=\"//g')"
 case $distro in
   *Pengwin*)
 		sudo dpkg --force-depends --remove wslu
-		sudo apt install -y git bc gzip make imagemagick
+		sudo apt install -y git gzip make
+		;;
 	*WLinux*|Ubuntu*|*Debian*|*Kali*)
 		sudo apt purge -y wslu
 		sudo apt install -y git bc gzip make imagemagick
@@ -98,7 +98,7 @@ case $distro in
     *Fedora*)
 		sudo dnf install -y git bc gzip make bash-completion ImageMagick
 		;;
-	*Generic*) [ "fedora" == "$(cat /etc/os-release | grep -e "LIKE=" | sed -e 's/ID_LIKE=//g')" ] && sudo dnf install -y git || exit 1;;
+	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && sudo dnf install -y git || exit 1;;
     *) exit 1;;
 esac
 }
