@@ -1,4 +1,4 @@
-version=38
+version=41
 
 is_line=0
 is_splash=0
@@ -14,12 +14,11 @@ for args; do
 done
 
 hostname=$(</etc/hostname)
-branch=`wslsys -b -s`
-build=`wslsys -B -s`
-release=`wslsys -R -s`
-kernel=`wslsys -K -s`
-uptime=`wslsys -U -s`
-packages=`wslsys -P -s`
+branch=$(wslsys -b -s)
+build=$(wslsys -B -s)
+release=$(wslsys -R -s)
+kernel=$(wslsys -K -s)
+uptime=$(wslsys -U -s)
 
 case "$distro" in
 	'ubuntu')
@@ -112,21 +111,21 @@ case "$distro" in
  	'pengwin')
 		t="${purple}${bold}"
 		full_text=(
-			"${light_purple}                      ...\`              ${reset}"
-			"${light_purple}                      \`-///:-\`          ${reset}"
-			"${light_purple}                        .+${purple}ssys${light_purple}/         ${reset}"
-			"${light_purple}                         +${purple}yyyyy${light_purple}o        ${reset}"
-			"${purple}                         -yyyyyy:       ${reset}"
-			"${purple}            \`.:/+ooo+/:\` -yyyyyy+       ${reset}"
-			"${purple}          \`:oyyyyyys+:-.\`syyyyyy:       ${reset}"
-			"${purple}         .syyyyyyo-\`   .oyyyyyyo        ${reset}"
-			"${purple}        \`syyyyyy/   \`-+yyyyyyy/\`        ${reset}"
-			"${purple}        /yyyyyy+ -/osyyyyyyo/.          ${reset}"
-			"${purple}        +yyyyyy-  \`.-:::-.\`             ${reset}"
-			"${purple}        .yyyyyy-                        ${reset}"
-			"${light_purple}         :${purple}yyyyy${light_purple}o                        ${reset}"
-			"${light_purple}          .+${purple}ooo${light_purple}+:                       ${reset}"
-			"${light_purple}            \`.::/:.                     ${reset}");;
+			"${light_purple}                       ...\`               ${reset}"
+			"${light_purple}                       \`-///:-\`           ${reset}"
+			"${light_purple}                         .+${purple}ssys${light_purple}/          ${reset}"
+			"${light_purple}                          +${purple}yyyyy${light_purple}o         ${reset}"
+			"${purple}                          -yyyyyy:        ${reset}"
+			"${purple}             \`.:/+ooo+/:\` -yyyyyy+        ${reset}"
+			"${purple}           \`:oyyyyyys+:-.\`syyyyyy:        ${reset}"
+			"${purple}          .syyyyyyo-\`   .oyyyyyyo         ${reset}"
+			"${purple}         \`syyyyyy/   \`-+yyyyyyy/\`         ${reset}"
+			"${purple}         /yyyyyy+ -/osyyyyyyo/.           ${reset}"
+			"${purple}         +yyyyyy-  \`.-:::-.\`              ${reset}"
+			"${purple}         .yyyyyy-                         ${reset}"
+			"${light_purple}          :${purple}yyyyy${light_purple}o                         ${reset}"
+			"${light_purple}           .+${purple}ooo${light_purple}+:                        ${reset}"
+			"${light_purple}             \`.::/:.                      ${reset}");;
 	'wlinux')
 		t="${light_orange}${bold}"
 		full_text=(
@@ -283,7 +282,7 @@ info_text=("${t}Windows 10 Linux Subsystem${reset}"
 
 function line() {
 	if [[ "$is_line" == "1" ]]; then
-		yes -- ${@:-=} | tr -d $'\n' | head -c $COLUMNS
+		yes -- "${@:-=}" | tr -d $'\n' | head -c $COLUMNS
 	else
 		echo ""
 	fi
