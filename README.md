@@ -95,3 +95,5 @@ This project exists thanks to all the people who contribute. [[Contribute](CONTR
 This project uses [GPLv3](LICENSE) License.
 
 Tux logo used in `\src\etc\wsl.ico` was originally made by Larry Ewing in the Gimp and re-illustrated in vector by Garrett LeSage, using Inkscape.
+
+Logo of WSL Utilities is licensed under [CC BY-NC 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).
