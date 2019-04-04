@@ -41,7 +41,7 @@ A WSL tool to convert path styles.
 
 ## Installation
 
-### WLinux/Fedora Remix
+### Pengwin/Fedora Remix
 
 Preinstalled in WLinux and Fedora Remix for WSL.
 
@@ -57,7 +57,7 @@ You can use the following command for easy installation:
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.deb.sh | sudo bash
 ```
 
-### For RPM-based systems(OpenSUSE/SLES/WLinux Enterprise)
+### For RPM-based systems(OpenSUSE/SLES/Pengwin Enterprise/Oracle Linux)
 
 You can use the following command for easy installation:
 
@@ -102,6 +102,6 @@ Tux logo used in `\src\etc\wsl.ico` was originally made by Larry Ewing in the Gi
 
 Some of `wslfetch` ASCII Arts comes from [`neofetch`](https://github.com/dylanaraps/neofetch/) with [MIT](https://github.com/dylanaraps/neofetch/blob/master/LICENSE.md) License and [`screenFetch`](https://github.com/KittyKatt/screenFetch/) with [GPLv3](https://github.com/KittyKatt/screenFetch/blob/master/COPYING) License.
 
-Pengwin Logo used in `wslfetch` ASCII art is ASCII version of the artwork by [Dennis D. Bednarz](https://twitter.com/DennisBednarz).
+Pengwin Logo used in `wslfetch` ASCII art is ASCII version of the artwork by [Dennis D. Bednarz](https://twitter.com/DennisBednarz), with use permission from Whitewater Foundry.
 
 WLinux Logo used in `wslfetch` ASCII art is ASCII version of the artwork by Larry Ewing.
