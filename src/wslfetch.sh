@@ -235,6 +235,20 @@ case "$distro" in
 			"${light_blue}                ;/      #=                  ${reset}"
 			"${light_blue}                 //    +;                   ${reset}"
 			"${light_blue}                  '////'                    ${reset}");;
+	'oracle')
+		t="${red}${bold}"
+		full_text=(
+			"${red}      \`-/+++++++++++++++++/-.\`       ${reset}"
+			"${red}    \`/syyyyyyyyyyyyyyyyyyyyyyys/.    ${reset}"
+			"${red}   :yyyyo/-...............-/oyyyy/   ${reset}"
+			"${red}  /yyys-                     .oyyy+  ${reset}"
+			"${red} .yyyy\`                       \`syyy- ${reset}"
+			"${red} :yyyo                         /yyy/ ${reset}"
+			"${red} .yyyy\`                       \`syyy- ${reset}"
+			"${red}  /yyys.                     .oyyyo  ${reset}"
+			"${red}   /yyyyo:-...............-:oyyyy/\`  ${reset}"
+			"${red}    \`/syyyyyyyyyyyyyyyyyyyyyyys+.    ${reset}"
+			"${red}      \`.:/+ooooooooooooooo+/:.\`      ${reset}");;
 	'fedora')
 		t="${light_blue}${bold}"
 		full_text=(

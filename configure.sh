@@ -92,7 +92,7 @@ case $distro in
     Arch*)
 		sudo pacman -Syyu git bc gzip make bash-completion imagemagick
 		;;
-    Scientific*)
+    *Oracle*|Scientific*)
 		sudo yum install -y git bc gzip make bash-completion imagemagick
 		;;
     *Fedora*)

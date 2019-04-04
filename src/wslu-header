@@ -109,6 +109,7 @@ case $distro in
     SLES*) distro="sles";;
     Alpine*) distro="alpine";;
     Arch*) distro="archlinux";;
+	*Oracle*) distro="oracle";;
     Scientific*) distro="scilinux";;
     *Fedora*) distro="fedora";;
 	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && distro="fedora" || distro="unknown";;
