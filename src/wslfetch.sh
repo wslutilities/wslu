@@ -61,8 +61,7 @@ case "$distro" in
 			"${white}       \`\$\$b.                         ${reset}"
 			"${white}         \`Y\$\$b.                      ${reset}"
 			"${white}            \`\"Y\$b._                  ${reset}"
-			"${white}                \`\"\"\"\"                ${reset}"
-			"${white}                                     ${reset}");;
+			"${white}                \`\"\"\"\"                ${reset}");;
 	'kali')
 		t="${light_blue}${bold}"
 		full_text=(
@@ -193,7 +192,7 @@ case "$distro" in
 	'archlinux')
 		t="${light_cyan}${bold}"
 		full_text=(
-			"${light_cyan}                   -\`                 "
+			"${light_cyan}                   -\`                 ${reset}"
 			"${light_cyan}                  .o+\`                ${reset}"
 			"${light_cyan}                 \`ooo/                ${reset}"
 			"${light_cyan}                \`+oooo:               ${reset}"
@@ -215,7 +214,7 @@ case "$distro" in
 	'scilinux')
 		t="${light_blue}${bold}"
 		full_text=(
-			"${light_blue}                  =/;;/-                    "
+			"${light_blue}                  =/;;/-                    ${reset}"
 			"${light_blue}                 +:    //                   ${reset}"
 			"${light_blue}                /;      /;                  ${reset}"
 			"${light_blue}               -X        H.                 ${reset}"
@@ -268,8 +267,7 @@ case "$distro" in
 			"${light_blue} :--${white} :dMNdhhdNMMNo${light_blue}------------;      ${reset}"
 			"${light_blue} :---${white}:sdNMMMMNds:${light_blue}------------:       ${reset}"
 			"${light_blue} :------${white}:://:${light_blue}-------------::         ${reset}"
-			"${light_blue} :---------------------://           ${reset}"
-			"${light_blue}                                     ${reset}");;
+			"${light_blue} :---------------------://           ${reset}");;
 	*)
 		t="${cyan}${bold}"
 		full_text=(
