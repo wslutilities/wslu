@@ -53,6 +53,7 @@ run `make` to build executable to `out` folder.
 run `make clean` to clean `out` folder.
 run `make test` to run tests.
 run `make install` to install to `/usr/bin/`. Requires to run as `sudo`.
+run `make link` to link files from the repo to `/usr/bin/`. Requires to run as `sudo`.
 run `make uninstall` to uninstall. Requires to run as `sudo`.
 run `cd extras/scripts && ./builder-docs.sh` to build docs to `gendocs`.
 

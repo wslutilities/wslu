@@ -117,6 +117,9 @@ jobs:
       - run:
           name: Push rpm package for opensuse 15
           command: package_cloud push whitewaterfoundry/wslu/opensuse/15.0 /tmp/pkgs/*.rpm --skip-errors
+      - run:
+          name: Push rpm package for oracle 7
+          command: package_cloud push whitewaterfoundry/wslu/ol/7 /tmp/pkgs/*.rpm --skip-errors
 workflows:
   version: 2
   tests:
