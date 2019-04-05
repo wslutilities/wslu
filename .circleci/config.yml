@@ -97,9 +97,6 @@ jobs:
           name: Push deb package for ubuntu bionic
           command: package_cloud push whitewaterfoundry/wslu/ubuntu/bionic /tmp/pkgs/*.deb --skip-errors
       - run:
-          name: Push rpm package for elementary juno
-          command: package_cloud push whitewaterfoundry/wslu/elementaryos/juno /tmp/pkgs/*.deb --skip-errors        
-      - run:
           name: Push rpm package for fedora 29
           command: package_cloud push whitewaterfoundry/wslu/fedora/29 /tmp/pkgs/*.rpm --skip-errors
       - run:
