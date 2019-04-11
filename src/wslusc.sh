@@ -1,4 +1,4 @@
-version="30"
+version="31"
 
 cname=""
 iconpath="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu\\wsl.ico"
@@ -23,18 +23,15 @@ done
 if [[ "$cname" != "" ]]; then
 	tpath=$(double_dash_p "$(wslvar -s TMP)")
 	dpath=$(wslpath "$(wslvar -l Desktop)")
-	script_location="$(wslpath "$(wslvar -s USERPROFILE)")/.wslu"
+	script_location="$(wslpath "$(wslvar -s USERPROFILE)")/wslu"
 	localfile_path="/usr/share/wslu"
-	script_location_win="$(double_dash_p "$(wslvar -s USERPROFILE)")\\.wslu"
+	script_location_win="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu"
 	
 	new_cname=$(basename "$(echo "$cname" | awk '{print $1}')")
 	if [[ "$customname" != "" ]]; then
 		new_cname=$customname
 	fi
 	
-	# Cleanup and remove old folder
-	script_old_location="$(wslpath "$(wslvar -s USERPROFILE)")/wslu"
-	[[ -d $script_old_location ]] && rm -rf "$script_old_location"
 	# Check default icon location
 	if [[ ! -f $script_location/wsl.ico ]]; then
 		echo "${warn} Default wslusc icon \"wsl.ico\" not found in Windows directory. Copying right now..."
