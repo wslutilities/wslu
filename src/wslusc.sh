@@ -23,9 +23,9 @@ done
 if [[ "$cname" != "" ]]; then
 	tpath=$(double_dash_p "$(wslvar -s TMP)")
 	dpath=$(wslpath "$(wslvar -l Desktop)")
-	script_location="$(wslpath "$(wslvar -s USERPROFILE)")/.wslu"
+	script_location="$(wslpath "$(wslvar -s USERPROFILE)")/wslu"
 	localfile_path="/usr/share/wslu"
-	script_location_win="$(double_dash_p "$(wslvar -s USERPROFILE)")\\.wslu"
+	script_location_win="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu"
 	
 	new_cname=$(basename "$(echo "$cname" | awk '{print $1}')")
 	if [[ "$customname" != "" ]]; then
