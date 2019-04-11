@@ -1,6 +1,6 @@
 # Maintainer: Patrick Wu <wotingwu@live.com>
 pkgname=wslu
-pkgver=2.1.0
+pkgver=2.1.1
 pkgrel=0
 pkgdesc="A collection of utilities for Windows 10 Linux Subsystems"
 url="https://github.com/wslutilities/wslu"

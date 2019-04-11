@@ -1,4 +1,4 @@
-version="30"
+version="31"
 
 cname=""
 iconpath="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu\\wsl.ico"
