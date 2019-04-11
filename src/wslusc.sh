@@ -32,9 +32,6 @@ if [[ "$cname" != "" ]]; then
 		new_cname=$customname
 	fi
 	
-	# Cleanup and remove old folder
-	script_old_location="$(wslpath "$(wslvar -s USERPROFILE)")/wslu"
-	[[ -d $script_old_location ]] && rm -rf "$script_old_location"
 	# Check default icon location
 	if [[ ! -f $script_location/wsl.ico ]]; then
 		echo "${warn} Default wslusc icon \"wsl.ico\" not found in Windows directory. Copying right now..."
