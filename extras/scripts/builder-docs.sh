@@ -22,16 +22,19 @@
 git clone https://github.com/wslutilities/wslu.wiki.git
 
 OUTPATH="../../docs"
-SOURCES=(wslfetch wslsys wslupath wslusc wslview wslvar)
+SOURCES=(wslfetch wslsys wslupath wslusc wslview wslvar wslstart)
 BUILD_TIME="$(date +%Y-%m-%d)"
 
 [[ -d "$OUTPATH" ]] || mkdir "$OUTPATH"
 
 for file in "${SOURCES[@]}"; do
     NAME_CAP="$(echo $file | tr '[:lower:]' '[:upper:]')"
-
+    
+    # rename the filename
+    mv wslu.wiki/"$file".md wslu.wiki/"$file"
+    
     # generate base files using ronn
-    ronn --manual=$NAME_CAP --organization="Patrick Wu" --date="$BUILD_TIME" wslu.wiki/"$file".md
+    ronn --manual=$NAME_CAP --organization="Patrick Wu" --date="$BUILD_TIME" wslu.wiki/"$file"
 
     # cleanup folder for file modification
     rm wslu.wiki/"$file".html
