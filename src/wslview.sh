@@ -37,7 +37,7 @@ for args; do
 done
 
 if [[ "$lname" != "" ]]; then
-	winps_exec Start "$lname"
+	winps_exec Start "\"$lname\""
 else
 	echo "${error}No input, aborting"
 	exit 21
