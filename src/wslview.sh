@@ -37,6 +37,8 @@ for args; do
 done
 
 if [[ "$lname" != "" ]]; then
+	# TODO
+	# Handle Linux file:/// protocol as it is not in path
 	winps_exec Start "\"$lname\""
 else
 	echo "${error}No input, aborting"
