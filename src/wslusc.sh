@@ -69,7 +69,7 @@ if [[ "$cname" != "" ]]; then
 			cp "$iconpath" "$script_location"
 		
 			if [[ "$ext" != "ico" ]]; then
-				if [[ "$ext" == "svg" ]] || [[ "$ext" == "png" ]]; then
+				if [[ "$ext" == "svg" ]] || [[ "$ext" == "png" ]] || [[ "$ext" == "xpm" ]]; then
 					echo "${info} Converting $ext icon to ico..."
 					convert "$script_location/$icon_filename" -resize 256X256 "$script_location/${icon_filename%.$ext}.ico"
 					icon_filename="${icon_filename%.$ext}.ico"
