@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # wslu - Windows 10 linux Subsystem Utility
 # Component of Windows 10 linux Subsystem Utility
 # <https://github.com/wslutilities/wslu>
