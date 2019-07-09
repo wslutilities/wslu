@@ -1,1 +1,2 @@
 debian/wsl.ico usr/share/wslu
+debian/wsl-integration.sh usr/share/wslu
