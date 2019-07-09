@@ -13,6 +13,7 @@ Package: wslu
 Architecture: all
 Depends: ${misc:Depends},
          bc
+Recommends: x11-utils
 Suggests: imagemagick
 Provides: www-browser
 Description: collection of utilities for the Windows 10 Linux Subsystem
