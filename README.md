@@ -44,11 +44,20 @@ A WSL tool to convert path styles.
 
 Preinstalled in WLinux and Fedora Remix for WSL.
 
-### For Debian-based systems(Ubuntu/Debian/Kali Linux)
+### Ubuntu
+
+Preinstalled in the latest apps. On older installations please install ubuntu-wsl that depends on wslu:
+
+```
+sudo apt update
+sudo apt install ubuntu-wsl
+```
+
+### For other Debian-based systems(Debian/Kali Linux)
 
 You can download the `.deb` package from release and install it using `sudo dpkg -i wslu*`.
 
-#### Ubuntu/Debian
+#### Debian
 
 You can use the following command for easy installation:
 
