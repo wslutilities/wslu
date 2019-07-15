@@ -1,3 +1,12 @@
+wslu (2.0.0-0ubuntu2.19.04.0) disco; urgency=medium
+
+  * Set DISPLAY=:0 when an X11 server is running (LP: #1836552)
+  * Use PulseAudio if it is running on Windows (LP: #1836552)
+  * Set up sound, too, when starting GUI programs via Windows desktop shortcuts
+    (LP: #1836552)
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Mon, 15 Jul 2019 13:31:02 +0200
+
 wslu (2.0.0-0ubuntu2) disco; urgency=medium
 
   * Only Suggest imagemagick and print error message when convert is missing
