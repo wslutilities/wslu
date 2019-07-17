@@ -3,10 +3,14 @@ version="28"
 help_short="wslsys (-h|-v|-S|-U|-b|-B|-fB|-R|-K|-P) -s"
 
 ## Windows 10 information
-branch=$(winps_exec "(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').'BuildBranch'")
-build=$(winps_exec "(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').'CurrentBuild'")
-full_build=$(winps_exec "(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').'BuildLabEx'")
-installdate=$(winps_exec "(Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').'InstallDate'")
+branch=`$(interop_prefix)c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildBranch | tail -n 2 | head -n 1`
+branch=${branch##* }
+build=`$(interop_prefix)c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1`
+build=${build##* }
+full_build=`$(interop_prefix)c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildLabEx | tail -n 2 | head -n 1`
+full_build=${full_build##* }
+installdate=`$(interop_prefix)c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v InstallDate | tail -n 2 | head -n 1`
+installdate=${installdate##* }
 
 ## WSL information
 release="$(grep "PRETTY_NAME=" /etc/os-release | sed -e 's/PRETTY_NAME=//g' -e 's/"//g')"
