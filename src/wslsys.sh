@@ -37,23 +37,23 @@ fi
 
 ## Simple printer defined for fetching information
 function printer {
-	if [[ $2 != "-s" ]]; then
-		echo "$1"
+	if [[ $3 != "-s" ]]; then
+		echo "$1: $2"
 	else
-		echo "${1//+(*): /}"
+		echo "$2"
 	fi
 }
 
 case $1 in
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslsys v$version"; exit;;
-		-I|--sys-installdate) printer "Release Install Date: $installdate" "$2";exit;;
-		-b|--branch) printer "Branch: $branch" "$2";exit;;
-		-B|--build) printer "Build: $build" "$2";exit;;
-		-fB|--full-build) printer "Full Build: $full_build" "$2";exit;;
-		-U|--uptime) printer "Uptime: $uptime" "$2";exit;;
-		-R|--release) printer "Linux Release: $release" "$2";exit;;
-		-K|--kernel) printer "Linux Kernel: $kernel" "$2";exit;;
-		-P|--package) printer "Packages Count: $packages" "$2";exit;;
+		-I|--sys-installdate) printer "Release Install Date: $installdate" $2;exit;;
+		-b|--branch) printer "Branch" "$branch" $2;exit;;
+		-B|--build) printer "Build" "$build" $2;exit;;
+		-fB|--full-build) printer "Full Build" "$full_build" $2;exit;;
+		-U|--uptime) printer "Uptime" "$uptime" $2;exit;;
+		-R|--release) printer "Linux Release" "$release" $2;exit;;
+		-K|--kernel) printer "Linux Kernel" "$kernel" $2;exit;;
+		-P|--package) printer "Packages Count" "$packages" $2;exit;;
 		*) echo -e "Release Install Date: $installdate\nBranch: $branch\nBuild: $build\nFull Build: $full_build\nUptime: $uptime\nLinux Release: $release\nLinux Kernel: $kernel\nPackages Count: $packages";exit;;
 esac
