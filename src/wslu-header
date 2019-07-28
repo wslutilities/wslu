@@ -25,7 +25,7 @@ LC_ALL=C
 LANG=C
 
 # force bash to not showing code manually.
-set +x
+
 
 # checking interopability
 grep enabled /proc/sys/fs/binfmt_misc/WSLInterop >/dev/null || (echo "WSL Interopability is disabled. Please enable it before using WSL."; exit 1)
@@ -87,7 +87,7 @@ function interop_prefix {
 }
 
 function chcp_com {
-	"$(interop_prefix)"c/Windows/System32/chcp.com "$@"
+	"$(interop_prefix)"c/Windows/System32/chcp.com "$@" >/dev/null
 }
 
 function winps_exec {
@@ -102,6 +102,12 @@ if [ ! -d ~/.config/wslu ]; then
 fi
 if [ ! -f ~/.config/wslu/oemcp ]; then
 	"$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*' > ~/.config/wslu/oemcp
+fi
+if [ ! -f ~/.config/wslu/baseexec ]; then
+	wslu_distro_regpath=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | grep -B1 -e "$WSL_DISTRO_NAME" | head -n1 | sed -e 's|\r||g')
+	wslu_distro_packagename=$($(interop_prefix)c/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	wslu_distro_packagename=${wslu_distro_packagename##* }
+	find $(wslpath "$(double_dash_p $(winps_exec "Write-Output \$Env:LOCALAPPDATA" | tr -d "\r"))\\Microsoft\\WindowsApps\\$wslu_distro_packagename") -name "*.exe" > ~/.config/wslu/baseexec
 fi
 
 # when --debug, debug.
