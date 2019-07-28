@@ -99,6 +99,8 @@ function winps_exec {
 # first run, saving some information
 if [ ! -d ~/.config/wslu ]; then
 	mkdir -p ~/.config/wslu
+fi
+if [ ! -f ~/.config/wslu/oemcp ]; then
 	"$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*' > ~/.config/wslu/oemcp
 fi
 
@@ -112,18 +114,18 @@ fi
 # basic distro detection
 distro="$(head -n1 /etc/os-release | sed -e 's/NAME=\"//g')"
 case $distro in
-    *Pengwin*) distro="pengwin";;
-    *WLinux*) distro="wlinux";;
-    Ubuntu*) distro="ubuntu";;
-    *Debian*) distro="debian";;
-    *Kali*) distro="kali";;
-    openSUSE*) distro="opensuse";;
-    SLES*) distro="sles";;
-    Alpine*) distro="alpine";;
-    Arch*) distro="archlinux";;
-    *Oracle*) distro="oracle";;
-    Scientific*) distro="scilinux";;
-    *Fedora*) distro="fedora";;
-    *Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && distro="fedora" || distro="unknown";;
-    *) distro="unknown";;
+	*Pengwin*) distro="pengwin";;
+	*WLinux*) distro="wlinux";;
+	Ubuntu*) distro="ubuntu";;
+	*Debian*) distro="debian";;
+	*Kali*) distro="kali";;
+	openSUSE*) distro="opensuse";;
+	SLES*) distro="sles";;
+	Alpine*) distro="alpine";;
+	Arch*) distro="archlinux";;
+	*Oracle*) distro="oracle";;
+	Scientific*) distro="scilinux";;
+	*Fedora*) distro="fedora";;
+	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && distro="fedora" || distro="unknown";;
+	*) distro="unknown";;
 esac
