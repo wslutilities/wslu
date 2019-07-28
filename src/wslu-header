@@ -86,9 +86,21 @@ function interop_prefix {
 	fi
 }
 
-function winps_exec {
-	"$(interop_prefix)"c/Windows/System32/chcp.com $("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*') && "$(interop_prefix)"c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -Command "$@"
+function chcp_com {
+	"$(interop_prefix)"c/Windows/System32/chcp.com "$@"
 }
+
+function winps_exec {
+	chcp_com $(cat ~/.config/wslu/oemcp)
+	"$(interop_prefix)"c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -Command "$@"
+	chcp_com 65001
+}
+
+# first run, saving some information
+if [ ! -d ~/.config/wslu ]; then
+	mkdir -p ~/.config/wslu
+	"$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*' > ~/.config/wslu/oemcp
+fi
 
 # when --debug, debug.
 if [ "$1" == "--debug" ]; then
@@ -109,9 +121,9 @@ case $distro in
     SLES*) distro="sles";;
     Alpine*) distro="alpine";;
     Arch*) distro="archlinux";;
-	*Oracle*) distro="oracle";;
+    *Oracle*) distro="oracle";;
     Scientific*) distro="scilinux";;
     *Fedora*) distro="fedora";;
-	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && distro="fedora" || distro="unknown";;
+    *Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && distro="fedora" || distro="unknown";;
     *) distro="unknown";;
 esac
