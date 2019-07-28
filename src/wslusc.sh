@@ -26,7 +26,13 @@ if [[ "$cname" != "" ]]; then
 	script_location="$(wslpath "$(wslvar -s USERPROFILE)")/wslu"
 	localfile_path="/usr/share/wslu"
 	script_location_win="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu"
-	
+
+	# distro related variable
+	distro_location_win=$(double_dash_p "C:\Windows\System32\bash.exe")
+	if [ -f ~/.config/wslu/baseexec ]; then
+		distro_location_win="$(double_dash_p $(wslpath -w $(cat ~/.config/wslu/baseexec)))"
+	fi
+
 	new_cname=$(basename "$(echo "$cname" | awk '{print $1}')")
 	if [[ "$customname" != "" ]]; then
 		new_cname=$customname
@@ -91,9 +97,9 @@ if [[ "$cname" != "" ]]; then
 	fi
 
 	if [[ "$is_gui" == "1" ]]; then
-		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs bash.exe -c \"cd ~; export DISPLAY=:0; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
+		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs $distro_location_win run \"cd ~; export DISPLAY=:0; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
 	else
-		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \"cd ~; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
+		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='$distro_location_win';\$s.Arguments='run \"cd ~; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
 	fi
 	tpath="$(wslpath "$(wslvar -s TMP)")/$new_cname.lnk"
 	mv "$tpath" "$dpath"
