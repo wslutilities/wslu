@@ -78,10 +78,12 @@ if [[ "$cname" != "" ]]; then
 				if [[ "$ext" == "svg" ]]; then
 					echo "${info} Converting $ext icon to ico..."
 					convert "$script_location/$icon_filename" -trim -background none -resize 256X256 -define 'icon:auto-resize=16,24,32,64,128,256'  "$script_location/${icon_filename%.$ext}.ico"
+					rm "$script_location/$icon_filename"
 					icon_filename="${icon_filename%.$ext}.ico"
 				elif [[ "$ext" == "png" ]] || [[ "$ext" == "xpm" ]]; then
 					echo "${info} Converting $ext icon to ico..."
 					convert "$script_location/$icon_filename" -resize 256X256 "$script_location/${icon_filename%.$ext}.ico"
+					rm "$script_location/$icon_filename"
 					icon_filename="${icon_filename%.$ext}.ico"
 				else
 					echo "${error} wslusc only support creating shortcut using .png/.svg/.ico icon. Aborted."
