@@ -1,6 +1,6 @@
 version="29"
 
-help_short="wslsys (-h|-v|-I|-b|-B|-fB|-U|-R|-K) -s"
+help_short="wslsys (-h|-v|-I|-b|-B|-fB|-U|-R|-K|-P) -s"
 
 ## Windows 10 information
 branch=$($(interop_prefix)c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildBranch | tail -n 2 | head -n 1 | sed -e 's|\r||g')
