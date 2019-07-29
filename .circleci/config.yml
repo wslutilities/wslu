@@ -85,6 +85,9 @@ jobs:
           name: Install packageloud cli
           command: gem install package_cloud
       - run:
+          name: Push deb package for debian bullseye
+          command: package_cloud push whitewaterfoundry/wslu/debian/bullseye /tmp/pkgs/*.deb --skip-errors
+      - run:
           name: Push deb package for debian buster
           command: package_cloud push whitewaterfoundry/wslu/debian/buster /tmp/pkgs/*.deb --skip-errors
       - run:
