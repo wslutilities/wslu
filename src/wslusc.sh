@@ -25,17 +25,16 @@ done
 # interactive mode
 if [[ $is_interactive -eq 1 ]]; then
 	echo "${info} Welcome to wslu shortcut creator interactive mode."
-	echo -n "Input the command you want to execute:"
-	read cname
-	echo -n "Input the name of the shortcut[optional, leave it blank for default]:"
-	read customname
-	echo -n "Is it a GUI application? [if yes, input 1; if no, input 0]:"
-	read is_gui
-	is_gui=$(( $is_gui + 0 ))
-	echo -n "Input the environment the command execute with[optional, leave it blank for default]:"
-	read customenv
-	echo 
-
+	read -e -i "$cname" -p "Input the command you want to execute:" input
+	cname="${input:-$cname}"
+	read -e -i "$customname" -p "Input the name of the shortcut[optional, leave it blank for default]:" input
+	customname="${input:-$customname}"
+	read -e -i "$is_gui" -p "Is it a GUI application? [if yes, input 1; if no, input 0]:" input
+	is_gui=$(( ${input:-$is_gui} + 0 ))
+	read -e -i "$customenv" -p "Input the environment the command execute with[optional, leave it blank for default]:" input
+	customenv="${input:-$customenv}"
+	read -e -i "$iconpath" -p "Input the linux path to the custom icon (support ico/png/xpm/svg) [optional, leave it blank for default]:" input
+	iconpath="${input:-$iconpath}"
 fi
 
 if [[ "$cname" != "" ]]; then
