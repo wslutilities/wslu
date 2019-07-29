@@ -2,7 +2,6 @@ version="36"
 
 cname=""
 iconpath="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu\\wsl.ico"
-is_icon=0
 is_gui=0
 is_interactive=0
 customname=""
@@ -13,7 +12,7 @@ help_short="wslusc (--env [PATH]|--name [NAME]|--icon [ICO FILE]|--gui|--interac
 while [ "$1" != "" ]; do
 	case "$1" in
 		-I|--interactive)is_interactive=1;shift;; 
-		-i|--icon)shift;is_icon=1;iconpath=$1;shift;;
+		-i|--icon)shift;iconpath=$1;shift;;
 		-n|--name)shift;customname=$1;shift;;
 		-e|--env)shift;customenv=$1;shift;;
 		-g|--gui)is_gui=1;shift;;
@@ -22,6 +21,23 @@ while [ "$1" != "" ]; do
 		*) cname="$*";break;;
 	esac
 done
+
+# interactive mode
+if [[ $is_interactive -eq 1 ]]; then
+	echo "${info} Welcome to wslu shortcut creator interactive mode."
+	echo -n "Input the command you want to execute:"
+	read cname
+	echo -n "Input the name of the shortcut[optional, leave it blank for default]:"
+	read customname
+	echo -n "Is it a GUI application? [if yes, input 1; if no, input 0]:"
+	read is_gui
+	is_gui=$(( $is_gui + 0 ))
+	echo -n "Input the environment the command execute with[optional, leave it blank for default]:"
+	read customenv
+	echo 
+
+fi
+
 if [[ "$cname" != "" ]]; then
 	tpath=$(double_dash_p "$(wslvar -s TMP)")
 	dpath=$(wslpath "$(wslvar -l Desktop)")
@@ -65,7 +81,8 @@ if [[ "$cname" != "" ]]; then
 		fi
 	fi
 
-	if [[ "$is_icon" == "1" ]]; then
+	# handling icon
+	if [[ "$iconpath" != "" ]]; then
 		icon_filename="$(basename "$iconpath")"
 		ext="${iconpath##*.}"
 
@@ -94,6 +111,8 @@ if [[ "$cname" != "" ]]; then
 			fi
 			iconpath="$script_location_win\\$icon_filename"
 		fi
+	else
+		iconpath="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu\\wsl.ico"
 	fi
 	
 	if [[ "$customenv" != "" ]]; then
