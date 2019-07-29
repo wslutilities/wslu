@@ -1,16 +1,18 @@
-version="34"
+version="36"
 
 cname=""
 iconpath="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu\\wsl.ico"
 is_icon=0
 is_gui=0
+is_interactive=0
 customname=""
 customenv=""
 
-help_short="wslusc (--env [PATH]|--name [NAME]|--icon [ICO FILE]|--gui|--help|--version) [COMMAND]"
+help_short="wslusc (--env [PATH]|--name [NAME]|--icon [ICO FILE]|--gui|--interactive|--help|--version) [COMMAND]"
 
 while [ "$1" != "" ]; do
 	case "$1" in
+		-I|--interactive)is_interactive=1;shift;; 
 		-i|--icon)shift;is_icon=1;iconpath=$1;shift;;
 		-n|--name)shift;customname=$1;shift;;
 		-e|--env)shift;customenv=$1;shift;;

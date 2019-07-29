@@ -22,8 +22,20 @@ hours=$((uptime/3600%24))
 minutes=$((uptime/60%60))
 uptime="${days}d ${hours}h ${minutes}m"
 
-## fedora remix specific information
-if [ "$distro" == "fedora" ]; then
+### WSL package information
+case "$distro" in
+	'ubuntu'|'kali'|'debian'|'wlinux')
+		packages=$(dpkg -l | grep -c '^i');;
+	'opensuse'|'sles'|'scilinux'|'oldfedora'|'fedora'|'oracle')
+		packages=$(rpm -qa | wc -l);;
+	'alpine')
+		packages=$(apk info | wc -l);;
+	'archlinux')
+		packages=$(pacman -Qq | wc -l);;
+esac
+
+##  old version of fedora remix specific information
+if [ "$distro" == "oldfedora" ]; then
 	release="Fedora Remix $(grep -e "^VERSION=" /etc/os-release | sed -e 's/\"//g' | sed -e 's/VERSION=//g')"
 fi
 
@@ -46,5 +58,6 @@ case $1 in
 		-U|--uptime) printer "Uptime" "$uptime" $2;exit;;
 		-R|--release) printer "Linux Release" "$release" $2;exit;;
 		-K|--kernel) printer "Linux Kernel" "$kernel" $2;exit;;
-		*) echo -e "Release Install Date: $installdate\nBranch: $branch\nBuild: $build\nFull Build: $full_build\nUptime: $uptime\nLinux Release: $release\nLinux Kernel: $kernel";exit;;
+		-P|--package) printer "Packages Count" "$packages" $2;exit;;
+		*) echo -e "Release Install Date: $installdate\nBranch: $branch\nBuild: $build\nFull Build: $full_build\nUptime: $uptime\nLinux Release: $release\nLinux Kernel: $kernel\nPackages Count: $packages";exit;;
 esac
