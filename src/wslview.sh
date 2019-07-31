@@ -45,7 +45,7 @@ if [[ "$lname" != "" ]]; then
 	#		exit 34
 	#	fi
 	#else
-		winps_exec Start "\"$lname\""
+	winps_exec Start "\"$lname\""
 	#fi
 else
 	echo "${error}No input, aborting"
