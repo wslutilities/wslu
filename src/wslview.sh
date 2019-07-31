@@ -37,16 +37,16 @@ for args; do
 done
 
 if [[ "$lname" != "" ]]; then
-	if [[ "$lname" =~  file:///* ]]; then
-		if [[ "$WSL_DISTRO_NAME" != "" ]]; then
-			echo "do something"
-		else
-			echo "${error} This protocol is not supported before version 1903."
-			exit 34
-		fi
-	else
+	#if [[ "$lname" =~  file:///* ]]; then
+	#	if [[ "$WSL_DISTRO_NAME" != "" ]]; then
+	#		echo "do something"
+	#	else
+	#		echo "${error} This protocol is not supported before version 1903."
+	#		exit 34
+	#	fi
+	#else
 		winps_exec Start "\"$lname\""
-	fi
+	#fi
 else
 	echo "${error}No input, aborting"
 	exit 21
