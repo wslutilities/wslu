@@ -55,6 +55,7 @@ reset=$(echo -e '\033(B\033[m')
 
 ## indicator
 info="${green}[info]${reset}"
+input_info="${cyan}[input]${reset}"
 error="${red}[error]${reset}"
 warn="${orange}[warn]${reset}"
 debug="${orange}${bold}[debug]${reset}"
