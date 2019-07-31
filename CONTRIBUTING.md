@@ -8,11 +8,8 @@ We love pull requests from everyone. By participating in this project, you agree
 
 Run the following to get started:
 ```bash
-git clone https://github.com/wslutilities/wslu
-git checkout develop
-git submodule init
-git submodule update
-./configure.sh -a
+git clone --recursive --branch develop https://github.com/wslutilities/wslu.git
+./configure.sh
 make
 sudo make link
 ```
@@ -45,7 +42,6 @@ wslu
 - `-e,  --env` -- Environment Check, check whether it is using Fake WSL Environment, normal Linux or WSL.
 - `-p, --prsh` -- Check Status of `powershell.exe`.
 - `-P,  --pkg` -- Install Needed Packages required by your system for building.
-- `-a,  --all` -- Do everything at the top.
 
 ### Build & Install
 

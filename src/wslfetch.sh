@@ -248,7 +248,7 @@ case "$distro" in
 			"${red}   /yyyyo:-...............-:oyyyy/\`  ${reset}"
 			"${red}    \`/syyyyyyyyyyyyyyyyyyyyyyys+.    ${reset}"
 			"${red}      \`.:/+ooooooooooooooo+/:.\`      ${reset}");;
-	'fedora')
+	'oldfedora'|'fedora')
 		t="${light_blue}${bold}"
 		full_text=(
 			"${light_blue}           /:-------------:\         ${reset}"

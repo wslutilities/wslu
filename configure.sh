@@ -49,7 +49,7 @@ else
 	echo "powershell.exe failed to launch."
 	exit 1
 fi
-ppep="$(powershell.exe Get-ExecutionPolicy 2>&1 | tail -n1 | sed 's/\r$//')"
+ppep="$(powershell.exe -NoProfile -NonInteractive -Command Get-ExecutionPolicy 2>&1 | tail -n1 | sed 's/\r$//')"
 echo -e "Powershell Execution Policy: $ppep"
 if [[ "$ppep" = "Restricted" ]]; then
 	cat << EOF

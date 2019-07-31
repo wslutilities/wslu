@@ -1,17 +1,18 @@
-version="34"
+version="36"
 
 cname=""
-iconpath="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu\\wsl.ico"
-is_icon=0
+iconpath=""
 is_gui=0
+is_interactive=0
 customname=""
 customenv=""
 
-help_short="wslusc (--env [PATH]|--name [NAME]|--icon [ICO FILE]|--gui|--help|--version) [COMMAND]"
+help_short="wslusc (--env [PATH]|--name [NAME]|--icon [ICO FILE]|--gui|--interactive|--help|--version) [COMMAND]"
 
 while [ "$1" != "" ]; do
 	case "$1" in
-		-i|--icon)shift;is_icon=1;iconpath=$1;shift;;
+		-I|--interactive)is_interactive=1;shift;; 
+		-i|--icon)shift;iconpath=$1;shift;;
 		-n|--name)shift;customname=$1;shift;;
 		-e|--env)shift;customenv=$1;shift;;
 		-g|--gui)is_gui=1;shift;;
@@ -20,18 +21,40 @@ while [ "$1" != "" ]; do
 		*) cname="$*";break;;
 	esac
 done
+
+# interactive mode
+if [[ $is_interactive -eq 1 ]]; then
+	echo "${info} Welcome to wslu shortcut creator interactive mode."
+	read -e -i "$cname" -p "${input_info} Command to execute: " input
+	cname="${input:-$cname}"
+	read -e -i "$customname" -p "${input_info} Shortcut name [optional, ENTER for default]: " input
+	customname="${input:-$customname}"
+	read -e -i "$is_gui" -p "${input_info} Is it a GUI application? [if yes, input 1; if no, input 0]: " input
+	is_gui=$(( ${input:-$is_gui} + 0 ))
+	read -e -i "$customenv" -p "${input_info} Pre-executed command [optional, ENTER for default]: " input
+	customenv="${input:-$customenv}"
+	read -e -i "$iconpath" -p "${input_info} Custom icon Linux path (support ico/png/xpm/svg) [optional, ENTER for default]: " input
+	iconpath="${input:-$iconpath}"
+fi
+
 if [[ "$cname" != "" ]]; then
 	tpath=$(double_dash_p "$(wslvar -s TMP)")
 	dpath=$(wslpath "$(wslvar -l Desktop)")
 	script_location="$(wslpath "$(wslvar -s USERPROFILE)")/wslu"
 	localfile_path="/usr/share/wslu"
 	script_location_win="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu"
-	
+	distro_location_win="$(double_dash_p $(wslpath -w $(cat ~/.config/wslu/baseexec)))"
+
+	distro_param="run"
+	if [[ $distro_location_win == *wsl.exe ]]; then
+		distro_param="-e"
+	fi
+
 	new_cname=$(basename "$(echo "$cname" | awk '{print $1}')")
 	if [[ "$customname" != "" ]]; then
 		new_cname=$customname
 	fi
-	
+
 	# Check default icon location
 	if [[ ! -f $script_location/wsl.ico ]]; then
 		echo "${warn} Default wslusc icon \"wsl.ico\" not found in Windows directory. Copying right now..."
@@ -57,7 +80,8 @@ if [[ "$cname" != "" ]]; then
 		fi
 	fi
 
-	if [[ "$is_icon" == "1" ]]; then
+	# handling icon
+	if [[ "$iconpath" != "" ]]; then
 		icon_filename="$(basename "$iconpath")"
 		ext="${iconpath##*.}"
 
@@ -69,9 +93,15 @@ if [[ "$cname" != "" ]]; then
 			cp "$iconpath" "$script_location"
 		
 			if [[ "$ext" != "ico" ]]; then
-				if [[ "$ext" == "svg" ]] || [[ "$ext" == "png" ]] || [[ "$ext" == "xpm" ]]; then
+				if [[ "$ext" == "svg" ]]; then
+					echo "${info} Converting $ext icon to ico..."
+					convert "$script_location/$icon_filename" -trim -background none -resize 256X256 -define 'icon:auto-resize=16,24,32,64,128,256'  "$script_location/${icon_filename%.$ext}.ico"
+					rm "$script_location/$icon_filename"
+					icon_filename="${icon_filename%.$ext}.ico"
+				elif [[ "$ext" == "png" ]] || [[ "$ext" == "xpm" ]]; then
 					echo "${info} Converting $ext icon to ico..."
 					convert "$script_location/$icon_filename" -resize 256X256 "$script_location/${icon_filename%.$ext}.ico"
+					rm "$script_location/$icon_filename"
 					icon_filename="${icon_filename%.$ext}.ico"
 				else
 					echo "${error} wslusc only support creating shortcut using .png/.svg/.ico icon. Aborted."
@@ -80,6 +110,8 @@ if [[ "$cname" != "" ]]; then
 			fi
 			iconpath="$script_location_win\\$icon_filename"
 		fi
+	else
+		iconpath="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu\\wsl.ico"
 	fi
 	
 	if [[ "$customenv" != "" ]]; then
@@ -87,9 +119,9 @@ if [[ "$cname" != "" ]]; then
 	fi
 
 	if [[ "$is_gui" == "1" ]]; then
-		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs bash.exe -c \"cd ~; export DISPLAY=:0; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
+		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs $distro_location_win $distro_param \"cd ~; export DISPLAY=:0; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
 	else
-		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\bash.exe';\$s.Arguments='-c \"cd ~; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
+		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='$distro_location_win';\$s.Arguments='$distro_param \"cd ~; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
 	fi
 	tpath="$(wslpath "$(wslvar -s TMP)")/$new_cname.lnk"
 	mv "$tpath" "$dpath"

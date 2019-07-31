@@ -45,6 +45,15 @@
 
 已內建。
 
+### Ubuntu
+
+最新版本已內建。針對舊版本的安裝，請安裝依賴於 wslu 的 ubuntu-wsl:
+
+```
+sudo apt update
+sudo apt install ubuntu-wsl
+```
+
 ### 基於Debian的分發版(Ubuntu/Debian/Kali Linux)
 
 你可以從 Releases 介面下載`.deb`進行安裝：`sudo dpkg -i wslu*`。

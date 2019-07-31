@@ -45,11 +45,20 @@
 
 已内置。
 
-### 基于Debian的分发版(Ubuntu/Debian/Kali Linux)
+### Ubuntu
+
+最新版本已内置。针对旧版本的安装，请安装依赖于 wslu 的 ubuntu-wsl:
+
+```
+sudo apt update
+sudo apt install ubuntu-wsl
+```
+
+### 基于Debian的分发版(Debian/Kali Linux)
 
 你可以从 Releases 界面下载`.deb`进行安装：`sudo dpkg -i wslu*`。
 
-#### Ubuntu/Debian
+#### Debian
 
 你可以用以下命令进行安装：
 
