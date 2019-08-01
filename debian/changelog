@@ -1,3 +1,13 @@
+wslu (2.3.0-1ubuntu1) eoan; urgency=medium
+
+  * debian/control: Set Vcs-* fields
+  * New upstream release
+    - Stop changing terminal font when running wsl* commands (LP: #1836208)
+  * Refresh patches
+  * debian/rules: Run tests in WSL only
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Thu, 01 Aug 2019 12:54:30 +0200
+
 wslu (2.0.0-0ubuntu3) eoan; urgency=medium
 
   * Set DISPLAY=:0 when an X11 server is running (LP: #1836552)
