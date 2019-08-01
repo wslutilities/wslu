@@ -9,7 +9,6 @@
 [![Circle CI master](https://flat.badgen.net/circleci/github/wslutilities/wslu/master?label=master&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/master)
 [![Circle CI develop](https://flat.badgen.net/circleci/github/wslutilities/wslu/develop?label=develop&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/develop)
 [![Donate](https://flat.badgen.net/badge/Donate/Paypal/purple)](https://www.paypal.me/callmepk/)
-[![Backers on Open Collective](https://flat.badgen.net/opencollective/backers/wslu)](CONTRIBUTING.md#financial-contributions)
 [![Chat On Gitter](https://flat.badgen.net/badge/chat/on%20gitter/cyan)](https://gitter.im/wslutilities/wslu)
 [![Twitter](https://flat.badgen.net/twitter/follow/wslutilities)](https://twitter.com/wslutilities)
 
@@ -41,15 +40,24 @@ A WSL tool to convert path styles.
 
 ## Installation
 
-### WLinux/Fedora Remix
+### Pengwin/Fedora Remix
 
 Preinstalled in WLinux and Fedora Remix for WSL.
 
-### For Debian-based systems(Ubuntu/Debian/Kali Linux)
+### Ubuntu
+
+Preinstalled in the latest apps. On older installations please install ubuntu-wsl that depends on wslu:
+
+```
+sudo apt update
+sudo apt install ubuntu-wsl
+```
+
+### For other Debian-based systems(Debian/Kali Linux)
 
 You can download the `.deb` package from release and install it using `sudo dpkg -i wslu*`.
 
-#### Ubuntu/Debian
+#### Debian
 
 You can use the following command for easy installation:
 
@@ -57,7 +65,7 @@ You can use the following command for easy installation:
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.deb.sh | sudo bash
 ```
 
-### For RPM-based systems(OpenSUSE/SLES/WLinux Enterprise)
+### For RPM-based systems(OpenSUSE/SLES/Pengwin Enterprise/Oracle Linux)
 
 You can use the following command for easy installation:
 
@@ -94,4 +102,14 @@ This project exists thanks to all the people who contribute. [[Contribute](CONTR
 
 This project uses [GPLv3](LICENSE) License.
 
+Logo of WSL Utilities is licensed under [CC BY-NC 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).
+
+### Assets
+
 Tux logo used in `\src\etc\wsl.ico` was originally made by Larry Ewing in the Gimp and re-illustrated in vector by Garrett LeSage, using Inkscape.
+
+Some of `wslfetch` ASCII Arts comes from [`neofetch`](https://github.com/dylanaraps/neofetch/) with [MIT](https://github.com/dylanaraps/neofetch/blob/master/LICENSE.md) License and [`screenFetch`](https://github.com/KittyKatt/screenFetch/) with [GPLv3](https://github.com/KittyKatt/screenFetch/blob/master/COPYING) License.
+
+Pengwin Logo used in `wslfetch` ASCII art is ASCII version of the artwork by [Dennis D. Bednarz](https://twitter.com/DennisBednarz), with use permission from Whitewater Foundry.
+
+WLinux Logo used in `wslfetch` ASCII art is ASCII version of the artwork by Larry Ewing.

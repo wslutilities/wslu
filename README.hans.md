@@ -41,15 +41,24 @@
 
 ## 安装
 
-### WLinux/Fedora Remix
+### Pengwin/Fedora Remix
 
 已内置。
 
-### 基于Debian的分发版(Ubuntu/Debian/Kali Linux)
+### Ubuntu
+
+最新版本已内置。针对旧版本的安装，请安装依赖于 wslu 的 ubuntu-wsl:
+
+```
+sudo apt update
+sudo apt install ubuntu-wsl
+```
+
+### 基于Debian的分发版(Debian/Kali Linux)
 
 你可以从 Releases 界面下载`.deb`进行安装：`sudo dpkg -i wslu*`。
 
-#### Ubuntu/Debian
+#### Debian
 
 你可以用以下命令进行安装：
 
@@ -57,7 +66,7 @@
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.deb.sh | sudo bash
 ```
 
-### 基于RPM的分发版(OpenSUSE/SLES/WLinux企业版)
+### 基于RPM的分发版(OpenSUSE/SLES/Pengwin企业版/Oracle Linux)
 
 你可以用以下命令进行安装：
 
@@ -92,7 +101,18 @@ wslu 已在 [AUR](https://aur.archlinux.org/packages/wslu/) 库中。你可以�
 
 <img width="150" src="https://www.gnu.org/graphics/gplv3-with-text-136x68.png">
 
-本应用使用了 [GPLv3](LICENSE) 许可。
+This project uses [GPLv3](LICENSE) License.
 
-在`\src\etc\wsl.ico`使用的 Tux 图标由 Larry Ewing 用 Gimp 创造，由 Garrett LeSage 使用 Inkscape 进行矢量重绘。
+Logo of WSL Utilities is licensed under [CC BY-NC 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).
+
+### Assets
+
+Tux logo used in `\src\etc\wsl.ico` was originally made by Larry Ewing in the Gimp and re-illustrated in vector by Garrett LeSage, using Inkscape.
+
+Some of `wslfetch` ASCII Arts comes from [`neofetch`](https://github.com/dylanaraps/neofetch/) with [MIT](https://github.com/dylanaraps/neofetch/blob/master/LICENSE.md) License and [`screenFetch`](https://github.com/KittyKatt/screenFetch/) with [GPLv3](https://github.com/KittyKatt/screenFetch/blob/master/COPYING) License.
+
+Pengwin Logo used in `wslfetch` ASCII art is ASCII version of the artwork by [Dennis D. Bednarz](https://twitter.com/DennisBednarz), with use permission from Whitewater Foundry.
+
+
+WLinux Logo used in `wslfetch` ASCII art is ASCII version of the artwork by Larry Ewing.
 

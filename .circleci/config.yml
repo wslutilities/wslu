@@ -33,14 +33,15 @@ jobs:
             make
             sudo make link
   pkgbuilds:
-    machine: true
+    docker:
+      - image: patrick330602/fake_wsl_env
     steps:
       - checkout
       - run:
           name: Install Pre-requisites
           command: |
-            sudo apt-get update -qq
-            sudo apt-get install -qq apt-utils build-essential rpm
+            apt-get update -qq
+            apt-get install -qq apt-utils build-essential rpm sudo
       - run:
           name: Build Package
           command: |
@@ -56,14 +57,15 @@ jobs:
             root: /tmp/pkgs
             paths: .
   nightlypkgbuilds:
-    machine: true
+    docker:
+      - image: patrick330602/fake_wsl_env
     steps:
       - checkout
       - run:
           name: Install Pre-requisites
           command: |
-            sudo apt-get update -qq
-            sudo apt-get install -qq apt-utils build-essential rpm
+            apt-get update -qq
+            apt-get install -qq apt-utils build-essential rpm sudo
       - run:
           name: Build Package
           command: |
@@ -84,6 +86,9 @@ jobs:
       - run:
           name: Install packageloud cli
           command: gem install package_cloud
+      - run:
+          name: Push deb package for debian bullseye
+          command: package_cloud push whitewaterfoundry/wslu/debian/bullseye /tmp/pkgs/*.deb --skip-errors
       - run:
           name: Push deb package for debian buster
           command: package_cloud push whitewaterfoundry/wslu/debian/buster /tmp/pkgs/*.deb --skip-errors
@@ -117,6 +122,9 @@ jobs:
       - run:
           name: Push rpm package for opensuse 15
           command: package_cloud push whitewaterfoundry/wslu/opensuse/15.0 /tmp/pkgs/*.rpm --skip-errors
+      - run:
+          name: Push rpm package for oracle 7
+          command: package_cloud push whitewaterfoundry/wslu/ol/7 /tmp/pkgs/*.rpm --skip-errors
 workflows:
   version: 2
   tests:

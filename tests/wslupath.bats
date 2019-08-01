@@ -43,7 +43,7 @@
 
 @test "wslupath - No parameter - Linux DirPath" {
   run out/wslupath "/mnt/c/Windows"
-  [ "${lines[0]}" = "c:\\Windows" ]
+  [ "${lines[0]}" = "C:\\Windows" ]
 }
 
 @test "wslupath - /w DoubleDash - Windows Double DirPath" {
