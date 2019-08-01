@@ -84,9 +84,9 @@ else
 			exit;;
 			*)
 			if [[ "$reg_path" == "1" ]]; then
-				set_path="$(style_path $(wslvar -l $args))"
+				set_path="$(style_path $(wslvar -l "$args"))"
 			else
-				set_path="$(style_path $args)"
+				set_path="$(style_path "$args")"
 			fi
 			break;;
 		esac
