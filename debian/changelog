@@ -1,3 +1,11 @@
+wslu (2.3.0-1ubuntu2) UNRELEASED; urgency=medium
+
+  * debian/postinst, debian/prerm:
+    - register also the www-browser alternative, the non-x-variant is
+      used by xdg-open when DISPLAY is unset
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Tue, 06 Aug 2019 16:23:29 +0200
+
 wslu (2.3.0-1ubuntu1) eoan; urgency=medium
 
   * debian/control: Set Vcs-* fields
