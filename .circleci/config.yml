@@ -105,8 +105,14 @@ jobs:
           name: Push rpm package for fedora 29
           command: package_cloud push whitewaterfoundry/wslu/fedora/29 /tmp/pkgs/*.rpm --skip-errors
       - run:
+          name: Push rpm package for fedora 30
+          command: package_cloud push whitewaterfoundry/wslu/fedora/30 /tmp/pkgs/*.rpm --skip-errors
+      - run:
           name: Push rpm package for enterprise linux 7
           command: package_cloud push whitewaterfoundry/wslu/el/7 /tmp/pkgs/*.rpm --skip-errors
+      - run:
+          name: Push rpm package for enterprise linux 8
+          command: package_cloud push whitewaterfoundry/wslu/el/8 /tmp/pkgs/*.rpm --skip-errors
       - run:
           name: Push rpm package for scientific linux 7
           command: package_cloud push whitewaterfoundry/wslu/scientific/7 /tmp/pkgs/*.rpm --skip-errors
@@ -116,6 +122,9 @@ jobs:
       - run:
           name: Push rpm package for sles 15
           command: package_cloud push whitewaterfoundry/wslu/sles/15.0 /tmp/pkgs/*.rpm --skip-errors
+      - run:
+          name: Push rpm package for sles 15.1
+          command: package_cloud push whitewaterfoundry/wslu/sles/15.1 /tmp/pkgs/*.rpm --skip-errors
       - run:
           name: Push rpm package for opensuse 42.3
           command: package_cloud push whitewaterfoundry/wslu/opensuse/42.3 /tmp/pkgs/*.rpm --skip-errors
