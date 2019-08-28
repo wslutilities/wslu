@@ -82,7 +82,7 @@ jobs:
       - image: circleci/ruby:2.3-jessie
     steps:
       - attach_workspace:
-          at: /tmp/pkgs    
+          at: /tmp/pkgs
       - run:
           name: Install packageloud cli
           command: gem install package_cloud
@@ -154,7 +154,7 @@ workflows:
     jobs:
       - pkgbuilds
       - deploypkg:
-          requires: 
+          requires:
             - pkgbuilds
   nightlybuild:
     triggers:

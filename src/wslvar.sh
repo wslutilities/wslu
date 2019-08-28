@@ -5,7 +5,7 @@ var_type=1
 help_short="wslvar (--sys|--shell) [NAME]\nwslvar (--help|--version|--getsys|--getshell)"
 
 function call_shell {
-	winps_exec "(Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders').'$@'" | cat
+	winps_exec "(Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders').'$*'" | cat
 }
 
 function view_shell {
@@ -13,7 +13,7 @@ function view_shell {
 }
 
 function call_sys {
-	winps_exec "Write-Output \$Env:$@" | cat
+	winps_exec "Write-Output \$Env:$*" | cat
 }
 
 function view_sys {
@@ -25,7 +25,7 @@ function cl_destoryer {
 }
 
 function caller {
-	if [ "$@" != "" ]; then
+	if [ "$*" != "" ]; then
 		case $var_type in
 			1) p="$(cl_destoryer "$(call_sys "$@")")";;
 			2) p="$(cl_destoryer "$(call_shell "$@")")";;
