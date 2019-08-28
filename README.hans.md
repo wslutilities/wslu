@@ -4,14 +4,19 @@
 
 # wslu - 一套Windows 10 Linux子系统工具组
 
-[![GitHub license](https://flat.badgen.net/github/license/wslutilities/wslu?icon=github&label=&color=cyan)](https://github.com/wslutilities/wslu/blob/master/LICENSE)
-[![GitHub (pre-)release](https://flat.badgen.net/github/release/wslutilities/wslu?icon=github&label=)](https://github.com/wslutilities/wslu)
-[![Circle CI master](https://flat.badgen.net/circleci/github/wslutilities/wslu/master?label=master&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/master)
-[![Circle CI develop](https://flat.badgen.net/circleci/github/wslutilities/wslu/develop?label=develop&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/develop)
-[![Donate](https://flat.badgen.net/badge/Donate/Paypal/purple)](https://www.paypal.me/callmepk/)
-[![Backers on Open Collective](https://flat.badgen.net/opencollective/backers/wslu)](CONTRIBUTING.md#financial-contributions)
-[![Chat On Gitter](https://flat.badgen.net/badge/chat/on%20gitter/cyan)](https://gitter.im/wslutilities/wslu)
-[![Twitter](https://flat.badgen.net/twitter/follow/wslutilities)](https://twitter.com/wslutilities)
+[![GitHub license](https://img.shields.io/github/license/wslutilities/wslu?style=flat-square&label=许可协议&color=blue&logo=github)](https://github.com/wslutilities/wslu/blob/master/LICENSE)
+[![GitHub (pre-)release](https://img.shields.io/github/v/release/wslutilities/wslu?include_prereleases&label=版本&logo=github&style=flat-square)](https://github.com/wslutilities/wslu)
+[![GitLab](https://img.shields.io/static/v1?label=gitlab&logo=gitlab&color=E24329&message=已镜像&style=flat-square)](https://gitlab.com/callmepk/wslu)
+[![码云](https://img.shields.io/static/v1?label=码云&color=C71D23&message=已镜像&style=flat-square)](https://gitee.com/mirrors/wslu)
+
+[![CircleCI Master](https://img.shields.io/circleci/build/github/wslutilities/wslu/master?label=master&logo=circleci&style=flat-square)](https://circleci.com/gh/wslutilities/wslu/tree/master)
+[![CircleCI](https://img.shields.io/circleci/build/github/wslutilities/wslu/develop?label=develop&logo=circleci&style=flat-square)](https://circleci.com/gh/wslutilities/wslu/tree/develop)
+[![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/master?label=codefactor%20%7C%20master&style=flat-square)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/master)
+[![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/develop?label=codefactor%20%7C%20develop&style=flat-square)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/develop)
+
+[![Gitter](https://img.shields.io/gitter/room/wslutilities/wslu?color=ED1965&logo=gitter&style=flat-square)](https://gitter.im/wslutilities/wslu)
+[![Twitter Follow](https://img.shields.io/twitter/follow/wslutilities?style=flat-square&logo=twitter&color=1DA1F2)
+](https://twitter.com/wslutilities)
 
 [English](README.md) | 简体中文 | [繁體中文](README.hant.md)
 
