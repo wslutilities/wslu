@@ -6,11 +6,12 @@ branches:
 image: Windows Server 2019
 build: Script
 clone_folder: C:\project\wslu
-before_build: 
+install:
+  - git submodule update --init --recursive
   - ps: wsl -u root apt-get update
   - ps: wsl -u root DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
-  - ps: wsl -u root DEBIAN_FRONTEND=noninteractive apt-get install -y bc git-core make imagemagick
+  - ps: wsl -u root DEBIAN_FRONTEND=noninteractive apt-get install -y bc make imagemagick
 build_script:
-  - ps: git submodule update --init --recursive
   - ps: wsl make
-  - ps: wsl make test
+test_script:
+  - ps: wsl make tests
