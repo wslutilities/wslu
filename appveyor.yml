@@ -14,4 +14,4 @@ install:
 build_script:
   - ps: wsl make
 test_script:
-  - ps: wsl make tests
+  - ps: wsl make test
