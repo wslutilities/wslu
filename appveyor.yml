@@ -1,6 +1,5 @@
 version: 2.3.1.{build}
 branches:
-  # whitelist
   only:
     - master
     - develop
@@ -8,7 +7,7 @@ image: Windows Server 2019
 build: Script
 clone_folder: C:\project\wslu
 before_build: 
-  - ps: wslconf /l /all
+  - ps: wslconfig /l /all
   - ps: wsl cat /etc/os-release
   - ps: wsl -u root apt-get update -qq
   - ps: wsl -u root apt-get upgrade -qq
