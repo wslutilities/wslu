@@ -1,0 +1,10 @@
+version: 2.3.1.{build}
+branches:
+  # whitelist
+  only:
+    - master
+    - develop
+image: Windows Server 2019
+clone_folder: C:\project\wslu
+install:
+  - ps: wsl cat /etc/os-release
