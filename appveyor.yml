@@ -5,6 +5,9 @@ branches:
     - master
     - develop
 image: Windows Server 2019
+build: Script
 clone_folder: C:\project\wslu
-install:
-  - ps: wsl cat /etc/os-release
+build_script: 
+  - ps: wsl --list
+  - ps: wsl --help
+
