@@ -8,15 +8,8 @@
 [![GitHub (pre-)release](https://img.shields.io/github/v/release/wslutilities/wslu?include_prereleases&logo=github&style=flat-square)](https://github.com/wslutilities/wslu)
 [![GitLab](https://img.shields.io/static/v1?label=gitlab&logo=gitlab&color=E24329&message=mirrored&style=flat-square)](https://gitlab.com/callmepk/wslu)
 [![Gitee](https://img.shields.io/static/v1?label=gitee&color=C71D23&message=mirrored&style=flat-square)](https://gitee.com/mirrors/wslu)
-
-[![CircleCI Master](https://img.shields.io/circleci/build/github/wslutilities/wslu/master?label=master&logo=circleci&style=flat-square)](https://circleci.com/gh/wslutilities/wslu/tree/master)
-[![CircleCI](https://img.shields.io/circleci/build/github/wslutilities/wslu/develop?label=develop&logo=circleci&style=flat-square)](https://circleci.com/gh/wslutilities/wslu/tree/develop)
-[![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/master?label=codefactor%20%7C%20master&style=flat-square)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/master)
-[![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/develop?label=codefactor%20%7C%20develop&style=flat-square)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/develop)
-
 [![Gitter](https://img.shields.io/gitter/room/wslutilities/wslu?color=ED1965&logo=gitter&style=flat-square)](https://gitter.im/wslutilities/wslu)
-[![Twitter Follow](https://img.shields.io/twitter/follow/wslutilities?style=flat-square&logo=twitter&color=1DA1F2)
-](https://twitter.com/wslutilities)
+[![Twitter Follow](https://img.shields.io/twitter/follow/wslutilities?style=flat-square&logo=twitter&color=1DA1F2)](https://twitter.com/wslutilities)
 
 English | [简体中文](README.hans.md) | [繁體中文](README.hant.md)
 
@@ -43,6 +36,16 @@ A fake WSL browser that can help you open link in default Windows browser.
 
 **wslupath** ⚠ *Deprecated*
 A WSL tool to convert path styles.
+
+## Status
+
+| | Service | Master | Develop |
+| ------ | ------ |:------:|:-------:|
+| License Validation | FOSSA | [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu?ref=badge_shield) | - |
+| Code Quality | CodeFactor | [![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/master)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/master) | [![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/develop)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/develop) |
+| Testing | AppVeyor | 
+| Deployment | CircleCI | [![CircleCI](https://img.shields.io/circleci/build/gh/wslutilities/wslu/master)](https://circleci.com/gh/wslutilities/wslu/tree/master) | [![CircleCI](https://img.shields.io/circleci/build/gh/wslutilities/wslu/develop)](https://circleci.com/gh/wslutilities/wslu/tree/develop) |
+
 
 ## Installation
 
