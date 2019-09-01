@@ -29,6 +29,14 @@ function call_display_scaling() {
 	echo "$(bc -l <<< "$(printf "%d\n" "$display_scaling")/96" | sed -e "s|\.0||g" -e "s|0||g")"
 }
 
+function call_windows_uptime() {
+	windows_uptime=$(winps_exec "((get-date) - (gcim Win32_OperatingSystem).LastBootUpTime).TotalSeconds")
+	w_days=$((windows_uptime/86400))
+	w_hours=$((windows_uptime/3600%24))
+	w_minutes=$((windows_uptime/60%60))
+	echo "${w_days}d ${w_hours}h ${w_minutes}m"
+}
+
 ## WSL information
 release="$(grep "PRETTY_NAME=" /etc/os-release | sed -e 's/PRETTY_NAME=//g' -e 's/"//g')"
 kernel="$(</proc/sys/kernel/ostype) $(</proc/sys/kernel/osrelease)"
@@ -72,10 +80,11 @@ case $1 in
 		-b|--branch) printer "Branch" "$(call_branch)" "$2";exit;;
 		-B|--build) printer "Build" "$(call_build)" "$2";exit;;
 		-fB|--full-build) printer "Full Build" "$(call_full_build)" "$2";exit;;
-		-U|--uptime) printer "Linux Uptime" "$uptime" "$2";exit;;
-		-R|--release) printer "Linux Release" "$release" "$2";exit;;
-		-K|--kernel) printer "Linux Kernel" "$kernel" "$2";exit;;
+		-U|--uptime) printer "WSL Uptime" "$uptime" "$2";exit;;
+		-wU|--win-uptime) printer "Windows Uptime" "$(call_windows_uptime)" "$2";exit;;
+		-R|--release) printer "WSL Release" "$release" "$2";exit;;
+		-K|--kernel) printer "WSL Kernel" "$kernel" "$2";exit;;
 		-P|--package) printer "Packages Count" "$packages" "$2";exit;;
 		-S|--display-scaling) printer "Display Scaling" "$(call_display_scaling)" "$2";exit;;
-		*) echo -e "Release Install Date: $(call_install_date)\nBranch: $(call_branch)\nBuild: $(call_build)\nFull Build: $(call_full_build)\nDisplay Scaling: $(call_display_scaling)\nLinux Uptime: $uptime\nLinux Release: $release\nLinux Kernel: $kernel\nPackages Count: $packages";exit;;
+		*) echo -e "Release Install Date: $(call_install_date)\nBranch: $(call_branch)\nBuild: $(call_build)\nFull Build: $(call_full_build)\nDisplay Scaling: $(call_display_scaling)\nWindows Uptime: $(call_windows_uptime)\nWSL Uptime: $uptime\nWSL Release: $release\nWSL Kernel: $kernel\nPackages Count: $packages";exit;;
 esac
