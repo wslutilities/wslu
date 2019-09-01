@@ -8,14 +8,8 @@
 [![GitHub (pre-)release](https://img.shields.io/github/v/release/wslutilities/wslu?include_prereleases&label=版本&logo=github&style=flat-square)](https://github.com/wslutilities/wslu)
 [![GitLab](https://img.shields.io/static/v1?label=gitlab&logo=gitlab&color=E24329&message=已镜像&style=flat-square)](https://gitlab.com/callmepk/wslu)
 [![码云](https://img.shields.io/static/v1?label=码云&color=C71D23&message=已镜像&style=flat-square)](https://gitee.com/mirrors/wslu)
-
-[![CircleCI Master](https://img.shields.io/circleci/build/github/wslutilities/wslu/master?label=master&logo=circleci&style=flat-square)](https://circleci.com/gh/wslutilities/wslu/tree/master)
-[![CircleCI](https://img.shields.io/circleci/build/github/wslutilities/wslu/develop?label=develop&logo=circleci&style=flat-square)](https://circleci.com/gh/wslutilities/wslu/tree/develop)
-[![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/master?label=codefactor%20%7C%20master&style=flat-square)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/master)
-[![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/develop?label=codefactor%20%7C%20develop&style=flat-square)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/develop)
-
 [![Gitter](https://img.shields.io/gitter/room/wslutilities/wslu?color=ED1965&logo=gitter&style=flat-square)](https://gitter.im/wslutilities/wslu)
-[![Twitter Follow](https://img.shields.io/twitter/follow/wslutilities?style=flat-square&logo=twitter&color=1DA1F2)
+[![Twitter Follow](https://img.shields.io/twitter/follow/wslutilities?style=flat-square&logo=twitter&color=1DA1F2&label=关注)
 ](https://twitter.com/wslutilities)
 
 [English](README.md) | 简体中文 | [繁體中文](README.hant.md)
@@ -43,6 +37,15 @@
 
 **wslupath** ⚠ *已弃用*
 可以转换不同类型路径的工具。
+
+## 状态
+
+| | 服务 | Master | Develop |
+| ------ | ------ |:------:|:-------:|
+| 证书检查 | FOSSA | [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu%2develop?ref=badge_shield) | - |
+| 代码质量 | CodeFactor | [![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/master)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/master) | [![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/develop)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/develop) |
+| 测试 | AppVeyor | [![Build status](https://ci.appveyor.com/api/projects/status/gcttf7igb0s40xak/branch/master?svg=true)](https://ci.appveyor.com/project/patrick330602/wslu/branch/master) | [![Build status](https://ci.appveyor.com/api/projects/status/gcttf7igb0s40xak/branch/develop?svg=true)](https://ci.appveyor.com/project/patrick330602/wslu/branch/master) |
+| 部署 | CircleCI | [![CircleCI](https://img.shields.io/circleci/build/gh/wslutilities/wslu/master)](https://circleci.com/gh/wslutilities/wslu/tree/master) | [![CircleCI](https://img.shields.io/circleci/build/gh/wslutilities/wslu/develop)](https://circleci.com/gh/wslutilities/wslu/tree/develop) |
 
 ## 安装
 
