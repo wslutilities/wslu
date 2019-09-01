@@ -1,4 +1,4 @@
-version="29"
+version="34"
 
 help_short="wslsys (-h|-v|-I|-b|-B|-fB|-U|-R|-K|-P) -s"
 
@@ -24,16 +24,17 @@ function call_install_date() {
 }
 
 function call_display_scaling() {
-	display_scaling=$("$(interop_prefix)"c/Windows/System32/ reg.exe query "HKCU\\Control Panel\\Desktop\\WindowMetrics" /v AppliedDPI | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	display_scaling=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\Control Panel\\Desktop\\WindowMetrics" /v AppliedDPI | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	display_scaling=${display_scaling##* }
 	echo "$(bc -l <<< "$(printf "%d\n" "$display_scaling")/96" | sed -e "s|\.0||g" -e "s|0||g")"
 }
 
 function call_windows_uptime() {
-	windows_uptime=$(winps_exec "((get-date) - (gcim Win32_OperatingSystem).LastBootUpTime).TotalSeconds")
-	w_days=$((windows_uptime/86400))
-	w_hours=$((windows_uptime/3600%24))
-	w_minutes=$((windows_uptime/60%60))
+	win_uptime=$(winps_exec "((get-date) - (gcim Win32_OperatingSystem).LastBootUpTime).TotalSeconds" | sed -e 's|\r||g')
+	win_uptime=${win_uptime//.*}
+	w_days=$((win_uptime/86400))
+	w_hours=$((win_uptime/3600%24))
+	w_minutes=$((win_uptime/60%60))
 	echo "${w_days}d ${w_hours}h ${w_minutes}m"
 }
 
@@ -49,7 +50,7 @@ uptime="${days}d ${hours}h ${minutes}m"
 
 ### WSL package information
 case "$distro" in
-	'ubuntu'|'kali'|'debian'|'wlinux')
+	'pengwin'|'ubuntu'|'kali'|'debian'|'wlinux')
 		packages=$(dpkg -l | grep -c '^i');;
 	'opensuse'|'sles'|'scilinux'|'oldfedora'|'fedora'|'oracle')
 		packages=$(rpm -qa | wc -l);;
