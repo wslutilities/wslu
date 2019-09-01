@@ -11,6 +11,9 @@ full_build=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software
 full_build=${full_build##* }
 installdate=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v InstallDate | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 installdate=${installdate##* }
+display_scaling=$("$(interop_prefix)"c/Windows/System32/ reg.exe query "HKCU\\Control Panel\\Desktop\\WindowMetrics" /v AppliedDPI | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+display_scaling=${display_scaling##* }
+display_scaling=$(bc -l <<< "$(printf "%d\n" "$display_scaling")/96" | sed -e "s|\.0||g" -e "s|0||g")
 
 ## WSL information
 release="$(grep "PRETTY_NAME=" /etc/os-release | sed -e 's/PRETTY_NAME=//g' -e 's/"//g')"
@@ -55,9 +58,10 @@ case $1 in
 		-b|--branch) printer "Branch" "$branch" "$2";exit;;
 		-B|--build) printer "Build" "$build" "$2";exit;;
 		-fB|--full-build) printer "Full Build" "$full_build" "$2";exit;;
-		-U|--uptime) printer "Uptime" "$uptime" "$2";exit;;
+		-U|--uptime) printer "Linux Uptime" "$uptime" "$2";exit;;
 		-R|--release) printer "Linux Release" "$release" "$2";exit;;
 		-K|--kernel) printer "Linux Kernel" "$kernel" "$2";exit;;
 		-P|--package) printer "Packages Count" "$packages" "$2";exit;;
-		*) echo -e "Release Install Date: $installdate\nBranch: $branch\nBuild: $build\nFull Build: $full_build\nUptime: $uptime\nLinux Release: $release\nLinux Kernel: $kernel\nPackages Count: $packages";exit;;
+		-S|--display-scaling) printer "Display Scaling" "$display_scaling" "$2";exit;;
+		*) echo -e "Release Install Date: $installdate\nBranch: $branch\nBuild: $build\nFull Build: $full_build\nDisplay Scaling: $display_scaling\nLinux Uptime: $uptime\nLinux Release: $release\nLinux Kernel: $kernel\nPackages Count: $packages";exit;;
 esac
