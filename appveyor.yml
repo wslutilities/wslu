@@ -3,6 +3,10 @@ branches:
   only:
     - master
     - develop
+only_commits:
+  files:
+    - src/**/*
+    - Makefile
 image: Windows Server 2019
 build: Script
 clone_folder: C:\project\wslu
