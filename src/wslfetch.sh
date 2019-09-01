@@ -6,7 +6,7 @@ help_short="wslfetch (--help|--version|--splash|--line)"
 
 for args; do
 	case $args in
-		-h|--help) help $0 "$help_short"; exit;;
+		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslfetch v$version"; exit;;
 		-s|--splash) is_splash=1;;
 		-l|--line) is_line=1;;
@@ -292,7 +292,7 @@ info_text=("${t}Windows 10 Linux Subsystem${reset}"
 ""
 "   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}")
 
-function line() {
+function line {
 	if [[ "$is_line" == "1" ]]; then
 		yes -- "${@:-=}" | tr -d $'\n' | head -c $COLUMNS
 	else
@@ -305,7 +305,7 @@ full_length=${#full_text[@]}
 
 line
 # use for loop to read all values and indexes
-for (( i=0; i<${full_length}; i++ ));
+for (( i=0; i<full_length; i++ ));
 do
 	tmp=""
 	if [[ $i -le ${info_length} ]]; then
