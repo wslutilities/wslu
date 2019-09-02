@@ -26,7 +26,7 @@ function call_install_date() {
 function call_display_scaling() {
 	display_scaling=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\Control Panel\\Desktop\\WindowMetrics" /v AppliedDPI | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	display_scaling=${display_scaling##* }
-	echo "$(bc -l <<< "$(printf "%d\n" "$display_scaling")/96" | sed -e "s|\.0||g" -e "s|0||g")"
+	echo "$(bc -l <<< "$(printf "%d\n" "$display_scaling")/96" | sed -e "s/\.0//g" -e "s/0*$//g")"
 }
 
 function call_windows_uptime() {
