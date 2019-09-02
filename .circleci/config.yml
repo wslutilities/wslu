@@ -123,9 +123,6 @@ jobs:
           name: Push rpm package for sles 15
           command: package_cloud push whitewaterfoundry/wslu/sles/15.0 /tmp/pkgs/*.rpm --skip-errors
       - run:
-          name: Push rpm package for sles 15.1
-          command: package_cloud push whitewaterfoundry/wslu/sles/15.1 /tmp/pkgs/*.rpm --skip-errors
-      - run:
           name: Push rpm package for opensuse 42.3
           command: package_cloud push whitewaterfoundry/wslu/opensuse/42.3 /tmp/pkgs/*.rpm --skip-errors
       - run:
