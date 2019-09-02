@@ -3,13 +3,13 @@ version="29"
 help_short="wslsys (-h|-v|-I|-b|-B|-fB|-U|-R|-K|-P) -s"
 
 ## Windows 10 information
-branch=$($(interop_prefix)c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildBranch | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+branch=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildBranch | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 branch=${branch##* }
-build=$($(interop_prefix)c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+build=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 build=${build##* }
-full_build=$($(interop_prefix)c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildLabEx | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+full_build=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildLabEx | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 full_build=${full_build##* }
-installdate=$($(interop_prefix)c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v InstallDate | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+installdate=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v InstallDate | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 installdate=${installdate##* }
 
 ## WSL information
@@ -51,13 +51,13 @@ function printer {
 case $1 in
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslsys v$version"; exit;;
-		-I|--sys-installdate) printer "Release Install Date: $installdate" $2;exit;;
-		-b|--branch) printer "Branch" "$branch" $2;exit;;
-		-B|--build) printer "Build" "$build" $2;exit;;
-		-fB|--full-build) printer "Full Build" "$full_build" $2;exit;;
-		-U|--uptime) printer "Uptime" "$uptime" $2;exit;;
-		-R|--release) printer "Linux Release" "$release" $2;exit;;
-		-K|--kernel) printer "Linux Kernel" "$kernel" $2;exit;;
-		-P|--package) printer "Packages Count" "$packages" $2;exit;;
+		-I|--sys-installdate) printer "Release Install Date: $installdate" "$2";exit;;
+		-b|--branch) printer "Branch" "$branch" "$2";exit;;
+		-B|--build) printer "Build" "$build" "$2";exit;;
+		-fB|--full-build) printer "Full Build" "$full_build" "$2";exit;;
+		-U|--uptime) printer "Uptime" "$uptime" "$2";exit;;
+		-R|--release) printer "Linux Release" "$release" "$2";exit;;
+		-K|--kernel) printer "Linux Kernel" "$kernel" "$2";exit;;
+		-P|--package) printer "Packages Count" "$packages" "$2";exit;;
 		*) echo -e "Release Install Date: $installdate\nBranch: $branch\nBuild: $build\nFull Build: $full_build\nUptime: $uptime\nLinux Release: $release\nLinux Kernel: $kernel\nPackages Count: $packages";exit;;
 esac

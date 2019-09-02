@@ -39,16 +39,16 @@ cp ../build/rpm/wslu.spec ~/rpm_wslu/SPECS/wslu-"$BUILD_VER".spec
 
 # Modifying the files
 sed -i s/BUILDVERPLACEHOLDER/"$BUILD_VER"/g ~/rpm_wslu/SPECS/wslu-"$BUILD_VER".spec
-sed -i s/NIGHTLYBUILDPLACEHOLDER/$EXTRAS/g ~/rpm_wslu/SPECS/wslu-"$BUILD_VER".spec
-sed -i "s|HOMEPLACEHOLDER|$HOME|g" ~/rpm_wslu/SPECS/wslu-"$BUILD_VER".spec
+sed -i s/NIGHTLYBUILDPLACEHOLDER/"$EXTRA"/g ~/rpm_wslu/SPECS/wslu-"$BUILD_VER".spec
+sed -i "s|HOMEPLACEHOLDER|""$HOME""|g" ~/rpm_wslu/SPECS/wslu-"$BUILD_VER".spec
 
 # Build tarball
-cd ~/rpm_wslu/SOURCES
+cd ~/rpm_wslu/SOURCES || exit 1
 tar -czvf wslu-"$BUILD_VER".tar.gz wslu-"$BUILD_VER"
 rm -rf wslu-"$BUILD_VER"
 
 # Build
-cd ~/rpm_wslu/SPECS
+cd ~/rpm_wslu/SPECS || exit 1
 sudo rpmbuild -ba --target noarch wslu-"$BUILD_VER".spec
 
 # Copy packages
@@ -58,4 +58,4 @@ cp ~/rpm_wslu/SRPMS/*.rpm "$CURRENT_DIR"/../../target/
 
 # Cleanup everything
 sudo rm -rf ~/rpm_wslu/
-cd "$CURRENT_DIR"
+cd "$CURRENT_DIR" || exit 1
