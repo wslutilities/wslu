@@ -23,6 +23,19 @@ if [[ "$name" != "" ]]; then
 	localfile_path="/usr/share/wslu" # WSL wslu source file location, Linux Sty.
 	script_location_win="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu" #  Windows wslu, Win Double Sty.
 
+	# Check presence of sudo.ps1
+	if [[ ! -f $script_location/sudo.ps1 ]]; then
+		echo "${warn} sudo.ps1 not found in Windows directory. Copying right now..."
+		[[ -d $script_location ]] || mkdir "$script_location"
+		if [[ -f $localfile_path/sudo.ps1 ]]; then
+			cp "$localfile_path"/sudo.ps1 "$script_location"
+			echo "${info} runHidden.vbs copied. Located at \"$script_location\"."
+		else
+			echo "${error} runHidden.vbs not found. Failed to copy."
+			exit 30
+		fi
+	fi
+
 	# Check presence of runHidden.vbs 
 	if [[ ! -f $script_location/runHidden.vbs ]]; then
 		echo "${warn} runHidden.vbs not found in Windows directory. Copying right now..."
