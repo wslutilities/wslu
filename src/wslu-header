@@ -100,7 +100,7 @@ function chcp_com {
 
 function winps_exec {
 	chcp_com $(cat ~/.config/wslu/oemcp)
-	"$(interop_prefix)"c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -Command "$@"
+	"$(interop_prefix)"c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive –ExecutionPolicy Bypass -Command "$@"
 	chcp_com 65001
 }
 
