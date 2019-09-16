@@ -112,12 +112,4 @@ This project uses [GPLv3](LICENSE) License.
 
 Logo of WSL Utilities is licensed under [CC BY-NC 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).
 
-### Assets
-
-Tux logo used in `\src\etc\wsl.ico` was originally made by Larry Ewing in the Gimp and re-illustrated in vector by Garrett LeSage, using Inkscape.
-
-Some of `wslfetch` ASCII Arts comes from [`neofetch`](https://github.com/dylanaraps/neofetch/) with [MIT](https://github.com/dylanaraps/neofetch/blob/master/LICENSE.md) License and [`screenFetch`](https://github.com/KittyKatt/screenFetch/) with [GPLv3](https://github.com/KittyKatt/screenFetch/blob/master/COPYING) License.
-
-Pengwin Logo used in `wslfetch` ASCII art is ASCII version of the artwork by [Dennis D. Bednarz](https://twitter.com/DennisBednarz), with use permission from Whitewater Foundry.
-
-WLinux Logo used in `wslfetch` ASCII art is ASCII version of the artwork by Larry Ewing.
+For other third party files and assets used, please refer to [THIRD_PARTY_LICENSE](THIRD_PARTY_LICENSE).
