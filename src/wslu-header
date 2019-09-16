@@ -99,7 +99,7 @@ function chcp_com {
 }
 
 function winps_exec {
-	chcp_com $(cat ~/.config/wslu/oemcp)
+	chcp_com "$(cat ~/.config/wslu/oemcp)"
 	"$(interop_prefix)"c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive –ExecutionPolicy Bypass -Command "$@"
 	chcp_com 65001
 }
@@ -108,6 +108,7 @@ function winps_exec {
 if [ ! -d ~/.config/wslu ]; then
 	mkdir -p ~/.config/wslu
 fi
+
 if [ ! -f ~/.config/wslu/oemcp ]; then
 	"$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*' > ~/.config/wslu/oemcp
 fi
