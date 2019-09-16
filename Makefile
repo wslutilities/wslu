@@ -46,5 +46,5 @@ clean:
 	rm -rf $(OUTPATH)
 
 test:
-	PATH="$(CURPATH)/src:$(CURPATH)/out:$$PATH"
+	PATH="$(CURPATH)/src:$(CURPATH)/out:$$PATH" \
 	extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslvar.bats tests/wslfetch.bats tests/wslview.bats
