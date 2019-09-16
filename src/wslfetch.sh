@@ -18,7 +18,7 @@ branch=$(wslsys -b -s)
 build=$(wslsys -B -s)
 release=$(wslsys -R -s)
 kernel=$(wslsys -K -s)
-uptime=$(wslsys -U -s)
+uptime=$(wslsys -wU -s)
 
 case "$distro" in
 	'ubuntu')
