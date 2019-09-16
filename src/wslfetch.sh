@@ -2,7 +2,8 @@ version=41
 
 is_line=0
 is_splash=0
-help_short="wslfetch (--help|--version|--splash|--line)"
+is_color=0
+help_short="wslfetch (--help|--version|--splash|--line|--no-colorbar)"
 
 for args; do
 	case $args in
@@ -10,6 +11,7 @@ for args; do
 		-v|--version) echo "wslu v$wslu_version; wslfetch v$version"; exit;;
 		-s|--splash) is_splash=1;;
 		-l|--line) is_line=1;;
+		-C|--no-colorbar) is_color=1;
 	esac
 done
 
@@ -289,11 +291,15 @@ info_text=("${t}Windows 10 Linux Subsystem${reset}"
 "${t}RELEASE:${reset}	${release}"
 "${t}KERNEL:${reset}	${kernel}"
 "${t}UPTIME:${reset}	${uptime}"
-""
-"   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}")
+"${reset}"
+)
+
+if [[ "$is_color" == "0" ]]; then
+info_text+=("   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}")
+fi
 
 function line {
-	if [[ "$is_line" == "1" ]]; then
+	if [[ "$" == "1" ]]; then
 		yes -- "${@:-=}" | tr -d $'\n' | head -c $COLUMNS
 	else
 		echo ""
@@ -303,7 +309,7 @@ function line {
 info_length=${#info_text[@]}
 full_length=${#full_text[@]}
 
-line
+line "$is_line"
 # use for loop to read all values and indexes
 for (( i=0; i<full_length; i++ ));
 do
