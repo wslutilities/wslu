@@ -294,7 +294,8 @@ info_text=("${t}Windows 10 Linux Subsystem${reset}"
 
 function line {
 	if [[ "$1" == "1" ]]; then
-		yes -- "${2:-=}" | tr -d $'\n' | head -c "$(stty -a <"$(tty)" | head -1 | sed -e 's|^.*columns ||g' -e 's|;.*$||g')"
+		CUR_TTY="$(tty)"
+		yes -- "${2:-=}" | tr -d $'\n' | head -c "$(stty -a <"$CUR_TTY" | head -1 | sed -e "s|^.*columns ||g" -e "s|;.*$||g")"
 	else
 		echo ""
 	fi
