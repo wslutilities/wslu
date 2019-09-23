@@ -299,8 +299,8 @@ info_text+=("   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \
 fi
 
 function line {
-	if [[ "$" == "1" ]]; then
-		yes -- "${@:-=}" | tr -d $'\n' | head -c $COLUMNS
+	if [[ "$1" == "1" ]]; then
+		yes -- "${2:-=}" | tr -d $'\n' | head -c $COLUMNS
 	else
 		echo ""
 	fi
@@ -309,7 +309,7 @@ function line {
 info_length=${#info_text[@]}
 full_length=${#full_text[@]}
 
-line "$is_line"
+line "$is_line" "-"
 # use for loop to read all values and indexes
 for (( i=0; i<full_length; i++ ));
 do
@@ -319,7 +319,7 @@ do
 	fi
 	echo -e "${full_text[$i]}${tmp}"
 done
-line
+line "$is_line" "-"
 
 if [[ "$is_splash" == "1" ]]; then
 	sleep 2
