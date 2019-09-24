@@ -30,11 +30,20 @@ A WSL Screenshoot Information Tool to print information in an elegant way.
 **wslvar**
 A WSL tool to help you get Windows system environment variables.
 
-**wslview**
+**wslview/wview**
 A fake WSL browser that can help you open link in default Windows browser.
 
-**wslupath** ⚠ *Deprecated*
+**wslstart/wstart**
+A file launcher for to open files from WSL in Windows.
+
+**wslupath**
 A WSL tool to convert path styles.
+
+**wslec**
+A profile script that helps you automatically set all environment variables when you WSL startup.
+
+**wslcron**
+A job scheduler that is properly working on WSL.
 
 ## Status
 
@@ -48,30 +57,45 @@ A WSL tool to convert path styles.
 
 ## Installation
 
-### Pengwin/Fedora Remix
+### Alpine Linux
 
-Preinstalled in WLinux and Fedora Remix for WSL.
+You can download the `.apk` package from release and install it using `sudo apk add --allow-untrusted "wslu*"`.
+
+### Arch Linux
+
+[wslu](https://aur.archlinux.org/packages/wslu/) and [wslu-git](https://aur.archlinux.org/packages/wslu-git/) on AUR.
+
+### Debian
+
+You can download the `.deb` package from release and install it using `sudo dpkg -i wslu*`.
+
+### Fedora Remix
+
+Preinstalled.
+
+### Kali Linux
+
+> TODO
+
+### Pengwin
+
+Preinstalled.
 
 ### Ubuntu
 
-Preinstalled in the latest apps. On older installations please install ubuntu-wsl that depends on wslu:
+> Attention!
+>
+> The `ubuntu-wsl` version of `wslu` is maintained by [Balint Reczey](https://launchpad.net/~rbalint) and its source code is hosted on [launchpad.net](https://code.launchpad.net/~ubuntu-core-dev/ubuntu/+source/wslu/+git/wslu).
+
+Preinstalled in the latest apps. On older installations of Ubuntu please install `ubuntu-wsl` that depends on wslu:
 
 ```
 sudo apt update
 sudo apt install ubuntu-wsl
 ```
 
-### For other Debian-based systems(Debian/Kali Linux)
 
-You can download the `.deb` package from release and install it using `sudo dpkg -i wslu*`.
 
-#### Debian
-
-You can use the following command for easy installation:
-
-```
-curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.deb.sh | sudo bash
-```
 
 ### For RPM-based systems(OpenSUSE/SLES/Pengwin Enterprise/Oracle Linux)
 
@@ -83,13 +107,6 @@ curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/scri
 
 You can download the `.rpm` package from release and install it using `sudo rpm -ivh "wslu*"`.
 
-### Arch Linux
-
-wslu is live on [AUR](https://aur.archlinux.org/packages/wslu/). You can download *PKGBUILD* and install manually or install via PKGBUILD helpers like yay.
-
-### Alpine Linux
-
-You can download the `.apk` package from release and install it using `sudo apk add --allow-untrusted "wslu*"`.
 
 ### Other distributions
 

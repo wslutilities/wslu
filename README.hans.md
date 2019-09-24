@@ -23,7 +23,7 @@
 用于创建 Linux 程序的 Windows 桌面快捷方式的工具。
 
 **wslsys**
-展示 Windows 和 Linux 下的系统信息的工具。
+展示 Windows 和 WSL 下系统信息的工具。
 
 **wslfetch**
 类似于 screenfetch 的系统信息展示工具。
@@ -31,11 +31,20 @@
 **wslvar**
 可以帮助你获取 Windows 系统常量的工具。
 
-**wslview**
-将 Windows 默认网络浏览器绑定为WSL网络浏览器的包装工具。
+**wslview/wview**
+将 Windows 默认网络浏览器绑定为 WSL 网络浏览器的包装工具。
 
-**wslupath** ⚠ *已弃用*
+**wslstart/wstart**
+一个比 explorer.exe 更易用的 WSL 文件启动器。
+
+**wslupath**
 可以转换不同类型路径的工具。
+
+**wslec**
+一个自动帮你配置WSL下特殊系统变量的脚本。
+
+**wslcron**
+一个可以与Windows互动的WSL计划任务设定器。
 
 ## 状态
 
