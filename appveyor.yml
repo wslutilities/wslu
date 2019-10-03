@@ -1,0 +1,21 @@
+version: 2.3.1.{build}
+branches:
+  only:
+    - master
+    - develop
+only_commits:
+  files:
+    - src/**/*
+    - Makefile
+image: Windows Server 2019
+build: Script
+clone_folder: C:\project\wslu
+install:
+  - git submodule update --init --recursive
+  - ps: wsl -u root apt-get update
+  - ps: wsl -u root DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
+  - ps: wsl -u root DEBIAN_FRONTEND=noninteractive apt-get install -y bc make imagemagick
+build_script:
+  - ps: wsl make
+test_script:
+  - ps: wsl make test

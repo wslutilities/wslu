@@ -4,14 +4,13 @@
 
 # wslu - 一套Windows 10 Linux子系統工具組
 
-[![GitHub license](https://flat.badgen.net/github/license/wslutilities/wslu?icon=github&label=&color=cyan)](https://github.com/wslutilities/wslu/blob/master/LICENSE)
-[![GitHub (pre-)release](https://flat.badgen.net/github/release/wslutilities/wslu?icon=github&label=)](https://github.com/wslutilities/wslu)
-[![Circle CI master](https://flat.badgen.net/circleci/github/wslutilities/wslu/master?label=master&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/master)
-[![Circle CI develop](https://flat.badgen.net/circleci/github/wslutilities/wslu/develop?label=develop&icon=circleci)](https://circleci.com/gh/wslutilities/wslu/tree/develop)
-[![Donate](https://flat.badgen.net/badge/Donate/Paypal/purple)](https://www.paypal.me/callmepk/)
-[![Backers on Open Collective](https://flat.badgen.net/opencollective/backers/wslu)](CONTRIBUTING.md#financial-contributions)
-[![Chat On Gitter](https://flat.badgen.net/badge/chat/on%20gitter/cyan)](https://gitter.im/wslutilities/wslu)
-[![Twitter](https://flat.badgen.net/twitter/follow/wslutilities)](https://twitter.com/wslutilities)
+[![GitHub license](https://img.shields.io/github/license/wslutilities/wslu?style=flat-square&label=許可協議&color=blue&logo=github)](https://github.com/wslutilities/wslu/blob/master/LICENSE)
+[![GitHub (pre-)release](https://img.shields.io/github/v/release/wslutilities/wslu?include_prereleases&label=版本&logo=github&style=flat-square)](https://github.com/wslutilities/wslu)
+[![GitLab](https://img.shields.io/static/v1?label=gitlab&logo=gitlab&color=E24329&message=已映象&style=flat-square)](https://gitlab.com/callmepk/wslu)
+[![碼雲](https://img.shields.io/static/v1?label=碼雲&color=C71D23&message=已映象&style=flat-square)](https://gitee.com/mirrors/wslu)
+[![Gitter](https://img.shields.io/gitter/room/wslutilities/wslu?color=ED1965&logo=gitter&style=flat-square)](https://gitter.im/wslutilities/wslu)
+[![Twitter Follow](https://img.shields.io/twitter/follow/wslutilities?style=flat-square&logo=twitter&color=1DA1F2&label=跟隨)
+](https://twitter.com/wslutilities)
 
 [English](README.md) | [简体中文](README.hans.md) | 繁體中文
 
@@ -38,6 +37,16 @@
 
 **wslupath** ⚠ *已棄用*
 可以轉換不同類型路徑的工具。
+
+## 狀態
+
+| | 服務 | Master | Develop |
+| ------ | ------ |:------:|:-------:|
+| 證書檢查 | FOSSA | [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu%2develop?ref=badge_shield) | - |
+| 程式碼質量 | CodeFactor | [![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/master)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/master) | [![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/develop)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/develop) |
+| 測試 | AppVeyor | [![Build status](https://ci.appveyor.com/api/projects/status/gcttf7igb0s40xak/branch/master?svg=true)](https://ci.appveyor.com/project/patrick330602/wslu/branch/master) | [![Build status](https://ci.appveyor.com/api/projects/status/gcttf7igb0s40xak/branch/develop?svg=true)](https://ci.appveyor.com/project/patrick330602/wslu/branch/master) |
+| 部署 | CircleCI | [![CircleCI](https://img.shields.io/circleci/build/gh/wslutilities/wslu/master)](https://circleci.com/gh/wslutilities/wslu/tree/master) | [![CircleCI](https://img.shields.io/circleci/build/gh/wslutilities/wslu/develop)](https://circleci.com/gh/wslutilities/wslu/tree/develop) |
+
 
 ## 安裝
 

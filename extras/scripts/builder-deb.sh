@@ -43,7 +43,7 @@ sed -i s/NIGHTLYBUILDPLACEHOLDER/"$EXTRA"/g "$BUILD_DIR"/DEBIAN/control
 chmod 755 "$BUILD_DIR"/DEBIAN/{postinst,prerm}
 
 # export md5 hashes
-cd $BUILD_DIR
+cd "$BUILD_DIR" || exit 1
 find . -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEBIAN.*' -printf '%P ' | xargs md5sum > DEBIAN/md5sums
 
 # setting permissions
@@ -52,9 +52,9 @@ find "$BUILD_DIR"/usr/ -type f -exec chmod 0555 {} \;
 
 # build
 [[ -d "$CURRENT_DIR"/../../target ]] || mkdir "$CURRENT_DIR"/../../target
-cd "$CURRENT_DIR"/../../target/
+cd "$CURRENT_DIR"/../../target/ || exit 1
 sudo dpkg -b "$BUILD_DIR"/ wslu-"${BUILD_VER}".deb
 
 # Cleanup everything
 rm -rf "$BUILD_DIR"
-cd "$CURRENT_DIR"
+cd "$CURRENT_DIR" || exit 1
