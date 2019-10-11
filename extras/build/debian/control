@@ -1,7 +1,7 @@
 Package: wslu
 Architecture: all
 Maintainer: Patrick Wu <wotingwu@live.com>
-Version: VERSIONPLACEHOLDER-0NIGHTLYBUILDPLACEHOLDER
+Version: VERSIONPLACEHOLDER-BUILDVERNIGHTLYBUILDPLACEHOLDER
 Priority: optional
 Depends: bc, imagemagick
 Description: A collection of utilities for Windows 10 Linux Subsystem
