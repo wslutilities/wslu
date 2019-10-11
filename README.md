@@ -71,7 +71,7 @@ You can download the `.deb` package from release and install it using `sudo dpkg
 You can use the following command for easy installation:
 
 ```
-curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.deb.sh | sudo bash
+$ curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.deb.sh | sudo bash
 ```
 
 ### For RPM-based systems(OpenSUSE/SLES/Pengwin Enterprise/Oracle Linux)
@@ -79,7 +79,7 @@ curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/scri
 You can use the following command for easy installation:
 
 ```
-curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.rpm.sh | sudo bash
+$ curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.rpm.sh | sudo bash
 ```
 
 You can download the `.rpm` package from release and install it using `sudo rpm -ivh "wslu*"`.
@@ -90,7 +90,15 @@ wslu is live on [AUR](https://aur.archlinux.org/packages/wslu/). You can downloa
 
 ### Alpine Linux
 
-You can download the `.apk` package from release and install it using `sudo apk add --allow-untrusted "wslu*"`.
+You can now install wslu from Alpine Linux testing with following way:
+
+```
+$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/" | sudo tee -a /etc/apk/repositories
+$ sudo apk update
+$ sudo apk add wslu@testing
+```
+
+You can also download the `.apk` package from release and install it using `sudo apk add --allow-untrusted "wslu*"`.
 
 ### Other distributions
 
