@@ -8,8 +8,8 @@ jobs:
       - run:
           name: Install Pre-requisites
           command: |
-            apt-get update -qq
-            apt-get install -qq apt-utils build-essential rpm sudo
+            sudo apt-get update -qq
+            sudo apt-get install -qq apt-utils build-essential rpm
       - run:
           name: Build Package
           command: |
@@ -32,8 +32,8 @@ jobs:
       - run:
           name: Install Pre-requisites
           command: |
-            apt-get update -qq
-            apt-get install -qq apt-utils build-essential rpm sudo
+            sudo apt-get update -qq
+            sudo apt-get install -qq apt-utils build-essential rpm
       - run:
           name: Build Package
           command: |
