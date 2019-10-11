@@ -25,7 +25,7 @@ LC_ALL=C
 LANG=C
 
 # force bash to not showing code manually.
-
+set +x
 
 # checking interopability
 grep enabled /proc/sys/fs/binfmt_misc/WSLInterop >/dev/null || (echo "WSL Interopability is disabled. Please enable it before using WSL."; exit 1)
