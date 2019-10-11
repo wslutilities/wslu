@@ -1,37 +1,5 @@
 version: 2
 jobs:
-  installtests:
-    docker:
-      - image: patrick330602/fake_wsl_env
-    steps:
-      - checkout
-      - run:
-          name: Pre-building Setup
-          command: |
-            apt-get update -qq
-            apt-get install -qq apt-utils sudo
-            bash -x ./configure.sh
-      - run:
-          name: Build and Install
-          command: |
-            make
-            sudo make install
-  linktests:
-    docker:
-      - image: patrick330602/fake_wsl_env
-    steps:
-      - checkout
-      - run:
-          name: Pre-building Setup
-          command: |
-            apt-get update -qq
-            apt-get install -qq apt-utils sudo
-            bash -x ./configure.sh
-      - run:
-          name: Build and Link
-          command: |
-            make
-            sudo make link
   pkgbuilds:
     docker:
       - image: patrick330602/fake_wsl_env
