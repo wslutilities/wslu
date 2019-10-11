@@ -1,8 +1,8 @@
 version: 2
 jobs:
   pkgbuilds:
-    docker:
-      - image: patrick330602/fake_wsl_env
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
@@ -25,8 +25,8 @@ jobs:
             root: /tmp/pkgs
             paths: .
   nightlypkgbuilds:
-    docker:
-      - image: patrick330602/fake_wsl_env
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
@@ -101,10 +101,6 @@ jobs:
           command: package_cloud push whitewaterfoundry/wslu/ol/7 /tmp/pkgs/*.rpm --skip-errors
 workflows:
   version: 2
-  tests:
-    jobs:
-      - installtests
-      - linktests
   buildtests:
     jobs:
       - pkgbuilds
