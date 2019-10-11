@@ -67,6 +67,8 @@ $ sudo apk update
 $ sudo apk add wslu@testing
 ```
 
+
+
 ### Arch Linux
 
 [wslu](https://aur.archlinux.org/packages/wslu/) and [wslu-git](https://aur.archlinux.org/packages/wslu-git/) on AUR.
@@ -112,7 +114,7 @@ sudo apt install ubuntu-wsl
 > 
 > `curl | bash` method is not secure. [Related article](https://sandstorm.io/news/2015-09-24-is-curl-bash-insecure-pgp-verified-install)
 
-Run the following command in your preferred distro: `curl -sL https://wslu.patrickwu.space/install | bash`
+Run the following command in your preferred distro: `curl -sL https://raw.githubusercontent.com/wslutilities/wslu/master/extras/scripts/wslu-install | bash`
 
 ## Contributors
 
