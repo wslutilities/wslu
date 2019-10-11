@@ -17,19 +17,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-function interop_prefix {
-	if [ -f /etc/wsl.conf ]; then
-		tmp=$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf)
-		if [ "$tmp" == "" ]; then
-			echo "/mnt/"
-		else
-			echo "$tmp"
-		fi
-	else
-		echo "/mnt/"
-	fi
-}
-
 function env_check {
 if [ -f /etc/fake-wsl-release ]
 then
@@ -39,36 +26,6 @@ then
     echo "Your distro do not support WSL Interopability. Installation Aborted."
     exit 1
 fi
-}
-
-function prsh_check {
-PATH="$(interop_prefix)c/Windows/System32/WindowsPowerShell/v1.0/:$PATH"
-if powershell.exe -NoProfile -NonInteractive -Command Get-History; then
-	echo "powershell.exe can be invoked."
-else
-	echo "powershell.exe failed to launch."
-	exit 1
-fi
-ppep="$(powershell.exe -NoProfile -NonInteractive -Command Get-ExecutionPolicy 2>&1 | tail -n1 | sed 's/\r$//')"
-echo -e "Powershell Execution Policy: $ppep"
-if [[ "$ppep" = "Restricted" ]]; then
-	cat << EOF
-***************************************
-               WARNING
-***************************************
-The execution policy for powershell.exe
-should not be Restricted. You should se
-t Powershell Execution Policy to Unrest
-ricted with a Powershell Prompt with Ad
-ministrator right:
-
-   Set-ExecutionPolicy Unrestricted
-
-Due to the limitation, it is not possib
-le to invoke this command from WSL.
-EOF
-fi
-PATH=$(getconf PATH)
 }
 
 function pkg_inst {
@@ -105,7 +62,6 @@ esac
 
 function main_inst {
 env_check
-prsh_check
 pkg_inst
 make
 sudo make install
@@ -114,11 +70,10 @@ sudo make install
 for args; do
 	case $args in
 		-e|--env) env_check; exit;;
-		-p|--prsh) prsh_check; exit;;
 		-P|--pkg) pkg_inst; exit;;
 		-i|--install) main_inst; exit;;
 		*) exit 1;;
 	esac
 done
 
-env_check; prsh_check; pkg_inst
+env_check; pkg_inst
