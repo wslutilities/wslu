@@ -9,8 +9,10 @@ wslu (2.3.2-0ubuntu1) UNRELEASED; urgency=medium
   * New upstream release
     - Fix support for Windows user names with space
   * Add autopkgtest
+  * Fix saving configuration when the Windows user name contains space
+  * Refresh patches
 
- -- Balint Reczey <rbalint@ubuntu.com>  Tue, 15 Oct 2019 18:23:00 +0200
+ -- Balint Reczey <rbalint@ubuntu.com>  Wed, 16 Oct 2019 11:58:38 +0200
 
 wslu (2.3.0-1ubuntu1) eoan; urgency=medium
 
