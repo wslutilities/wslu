@@ -7,10 +7,10 @@ Subject: Print error message when convert is not found
  1 file changed, 11 insertions(+)
 
 diff --git a/src/wslusc.sh b/src/wslusc.sh
-index bed23be..02d1af6 100644
+index 2c3926e..ee5c589 100644
 --- a/src/wslusc.sh
 +++ b/src/wslusc.sh
-@@ -95,6 +95,17 @@ if [[ "$cname" != "" ]]; then
+@@ -98,6 +98,17 @@ if [[ "$cname" != "" ]]; then
  			if [[ "$ext" != "ico" ]]; then
  				if [[ "$ext" == "svg" ]]; then
  					echo "${info} Converting $ext icon to ico..."

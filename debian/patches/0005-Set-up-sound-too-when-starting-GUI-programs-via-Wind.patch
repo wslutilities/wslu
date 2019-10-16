@@ -8,10 +8,10 @@ Subject: Set up sound, too,
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/wslusc.sh b/src/wslusc.sh
-index 02d1af6..a548860 100644
+index ee5c589..39f757d 100644
 --- a/src/wslusc.sh
 +++ b/src/wslusc.sh
-@@ -130,7 +130,7 @@ if [[ "$cname" != "" ]]; then
+@@ -134,7 +134,7 @@ if [[ "$cname" != "" ]]; then
  	fi
  
  	if [[ "$is_gui" == "1" ]]; then
