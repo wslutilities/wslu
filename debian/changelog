@@ -1,4 +1,4 @@
-wslu (2.3.2-0ubuntu1) UNRELEASED; urgency=medium
+wslu (2.3.2-0ubuntu1) eoan; urgency=medium
 
   [ Sebastien Bacher ]
   * debian/postinst, debian/prerm:
