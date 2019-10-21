@@ -24,8 +24,15 @@ wslu_version=3.0.0
 LC_ALL=C
 LANG=C
 
-# force bash to not showing code manually.
+# prevent bash -x
 set +x
+
+# when --verbose, verbose.
+if [ "$1" == "--verbose" ]; then
+	echo -e '\e[38;5;202m\033[1m Showing verbose output. \033(B\033[m'
+	shift
+	set -x
+fi
 
 # checking interopability
 grep enabled /proc/sys/fs/binfmt_misc/WSLInterop >/dev/null || (echo "WSL Interopability is disabled. Please enable it before using WSL."; exit 1)
@@ -125,13 +132,6 @@ if [ ! -f ~/.config/wslu/baseexec ]; then
 	else
 		echo "$(wslpath "C:\\Windows\\System32\\wsl.exe")" > ~/.config/wslu/baseexec
 	fi
-fi
-
-# when --debug, debug.
-if [ "$1" == "--debug" ]; then
-	echo "${debug}Debug Mode Enabled."
-	shift
-	set -x
 fi
 
 # basic distro detection
