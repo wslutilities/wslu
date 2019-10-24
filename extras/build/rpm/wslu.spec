@@ -14,6 +14,7 @@ Name: wslu
 Version: BUILDVERPLACEHOLDERNIGHTLYBUILDPLACEHOLDER
 Release: 1
 Source: wslu-BUILDVERPLACEHOLDER.tar.gz
+BuildArch: noarch
 Requires: bc ImageMagick
 Requires(post): %{_sbindir}/update-alternatives
 Requires(postun): %{_sbindir}/update-alternatives
@@ -21,7 +22,6 @@ URL: https://github.com/wslutilities/wslu/
 License: GPLv3
 %description
 This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
-%global debug_package %{nil}
 %prep
 %setup
 %build
@@ -58,6 +58,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc /usr/share/man/man1/
 
 %changelog
-* Fri Mar 15 2019 patrick330602 <wotingwu@live.com>
+* Wed Jul 31 2019 patrick330602 <wotingwu@live.com>
 - Please check https://github.com/wslutilities/wslu/releases/latest for changelog
 

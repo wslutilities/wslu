@@ -7,7 +7,7 @@ Subject: Makefile: Honor DESTDIR
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 6a8201a..187f045 100644
+index dadbd3e..43647f6 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -28,10 +28,10 @@ link:

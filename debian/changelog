@@ -1,3 +1,45 @@
+wslu (2.3.2-0ubuntu2) focal; urgency=medium
+
+  * Suppress pulseaudio error on starting shell when pulseaudio-utils is installed
+    (LP: #1844671)
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Thu, 24 Oct 2019 16:04:32 +0200
+
+wslu (2.3.2-0ubuntu1) eoan; urgency=medium
+
+  [ Sebastien Bacher ]
+  * debian/postinst, debian/prerm:
+    - register also the www-browser alternative, the non-x-variant is
+      used by xdg-open when DISPLAY is unset
+
+  [ Balint Reczey ]
+  * New upstream release
+    - Fix support for Windows user names with space
+  * Add autopkgtest
+  * Fix saving configuration when the Windows user name contains space
+  * Refresh patches
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Wed, 16 Oct 2019 11:58:38 +0200
+
+wslu (2.3.0-1ubuntu1) eoan; urgency=medium
+
+  * debian/control: Set Vcs-* fields
+  * New upstream release
+    - Stop changing terminal font when running wsl* commands (LP: #1836208)
+  * Refresh patches
+  * debian/rules: Run tests in WSL only
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Thu, 01 Aug 2019 12:54:30 +0200
+
+wslu (2.0.0-0ubuntu3) eoan; urgency=medium
+
+  * Set DISPLAY=:0 when an X11 server is running (LP: #1836552)
+  * Use PulseAudio if it is running on Windows (LP: #1836552)
+  * Set up sound, too, when starting GUI programs via Windows desktop shortcuts
+    (LP: #1836552)
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Mon, 15 Jul 2019 12:05:41 +0200
+
 wslu (2.0.0-0ubuntu2~16.04.1) xenial; urgency=medium
 
   * Set DISPLAY=:0 when an X11 server is running (LP: #1836552)

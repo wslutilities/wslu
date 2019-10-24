@@ -6,4 +6,5 @@ set -e
 
 if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] ; then
     update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/wslview 30
+    update-alternatives --install /usr/bin/www-browser www-browser /usr/bin/wslview 30
 fi

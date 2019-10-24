@@ -1,5 +1,5 @@
-0001-Skip-interop-check-in-scripts.patch
 0002-Makefile-Honor-DESTDIR.patch
-0003-Fix-one-test-failing-on-Windows.patch
 0004-Print-error-message-when-convert-is-not-found.patch
 0005-Set-up-sound-too-when-starting-GUI-programs-via-Wind.patch
+0006-Fix-empty-.config-wslu-baseexec.patch
+0007-Fix-setting-.config-wslu-baseexec-when-the-Windows-u.patch
