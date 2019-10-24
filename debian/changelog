@@ -1,3 +1,10 @@
+wslu (2.3.2-0ubuntu2) focal; urgency=medium
+
+  * Suppress pulseaudio error on starting shell when pulseaudio-utils is installed
+    (LP: #1844671)
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Thu, 24 Oct 2019 16:04:32 +0200
+
 wslu (2.3.2-0ubuntu1) eoan; urgency=medium
 
   [ Sebastien Bacher ]
