@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # wslu - Windows 10 linux Subsystem Utility
 # Component of Windows 10 linux Subsystem Utility
 # <https://github.com/wslutilities/wslu>
@@ -18,76 +18,113 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Version
-wslu_version=2.0.0
+wslu_version=2.3.2
 
 # Speed up script by not using unicode.
 LC_ALL=C
 LANG=C
 
 # force bash to not showing code manually.
-set +x
+
 
 # checking interopability
-cat /proc/sys/fs/binfmt_misc/WSLInterop | grep enabled >/dev/null || (echo "WSL Interopability is disabled. Please enable it before using WSL."; exit 1)
+grep enabled /proc/sys/fs/binfmt_misc/WSLInterop >/dev/null || (echo "WSL Interopability is disabled. Please enable it before using WSL."; exit 1)
 
 # variables
 ## color
-black=`echo -e '\e[30m'`
-red=`echo -e '\e[31m'`
-green=`echo -e '\e[32m'`
-brown=`echo -e '\e[33m'`
-blue=`echo -e '\e[34m'`
-purple=`echo -e '\e[35m'`
-cyan=`echo -e '\e[36m'`
-yellow=`echo -e '\e[1;33m'`
-white=`echo -e '\e[1;37m'`
-dark_gray=`echo -e '\e[1;30m'`
-light_red=`echo -e '\e[1;31m'`
-light_green=`echo -e '\e[1;32m'`
-light_blue=`echo -e '\e[1;34m'`
-light_purple=`echo -e '\e[1;35m'`
-light_cyan=`echo -e '\e[1;36m'`
-light_gray=`echo -e '\e[37m'`
-orange=`echo -e '\e[38;5;202m'`
-light_orange=`echo -e '\e[38;5;214m'`
-bold=`echo -e '\033[1m'`
-reset=`echo -e '\033(B\033[m'`
+black=$(echo -e '\e[30m')
+red=$(echo -e '\e[31m')
+green=$(echo -e '\e[32m')
+brown=$(echo -e '\e[33m')
+blue=$(echo -e '\e[34m')
+purple=$(echo -e '\e[35m')
+cyan=$(echo -e '\e[36m')
+yellow=$(echo -e '\e[1;33m')
+white=$(echo -e '\e[1;37m')
+dark_gray=$(echo -e '\e[1;30m')
+light_red=$(echo -e '\e[1;31m')
+light_green=$(echo -e '\e[1;32m')
+light_blue=$(echo -e '\e[1;34m')
+light_purple=$(echo -e '\e[1;35m')
+light_cyan=$(echo -e '\e[1;36m')
+light_gray=$(echo -e '\e[37m')
+orange=$(echo -e '\e[38;5;202m')
+light_orange=$(echo -e '\e[38;5;214m')
+bold=$(echo -e '\033[1m')
+reset=$(echo -e '\033(B\033[m')
 
 ## indicator
 info="${green}[info]${reset}"
+input_info="${cyan}[input]${reset}"
 error="${red}[error]${reset}"
 warn="${orange}[warn]${reset}"
 debug="${orange}${bold}[debug]${reset}"
 
+## Windows build number constant
+readonly BN_SPR_CREATORS=15063		#1703, Redstone 2, Creators Update
+readonly BN_FAL_CREATORS=16299		#1709, Redstone 3, Fall Creators Update
+readonly BN_APR_EIGHTEEN=17134		#1803, Redstone 4, April 2018 Update
+readonly BN_OCT_EIGHTEEN=17763		#1809, Redstone 5, October 2018 Update
+readonly BN_MAY_NINETEEN=18362		#1903, 19H1, May 2019 Update
+
 # functions
 
 function help {
-	echo -e "`basename "$1"` - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux
+	app_name=$(basename "$1")
+	echo -e "$app_name - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux
 Usage: $2
 
-For more help for `basename "$1"`, visit the following site: https://github.com/wslutilities/wslu/wiki/`basename "$1"`"
+For more help for $app_name, visit the following site: https://github.com/wslutilities/wslu/wiki/$app_name"
 }
 
 function double_dash_p {
-	echo "$(echo $@ | sed -e 's|\\|\\\\|g')"
+	echo "${@//\\/\\\\}"
 }
 
 function interop_prefix {
 	if [ -f /etc/wsl.conf ]; then
-		tmp=$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf)
+		tmp=$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf | awk '{$1=$1;print}')
 		if [ "$tmp" == "" ]; then
 			echo "/mnt/"
 		else
-			echo $tmp
+			echo "$tmp"
 		fi
 	else
 		echo "/mnt/"
 	fi
 }
 
-function winps_exec {
-	$(interop_prefix)c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -Command $@
+function chcp_com {
+	"$(interop_prefix)"c/Windows/System32/chcp.com "$@" >/dev/null
 }
+
+function winps_exec {
+	chcp_com $(cat ~/.config/wslu/oemcp)
+	"$(interop_prefix)"c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -Command "$@"
+	chcp_com 65001
+}
+
+# first run, saving some information
+if [ ! -d ~/.config/wslu ]; then
+	mkdir -p ~/.config/wslu
+fi
+if [ ! -f ~/.config/wslu/oemcp ]; then
+	"$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*' > ~/.config/wslu/oemcp
+fi
+
+if [ ! -f ~/.config/wslu/baseexec ]; then
+	wslutmpbuild=$(reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	wslutmpbuild=${wslutmpbuild##* }
+	wslutmpbuild="$(( $wslutmpbuild + 0 ))"
+	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
+		wslu_distro_regpath=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | grep -B1 -e "$WSL_DISTRO_NAME" | head -n1 | sed -e 's|\r||g')
+		wslu_distro_packagename=$($(interop_prefix)c/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+		wslu_distro_packagename=${wslu_distro_packagename##* }
+		find $(wslpath "$(double_dash_p $(winps_exec "Write-Output \$Env:LOCALAPPDATA" | tr -d "\r"))\\Microsoft\\WindowsApps\\$wslu_distro_packagename") -name "*.exe" > ~/.config/wslu/baseexec
+	else
+		echo "$(wslpath "C:\\Windows\\System32\\wsl.exe")" > ~/.config/wslu/baseexec
+	fi
+fi
 
 # when --debug, debug.
 if [ "$1" == "--debug" ]; then
@@ -97,18 +134,20 @@ if [ "$1" == "--debug" ]; then
 fi
 
 # basic distro detection
-distro="$(cat /etc/os-release | head -n1 | sed -e 's/NAME=\"//g')"
+distro="$(head -n1 /etc/os-release | sed -e 's/NAME=\"//g')"
 case $distro in
-    *WLinux*) distro="wlinux";;
-    Ubuntu*) distro="ubuntu";;
-    *Debian*) distro="debian";;
-    *Kali*) distro="kali";;
-    openSUSE*) distro="opensuse";;
-    SLES*) distro="sles";;
-    Alpine*) distro="alpine";;
-    Arch*) distro="archlinux";;
-    Scientific*) distro="scilinux";;
-    *Fedora*) distro="fedora";;
-	*Generic*) [ "fedora" == "$(cat /etc/os-release | grep -e "LIKE=" | sed -e 's/ID_LIKE=//g')" ] && distro="fedora" || distro="unknown";;
-    *) distro="unknown";;
+	*Pengwin*) distro="pengwin";;
+	*WLinux*) distro="wlinux";;
+	Ubuntu*) distro="ubuntu";;
+	*Debian*) distro="debian";;
+	*Kali*) distro="kali";;
+	openSUSE*) distro="opensuse";;
+	SLES*) distro="sles";;
+	Alpine*) distro="alpine";;
+	Arch*) distro="archlinux";;
+	*Oracle*) distro="oracle";;
+	Scientific*) distro="scilinux";;
+	*Fedora*) distro="fedora";;
+	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && distro="oldfedora" || distro="unknown";;
+	*) distro="unknown";;
 esac

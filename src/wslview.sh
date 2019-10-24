@@ -1,4 +1,4 @@
-version="05"
+version="06"
 
 lname=""
 
@@ -30,14 +30,23 @@ for args; do
 	case $args in
 		-r|--register) add_reg_alt;;
 		-u|--unregister) del_reg_alt;;
-		-h|--help) help $0 "$help_short"; exit;;
+		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslview v$version"; exit;;
 		*) lname="$lname$args";;
 	esac
 done
 
 if [[ "$lname" != "" ]]; then
-	winps_exec Start "$lname"
+	#if [[ "$lname" =~  file:///* ]]; then
+	#	if [[ "$WSL_DISTRO_NAME" != "" ]]; then
+	#		echo "do something"
+	#	else
+	#		echo "${error} This protocol is not supported before version 1903."
+	#		exit 34
+	#	fi
+	#else
+	winps_exec Start "\"$lname\""
+	#fi
 else
 	echo "${error}No input, aborting"
 	exit 21

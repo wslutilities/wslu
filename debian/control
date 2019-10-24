@@ -7,6 +7,8 @@ Build-Depends: bats,
                imagemagick,
                inkscape
 Standards-Version: 4.3.0.3
+Vcs-Git: https://git.launchpad.net/~ubuntu-core-dev/ubuntu/+source/wslu -b ubuntu/master
+Vcs-Browser:  https://git.launchpad.net/~ubuntu-core-dev/ubuntu/+source/wslu
 Homepage: https://wslu.patrickwu.space/
 
 Package: wslu

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if (test ! -f /proc/sys/fs/binfmt_misc/WSLInterop || ! grep -q enabled /proc/sys/fs/binfmt_misc/WSLInterop); then
+   echo "Skipping tests, they pass in WSL only with WSLInterop enabled"
+   exit 77
+fi
+
+ln -s /usr/bin out || true
+bats tests/*.bats

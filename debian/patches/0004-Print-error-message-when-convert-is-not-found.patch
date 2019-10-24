@@ -7,14 +7,14 @@ Subject: Print error message when convert is not found
  1 file changed, 11 insertions(+)
 
 diff --git a/src/wslusc.sh b/src/wslusc.sh
-index e70a45d..7bafd19 100644
+index 2c3926e..ee5c589 100644
 --- a/src/wslusc.sh
 +++ b/src/wslusc.sh
-@@ -70,6 +70,17 @@ if [[ "$cname" != "" ]]; then
- 		
+@@ -98,6 +98,17 @@ if [[ "$cname" != "" ]]; then
  			if [[ "$ext" != "ico" ]]; then
- 				if [[ "$ext" == "svg" ]] || [[ "$ext" == "png" ]]; then
-+					if ! type convert > /dev/null 2>&1; then
+ 				if [[ "$ext" == "svg" ]]; then
+ 					echo "${info} Converting $ext icon to ico..."
++					if ! type convert > /dev/null; then
 +						echo "The 'convert' command is needed for converting the icon."
 +						if [ -x /usr/lib/command-not-found ]; then
 +							echo " It can be installed with:" >&2
@@ -25,6 +25,6 @@ index e70a45d..7bafd19 100644
 +						fi
 +						exit 22
 +					fi
- 					echo "${info} Converting $ext icon to ico..."
- 					convert "$script_location/$icon_filename" -resize 256X256 "$script_location/${icon_filename%.$ext}.ico"
+ 					convert "$script_location/$icon_filename" -trim -background none -resize 256X256 -define 'icon:auto-resize=16,24,32,64,128,256'  "$script_location/${icon_filename%.$ext}.ico"
+ 					rm "$script_location/$icon_filename"
  					icon_filename="${icon_filename%.$ext}.ico"
