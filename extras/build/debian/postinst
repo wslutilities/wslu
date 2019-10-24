@@ -8,16 +8,23 @@ function interop_prefix {
 		if [ "$tmp" == "" ]; then
 			echo "/mnt/"
 		else
-			echo $tmp
+			echo "$tmp"
 		fi
 	else
 		echo "/mnt/"
 	fi
 }
 
+function winps_exec {
+PATH="$(interop_prefix)c/Windows/System32/WindowsPowerShell/v1.0/:$(interop_prefix)c/Windows/System32/:$PATH"
+chcp.com $("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*') >/dev/null
+"$(interop_prefix)"c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -Command "$@"
+chcp.com 65001 >/dev/null
+PATH=$(getconf PATH)
+}
+
 function prsh_check {
-PATH="$(interop_prefix)c/Windows/System32/WindowsPowerShell/v1.0/:$PATH"
-ppep="`powershell.exe Get-ExecutionPolicy 2>&1 | tail -n1 | sed 's/\r$//'`"
+ppep="$(winps_exec Get-ExecutionPolicy 2>&1 | tail -n1 | sed 's/\r$//')"
 echo -e "Powershell Execution Policy: $ppep"
 if [[ "$ppep" = "Restricted" ]]; then
 	cat << EOF
@@ -36,10 +43,9 @@ Due to the limitation, it is not possib
 le to invoke this command from WSL.
 EOF
 fi
-PATH=$(getconf PATH)
+
 }
 
-function env_check {
 if [ -f /etc/fake-wsl-release ]
 then
 	cat << EOF
@@ -62,6 +68,3 @@ EOF
 else
    prsh_check
 fi
-}
-
-env_check
