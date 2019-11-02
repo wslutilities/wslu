@@ -18,20 +18,11 @@ all:
 	done
 	chmod +x $(OUTPATH)/*
 
-link:
-	for file in $(OUTFILES); do \
-		ln -s $(CURPATH)/$$file /usr/bin/`basename $$file`; \
-	done
-	for file in $(MANFILES); do \
-		ln -s $(CURPATH)/$$file /usr/share/man/man1/`basename $$file`; \
-	done
-	ln -s $(CURPATH)/src/etc /usr/share/wslu
-
 install:
-	install -m755 out/* /usr/bin
-	install -m555 docs/* /usr/share/man/man1
-	[ -d /usr/share/wslu ] || mkdir -p /usr/share/wslu
-	cp src/etc/* /usr/share/wslu
+	install -m755 out/* $(DESTDIR)/bin
+	install -m555 docs/* $(DESTDIR)/share/man/man1
+	[ -d $(DESTDIR)/share/wslu ] || mkdir -p $(DESTDIR)/share/wslu
+	cp src/etc/* $(DESTDIR)/share/wslu
 
 uninstall: 
 	for f in $(INSTEDEXES); do \
@@ -46,5 +37,4 @@ clean:
 	rm -rf $(OUTPATH)
 
 test:
-	PATH="$(CURPATH)/src:$(CURPATH)/out:$$PATH" \
 	extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslvar.bats tests/wslfetch.bats tests/wslview.bats
