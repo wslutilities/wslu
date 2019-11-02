@@ -64,7 +64,7 @@ function main_inst {
 env_check
 pkg_inst
 make
-sudo make install
+sudo make DESTDIR=/usr install
 }
 
 for args; do

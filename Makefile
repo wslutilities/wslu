@@ -19,10 +19,9 @@ all:
 	chmod +x $(OUTPATH)/*
 
 install:
-	install -m755 out/* $(DESTDIR)/bin
-	install -m555 docs/* $(DESTDIR)/share/man/man1
-	[ -d $(DESTDIR)/share/wslu ] || mkdir -p $(DESTDIR)/share/wslu
-	cp src/etc/* $(DESTDIR)/share/wslu
+	install -Dm 555 docs/* -t $(DESTDIR)/share/man/man1
+	install -Dm 755 out/* -t $(DESTDIR)/bin
+	install -Dm 555 src/etc/* -t $(DESTDIR)/share/wslu
 
 uninstall: 
 	for f in $(INSTEDEXES); do \
