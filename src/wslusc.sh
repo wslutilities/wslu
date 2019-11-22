@@ -43,7 +43,7 @@ if [[ "$cname" != "" ]]; then
 	script_location="$(wslpath "$(wslvar -s USERPROFILE)")/wslu" # Windows wslu, Linux WSL Sty.
 	localfile_path="/usr/share/wslu" # WSL wslu source file location, Linux Sty.
 	script_location_win="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu" #  Windows wslu, Win Double Sty.
-	distro_location_win="$(double_dash_p "$(wslpath -w "$(cat ~/.config/wslu/baseexec)")")" # Distro Location, Win Double Sty.
+	distro_location_win="$(double_dash_p $(cat ~/.config/wslu/baseexec)")" # Distro Location, Win Double Sty.
 
 	# change param according to the exec.
 	distro_param="run"
