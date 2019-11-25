@@ -1,3 +1,11 @@
+wslu (2.3.2-0ubuntu3) focal; urgency=medium
+
+  * Detect X and PulseAudio in WSL2, too (LP: #1853343)
+  * debian/wsl-integration.sh: Use type instead of which for faster execution.
+    Also skip all detection steps when pactl and xvinfo are not installed.
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Mon, 25 Nov 2019 10:50:14 +0100
+
 wslu (2.3.2-0ubuntu2) focal; urgency=medium
 
   * Suppress pulseaudio error on starting shell when pulseaudio-utils is installed
