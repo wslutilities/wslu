@@ -1,3 +1,11 @@
+wslu (2.3.2-0ubuntu2~19.04.1) disco; urgency=medium
+
+  * Detect X and PulseAudio in WSL2, too (LP: #1853343)
+  * debian/wsl-integration.sh: Use type instead of which for faster execution.
+    Also skip all detection steps when pactl and xvinfo are not installed.
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Mon, 25 Nov 2019 12:40:55 +0100
+
 wslu (2.3.2-0ubuntu2~19.04) disco; urgency=medium
 
   * Backport to Disco (LP: #1849679)
