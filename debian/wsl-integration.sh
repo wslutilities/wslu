@@ -28,7 +28,7 @@ elif type pactl > /dev/null 2>&1 || type xvinfo > /dev/null 2>&1; then
     # set up audio if pulse server is reachable only via tcp
     if type pactl > /dev/null 2>&1 \
            && (! timeout $WSL_HOST_PA_TIMEOUT pactl info > /dev/null 2>&1 || timeout $WSL_HOST_PA_TIMEOUT pactl info 2> /dev/null | grep -q 'Default Sink: auto_null' ) \
-           && env PULSE_SERVER=tcp:${WSL_HOST} timeout $WSL_HOST_PA_TIMEOUT pactl info > /dev/null 2>&1; then
+           && env PULSE_SERVER=tcp:${WSL_HOST} timeout $WSL_HOST_PA_TIMEOUT pactl stat > /dev/null 2>&1; then
         export PULSE_SERVER=tcp:${WSL_HOST}
         echo -e "export PULSE_SERVER=$PULSE_SERVER" >> $WSL_INTEGRATION_CACHE
     fi
