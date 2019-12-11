@@ -1,3 +1,17 @@
+wslu (2.3.2-0ubuntu4) focal; urgency=medium
+
+  * debian/wsl-integration.sh: Set timeouts for X and PulseAudio detection.
+    This fixes long startup time when detection fails after waiting for long.
+    (LP: #1855520)
+  * Cache results of detecting X and sound server in $HOME/.config/wsl/integration-cache.
+    Reuse results when starting new shells in the same runnig WSL Ubuntu instance.
+    (LP: #1855898)
+  * debian/wsl-integration.sh: Use pactl stat instead of pactl info in detection.
+    Pactl stat is slightly faster, ~0.3s vs. ~0.45s with pactl info when running
+    on WSL1.
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Wed, 11 Dec 2019 15:45:09 +0100
+
 wslu (2.3.2-0ubuntu3) focal; urgency=medium
 
   * Detect X and PulseAudio in WSL2, too (LP: #1853343)
