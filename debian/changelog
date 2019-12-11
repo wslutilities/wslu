@@ -1,3 +1,11 @@
+wslu (2.3.2-0ubuntu2~19.04.2) disco; urgency=medium
+
+  * Revert previous SRU (LP: #1855520):
+    - Revert "debian/wsl-integration.sh: Use type instead of which for faster execution"
+    - Revert "Detect X and PulseAudio in WSL2, too"
+
+ -- Balint Reczey <rbalint@ubuntu.com>  Wed, 11 Dec 2019 08:57:49 +0100
+
 wslu (2.3.2-0ubuntu2~19.04.1) disco; urgency=medium
 
   * Detect X and PulseAudio in WSL2, too (LP: #1853343)
