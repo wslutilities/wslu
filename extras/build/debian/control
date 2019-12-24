@@ -1,6 +1,6 @@
 Package: wslu
 Architecture: all
-Maintainer: Patrick Wu <wotingwu@live.com>
+Maintainer: Patrick Wu <me@patrickwu.space>
 Version: VERSIONPLACEHOLDER-0NIGHTLYBUILDPLACEHOLDER
 Priority: optional
 Depends: bc, imagemagick

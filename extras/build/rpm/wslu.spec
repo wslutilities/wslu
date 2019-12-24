@@ -1,4 +1,4 @@
-%define packager       Patrick Wu <wotingwu@live.com>
+%define packager       Patrick Wu <me@patrickwu.space>
 
 %define _topdir        HOMEPLACEHOLDER/rpm_wslu
 %define _tmppath       /var/tmp
@@ -58,6 +58,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc /usr/share/man/man1/
 
 %changelog
-* Wed Jul 31 2019 patrick330602 <wotingwu@live.com>
+* Wed Jul 31 2019 patrick330602 <me@patrickwu.space>
 - Please check https://github.com/wslutilities/wslu/releases/latest for changelog
 
