@@ -38,4 +38,4 @@ elif type pactl > /dev/null 2>&1 || type xvinfo > /dev/null 2>&1; then
     unset WSL_HOST_PA_TIMEOUT
 fi
 
-unset WSLU_INTEGRATION_CACHE
+unset WSL_INTEGRATION_CACHE
