@@ -3,7 +3,7 @@ version=41
 is_line=0
 is_splash=0
 is_color=0
-help_short="wslfetch (--help|--version|--splash|--line|--no-colorbar)"
+help_short="wslfetch (--help|--version|--splash|--line|--colorbar)"
 
 for args; do
 	case $args in
@@ -11,7 +11,7 @@ for args; do
 		-v|--version) echo "wslu v$wslu_version; wslfetch v$version"; exit;;
 		-s|--splash) is_splash=1;;
 		-l|--line) is_line=1;;
-		-C|--no-colorbar) is_color=1;
+		-c|--colorbar) is_color=1;
 	esac
 done
 
@@ -294,8 +294,9 @@ info_text=("${t}Windows 10 Linux Subsystem${reset}"
 "${reset}"
 )
 
-if [[ "$is_color" == "0" ]]; then
-info_text+=("   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}")
+if [[ "$is_color" == "1" ]]; then
+info_text+=("   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}"
+"   \e[48;5;8m   \e[48;5;9m   \e[48;5;10m   \e[48;5;11m   \e[48;5;12m   \e[48;5;13m   \e[48;5;14m   \e[48;5;15m   ${reset}")
 fi
 
 function line {
