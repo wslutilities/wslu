@@ -1,0 +1,74 @@
+.TH "WSLSYS" "1" "DATEPLACEHOLDER" "VERSIONPLACEHOLDER" "WSL Utilities"
+
+.SH NAME
+wslsys
+Component of Windows 10 Linux Subsystem Utility
+.SH SYNOSIS
+.B wslsys
+[\fB-h\fR|\fB-v\fR|\fB-I\fR|\fB-b\fR|\fB-B\fR|\fB-fB\fR|\fB-U\fR|\fB-R\fR|\fB-K\fR|\fB-P\fR]
+.B -s
+.SH DESCRIPTION
+This is a WSL system information printer to print out some basic system
+information.
+.SH COMMANDS
+.PP
+Default will print out the overall system information.
+individual information can printed out using following(add \fB-s\fR flag to print only value):
+.PP
+.B -h, --help
+Print a simple help.
+.PP
+.B -v, --version
+Print current version.
+.PP
+.B -I, --sys-installdate
+Print the time when the current release is installed. The format is in Hex Unix Timestamp.
+For example, \fB"0x5df84068"\fR.
+.PP
+.B -b, --branch
+Print current release branch of your Windows 10.
+For example, \fB"rs_prerelease"\fR means you are on rs_prerelease realease branch.
+.PP
+.B -B, --build
+Print current build version of your Windows 10.
+For example, \fB"19536"\fR means you are using Winows 10 build 19536.
+.PP
+.B -fB, --full-build
+Print current build version of your Windows 10 in long form.
+For example, \fB"19536.1000.amd64fre.rs_prerelease.191211-1446"\fR.
+.PP
+.B -U, --uptime
+Print current uptime inside WSL.
+For example, \fB"0d 0h 2m"\fR.
+.PP
+.B -wU, --win-uptime
+Print current uptime in Windows 10. 
+For example, \fB"0d 12h 8m"\fR.
+.PP
+.B -R, --release
+Print the current release for your WSL distro.
+For example, \fB"Ubuntu 18.04.3 LTS"\fR.
+.PP
+.B -K, --kernel
+Print the current version of the WSL kernel.
+For example, \fB"Linux 4.19.81-microsoft-standard"\fR.
+.PP
+.B -P, --package
+Print total number of installed packages.
+For example, \fB"1047"\fR for 1047 packages installed.
+.PP
+.B -S, --display-scaling
+Print the current disply scaling from your display setting.
+For example, \fB"2"\fR for 200% scaling.
+.SH SEE ALSO
+https://wslu.patrickwu.space
+.SH AUTHOR
+Created by Patrick Wu <me@patrickwu.space>
+.SH REPORTING BUGS
+Report bugs to <https://github.com/wslutilities/wslu/issues>
+.SH COPYRIGHT
+This is free software; you can redistribute it and/or modify it under
+the terms of the GNU GPL version 3 or (at your option) any later
+version.
+There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.
