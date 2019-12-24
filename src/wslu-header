@@ -73,6 +73,7 @@ readonly BN_FAL_CREATORS=16299		#1709, Redstone 3, Fall Creators Update
 readonly BN_APR_EIGHTEEN=17134		#1803, Redstone 4, April 2018 Update
 readonly BN_OCT_EIGHTEEN=17763		#1809, Redstone 5, October 2018 Update
 readonly BN_MAY_NINETEEN=18362		#1903, 19H1, May 2019 Update
+readonly BN_NOV_NINETEEN=18363		#1909, 19H2, November 2019 Update
 
 # functions
 
