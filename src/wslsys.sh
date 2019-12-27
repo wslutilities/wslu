@@ -23,6 +23,16 @@ function call_install_date() {
 	echo "${installdate##* }"
 }
 
+function call_theme() {
+	win_theme=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" /v AppsUseLightTheme | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	win_theme=${win_theme##* }
+	if [ "$win_theme" != "0x1" ]; then
+		echo "dark"
+	else
+		echo "light"
+	fi
+}
+
 function call_display_scaling() {
 	display_scaling=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\Control Panel\\Desktop\\WindowMetrics" /v AppliedDPI | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	display_scaling=${display_scaling##* }
@@ -36,6 +46,11 @@ function call_windows_uptime() {
 	w_hours=$((win_uptime/3600%24))
 	w_minutes=$((win_uptime/60%60))
 	echo "${w_days}d ${w_hours}h ${w_minutes}m"
+}
+
+function get_windows_locale() {
+	win_uptime=$(winps_exec "(Get-Culture).Name" | sed -e 's|\r||g')
+	echo $win_uptime
 }
 
 ## WSL information
@@ -87,5 +102,7 @@ case $1 in
 		-K|--kernel) printer "WSL Kernel" "$kernel" "$2";exit;;
 		-P|--package) printer "Packages Count" "$packages" "$2";exit;;
 		-S|--display-scaling) printer "Display Scaling" "$(call_display_scaling)" "$2";exit;;
-		*) echo -e "Release Install Date: $(call_install_date)\nBranch: $(call_branch)\nBuild: $(call_build)\nFull Build: $(call_full_build)\nDisplay Scaling: $(call_display_scaling)\nWindows Uptime: $(call_windows_uptime)\nWSL Uptime: $uptime\nWSL Release: $release\nWSL Kernel: $kernel\nPackages Count: $packages";exit;;
+		-l|--locale) printer "Locale" "$(get_windows_locale)" "$2";exit;;
+		-t|--win-theme) printer "Windows Theme" "$(call_theme)" "$2"; exit;;
+		*) echo -e "Locale: $(get_windows_locale)\nRelease Install Date: $(call_install_date)\nBranch: $(call_branch)\nBuild: $(call_build)\nFull Build: $(call_full_build)\nDisplay Scaling: $(call_display_scaling)\nWindows Theme: $(call_theme)\nWindows Uptime: $(call_windows_uptime)\nWSL Uptime: $uptime\nWSL Release: $release\nWSL Kernel: $kernel\nPackages Count: $packages";exit;;
 esac
