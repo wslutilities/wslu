@@ -16,11 +16,12 @@ for args; do
 done
 
 hostname=$(</etc/hostname)
-branch=$(wslsys -b -s)
-build=$(wslsys -B -s)
-release=$(wslsys -R -s)
-kernel=$(wslsys -K -s)
-uptime=$(wslsys -wU -s)
+wslsys=$(wslsys)
+branch=$(echo "$wslsys" | grep -Po '^Branch: \K.*')
+build=$(echo "$wslsys" | grep -Po '^Build: \K.*')
+release=$(echo "$wslsys" | grep -Po '^Linux Release: \K.*')
+kernel=$(echo "$wslsys" | grep -Po '^Linux Kernel: \K.*')
+uptime=$(echo "$wslsys" | grep -Po '^Uptime: \K.*')
 
 case "$distro" in
 	'ubuntu')
