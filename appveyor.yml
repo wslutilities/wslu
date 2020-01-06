@@ -17,6 +17,6 @@ install:
   - ps: wsl -u root DEBIAN_FRONTEND=noninteractive apt-get install -y bc make imagemagick
 build_script:
   - ps: wsl make
-  - ps: wsl -u root make install PREFIX=/usr
+  - ps: wsl -u root DESTDIR=/usr make install
 test_script:
   - ps: wsl make test
