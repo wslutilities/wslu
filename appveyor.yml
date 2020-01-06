@@ -19,5 +19,7 @@ install:
 build_script:
   - ps: wsl make
   - ps: wsl -u root make install
+  - ps: wsl out/wslusc --verbose test1
+  - ps: Get-ChildItem $HOME\Desktop
 test_script:
   - ps: wsl make test
