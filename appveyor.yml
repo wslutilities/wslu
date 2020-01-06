@@ -14,9 +14,8 @@ clone_folder: C:\project\wslu
 install:
   - git submodule update --init --recursive
   - ps: wsl -u root apt-get update
-  - ps: wsl -u root DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
   - ps: wsl -u root DEBIAN_FRONTEND=noninteractive apt-get install -y bc make imagemagick
-  - ps: wsl -u root DEBIAN_FRONTEND=noninteractive apt-get remove ubuntu-wsl
+  - ps: Get-ChildItem $HOME
 build_script:
   - ps: wsl make
   - ps: wsl -u root make install
