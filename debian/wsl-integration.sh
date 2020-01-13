@@ -15,14 +15,14 @@ elif type pactl > /dev/null 2>&1 || type xvinfo > /dev/null 2>&1; then
     fi
 
     # create emty cache
-    [ -d $HOME/.cache/wslu ] || mkdir -p $HOME/.cache/wslu
-    echo -n "" > $WSL_INTEGRATION_CACHE
+    [ -d $HOME/.cache/wslu ] || mkdir -p $HOME/.cache/wslu 2> /dev/null
+    echo -n "" > $WSL_INTEGRATION_CACHE 2> /dev/null
 
     # set DISPLAY if there is an X11 server running
     if type xvinfo > /dev/null 2>&1 && env DISPLAY=${WSL_HOST}:0 timeout $WSL_HOST_X_TIMEOUT xvinfo > /dev/null 2>&1; then
         export DISPLAY=${WSL_HOST}:0
         export LIBGL_ALWAYS_INDIRECT=1
-        echo -e "export DISPLAY=$DISPLAY\nexport LIBGL_ALWAYS_INDIRECT=1" >> $WSL_INTEGRATION_CACHE
+        echo -e "export DISPLAY=$DISPLAY\nexport LIBGL_ALWAYS_INDIRECT=1" >> $WSL_INTEGRATION_CACHE 2> /dev/null
     fi
 
     # set up audio if pulse server is reachable only via tcp
@@ -30,7 +30,7 @@ elif type pactl > /dev/null 2>&1 || type xvinfo > /dev/null 2>&1; then
            && (! timeout $WSL_HOST_PA_TIMEOUT pactl info > /dev/null 2>&1 || timeout $WSL_HOST_PA_TIMEOUT pactl info 2> /dev/null | grep -q 'Default Sink: auto_null' ) \
            && env PULSE_SERVER=tcp:${WSL_HOST} timeout $WSL_HOST_PA_TIMEOUT pactl stat > /dev/null 2>&1; then
         export PULSE_SERVER=tcp:${WSL_HOST}
-        echo -e "export PULSE_SERVER=$PULSE_SERVER" >> $WSL_INTEGRATION_CACHE
+        echo -e "export PULSE_SERVER=$PULSE_SERVER" >> $WSL_INTEGRATION_CACHE 2> /dev/null
     fi
 
     unset WSL_HOST
