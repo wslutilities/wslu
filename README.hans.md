@@ -8,7 +8,6 @@
 [![GitHub (pre-)release](https://img.shields.io/github/v/release/wslutilities/wslu?include_prereleases&label=版本&logo=github&style=flat-square)](https://github.com/wslutilities/wslu)
 [![GitLab](https://img.shields.io/static/v1?label=gitlab&logo=gitlab&color=E24329&message=已镜像&style=flat-square)](https://gitlab.com/callmepk/wslu)
 [![码云](https://img.shields.io/static/v1?label=码云&color=C71D23&message=已镜像&style=flat-square)](https://gitee.com/mirrors/wslu)
-[![Gitter](https://img.shields.io/gitter/room/wslutilities/wslu?color=ED1965&logo=gitter&style=flat-square)](https://gitter.im/wslutilities/wslu)
 [![Twitter Follow](https://img.shields.io/twitter/follow/wslutilities?style=flat-square&logo=twitter&color=1DA1F2&label=关注)
 ](https://twitter.com/wslutilities)
 
@@ -90,7 +89,12 @@ wslu 已在 [AUR](https://aur.archlinux.org/packages/wslu/) 库中。你可以�
 
 ### Alpine Linux
 
-你可以从 Releases 界面下载`.apk`进行安装：`sudo apk add --allow-untrusted "wslu*"`.
+你现在可以通过执行以下指令安装：
+```
+$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/" | sudo tee -a /etc/apk/repositories
+$ sudo apk update
+$ sudo apk add wslu@testing
+```
 
 ### 其他发行版
 
