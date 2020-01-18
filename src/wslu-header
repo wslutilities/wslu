@@ -138,6 +138,7 @@ elif grep -q "/" ~/.config/wslu/baseexec; then
 	baseexec_gen
 elif ! which "$(cat ~/.config/wslu/baseexec)" &>/dev/null; then
 	# if baseexec cannnot be executed, regenerate
+	rm ~/.config/wslu/baseexec
 	baseexec_gen
 fi
 
