@@ -76,6 +76,9 @@ jobs:
           name: Push rpm package for fedora 30
           command: package_cloud push whitewaterfoundry/wslu/fedora/30 /tmp/pkgs/*.rpm --skip-errors
       - run:
+          name: Push rpm package for fedora 31
+          command: package_cloud push whitewaterfoundry/wslu/fedora/31 /tmp/pkgs/*.rpm --skip-errors
+      - run:
           name: Push rpm package for enterprise linux 7
           command: package_cloud push whitewaterfoundry/wslu/el/7 /tmp/pkgs/*.rpm --skip-errors
       - run:

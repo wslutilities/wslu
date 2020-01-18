@@ -35,7 +35,6 @@ uninstall:
 clean:
 	rm -rf $(OUTPATH)
 
-docs:
 	bash extras/script/doc_handler.sh
 
 test:

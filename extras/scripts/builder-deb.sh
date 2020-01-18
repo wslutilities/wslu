@@ -20,8 +20,10 @@
 
 BUILD_DIR="$(mktemp --tmpdir --directory wslu-build-debian.XXXX)"
 BUILD_VER="$(grep 'version=' ../../src/wslu-header | cut -d'=' -f 2 | xargs)"
+BUILD_RELEASE="2"
 EXTRA="~$(date +%Y%m%d%H%M%S)"
 CURRENT_DIR="$(pwd)"
+
 
 # nightly build handler
 if [[ "$1" != "--nightly" ]]; then
@@ -38,6 +40,7 @@ cp "$CURRENT_DIR"/../../src/etc/* "$BUILD_DIR"/usr/share/wslu/
 cp "$CURRENT_DIR"/../build/debian/* "$BUILD_DIR"/DEBIAN
 
 # modifying the files
+sed -i s/BUILDVER/"$BUILD_RELEASE"/g "$BUILD_DIR"/DEBIAN/control
 sed -i s/VERSIONPLACEHOLDER/"$BUILD_VER"/g "$BUILD_DIR"/DEBIAN/control
 sed -i s/NIGHTLYBUILDPLACEHOLDER/"$EXTRA"/g "$BUILD_DIR"/DEBIAN/control
 chmod 755 "$BUILD_DIR"/DEBIAN/{postinst,prerm}
