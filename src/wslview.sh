@@ -2,7 +2,7 @@ version="06"
 
 lname=""
 
-help_short="wslview (--register|--unregister|--help|--version) [LINK]"
+help_short="wslview (--reg-as-browser|--unreg-as-browser|--help|--version) [LINK]"
 
 function del_reg_alt {
 	if [ "$distro" == "archlinux" ] || [ "$distro" == "alpine" ]; then
@@ -28,8 +28,8 @@ function add_reg_alt {
 
 for args; do
 	case $args in
-		-r|--register) add_reg_alt;;
-		-u|--unregister) del_reg_alt;;
+		-r|--reg-as-browser) add_reg_alt;;
+		-u|--unreg-as-browser) del_reg_alt;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslview v$version"; exit;;
 		*) lname="$lname$args";;
