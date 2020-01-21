@@ -21,7 +21,7 @@ all:
 install:
 	install -Dm 555 docs/* -t $(DESTDIR)/share/man/man1
 	install -Dm 755 out/* -t $(DESTDIR)/bin
-	install -Dm 555 src/etc/* -t $(DESTDIR)/share/wslu
+	install -Dm 555 src/etc/* -t /usr/share/wslu
 
 uninstall: 
 	for f in $(INSTEDEXES); do \
