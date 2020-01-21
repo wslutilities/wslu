@@ -144,7 +144,7 @@ if [ ! -f ~/.config/wslu/baseexec ]; then
 elif grep -q "/" ~/.config/wslu/baseexec; then
 	# if baseexec is using the old linux style, regenerate
 	baseexec_gen
-elif ! which "$(cat ~/.config/wslu/baseexec)" >/dev/null; then
+elif ! which "$(cat ~/.config/wslu/baseexec)" &>/dev/null; then
 	# if baseexec cannnot be executed, regenerate
 	baseexec_gen
 fi
