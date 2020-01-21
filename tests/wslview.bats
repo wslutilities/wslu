@@ -9,11 +9,11 @@
 @test "wslview - Help" {
   run out/wslview --help
   [ "${lines[0]}" = "wslview - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
-  [ "${lines[1]}" = "Usage: wslview (--register|--unregister|--help|--version) [LINK]" ]
+  [ "${lines[1]}" = "Usage: wslview (--reg-as-browser|--unreg-as-browser|--help|--version) [LINK]" ]
 }
 
 @test "wslview - Help - Alt." {
   run out/wslview -h
   [ "${lines[0]}" = "wslview - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
-  [ "${lines[1]}" = "Usage: wslview (--register|--unregister|--help|--version) [LINK]" ]
+  [ "${lines[1]}" = "Usage: wslview (--reg-as-browser|--unreg-as-browser|--help|--version) [LINK]" ]
 }
