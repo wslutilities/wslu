@@ -37,16 +37,23 @@ for args; do
 done
 
 if [[ "$lname" != "" ]]; then
-	#if [[ "$lname" =~  file:///* ]]; then
-	#	if [[ "$WSL_DISTRO_NAME" != "" ]]; then
-	#		echo "do something"
-	#	else
-	#		echo "${error} This protocol is not supported before version 1903."
-	#		exit 34
-	#	fi
-	#else
-	winps_exec Start "\"$lname\""
-	#fi
+	if [[ "$lname" =~ ^file:\/\/\/.* ]]; then
+		wslutmpbuild=$(reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+		wslutmpbuild=${wslutmpbuild##* }
+		wslutmpbuild="$(( $wslutmpbuild + 0 ))"
+		if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
+			# if Windows 10 is in version 1903 or later
+			trimmed_lname="$(echo "$lname" | sed -e 's|^file:\/\/||g')"
+			properfile_full_path="$(readlink -f "$trimmed_lname")"
+			converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME$(echo "$properfile_full_path" | sed -e 's|\/|\\|g')"
+			winps_exec Start "\"$converted_file_path\""
+		else
+			echo "${error} This protocol is not supported before version 1903."
+			exit 34
+		fi
+	else
+		winps_exec Start "\"$lname\""
+	fi
 else
 	echo "${error}No input, aborting"
 	exit 21
