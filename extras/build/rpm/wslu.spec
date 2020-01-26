@@ -33,7 +33,7 @@ mkdir -p ${RPM_BUILD_ROOT}/usr/share/wslu
 mkdir -p ${RPM_BUILD_ROOT}/usr/share/man/man1
 install -m755 wsl* ${RPM_BUILD_ROOT}%{_bindir}
 install -m555 etc/* ${RPM_BUILD_ROOT}/usr/share/wslu
-install -m555 docs/* ${RPM_BUILD_ROOT}/usr/share/man/man1
+install -m555 out-docs/* ${RPM_BUILD_ROOT}/usr/share/man/man1
 
 %post
 %{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 1
