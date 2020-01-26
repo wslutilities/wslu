@@ -18,37 +18,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# get documentation from online
-git clone https://github.com/wslutilities/wslu.wiki.git
-
-OUTPATH="../../docs"
-SOURCES=(wslfetch wslsys wslupath wslusc wslview wslvar)
-BUILD_TIME="$(date +%Y-%m-%d)"
+SOURCEPATH="../../docs"
+OUTPATH="../../out-docs"
+BUILD_TIME="$"
 
 [[ -d "$OUTPATH" ]] || mkdir "$OUTPATH"
 
-for file in "${SOURCES[@]}"; do
-    NAME_CAP="$(echo "$file" | tr '[:lower:]' '[:upper:]')"
-    
-    # rename the filename
-    mv wslu.wiki/"$file".md wslu.wiki/"$file"
-    
-    # generate base files using ronn
-    ronn --manual="$NAME_CAP" --organization="Patrick Wu" --date="$BUILD_TIME" wslu.wiki/"$file"
-
-    # cleanup folder for file modification
-    rm wslu.wiki/"$file".html
-    mv wslu.wiki/"$file" wslu.wiki/"$file".1
-
+for file in "$(ls $SOURCEPATH)"; do
+    cp "$SOURCEPATH/$file" "$OUTPATH"
     # Manpage Modification
-    sed -i "s|.TH \"$NAME_CAP\" \"\"|.TH \"$NAME_CAP\" \"1\"|" wslu.wiki/"$file".1
+    sed -i "s|DATEPLACEHOLDER|"$$()""|" "$OUTPATH/$file"
     sed -i 's|.SH "NAME"||' wslu.wiki/"$file".1
     sed -i 's|\\fBwslfetch\\fR||' wslu.wiki/"$file".1
     sed -i 's|Manpage Name|NAME|' wslu.wiki/"$file".1
 
-    # gzip file and move to the destination
-    gzip wslu.wiki/"$file".1
-    mv wslu.wiki/"$file".1.gz "$OUTPATH"
+    # gzip file and mremove the temp file
+    gzip "$OUTPATH/$file"
+    rm "$OUTPATH/$file"
 done
 
 # cleanup temp files

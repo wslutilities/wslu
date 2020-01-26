@@ -1,6 +1,8 @@
 AUTOMAKE_OPTIONS = foreign
 HEADER = src/wslu-header
 OUTPATH = out
+MANPATH = docs
+OUTMANPATH = out-docs
 CURPATH = $(shell pwd)
 
 SOURCES := $(wildcard src/*.sh)
@@ -16,10 +18,10 @@ all:
 		cat $(HEADER) $$file > $(OUTPATH)/`basename $$file`; \
 		mv $(OUTPATH)/`basename $$file` $(OUTPATH)/`basename $$file .sh`; \
 	done
-	chmod +x $(OUTPATH)/*
+	chmod +x $(OUTPFILES)
 
 install:
-	install -Dm 555 docs/* -t $(DESTDIR)/share/man/man1
+	install -Dm 555 docs-out/* -t $(DESTDIR)/share/man/man1
 	install -Dm 755 out/* -t $(DESTDIR)/bin
 	install -Dm 555 src/etc/* -t /usr/share/wslu
 
@@ -32,10 +34,18 @@ uninstall:
 	done
 	rm -rf /usr/share/wslu
 
+doc:
+	[ -d $(OUTMANPATH) ] || mkdir $(OUTMANPATH)
+	for file in $(MANFILES); do \
+    	cp $$file $(OUTMANPATH); \
+    	sed -i 's|DATEPLACEHOLDER|''$(date +%Y-%m-%d)''|' $(OUTMANPATH)/`basename $$file`; \
+		sed -i 's|VERSIONPLACEHOLDER|''$(grep 'version=' $(HEADER) | cut -d'=' -f 2 | xargs)''|' $(OUTMANPATH)/`basename $$file`; \
+		gzip $(OUTMANPATH)/`basename $$file`; \
+		rm $(OUTMANPATH)/`basename $$file`; \
+	done
+
 clean:
 	rm -rf $(OUTPATH)
-
-	bash extras/script/doc_handler.sh
 
 test:
 	extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslvar.bats tests/wslfetch.bats tests/wslview.bats
