@@ -12,13 +12,16 @@ MANFILES := $(wildcard docs/*)
 INSTEDEXES := $(wildcard /usr/bin/wsl*)
 INSTEDMANS := $(wildcard /usr/share/man/man1/wsl*)
 
+DATETMP = $(shell date +%Y-%m-%d)
+VERTMP = $(shell grep 'version=' $(HEADER) | cut -d'=' -f 2 | xargs)
+
 all:
 	[ -d $(OUTPATH) ] || mkdir $(OUTPATH)
 	for file in $(SOURCES); do \
 		cat $(HEADER) $$file > $(OUTPATH)/`basename $$file`; \
 		mv $(OUTPATH)/`basename $$file` $(OUTPATH)/`basename $$file .sh`; \
 	done
-	chmod +x $(OUTPFILES)
+	chmod +x $(OUTPATH)/*
 
 install:
 	install -Dm 555 docs-out/* -t $(DESTDIR)/share/man/man1
@@ -38,14 +41,14 @@ doc:
 	[ -d $(OUTMANPATH) ] || mkdir $(OUTMANPATH)
 	for file in $(MANFILES); do \
     	cp $$file $(OUTMANPATH); \
-    	sed -i 's|DATEPLACEHOLDER|''$(date +%Y-%m-%d)''|' $(OUTMANPATH)/`basename $$file`; \
-		sed -i 's|VERSIONPLACEHOLDER|''$(grep 'version=' $(HEADER) | cut -d'=' -f 2 | xargs)''|' $(OUTMANPATH)/`basename $$file`; \
-		gzip $(OUTMANPATH)/`basename $$file`; \
-		rm $(OUTMANPATH)/`basename $$file`; \
+    	sed -e 's/DATEPLACEHOLDER/'$(DATETMP)'/' -e 's/VERSIONPLACEHOLDER/'$(VERTMP)'/' $(OUTMANPATH)/`basename $$file` > $(OUTMANPATH)/`basename $$file`.tmp; \
+		mv $(OUTMANPATH)/`basename $$file`.tmp $(OUTMANPATH)/`basename $$file`; \
+		gzip -f -q $(OUTMANPATH)/`basename $$file`; \
 	done
 
 clean:
 	rm -rf $(OUTPATH)
+	rm -rf $(OUTMANPATH)
 
 test:
 	extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslvar.bats tests/wslfetch.bats tests/wslview.bats
