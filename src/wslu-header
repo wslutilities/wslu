@@ -121,7 +121,6 @@ function baseexec_gen {
 			# fallback if it is imported repository or other type
 			echo "C:\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
 		fi
-	fi
 	else
 		# older version fallback.
 		echo "C:\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
