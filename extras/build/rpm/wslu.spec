@@ -12,7 +12,7 @@
 Summary: Windows 10 Linux Subsystem Utilities
 Name: wslu
 Version: BUILDVERPLACEHOLDERNIGHTLYBUILDPLACEHOLDER
-Release: 2
+Release: 3
 Source: wslu-BUILDVERPLACEHOLDER.tar.gz
 BuildArch: noarch
 Requires: bc ImageMagick

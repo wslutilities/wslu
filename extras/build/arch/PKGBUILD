@@ -2,7 +2,7 @@
 
 pkgname=wslu
 pkgver=2.3.5
-pkgrel=0
+pkgrel=3
 pkgdesc="A collection of utilities for Windows 10 Linux Subsystems"
 arch=('any')
 url='https://github.com/wslutilities/wslu'
