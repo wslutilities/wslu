@@ -117,12 +117,20 @@ function baseexec_gen {
 	wslutmpbuild=${wslutmpbuild##* }
 	wslutmpbuild="$(( $wslutmpbuild + 0 ))"
 	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
+		# The environment variable only available in 19H1 or later.
 		wslu_distro_regpath=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | grep -B1 -e "$WSL_DISTRO_NAME" | head -n1 | sed -e 's|\r||g')
-		wslu_distro_packagename=$($(interop_prefix)c/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-		wslu_distro_packagename=${wslu_distro_packagename##* }
-		wslu_base_exec_folder_path="$(wslpath "$(double_dash_p $(winps_exec "Write-Output \$Env:LOCALAPPDATA" | tr -d "\r"))\\Microsoft\\WindowsApps\\$wslu_distro_packagename")"
-		wslpath -w "$(find "$wslu_base_exec_folder_path" -name "*.exe")" > ~/.config/wslu/baseexec
+		if $(interop_prefix)c/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName &>/dev/null; then
+			# if it is a store distro
+			wslu_distro_packagename=$($(interop_prefix)c/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+			wslu_distro_packagename=${wslu_distro_packagename##* }
+			wslu_base_exec_folder_path="$(wslpath "$(double_dash_p $(winps_exec "Write-Output \$Env:LOCALAPPDATA" | tr -d "\r"))\\Microsoft\\WindowsApps\\$wslu_distro_packagename")"
+			wslpath -w "$(find "$wslu_base_exec_folder_path" -name "*.exe")" > ~/.config/wslu/baseexec
+		else
+			# if it is imported distro
+			echo "C:\\Windows\\System32\\wsl.exe -d $WSL_DISTRO_NAME" > ~/.config/wslu/baseexec
+		fi
 	else
+		# older version fallback.
 		echo "C:\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
 	fi
 }
