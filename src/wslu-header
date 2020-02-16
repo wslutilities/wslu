@@ -138,6 +138,21 @@ function baseexec_gen {
 	fi
 }
 
+function wslu_file_check {
+	if [[ ! -f "$1/$2" ]]; then
+		echo "${warn} $2 not found in Windows directory. Copying right now..."
+		[[ -d "$1" ]] || mkdir "$1"
+		if [[ -f "/usr/share/wslu/$2" ]]; then
+			cp "/usr/share/wslu/$2" "$1"
+			echo "${info} $2 copied. Located at \"$1\"."
+		else
+			echo "${error} $2 not found. Failed to copy."
+			exit 30
+		fi
+	fi
+}
+
+
 # first run, saving some information
 if [ ! -d ~/.config/wslu ]; then
 	mkdir -p ~/.config/wslu
