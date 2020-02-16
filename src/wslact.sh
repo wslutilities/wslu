@@ -63,9 +63,13 @@ function time_sync {
 		esac
 	done
 	echo "${info} Before Sync: $(date +"%d %b %Y %T %Z")"
-	sudo date -s "$(winps_exec "Get-Date -UFormat \"%d %b %Y %T %Z\"" | tr -d "\r")"
-	echo "${info} After Sync: $(date +"%d %b %Y %T %Z")"
-	echo "${info} Manual Time Sync Complete."
+	if sudo date -s "$(winps_exec "Get-Date -UFormat \"%d %b %Y %T %Z\"" | tr -d "\r")" >/dev/null; then
+		echo "${info} After Sync: $(date +"%d %b %Y %T %Z")"
+		echo "${info} Manual Time Sync Complete."
+	else
+		echo "${error} Time Sync failed."
+		exit 1
+	fi
 }
 
 
