@@ -18,34 +18,11 @@ function gen_startup {
 	if [[ "$name" != "" ]]; then
 		tpath=$(double_dash_p "$(wslvar -s TMP)") # Windows Temp, Win Double Sty.
 		script_location="$(wslpath "$(wslvar -s USERPROFILE)")/wslu" # Windows wslu, Linux WSL Sty.
-		localfile_path="/usr/share/wslu" # WSL wslu source file location, Linux Sty.
 		script_location_win="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu" #  Windows wslu, Win Double Sty.
 
-		# Check presence of sudo.ps1
-		if [[ ! -f $script_location/sudo.ps1 ]]; then
-			echo "${warn} sudo.ps1 not found in Windows directory. Copying right now..."
-			[[ -d $script_location ]] || mkdir "$script_location"
-			if [[ -f $localfile_path/sudo.ps1 ]]; then
-				cp "$localfile_path"/sudo.ps1 "$script_location"
-				echo "${info} runHidden.vbs copied. Located at \"$script_location\"."
-			else
-				echo "${error} runHidden.vbs not found. Failed to copy."
-				exit 30
-			fi
-		fi
-
-		# Check presence of runHidden.vbs 
-		if [[ ! -f $script_location/runHidden.vbs ]]; then
-			echo "${warn} runHidden.vbs not found in Windows directory. Copying right now..."
-			[[ -d $script_location ]] || mkdir "$script_location"
-			if [[ -f $localfile_path/runHidden.vbs ]]; then
-				cp "$localfile_path"/runHidden.vbs "$script_location"
-				echo "${info} runHidden.vbs copied. Located at \"$script_location\"."
-			else
-				echo "${error} runHidden.vbs not found. Failed to copy."
-				exit 30
-			fi
-		fi
+		# Check presence of sudo.ps1 and 
+		wslu_file_check "$script_location" "sudo.ps1"
+		wslu_file_check "$script_location" "runHidden.vbs"
 
 		# check if it is a service or a 
 		if [[ $isService -eq 1 ]]; then
