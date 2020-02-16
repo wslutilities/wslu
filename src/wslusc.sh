@@ -38,11 +38,11 @@ if [[ $is_interactive -eq 1 ]]; then
 fi
 
 if [[ "$cname" != "" ]]; then
+	up_path="$(wslvar -s USERPROFILE)"
 	tpath=$(double_dash_p "$(wslvar -s TMP)") # Windows Temp, Win Double Sty.
 	dpath=$(wslpath "$(wslvar -l Desktop)") # Windows Desktop, Win Sty.
-	script_location="$(wslpath "$(wslvar -s USERPROFILE)")/wslu" # Windows wslu, Linux WSL Sty.
-	localfile_path="/usr/share/wslu" # WSL wslu source file location, Linux Sty.
-	script_location_win="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu" #  Windows wslu, Win Double Sty.
+	script_location="$(wslpath "$up_path")/wslu" # Windows wslu, Linux WSL Sty.
+	script_location_win="$(double_dash_p "$up_path")\\wslu" #  Windows wslu, Win Double Sty.
 	distro_location_win="$(double_dash_p "$(cat ~/.config/wslu/baseexec)")" # Distro Location, Win Double Sty.
 
 	# change param according to the exec.
@@ -68,7 +68,7 @@ if [[ "$cname" != "" ]]; then
 		ext="${iconpath##*.}"
 
 		if [[ ! -f $iconpath ]]; then
-			iconpath="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu\\wsl.ico"
+			iconpath="$(double_dash_p "$up_path")\\wslu\\wsl.ico"
 			echo "${warn} Icon not found. Reset to default icon..."
 		else
 			echo "${info} You choose to use custom icon: $iconpath. Processing..."
@@ -93,7 +93,7 @@ if [[ "$cname" != "" ]]; then
 			iconpath="$script_location_win\\$icon_filename"
 		fi
 	else
-		iconpath="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu\\wsl.ico"
+		iconpath="$(double_dash_p "$up_path")\\wslu\\wsl.ico"
 	fi
 	
 	# handling custom vairable command
@@ -110,6 +110,6 @@ if [[ "$cname" != "" ]]; then
 	mv "$tpath" "$dpath"
 	echo "${info} Create shortcut ${new_cname}.lnk successful"
 else
-	echo "${error}No input, aborting"
+	echo "${error} No input, aborting"
 	exit 21
 fi

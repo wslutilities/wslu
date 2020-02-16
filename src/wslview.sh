@@ -6,7 +6,7 @@ help_short="wslview (--reg-as-browser|--unreg-as-browser|--help|--version) [LINK
 
 function del_reg_alt {
 	if [ "$distro" == "archlinux" ] || [ "$distro" == "alpine" ]; then
-		echo "${error}Unsupported action for this distro. Aborted. "
+		echo "${error} Unsupported action for this distro. Aborted. "
 		exit 34
 	else
 		sudo update-alternatives --remove x-www-browser "$(readlink -f "$0")"
@@ -17,7 +17,7 @@ function del_reg_alt {
 
 function add_reg_alt {
 	if [ "$distro" == "archlinux" ] || [ "$distro" == "alpine" ]; then
-		echo "${error}Unsupported action for this distro. Aborted. "
+		echo "${error} Unsupported action for this distro. Aborted. "
 		exit 34
 	else
 		sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser "$(readlink -f "$0")" 1
@@ -55,6 +55,6 @@ if [[ "$lname" != "" ]]; then
 		winps_exec Start "\"$lname\""
 	fi
 else
-	echo "${error}No input, aborting"
+	echo "${error} No input, aborting"
 	exit 21
 fi
