@@ -58,30 +58,9 @@ if [[ "$cname" != "" ]]; then
 		new_cname=$customname
 	fi
 
-	# Check default icon location
-	if [[ ! -f $script_location/wsl.ico ]]; then
-		echo "${warn} Default wslusc icon \"wsl.ico\" not found in Windows directory. Copying right now..."
-		[[ -d $script_location ]] || mkdir "$script_location"
-		if [[ -f $localfile_path/wsl.ico ]]; then
-			cp "$localfile_path"/wsl.ico "$script_location"
-			echo "${info} Default wslusc icon \"wsl.ico\" copied. Located at \"$script_location\"."
-		else
-			echo "${error} wsl.ico not found. Failed to copy."
-			exit 30
-		fi
-	fi
-	# Check presence of runHidden.vbs 
-	if [[ ! -f $script_location/runHidden.vbs ]]; then
-		echo "${warn} runHidden.vbs not found in Windows directory. Copying right now..."
-		[[ -d $script_location ]] || mkdir "$script_location"
-		if [[ -f $localfile_path/runHidden.vbs ]]; then
-			cp "$localfile_path"/runHidden.vbs "$script_location"
-			echo "${info} runHidden.vbs copied. Located at \"$script_location\"."
-		else
-			echo "${error} runHidden.vbs not found. Failed to copy."
-			exit 30
-		fi
-	fi
+	# Check default icon and runHidden.vbs
+	wslu_file_check "$script_location" "wsl.ico"
+	wslu_file_check "$script_location" "runHidden.vbs"
 
 	# handling icon
 	if [[ "$iconpath" != "" ]]; then
