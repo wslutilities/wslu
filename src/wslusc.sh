@@ -47,7 +47,7 @@ if [[ "$cname" != "" ]]; then
 
 	# change param according to the exec.
 	distro_param="run"
-	if [[ "$distro_location_win" == *wsl.exe ]]; then
+	if [[ "$distro_location_win" == *wsl.exe* ]]; then
 		distro_param="-e"
 	fi
 
