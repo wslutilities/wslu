@@ -29,7 +29,7 @@ set +x
 
 # when --verbose, verbose.
 if [ "$1" == "--verbose" ]; then
-	echo -e '\e[38;5;202m\033[1m Showing verbose output. \033(B\033[m'
+	echo -e '\e[38;5;202m\033[1m[verbose] Showing verbose output. \033(B\033[m'
 	shift
 	set -x
 fi
@@ -65,7 +65,6 @@ info="${green}[info]${reset}"
 input_info="${cyan}[input]${reset}"
 error="${red}[error]${reset}"
 warn="${orange}[warn]${reset}"
-debug="${orange}${bold}[debug]${reset}"
 
 ## Windows build number constant
 readonly BN_SPR_CREATORS=15063		#1703, Redstone 2, Creators Update
@@ -82,11 +81,15 @@ function help {
 	echo -e "$app_name - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux
 Usage: $2
 
-For more help for $app_name, visit the following site: https://github.com/wslutilities/wslu/wiki/$app_name"
+For more help for $app_name, visit the following site: https://wslu.patrickwu.space/man/$app_name"
 }
 
 function double_dash_p {
 	echo "${@//\\/\\\\}"
+}
+
+function verbose_echo {
+	echo "${orange}${bold}[verbose]${reset} $@"
 }
 
 function interop_prefix {
