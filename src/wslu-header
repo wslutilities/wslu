@@ -104,36 +104,27 @@ function interop_prefix {
 	hard_reset=0
 	if [ -f /etc/wsl.conf ]; then
 		tmp="$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf | awk '{$1=$1;print}')"
-		debug_echo "result of \$tmp: $tmp"
 		if [ "$tmp" == "" ]; then
-			debug_echo "win_location set to $win_location"
 			win_location="/mnt/"
 		else
-			debug_echo "win_location set to $win_location"
 			win_location="$tmp"
 		fi
 		unset tmp
 	else
-		debug_echo "win_location set to $win_location"
 		win_location="/mnt/"
 	fi
 
 	for pt in $(ls "$win_location"); do
-		debug_echo "found \"$pt\" in $win_location, checking"
 		if [ $(echo "$pt" | wc -l) -eq 1 ]; then
 			if [ -d "$win_location$pt/Windows/System32" ]; then
 				hard_reset=1
-				debug_echo "Windows Drive location found: $win_location$pt"
 				win_location="$win_location$pt"
 				break
 			fi
-		else
-			debug_echo "$win_location$pt: not a Windows drive"
 		fi 
 	done
 
 	if [ $hard_reset -eq 0 ]; then
-		debug_echo "fallback to default"
 		win_location="${win_location}c"
 	fi
 
