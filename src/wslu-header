@@ -103,7 +103,7 @@ function interop_prefix {
 	win_location=""
 	hard_reset=0
 	if [ -f /etc/wsl.conf ]; then
-		tmp=$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf | awk '{$1=$1;print}')
+		tmp="$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf | awk '{$1=$1;print}')"
 		debug_echo "result of \$tmp: $tmp"
 		if [ "$tmp" == "" ]; then
 			debug_echo "win_location set to $win_location"
