@@ -28,8 +28,10 @@ LANG=C
 set +x
 
 # when --verbose, verbose.
+wslu_verbose=0
 if [ "$1" == "--verbose" ]; then
 	echo -e '\e[38;5;202m\033[1m[verbose] Showing verbose output. \033(B\033[m'
+	wslu_verbose=1
 	shift
 	set -x
 fi
@@ -76,6 +78,10 @@ readonly BN_NOV_NINETEEN=18363		#1909, 19H2, November 2019 Update
 
 # functions
 
+function verbose_echo {
+	[ $wslu_verbose ] || echo "${orange}${bold}[verbose]${reset} $@"
+}
+
 function help {
 	app_name=$(basename "$1")
 	echo -e "$app_name - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux
@@ -86,10 +92,6 @@ For more help for $app_name, visit the following site: https://wslu.patrickwu.sp
 
 function double_dash_p {
 	echo "${@//\\/\\\\}"
-}
-
-function verbose_echo {
-	echo "${orange}${bold}[verbose]${reset} $@"
 }
 
 function interop_prefix {
