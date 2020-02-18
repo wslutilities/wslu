@@ -4,27 +4,27 @@ help_short="wslsys (-h|-v|-I|-b|-B|-fB|-U|-R|-K|-P) -s"
 
 ## Windows 10 information
 function call_branch() {
-	branch=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildBranch | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	branch=$("$(interop_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildBranch | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	echo "${branch##* }"
 }
 
 function call_build() {
-	build=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	build=$("$(interop_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	echo "${build##* }"
 }
 
 function call_full_build() {
-	full_build=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildLabEx | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	full_build=$("$(interop_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildLabEx | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	echo "${full_build##* }"
 }
 
 function call_install_date() {
-	installdate=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v InstallDate | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	installdate=$("$(interop_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v InstallDate | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	echo "${installdate##* }"
 }
 
 function call_theme() {
-	win_theme=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" /v AppsUseLightTheme | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	win_theme=$("$(interop_prefix)"/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" /v AppsUseLightTheme | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	win_theme=${win_theme##* }
 	if [ "$win_theme" != "0x1" ]; then
 		echo "dark"
@@ -34,7 +34,7 @@ function call_theme() {
 }
 
 function call_display_scaling() {
-	display_scaling=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\Control Panel\\Desktop\\WindowMetrics" /v AppliedDPI | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	display_scaling=$("$(interop_prefix)"/Windows/System32/reg.exe query "HKCU\\Control Panel\\Desktop\\WindowMetrics" /v AppliedDPI | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	display_scaling=${display_scaling##* }
 	echo "$(bc -l <<< "$(printf "%d\n" "$display_scaling")/96" | sed -e "s/\.0//g" -e "s/0*$//g")"
 }
