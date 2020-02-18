@@ -101,7 +101,6 @@ function double_dash_p {
 
 function interop_prefix {
 	win_location=""
-	hard_reset=0
 	if [ -f /etc/wsl.conf ]; then
 		tmp="$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf | awk '{$1=$1;print}')"
 		if [ "$tmp" == "" ]; then
@@ -114,18 +113,26 @@ function interop_prefix {
 		win_location="/mnt/"
 	fi
 
+	echo "$win_location"
+
+	unset win_location
+}
+
+function sysdrive_prefix {
+	win_location="$(interop_prefix)"
+	hard_reset=0
 	for pt in $(ls "$win_location"); do
 		if [ $(echo "$pt" | wc -l) -eq 1 ]; then
 			if [ -d "$win_location$pt/Windows/System32" ]; then
 				hard_reset=1
-				win_location="$win_location$pt"
+				win_location="$pt"
 				break
 			fi
 		fi 
 	done
 
 	if [ $hard_reset -eq 0 ]; then
-		win_location="${win_location}c"
+		win_location="c"
 	fi
 
 	echo "$win_location"
@@ -135,37 +142,37 @@ function interop_prefix {
 }
 
 function chcp_com {
-	"$(interop_prefix)"/Windows/System32/chcp.com "$@" >/dev/null
+	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/chcp.com "$@" >/dev/null
 }
 
 function winps_exec {
 	chcp_com "$(cat ~/.config/wslu/oemcp)"
-	"$(interop_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive –ExecutionPolicy Bypass -Command "$@"
+	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive –ExecutionPolicy Bypass -Command "$@"
 	EXIT_STATUS=$?
 	chcp_com 65001
 	return $EXIT_STATUS
 }
 
 function baseexec_gen {
-	wslutmpbuild=$("$(interop_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	wslutmpbuild=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	wslutmpbuild=${wslutmpbuild##* }
 	wslutmpbuild="$(( $wslutmpbuild + 0 ))"
 	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
 		# The environment variable only available in 19H1 or later.
-		wslu_distro_regpath=$("$(interop_prefix)"/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | grep -B1 -e "$WSL_DISTRO_NAME" | head -n1 | sed -e 's|\r||g')
-		if $(interop_prefix)/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName &>/dev/null; then
+		wslu_distro_regpath=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | grep -B1 -e "$WSL_DISTRO_NAME" | head -n1 | sed -e 's|\r||g')
+		if "$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName &>/dev/null; then
 			# if it is a store distro
-			wslu_distro_packagename=$($(interop_prefix)/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+			wslu_distro_packagename=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 			wslu_distro_packagename=${wslu_distro_packagename##* }
 			wslu_base_exec_folder_path="$(wslpath "$(double_dash_p $(winps_exec "Write-Output \$Env:LOCALAPPDATA" | tr -d "\r"))\\Microsoft\\WindowsApps\\$wslu_distro_packagename")"
 			wslpath -w "$(find "$wslu_base_exec_folder_path" -name "*.exe")" > ~/.config/wslu/baseexec
 		else
 			# if it is imported distro
-			echo "$(double_dash_p "$(wslpath -w "$(interop_prefix)")")\\Windows\\System32\\wsl.exe -d $WSL_DISTRO_NAME" > ~/.config/wslu/baseexec
+			echo "$(double_dash_p "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")")\\Windows\\System32\\wsl.exe -d $WSL_DISTRO_NAME" > ~/.config/wslu/baseexec
 		fi
 	else
 		# older version fallback.
-		echo "$(double_dash_p "$(wslpath -w "$(interop_prefix)")")\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
+		echo "$(double_dash_p "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")")\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
 	fi
 }
 
@@ -191,7 +198,7 @@ fi
 
 # generate oem codepage
 if [ ! -f ~/.config/wslu/oemcp ]; then
-	"$(interop_prefix)"/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*' > ~/.config/wslu/oemcp
+	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*' > ~/.config/wslu/oemcp
 fi
 
 # generate base exe locaiton
