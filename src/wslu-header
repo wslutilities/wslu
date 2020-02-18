@@ -36,7 +36,7 @@ if [ "$1" == "--verbose" ]; then
 	echo -e '\e[38;5;202m\033[1m[verbose] Showing verbose output. \033(B\033[m'
 	shift
 	set -x
-elif ["$1" == "--debug"]; then
+elif [ "$1" == "--debug" ]; then
 	wslu_debug=1
 	echo -e '\e[38;5;202m\033[1m[debug] Showing debug output. \033(B\033[m'
 	shift
@@ -84,7 +84,7 @@ readonly BN_NOV_NINETEEN=18363		#1909, 19H2, November 2019 Update
 
 # functions
 function debug_echo {
-	[ $wslu_debug -eq 0 ] || echo "${orange}${bold}[debug]${reset} $@"
+	[ $wslu_debug -eq 1 ] && echo "${orange}${bold}[debug]${reset} $@"
 }
 
 function help {
@@ -118,9 +118,9 @@ function interop_prefix {
 		win_location="/mnt/"
 	fi
 
-	for pt in (ls "$win_location"); do
+	for pt in $(ls "$win_location"); do
 		debug_echo "found \"$pt\" in $win_location, checking"
-		if [ $(echo "$pt" | wc -l) -gt 1 ]; then
+		if [ $(echo "$pt" | wc -l) -eq 1 ]; then
 			if [ -d "$win_location$pt/Windows/System32" ]; then
 				hard_reset=1
 				debug_echo "Windows Drive location found: $win_location$pt"
