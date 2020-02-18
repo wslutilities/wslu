@@ -27,13 +27,19 @@ LANG=C
 # prevent bash -x
 set +x
 
-# when --verbose, verbose.
-wslu_verbose=0
+# when --verbose, verbose; when --debug, debug.
+#
+# They should not exist at the same time, otherwise
+# the output would be too messy.
+wslu_debug=0
 if [ "$1" == "--verbose" ]; then
 	echo -e '\e[38;5;202m\033[1m[verbose] Showing verbose output. \033(B\033[m'
-	wslu_verbose=1
 	shift
 	set -x
+elif ["$1" == "--debug"]; then
+	wslu_debug=1
+	echo -e '\e[38;5;202m\033[1m[debug] Showing debug output. \033(B\033[m'
+	shift
 fi
 
 # checking interopability
@@ -77,9 +83,8 @@ readonly BN_MAY_NINETEEN=18362		#1903, 19H1, May 2019 Update
 readonly BN_NOV_NINETEEN=18363		#1909, 19H2, November 2019 Update
 
 # functions
-
-function verbose_echo {
-	[ $wslu_verbose ] || echo "${orange}${bold}[verbose]${reset} $@"
+function debug_echo {
+	[ $wslu_debug -eq 0 ] || echo "${orange}${bold}[debug]${reset} $@"
 }
 
 function help {
@@ -95,25 +100,56 @@ function double_dash_p {
 }
 
 function interop_prefix {
+	win_location=""
+	hard_reset=0
 	if [ -f /etc/wsl.conf ]; then
 		tmp=$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf | awk '{$1=$1;print}')
+		debug_echo "result of \$tmp: $tmp"
 		if [ "$tmp" == "" ]; then
-			echo "/mnt/"
+			debug_echo "win_location set to $win_location"
+			win_location="/mnt/"
 		else
-			echo "$tmp"
+			debug_echo "win_location set to $win_location"
+			win_location="$tmp"
 		fi
+		unset tmp
 	else
-		echo "/mnt/"
+		debug_echo "win_location set to $win_location"
+		win_location="/mnt/"
 	fi
+
+	for pt in (ls "$win_location"); do
+		debug_echo "found \"$pt\" in $win_location, checking"
+		if [ $(echo "$pt" | wc -l) -gt 1 ]; then
+			if [ -d "$win_location$pt/Windows/System32" ]; then
+				hard_reset=1
+				debug_echo "Windows Drive location found: $win_location$pt"
+				win_location="$win_location$pt"
+				break
+			fi
+		else
+			debug_echo "$win_location$pt: not a Windows drive"
+		fi 
+	done
+
+	if [ $hard_reset -eq 0 ]; then
+		debug_echo "fallback to default"
+		win_location="${win_location}c"
+	fi
+
+	echo "$win_location"
+
+	unset win_location
+	unset hard_reset
 }
 
 function chcp_com {
-	"$(interop_prefix)"c/Windows/System32/chcp.com "$@" >/dev/null
+	"$(interop_prefix)"/Windows/System32/chcp.com "$@" >/dev/null
 }
 
 function winps_exec {
 	chcp_com "$(cat ~/.config/wslu/oemcp)"
-	"$(interop_prefix)"c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive –ExecutionPolicy Bypass -Command "$@"
+	"$(interop_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive –ExecutionPolicy Bypass -Command "$@"
 	EXIT_STATUS=$?
 	chcp_com 65001
 	return $EXIT_STATUS
@@ -125,20 +161,20 @@ function baseexec_gen {
 	wslutmpbuild="$(( $wslutmpbuild + 0 ))"
 	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
 		# The environment variable only available in 19H1 or later.
-		wslu_distro_regpath=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | grep -B1 -e "$WSL_DISTRO_NAME" | head -n1 | sed -e 's|\r||g')
-		if $(interop_prefix)c/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName &>/dev/null; then
+		wslu_distro_regpath=$("$(interop_prefix)"/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | grep -B1 -e "$WSL_DISTRO_NAME" | head -n1 | sed -e 's|\r||g')
+		if $(interop_prefix)/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName &>/dev/null; then
 			# if it is a store distro
-			wslu_distro_packagename=$($(interop_prefix)c/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+			wslu_distro_packagename=$($(interop_prefix)/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 			wslu_distro_packagename=${wslu_distro_packagename##* }
 			wslu_base_exec_folder_path="$(wslpath "$(double_dash_p $(winps_exec "Write-Output \$Env:LOCALAPPDATA" | tr -d "\r"))\\Microsoft\\WindowsApps\\$wslu_distro_packagename")"
 			wslpath -w "$(find "$wslu_base_exec_folder_path" -name "*.exe")" > ~/.config/wslu/baseexec
 		else
 			# if it is imported distro
-			echo "C:\\Windows\\System32\\wsl.exe -d $WSL_DISTRO_NAME" > ~/.config/wslu/baseexec
+			echo "$(double_dash_p "$(wslpath -w "$(interop_prefix)")")\\Windows\\System32\\wsl.exe -d $WSL_DISTRO_NAME" > ~/.config/wslu/baseexec
 		fi
 	else
 		# older version fallback.
-		echo "C:\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
+		echo "$(double_dash_p "$(wslpath -w "$(interop_prefix)")")\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
 	fi
 }
 
@@ -164,7 +200,7 @@ fi
 
 # generate oem codepage
 if [ ! -f ~/.config/wslu/oemcp ]; then
-	"$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*' > ~/.config/wslu/oemcp
+	"$(interop_prefix)"/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*' > ~/.config/wslu/oemcp
 fi
 
 # generate base exe locaiton
