@@ -60,6 +60,8 @@ if [[ "$cname" != "" ]]; then
 
 	# Check default icon and runHidden.vbs
 	wslu_file_check "$script_location" "wsl.ico"
+	wslu_file_check "$script_location" "wsl-term.ico"
+	wslu_file_check "$script_location" "wsl-gui.ico"
 	wslu_file_check "$script_location" "runHidden.vbs"
 
 	# handling icon
@@ -93,7 +95,11 @@ if [[ "$cname" != "" ]]; then
 			iconpath="$script_location_win\\$icon_filename"
 		fi
 	else
-		iconpath="$(double_dash_p "$up_path")\\wslu\\wsl.ico"
+		if [[ "$is_gui" == "1" ]]; then
+			iconpath="$(double_dash_p "$up_path")\\wslu\\wsl-gui.ico"
+		else
+			iconpath="$(double_dash_p "$up_path")\\wslu\\wsl-term.ico"
+		fi
 	fi
 	
 	# handling custom vairable command
