@@ -20,7 +20,7 @@
 
 # setup gpg because why not
 
-if [[ -n ${WSL_INTEROP} ]]; then
+if [[ -n $WSL_INTEROP ]]; then
   # enable external x display for WSL 2
 
   ipconfig_exec=$(wslpath "C:\\Windows\\System32\\ipconfig.exe")
@@ -43,8 +43,9 @@ else
     export DISPLAY=:0
 fi
 
-export LIBGL_ALWAYS_INDIRECT=1
-export NO_AT_BRIDGE=1
 export GDK_SCALE=$(wslsys -S -s)
 export QT_SCALE_FACTOR=$(wslsys -S -s)
 export GDK_DPI_SCALE=1
+
+cd ~
+bash -l -c "$*"
