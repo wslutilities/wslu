@@ -46,6 +46,9 @@ doc:
 		gzip -f -q $(OUTMANPATH)/`basename $$file`; \
 	done
 
+res:
+	install -Dm 555 src/etc/* -t /usr/share/wslu
+
 clean:
 	rm -rf $(OUTPATH)
 	rm -rf $(OUTMANPATH)
