@@ -40,7 +40,7 @@ fi
 if [[ "$cname" != "" ]]; then
 	up_path="$(wslvar -s USERPROFILE)"
 	tpath=$(double_dash_p "$(wslvar -s TMP)") # Windows Temp, Win Double Sty.
-	dpath=$(wslpath "$(wslvar -l Desktop)") # Windows Desktop, Win Sty.
+	dpath=$(wslpath "$(wslvar -l Desktop)") # Windows Desktop, WSL Sty.
 	script_location="$(wslpath "$up_path")/wslu" # Windows wslu, Linux WSL Sty.
 	script_location_win="$(double_dash_p "$up_path")\\wslu" #  Windows wslu, Win Double Sty.
 	distro_location_win="$(double_dash_p "$(cat ~/.config/wslu/baseexec)")" # Distro Location, Win Double Sty.
