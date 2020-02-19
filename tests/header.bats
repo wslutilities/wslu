@@ -2,7 +2,7 @@
 
 #header testing
 @test "Header - Colortesting 1" {
-  color="$(. src/wslu-header --silent;echo -e $black | cat -A)"
+  color="$(. src/wslu-header;echo -e $black | cat -A)"
   [ "$color" = "^[[30m$" ]
 }
 
@@ -29,4 +29,19 @@
 @test "Header - Indicator" {
   format="$(. src/wslu-header;echo -e $info | cat -A)"
   [ "$format" = "^[[32m[info]^[(B^[[m$" ]
+}
+
+@test "Header - Double Dash Parsing" {
+  format="$(. src/wslu-header; echo "$(double_dash_p "\\")")"
+  [ "$format" = "\\" ]
+}
+
+@test "Header - Interop Prefix" {
+  format="$(. src/wslu-header; echo "$(interop_prefix)")"
+  [ "$format" = "/mnt/" ]
+}
+
+@test "Header - System Drive Prefix" {
+  format="$(. src/wslu-header; echo "$(sysdrive_prefix)")"
+  [ "$format" = "c" ]
 }
