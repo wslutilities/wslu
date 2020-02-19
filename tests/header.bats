@@ -33,7 +33,7 @@
 
 @test "Header - Double Dash Parsing" {
   format="$(. src/wslu-header; echo "$(double_dash_p "\\")")"
-  [ "$format" = "\\" ]
+  [ "$format" = "\\\\" ]
 }
 
 @test "Header - Interop Prefix" {
