@@ -30,8 +30,6 @@ if [[ "$1" != "--nightly" ]]; then
     EXTRA=""
 fi
 
-make
-make doc
 # Creating folders
 mkdir -p "$BUILD_DIR"/{DEBIAN/,usr/bin/,usr/share/wslu/,usr/share/man/man1,usr/lib/mime/packages/}
 

@@ -14,6 +14,7 @@ jobs:
           name: Build Package
           command: |
             make
+            make doc
             cd extras/scripts
             sudo bash -x ./builder-deb.sh
             sudo bash -x ./builder-rpm.sh
