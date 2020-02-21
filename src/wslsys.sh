@@ -105,5 +105,5 @@ case $1 in
 		-S|--display-scaling) printer "Display Scaling" "$(call_display_scaling)" "$2";exit;;
 		-l|--locale) printer "Locale" "$(get_windows_locale)" "$2";exit;;
 		-t|--win-theme) printer "Windows Theme" "$(call_theme)" "$2"; exit;;
-		*) echo -e "Locale: $(get_windows_locale)\nRelease Install Date: $(date -d @$(printf "%d" $(call_install_date)))\nBranch: $(call_branch)\nBuild: $(call_build)\nFull Build: $(call_full_build)\nDisplay Scaling: $(call_display_scaling)\nWindows Theme: $(call_theme)\nWindows Uptime: $(call_windows_uptime)\nWSL Uptime: $uptime\nWSL Release: $release\nWSL Kernel: $kernel\nPackages Count: $packages";exit;;
+		*) echo -e "Locale: $(get_windows_locale)\nRelease Install Date: $(date -d @"$(printf "%d" "$(call_install_date)")")\nBranch: $(call_branch)\nBuild: $(call_build)\nFull Build: $(call_full_build)\nDisplay Scaling: $(call_display_scaling)\nWindows Theme: $(call_theme)\nWindows Uptime: $(call_windows_uptime)\nWSL Uptime: $uptime\nWSL Release: $release\nWSL Kernel: $kernel\nPackages Count: $packages";exit;;
 esac
