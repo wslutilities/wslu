@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 version=44
 
 is_line=0

@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 version="01"
 
 help_short="wslact [flags] [command] ..."

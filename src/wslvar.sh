@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 version="03"
 
 var_type=1

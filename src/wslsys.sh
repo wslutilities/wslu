@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 version="34"
 
 help_short="wslsys (-h|-v|-I|-b|-B|-fB|-U|-R|-K|-P) -s"

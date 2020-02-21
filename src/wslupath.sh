@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 version="09"
 
 ##########   CAUTION   ###########
