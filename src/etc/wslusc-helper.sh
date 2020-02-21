@@ -47,5 +47,5 @@ export GDK_SCALE=$(wslsys -S -s)
 export QT_SCALE_FACTOR=$(wslsys -S -s)
 export GDK_DPI_SCALE=1
 
-cd ~
+cd ~ || exit
 bash -l -c "$*"
