@@ -45,8 +45,9 @@ else
     export DISPLAY=:0
 fi
 
-export GDK_SCALE=$(wslsys -S -s)
-export QT_SCALE_FACTOR=$(wslsys -S -s)
+win_sys_scaling=$(wslsys -S -s)
+export GDK_SCALE=$win_sys_scaling
+export QT_SCALE_FACTOR=$win_sys_scaling
 export GDK_DPI_SCALE=1
 
 cd ~ || exit
