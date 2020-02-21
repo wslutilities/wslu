@@ -128,6 +128,6 @@ This project exists thanks to all the people who contribute. [[Contribute](CONTR
 
 This project uses [GPLv3](LICENSE) License.
 
-Logo of WSL Utilities is licensed under [CC BY-NC 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).
+Logo of WSL Utilities and icons for `wslusc` desktop shortcuts are licensed under [CC BY 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
 
 For other third party files and assets used, please refer to [THIRD_PARTY_LICENSE](THIRD_PARTY_LICENSE).
