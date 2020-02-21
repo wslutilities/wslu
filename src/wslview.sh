@@ -42,7 +42,7 @@ if [[ "$lname" != "" ]]; then
 		wslutmpbuild=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 		wslutmpbuild=${wslutmpbuild##* }
 		wslutmpbuild="$(( wslutmpbuild + 0 ))"
-		if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
+		if [ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ]; then
 			# if Windows 10 is in version 1903 or later
 			properfile_full_path="$(readlink -f "${lname//file:\/\//}")"
 			converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\})"
