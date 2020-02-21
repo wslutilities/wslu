@@ -43,9 +43,8 @@ if [[ "$lname" != "" ]]; then
 		wslutmpbuild="$(( $wslutmpbuild + 0 ))"
 		if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
 			# if Windows 10 is in version 1903 or later
-			trimmed_lname="$(echo "$lname" | sed -e 's|^file:\/\/||g')"
-			properfile_full_path="$(readlink -f "$trimmed_lname")"
-			converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME$(echo "$properfile_full_path" | sed -e 's|\/|\\|g')"
+			properfile_full_path="$(readlink -f "${lname//file:\/\//}")"
+			converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\})"
 			winps_exec Start "\"$converted_file_path\""
 		else
 			echo "${error} This protocol is not supported before version 1903."
