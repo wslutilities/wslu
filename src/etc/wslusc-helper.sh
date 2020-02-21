@@ -29,8 +29,10 @@ if [[ -n $WSL_INTEROP ]]; then
   fi
 
   if ( eval "$ipconfig_exec" | grep -n -m 1 "Default Gateway.*: [0-9a-z]" | cut -d : -f 1 ) >/dev/null; then
+    set +H
     wsl2_d_tmp="$(eval "$ipconfig_exec" | grep -n -m 1 "Default Gateway.*: [0-9a-z]" | cut -d : -f 1)"
-    wsl2_d_tmp="$(eval "$ipconfig_exec" | sed $(( $wsl2_d_tmp - 4 ))','$(( $wsl2_d_tmp + 0 ))'!d' | grep IPv4 | cut -d : -f 2 | sed -e "s|\s||g" -e "s|\r||g")"
+    wsl2_d_tmp="$(eval "$ipconfig_exec" | sed $(( wsl2_d_tmp - 4 ))','$(( wsl2_d_tmp + 0 ))'!d' | grep IPv4 | cut -d : -f 2 | sed -e "s|\s||g" -e "s|\r||g")"
+    set -H
     export DISPLAY=${wsl2_d_tmp}:0.0
   else
     wsl2_d_tmp="$(grep nameserver /etc/resolv.conf | awk '{print $2}')"
