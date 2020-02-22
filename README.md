@@ -14,7 +14,7 @@ English | [简体中文](README.hans.md) | [繁體中文](README.hant.md)
 
 </div>
 
-This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
+This is a collection of utilities for Windows 10 Linux Subsystem, such as retriving Windows environment variables or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update. Some of the feature requires higher version of Windows 10. Supports WSL2.
 
 ## Feature
 
@@ -25,25 +25,19 @@ A WSL shortcut creator to create a shortcut on your Windows 10 Desktop.
 A WSL system information printer to print out system informations from Windows 10 or Linux.
 
 **wslfetch**
-A WSL Screenshoot Information Tool to print information in an elegant way.
+A WSL screenshoot information tool to print information in an elegant way.
 
 **wslvar**
 A WSL tool to help you get Windows system environment variables.
 
-**wslview/wview**
+**wslview**
 A fake WSL browser that can help you open link in default Windows browser.
-
-**wslstart/wstart**
-A file launcher for to open files from WSL in Windows.
 
 **wslupath**
 A WSL tool to convert path styles.
 
-**wslec**
-A profile script that helps you automatically set all environment variables when you WSL startup.
-
-**wslcron**
-A job scheduler that is properly working on WSL.
+**wslact**
+A set of quick actions for WSL such as creating startup tasks and manually sync time between Windows ans WSL.
 
 ## Status
 
@@ -59,15 +53,13 @@ A job scheduler that is properly working on WSL.
 
 ### Alpine Linux
 
-You can now install wslu from Alpine Linux testing with following way:
+You can install wslu from Alpine Linux testing with following way:
 
 ```
 $ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/" | sudo tee -a /etc/apk/repositories
 $ sudo apk update
 $ sudo apk add wslu@testing
 ```
-
-
 
 ### Arch Linux
 
@@ -83,7 +75,15 @@ Preinstalled.
 
 ### Kali Linux
 
-> TODO
+You can install wslu using the following command:
+
+```
+sudo apt install gnupg2 apt-transport-https
+wget -O - https://access.patrickwu.space/wslu/public.asc | sudo apt-key add -
+echo "deb https://access.patrickwu.space/wslu/kali kali-rolling main" | sudo tee -a /etc/apt/sources.list
+sudo apt update
+sudo apt install wslu
+```
 
 ### Pengwin
 
@@ -93,7 +93,7 @@ Preinstalled.
 
 > Attention!
 >
-> The `ubuntu-wsl` version of `wslu` is maintained by [Balint Reczey](https://launchpad.net/~rbalint) and its source code is hosted on [launchpad.net](https://code.launchpad.net/~ubuntu-core-dev/ubuntu/+source/wslu/+git/wslu).
+> The Ubuntu version of `wslu` is maintained by [Balint Reczey](https://launchpad.net/~rbalint) and its source code is hosted on [launchpad.net](https://code.launchpad.net/~ubuntu-core-dev/ubuntu/+source/wslu/+git/wslu).
 
 Preinstalled in the latest apps. On older installations of Ubuntu please install `ubuntu-wsl` that depends on wslu:
 
@@ -102,12 +102,9 @@ sudo apt update
 sudo apt install ubuntu-wsl
 ```
 
-
 ### For RPM-based systems(OpenSUSE/SLES/Pengwin Enterprise/Oracle Linux)
 
 > TODO
-### Alpine Linux
-
 
 ### Other distributions
 
