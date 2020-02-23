@@ -24,8 +24,22 @@ function time_sync {
 	fi
 }
 
+function smart_mount {
+	if [ "$EUID" -ne 0 ]
+		then echo "${error} \`wslact smart-mount\` requires you to run as root. Aborted."
+		exit 1
+	fi
+	while [ "$1" != "" ]; do
+		case "$1" in
+			-h|--help) help "wslact" "$help_short"; exit;;
+			*) shift;;
+		esac
+	done
+}
+
 while [ "$1" != "" ]; do
 	case "$1" in
+		sm|smart-mount) smart_mount "$@"; exit;;
 		ts|time-sync) time_sync "$@"; exit;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslact v$version"; exit;;
