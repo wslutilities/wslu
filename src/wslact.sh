@@ -35,6 +35,27 @@ function smart_mount {
 			*) shift;;
 		esac
 	done
+	drive_list="$("$(interop_prefix)/$(sysdrive_prefix)"/WINDOWS/system32/fsutil.exe fsinfo drives | tail -1 | tr '[:upper:]' '[:lower:]' | tr -d ':\\' | sed -e 's/drives //g' -e 's|'$(sysdrive_prefix)' ||g' -e 's|\r||g' -e 's| $||g' -e 's| |\n|g')"
+	mount_s=0
+	mount_f=0
+	mount_j=0
+	for drive in $drive_list; do
+		[[ -d "/mnt/$drive" ]] || mkdir -p "/mnt/$drive"
+		if [[ -n $(find "/mnt/$drive" -maxdepth 0 -type d -empty) ]]; then
+			echo "${info} Mounting $drive drive to /mnt/$drive..."
+			if mount -t drvfs ${drive}: "/mnt/$drive"; then
+				echo "${info} Mounted $drive drive to /mnt/$drive."
+				mount_s=mount_s+1
+			else
+				echo "${error} Failed to mount $drive drive. Skipped."
+				mount_f=mount_f+1
+			fi
+		else
+			echo "${warn} Already mounted $drive drive at /mnt/$drive. Skipped."
+			mount_j=mount_j+1
+		fi
+	done
+	echo "${info} Smart mounting completed. $mount_s drive(s) succeed. $mount_f drive(s) failed. $mount_j drive(s) skipped."
 }
 
 while [ "$1" != "" ]; do
