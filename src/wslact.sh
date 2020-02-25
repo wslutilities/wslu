@@ -42,17 +42,17 @@ function smart_mount {
 	for drive in $drive_list; do
 		[[ -d "/mnt/$drive" ]] || mkdir -p "/mnt/$drive"
 		if [[ -n $(find "/mnt/$drive" -maxdepth 0 -type d -empty) ]]; then
-			echo "${info} Mounting $drive drive to /mnt/$drive..."
+			echo "${info} Mounting ${drive^} drive to /mnt/$drive..."
 			if mount -t drvfs ${drive}: "/mnt/$drive"; then
-				echo "${info} Mounted $drive drive to /mnt/$drive."
-				mount_s=mount_s+1
+				echo "${info} Mounted ${drive^} drive to /mnt/$drive."
+				mount_s=$((mount_s + 1))
 			else
-				echo "${error} Failed to mount $drive drive. Skipped."
-				mount_f=mount_f+1
+				echo "${error} Failed to mount ${drive^} drive. Skipped."
+				mount_f=$((mount_f + 1))
 			fi
 		else
-			echo "${warn} Already mounted $drive drive at /mnt/$drive. Skipped."
-			mount_j=mount_j+1
+			echo "${warn} Already mounted ${drive^} drive at /mnt/$drive. Skipped."
+			mount_j=$((mount_j + 1))
 		fi
 	done
 	echo "${info} Smart mounting completed. $mount_s drive(s) succeed. $mount_f drive(s) failed. $mount_j drive(s) skipped."
