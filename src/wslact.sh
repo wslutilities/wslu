@@ -25,17 +25,17 @@ function time_sync {
 }
 
 function smart_mount {
-	if [ "$EUID" -ne 0 ]
-		then echo "${error} \`wslact smart-mount\` requires you to run as root. Aborted."
-		exit 1
-	fi
-
 	while [ "$1" != "" ]; do
 		case "$1" in
 			-h|--help) help "wslact" "$help_short"; exit;;
 			*) shift;;
 		esac
 	done
+
+	if [ "$EUID" -ne 0 ]
+		then echo "${error} \`wslact smart-mount\` requires you to run as root. Aborted."
+		exit 1
+	fi
 
 	mount_opt=""
 	drive_list="$("$(interop_prefix)/$(sysdrive_prefix)"/WINDOWS/system32/fsutil.exe fsinfo drives | tail -1 | tr '[:upper:]' '[:lower:]' | tr -d ':\\' | sed -e 's/drives //g' -e 's|'$(sysdrive_prefix)' ||g' -e 's|\r||g' -e 's| $||g' -e 's| |\n|g')"
