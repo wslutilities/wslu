@@ -4,16 +4,18 @@ version="02"
 help_short="wslact [flags] [command] ..."
 
 function time_sync {
-	if [ "$EUID" -ne 0 ]
-		then echo "${error} \`wslact time-sync\` requires you to run as root. Aborted."
-		exit 1
-	fi
 	while [ "$1" != "" ]; do
 		case "$1" in
 			-h|--help) help "wslact" "$help_short"; exit;;
 			*) shift;;
 		esac
 	done
+
+	if [ "$EUID" -ne 0 ]
+		then echo "${error} \`wslact time-sync\` requires you to run as root. Aborted."
+		exit 1
+	fi
+
 	echo "${info} Before Sync: $(date +"%d %b %Y %T %Z")"
 	if date -s "$(winps_exec "Get-Date -UFormat \"%d %b %Y %T %Z\"" | tr -d "\r")" >/dev/null; then
 		echo "${info} After Sync: $(date +"%d %b %Y %T %Z")"
