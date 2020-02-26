@@ -100,19 +100,13 @@ function double_dash_p {
 }
 
 function interop_prefix {
-	win_location=""
+
+	win_location="/mnt/"
 	if [ -f /etc/wsl.conf ]; then
 		tmp="$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf | awk '{$1=$1;print}')"
-		if [ "$tmp" == "" ]; then
-			win_location="/mnt/"
-		else
-			win_location="$tmp"
-		fi
+		[ "$tmp" == "" ] || win_location="$tmp"
 		unset tmp
-	else
-		win_location="/mnt/"
 	fi
-
 	echo "$win_location"
 
 	unset win_location
