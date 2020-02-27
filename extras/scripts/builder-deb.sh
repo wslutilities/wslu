@@ -20,7 +20,7 @@
 
 BUILD_DIR="$(mktemp --tmpdir --directory wslu-build-debian.XXXX)"
 BUILD_VER="$(grep 'version=' ../../src/wslu-header | cut -d'=' -f 2 | xargs)"
-BUILD_RELEASE="3"
+BUILD_RELEASE="1"
 EXTRA="~$(date +%Y%m%d%H%M%S)"
 CURRENT_DIR="$(pwd)"
 

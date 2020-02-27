@@ -31,9 +31,9 @@ function general_converter {
 
 function style_path {
 	case $style in
-		1)p="$(general_converter "$@")";;
-		2)p="$*";;
-		3)p="$(path_double_dash "$@")";;
+		1) p="$(general_converter "$@")";;
+		2) p="$*";;
+		3) p="$(path_double_dash "$@")";;
 	esac
 	echo "$p"
 }
@@ -45,9 +45,9 @@ else
 	for args; do
 		case $args in
 			#styles
-			-r|--reg-data)reg_path=1;;
-			-O|--original)style=2;;
-			-d|--doubledash-dir)style=3;;
+			-r|--reg-data) reg_path=1;;
+			-O|--original) style=2;;
+			-d|--doubledash-dir) style=3;;
 			## system location
 
 			-D|--desktop)
@@ -78,7 +78,7 @@ else
 			set_path="$(style_path "$(wslvar -s ProgramFiles)")"
 			break;;
 			-h|--help) help "$0" "$help_short"; exit;;
-			-v|--version)echo "wslu v$wslu_version; wslupath v$version"; exit;;
+			-v|--version) echo "wslu v$wslu_version; wslupath v$version"; exit;;
 			-R|--avail-reg) echo "Available registery input:"
 			wslvar -L
 			exit;;
