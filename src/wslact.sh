@@ -25,6 +25,8 @@ function time_sync {
 }
 
 function smart_mount {
+	local help_short="wslact smart-mount (-h)"
+
 	while [ "$1" != "" ]; do
 		case "$1" in
 			-h|--help) help "wslact" "$help_short"; exit;;
@@ -57,6 +59,7 @@ function smart_mount {
 		[[ -d "/mnt/$drive" ]] || mkdir -p "/mnt/$drive"
 		if [[ -n $(find "/mnt/$drive" -maxdepth 0 -type d -empty) ]]; then
 			echo "${info} Mounting Drive ${drive^} to /mnt/$drive..."
+			
 			if mount -t drvfs ${drive}: "/mnt/$drive" -o "$mount_opt"; then
 				echo "${info} Mounted Drive ${drive^} to /mnt/$drive."
 				mount_s=$((mount_s + 1))
