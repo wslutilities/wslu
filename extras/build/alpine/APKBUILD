@@ -1,8 +1,8 @@
 # Maintainer: Patrick Wu <wotingwu@live.com>
 # Contributor: Patrick Wu <wotingwu@live.com>
 pkgname=wslu
-pkgver=2.3.5
-pkgrel=3
+pkgver=2.3.6
+pkgrel=1
 pkgdesc="A collection of utilities for Windows 10 Linux Subsystems"
 url="https://github.com/wslutilities/wslu"
 arch="noarch"
