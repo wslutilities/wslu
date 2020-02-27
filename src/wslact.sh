@@ -59,7 +59,7 @@ function smart_mount {
 		[[ -d "/mnt/$drive" ]] || mkdir -p "/mnt/$drive"
 		if [[ -n $(find "/mnt/$drive" -maxdepth 0 -type d -empty) ]]; then
 			echo "${info} Mounting Drive ${drive^} to /mnt/$drive..."
-			
+			#if "$(interop_prefix)/$(sysdrive_prefix)"/WINDOWS/system32/wsl.exe -d $WSL_DISTRO_NAME -u root -e mount -t drvfs ${drive}: "/mnt/$drive" -o "$mount_opt"; then
 			if mount -t drvfs ${drive}: "/mnt/$drive" -o "$mount_opt"; then
 				echo "${info} Mounted Drive ${drive^} to /mnt/$drive."
 				mount_s=$((mount_s + 1))
