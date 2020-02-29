@@ -1,31 +1,28 @@
-.TH "WSLFETCH" "1" "DATEPLACEHOLDER" "VERSIONPLACEHOLDER" "WSL Utilities"
-
+.TH "WSLFETCH" "1" "DATEPLACEHOLDER" "VERSIONPLACEHOLDER" "WSL Utilities User Manual"
 .SH NAME
 .B wslfetch
-Component of Windows 10 Linux Subsystem Utility
+- Component of Windows 10 Linux Subsystem Utility
 .SH SYNOPSIS
 .B wslfetch
-[\fB--help\fR|\fB--version\fR|\fB--splash\fR|\fB--line\fR|\fB--no-colorbar\fR]
+.RB [\-hvlsc ]
 .SH DESCRIPTION
 This is a WSL Screenshot Information Tool to print information in a elegant way.
-.SH COMMANDS
-.PP
+.SH OPTIONS
+.TP
 .B -h, --help
-print a simple help
-.PP
+print a simple help.
+.TP
 .B -v, --version
-print current version
-.PP
+print current version.
+.TP
 .B -l, --line
 print a separate line before and after
-.PP
+.TP
 .B -s, --splash
 use wslfetch as splash when startup; add 'wslfetch --splash' to the end of the rc file
-.PP
+.TP
 .B -c, --colorbar
 add a colorbar to the printed information.
-.SH SEE ALSO
-https://wslu.patrickwu.space
 .SH AUTHOR
 Created by Patrick Wu <me@patrickwu.space>
 .SH REPORTING BUGS
@@ -36,3 +33,5 @@ the terms of the GNU GPL version 3 or (at your option) any later
 version.
 There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE.
+.SH SEE ALSO
+wslu(7)
