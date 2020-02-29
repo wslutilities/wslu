@@ -1,27 +1,27 @@
-.TH "WSLVIEW" "1" "DATEPLACEHOLDER" "VERSIONPLACEHOLDER" "WSL Utilities"
 
+.TH "WSLVIEW" "1" "DATEPLACEHOLDER" "VERSIONPLACEHOLDER" "WSL Utilities User Manual"
 .SH NAME
 .B wslview
-Component of Windows 10 Linux Subsystem Utility
+- Component of Windows 10 Linux Subsystem Utility
 .SH SYNOPSIS
 .B wslview
-(--reg-as-browser|--unreg-as-browser|--help|--version) [LINK]
+.RB [ \-hvur ]
+.I LINK/FILE
 .SH DESCRIPTION
 This is file viewer that allows you to open files and folders from WSL in Windows and a fake web browser that allows opening urls in your default browser on Windows 10.
-.SH COMMANDS
+.SH OPTIONS
+.TP
 .B -h, --help
-print a simple help
-.PP
+print a simple help.
+.TP
 .B -v, --version
-print current version
-.PP
+print current version.
+.TP
 .B -u, --unreg-as-browser
-remove \fBwslview\fR as the default WSL web browser
-.PP
+remove \fBwslview\fR as the default WSL web browser.
+.TP
 .B -r, --reg-as-browser
-register \fBwslview\fR as the default WSL web browser
-.SH SEE ALSO
-https://wslu.patrickwu.space
+register \fBwslview\fR as the default WSL web browser.
 .SH AUTHOR
 Created by Patrick Wu <me@patrickwu.space>
 .SH REPORTING BUGS
@@ -32,3 +32,5 @@ the terms of the GNU GPL version 3 or (at your option) any later
 version.
 There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE.
+.SH SEE ALSO
+wslu(7)
