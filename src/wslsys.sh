@@ -96,9 +96,9 @@ case $1 in
 		-I|--sys-installdate) printer "Release Install Date" "$(call_install_date)" "$2";exit;;
 		-b|--branch) printer "Branch" "$(call_branch)" "$2";exit;;
 		-B|--build) printer "Build" "$(call_build)" "$2";exit;;
-		-fB|--full-build) printer "Full Build" "$(call_full_build)" "$2";exit;;
+		-F|--full-build) printer "Full Build" "$(call_full_build)" "$2";exit;;
 		-U|--uptime) printer "WSL Uptime" "$uptime" "$2";exit;;
-		-wU|--win-uptime) printer "Windows Uptime" "$(call_windows_uptime)" "$2";exit;;
+		-W|--win-uptime) printer "Windows Uptime" "$(call_windows_uptime)" "$2";exit;;
 		-R|--release) printer "WSL Release" "$release" "$2";exit;;
 		-K|--kernel) printer "WSL Kernel" "$kernel" "$2";exit;;
 		-P|--package) printer "Packages Count" "$packages" "$2";exit;;
