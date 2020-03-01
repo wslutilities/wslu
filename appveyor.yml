@@ -20,6 +20,5 @@ build_script:
   - ps: wsl make
   - ps: wsl make doc
   - ps: wsl -u root DESTDIR=/usr make install
-  - ps: wsl wslsys
 test_script:
   - ps: wsl make test
