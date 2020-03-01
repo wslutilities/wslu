@@ -8,7 +8,7 @@ arch=('any')
 url='https://github.com/wslutilities/wslu'
 license=('GPL-3.0-or-later')
 depends=('bc' 'imagemagick' 'bash-completion')
-makedepends=('git' 'make')
+makedepends=('git' 'make' 'gzip')
 source=("git+https://github.com/wslutilities/wslu.git#tag=v${pkgver}")
 sha256sums=('SKIP')
 
@@ -21,7 +21,8 @@ package() {
   cd wslu
 
   install -Dm 755 out/* -t "${pkgdir}"/usr/bin/
-  install -Dm 555 docs/* -t "${pkgdir}"/usr/share/man/man1/
+  install -Dm 555 docs/*.1.gz -t "${pkgdir}"/usr/share/man/man1/
+  install -Dm 555 docs/*.7.gz -t "${pkgdir}"/usr/share/man/man7
   install -Dm 555 src/etc/* -t "${pkgdir}"/usr/share/wslu/
   install -Dm 644 LICENSE -t "${pkgdir}"/usr/share/licenses/wslu/
 }

@@ -10,10 +10,11 @@ license="GPL-3.0-or-later"
 depends="bc bash-completion imagemagick"
 subpackages="$pkgname-doc"
 source="$pkgname-$pkgver.tar.gz::https://github.com/wslutilities/wslu/archive/v$pkgver.tar.gz"
-options="!check" #tests can be only run on a distro running on WSL(Windows Subsystems for Linux) environment, hence disabled
+options="!check" #tests can be only  runn on WSL(Windows Subsystems for Linux) version of Alpine Linux environment, hence disabled
 
 build() {
 	make
+	make doc
 }
 
 check() {
