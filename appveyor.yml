@@ -8,16 +8,18 @@ only_commits:
     - src/**/*
     - Makefile
     - appveyor.yml
+    - tests/*
 image: Visual Studio 2019
 build: Script
 clone_folder: C:\project\wslu
 install:
   - git submodule update --init --recursive
   - ps: wsl -u root apt-get update
-  - ps: wsl -u root DEBIAN_FRONTEND=noninteractive apt-get install -y bc make imagemagick gzip
+  - ps: wsl -u root DEBIAN_FRONTEND=noninteractive apt-get install -y bc make imagemagick gzip groff
 build_script:
   - ps: wsl make
   - ps: wsl make doc
   - ps: wsl -u root DESTDIR=/usr make install
+  - ps: wsl wslsys
 test_script:
   - ps: wsl make test
