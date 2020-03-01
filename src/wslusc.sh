@@ -8,7 +8,7 @@ is_interactive=0
 customname=""
 customenv=""
 
-help_short="wslusc (--env [PATH]|--name [NAME]|--icon [ICO FILE]|--gui|--interactive|--help|--version) [COMMAND]"
+help_short="wslusc [-gi] [-e PATH] [-n NAME] [-i FILE] COMMAND\nwslusc [-hv]"
 
 while [ "$1" != "" ]; do
 	case "$1" in

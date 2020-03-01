@@ -1,7 +1,7 @@
 # shellcheck shell=bash
 version="34"
 
-help_short="wslsys (-h|-v|-I|-b|-B|-fB|-U|-R|-K|-P) -s"
+help_short="wslsys [-IbBFUWRKPSlt] [-s]\nwslsys [-hv]"
 
 ## Windows 10 information
 function call_branch() {

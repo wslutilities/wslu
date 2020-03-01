@@ -4,7 +4,7 @@ version=44
 is_line=0
 is_splash=0
 is_color=0
-help_short="wslfetch (--help|--version|--splash|--line|--colorbar)"
+help_short="wslfetch [-hvlsc]"
 
 for args; do
 	case $args in

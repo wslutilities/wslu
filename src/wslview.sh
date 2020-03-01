@@ -3,7 +3,7 @@ version="06"
 
 lname=""
 
-help_short="wslview (--reg-as-browser|--unreg-as-browser|--help|--version) [LINK]"
+help_short="wslview [-hvur]\nwslview LINK/FILE"
 
 function del_reg_alt {
 	if [ "$distro" == "archlinux" ] || [ "$distro" == "alpine" ]; then

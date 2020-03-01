@@ -1,10 +1,10 @@
 # shellcheck shell=bash
 version="03"
 
-help_short="wslact [flags] [command] ..."
+help_short="wslact COMMAND ..."
 
 function time_sync {
-	local help_short="wslact time-sync (-h)"
+	local help_short="wslact time-sync [-h]"
 
 	while [ "$1" != "" ]; do
 		case "$1" in

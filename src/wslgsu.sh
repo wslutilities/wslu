@@ -1,7 +1,7 @@
 # shellcheck shell=bash
 version="01"
 
-help_short="wslgsu [--name <NAME>] [-S <Service> | <Command> ]Generate a WSL startup Task using Windows Task Schduler."
+help_short="wslgsu [-u USERNAME] [-n NAME] [-S] SERVICE/COMMAND\nwslgsu [-hv]"
 
 isService=0
 wa_gs_commd=""
