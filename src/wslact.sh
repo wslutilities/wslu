@@ -29,7 +29,7 @@ function time_sync {
 }
 
 function smart_mount {
-	local help_short="wslact smart-mount (-h)"
+	local help_short="wslact smart-mount [-h]"
 
 	while [ "$1" != "" ]; do
 		case "$1" in
@@ -38,10 +38,10 @@ function smart_mount {
 		esac
 	done
 
-	# if [ "$EUID" -ne 0 ]
-	# 	then echo "${error} \`wslact smart-mount\` requires you to run as root. Aborted."
-	# 	exit 1
-	# fi
+	if [ "$EUID" -ne 0 ]
+		then echo "${error} \`wslact smart-mount\` requires you to run as root. Aborted."
+		exit 1
+	fi
 
 	mount_opt=""
 	drive_list="$("$(interop_prefix)/$(sysdrive_prefix)"/WINDOWS/system32/fsutil.exe fsinfo drives | tail -1 | tr '[:upper:]' '[:lower:]' | tr -d ':\\' | sed -e 's/drives //g' -e 's|'$(sysdrive_prefix)' ||g' -e 's|\r||g' -e 's| $||g' -e 's| |\n|g')"
@@ -63,8 +63,7 @@ function smart_mount {
 		[[ -d "/mnt/$drive" ]] || mkdir -p "/mnt/$drive"
 		if [[ -n $(find "/mnt/$drive" -maxdepth 0 -type d -empty) ]]; then
 			echo "${info} Mounting Drive ${drive^} to /mnt/$drive..."
-			if "$(interop_prefix)/$(sysdrive_prefix)"/WINDOWS/system32/wsl.exe -d $WSL_DISTRO_NAME -u root -e mount -t drvfs ${drive}: "/mnt/$drive" -o "$mount_opt"; then
-			# if mount -t drvfs ${drive}: "/mnt/$drive" -o "$mount_opt"; then
+			if mount -t drvfs ${drive}: "/mnt/$drive" -o "$mount_opt"; then
 				echo "${info} Mounted Drive ${drive^} to /mnt/$drive."
 				mount_s=$((mount_s + 1))
 			else
