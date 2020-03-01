@@ -9,7 +9,7 @@ style=1
 reg_path=0
 set_path=""
 
-help_short="wslupath (-dOr) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslupath [-h|-v|-R]"
+help_short="wslupath [-dOr] [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]\nwslupath [-h|-v|-R]"
 
 function path_double_dash {
 	new_path="${*//\\/\\\\}"
