@@ -12,3 +12,4 @@
   run out/wslgsu -h
   [ "${lines[1]}" = "Usage: wslgsu [-u USERNAME] [-n NAME] [-S] SERVICE/COMMAND" ]
   [ "${lines[2]}" = "wslgsu [-hv]" ]
+}
