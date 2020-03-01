@@ -9,8 +9,8 @@ SOURCES := $(wildcard src/*.sh)
 ETCFILES := $(wildcard src/etc/*)
 OUTFILES := $(wildcard out/*)
 MANFILES := $(wildcard docs/*)
-INSTEDEXES := $(wildcard /usr/bin/wsl*)
-INSTEDMANS := $(wildcard /usr/share/man/man1/wsl*)
+INSTEDEXES := $(wildcard $(DESTDIR)/bin/wsl*)
+INSTEDMANOS := $(wildcard $(DESTDIR)/share/man/man1/wsl*)
 
 DATETMP = $(shell date +%Y-%m-%d)
 VERTMP = $(shell grep 'version=' $(HEADER) | cut -d'=' -f 2 | xargs)
@@ -23,18 +23,17 @@ all:
 	done
 	chmod +x $(OUTPATH)/*
 
-install:
-	install -Dm 555 out-docs/* -t $(DESTDIR)/share/man/man1
+install: doc_install res_install
 	install -Dm 755 out/* -t $(DESTDIR)/bin
-	install -Dm 555 src/etc/* -t /usr/share/wslu
 
 uninstall: 
 	for f in $(INSTEDEXES); do \
     	rm -f $$f; \
 	done
-	for f in $(INSTEDMANS); do \
+	for f in $(INSTEDMANOS); do \
     	rm -f $$f; \
 	done
+	rm -rf $(DESTDIR)/share/man/man7/wslu.7.gz
 	rm -rf /usr/share/wslu
 
 doc:
@@ -45,6 +44,10 @@ doc:
 		mv $(OUTMANPATH)/`basename $$file`.tmp $(OUTMANPATH)/`basename $$file`; \
 		gzip -f -q $(OUTMANPATH)/`basename $$file`; \
 	done
+
+doc_install:
+	install -Dm 555 out-docs/*.1.gz -t $(DESTDIR)/share/man/man1
+	install -Dm 555 out-docs/*.7.gz -t $(DESTDIR)/share/man/man7
 
 res_install:
 	install -Dm 555 src/etc/* -t /usr/share/wslu
