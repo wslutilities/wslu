@@ -13,16 +13,30 @@ Currently, we have two features available:
 .in +4n
 .nf
 \fBts, time-sync\fR \- Time Sync
-\fBsm, smart-mounting\fR \- Smart Mounting
+\fBsm, smart-mount\fR \- Smart Mounting
 .fi
 .in
 .SH COMMANDS
 .SS "Time Sync"
-Time Sync (\fItime-sync\fR) feature allows user to manually sync time from Windows to WSL. Sometime, when you have network issues, WSL time will be slower than the Windows time. This tool is designed for this situation.
+Time Sync (\fItime-sync\fR) feature allows user to manually sync time from Windows to WSL. Sometime, when you have network issues, WSL time will be slower than the Windows time. This tool is designed for this situation. Requires sudo.
 .TP
 SYNOPSIS
-.B wslact
-.RB  [ \-h ]
+.B wslact time-sync
+.RB [ \-h ]
+.TP
+OPTIONS
+.nf
+.B -h, --help
+.in +4n
+print a simple help.
+.in
+.fi
+.SS "Smart Mounting"
+Smart Mounting (\fIsmart-mount\fR) feature allows you to mount all drives available on Windows to WSL. Requires sudo.
+.TP
+SYNOPSIS
+.B wslact smart-mount
+.RB [ \-h ]
 .TP
 OPTIONS
 .nf
