@@ -1,69 +1,64 @@
 .TH "WSLUPATH" "1" "DATEPLACEHOLDER" "VERSIONPLACEHOLDER" "WSL Utilities"
-
 .SH NAME
 wslupath(DEPRECATED) - Component of Windows 10 Linux Subsystem Utility
 .SH SYNOPSIS
 .B wslupath
-(-w|-d|-u|-m|-r) [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]
-.P
-.B wslupath
-(-h|-v|-R)
+.RB [ \-dOr ]
+.RB [\-D|\-A|\-T|\-S|\-W|\-s|\-su|\-H|\-P|\|\.\|\.\|\.NAME\|\.\|\.\|\.]\fR
+.PP
+\Bwslupath 
+.RB [\-h|\-v|\-R]
 .SH DESCRIPTION
 This is a WSL Windows path Converter that can convert Windows path to other styles of path\.
 .SH COMMANDS
 .SS Output Type Options
-.B -w, --windows
-print Windows form of path(C:\eWindows\eSystem32)
-.P
-.B -d, --windows-double-slash
+Without a type, it will detect path style automatically.
+.TP
+.B -O, --original
+print original (Windows) form of path(C:\eWindows\eSystem32)
+.TP
+.B -d, --doubledash-dir
 print Windows form of path with double backslash(C:\e\eWindows\e\eSystem32)
-.P
-.B -u, --unix
-print Unix form of path(/mnt/c/Windows/System32)
-.P
-.B -m, --mixed
-print Windows form of path(C:/Windows/System32)
-.P
+.TP
 .B -r, --reg-data
-use the registry data to print path[wslpath -R to know more]
+use the registry data to print path[wslpath \-R to know more]
 .SS System Path
 .B -D, --desktop
 print desktop path and exit
-.P
+.TP
 .B -A, --appdata
 print AppData path(%APPDATA%) and exit
-.P
+.TP
 .B -T, --temp
 print temp path(%TMP%) and exit
-.P
+.TP
 .B -S, --sysdir
 print system path and exit
-.P
+.TP
 .B -W, --windir
 print Windows path and exit
-.P
+.TP
 .B -s, --start-menu
 print Start Menu path and exit
-.P
+.TP
 .B -su, --startup
 print Startup path and exit
-.P
+.TP
 .B -H, --home
 print user home path (%HOMEPATH%) and exit
-.P
+.TP
 .B -P, --program-files
 print Program Files path (%ProgramFiles%) and exit
 .SS Other Options
+.TP
 .B -h, --help
 print a simple help
-.P
+.TP
 .B -v, --version
 print current version
-.P
+.TP
 .B -R, --avail-reg
 print available registry input
-.SH SEE ALSO
-https://wslu.patrickwu.space
 .SH AUTHOR
 Created by Patrick Wu <me@patrickwu.space>
 .SH REPORTING BUGS
@@ -74,3 +69,5 @@ the terms of the GNU GPL version 3 or (at your option) any later
 version.
 There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE.
+.SH SEE ALSO
+wslu(7)
