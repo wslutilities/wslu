@@ -7,17 +7,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites
-        command: |
+        run: |
           sudo apt-get update -qq
           sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper 
-      - run:
-          name: Build Package
-          command: |
-            mkdir -p debian
-            cp -r extras/build/debian/* debian
-            BUILD_VER="$(grep 'version=' src/wslu-header | cut -d'=' -f 2 | xargs)"
-            BUILD_EXTRA_VER="1"
-            dch --distribution buster --newversion ${BUILD_VER}-${BUILD_EXTRA_VER}
-            DEB_BUILD_OPTIONS=nocheck debuild -i -us -uc -b
-            mkdir -p /tmp/pkgs
-            sudo mv ../*.deb /tmp/pkgs
+      - name: Build Package
+        run: |
+          mkdir -p debian
+          cp -r extras/build/debian/* debian
+          BUILD_VER="$(grep 'version=' src/wslu-header | cut -d'=' -f 2 | xargs)"
+          BUILD_EXTRA_VER="1"
+          dch --distribution buster --newversion ${BUILD_VER}-${BUILD_EXTRA_VER}
+          DEB_BUILD_OPTIONS=nocheck debuild -i -us -uc -b
+          mkdir -p /tmp/pkgs
+          sudo mv ../*.deb /tmp/pkgs
