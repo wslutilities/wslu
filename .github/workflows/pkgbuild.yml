@@ -18,9 +18,11 @@ jobs:
           BUILD_EXTRA_VER="1"
           # dch --distribution stable --newversion ${BUILD_VER}-${BUILD_EXTRA_VER}
           DEB_BUILD_OPTIONS=nocheck debuild -i -us -uc -b
-          mkdir -p /tmp/pkgs
-          sudo mv ../wsl* /tmp/pkgs
-          ls /tmp/pkgs
+          mkdir -p ./pkgs
+          mv ../wsl* ./pkgs
+        with:
+          name: DebianPackages
+          path: pkgs
   rpmbuild:
     name: RPM Package building
     runs-on: ubuntu-18.04
@@ -34,5 +36,6 @@ jobs:
         run: |
           make
           sudo bash -x ./extras/build/builder-rpm.sh
-          mkdir -p /tmp/pkgs
-          sudo mv ../../target/* /tmp/pkgs
+        with:
+          name: RPMPackages
+          path: target
