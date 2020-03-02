@@ -18,7 +18,6 @@ install:
   - ps: wsl -u root DEBIAN_FRONTEND=noninteractive apt-get install -y bc make imagemagick gzip groff
 build_script:
   - ps: wsl make
-  - ps: wsl make doc
-  - ps: wsl -u root DESTDIR=/usr make install
+  - ps: wsl -u root make install
 test_script:
   - ps: wsl make test
