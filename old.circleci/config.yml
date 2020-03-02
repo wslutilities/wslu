@@ -13,10 +13,12 @@ jobs:
       - run:
           name: Build Package
           command: |
-            make
-            make doc
-            cd extras/scripts
-            sudo bash -x ./builder-deb.sh
+            mkdir -p debian
+            cp -r extras/build/debian/* debian
+            BUILD_VER="$(grep 'version=' src/wslu-header | cut -d'=' -f 2 | xargs)"
+            BUILD_EXTRA_VER="1"
+            dch --newversion ${BUILD_VER}-${BUILD_EXTRA_VER}
+            DEB_BUILD_OPTIONS=nocheck debuild -i -us -uc -b
             sudo bash -x ./builder-rpm.sh
             mkdir -p /tmp/pkgs
             sudo mv ../../target/* /tmp/pkgs
