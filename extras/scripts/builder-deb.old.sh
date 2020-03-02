@@ -37,7 +37,7 @@ mkdir -p "$BUILD_DIR"/{DEBIAN/,usr/bin/,usr/share/wslu/,usr/share/man/man1,usr/l
 cp "$CURRENT_DIR"/../../out-docs/* "$BUILD_DIR"/usr/share/man/man1/
 cp "$CURRENT_DIR"/../../out/wsl* "$BUILD_DIR"/usr/bin/
 cp "$CURRENT_DIR"/../../src/etc/* "$BUILD_DIR"/usr/share/wslu/
-cp "$CURRENT_DIR"/../build/debian/* "$BUILD_DIR"/DEBIAN
+cp -r "$CURRENT_DIR"/../build/debian/* "$BUILD_DIR"/DEBIAN
 
 # modifying the files
 sed -i s/BUILDVER/"$BUILD_RELEASE"/g "$BUILD_DIR"/DEBIAN/control
