@@ -13,7 +13,6 @@ jobs:
       - name: Build RPM Package
         run: |
           make
-          cd ./extras/build
-          sudo bash -x ./builder-rpm.sh
+          cd ./extras/build; udo bash -x builder-rpm.sh
           mkdir -p /tmp/pkgs
           sudo mv ../../target/* /tmp/pkgs
