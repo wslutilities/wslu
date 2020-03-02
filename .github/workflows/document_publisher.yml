@@ -14,7 +14,7 @@ jobs:
         run: bash -c "for x in docs/*; do groff \$x -mandoc -Thtml > \${x%.*}.html; done"
       - name: deploy manpages to website
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GIT_DEPLOY_KEY }}
         run: |
           git config --global user.email "me@patrickwu.space"
           git config --global user.name "Jinming Wu, Patrick"
