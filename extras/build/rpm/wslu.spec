@@ -31,9 +31,11 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p ${RPM_BUILD_ROOT}%{_bindir}
 mkdir -p ${RPM_BUILD_ROOT}/usr/share/wslu
 mkdir -p ${RPM_BUILD_ROOT}/usr/share/man/man1
+mkdir -p ${RPM_BUILD_ROOT}/usr/share/man/man7
 install -m755 wsl* ${RPM_BUILD_ROOT}%{_bindir}
 install -m555 etc/* ${RPM_BUILD_ROOT}/usr/share/wslu
-install -m555 out-docs/* ${RPM_BUILD_ROOT}/usr/share/man/man1
+install -m555 out-docs/*.1.gz ${RPM_BUILD_ROOT}/usr/share/man/man1
+install -m555 out-docs/*.7.gz ${RPM_BUILD_ROOT}/usr/share/man/man7
 
 %post
 %{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 1
@@ -53,9 +55,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wslsys
 %{_bindir}/wslupath
 %{_bindir}/wslview
+%{_bindir}/wslgsu
+%{_bindir}/wslact
 %{_bindir}/wslvar
 /usr/share/wslu/
-%doc /usr/share/man/man1/
+%doc /usr/share/man/
 
 %changelog
 * Wed Jul 31 2019 patrick330602 <me@patrickwu.space>
