@@ -14,6 +14,8 @@ jobs:
         run: bash -c "for x in docs/*; do groff \$x -mandoc -Thtml > \${x%.*}.html; done"
       - name: deploy manpages to website
         run: |
+          git config --global user.email "me@patrickwu.space"
+          git config --global user.name "Jinming Wu, Patrick"
           git clone --depth 1 https://${{ secrets.GITHUB_TOKEN }}@github.com/wslutilities/wslutilities.github.io.git website
           mkdir -p ./website/wslu/man
           cp docs/*.html ./website/wslu/man
