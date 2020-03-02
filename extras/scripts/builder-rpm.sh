@@ -32,10 +32,10 @@ mkdir -p ~/rpm_wslu/{BUILD/,RPMS/,SOURCES/,SPECS/,SRPMS/}
 mkdir -p ~/rpm_wslu/SOURCES/wslu-"$BUILD_VER"/{etc,docs}
 
 # Copy files to build folder
-cp ../../out/wsl* ~/rpm_wslu/SOURCES/wslu-"$BUILD_VER"
-cp ../../src/etc/* ~/rpm_wslu/SOURCES/wslu-"$BUILD_VER"/etc
-cp ../../docs/* ~/rpm_wslu/SOURCES/wslu-"$BUILD_VER"/docs
-cp ../build/rpm/wslu.spec ~/rpm_wslu/SPECS/wslu-"$BUILD_VER".spec
+cp out/wsl* ~/rpm_wslu/SOURCES/wslu-"$BUILD_VER"
+cp src/etc/* ~/rpm_wslu/SOURCES/wslu-"$BUILD_VER"/etc
+cp out-docs/* ~/rpm_wslu/SOURCES/wslu-"$BUILD_VER"/docs
+cp extras/build/rpm/wslu.spec ~/rpm_wslu/SPECS/wslu-"$BUILD_VER".spec
 
 # Modifying the files
 sed -i s/BUILDVERPLACEHOLDER/"$BUILD_VER"/g ~/rpm_wslu/SPECS/wslu-"$BUILD_VER".spec
@@ -52,9 +52,9 @@ cd ~/rpm_wslu/SPECS || exit 1
 sudo rpmbuild -ba --target noarch wslu-"$BUILD_VER".spec
 
 # Copy packages
-[[ -d "$CURRENT_DIR"/../../target ]] || mkdir "$CURRENT_DIR"/../../target
-cp ~/rpm_wslu/RPMS/noarch/*.rpm "$CURRENT_DIR"/../../target/
-cp ~/rpm_wslu/SRPMS/*.rpm "$CURRENT_DIR"/../../target/
+[[ -d target ]] || mkdir target
+cp ~/rpm_wslu/RPMS/noarch/*.rpm ./target/
+cp ~/rpm_wslu/SRPMS/*.rpm ./target/
 
 # Cleanup everything
 sudo rm -rf ~/rpm_wslu/
