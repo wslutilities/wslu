@@ -1,4 +1,7 @@
 AUTOMAKE_OPTIONS = foreign
+DESTDIR ?=
+PREFIX ?= /usr
+
 HEADER = src/wslu-header
 OUTPATH = out
 MANPATH = docs
@@ -9,8 +12,8 @@ SOURCES := $(wildcard src/*.sh)
 ETCFILES := $(wildcard src/etc/*)
 OUTFILES := $(wildcard out/*)
 MANFILES := $(wildcard docs/*)
-INSTEDEXES := $(wildcard $(DESTDIR)/usr/bin/wsl*)
-INSTEDMANOS := $(wildcard $(DESTDIR)/usr/share/man/man1/wsl*)
+INSTEDEXES := $(wildcard $(DESTDIR)$(PREFIX)/bin/wsl*)
+INSTEDMANOS := $(wildcard $(DESTDIR)$(PREFIX)/share/man/man1/wsl*)
 
 DATETMP = $(shell date +%Y-%m-%d)
 VERTMP = $(shell grep 'version=' $(HEADER) | cut -d'=' -f 2 | xargs)
@@ -24,7 +27,7 @@ all: doc
 	chmod +x $(OUTPATH)/*
 
 install: doc_install res_install
-	install -Dm 755 out/* -t $(DESTDIR)/usr/bin
+	install -Dm 755 out/* -t $(DESTDIR)$(PREFIX)/bin
 
 uninstall: 
 	for f in $(INSTEDEXES); do \
@@ -33,8 +36,8 @@ uninstall:
 	for f in $(INSTEDMANOS); do \
 		rm -f $$f; \
 	done
-	rm -rf $(DESTDIR)/usr/share/man/man7/wslu.7.gz
-	rm -rf $(DESTDIR)/usr/share/wslu
+	rm -rf $(DESTDIR)$(PREFIX)/share/man/man7/wslu.7.gz
+	rm -rf $(DESTDIR)$(PREFIX)/share/wslu
 
 doc:
 	[ -d $(OUTMANPATH) ] || mkdir $(OUTMANPATH)
@@ -46,11 +49,11 @@ doc:
 	done
 
 doc_install:
-	install -Dm 555 out-docs/*.1.gz -t $(DESTDIR)/usr/share/man/man1
-	install -Dm 555 out-docs/*.7.gz -t $(DESTDIR)/usr/share/man/man7
+	install -Dm 555 out-docs/*.1.gz -t $(DESTDIR)$(PREFIX)/share/man/man1
+	install -Dm 555 out-docs/*.7.gz -t $(DESTDIR)$(PREFIX)/share/man/man7
 
 res_install:
-	install -Dm 555 src/etc/* -t $(DESTDIR)/usr/share/wslu
+	install -Dm 555 src/etc/* -t $(DESTDIR)$(PREFIX)/share/wslu
 
 clean:
 	rm -rf $(OUTPATH)
