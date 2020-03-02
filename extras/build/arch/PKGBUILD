@@ -22,7 +22,7 @@ package() {
 
   install -Dm 755 out/* -t "${pkgdir}"/usr/bin/
   install -Dm 555 docs/*.1.gz -t "${pkgdir}"/usr/share/man/man1/
-  install -Dm 555 docs/*.7.gz -t "${pkgdir}"/usr/share/man/man7
+  install -Dm 555 docs/*.7.gz -t "${pkgdir}"/usr/share/man/man7/
   install -Dm 555 src/etc/* -t "${pkgdir}"/usr/share/wslu/
   install -Dm 644 LICENSE -t "${pkgdir}"/usr/share/licenses/wslu/
 }
