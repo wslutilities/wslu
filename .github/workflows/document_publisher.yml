@@ -1,5 +1,8 @@
-name: Manpage Website Generator
-on: [push]
+name: Deploy Manpage HTML to Website
+on: 
+  push:
+    paths:
+      - 'docs/*'
 jobs:
   build:
     name: Manpage Generate
@@ -13,10 +16,12 @@ jobs:
       - name: Convert manpages
         run: bash -c "for x in docs/*; do groff \$x -mandoc -Thtml > \${x%.*}.html; done"
       - name: deploy manpages to website
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.email "me@patrickwu.space"
           git config --global user.name "Jinming Wu, Patrick"
-          git clone --depth 1 https://${{ secrets.GITHUB_TOKEN }}@github.com/wslutilities/wslutilities.github.io.git website
+          git clone --depth 1 https://$GH_TOKEN@github.com/wslutilities/wslutilities.github.io.git website
           mkdir -p ./website/wslu/man
           cp docs/*.html ./website/wslu/man
           git --git-dir=./website/.git --work-tree=./website add -A
