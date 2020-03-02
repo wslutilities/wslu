@@ -16,7 +16,7 @@ jobs:
           cp -r extras/build/debian/* debian
           BUILD_VER="$(grep 'version=' src/wslu-header | cut -d'=' -f 2 | xargs)"
           BUILD_EXTRA_VER="1"
-          dch --distribution stable --newversion ${BUILD_VER}-${BUILD_EXTRA_VER}
+          # dch --distribution stable --newversion ${BUILD_VER}-${BUILD_EXTRA_VER}
           DEB_BUILD_OPTIONS=nocheck debuild -i -us -uc -b
           mkdir -p /tmp/pkgs
           sudo mv ../*.deb /tmp/pkgs
