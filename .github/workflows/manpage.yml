@@ -1,5 +1,8 @@
-name: Deploy Manpage HTML to Website
-on: [push]
+name: Manpage Website Deployment
+on:
+  push:
+    paths:
+      - 'docs/*'
 jobs:
   build:
     name: Manpage Generate

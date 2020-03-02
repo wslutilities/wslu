@@ -1,7 +1,7 @@
-name: Debian Pakckaging
+name: Pakckaging Builds
 on: [push]
 jobs:
-  build:
+  debbuild:
     name: Debian Package building
     runs-on: ubuntu-18.04
     steps:
@@ -19,4 +19,20 @@ jobs:
           # dch --distribution stable --newversion ${BUILD_VER}-${BUILD_EXTRA_VER}
           DEB_BUILD_OPTIONS=nocheck debuild -i -us -uc -b
           mkdir -p /tmp/pkgs
-          sudo mv ../*.deb /tmp/pkgs
+          sudo mv ../wsl* /tmp/pkgs
+          ls /tmp/pkgs
+  rpmbuild:
+    name: RPM Package building
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Pre-requisites
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qq apt-utils build-essential rpm gzip
+      - name: Build RPM Package
+        run: |
+          make
+          sudo bash -x ./extras/build/builder-rpm.sh
+          mkdir -p /tmp/pkgs
+          sudo mv ../../target/* /tmp/pkgs
