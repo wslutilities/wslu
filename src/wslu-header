@@ -42,8 +42,8 @@ elif [ "$1" == "--debug" ]; then
 	shift
 fi
 
-# checking interopability
-grep enabled /proc/sys/fs/binfmt_misc/WSLInterop >/dev/null || (echo -e "\e[31m\033[1m[error] WSL Interopability is disabled. Please enable it before using WSL.\033(B\033[m"; exit 1)
+# checking interoperability
+grep enabled /proc/sys/fs/binfmt_misc/WSLInterop >/dev/null || (echo -e "\e[31m\033[1m[error] WSL Interoperability is disabled. Please enable it before using WSL.\033(B\033[m"; exit 1)
 
 # variables
 ## color
@@ -92,7 +92,7 @@ function help {
 	echo -e "$app_name - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux
 Usage: $2
 
-For more help for $app_name, visit the following site: https://wslu.patrickwu.space/man/$app_name"
+For more help for $app_name, please use `man $app_name` visit the following site: https://wslu.patrickwu.space/man/$app_name.html"
 }
 
 function double_dash_p {
