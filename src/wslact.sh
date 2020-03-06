@@ -61,9 +61,9 @@ function smart_mount {
 	
 	for drive in $drive_list; do
 		[[ -d "/mnt/$drive" ]] || mkdir -p "/mnt/$drive"
-		if [[ -n $(find "/mnt/$drive" -maxdepth 0 -type d -empty) ]]; then
+		if [[ -n $(find "/mnt/$drive" -maxdepth 0 -type d -empty 2>/dev/null) ]]; then
 			echo "${info} Mounting Drive ${drive^} to /mnt/$drive..."
-			if mount -t drvfs ${drive}: "/mnt/$drive" -o "$mount_opt"; then
+			if mount -t drvfs ${drive}: "/mnt/$drive" -o "$mount_opt" 2>/dev/null; then
 				echo "${info} Mounted Drive ${drive^} to /mnt/$drive."
 				mount_s=$((mount_s + 1))
 			else
