@@ -20,10 +20,12 @@ VERTMP = $(shell grep 'version=' $(HEADER) | cut -d'=' -f 2 | xargs)
 
 all: doc
 	[ -d $(OUTPATH) ] || mkdir $(OUTPATH)
+	echo "\n" > tmp_n
 	for file in $(SOURCES); do \
-		cat $(HEADER) $$file > $(OUTPATH)/`basename $$file`; \
+		cat $(HEADER) tmp_n $$file > $(OUTPATH)/`basename $$file`; \
 		mv $(OUTPATH)/`basename $$file` $(OUTPATH)/`basename $$file .sh`; \
 	done
+	rm tmp_n
 	chmod +x $(OUTPATH)/*
 
 install: doc_install res_install
