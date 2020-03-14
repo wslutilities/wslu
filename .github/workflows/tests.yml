@@ -6,5 +6,5 @@ jobs:
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v2
-      - name: First test
-        run: wsl.exe -u root -e cat /etc/os-release
+      - name: Doing nothing
+        run: echo "won't work right now, implement until GitHub action properly support WSL."
