@@ -1,0 +1,11 @@
+name: Tests
+on: [push]
+jobs:
+  generaltests:
+    name: General Tests
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - name: First test
+        run: |
+        wsl.exe -u root -e cat /etc/os-release
