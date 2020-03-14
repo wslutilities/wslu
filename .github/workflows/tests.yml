@@ -7,4 +7,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Doing nothing
-        run: echo "won't work right now, implement until GitHub action properly support WSL."
+        run: echo "won't work right now, implement until GitHub action properly support WSL. related issue - https://github.com/actions/virtual-environments/issues/50"
