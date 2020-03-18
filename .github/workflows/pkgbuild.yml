@@ -1,8 +1,8 @@
-name: Pakckaging Builds
+name: Packaging Builds
 on: [push]
 jobs:
   debbuild:
-    name: Debian Package building
+    name: Debian Package deploying
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -14,28 +14,39 @@ jobs:
         run: |
           mkdir -p debian
           cp -r extras/build/debian/* debian
+          chmod +x debian/rules
           BUILD_VER="$(grep 'version=' src/wslu-header | cut -d'=' -f 2 | xargs)"
           BUILD_EXTRA_VER="1"
           # dch --distribution stable --newversion ${BUILD_VER}-${BUILD_EXTRA_VER}
           DEB_BUILD_OPTIONS=nocheck debuild -i -us -uc -b
           mkdir -p ./pkgs
-          mv ../wsl* ./pkgs
-        # with:
-        #   name: DebianPackages
-        #   path: pkgs
+          mv ../wsl*.* ./pkgs
   rpmbuild:
-    name: RPM Package building
+    name: RPM Package deploying
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -qq apt-utils build-essential rpm gzip
-      - name: Build RPM Package
+          sudo apt-get install -qq build-essentials tar
+      - name: 
         run: |
-          make
-          sudo bash -x ./extras/build/builder-rpm.sh
-        # with:
-        #   name: RPMPackages
-        #   path: target
+          mkdir -p ../tmp_rpmb_d/
+          cp -r * ../tmp_romb_d/
+          cd ../tmp_romb_d/
+          tar -czvf wslu-3.0.0.tar.gz *
+          cd ../wslu
+      - name: deploy manpages to website
+        env:
+          GH_TOKEN: ${{ secrets.GIT_DEPLOY_KEY }}
+        run: |
+          git config --global user.email "me@patrickwu.space"
+          git config --global user.name "Jinming Wu, Patrick"
+          git clone --depth 1 https://patrick330602:$GH_TOKEN@github.com/wslutilities/rpm-wslu.git rpm-repo
+          mkdir -p rpm-repo/{SOURCES,SPECS}
+          cp ../tmp_romb_d/wslu-3.0.0.tar.gz rpm-repo/SOURCES
+          cp extras/build/rpm/wslu.spec rpm-repo/SPECS
+          git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo add -A
+          git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo commit -m "RPM Packaging file update: $(time)"
+          git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo push
