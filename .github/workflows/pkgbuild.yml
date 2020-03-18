@@ -37,7 +37,7 @@ jobs:
           cd ../tmp_rpmb_d/
           tar -czvf wslu-3.0.0.tar.gz *
           cd ../wslu
-      - name: deploy manpages to website
+      - name: deploy RPM source rpm-wslu
         env:
           GH_TOKEN: ${{ secrets.GIT_DEPLOY_KEY }}
         run: |
