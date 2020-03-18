@@ -33,8 +33,8 @@ jobs:
       - name: 
         run: |
           mkdir -p ../tmp_rpmb_d/
-          cp -r * ../tmp_romb_d/
-          cd ../tmp_romb_d/
+          cp -r * ../tmp_rpmb_d/
+          cd ../tmp_rpmb_d/
           tar -czvf wslu-3.0.0.tar.gz *
           cd ../wslu
       - name: deploy manpages to website
@@ -45,7 +45,7 @@ jobs:
           git config --global user.name "Jinming Wu, Patrick"
           git clone --depth 1 https://patrick330602:$GH_TOKEN@github.com/wslutilities/rpm-wslu.git rpm-repo
           mkdir -p rpm-repo/{SOURCES,SPECS}
-          cp ../tmp_romb_d/wslu-3.0.0.tar.gz rpm-repo/SOURCES
+          cp ../tmp_rpmb_d/wslu-3.0.0.tar.gz rpm-repo/SOURCES
           cp extras/build/rpm/wslu.spec rpm-repo/SPECS
           git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo add -A
           git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo commit -m "RPM Packaging file update: $(time)"
