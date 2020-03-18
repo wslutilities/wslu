@@ -49,5 +49,5 @@ jobs:
           cp ../tmp_rpmb_d/wslu-3.0.0.tar.gz rpm-repo/SOURCES
           cp extras/build/rpm/wslu.spec rpm-repo/SPECS
           git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo add -A
-          git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo commit -m "RPM Packaging file update: $(time)"
+          git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo commit -m "RPM Packaging file update: $(date)"
           git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo push
