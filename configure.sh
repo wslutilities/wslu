@@ -89,10 +89,9 @@ function rpm_build_prep {
 	sed -i s/RELVERPLACEHOLDER/"$REL_VER_NUM"/g ./extras/build/rpm/wslu.spec
 	mkdir -p ../wslu-$BUILD_VER_NUM/
 	cp -r * ../wslu-$BUILD_VER_NUM/
-	cd ../wslu-$BUILD_VER_NUM
-	tar -czvf wslu-$BUILD_VER_NUM.tar.gz *
-	cp wslu-$BUILD_VER_NUM.tar.gz ../wslu/
-	cd ../wslu
+	cd ../
+	tar -czvf wslu-$BUILD_VER_NUM.tar.gz ./wslu-$BUILD_VER_NUM
+	cd ./wslu
 }
 
 for args; do

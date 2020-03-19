@@ -41,7 +41,7 @@ jobs:
           git clone --depth 1 https://patrick330602:$GH_TOKEN@github.com/wslutilities/rpm-wslu.git rpm-repo
           mkdir -p rpm-repo/SOURCES
           mkdir -p rpm-repo/SPECS
-          cp wslu-*.tar.gz rpm-repo/SOURCES
+          cp ../wslu-*.tar.gz rpm-repo/SOURCES
           cp extras/build/rpm/wslu.spec rpm-repo/SPECS
           git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo add -A
           git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo commit -m "RPM Packaging file update: $(date)"
