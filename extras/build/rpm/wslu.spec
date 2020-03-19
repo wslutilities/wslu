@@ -1,8 +1,8 @@
 %define packager       Jinming Wu, Patrick <me@patrickwu.space>
 Summary: Windows 10 Linux Subsystem Utilities
 Name: wslu
-Version: 3.0.0
-Release: 1
+Version: BUILDVERPLACEHOLDER
+Release: RELVERPLACEHOLDER
 Source: wslu-BUILDVERPLACEHOLDER.tar.gz
 BuildArch: noarch
 Requires: bc ImageMagick
