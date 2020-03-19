@@ -74,11 +74,11 @@ function rpm_build_prep {
 	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g ./src/wslu-header
 	sed -i s/BUILDVERPLACEHOLDER/"$BUILD_VER_NUM"/g ./extras/build/rpm/wslu.spec
 	sed -i s/RELVERPLACEHOLDER/"$REL_VER_NUM"/g ./extras/build/rpm/wslu.spec
-	mkdir -p ../tmp_rpmb_d/
-	cp -r * ../tmp_rpmb_d/
-	cd ../tmp_rpmb_d/
-	tar -czvf wslu-$BUILD_VER_NUM.tar.gz *
-	cd ../wslu
+	mkdir -p ../wslu-$BUILD_VER_NUM/
+	cp -r * ../wslu-$BUILD_VER_NUM/
+	cd ../
+	tar -czvf wslu-$BUILD_VER_NUM.tar.gz ./wslu-$BUILD_VER_NUM
+	cd ./wslu
 }
 
 for args; do
