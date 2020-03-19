@@ -70,15 +70,15 @@ sudo make DESTDIR=/usr install
 
 function rpm_build_prep {
 	BUILD_VER_NUM=$(cat ./VERSION | cut -f1 -d-)
-	REL_VER_NUM=$(cat ./VERSION | cut -f1 -d-)
+	REL_VER_NUM=$(cat ./VERSION | cut -f2 -d-)
 	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g ./src/wslu-header
 	sed -i s/BUILDVERPLACEHOLDER/"$BUILD_VER_NUM"/g ./extras/build/rpm/wslu.spec
 	sed -i s/RELVERPLACEHOLDER/"$REL_VER_NUM"/g ./extras/build/rpm/wslu.spec
-	mkdir -p ../wslu-ptl/
-	cp -r * ../wslu-ptl/
-	cd ../wslu-ptl
-	tar -czvf wslu-$BUILD_VER_NUM.tar.gz *
-	cd ../wslu
+	mkdir -p ../wslu-$BUILD_VER_NUM/
+	cp -r * ../wslu-$BUILD_VER_NUM/
+	cd ../wslu-$BUILD_VER_NUM
+	tar -czvf wslu-$BUILD_VER_NUM.tar.gz 
+	cd ./wslu
 }
 
 for args; do
