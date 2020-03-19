@@ -31,13 +31,8 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -qq build-essential tar
       - name: 
-        run: |
-          mkdir -p ../tmp_rpmb_d/
-          cp -r * ../tmp_rpmb_d/
-          cd ../tmp_rpmb_d/
-          tar -czvf wslu-3.0.0.tar.gz *
-          cd ../wslu
-      - name: deploy RPM source rpm-wslu
+        run: bash ./configure.sh --rpm
+      - name: deploy RPM source to rpm-wslu
         env:
           GH_TOKEN: ${{ secrets.GIT_DEPLOY_KEY }}
         run: |
@@ -46,7 +41,7 @@ jobs:
           git clone --depth 1 https://patrick330602:$GH_TOKEN@github.com/wslutilities/rpm-wslu.git rpm-repo
           mkdir -p rpm-repo/SOURCES
           mkdir -p rpm-repo/SPECS
-          cp ../tmp_rpmb_d/wslu-3.0.0.tar.gz rpm-repo/SOURCES
+          cp ../tmp_rpmb_d/wslu-*.tar.gz rpm-repo/SOURCES
           cp extras/build/rpm/wslu.spec rpm-repo/SPECS
           git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo add -A
           git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo commit -m "RPM Packaging file update: $(date)"
