@@ -78,7 +78,7 @@ function rpm_build_prep {
 	cp -r * ../wslu-$BUILD_VER_NUM/
 	cd ../wslu-$BUILD_VER_NUM
 	tar -czvf wslu-$BUILD_VER_NUM.tar.gz 
-	cd ./wslu
+	cd ../wslu
 }
 
 for args; do
