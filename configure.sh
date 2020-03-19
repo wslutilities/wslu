@@ -77,7 +77,7 @@ function deb_build_prep {
 	cp -r * ../wslu-$BUILD_VER_NUM/
 	cd ../wslu-$BUILD_VER_NUM
 	tar -czvf wslu-$BUILD_VER_NUM.tar.gz *
-	cp wslu-$BUILD_VER_NUM.tar.gz ../wslu
+	cp wslu-$BUILD_VER_NUM.tar.gz ../wslu/
 	cd ../wslu
 }
 
@@ -90,7 +90,8 @@ function rpm_build_prep {
 	mkdir -p ../wslu-$BUILD_VER_NUM/
 	cp -r * ../wslu-$BUILD_VER_NUM/
 	cd ../wslu-$BUILD_VER_NUM
-	tar -czvf wslu-$BUILD_VER_NUM.tar.gz 
+	tar -czvf wslu-$BUILD_VER_NUM.tar.gz *
+	cp wslu-$BUILD_VER_NUM.tar.gz ../wslu/
 	cd ../wslu
 }
 
