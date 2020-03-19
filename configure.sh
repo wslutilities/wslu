@@ -67,8 +67,23 @@ make
 sudo make DESTDIR=/usr install
 }
 
+
+function rpm_build_prep {
+	BUILD_VER_NUM=$(cat ./VERSION | cut -f1 -d-)
+	REL_VER_NUM=$(cat ./VERSION | cut -f1 -d-)
+	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g ./src/wslu-header
+	sed -i s/BUILDVERPLACEHOLDER/"$BUILD_VER_NUM"/g ./extras/build/rpm/wslu.spec
+	sed -i s/RELVERPLACEHOLDER/"$REL_VER_NUM"/g ./extras/build/rpm/wslu.spec
+	mkdir -p ../tmp_rpmb_d/
+	cp -r * ../tmp_rpmb_d/
+	cd ../tmp_rpmb_d/
+	tar -czvf wslu-$BUILD_VER_NUM.tar.gz *
+	cd ../wslu
+}
+
 for args; do
 	case $args in
+		--rpm) rpm_build_prep; exit;;
 		-e|--env) env_check; exit;;
 		-P|--pkg) pkg_inst; exit;;
 		-i|--install) main_inst; exit;;
