@@ -51,11 +51,11 @@ doc:
 	done
 
 doc_install:
-	install -Dm 555 out-docs/*.1.gz -t $(DESTDIR)$(PREFIX)/share/man/man1
-	install -Dm 555 out-docs/*.7.gz -t $(DESTDIR)$(PREFIX)/share/man/man7
+	install -Dm 644 out-docs/*.1.gz -t $(DESTDIR)$(PREFIX)/share/man/man1
+	install -Dm 644 out-docs/*.7.gz -t $(DESTDIR)$(PREFIX)/share/man/man7
 
 res_install:
-	install -Dm 555 src/etc/* -t $(DESTDIR)$(PREFIX)/share/wslu
+	install -Dm 644 src/etc/* -t $(DESTDIR)$(PREFIX)/share/wslu
 
 clean:
 	rm -rf $(OUTPATH)
