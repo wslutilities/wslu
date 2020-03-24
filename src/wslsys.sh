@@ -50,7 +50,7 @@ function call_windows_uptime() {
 }
 
 function get_windows_locale() {
-	win_uptime=$(winps_exec "(Get-Culture).Name" | sed -e 's|\r||g')
+	win_uptime=$(winps_exec "(Get-Culture).Name" | sed -e 's|\r||g' -e 's|-|_|g')
 	echo "$win_uptime"
 }
 
