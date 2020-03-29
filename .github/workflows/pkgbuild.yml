@@ -12,13 +12,7 @@ jobs:
           sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper 
       - name: Build Debian Package
         run: |
-          mkdir -p debian
-          cp -r extras/build/debian/* debian
-          chmod +x debian/rules
-          BUILD_VER="$(grep 'version=' src/wslu-header | cut -d'=' -f 2 | xargs)"
-          BUILD_EXTRA_VER="1"
-          # dch --distribution stable --newversion ${BUILD_VER}-${BUILD_EXTRA_VER}
-          DEB_BUILD_OPTIONS=nocheck debuild -i -us -uc -b
+          bash ./configure.sh --deb
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
   rpmbuild:
