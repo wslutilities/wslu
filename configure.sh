@@ -73,7 +73,6 @@ function deb_build_prep {
 	chmod +x debian/rules
 	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g ./src/wslu-header
 	dch --distribution $@ --newversion "$(cat ./VERSION)"
-	#DEB_BUILD_OPTIONS=nocheck debuild -i -us -uc -b
 }
 
 function rpm_build_prep {

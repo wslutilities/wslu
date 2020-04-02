@@ -12,7 +12,8 @@ jobs:
           sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper 
       - name: Build Debian Package
         run: |
-          bash ./configure.sh --deb
+          bash ./configure.sh --deb bionic
+          DEB_BUILD_OPTIONS=nocheck debuild -i -us -uc -b
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
   rpmbuild:
