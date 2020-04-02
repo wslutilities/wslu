@@ -67,20 +67,25 @@ make
 sudo make DESTDIR=/usr install
 }
 
+function general_build_prep {
+	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g ./src/wslu-header
+}
+
 function deb_build_prep {
 	mkdir -p debian
 	cp -r extras/build/debian/* debian
 	chmod +x debian/rules
-	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g ./src/wslu-header
+	general_build_prep
 	dch --distribution $@ --newversion "$(cat ./VERSION)"
 }
 
 function rpm_build_prep {
 	BUILD_VER_NUM=$(cat ./VERSION | cut -f1 -d-)
 	REL_VER_NUM=$(cat ./VERSION | cut -f2 -d-)
-	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g ./src/wslu-header
+	general_build_prep
 	sed -i s/BUILDVERPLACEHOLDER/"$BUILD_VER_NUM"/g ./extras/build/rpm/wslu.spec
 	sed -i s/RELVERPLACEHOLDER/"$REL_VER_NUM"/g ./extras/build/rpm/wslu.spec
+	sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a %b %d %Y')"/g ./extras/build/rpm/wslu.spec
 	mkdir -p ../wslu-$BUILD_VER_NUM/
 	cp -r * ../wslu-$BUILD_VER_NUM/
 	cd ../
@@ -90,6 +95,7 @@ function rpm_build_prep {
 
 for args; do
 	case $args in
+		--build) general_build_prep; exit;;
 		--rpm) rpm_build_prep; exit;;
 		--deb) deb_build_prep $2; exit;;
 		-e|--env) env_check; exit;;

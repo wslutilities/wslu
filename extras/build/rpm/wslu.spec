@@ -49,6 +49,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc /usr/share/man/
 
 %changelog
-* Wed Mar 30 2020 Jinming Wu, Patrick <me@patrickwu.space> - BUILDVERPLACEHOLDER-RELVERPLACEHOLDER
+* DATETIMEPLACEHOLDER Jinming Wu, Patrick <me@patrickwu.space> - BUILDVERPLACEHOLDER-RELVERPLACEHOLDER
 - Please check https://github.com/wslutilities/wslu/releases/latest for changelog
 
