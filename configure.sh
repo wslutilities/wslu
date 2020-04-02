@@ -79,7 +79,7 @@ function deb_build_prep {
 	date +'%a, %d %b %Y %T %z'
 	sed -i s/DISTROPLACEHOLDER/"$@"/g debian/changelog
 	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g debian/changelog
-	sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a %b %d %Y')"/g debian/changelog
+	sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a, %d %b %Y %T %z')"/g debian/changelog
 	#dch --distribution $@ --newversion "$(cat ./VERSION)"
 }
 
