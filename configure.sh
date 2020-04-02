@@ -76,7 +76,11 @@ function deb_build_prep {
 	cp -r extras/build/debian/* debian
 	chmod +x debian/rules
 	general_build_prep
-	dch --distribution $@ --newversion "$(cat ./VERSION)"
+	date +'%a, %d %b %Y %T %z'
+	sed -i s/DISTROPLACEHOLDER/"$@"/g debian/changelog
+	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g debian/changelog
+	sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a %b %d %Y')"/g debian/changelog
+	#dch --distribution $@ --newversion "$(cat ./VERSION)"
 }
 
 function rpm_build_prep {
