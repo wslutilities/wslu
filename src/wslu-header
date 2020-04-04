@@ -92,7 +92,8 @@ function help {
 	echo -e "$app_name - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux
 Usage: $2
 
-For more help for $app_name, please use \`man $app_name\` visit the following site: https://wslu.patrickwu.space/man/$app_name.html"
+For more help for $app_name, please use the command \`man $app_name\` or visit the following site: https://wslutiliti.es/wslu/man/$app_name.html.
+For overall help, you can use the command \`man wslu\` or visite the following site: https://wslutiliti.es/wslu."
 }
 
 function double_dash_p {
