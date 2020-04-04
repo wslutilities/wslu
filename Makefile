@@ -55,7 +55,10 @@ doc_install:
 	install -Dm 644 out-docs/*.7.gz -t $(DESTDIR)$(PREFIX)/share/man/man7
 
 res_install:
-	install -Dm 644 src/etc/* -t $(DESTDIR)$(PREFIX)/share/wslu
+	install -Dm 644 src/etc/*.vbs -t $(DESTDIR)$(PREFIX)/share/wslu
+	install -Dm 644 src/etc/*.ps1 -t $(DESTDIR)$(PREFIX)/share/wslu
+	install -Dm 644 src/etc/*.ico -t $(DESTDIR)$(PREFIX)/share/wslu
+	install -Dm 755 src/etc/*.sh -t $(DESTDIR)$(PREFIX)/share/wslu
 
 clean:
 	rm -rf $(OUTPATH)
