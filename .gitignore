@@ -2,3 +2,4 @@ out
 out-docs
 target
 .vscode
+**/*/.DS_Store
