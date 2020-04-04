@@ -2,3 +2,10 @@
 
 %:
 	dh $@
+
+override_dh_auto_test:
+	if (test -f /proc/sys/fs/binfmt_misc/WSLInterop && grep -q enabled /proc/sys/fs/binfmt_misc/WSLInterop); then \
+		dh_auto_test ; \
+	else \
+		echo "Skipping tests; tests can be only run on WSL with WSLInterop enabled"; \
+	fi
