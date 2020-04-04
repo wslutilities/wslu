@@ -13,7 +13,7 @@ jobs:
       - name: Build Debian Package
         run: |
           bash ./configure.sh --deb buster
-          DEB_BUILD_OPTIONS=nocheck debuild -i -us -uc -b
+          debuild -i -us -uc -b
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
   rpmbuild:
