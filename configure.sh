@@ -72,14 +72,13 @@ function general_build_prep {
 }
 
 function deb_build_prep {
-	mkdir -p debian
-	cp -r extras/build/debian/* debian
-	chmod +x debian/rules
+	mkdir -p ./debian
+	cp -r ./extras/build/debian/* ./debian
+	chmod +x ./debian/rules
 	general_build_prep
-	date +'%a, %d %b %Y %T %z'
-	sed -i s/DISTROPLACEHOLDER/"$@"/g debian/changelog
-	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g debian/changelog
-	sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a, %d %b %Y %T %z')"/g debian/changelog
+	sed -i s/DISTROPLACEHOLDER/"$@"/g ./debian/changelog
+	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g ./debian/changelog
+	sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a, %d %b %Y %T %z')"/g ./debian/changelog
 	#dch --distribution $@ --newversion "$(cat ./VERSION)"
 }
 
