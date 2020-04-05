@@ -21,7 +21,7 @@ jobs:
           name: DEBs
           path: pkgs
   pgwbuild:
-    name: Pengwin Packaging & Deploying
+    name: Pengwin Packaging
     runs-on: ubuntu-16.04
     steps:
       - uses: actions/checkout@v2
@@ -29,17 +29,31 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper
-          gem install package_cloud
       - name: Build Debian Package
         run: |
           bash ./configure.sh --deb bullseye
           debuild -i -us -uc -b
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
+      - uses: actions/upload-artifact@v1
+        with:
+          name: PengwinDEBs
+          path: pkgs
+  pgwspdeploy:
+    name: Pengwin Dev version Deploying
+    needs: pgwbuild
+    container:
+      image: ircleci/ruby:2.3-jessie
+      env:
+        PACKAGECLOUD_TOKEN: ${{ secrets.PGW_DEV_DEPLOY_KEY }}
+    steps:
+      - name: Retrive package for deployment
+        uses: actions/download-artifact@v1
+        with:
+          name: PengwinDEBs
+      - run: gem install package_cloud
       - name: deploy to the dev
-        env:
-          PACKAGECLOUD_TOKEN: ${{ secrets.PGW_DEV_DEPLOY_KEY }}
-        run: package_cloud push whitewaterfoundry/wslu-dev/debian/bullseye ./pkgs/*.deb --skip-errors
+        run: package_cloud push whitewaterfoundry/wslu-dev/debian/bullseye ./PengwinDEBs/*.deb --skip-errors
   rpmbuild:
     name: RPM Packaging
     runs-on: ubuntu-18.04
