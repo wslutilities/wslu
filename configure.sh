@@ -108,4 +108,4 @@ for args; do
 	esac
 done
 
-env_check; pkg_inst
+env_check; pkg_inst; general_build_prep
