@@ -1,62 +1,24 @@
 name: Packaging Builds
 on: [push]
 jobs:
-  ubuntu16build:
-    name: Ubuntu 16.04
+  debbuild:
+    name: Debian
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper 
+          sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper
       - name: Build Debian Package
         run: |
-          bash ./configure.sh --deb xenial
+          bash ./configure.sh --deb buster
           debuild -i -us -uc -b
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
       - uses: actions/upload-artifact@v1
         with:
-          name: Ubuntu1604DEBs
-          path: pkgs
-  ubuntu18build:
-    name: Ubuntu 18.04
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install Pre-requisites
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper 
-      - name: Build Debian Package
-        run: |
-          bash ./configure.sh --deb bionic
-          debuild -i -us -uc -b
-          mkdir -p ./pkgs
-          mv ../wsl*.* ./pkgs
-      - uses: actions/upload-artifact@v1
-        with:
-          name: Ubuntu1804DEBs
-          path: pkgs
-  ubuntu20build:
-    name: Ubuntu 20.04
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install Pre-requisites
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper 
-      - name: Build Debian Package
-        run: |
-          bash ./configure.sh --deb focal
-          debuild -i -us -uc -b
-          mkdir -p ./pkgs
-          mv ../wsl*.* ./pkgs
-      - uses: actions/upload-artifact@v1
-        with:
-          name: Ubuntu2004DEBs
+          name: DebianDEBs
           path: pkgs
   pgwbuild:
     name: Pengwin
