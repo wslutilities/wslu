@@ -23,7 +23,12 @@ make
 
 %install
 make PREFIX=/usr DESTDIR=%{?buildroot} install
-
+ln -s %{?buildroot}/usr/bin/wslview %{?buildroot}/usr/bin/wview
+ln -s %{?buildroot}/usr/bin/wslview %{?buildroot}/usr/bin/wslstart
+ln -s %{?buildroot}/usr/bin/wslview %{?buildroot}/usr/bin/wstart
+ln -s %{?buildroot}/usr/man/man1/wslview.1.gz %{?buildroot}/usr/man/man1/wview.1.gz 
+ln -s %{?buildroot}/usr/man/man1/wslview.1.gz %{?buildroot}/usr/man/man1/wslstart.1.gz 
+ln -s %{?buildroot}/usr/man/man1/wslview.1.gz %{?buildroot}/usr/man/man1/wstart.1.gz 
 %post
 %{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 1
 %{_sbindir}/update-alternatives --install %{_bindir}/x-www-browser x-www-browser %{_bindir}/wslview 1
@@ -42,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wslsys
 %{_bindir}/wslupath
 %{_bindir}/wslview
+%{_bindir}/wview
+%{_bindir}/wstart
+%{_bindir}/wslstart
 %{_bindir}/wslgsu
 %{_bindir}/wslact
 %{_bindir}/wslvar
