@@ -44,8 +44,6 @@ jobs:
     needs: pgwbuild
     container:
       image: ircleci/ruby:2.3-jessie
-      env:
-        PACKAGECLOUD_TOKEN: ${{ secrets.PGW_DEV_DEPLOY_KEY }}
     steps:
       - name: Retrive package for deployment
         uses: actions/download-artifact@v1
@@ -53,6 +51,8 @@ jobs:
           name: PengwinDEBs
       - run: gem install package_cloud
       - name: deploy to the dev
+        env:
+          PACKAGECLOUD_TOKEN: ${{ secrets.PGW_DEV_DEPLOY_KEY }}
         run: package_cloud push whitewaterfoundry/wslu-dev/debian/bullseye ./PengwinDEBs/*.deb --skip-errors
   rpmbuild:
     name: RPM Packaging
