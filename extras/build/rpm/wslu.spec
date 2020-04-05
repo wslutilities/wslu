@@ -10,7 +10,7 @@ Requires(post): %{_sbindir}/update-alternatives
 Requires(postun): %{_sbindir}/update-alternatives
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 URL: https://github.com/wslutilities/wslu/
-License: GPLv3
+License: GPL-3.0-or-later
 
 %description
 This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
@@ -20,11 +20,15 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as conver
 
 %build
 make
-# for os lower than 7
-mkdir -p %{?buildroot}/usr/share/man/man1/
-mkdir -p %{?buildroot}/usr/share/man/man7/
 
 %install
+# for os <= 7
+mkdir -p %{?buildroot}/usr/share/man/man1/
+mkdir -p %{?buildroot}/usr/share/man/man7/
+mkdir -p %{?buildroot}/usr/share/wslu/
+mkdir -p %{?buildroot}/usr/bin/
+/usr/share/wslu/
+# normal part
 make PREFIX=/usr DESTDIR=%{?buildroot} install
 ln -sf /usr/bin/wslview %{?buildroot}/usr/bin/wview
 ln -sf /usr/bin/wslview %{?buildroot}/usr/bin/wslstart
