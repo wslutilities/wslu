@@ -20,6 +20,9 @@ This is a collection of utilities for Windows 10 Linux Subsystem, such as conver
 
 %build
 make
+# for os lower than 7
+mkdir -p %{?buildroot}/usr/share/man/man1/
+mkdir -p %{?buildroot}/usr/share/man/man7/
 
 %install
 make PREFIX=/usr DESTDIR=%{?buildroot} install
