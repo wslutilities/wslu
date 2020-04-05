@@ -42,8 +42,8 @@ jobs:
   pgwspdeploy:
     name: Pengwin Dev version Deploying
     needs: pgwbuild
-    container:
-      image: ircleci/ruby:2.3-jessie
+    runs-on: ubuntu-18.04
+    container: ircleci/ruby:2.3-jessie
     steps:
       - name: Retrive package for deployment
         uses: actions/download-artifact@v1
