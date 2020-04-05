@@ -27,7 +27,6 @@ mkdir -p %{?buildroot}/usr/share/man/man1/
 mkdir -p %{?buildroot}/usr/share/man/man7/
 mkdir -p %{?buildroot}/usr/share/wslu/
 mkdir -p %{?buildroot}/usr/bin/
-/usr/share/wslu/
 # normal part
 make PREFIX=/usr DESTDIR=%{?buildroot} install
 ln -sf /usr/bin/wslview %{?buildroot}/usr/bin/wview
