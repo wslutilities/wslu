@@ -23,12 +23,12 @@ make
 
 %install
 make PREFIX=/usr DESTDIR=%{?buildroot} install
-ln -sf %{?buildroot}/usr/bin/wslview %{?buildroot}/usr/bin/wview
-ln -sf %{?buildroot}/usr/bin/wslview %{?buildroot}/usr/bin/wslstart
-ln -sf %{?buildroot}/usr/bin/wslview %{?buildroot}/usr/bin/wstart
-ln -sf %{?buildroot}/usr/share/man/man1/wslview.1.gz %{?buildroot}/usr/share/man/man1/wview.1.gz
-ln -sf %{?buildroot}/usr/share/man/man1/wslview.1.gz %{?buildroot}/usr/share/man/man1/wslstart.1.gz
-ln -sf %{?buildroot}/usr/share/man/man1/wslview.1.gz %{?buildroot}/usr/share/man/man1/wstart.1.gz
+ln -sf /usr/bin/wslview %{?buildroot}/usr/bin/wview
+ln -sf /usr/bin/wslview %{?buildroot}/usr/bin/wslstart
+ln -sf /usr/bin/wslview %{?buildroot}/usr/bin/wstart
+ln -sf /usr/share/man/man1/wslview.1.gz %{?buildroot}/usr/share/man/man1/wview.1.gz
+ln -sf /usr/share/man/man1/wslview.1.gz %{?buildroot}/usr/share/man/man1/wslstart.1.gz
+ln -sf /usr/share/man/man1/wslview.1.gz %{?buildroot}/usr/share/man/man1/wstart.1.gz
 
 %post
 %{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 1
