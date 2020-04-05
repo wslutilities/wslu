@@ -6,7 +6,8 @@
 
 [![GitHub license](https://img.shields.io/github/license/wslutilities/wslu?style=flat-square&label=license&color=blue&logo=github)](https://github.com/wslutilities/wslu/blob/master/LICENSE)
 [![GitHub (pre-)release](https://img.shields.io/github/v/release/wslutilities/wslu?include_prereleases&logo=github&style=flat-square)](https://github.com/wslutilities/wslu)
-[![GitLab](https://img.shields.io/static/v1?label=gitlab&logo=gitlab&color=E24329&message=mirrored&style=flat-square)](https://gitlab.com/callmepk/wslu)
+[![GitLab](https://img.shields.io/static/v1?label=gitlab&logo=gitlab&color=E24329&message=mirrored&style=flat-square)](https://gitlab.com/wslutilities/wslu)
+[![Launchpad](https://img.shields.io/static/v1?label=launchpad&logo=launchpad&color=F8C300&message=mirrored&style=flat-square)](https://launchpad.net/wslu)
 [![Gitee](https://img.shields.io/static/v1?label=gitee&color=C71D23&message=mirrored&style=flat-square)](https://gitee.com/mirrors/wslu)
 [![Twitter Follow](https://img.shields.io/twitter/follow/wslutilities?style=flat-square&logo=twitter&color=1DA1F2&label=follow)](https://twitter.com/wslutilities)
 
@@ -14,7 +15,7 @@ English | [简体中文](README.hans.md) | [繁體中文](README.hant.md)
 
 </div>
 
-This is a collection of utilities for Windows 10 Linux Subsystem, such as retriving Windows environment variables or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update. Some of the feature requires higher version of Windows 10. Supports WSL2.
+This is a collection of utilities for Windows 10 Linux Subsystem, such as retrieving environment variables or creating your favorite Linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update. Some of the feature requires a higher version of Windows 10. Supports WSL2.
 
 ## Feature
 
@@ -25,7 +26,7 @@ A WSL shortcut creator to create a shortcut on your Windows 10 Desktop.
 A WSL system information printer to print out system informations from Windows 10 or Linux.
 
 **wslfetch**
-A WSL screenshoot information tool to print information in an elegant way.
+A WSL screenshot information tool to print information in an elegant way.
 
 **wslvar**
 A WSL tool to help you get Windows system environment variables.
@@ -33,27 +34,21 @@ A WSL tool to help you get Windows system environment variables.
 **wslview**
 A fake WSL browser that can help you open link in default Windows browser.
 
-**wslupath**
+**wslupath** *Deprecated*
 A WSL tool to convert path styles.
 
 **wslact**
-A set of quick actions for WSL such as creating startup tasks and manually sync time between Windows ans WSL.
+A set of quick actions for WSL such as quickly mounting all  and manually sync time between Windows and WSL.
 
-## Status
-
-| | Service | Master | Develop |
-| ------ | ------ |:------:|:-------:|
-| License Check | FOSSA | [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu%2develop?ref=badge_shield) | - |
-| Code Quality | CodeFactor | [![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/master)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/master) | [![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/develop)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/develop) |
-| Testing | AppVeyor | [![Build status](https://ci.appveyor.com/api/projects/status/gcttf7igb0s40xak/branch/master?svg=true)](https://ci.appveyor.com/project/patrick330602/wslu/branch/master) | [![Build status](https://ci.appveyor.com/api/projects/status/gcttf7igb0s40xak/branch/develop?svg=true)](https://ci.appveyor.com/project/patrick330602/wslu/branch/develop) |
-| Deployment | CircleCI | [![CircleCI](https://img.shields.io/circleci/build/gh/wslutilities/wslu/master)](https://circleci.com/gh/wslutilities/wslu/tree/master) | [![CircleCI](https://img.shields.io/circleci/build/gh/wslutilities/wslu/develop)](https://circleci.com/gh/wslutilities/wslu/tree/develop) |
+**wslact**
+A tool to help creating startup tasks
 
 
 ## Installation
 
 ### Alpine Linux
 
-You can install wslu from Alpine Linux testing with following way:
+You can install `wslu` from Alpine Linux testing with the following way:
 
 ```
 $ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/" | sudo tee -a /etc/apk/repositories
@@ -75,7 +70,7 @@ Preinstalled.
 
 ### Kali Linux
 
-You can install wslu using the following command:
+You can install `wslu` using the following command:
 
 ```
 sudo apt install gnupg2 apt-transport-https
@@ -93,9 +88,9 @@ Preinstalled.
 
 > Attention!
 >
-> The Ubuntu version of `wslu` is maintained by [Balint Reczey](https://launchpad.net/~rbalint) and its source code is hosted on [launchpad.net](https://code.launchpad.net/~ubuntu-core-dev/ubuntu/+source/wslu/+git/wslu).
+> The Ubuntu version of `wslu` is a modified version. Yu should report bug [here](https://bugs.launchpad.net/wslu).
 
-Preinstalled in the latest apps. On older installations of Ubuntu please install `ubuntu-wsl` that depends on wslu:
+Preinstalled in the latest apps. On older installations of Ubuntu please install `ubuntu-wsl` that depends on `wslu`:
 
 ```
 sudo apt update
