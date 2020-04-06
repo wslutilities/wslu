@@ -8,7 +8,6 @@
 [![GitHub (pre-)release](https://img.shields.io/github/v/release/wslutilities/wslu?include_prereleases&label=版本&logo=github&style=flat-square)](https://github.com/wslutilities/wslu)
 [![GitLab](https://img.shields.io/static/v1?label=gitlab&logo=gitlab&color=E24329&message=已映象&style=flat-square)](https://gitlab.com/callmepk/wslu)
 [![碼雲](https://img.shields.io/static/v1?label=碼雲&color=C71D23&message=已映象&style=flat-square)](https://gitee.com/mirrors/wslu)
-[![Gitter](https://img.shields.io/gitter/room/wslutilities/wslu?color=ED1965&logo=gitter&style=flat-square)](https://gitter.im/wslutilities/wslu)
 [![Twitter Follow](https://img.shields.io/twitter/follow/wslutilities?style=flat-square&logo=twitter&color=1DA1F2&label=跟隨)
 ](https://twitter.com/wslutilities)
 
@@ -67,7 +66,7 @@ sudo apt install ubuntu-wsl
 
 你可以從 Releases 介面下載`.deb`進行安裝：`sudo dpkg -i wslu*`。
 
-#### Ubuntu/Debian
+#### Debian
 
 你可以用以下命令進行安裝：
 
@@ -91,7 +90,12 @@ wslu 已在 [AUR](https://aur.archlinux.org/packages/wslu/) 庫中。你可以�
 
 ### Alpine Linux
 
-你可以從 Releases 介面下載`.apk`進行安裝：`sudo apk add --allow-untrusted "wslu*"`.
+你現在可以通過執行以下指令安裝：
+```
+$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/" | sudo tee -a /etc/apk/repositories
+$ sudo apk update
+$ sudo apk add wslu@testing
+```
 
 ### 其他發行版
 

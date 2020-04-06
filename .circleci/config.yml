@@ -1,47 +1,15 @@
 version: 2
 jobs:
-  installtests:
-    docker:
-      - image: patrick330602/fake_wsl_env
-    steps:
-      - checkout
-      - run:
-          name: Pre-building Setup
-          command: |
-            apt-get update -qq
-            apt-get install -qq apt-utils sudo
-            bash -x ./configure.sh
-      - run:
-          name: Build and Install
-          command: |
-            make
-            sudo make install
-  linktests:
-    docker:
-      - image: patrick330602/fake_wsl_env
-    steps:
-      - checkout
-      - run:
-          name: Pre-building Setup
-          command: |
-            apt-get update -qq
-            apt-get install -qq apt-utils sudo
-            bash -x ./configure.sh
-      - run:
-          name: Build and Link
-          command: |
-            make
-            sudo make link
   pkgbuilds:
-    docker:
-      - image: patrick330602/fake_wsl_env
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
           name: Install Pre-requisites
           command: |
-            apt-get update -qq
-            apt-get install -qq apt-utils build-essential rpm sudo
+            sudo apt-get update -qq
+            sudo apt-get install -qq apt-utils build-essential rpm
       - run:
           name: Build Package
           command: |
@@ -57,15 +25,15 @@ jobs:
             root: /tmp/pkgs
             paths: .
   nightlypkgbuilds:
-    docker:
-      - image: patrick330602/fake_wsl_env
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
           name: Install Pre-requisites
           command: |
-            apt-get update -qq
-            apt-get install -qq apt-utils build-essential rpm sudo
+            sudo apt-get update -qq
+            sudo apt-get install -qq apt-utils build-essential rpm
       - run:
           name: Build Package
           command: |
@@ -108,6 +76,9 @@ jobs:
           name: Push rpm package for fedora 30
           command: package_cloud push whitewaterfoundry/wslu/fedora/30 /tmp/pkgs/*.rpm --skip-errors
       - run:
+          name: Push rpm package for fedora 31
+          command: package_cloud push whitewaterfoundry/wslu/fedora/31 /tmp/pkgs/*.rpm --skip-errors
+      - run:
           name: Push rpm package for enterprise linux 7
           command: package_cloud push whitewaterfoundry/wslu/el/7 /tmp/pkgs/*.rpm --skip-errors
       - run:
@@ -133,10 +104,6 @@ jobs:
           command: package_cloud push whitewaterfoundry/wslu/ol/7 /tmp/pkgs/*.rpm --skip-errors
 workflows:
   version: 2
-  tests:
-    jobs:
-      - installtests
-      - linktests
   buildtests:
     jobs:
       - pkgbuilds

@@ -1,27 +1,28 @@
 # Maintainer: Patrick Wu <wotingwu@live.com>
+# Contributor: Patrick Wu <wotingwu@live.com>
 pkgname=wslu
-pkgver=2.3.2
-pkgrel=0
+pkgver=2.3.6
+pkgrel=1
 pkgdesc="A collection of utilities for Windows 10 Linux Subsystems"
 url="https://github.com/wslutilities/wslu"
-arch="all"
-license="GPL3"
+arch="noarch"
+license="GPL-3.0-or-later"
 depends="bc bash-completion imagemagick"
-makedepends="make"
-install=""
-subpackages=""
-source="${pkgname}-${pkgver}.tar.gz::https://github.com/wslutilities/wslu/archive/v2.3.0.tar.gz"
-builddir="$srcdir/wslu-2.3.0"
+subpackages="$pkgname-doc"
+source="$pkgname-$pkgver.tar.gz::https://github.com/wslutilities/wslu/archive/v$pkgver.tar.gz"
+options="!check" #tests can be only run on a distro running on WSL(Windows Subsystems for Linux) environment, hence disabled
+
 build() {
-        cd "$builddir"
-        make
+	make
+}
+
+check() {
+	make test
 }
 
 package() {
-        cd "$builddir"
-        install -Dm 755 out/* -t "${pkgdir}"/usr/bin/
-        install -Dm 555 docs/* -t "${pkgdir}"/usr/share/man/man1/
-        install -Dm 555 src/etc/* -t "${pkgdir}"/usr/share/wslu/
-        install -Dm 644 LICENSE -t "${pkgdir}"/usr/share/licenses/wslu/
+	install -Dm 555 docs/* -t "$pkgdir"/usr/share/man/man1/
+	install -Dm 755 out/* -t "$pkgdir"/usr/bin/
+	install -Dm 555 src/etc/* -t "$pkgdir"/usr/share/wslu/
 }
 sha512sums=""

@@ -8,7 +8,6 @@
 [![GitHub (pre-)release](https://img.shields.io/github/v/release/wslutilities/wslu?include_prereleases&logo=github&style=flat-square)](https://github.com/wslutilities/wslu)
 [![GitLab](https://img.shields.io/static/v1?label=gitlab&logo=gitlab&color=E24329&message=mirrored&style=flat-square)](https://gitlab.com/callmepk/wslu)
 [![Gitee](https://img.shields.io/static/v1?label=gitee&color=C71D23&message=mirrored&style=flat-square)](https://gitee.com/mirrors/wslu)
-[![Gitter](https://img.shields.io/gitter/room/wslutilities/wslu?color=ED1965&logo=gitter&style=flat-square)](https://gitter.im/wslutilities/wslu)
 [![Twitter Follow](https://img.shields.io/twitter/follow/wslutilities?style=flat-square&logo=twitter&color=1DA1F2&label=follow)](https://twitter.com/wslutilities)
 
 English | [简体中文](README.hans.md) | [繁體中文](README.hant.md)
@@ -71,7 +70,7 @@ You can download the `.deb` package from release and install it using `sudo dpkg
 You can use the following command for easy installation:
 
 ```
-curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.deb.sh | sudo bash
+$ curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.deb.sh | sudo bash
 ```
 
 ### For RPM-based systems(OpenSUSE/SLES/Pengwin Enterprise/Oracle Linux)
@@ -79,7 +78,7 @@ curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/scri
 You can use the following command for easy installation:
 
 ```
-curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.rpm.sh | sudo bash
+$ curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.rpm.sh | sudo bash
 ```
 
 You can download the `.rpm` package from release and install it using `sudo rpm -ivh "wslu*"`.
@@ -90,7 +89,13 @@ wslu is live on [AUR](https://aur.archlinux.org/packages/wslu/). You can downloa
 
 ### Alpine Linux
 
-You can download the `.apk` package from release and install it using `sudo apk add --allow-untrusted "wslu*"`.
+You can now install wslu from Alpine Linux testing with following way:
+
+```
+$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/" | sudo tee -a /etc/apk/repositories
+$ sudo apk update
+$ sudo apk add wslu@testing
+```
 
 ### Other distributions
 
