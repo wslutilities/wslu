@@ -1,5 +1,5 @@
 0002-Makefile-Honor-DESTDIR.patch
 0004-Print-error-message-when-convert-is-not-found.patch
-0005-Set-up-sound-too-when-starting-GUI-programs-via-Wind.patch
-0006-Fix-empty-.config-wslu-baseexec.patch
-0007-Fix-setting-.config-wslu-baseexec-when-the-Windows-u.patch
+0008-Set-up-sound-when-starting-GUI-programs-via-Windows-.patch
+0009-Fix-empty-.config-wslu-baseexec.patch
+0010-Matching-original-Windows-username-space-fix.patch

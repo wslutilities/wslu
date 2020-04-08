@@ -1,0 +1,25 @@
+From 9050970ed2f119761fe4cef511ec02407ecad595 Mon Sep 17 00:00:00 2001
+From: "Jinming Wu, Patrick" <me@patrickwu.space>
+Date: Wed, 8 Apr 2020 10:07:41 +0800
+Subject: [PATCH] Matching original Windows username space fix
+
+---
+ src/wslu-header | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/wslu-header b/src/wslu-header
+index 1eb17d0..60377e9 100644
+--- a/src/wslu-header
++++ b/src/wslu-header
+@@ -115,7 +115,7 @@ function baseexec_gen {
+ 			# if it is a store distro
+ 			wslu_distro_packagename=$($(interop_prefix)c/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+ 			wslu_distro_packagename=${wslu_distro_packagename##* }
+-			wslu_base_exec_folder_path="$(wslpath "$(double_dash_p $(winps_exec "Write-Output \$Env:LOCALAPPDATA" | tr -d "\r"))\\Microsoft\\WindowsApps\\$wslu_distro_packagename")"
++			wslu_base_exec_folder_path="$(wslpath "$(winps_exec "Write-Output \$Env:LOCALAPPDATA" | tr -d "\r")\\Microsoft\\WindowsApps\\$wslu_distro_packagename")"
+ 			wslpath -w "$(find "$wslu_base_exec_folder_path" -name "*.exe")" > ~/.config/wslu/baseexec
+ 		else
+ 			# fallback if it is imported repository or other type
+-- 
+2.26.0
+
