@@ -1,3 +1,23 @@
+wslu (2.3.6-0ubuntu1) focal; urgency=medium
+
+  [ Patrick Wu ]
+  * Upstream update to 2.3.6
+    - wslupath manpage update
+    - fixes that imported distro cannot be properly handled by baseexec_gen
+    - fix an issue in handling dirty output in regenerate baseexec
+    - fix an issue in generating ~/.config/baseexec
+    - wslusc: fix an issue that will cause generated shortcut cannot be opened for some users
+  * Update patches
+  * debian/wsl-integration.sh: removal links in profile.d as requested by MSFT.
+  * debian/wsl-integration.sh: Fix issue that space in username breaks wsl-integration.sh. (LP: #1869878)
+
+  [ Balint Reczey ]
+  * debian/wsl-integration.sh: Suppress errors when saving $HOME/.cache. (LP: 1859509)
+  * debian/wsl-integration.sh: debian/wsl-integration.sh unset the right variable
+    at the end of script. (LP: #1857426)
+
+ -- Jinming Wu, Patrick <me@patrickwu.space>  Wed, 08 Apr 2020 10:18:44 +0800
+
 wslu (2.3.2-0ubuntu4) focal; urgency=medium
 
   * debian/wsl-integration.sh: Set timeouts for X and PulseAudio detection.
