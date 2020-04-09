@@ -1,4 +1,9 @@
-WSL_INTEGRATION_CACHE=$HOME/.cache/wslu/integration
+if [ "$HOME" == "/" ]; then
+    CACHE_BASE="/tmp"
+else
+    CACHE_BASE="$HOME/.cache"
+fi
+WSL_INTEGRATION_CACHE="${CACHE_BASE}/wslu/integration"
 
 if find -L "$WSL_INTEGRATION_CACHE" -newer /etc/resolv.conf 2> /dev/null | grep -q -m 1 '.'; then
     . $WSL_INTEGRATION_CACHE
@@ -14,8 +19,8 @@ elif type pactl > /dev/null 2>&1 || type xvinfo > /dev/null 2>&1; then
         WSL_HOST_PA_TIMEOUT=0.8
     fi
 
-    # create emty cache
-    [ -d "$HOME/.cache/wslu" ] || mkdir -p "$HOME/.cache/wslu" 2> /dev/null
+    # create empty cache
+    [ -d "${CACHE_BASE}/wslu" ] || mkdir -p "${CACHE_BASE}/wslu" 2> /dev/null
     echo -n "" > "$WSL_INTEGRATION_CACHE" 2> /dev/null
 
     # set DISPLAY if there is an X11 server running
@@ -39,3 +44,4 @@ elif type pactl > /dev/null 2>&1 || type xvinfo > /dev/null 2>&1; then
 fi
 
 unset WSL_INTEGRATION_CACHE
+unset CACHE_BASE
