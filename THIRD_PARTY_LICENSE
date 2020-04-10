@@ -1,6 +1,6 @@
 ./src/etc/sudo.ps1
 ==================
-The sudo.ps1 used here is a part of psutils(^1) made by Luke Sampson. the file is used under MIT License (License A).
+The sudo.ps1 used here is a part of psutils[^1] made by Luke Sampson. the file is used under MIT License (License A).
 
 /src/etc/wsl.ico
 ==================
@@ -10,9 +10,9 @@ Tux logo used here was originally made by Larry Ewing in the Gimp and re-illustr
 /src/wslfetch.sh
 ==================
 
-Some of `wslfetch` ASCII Arts comes from neofetch(^2) with MIT License (License B) and screenFetch(^3) with GPLv3 License (License C).
+Some of `wslfetch` ASCII Arts comes from neofetch[^2] with MIT License (License B) and screenFetch[^3] with GPLv3 License (License C).
 
-Pengwin Logo used in `wslfetch` ASCII art is ASCII version of the artwork by Dennis D. Bednarz(^4), with use permission from Whitewater Foundry.
+Pengwin Logo used in `wslfetch` ASCII art is ASCII version of the artwork by Dennis D. Bednarz[^4], with use permission from Whitewater Foundry.
 
 WLinux Logo used in `wslfetch` ASCII art is ASCII version of the artwork by Larry Ewing.
 
