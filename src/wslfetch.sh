@@ -1,8 +1,10 @@
+# shellcheck shell=bash
 version=44
 
 is_line=0
 is_splash=0
-help_short="wslfetch (--help|--version|--splash|--line)"
+is_color=0
+help_short="wslfetch [-hvlsc]"
 
 for args; do
 	case $args in
@@ -10,15 +12,17 @@ for args; do
 		-v|--version) echo "wslu v$wslu_version; wslfetch v$version"; exit;;
 		-s|--splash) is_splash=1;;
 		-l|--line) is_line=1;;
+		-c|--colorbar) is_color=1;
 	esac
 done
 
 hostname=$(</etc/hostname)
-branch=$(wslsys -b -s)
-build=$(wslsys -B -s)
-release=$(wslsys -R -s)
-kernel=$(wslsys -K -s)
-uptime=$(wslsys -U -s)
+wslsys=$(wslsys)
+branch=$(echo "$wslsys" | grep -Po '^Branch: \K.*')
+build=$(echo "$wslsys" | grep -Po '^Build: \K.*')
+release=$(echo "$wslsys" | grep -Po '^WSL Release: \K.*')
+kernel=$(echo "$wslsys" | grep -Po '^WSL Kernel: \K.*')
+uptime=$(echo "$wslsys" | grep -Po '^Windows Uptime: \K.*')
 
 case "$distro" in
 	'ubuntu')
@@ -289,8 +293,13 @@ info_text=("${t}Windows 10 Linux Subsystem${reset}"
 "${t}RELEASE:${reset}	${release}"
 "${t}KERNEL:${reset}	${kernel}"
 "${t}UPTIME:${reset}	${uptime}"
-""
-"   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}")
+"${reset}"
+)
+
+if [[ "$is_color" == "1" ]]; then
+info_text+=("   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}"
+"   \e[48;5;8m   \e[48;5;9m   \e[48;5;10m   \e[48;5;11m   \e[48;5;12m   \e[48;5;13m   \e[48;5;14m   \e[48;5;15m   ${reset}")
+fi
 
 function line {
 	if [[ "$1" == "1" ]]; then

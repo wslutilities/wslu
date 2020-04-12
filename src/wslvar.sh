@@ -1,8 +1,9 @@
+# shellcheck shell=bash
 version="03"
 
 var_type=1
 
-help_short="wslvar (--sys|--shell) [NAME]\nwslvar (--help|--version|--getsys|--getshell)"
+help_short="wslvar [-sl] NAME\nwslvar [-hvSL]"
 
 function call_shell {
 	winps_exec "(Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders').'$*'" | cat

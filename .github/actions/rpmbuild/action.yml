@@ -1,0 +1,11 @@
+name: Build an RPM
+description: Build an RPM.
+
+runs:
+  using: docker
+  #image: 'docker://robertdebock/github-action-rpmbuild:centos-7'
+  image: 'Dockerfile'
+
+branding:
+  icon: box
+  color: green

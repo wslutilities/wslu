@@ -11,24 +11,27 @@ Run the following to get started:
 git clone --recursive --branch develop https://github.com/wslutilities/wslu.git
 ./configure.sh
 make
-sudo make link
+sudo make res_install
 ```
 
-### Build Structure
+### Structure
 
 ```
 wslu
 |-src
-|  |-mime/wslview: mime file for wslview
 |  |-etc
-|  |  |-wsl.ico: default icon for wslusc
-|  |  \-runHidden.vbs: script for wslusc
+|  |  |-wsl.ico: legacy default icon for wslusc
+|  |  |-wsl-gui.ico: default icon for wslusc GUI shortcut
+|  |  |-wsl-term.ico: default icon for wslusc cli shortcut
+|  |  |-sudo.ps1: helper script for wslgsu 
+|  |  |-wslsc-helper.sh: helper script for wslusc on WSL side
+|  |  \-runHidden.vbs: helper script for wslusc on Windows side
 |  |-wslu-header: Header file of all script
 |  \-<components>.sh: Components of script
 |-tests: location for script tests
 \-extras
    |-bats: testing utility
-   |-scripts: scripts used for building
+   |-scripts: scripts
    \-build
       |-debian: files for building .deb
       |-rpm: files for building .rpm
@@ -38,44 +41,40 @@ wslu
 
 ### configure.sh
 
-`configure.sh` is the script to complete some preprocessing task. Following parameter is available:
+`configure.sh` is the script to complete some preprocessing task for both developing and packaging building.
+
+Following parameter is available for developing:
 - `-e,  --env` -- Environment Check, check whether it is using Fake WSL Environment, normal Linux or WSL.
 - `-p, --prsh` -- Check Status of `powershell.exe`.
 - `-P,  --pkg` -- Install Needed Packages required by your system for building.
 
+Following parameter is available for package building:
+- `--build` -- helper to add the version to wslu header.
+- `--deb <distro>` -- preprocessing script for deb packages.`<distro>` should be version code name like `bionic`, `stable`, `kali-rolling` or `buster`.
+- `--rpm` -- preprocessing script for rpm packages.
+
 ### Build & Install
 
-run `make` to build executable to `out` folder.
-run `make clean` to clean `out` folder.
+run `make` to build executables to `out` folder and manages to `out-docs` folder.
+run `make doc` to build manpage only.
+run `make clean` to remove `out` and `out-docs` folder.
 run `make test` to run tests.
-run `make install` to install to `/usr/bin/`. Requires to run as `sudo`.
-run `make link` to link files from the repo to `/usr/bin/`. Requires to run as `sudo`.
-run `make uninstall` to uninstall. Requires to run as `sudo`.
+run `make install` to install.
+run `make res_install` to install just resources.
+run `make uninstall` to uninstall.
 run `cd extras/scripts && ./builder-docs.sh` to build docs to `gendocs`.
+
+Pass necessary environment variables if necessary. The default installation is in `/usr` folder:
+- `DESTDIR`: You can change the destination installation folder. It is empty by default.
+- `PREFIX`: You can change the prefix for where to install. It is `/usr` by default.
 
 ### Test
 
 `wslu` use [bats](https://github.com/bats-core/bats-core) for testing. Please refer to [its guide](https://github.com/bats-core/bats-core#writing-tests) to write tests.
 
-### Build Packages
-
-For Debian Package, run:
-```bash
-cd extras/script
-sudo ./builder-deb.sh
-```
-
-For RPM Package, run:
-```bash
-cd extras/script
-sudo ./builder-rpm.sh
-```
-
-It is suggested to execute those commands in Ubuntu 16.04 LTS or its corresponding environment.
-
 ### Push Requests
 
-Make sure that the code changed is tested.
+Make sure that the codes changed are tested.
 
 Then create Pull requests [here](https://github.com/wslutilities/wslu/compare).
 

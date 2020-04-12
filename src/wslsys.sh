@@ -1,16 +1,58 @@
-version="29"
+# shellcheck shell=bash
+version="34"
 
-help_short="wslsys (-h|-v|-I|-b|-B|-fB|-U|-R|-K|-P) -s"
+help_short="wslsys [-IbBFUWRKPSlt] [-s]\nwslsys [-hv]"
 
 ## Windows 10 information
-branch=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildBranch | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-branch=${branch##* }
-build=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-build=${build##* }
-full_build=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildLabEx | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-full_build=${full_build##* }
-installdate=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v InstallDate | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-installdate=${installdate##* }
+function call_branch() {
+	branch=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildBranch | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	echo "${branch##* }"
+}
+
+function call_build() {
+	build=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	echo "${build##* }"
+}
+
+function call_full_build() {
+	full_build=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildLabEx | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	echo "${full_build##* }"
+}
+
+function call_install_date() {
+	installdate=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v InstallDate | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	echo "${installdate##* }"
+}
+
+function call_theme() {
+	win_theme=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" /v AppsUseLightTheme | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	win_theme=${win_theme##* }
+	if [ "$win_theme" != "0x1" ]; then
+		echo "dark"
+	else
+		echo "light"
+	fi
+}
+
+function call_display_scaling() {
+	display_scaling=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKCU\\Control Panel\\Desktop\\WindowMetrics" /v AppliedDPI | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	display_scaling=${display_scaling##* }
+	bc -l <<< "$(printf "%d\n" "$display_scaling")/96" | sed -e "s/\.0//g" -e "s/0*$//g"
+}
+
+function call_windows_uptime() {
+	win_uptime=$(winps_exec "((get-date) - (gcim Win32_OperatingSystem).LastBootUpTime).TotalSeconds" | sed -e 's|\r||g')
+	win_uptime=${win_uptime//.*}
+	w_days=$((win_uptime/86400))
+	w_hours=$((win_uptime/3600%24))
+	w_minutes=$((win_uptime/60%60))
+	echo "${w_days}d ${w_hours}h ${w_minutes}m"
+}
+
+function get_windows_locale() {
+	win_uptime=$(winps_exec "(Get-Culture).Name" | sed -e 's|\r||g' -e 's|-|_|g')
+	echo "$win_uptime"
+}
 
 ## WSL information
 release="$(grep "PRETTY_NAME=" /etc/os-release | sed -e 's/PRETTY_NAME=//g' -e 's/"//g')"
@@ -24,7 +66,7 @@ uptime="${days}d ${hours}h ${minutes}m"
 
 ### WSL package information
 case "$distro" in
-	'ubuntu'|'kali'|'debian'|'wlinux')
+	'pengwin'|'ubuntu'|'kali'|'debian'|'wlinux')
 		packages=$(dpkg -l | grep -c '^i');;
 	'opensuse'|'sles'|'scilinux'|'oldfedora'|'fedora'|'oracle')
 		packages=$(rpm -qa | wc -l);;
@@ -51,13 +93,17 @@ function printer {
 case $1 in
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslsys v$version"; exit;;
-		-I|--sys-installdate) printer "Release Install Date: $installdate" "$2";exit;;
-		-b|--branch) printer "Branch" "$branch" "$2";exit;;
-		-B|--build) printer "Build" "$build" "$2";exit;;
-		-fB|--full-build) printer "Full Build" "$full_build" "$2";exit;;
-		-U|--uptime) printer "Uptime" "$uptime" "$2";exit;;
-		-R|--release) printer "Linux Release" "$release" "$2";exit;;
-		-K|--kernel) printer "Linux Kernel" "$kernel" "$2";exit;;
+		-I|--sys-installdate) printer "Release Install Date" "$(call_install_date)" "$2";exit;;
+		-b|--branch) printer "Branch" "$(call_branch)" "$2";exit;;
+		-B|--build) printer "Build" "$(call_build)" "$2";exit;;
+		-F|--full-build) printer "Full Build" "$(call_full_build)" "$2";exit;;
+		-U|--uptime) printer "WSL Uptime" "$uptime" "$2";exit;;
+		-W|--win-uptime) printer "Windows Uptime" "$(call_windows_uptime)" "$2";exit;;
+		-R|--release) printer "WSL Release" "$release" "$2";exit;;
+		-K|--kernel) printer "WSL Kernel" "$kernel" "$2";exit;;
 		-P|--package) printer "Packages Count" "$packages" "$2";exit;;
-		*) echo -e "Release Install Date: $installdate\nBranch: $branch\nBuild: $build\nFull Build: $full_build\nUptime: $uptime\nLinux Release: $release\nLinux Kernel: $kernel\nPackages Count: $packages";exit;;
+		-S|--display-scaling) printer "Display Scaling" "$(call_display_scaling)" "$2";exit;;
+		-l|--locale) printer "Locale" "$(get_windows_locale)" "$2";exit;;
+		-t|--win-theme) printer "Windows Theme" "$(call_theme)" "$2"; exit;;
+		*) echo -e "Locale: $(get_windows_locale)\nRelease Install Date: $(date -d @"$(printf "%d" "$(call_install_date)")")\nBranch: $(call_branch)\nBuild: $(call_build)\nFull Build: $(call_full_build)\nDisplay Scaling: $(call_display_scaling)\nWindows Theme: $(call_theme)\nWindows Uptime: $(call_windows_uptime)\nWSL Uptime: $uptime\nWSL Release: $release\nWSL Kernel: $kernel\nPackages Count: $packages";exit;;
 esac

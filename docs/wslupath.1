@@ -1,0 +1,73 @@
+.TH "WSLUPATH" "1" "DATEPLACEHOLDER" "VERSIONPLACEHOLDER" "WSL Utilities"
+.SH NAME
+wslupath(DEPRECATED) - Component of Windows 10 Linux Subsystem Utility
+.SH SYNOPSIS
+.B wslupath
+.RB [ \-dOr ]
+.RB [\-D|\-A|\-T|\-S|\-W|\-s|\-su|\-H|\-P|\|\.\|\.\|\.NAME\|\.\|\.\|\.]\fR
+.PP
+\Bwslupath 
+.RB [\-h|\-v|\-R]
+.SH DESCRIPTION
+This is a WSL Windows path Converter that can convert Windows path to other styles of path\.
+.SH COMMANDS
+.SS Output Type Options
+Without a type, it will detect path style automatically.
+.TP
+.B -O, --original
+print original (Windows) form of path(C:\eWindows\eSystem32)
+.TP
+.B -d, --doubledash-dir
+print Windows form of path with double backslash(C:\e\eWindows\e\eSystem32)
+.TP
+.B -r, --reg-data
+use the registry data to print path[wslpath \-R to know more]
+.SS System Path
+.B -D, --desktop
+print desktop path and exit
+.TP
+.B -A, --appdata
+print AppData path(%APPDATA%) and exit
+.TP
+.B -T, --temp
+print temp path(%TMP%) and exit
+.TP
+.B -S, --sysdir
+print system path and exit
+.TP
+.B -W, --windir
+print Windows path and exit
+.TP
+.B -s, --start-menu
+print Start Menu path and exit
+.TP
+.B -su, --startup
+print Startup path and exit
+.TP
+.B -H, --home
+print user home path (%HOMEPATH%) and exit
+.TP
+.B -P, --program-files
+print Program Files path (%ProgramFiles%) and exit
+.SS Other Options
+.TP
+.B -h, --help
+print a simple help
+.TP
+.B -v, --version
+print current version
+.TP
+.B -R, --avail-reg
+print available registry input
+.SH AUTHOR
+Created by Patrick Wu <me@patrickwu.space>
+.SH REPORTING BUGS
+Report bugs to <https://github.com/wslutilities/wslu/issues>
+.SH COPYRIGHT
+This is free software; you can redistribute it and/or modify it under
+the terms of the GNU GPL version 3 or (at your option) any later
+version.
+There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.
+.SH SEE ALSO
+wslvar(1), wslu(7)

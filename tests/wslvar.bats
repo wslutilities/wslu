@@ -9,15 +9,15 @@
 @test "wslvar - Help" {
   run out/wslvar --help
   [ "${lines[0]}" = "wslvar - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
-  [ "${lines[1]}" = "Usage: wslvar (--sys|--shell) [NAME]" ]
-  [ "${lines[2]}" = "wslvar (--help|--version|--getsys|--getshell)" ]
+  [ "${lines[1]}" = "Usage: wslvar [-sl] NAME" ]
+  [ "${lines[2]}" = "wslvar [-hvSL]" ]
 }
 
 @test "wslvar - Help - Alt." {
   run out/wslvar -h
   [ "${lines[0]}" = "wslvar - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
-  [ "${lines[1]}" = "Usage: wslvar (--sys|--shell) [NAME]" ]
-  [ "${lines[2]}" = "wslvar (--help|--version|--getsys|--getshell)" ]
+  [ "${lines[1]}" = "Usage: wslvar [-sl] NAME" ]
+  [ "${lines[2]}" = "wslvar [-hvSL]" ]
 }
 @test "wslvar - System Variables" {
   run out/wslvar -s ProgramData

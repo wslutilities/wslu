@@ -1,0 +1,76 @@
+.TH "WSLU" "7" "DATEPLACEHOLDER" "VERSIONPLACEHOLDER" "WSL Utilities User Manual"
+.SH NAME
+.B wslu
+- a collection of utilities for Windows 10 Linux Subsystem
+.SH DESCRIPTION
+This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher. Some features require Windows 10 May 2019 Update or later.
+.SH SUPPORTED DISTRIBUTION
+.nf
+- Debian GNU/Linux
+- Kali Linux
+- OpenSUSE Leap 42, 12.0 and 15.0
+- SUSE Linux Enterprise Server 12 and 15
+- Ubuntu Latest, 16.04 LTS and 18.04 LTS
+- Pengwin(Formerly WLinux)
+.fi
+
+.SS
+.B Community Supported Distro
+.nf
+- Arch Linux via ArchWSL <https://github.com/yuk7/ArchWSL>
+- Alpine Linux via AlpineWSL <https://github.com/yuk7/AlpineWSL> or Alpine WSL <https://www.microsoft.com/store/productId/9P804CRF0395>
+- Scientific Linux, Oracle Linux* or RedHat Enterprise Linux** via Pengwin Enterprise (Formerly WLinux Enterprise)
+- Fedora via Fedora Remix for WSL
+
+.B *: Will support in the future.
+.B **: you need to request to using RHEL from Pengwin team and have a license of RHEL of your own.
+.fi
+.PP
+> Legacy Ubuntu is no longer supported.
+.SH OPTIONS
+All WSL Utilities command shared a common header. the following option are available to all commands.
+.TP
+.B --debug
+Entering debug mode.
+.TP
+.B --verbose
+Entering verbose mode.
+.SH EXIT STATUS
+.TP
+.B 1
+general error/unknown error.
+.TP
+.B 20
+input is empty or invalid.
+.TP
+.B 21
+input is empty.
+.TP
+.B 22
+input is invalid.
+.TP
+.B 30
+file do not exist.
+.TP
+.B 31
+folder do not exist.
+.TP
+.B 32
+feature not implemented.
+.TP
+.B 33
+required component do not exist.
+.TP
+.B 34
+unsupported feature (for a distro)
+.TP
+.B 40
+Unknown system input.
+.SH BUG
+Report bugs to https://github.com/wslutilities/wslu/issues.
+.SH COPYRIGHT
+This is free software; you can redistribute it and/or modify it under the terms of the GNU GPL version 3 or (at your option) any later version. There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Logo of WSL Utilities and wslusc icons is licensed under CC BY 4.0 International License.
+
+For third-party license, please refer to https://wslutiliti.es/wslu/licenses.

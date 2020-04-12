@@ -1,0 +1,45 @@
+.TH "WSLVAR" "1" "DATEPLACEHOLDER" "VERSIONPLACEHOLDER" "WSL Utilities User Manual"
+.SH NAME
+.B wslvar
+- Component of Windows 10 Linux Subsystem Utility
+.SH SYNOPSIS
+.B wslvar
+.RB [ \-sl ]
+.I NAME
+.PP
+.B wslvar
+.RB [\-hvSL ]
+.SH DESCRIPTION
+This is a WSL tool to help you get Windows system environment variables.
+.SH OPTIONS
+.SS "Output Type Options"
+.B -s, --sys
+use data from system local & global variables.
+.TP
+.B -l, --shell
+use data from Shell folder environment variables.
+.SS "Other Options"
+.TP
+.B -h, --help
+print a simple help.
+.TP
+.B -v, --version
+print current version.
+.TP
+.B -S, --getsys
+show available system local & global variables.
+.TP
+.B -L, --getshell
+show available Shell folder environment variables.
+.SH AUTHOR
+Created by Patrick Wu <me@patrickwu.space>
+.SH REPORTING BUGS
+Report bugs to <https://github.com/wslutilities/wslu/issues>
+.SH COPYRIGHT
+This is free software; you can redistribute it and/or modify it under
+the terms of the GNU GPL version 3 or (at your option) any later
+version.
+There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.
+.SH SEE ALSO
+wslu(7)
