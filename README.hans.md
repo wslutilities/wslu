@@ -36,7 +36,7 @@
 
 **wslvar**
 
-可以帮助你获取 Windows 系统常量的 WSL 工具。
+可以帮助你获取 Windows 系统环境变量的 WSL 工具。
 
 **wslview**
 
@@ -170,7 +170,7 @@ sudo zypper in wslu
 
 > **⚠ 不建议**
 > 
-> `curl | bash`这种方法并不安全。 [相关文章](https://sandstorm.io/news/2015-09-24-is-curl-bash-insecure-pgp-verified-install)
+> `curl | bash` 这种方法并不安全。 [相关文章](https://sandstorm.io/news/2015-09-24-is-curl-bash-insecure-pgp-verified-install)
 
 在你想要安装的发行版下运行以下命令：`curl -sL https://raw.githubusercontent.com/wslutilities/wslu/master/extras/scripts/wslu-install | bash`
 
@@ -187,5 +187,5 @@ sudo zypper in wslu
 
 WSL Utilities 的图标及 `wslusc` 桌面快捷方式采用[知识共享署名-非商业性使用 4.0 国际许可协议](http://creativecommons.org/licenses/by-nc/4.0/)进行许可。
 
-对于使用的第三方文件与资源，请参照[THIRD_PARTY_LICENSE](THIRD_PARTY_LICENSE)。
+对于使用的第三方文件与资源，请参照 [THIRD_PARTY_LICENSE](THIRD_PARTY_LICENSE)。
 

@@ -16,7 +16,7 @@
 
 </div>
 
-這是一套適用於 Windows 10 Linux 子系統的工具組，可以在 Windows 10 Linux 子系統下完成諸如獲取 Windows 環境變數或者建立你最喜愛的 Linux 程式桌面快捷方式等工作。
+這是一套適用於 Windows 10 Linux 子系統的工具組，可以在 Windows 10 Linux 子系統下完成諸如獲取 Windows 環境變數或者建立你最喜愛的 Linux 程式桌面捷徑等工作。
 
 需要 Windows 10 創造者更新; 部分功能需要更高版本的Windows 10；支援 WSL2。
 
@@ -24,7 +24,7 @@
 
 **wslusc**
 
-用於建立 Linux 程式的 Windows 桌面快捷方式的 WSL 工具。
+用於建立 Linux 程式的 Windows 桌面捷徑的 WSL 工具。
 
 **wslsys**
 
@@ -36,7 +36,7 @@
 
 **wslvar**
 
-可以幫助你獲取 Windows 系統常量的 WSL 工具。
+可以幫助你獲取 Windows 系統環境變數的 WSL 工具。
 
 **wslview**
 
@@ -52,7 +52,7 @@
 
 **wslact**
 
-一組 WSL 快速動作，如快速掛載所有硬碟或手動與 Windows 同步時間。
+一組 WSL 快捷動作，如快速掛載所有硬碟或手動與 Windows 同步時間。
 
 **wslgsu**
 
