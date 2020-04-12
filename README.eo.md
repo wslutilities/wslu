@@ -30,7 +30,7 @@ WSL ŝparvoja kreinto kiu kreas ŝparvojo sur via Vindoza labortablo.
 
 **wslsys**
 
-WSL sistema informa presilo kiu presilas sistemajn informojn el Vindozo 10 aŭ Linukso.
+WSL sistema informa presilo kiu presilas sistemajn informojn el Vindozo 10 aŭ WSL.
 
 **wslfetch**
 
