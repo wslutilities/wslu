@@ -4,7 +4,6 @@ out-docs
 target
 
 # folders requird for build
-debian
 SOURCES
 SPECS
 SRPMS
