@@ -2,115 +2,190 @@
 
 <img width="150" height="150" src="extras/icon.png">
 
-# wslu - 一套Windows 10 Linux子系統工具組
+# wslu - 一套 Windows 10 Linux 子系統工具組
 
-[![GitHub license](https://img.shields.io/github/license/wslutilities/wslu?style=flat-square&label=許可協議&color=blue&logo=github)](https://github.com/wslutilities/wslu/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/wslutilities/wslu?style=flat-square&label=授權條款&color=blue&logo=github)](https://github.com/wslutilities/wslu/blob/master/LICENSE)
 [![GitHub (pre-)release](https://img.shields.io/github/v/release/wslutilities/wslu?include_prereleases&label=版本&logo=github&style=flat-square)](https://github.com/wslutilities/wslu)
 [![GitLab](https://img.shields.io/static/v1?label=gitlab&logo=gitlab&color=E24329&message=已映象&style=flat-square)](https://gitlab.com/callmepk/wslu)
+[![Launchpad](https://img.shields.io/static/v1?label=launchpad&logo=launchpad&color=F8C300&message=已映象&style=flat-square)](https://launchpad.net/wslu)
 [![碼雲](https://img.shields.io/static/v1?label=碼雲&color=C71D23&message=已映象&style=flat-square)](https://gitee.com/mirrors/wslu)
 [![Twitter Follow](https://img.shields.io/twitter/follow/wslutilities?style=flat-square&logo=twitter&color=1DA1F2&label=跟隨)
 ](https://twitter.com/wslutilities)
 
-[English](README.md) | [简体中文](README.hans.md) | 繁體中文
+[English](README.md) | [简体中文](README.hans.md) | 繁體中文 | [Esperanto](README.eo.md)
 
 </div>
 
-這是一套適用於Windows 10 Linux子系統的工具組，可以在Windows 10 Linux子系統下完成諸如將Windows路徑轉換為WSL專屬路徑或者建立你最喜愛的Linux程式桌面快捷方式等工作。需要Windows 10創造者更新或更高。
+這是一套適用於 Windows 10 Linux 子系統的工具組，可以在 Windows 10 Linux 子系統下完成諸如獲取 Windows 環境變數或者建立你最喜愛的 Linux 程式桌面快捷方式等工作。
+
+需要 Windows 10 創造者更新; 部分功能需要更高版本的Windows 10；支援 WSL2。
 
 ## 功能
 
 **wslusc**
-用於建立 Linux 程式的 Windows 桌面快捷方式的工具。
+
+用於建立 Linux 程式的 Windows 桌面快捷方式的 WSL 工具。
 
 **wslsys**
-展示 Windows 和 Linux 下的系統資訊的工具。
+
+展示 Windows 和 WSL 下系統資訊的 WSL 工具。
 
 **wslfetch**
-類似於 screenfetch 的系統資訊展示工具。
+
+類似於 screenfetch 的 WSL 系統資訊展示工具。
 
 **wslvar**
-可以幫助你獲取 Windows 系統常量的工具。
+
+可以幫助你獲取 Windows 系統常量的 WSL 工具。
 
 **wslview**
-將 Windows 預設網路瀏覽器繫結為WSL網路瀏覽器的包裝工具。
 
-**wslupath** ⚠ *已棄用*
-可以轉換不同類型路徑的工具。
+**擁有別名 `wview/wslstart/wstart`**
 
-## 狀態
+虛擬 WSL 瀏覽器，可以通過其在 Windows 預設網路瀏覽器開啟連結或在 Windows 裡開啟 WSL 下的檔案。
 
-| | 服務 | Master | Develop |
-| ------ | ------ |:------:|:-------:|
-| 證書檢查 | FOSSA | [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu%2develop?ref=badge_shield) | - |
-| 程式碼質量 | CodeFactor | [![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/master)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/master) | [![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/develop)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/develop) |
-| 測試 | AppVeyor | [![Build status](https://ci.appveyor.com/api/projects/status/gcttf7igb0s40xak/branch/master?svg=true)](https://ci.appveyor.com/project/patrick330602/wslu/branch/master) | [![Build status](https://ci.appveyor.com/api/projects/status/gcttf7igb0s40xak/branch/develop?svg=true)](https://ci.appveyor.com/project/patrick330602/wslu/branch/develop) |
-| 部署 | CircleCI | [![CircleCI](https://img.shields.io/circleci/build/gh/wslutilities/wslu/master)](https://circleci.com/gh/wslutilities/wslu/tree/master) | [![CircleCI](https://img.shields.io/circleci/build/gh/wslutilities/wslu/develop)](https://circleci.com/gh/wslutilities/wslu/tree/develop) |
+**wslupath**
+
+*⚠ 已棄用*
+
+可以轉換不同路徑類型的 WSL 工具。
+
+**wslact**
+
+一組 WSL 快速動作，如快速掛載所有硬碟或手動與 Windows 同步時間。
+
+**wslgsu**
+
+在 Windows 端建立 WSL 開機啟動的 WSL 工具。
 
 
-## 安裝
+## 安装
 
-### Pengwin/Fedora Remix
+### Alpine Linux
 
-已內建。
+你可以用以下指令安裝 `wslu`：
+
+```
+$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/" | sudo tee -a /etc/apk/repositories
+$ sudo apk update
+$ sudo apk add wslu@testing
+```
+
+### Arch Linux
+
+AUR 上的 [wslu](https://aur.archlinux.org/packages/wslu/) 和 [wslu-git](https://aur.archlinux.org/packages/wslu-git/)。
+
+### CentOS/RHEL
+
+為相應的發行版新增倉庫：
+
+- **CentOS 7**: `sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/CentOS_7/home:wslutilities.repo`
+- **CentOS 8**: `sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/CentOS_8/home:wslutilities.repo`
+- **Red Hat Enterprise Linux 7**: `sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/RHEL_7/home:wslutilities.repo`
+
+然後用以下指令 `sudo yum install wslu` 安裝 `wslu`。
+
+
+### Debian
+
+你可以用以下指令安裝 `wslu`：
+
+```
+sudo apt install gnupg2 apt-transport-https
+wget -O - https://access.patrickwu.space/wslu/public.asc | sudo apt-key add -
+echo "deb https://access.patrickwu.space/wslu/debian buster main" | sudo tee -a /etc/apt/sources.list
+sudo apt update
+sudo apt install wslu
+```
+
+### Fedora Remix
+
+你可以用以下指令通過 `COPR` 安裝 `wslu`：
+
+```
+sudo dnf copr enable wslutilities/wslu
+sudo dnf install wslu
+```
+
+### Kali Linux
+
+你可以用以下指令安装 `wslu`：
+
+```
+sudo apt install gnupg2 apt-transport-https
+wget -O - https://access.patrickwu.space/wslu/public.asc | sudo apt-key add -
+echo "deb https://access.patrickwu.space/wslu/kali kali-rolling main" | sudo tee -a /etc/apt/sources.list
+sudo apt update
+sudo apt install wslu
+```
+
+### Pengwin
+
+已預載。
+
+### Pengwin Enterprise
+
+你可以用以下指令安装 `wslu`：
+
+```
+sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/ScientificLinux_7/home:wslutilities.repo
+sudo yum install wslu
+```
 
 ### Ubuntu
 
-最新版本已內建。針對舊版本的安裝，請安裝依賴於 wslu 的 ubuntu-wsl:
+> 注意!
+>
+> Ubuntu 版本的 `wslu` 為修改版。你需要在[此](https://bugs.launchpad.net/ubuntu/+source/wslu)對 Ubuntu 版問題進行反饋。
+
+最新版本已預載。針對舊版本的安裝，請安裝依賴於 wslu 的 ubuntu-wsl:
 
 ```
 sudo apt update
 sudo apt install ubuntu-wsl
 ```
 
-### 基於Debian的分發版(Ubuntu/Debian/Kali Linux)
+### OpenSUSE
 
-你可以從 Releases 介面下載`.deb`進行安裝：`sudo dpkg -i wslu*`。
-
-#### Ubuntu/Debian
-
-你可以用以下命令進行安裝：
+你可以用以下指令安装 `wslu`：
 
 ```
-curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.deb.sh | sudo bash
+sudo zypper addrepo https://download.opensuse.org/repositories/home:/wslutilities/openSUSE_Leap_15.1/home:wslutilities.repo
+sudo zypper up
+sudo zypper in wslu`.
 ```
 
-### 基於RPM的分發版(OpenSUSE/SLES/Pengwin企業版/Oracle Linux)
+### SUSE Linux Enperprise Server
 
-你可以用以下命令進行安裝：
+你可以用以下指令安装 `wslu`：
 
 ```
-curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.rpm.sh | sudo bash
+SLESCUR_VERSION="$(grep VERSION= /etc/os-release | sed -e s/VERSION=//g -e s/\"//g -e s/-/_/g)"
+sudo zypper addrepo https://download.opensuse.org/repositories/home:/wslutilities/SLE_$SLESCUR_VERSION/home:wslutilities.repo
+sudo zypper addrepo https://download.opensuse.org/repositories/graphics/SLE_12_SP3_Backports/graphics.repo
+sudo zypper up
+sudo zypper in wslu
 ```
-
-你也可以從 Releases 介面下載`.rpm`進行安裝：`sudo rpm -ivh "wslu*"`。
-
-### Arch Linux
-
-wslu 已在 [AUR](https://aur.archlinux.org/packages/wslu/) 庫中。你可以下載 *PKGBUILD* 手動安裝或者使用 AUR 助手（比如 yay）進行安裝。
-
-### Alpine Linux
-
-你可以從 Releases 介面下載`.apk`進行安裝：`sudo apk add --allow-untrusted "wslu*"`.
 
 ### 其他發行版
 
 > **⚠ 不建議**
 > 
-> `curl | bash`這種方法並不安全。 [相關文章](https://sandstorm.io/news/2015-09-24-is-curl-bash-insecure-pgp-verified-install)
+> `curl | bash` 這種方法並不安全。 [相關文章](https://sandstorm.io/news/2015-09-24-is-curl-bash-insecure-pgp-verified-install)
 
-在你想要安裝的發行版下執行一下命令：`curl -sL https://wslu.patrickwu.space/install | bash`
+在你想要安裝的發行版下執行以下指令：`curl -sL https://raw.githubusercontent.com/wslutilities/wslu/master/extras/scripts/wslu-install | bash`
 
 ## 貢獻者
 
 沒有你們，這個項目不可能存在。[[為這項目作出貢獻](CONTRIBUTING.md)]。
 <img src="https://opencollective.com/wslu/contributors.svg?width=890&button=false" />
 
-## 許可及版權（英文）
+## 授權及版權
 
 <img width="150" src="https://www.gnu.org/graphics/gplv3-with-text-136x68.png">
 
-This project uses [GPLv3](LICENSE) License.
+本項目使用 [GPLv3](LICENSE) 授權條款。
 
-Logo of WSL Utilities is licensed under [CC BY-NC 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).
+WSL Utilities 的圖示及 `wslusc` 桌面快捷方式係採用[創用 CC 姓名標示-非商業性 4.0 國際 授權條款](http://creativecommons.org/licenses/by-nc/4.0/)授權。
 
-For other third party files and assets used, please refer to [THIRD_PARTY_LICENSE](THIRD_PARTY_LICENSE).
+對於使用的第三方檔案與資源，請參照 [THIRD_PARTY_LICENSE](THIRD_PARTY_LICENSE)。
