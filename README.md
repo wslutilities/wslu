@@ -11,44 +11,57 @@
 [![Gitee](https://img.shields.io/static/v1?label=gitee&color=C71D23&message=mirrored&style=flat-square)](https://gitee.com/mirrors/wslu)
 [![Twitter Follow](https://img.shields.io/twitter/follow/wslutilities?style=flat-square&logo=twitter&color=1DA1F2&label=follow)](https://twitter.com/wslutilities)
 
-English | [简体中文](README.hans.md) | [繁體中文](README.hant.md)
+English | [简体中文](README.hans.md) | [繁體中文](README.hant.md) | [Esperanto](README.eo.md) 
 
 </div>
 
-This is a collection of utilities for Windows 10 Linux Subsystem, such as retrieving environment variables or creating your favorite Linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update. Some of the feature requires a higher version of Windows 10. Supports WSL2.
+This is a collection of utilities for Windows 10 Linux Subsystem, such as retrieving environment variables or creating your favorite Linux GUI application shortcuts on Windows 10 Desktop.
+
+Requires Windows 10 Creators Update; Some of the feature requires a higher version of Windows 10; Supports WSL2.
 
 ## Feature
 
 **wslusc**
+
 A WSL shortcut creator to create a shortcut on your Windows 10 Desktop.
 
 **wslsys**
-A WSL system information printer to print out system informations from Windows 10 or Linux.
+
+A WSL system information printer to print out system informations from Windows 10 or WSL.
 
 **wslfetch**
+
 A WSL screenshot information tool to print information in an elegant way.
 
 **wslvar**
+
 A WSL tool to help you get Windows system environment variables.
 
 **wslview**
+
+*With alias `wview/wslstart/wstart`*
+
 A fake WSL browser that can help you open link in default Windows browser.
 
-**wslupath** *Deprecated*
+**wslupath**
+
+*⚠ Deprecated*
+
 A WSL tool to convert path styles.
 
 **wslact**
-A set of quick actions for WSL such as quickly mounting all  and manually sync time between Windows and WSL.
 
-**wslact**
-A tool to help creating startup tasks
+A set of quick actions for WSL such as quickly mounting all drives or manually sync time between Windows and WSL.
+
+**wslgsu**
+A WSL tool to help creating startup tasks for linux process on Windows.
 
 
 ## Installation
 
 ### Alpine Linux
 
-You can install `wslu` from Alpine Linux testing with the following way:
+You can install `wslu` from Alpine Linux testing with the following command:
 
 ```
 $ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/" | sudo tee -a /etc/apk/repositories
@@ -73,7 +86,7 @@ Then install with the command `sudo yum install wslu`.
 
 ### Debian
 
-You can install `wslu` using the following command:
+You can install `wslu` with the following command:
 
 ```
 sudo apt install gnupg2 apt-transport-https
@@ -85,7 +98,7 @@ sudo apt install wslu
 
 ### Fedora Remix
 
-You can install via COPR:
+You can install `wslu` from `COPR` with the following command:
 
 ```
 sudo dnf copr enable wslutilities/wslu
@@ -94,7 +107,7 @@ sudo dnf install wslu
 
 ### Kali Linux
 
-You can install `wslu` using the following command:
+You can install `wslu` with the following command:
 
 ```
 sudo apt install gnupg2 apt-transport-https
@@ -110,7 +123,7 @@ Preinstalled.
 
 ### Pengwin Enterprise
 
-You can install `wslu` using the following command:
+You can install `wslu` with the following command:
 
 ```
 sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/ScientificLinux_7/home:wslutilities.repo
@@ -121,7 +134,7 @@ sudo yum install wslu
 
 > Attention!
 >
-> The Ubuntu version of `wslu` is a modified version. Yu should report bug [here](https://bugs.launchpad.net/wslu).
+> The Ubuntu version of `wslu` is a modified version. You should report bug [here](https://bugs.launchpad.net/ubuntu/+source/wslu).
 
 Preinstalled in the latest apps. On older installations of Ubuntu please install `ubuntu-wsl` that depends on `wslu`:
 
@@ -132,7 +145,7 @@ sudo apt install ubuntu-wsl
 
 ### OpenSUSE
 
-You can install `wslu` using the following command:
+You can install `wslu` with the following command:
 
 ```
 sudo zypper addrepo https://download.opensuse.org/repositories/home:/wslutilities/openSUSE_Leap_15.1/home:wslutilities.repo
@@ -142,7 +155,7 @@ sudo zypper in wslu`.
 
 ### SUSE Linux Enperprise Server
 
-You can install `wslu` using the following command:
+You can install `wslu` with the following command:
 
 ```
 SLESCUR_VERSION="$(grep VERSION= /etc/os-release | sed -e s/VERSION=//g -e s/\"//g -e s/-/_/g)"
@@ -158,11 +171,11 @@ sudo zypper in wslu
 > 
 > `curl | bash` method is not secure. [Related article](https://sandstorm.io/news/2015-09-24-is-curl-bash-insecure-pgp-verified-install)
 
-Run the following command in your preferred distro: `curl -sL https://raw.githubusercontent.com/wslutilities/wslu/master/extras/scripts/wslu-install | bash`
+You can install `wslu` with the following command on your preferred distribution: `curl -sL https://raw.githubusercontent.com/wslutilities/wslu/master/extras/scripts/wslu-install | bash`
 
 ## Contributors
 
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+This project exists thanks to all the people who contribute. [ [Contribute](CONTRIBUTING.md) ].
 <img src="https://opencollective.com/wslu/contributors.svg?width=890&button=false" />
 
 ## License & Credits
