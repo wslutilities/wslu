@@ -1,9 +1,8 @@
-name: Packaging Builds
+name: Package Deployment
 on:
   push:
     branches:
-      - develop
-      - dev/**
+      - master
 jobs:
   debbuild:
     name: Debian
@@ -57,7 +56,7 @@ jobs:
       - name: deploy to the dev
         env:
           PACKAGECLOUD_TOKEN: ${{ secrets.PGW_DEV_DEPLOY_KEY }}
-        run: package_cloud push whitewaterfoundry/wslu-dev/debian/bullseye ./PengwinDEBs/*.deb --skip-errors
+        run: package_cloud push whitewaterfoundry/wslu/debian/bullseye ./PengwinDEBs/*.deb --skip-errors
   rpmbuild:
     name: RPM
     runs-on: ubuntu-18.04
