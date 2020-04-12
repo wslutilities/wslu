@@ -30,7 +30,9 @@ case $distro in
 esac
 git clone https://github.com/wslutilities/wslu $BUILD_DIR
 cd $BUILD_DIR
-bash configure.sh -i
+bash configure.sh
+make
+sudo make install
 sudo install -m755 extras/scripts/wslu-uninstall /usr/bin
 rm -rf $BUILD_DIR
 echo -e "\e[32m## wslu installation complete. To uninstall, run 'wslu-uninstall'\033(B\033[m"

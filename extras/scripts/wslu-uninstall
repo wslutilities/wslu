@@ -26,5 +26,6 @@ for f in /usr/share/man/man1/wsl*; do
 	sudo rm -f $f;
 done
 
+sudo rm -f /usr/share/man/man7/wsl*
 sudo rm -rf /usr/share/wslu
 echo -e "\e[32m## wslu uninstallation complete.\033(B\033[m"

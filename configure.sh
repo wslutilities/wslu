@@ -31,7 +31,7 @@ fi
 function pkg_inst {
 distro="$(head -n1 /etc/os-release | sed -e 's/NAME=\"//g')"
 case $distro in
-  *Pengwin*)
+	*Pengwin*)
 		sudo dpkg --force-depends --remove wslu
 		sudo apt install -y git gzip make
 		;;
@@ -46,17 +46,17 @@ case $distro in
 	Alpine*)
 		sudo apk add git bc gzip make bash-completion imagemagick
 		;;
-    Arch*)
+	Arch*)
 		sudo pacman -Syyu git bc gzip make bash-completion imagemagick
 		;;
-    *Oracle*|Scientific*)
+	*Oracle*|Scientific*)
 		sudo yum install -y git bc gzip make bash-completion imagemagick
 		;;
-    *Fedora*)
+	*Fedora*)
 		sudo dnf install -y git bc gzip make bash-completion ImageMagick
 		;;
 	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && sudo dnf install -y git || exit 1;;
-    *) exit 1;;
+	*) exit 1;;
 esac
 }
 
