@@ -84,6 +84,18 @@ readonly BN_OCT_EIGHTEEN=17763		#1809, Redstone 5, October 2018 Update
 readonly BN_MAY_NINETEEN=18362		#1903, 19H1, May 2019 Update
 readonly BN_NOV_NINETEEN=18363		#1909, 19H2, November 2019 Update
 
+# source default config
+if [ -f /usr/share/wslu/wsluconfig ]; then
+	source /usr/share/wslu/wslurc
+fi
+
+# source user-defined config
+if [ -f "$HOME/.config/wslu/wslurc" ]; then
+	source "$HOME/.config/wslu/wslurc"
+elif [ -f "$HOME/.wslurc" ]; then
+	source "$HOME/.wslurc"
+fi
+
 # functions
 function debug_echo {
 	[ $wslu_debug -eq 1 ] && echo "${orange}${bold}[debug]${reset} $@"
