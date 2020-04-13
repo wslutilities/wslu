@@ -1,7 +1,8 @@
 Source: wslu
 Section: utils
 Priority: optional
-Maintainer: Jinming Wu, Patrick <me@patrickwu.space>
+Maintainer: Kali Developers <devel@kali.org>
+Uploader: Jinming Wu, Patrick <me@patrickwu.space>
 Build-Depends: debhelper (>= 11), gzip, make
 Standards-Version: 4.1.3
 Homepage: https://wslutiliti.es/wslu

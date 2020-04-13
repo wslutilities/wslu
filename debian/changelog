@@ -1,5 +1,5 @@
-wslu (VERSIONPLACEHOLDER) DISTROPLACEHOLDER; urgency=medium
+wslu (3.0.0-0kali1) kali-dev; urgency=medium
 
-  * Please check https://github.com/wslutilities/wslu/releases/latest for changelog
+  * Initial release
 
- -- Jinming Wu, Patrick <me@patrickwu.space>  DATETIMEPLACEHOLDER
+ -- Jinming Wu, Patrick <me@patrickwu.space>  Mon, 13 Apr 2020 11:33:29 +0800
