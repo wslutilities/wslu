@@ -43,7 +43,7 @@ jobs:
           name: PengwinDEBs
           path: pkgs
   pgwspdeploy:
-    name: Pengwin Dev version Deploying
+    name: Pengwin Deploying
     needs: pgwbuild
     runs-on: ubuntu-18.04
     container: circleci/ruby:2.3-jessie
