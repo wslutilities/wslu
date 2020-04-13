@@ -1,7 +1,7 @@
 # Maintainer: Patrick Wu <me@patrickwu.space>
 
 pkgname=wslu
-pkgver=3.0.0
+pkgver=3.0.1
 pkgrel=0
 pkgdesc="A collection of utilities for Windows 10 Linux Subsystems"
 arch=('any')
@@ -13,15 +13,13 @@ sha256sums=('SKIP')
 
 build() {
   cd wslu
+  bash ./configure.sh --build
   make
 }
 
 package() {
   cd wslu
-
-  install -Dm 755 out/* -t "${pkgdir}"/usr/bin/
-  install -Dm 555 docs/*.1.gz -t "${pkgdir}"/usr/share/man/man1/
-  install -Dm 555 src/etc/* -t "${pkgdir}"/usr/share/wslu/
+  make DESTDIR="${pkgdir}" install
   install -Dm 644 LICENSE -t "${pkgdir}"/usr/share/licenses/wslu/
 }
 

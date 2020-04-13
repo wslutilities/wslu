@@ -45,7 +45,7 @@ if [[ "$lname" != "" ]]; then
 		if [ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ]; then
 			# if Windows 10 is in version 1903 or later
 			properfile_full_path="$(readlink -f "${lname//file:\/\//}")"
-			converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\})"
+			converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\}"
 			winps_exec Start "\"$converted_file_path\""
 		else
 			echo "${error} This protocol is not supported before version 1903."
