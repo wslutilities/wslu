@@ -1,5 +1,5 @@
-wslu (3.0.0-0kali1) kali-dev; urgency=medium
+wslu (3.0.1-0kali1) kali-dev; urgency=medium
 
   * Initial release
 
- -- Jinming Wu, Patrick <me@patrickwu.space>  Mon, 13 Apr 2020 11:33:29 +0800
+ -- Jinming Wu, Patrick <me@patrickwu.space>  Mon, 13 Apr 2020 20:41:40 +0800
