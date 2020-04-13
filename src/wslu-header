@@ -199,7 +199,7 @@ if [ ! -f ~/.config/wslu/oemcp ]; then
 fi
 
 # generate base exe locaiton
-if [ ! -f ~/.config/wslu/baseexec ]; then
+if [ ! -f ~/.config/wslu/baseexec ]|| [ -z "$(cat ~/.config/wslu/baseexec)" ]; then
 	# if it is not generated
 	baseexec_gen
 elif grep -q "/" ~/.config/wslu/baseexec; then
