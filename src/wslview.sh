@@ -51,6 +51,14 @@ if [[ "$lname" != "" ]]; then
 			echo "${error} This protocol is not supported before version 1903."
 			exit 34
 		fi
+	elif [[ $lname =~ ^(/[^/]+)*(/)?$ ]]; then
+		if [ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ]; then
+			converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\}"
+			winps_exec Start "\"$converted_file_path\""
+		else
+			echo "${error} This protocol is not supported before version 1903."
+			exit 34
+		fi
 	else
 		winps_exec Start "\"$lname\""
 	fi
