@@ -8,7 +8,7 @@ We love pull requests from everyone. By participating in this project, you agree
 
 Run the following to get started:
 ```bash
-git clone --recursive --branch develop https://github.com/wslutilities/wslu.git
+git clone --recursive --branch dev/master https://github.com/wslutilities/wslu.git
 ./configure.sh
 make
 sudo make res_install
