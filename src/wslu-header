@@ -19,6 +19,7 @@
 
 # Version
 wslu_version=VERSIONPLACEHOLDER
+wslu_prefix="PREFIXPLACEHOLDER"
 
 # Speed up script by not using unicode.
 LC_ALL=C
@@ -85,8 +86,8 @@ readonly BN_MAY_NINETEEN=18362		#1903, 19H1, May 2019 Update
 readonly BN_NOV_NINETEEN=18363		#1909, 19H2, November 2019 Update
 
 # source default config
-if [ -f /usr/share/wslu/wsluconfig ]; then
-	source /usr/share/wslu/wslurc
+if [ -f "${wslu_prefix}/share/wslu/wsluconfig" ]; then
+	source "${wslu_prefix}/share/wslu/wslurc"
 fi
 
 # source user-defined config
@@ -189,8 +190,8 @@ function wslu_file_check {
 	if [[ ! -f "$1/$2" ]]; then
 		echo "${warn} $2 not found in Windows directory. Copying right now..."
 		[[ -d "$1" ]] || mkdir "$1"
-		if [[ -f "/usr/share/wslu/$2" ]]; then
-			cp "/usr/share/wslu/$2" "$1"
+		if [[ -f "${wslu_prefix}/share/wslu/$2" ]]; then
+			cp "${wslu_prefix}/share/wslu/$2" "$1"
 			echo "${info} $2 copied. Located at \"$1\"."
 		else
 			echo "${error} $2 not found. Failed to copy."
