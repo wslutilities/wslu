@@ -150,7 +150,7 @@ You can install `wslu` with the following command:
 ```
 sudo zypper addrepo https://download.opensuse.org/repositories/home:/wslutilities/openSUSE_Leap_15.1/home:wslutilities.repo
 sudo zypper up
-sudo zypper in wslu`.
+sudo zypper in wslu
 ```
 
 ### SUSE Linux Enperprise Server
