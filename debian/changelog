@@ -17,7 +17,7 @@ wslu (2.3.6-0ubuntu1) focal; urgency=medium
   * debian/wsl-integration.sh: debian/wsl-integration.sh unset the right variable
     at the end of script. (LP: #1857426)
 
- -- Jinming Wu, Patrick <me@patrickwu.space>  Thu, 09 Apr 2020 20:27:13 +0800
+ -- Patrick Wu <patrick.wu@canonical.com>  Thu, 09 Apr 2020 20:27:13 +0800
 
 wslu (2.3.2-0ubuntu4) focal; urgency=medium
 
