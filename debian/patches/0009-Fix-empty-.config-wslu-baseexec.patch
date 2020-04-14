@@ -1,4 +1,3 @@
-From 32c69c25b170eacf05f2c6d4145db6892c790b4b Mon Sep 17 00:00:00 2001
 From: "Jinming Wu, Patrick" <me@patrickwu.space>
 Date: Wed, 8 Apr 2020 09:57:13 +0800
 Subject: [PATCH] Fix empty ~/.config/wslu/baseexec
@@ -22,6 +21,4 @@ index 8b177da..1eb17d0 100644
  	# if it is not generated
  	baseexec_gen
  elif grep -q "/" ~/.config/wslu/baseexec; then
--- 
-2.26.0
 

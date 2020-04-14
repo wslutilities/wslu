@@ -1,8 +1,6 @@
-From 95234b21e0733c27c4742d2a84a87ce9fd3cd5fa Mon Sep 17 00:00:00 2001
 From: "Jinming Wu, Patrick" <me@patrickwu.space>
 Date: Wed, 8 Apr 2020 09:47:48 +0800
-Subject: [PATCH] Set up sound when starting GUI programs via Windows desktop
- shortcuts
+Subject: [PATCH] Set up sound when starting GUI programs via desktop shortcuts
 
 ---
  src/wslusc.sh | 2 +-
@@ -21,6 +19,3 @@ index a0544b3..be4fa96 100644
  	else
  		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='\"$distro_location_win\"';\$s.Arguments='$distro_param \"cd ~; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
  	fi
--- 
-2.26.0
-
