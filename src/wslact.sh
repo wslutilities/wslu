@@ -19,7 +19,7 @@ function time_sync {
 	fi
 
 	echo "${info} Before Sync: $(date +"%d %b %Y %T %Z")"
-	if date -s "$(winps_exec "Get-Date -UFormat \"%d %b %Y %T %Z\"" | tr -d "\r")" >/dev/null; then
+	if date -s "$(winps_exec "Get-Date -UFormat \"%m/%d/%Y %T %Z\"" | tr -d "\r")" >/dev/null; then
 		echo "${info} After Sync: $(date +"%d %b %Y %T %Z")"
 		echo "${info} Manual Time Sync Complete."
 	else
