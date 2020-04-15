@@ -4,7 +4,7 @@ Source: https://github.com/wslutilities/wslu
 
 Files: *
 Copyright: 2007, Free Software Foundation, Inc. <https://fsf.org/>
-           2018-2019, Patrick Wu
+           2018-2020, Patrick Wu
 License: GPL-3+
 
 Files: src/etc/wsl.ico

@@ -1,21 +1,25 @@
 wslu (2.3.6-0ubuntu1) focal; urgency=medium
 
   [ Patrick Wu ]
-  * Upstream update to 2.3.6
+  * Upstream update to 2.3.6 to address critical issues
     - wslupath manpage update
     - fixes that imported distro cannot be properly handled by baseexec_gen
     - fix an issue in handling dirty output in regenerate baseexec
     - fix an issue in generating ~/.config/baseexec
-    - wslusc: fix an issue that will cause generated shortcut cannot be opened for some users
+    - wslusc: fix an issue that will cause generated shortcut cannot be opened
+      for some users
   * Update patches
   * debian/wsl-integration.sh: removal links in profile.d as requested by MSFT.
-  * debian/wsl-integration.sh: Fix issue that space in username breaks wsl-integration.sh. (LP: #1869878)
-  * debian/wsl-integration.sh: Use /tmp folder for system users who do not have $HOME. (LP: 1859509)
+  * debian/wsl-integration.sh: Fix issue that space in username breaks 
+    wsl-integration.sh. (LP: #1869878)
+  * debian/wsl-integration.sh: Use /tmp folder for system users who do not have 
+    $HOME. (LP: #1859509)
 
   [ Balint Reczey ]
-  * debian/wsl-integration.sh: Suppress errors when saving $HOME/.cache. (LP: 1859509)
-  * debian/wsl-integration.sh: debian/wsl-integration.sh unset the right variable
-    at the end of script. (LP: #1857426)
+  * debian/wsl-integration.sh: Suppress errors when saving $HOME/.cache. 
+    (LP: #1859509)
+  * debian/wsl-integration.sh: debian/wsl-integration.sh unset the right 
+    variable at the end of script. (LP: #1857426)
 
  -- Patrick Wu <patrick.wu@canonical.com>  Thu, 09 Apr 2020 20:27:13 +0800
 
