@@ -10,7 +10,7 @@ diff --git a/src/wslusc.sh b/src/wslusc.sh
 index a0544b3..be4fa96 100644
 --- a/src/wslusc.sh
 +++ b/src/wslusc.sh
-@@ -123,7 +123,7 @@ if [[ "$cname" != "" ]]; then
+@@ -134,7 +134,7 @@ if [[ "$cname" != "" ]]; then
  	fi
  
  	if [[ "$is_gui" == "1" ]]; then

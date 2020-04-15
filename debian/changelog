@@ -1,7 +1,7 @@
 wslu (2.3.6-0ubuntu1) UNRELEASED; urgency=medium
 
   [ Patrick Wu ]
-  * Upstream update to 2.3.6 to address critical issues
+  * Upstream update to 2.3.6 to address critical issues (LP: #1871986)
     - wslupath manpage update
     - fixes that imported distro cannot be properly handled by baseexec_gen
     - fix an issue in handling dirty output in regenerate baseexec

@@ -21,4 +21,3 @@ index 8b177da..1eb17d0 100644
  	# if it is not generated
  	baseexec_gen
  elif grep -q "/" ~/.config/wslu/baseexec; then
-
