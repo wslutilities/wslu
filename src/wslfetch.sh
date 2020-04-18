@@ -18,6 +18,7 @@ done
 
 hostname=$(</etc/hostname)
 wslsys=$(wslsys)
+wslvers=$(echo "$wslsys" | grep -Po '^WSL Version: \K.*')
 branch=$(echo "$wslsys" | grep -Po '^Branch: \K.*')
 build=$(echo "$wslsys" | grep -Po '^Build: \K.*')
 release=$(echo "$wslsys" | grep -Po '^WSL Release: \K.*')
@@ -288,13 +289,13 @@ case "$distro" in
 esac
 
 
-info_text=("${t}Windows 10 Linux Subsystem${reset}"
+info_text=("${t}Windows Subsystem for Linux (WSL${wslvers})${reset}"
 "${t}${USER}${reset}@${t}${hostname}${reset}"
-"${t}BUILD:${reset}	${build}"
-"${t}BRANCH:${reset}	${branch}"
-"${t}RELEASE:${reset}	${release}"
-"${t}KERNEL:${reset}	${kernel}"
-"${t}UPTIME:${reset}	${uptime}"
+"${t}Build:${reset} ${build}"
+"${t}Branch:${reset} ${branch}"
+"${t}Release:${reset} ${release}"
+"${t}Kernel:${reset} ${kernel}"
+"${t}Uptime:${reset} ${uptime}"
 "${reset}"
 )
 
