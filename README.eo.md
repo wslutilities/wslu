@@ -19,7 +19,7 @@
 
 Estas kolekto de utilaĵoj por Vindoza Subsistemo por Linukso (Windows Subsystem for Linux, WSL), kiel ricevi Vindozajn medivariablojn aŭ krei viajn plej ŝatatajn Linuksajn Grafikinterfacajn aplikaĵojn ŝparvojojn sur Vindoza labortablo.
 
-Deviĝi Vindozo 10 1703; Iom de funkciojn deviĝas pli alian version de Vindozo 10;Ankaŭ subteni WSL2.
+Deviĝi Vindozo 10 1703; Iom de funkciojn deviĝas pli alian version de Vindozo 10; Ankaŭ subteni WSL2.
 
 
 ## Funkcioj
@@ -54,18 +54,18 @@ WSL ilo kiu konvertas dosierindikojn.
 
 **wslact**
 
-Aro de rapidaj agoj por WSL, kiel repide surmeti ĉiuj Vindozajn diskingojn aŭ mane sinkronigi tempon inter Vindozo kaj WSL.
+Aro de rapidaj agoj por WSL, kiel repide surmeti ĉiujn Vindozajn diskingojn aŭ mane sinkronigi tempon inter Vindozo kaj WSL.
 
 **wslgsu**
 
-WSL ilo kiu helpas krei starta tasko por Linuksajn procezojn sur Vindozo.
+WSL ilo kiu helpas krei startajn taskojn por Linuksaj procezoj en Vindozo.
 
 
 ## Instalo
 
 ### Alpine Linux
 
-Oni povas instali `wslu` el **Alpine Linux testing** kun la jenaj komandoj:
+Oni povas instali `wslu` el **Alpine Linux testing** per la jenaj komandoj:
 
 ```
 $ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/" | sudo tee -a /etc/apk/repositories
@@ -85,12 +85,12 @@ Aldonu la deponejon por la respondanta Linuksa distribuo:
 - **CentOS 8**: `sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/CentOS_8/home:wslutilities.repo`
 - **Red Hat Enterprise Linux 7**: `sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/RHEL_7/home:wslutilities.repo`
 
-Tiam instalu kun la komando `sudo yum install wslu`.
+Tiam instalu per la komando `sudo yum install wslu`.
 
 
 ### Debian
 
-Oni povas instali `wslu` kun la jenaj komandoj:
+Oni povas instali `wslu` per la jenaj komandoj:
 
 ```
 sudo apt install gnupg2 apt-transport-https
@@ -102,7 +102,7 @@ sudo apt install wslu
 
 ### Fedora Remix
 
-Oni povas instali `wslu` el **COPR** kun la jenaj komandoj:
+Oni povas instali `wslu` el **COPR** per la jenaj komandoj:
 
 ```
 sudo dnf copr enable wslutilities/wslu
@@ -111,7 +111,7 @@ sudo dnf install wslu
 
 ### Kali Linux
 
-Oni povas instali `wslu` kun la jenaj komandoj:
+Oni povas instali `wslu` per la jenaj komandoj:
 
 ```
 sudo apt install gnupg2 apt-transport-https
@@ -127,7 +127,7 @@ Antaŭinstalita.
 
 ### Pengwin Enterprise
 
-Oni povas instali `wslu` kun la jenaj komandoj:
+Oni povas instali `wslu` per la jenaj komandoj:
 
 ```
 sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/ScientificLinux_7/home:wslutilities.repo
@@ -149,7 +149,7 @@ sudo apt install ubuntu-wsl
 
 ### OpenSUSE
 
-Oni povas instali `wslu` kun la jenaj komandoj:
+Oni povas instali `wslu` per la jenaj komandoj:
 
 ```
 sudo zypper addrepo https://download.opensuse.org/repositories/home:/wslutilities/openSUSE_Leap_15.1/home:wslutilities.repo
@@ -159,7 +159,7 @@ sudo zypper in wslu
 
 ### SUSE Linux Enperprise Server
 
-Oni povas instali `wslu` kun la jenaj komandoj:
+Oni povas instali `wslu` per la jenaj komandoj:
 
 ```
 SLESCUR_VERSION="$(grep VERSION= /etc/os-release | sed -e s/VERSION=//g -e s/\"//g -e s/-/_/g)"
@@ -175,7 +175,7 @@ sudo zypper in wslu
 > 
 > La maniero `curl | bash` estas ne sekura. [Rilata atikolo (La angla)](https://sandstorm.io/news/2015-09-24-is-curl-bash-insecure-pgp-verified-install)
 
-Oni povas instali `wslu` kun la jenaj komandoj sur via preferata distribuoj: `curl -sL https://raw.githubusercontent.com/wslutilities/wslu/master/extras/scripts/wslu-install | bash`
+Oni povas instali `wslu` per la jenaj komandoj sur via preferata distribuoj: `curl -sL https://raw.githubusercontent.com/wslutilities/wslu/master/extras/scripts/wslu-install | bash`
 
 ## Kontributanoj
 
