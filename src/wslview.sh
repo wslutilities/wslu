@@ -42,7 +42,7 @@ if [[ "$lname" != "" ]]; then
 	wslutmpbuild=${wslutmpbuild##* }
 	wslutmpbuild="$(( wslutmpbuild + 0 ))"
 	# file:/// protocol used in linux
-	if [[ "$lname" =~ ^file:\/\/\/(?![A-Za-z]\:\/).*$ ]]; then
+	if [[ "$lname" =~ ^file:\/\/\/[^:alpha:][^:][^/]* ]]; then
 		if [ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ]; then
 			properfile_full_path="$(readlink -f "${lname//file:\/\//}")"
 			converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\}"
