@@ -174,14 +174,17 @@ function baseexec_gen {
 }
 
 function wslu_file_check {
+	should_i_show=""
+	[[ "$3" == "?!S" ]] && should_i_show="n"
+
 	if [[ ! -f "$1/$2" ]]; then
-		echo "${warn} $2 not found in Windows directory. Copying right now..."
+		[[ -z "$should_i_show" ]] && echo "${warn} $2 not found in Windows directory. Copying right now..."
 		[[ -d "$1" ]] || mkdir "$1"
 		if [[ -f "/usr/share/wslu/$2" ]]; then
 			cp "/usr/share/wslu/$2" "$1"
-			echo "${info} $2 copied. Located at \"$1\"."
+			[[ -z "$should_i_show" ]] && echo "${info} $2 copied. Located at \"$1\"."
 		else
-			echo "${error} $2 not found. Failed to copy."
+			[[ -z "$should_i_show" ]] && echo "${error} $2 not found. Failed to copy."
 			exit 30
 		fi
 	fi
