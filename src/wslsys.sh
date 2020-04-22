@@ -35,9 +35,10 @@ function call_theme() {
 }
 
 function call_display_scaling() {
-	display_scaling=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKCU\\Control Panel\\Desktop\\WindowMetrics" /v AppliedDPI | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-	display_scaling=${display_scaling##* }
-	bc -l <<< "$(printf "%d\n" "$display_scaling")/96" | sed -e "s/\.0//g" -e "s/0*$//g"
+	up_path="$(wslvar -s USERPROFILE)"
+	wslu_file_check "$(wslpath "$up_path")/wslu" "get_dpi.ps1"
+	display_scaling="$(winps_exec "$(double_dash_p "$up_path")\\wslu\\get_dpi.ps1" | sed -e 's|\r||g')"
+	bc -l <<< "$(printf "%d\n" "$display_scaling")/100" | sed -e "s/\.0//g" -e "s/0*$//g"
 }
 
 function call_windows_uptime() {
