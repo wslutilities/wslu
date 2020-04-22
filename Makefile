@@ -16,7 +16,7 @@ INSTEDEXES := $(wildcard $(DESTDIR)$(PREFIX)/bin/wsl*)
 INSTEDMANOS := $(wildcard $(DESTDIR)$(PREFIX)/share/man/man1/wsl*)
 
 DATETMP = $(shell date +%Y-%m-%d)
-VERTMP = $(shell grep 'version=' $(HEADER) | cut -d'=' -f 2 | xargs)
+VERTMP = $(shell cat ./VERSION)
 
 all: doc
 	[ -d $(OUTPATH) ] || mkdir $(OUTPATH)
