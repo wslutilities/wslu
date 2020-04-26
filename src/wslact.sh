@@ -29,12 +29,14 @@ function time_sync {
 }
 
 function auto_mount {
-	local help_short="wslact auto-mount [-h]"
+	local help_short="wslact auto-mount [-mh]"
 	local mntpt_prefix="$(interop_prefix)"
 	local sysdrv_prefix="$(sysdrive_prefix)"
 
+	mount_opt=""
 	while [ "$1" != "" ]; do
 		case "$1" in
+			-m|--mount-options) shift; mount_opt="$1"; shift;;
 			-h|--help) help "wslact" "$help_short"; exit;;
 			*) shift;;
 		esac
@@ -45,10 +47,12 @@ function auto_mount {
 		exit 1
 	fi
 
-	mount_opt=""
+
 	drive_list="$("$mntpt_prefix$sysdrv_prefix"/WINDOWS/system32/fsutil.exe fsinfo drives | tail -1 | tr '[:upper:]' '[:lower:]' | tr -d ':\\' | sed -e 's/drives //g' -e 's|'$sysdrv_prefix' ||g' -e 's|\r||g' -e 's| $||g' -e 's| |\n|g')"
 
-	if [ -f /etc/wsl.conf ]; then
+	if [ -n "$mount_opt" ]; then
+		echo "${info} Custom mount option detected: $mount_opt"
+	elif [ -f /etc/wsl.conf ]; then
 		tmp="$(grep ^options /etc/wsl.conf | sed -r -e 's|^options[ ]+=[ ]+||g' -e 's|^"||g' -e 's|"$||g')"
 		if [ "$tmp" != "" ]; then
 			echo "${info} Custom mount option detected: $tmp"
