@@ -1,15 +1,17 @@
 # shellcheck shell=bash
-version="01"
+version="22"
 
-help_short="wslgsu [-u USERNAME] [-n NAME] [-S] SERVICE/COMMAND\nwslgsu [-hv]"
+help_short="wslgsu [-u USERNAME] [-n NAME] [-S] SERVICE/COMMAND\nwslgsu [-hvw]"
 
 isService=0
+isWakeup=0
 wa_gs_commd=""
 wa_gs_name=""
 wa_gs_user="root"
 
 while [ "$1" != "" ]; do
 	case "$1" in
+		-w|--wakeup) isWakeup=1; shift;;
 		-u|--user) shift; wa_gs_user="$1"; shift;;
 		-n|--name) shift; wa_gs_name="$1"; shift;;
 		-S|--service) isService=1; shift;;
@@ -18,7 +20,7 @@ while [ "$1" != "" ]; do
 	esac
 done
 
-if [[ "$wa_gs_commd" != "" ]]; then
+if [[ "$wa_gs_commd" != "" ]] || [[ $isWakeup -eq 1 ]]; then
 	tmp_location="$(wslvar -s TMP)"
 	up_location=""
 	tpath="$(double_dash_p "$tmp_location")" # Windows Temp, Win Double Sty.
@@ -30,8 +32,10 @@ if [[ "$wa_gs_commd" != "" ]]; then
 	wslu_file_check "$script_location" "sudo.ps1"
 	wslu_file_check "$script_location" "runHidden.vbs"
 
-	# check if it is a service or a command
-	if [[ $isService -eq 1 ]]; then
+	# check if it is a service, a command or it just want to wakeup
+	if [[ $isWakeup -eq 1 ]]; then
+		wa_gs_commd="wsl.exe -d $WSL_DISTRO_NAME echo"
+	elif [[ $isService -eq 1 ]]; then
 	# service
 		# handling no name given case
 		if [[ "$wa_gs_name" = "" ]]; then
