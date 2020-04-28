@@ -65,10 +65,10 @@ WSL ilo kiu helpas krei startajn taskojn por Linuksaj procezoj en Vindozo.
 
 ### Alpine Linux
 
-Oni povas instali `wslu` el **Alpine Linux testing** per la jenaj komandoj:
+Oni povas instali `wslu` el **Alpine Linux community** per la jenaj komandoj:
 
 ```
-$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/" | sudo tee -a /etc/apk/repositories
+$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/community/" | sudo tee -a /etc/apk/repositories
 $ sudo apk update
 $ sudo apk add wslu@testing
 ```
