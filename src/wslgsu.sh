@@ -20,6 +20,11 @@ while [ "$1" != "" ]; do
 	esac
 done
 
+wslutmpbuild=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+wslutmpbuild=${wslutmpbuild##* }
+wslutmpbuild="$(( wslutmpbuild + 0 ))"
+[ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ] || (echo "This tool is not supported before version 1903."; exit 34)
+
 if [[ "$wa_gs_commd" != "" ]] || [[ $isWakeup -eq 1 ]]; then
 	tmp_location="$(wslvar -s TMP)"
 	up_location=""
