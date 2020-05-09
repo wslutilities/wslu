@@ -4,6 +4,7 @@ on:
     branches:
       - develop
       - dev/**
+      - 3.x/**
 jobs:
   debbuild:
     name: Debian
