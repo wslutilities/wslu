@@ -14,7 +14,7 @@
 .RB [ \-hv ]
 .I SERVICE/COMMAND
 .SH DESCRIPTION
-This tool allows you to generate a WSL startup Task using Windows Task Schduler.
+This tool allows you to generate a WSL startup Task using the Windows Task Scheduler.
 .SH OPTIONS
 .TP
 .B -h, --help
@@ -24,13 +24,13 @@ Print a simple help.
 Print current version.
 .TP
 .B -u, --username \fIUSERNAME\fR
-Use a separate user to eexecute the command/service. By default it's \fIroot\fR.
+Use a separate user to execute the command/service. By default it's \fIroot\fR.
 .TP
 .B -n, --name \fINAME\fR
-Add a different name other than the service/command name. By default it will autoamtically extracted from the service/command.
+Add an explicit name instead of the default of autoamtically extracting a name from the service/command.
 .TP
 .B -S, --service
-Using the option means you are addng an system service. without \fB-S\fR, you are adding a command to system. 
+Using this option means you are addng a system service. without \fB-S\fR, you are adding a command to system. 
 .SH AUTHOR
 Created by Patrick Wu <me@patrickwu.space>
 .SH REPORTING BUGS

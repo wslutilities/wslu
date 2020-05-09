@@ -61,10 +61,10 @@ A WSL tool to help creating startup tasks for linux process on Windows.
 
 ### Alpine Linux
 
-You can install `wslu` from Alpine Linux testing with the following command:
+You can install `wslu` from Alpine Linux community with the following command:
 
 ```
-$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/" | sudo tee -a /etc/apk/repositories
+$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/community/" | sudo tee -a /etc/apk/repositories
 $ sudo apk update
 $ sudo apk add wslu@testing
 ```
