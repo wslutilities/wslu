@@ -56,11 +56,6 @@ WSL ilo kiu konvertas dosierindikojn.
 
 Aro de rapidaj agoj por WSL, kiel repide surmeti ĉiujn Vindozajn diskingojn aŭ mane sinkronigi tempon inter Vindozo kaj WSL.
 
-**wslgsu**
-
-WSL ilo kiu helpas krei startajn taskojn por Linuksaj procezoj en Vindozo.
-
-
 ## Instalo
 
 ### Alpine Linux

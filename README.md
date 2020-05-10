@@ -53,9 +53,6 @@ A WSL tool to convert path styles.
 
 A set of quick actions for WSL such as quickly mounting all drives or manually sync time between Windows and WSL.
 
-**wslgsu**
-A WSL tool to help creating startup tasks for linux process on Windows.
-
 
 ## Installation
 
