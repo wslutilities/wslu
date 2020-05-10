@@ -54,10 +54,6 @@
 
 一组 WSL 快速动作，如快速挂载所有硬盘或手动与 Windows 同步时间。
 
-**wslgsu**
-
-在 Windows 端创建 WSL 开机启动的 WSL 工具。
-
 ## 安装
 
 ### Alpine Linux

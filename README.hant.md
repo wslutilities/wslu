@@ -54,10 +54,6 @@
 
 一組 WSL 快捷動作，如快速掛載所有硬碟或手動與 Windows 同步時間。
 
-**wslgsu**
-
-在 Windows 端建立 WSL 開機啟動的 WSL 工具。
-
 
 ## 安装
 
