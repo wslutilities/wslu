@@ -20,7 +20,7 @@ VERTMP = $(shell cat ./VERSION)
 
 all: doc
 	[ -d $(OUTPATH) ] || mkdir $(OUTPATH)
-	sed -e 's/VERSIONPLACEHOLDER/'$(VERTMP)'/' -e 's/PREFIXPLACEHOLDER/'$(PREFIX)'/' $(HEADER) > $(HEADER).tmp; \
+	sed -e 's/VERSIONPLACEHOLDER/'$(VERTMP)'/' -e 's#PREFIXPLACEHOLDER#'$(PREFIX)'#' $(HEADER) > $(HEADER).tmp; \
 	mv $(HEADER).tmp $(HEADER); \
 	for file in $(SOURCES); do \
 		cat $(HEADER) $$file > $(OUTPATH)/`basename $$file`; \
