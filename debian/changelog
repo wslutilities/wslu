@@ -1,3 +1,20 @@
+wslu (3.1.0-0kali1) kali-dev; urgency=medium
+
+  * header: use the proper color definition
+  * wslfetch: new display for WSL with WSL version displayed
+  * wslfetch: use the proper logo for Ubuntu (Reported by @flexiondotorg)
+  * wslsys: add WSL version option
+  * wslsys: fix an issue in DPI scaling getting wrong value due to the API change in Latest fast ring insider build (Reported by @crramirez)
+  * wslact: adding `--mount-options` for auto-mounting feature
+  * wslact: fix an i18n related issue in time-sync feature (fixes #113 by @ricardosantos9521)
+  * wslgsu: removed temporarily
+  * wslgsu: limit the Windows version it can use
+  * wslview: properly detect all different protocols and path styles (fixes #118)
+  * package: fix alpine dependency issue (fixes #117)
+
+ -- Jinming Wu, Patrick <me@patrickwu.space>  Wed, 13 May 2020 22:53:03 +0800
+
+
 wslu (3.0.1-0kali1) kali-dev; urgency=medium
 
   * Initial release
