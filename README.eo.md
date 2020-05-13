@@ -56,19 +56,14 @@ WSL ilo kiu konvertas dosierindikojn.
 
 Aro de rapidaj agoj por WSL, kiel repide surmeti ĉiujn Vindozajn diskingojn aŭ mane sinkronigi tempon inter Vindozo kaj WSL.
 
-**wslgsu**
-
-WSL ilo kiu helpas krei startajn taskojn por Linuksaj procezoj en Vindozo.
-
-
 ## Instalo
 
 ### Alpine Linux
 
-Oni povas instali `wslu` el **Alpine Linux testing** per la jenaj komandoj:
+Oni povas instali `wslu` el **Alpine Linux community** per la jenaj komandoj:
 
 ```
-$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/" | sudo tee -a /etc/apk/repositories
+$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/community/" | sudo tee -a /etc/apk/repositories
 $ sudo apk update
 $ sudo apk add wslu@testing
 ```

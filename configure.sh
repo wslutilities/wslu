@@ -75,7 +75,6 @@ function deb_build_prep {
 	mkdir -p ./debian
 	cp -r ./extras/build/debian/* ./debian
 	chmod +x ./debian/rules
-	general_build_prep
 	sed -i s/DISTROPLACEHOLDER/"$@"/g ./debian/changelog
 	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g ./debian/changelog
 	sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a, %d %b %Y %T %z')"/g ./debian/changelog
@@ -85,7 +84,6 @@ function deb_build_prep {
 function rpm_build_prep {
 	BUILD_VER_NUM=$(cat ./VERSION | cut -f1 -d-)
 	REL_VER_NUM=$(cat ./VERSION | cut -f2 -d-)
-	general_build_prep
 	sed -i s/BUILDVERPLACEHOLDER/"$BUILD_VER_NUM"/g ./extras/build/rpm/wslu.spec
 	sed -i s/RELVERPLACEHOLDER/"$REL_VER_NUM"/g ./extras/build/rpm/wslu.spec
 	sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a %b %d %Y')"/g ./extras/build/rpm/wslu.spec
@@ -108,4 +106,4 @@ for args; do
 	esac
 done
 
-env_check; pkg_inst; general_build_prep
+env_check; pkg_inst
