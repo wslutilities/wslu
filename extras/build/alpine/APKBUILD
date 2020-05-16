@@ -1,13 +1,13 @@
 # Maintainer: Patrick Wu <me@patrickwu.space>
 # Contributor: Patrick Wu <me@patrickwu.space>
 pkgname=wslu
-pkgver=3.0.0
+pkgver=3.0.1
 pkgrel=0
 pkgdesc="A collection of utilities for Windows 10 Linux Subsystems"
 url="https://github.com/wslutilities/wslu"
 arch="noarch"
 license="GPL-3.0-or-later"
-depends="bc bash-completion imagemagick"
+depends="bc bash-completion imagemagick grep" #the builtin grep have issues with wslu
 subpackages="$pkgname-doc"
 source="$pkgname-$pkgver.tar.gz::https://github.com/wslutilities/wslu/archive/v$pkgver.tar.gz"
 options="!check" #tests can be only be run on WSL(Windows Subsystems for Linux) version of Alpine Linux environment, hence disabled

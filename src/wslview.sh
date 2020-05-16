@@ -38,14 +38,22 @@ for args; do
 done
 
 if [[ "$lname" != "" ]]; then
-	if [[ "$lname" =~ ^file:\/\/\/.* ]]; then
-		wslutmpbuild=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-		wslutmpbuild=${wslutmpbuild##* }
-		wslutmpbuild="$(( wslutmpbuild + 0 ))"
+	wslutmpbuild=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	wslutmpbuild=${wslutmpbuild##* }
+	wslutmpbuild="$(( wslutmpbuild + 0 ))"
+	# file:/// protocol used in linux
+	if [[ "$lname" =~ ^file:\/\/\/[^:alpha:][^:][^/]* ]]; then
 		if [ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ]; then
-			# if Windows 10 is in version 1903 or later
 			properfile_full_path="$(readlink -f "${lname//file:\/\//}")"
-			converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\})"
+			converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\}"
+			winps_exec Start "\"$converted_file_path\""
+		else
+			echo "${error} This protocol is not supported before version 1903."
+			exit 34
+		fi
+	elif [[ $lname =~ ^(/[^/]+)*(/)?$ ]]; then
+		if [ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ]; then
+			converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\}"
 			winps_exec Start "\"$converted_file_path\""
 		else
 			echo "${error} This protocol is not supported before version 1903."

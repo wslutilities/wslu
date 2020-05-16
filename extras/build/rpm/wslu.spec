@@ -57,7 +57,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wview
 %{_bindir}/wstart
 %{_bindir}/wslstart
-%{_bindir}/wslgsu
 %{_bindir}/wslact
 %{_bindir}/wslvar
 /usr/share/wslu/

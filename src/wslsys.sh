@@ -1,7 +1,7 @@
 # shellcheck shell=bash
 version="34"
 
-help_short="wslsys [-IbBFUWRKPSlt] [-s]\nwslsys [-hv]"
+help_short="wslsys [-VIbBFUWRKPSlt] [-s]\nwslsys [-hv]"
 
 ## Windows 10 information
 function call_branch() {
@@ -35,9 +35,10 @@ function call_theme() {
 }
 
 function call_display_scaling() {
-	display_scaling=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKCU\\Control Panel\\Desktop\\WindowMetrics" /v AppliedDPI | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-	display_scaling=${display_scaling##* }
-	bc -l <<< "$(printf "%d\n" "$display_scaling")/96" | sed -e "s/\.0//g" -e "s/0*$//g"
+	up_path="$(wslvar -s USERPROFILE)"
+	wslu_file_check "$(wslpath "$up_path")/wslu" "get_dpi.ps1" "?!S"
+	display_scaling="$(winps_exec "$(double_dash_p "$up_path")\\wslu\\get_dpi.ps1" | sed -e 's|\r||g')"
+	bc -l <<< "$(printf "%d\n" "$display_scaling")/100" | sed -e "s/\.0//g" -e "s/0*$//g"
 }
 
 function call_windows_uptime() {
@@ -55,6 +56,28 @@ function get_windows_locale() {
 }
 
 ## WSL information
+
+function get_wsl_version() {
+	wslutmpbuild="$(( $(call_build) + 0 ))"
+	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
+		# The environment variable only available in 19H1 or later.
+		wslu_distro_regpath=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | grep -B1 -e "$WSL_DISTRO_NAME" | head -n1 | sed -e 's|\r||g')
+		if "$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Version &>/dev/null; then
+			wslu_distro_version=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Version | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+			wslu_distro_version=${wslu_distro_version##* }
+			if [ "$wslu_distro_version" != "0x2" ]; then
+				echo "1"
+			else
+				echo "2"
+			fi
+		else
+			echo "1"
+		fi
+	else
+		echo "1"
+	fi
+}
+
 release="$(grep "PRETTY_NAME=" /etc/os-release | sed -e 's/PRETTY_NAME=//g' -e 's/"//g')"
 kernel="$(</proc/sys/kernel/ostype) $(</proc/sys/kernel/osrelease)"
 uptime=$(</proc/uptime)
@@ -93,6 +116,7 @@ function printer {
 case $1 in
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslsys v$version"; exit;;
+		-V|--wsl--version) printer "WSL version" "$(get_wsl_version)" "$2";exit;;
 		-I|--sys-installdate) printer "Release Install Date" "$(call_install_date)" "$2";exit;;
 		-b|--branch) printer "Branch" "$(call_branch)" "$2";exit;;
 		-B|--build) printer "Build" "$(call_build)" "$2";exit;;
@@ -105,5 +129,5 @@ case $1 in
 		-S|--display-scaling) printer "Display Scaling" "$(call_display_scaling)" "$2";exit;;
 		-l|--locale) printer "Locale" "$(get_windows_locale)" "$2";exit;;
 		-t|--win-theme) printer "Windows Theme" "$(call_theme)" "$2"; exit;;
-		*) echo -e "Locale: $(get_windows_locale)\nRelease Install Date: $(date -d @"$(printf "%d" "$(call_install_date)")")\nBranch: $(call_branch)\nBuild: $(call_build)\nFull Build: $(call_full_build)\nDisplay Scaling: $(call_display_scaling)\nWindows Theme: $(call_theme)\nWindows Uptime: $(call_windows_uptime)\nWSL Uptime: $uptime\nWSL Release: $release\nWSL Kernel: $kernel\nPackages Count: $packages";exit;;
+		*) echo -e "WSL Version: $(get_wsl_version)\nLocale: $(get_windows_locale)\nRelease Install Date: $(date -d @"$(printf "%d" "$(call_install_date)")")\nBranch: $(call_branch)\nBuild: $(call_build)\nFull Build: $(call_full_build)\nDisplay Scaling: $(call_display_scaling)\nWindows Theme: $(call_theme)\nWindows Uptime: $(call_windows_uptime)\nWSL Uptime: $uptime\nWSL Release: $release\nWSL Kernel: $kernel\nPackages Count: $packages";exit;;
 esac

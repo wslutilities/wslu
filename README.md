@@ -53,18 +53,15 @@ A WSL tool to convert path styles.
 
 A set of quick actions for WSL such as quickly mounting all drives or manually sync time between Windows and WSL.
 
-**wslgsu**
-A WSL tool to help creating startup tasks for linux process on Windows.
-
 
 ## Installation
 
 ### Alpine Linux
 
-You can install `wslu` from Alpine Linux testing with the following command:
+You can install `wslu` from Alpine Linux community with the following command:
 
 ```
-$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/" | sudo tee -a /etc/apk/repositories
+$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/community/" | sudo tee -a /etc/apk/repositories
 $ sudo apk update
 $ sudo apk add wslu@testing
 ```

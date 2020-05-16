@@ -54,10 +54,6 @@
 
 一组 WSL 快速动作，如快速挂载所有硬盘或手动与 Windows 同步时间。
 
-**wslgsu**
-
-在 Windows 端创建 WSL 开机启动的 WSL 工具。
-
 ## 安装
 
 ### Alpine Linux
@@ -65,7 +61,7 @@
 你可以用以下命令安装 `wslu`：
 
 ```
-$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/" | sudo tee -a /etc/apk/repositories
+$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/community/" | sudo tee -a /etc/apk/repositories
 $ sudo apk update
 $ sudo apk add wslu@testing
 ```
