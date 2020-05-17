@@ -1,30 +1,30 @@
 # shellcheck shell=bash
 version="34"
 
-help_short="wslsys [-VIbBFUWRKPSlt] [-s]\nwslsys [-hv]"
+help_short="wslsys [-VIbBFUWRKPSlt] [-s]\nwslsys [-hv] [-n NAME]"
 
 ## Windows 10 information
-function call_branch() {
+function get_branch() {
 	branch=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildBranch | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	echo "${branch##* }"
 }
 
-function call_build() {
+function get_build() {
 	build=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	echo "${build##* }"
 }
 
-function call_full_build() {
+function get_full_build() {
 	full_build=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v BuildLabEx | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	echo "${full_build##* }"
 }
 
-function call_install_date() {
+function get_install_date() {
 	installdate=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v InstallDate | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	echo "${installdate##* }"
 }
 
-function call_theme() {
+function get_theme() {
 	win_theme=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" /v AppsUseLightTheme | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	win_theme=${win_theme##* }
 	if [ "$win_theme" != "0x1" ]; then
@@ -34,14 +34,14 @@ function call_theme() {
 	fi
 }
 
-function call_display_scaling() {
+function get_display_scaling() {
 	up_path="$(wslvar -s USERPROFILE)"
 	wslu_file_check "$(wslpath "$up_path")/wslu" "get_dpi.ps1" "?!S"
 	display_scaling="$(winps_exec "$(double_dash_p "$up_path")\\wslu\\get_dpi.ps1" | sed -e 's|\r||g')"
 	bc -l <<< "$(printf "%d\n" "$display_scaling")/100" | sed -e "s/\.0//g" -e "s/0*$//g"
 }
 
-function call_windows_uptime() {
+function get_windows_uptime() {
 	win_uptime=$(winps_exec "((get-date) - (gcim Win32_OperatingSystem).LastBootUpTime).TotalSeconds" | sed -e 's|\r||g')
 	win_uptime=${win_uptime//.*}
 	w_days=$((win_uptime/86400))
@@ -58,7 +58,7 @@ function get_windows_locale() {
 ## WSL information
 
 function get_wsl_version() {
-	wslutmpbuild="$(( $(call_build) + 0 ))"
+	wslutmpbuild="$(( $(get_build) + 0 ))"
 	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
 		# The environment variable only available in 19H1 or later.
 		wslu_distro_regpath=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | grep -B1 -e "$WSL_DISTRO_NAME" | head -n1 | sed -e 's|\r||g')
@@ -78,31 +78,41 @@ function get_wsl_version() {
 	fi
 }
 
-release="$(grep "PRETTY_NAME=" /etc/os-release | sed -e 's/PRETTY_NAME=//g' -e 's/"//g')"
-kernel="$(</proc/sys/kernel/ostype) $(</proc/sys/kernel/osrelease)"
-uptime=$(</proc/uptime)
-uptime=${uptime//.*}
-days=$((uptime/86400))
-hours=$((uptime/3600%24))
-minutes=$((uptime/60%60))
-uptime="${days}d ${hours}h ${minutes}m"
+function get_wsl_release() {
+	release="$(grep "PRETTY_NAME=" /etc/os-release | sed -e 's/PRETTY_NAME=//g' -e 's/"//g')"
+	##  old version of fedora remix specific information
+	if [ "$distro" == "oldfedora" ]; then
+		release="Fedora Remix $(grep -e "^VERSION=" /etc/os-release | sed -e 's/\"//g' | sed -e 's/VERSION=//g')"
+	fi
+	echo "$release"
+}
 
-### WSL package information
-case "$distro" in
-	'pengwin'|'ubuntu'|'kali'|'debian'|'wlinux')
-		packages=$(dpkg -l | grep -c '^i');;
-	'opensuse'|'sles'|'scilinux'|'oldfedora'|'fedora'|'oracle')
-		packages=$(rpm -qa | wc -l);;
-	'alpine')
-		packages=$(apk info | wc -l);;
-	'archlinux')
-		packages=$(pacman -Qq | wc -l);;
-esac
+function get_wsl_kernel() {
+	echo "$(</proc/sys/kernel/ostype) $(</proc/sys/kernel/osrelease)"
+}
 
-##  old version of fedora remix specific information
-if [ "$distro" == "oldfedora" ]; then
-	release="Fedora Remix $(grep -e "^VERSION=" /etc/os-release | sed -e 's/\"//g' | sed -e 's/VERSION=//g')"
-fi
+function get_wsl_uptime() {
+	uptime=$(</proc/uptime)
+	uptime=${uptime//.*}
+	days=$((uptime/86400))
+	hours=$((uptime/3600%24))
+	minutes=$((uptime/60%60))
+	echo "${days}d ${hours}h ${minutes}m"
+}
+
+function get_wsl_packages() {
+	case "$distro" in
+		'pengwin'|'ubuntu'|'kali'|'debian'|'wlinux')
+			packages=$(dpkg -l | grep -c '^i');;
+		'opensuse'|'sles'|'scilinux'|'oldfedora'|'fedora'|'oracle')
+			packages=$(rpm -qa | wc -l);;
+		'alpine')
+			packages=$(apk info | wc -l);;
+		'archlinux')
+			packages=$(pacman -Qq | wc -l);;
+	esac
+	echo "$packages"
+}
 
 ## Simple printer defined for fetching information
 function printer {
@@ -152,16 +162,16 @@ function dict_finder {
 			printer "WSL version" "$(get_wsl_version)" "$2"
 			return;;
 		10|-U|--uptime|wsl-uptime)
-			printer "WSL Uptime" "$uptime" "$2"
+			printer "WSL Uptime" "$(get_wsl_uptime)" "$2"
 			return;;
 		11|-R|--release|wsl-release)
-			printer "WSL Release" "$(get_release)" "$2"
+			printer "WSL Release" "$(get_wsl_release)" "$2"
 			return;;
 		12|-K|--kernel|wsl-kernel)
-			printer "WSL Kernel" "$kernel" "$2"
+			printer "WSL Kernel" "$(get_wsl_kernel)" "$2"
 			return;;
 		13|-P|--package|wsl-package-count)
-			printer "Packages" "$packages" "$2"
+			printer "Packages" "$(get_wsl_packages)" "$2"
 			return;;
 		*) return 1;;
 	esac
@@ -196,6 +206,7 @@ function wslsys_main {
 	fi
 }
 
+# pre-handler
 case $1 in
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslsys v$version"; exit;;
