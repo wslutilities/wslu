@@ -86,14 +86,15 @@ readonly BN_MAY_NINETEEN=18362		#1903, 19H1, May 2019 Update
 readonly BN_NOV_NINETEEN=18363		#1909, 19H2, November 2019 Update
 
 # source default config
-if [ -f "${wslu_prefix}/share/wslu/wsluconfig" ]; then
-	source "${wslu_prefix}/share/wslu/wslurc"
+if [ -f "${wslu_prefix}/share/wslu/conf" ]; then
+	source "${wslu_prefix}/share/wslu/conf"
 fi
 
 # source user-defined config
-if [ -f "$HOME/.config/wslu/wslurc" ]; then
-	source "$HOME/.config/wslu/wslurc"
-elif [ -f "$HOME/.wslurc" ]; then
+if [ -f "$HOME/.config/wslu/conf" ]; then
+	source "$HOME/.config/wslu/conf"
+fi
+if [ -f "$HOME/.wslurc" ]; then
 	source "$HOME/.wslurc"
 fi
 
