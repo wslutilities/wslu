@@ -10,20 +10,9 @@ for args; do
 	case $args in
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslfetch v$version"; exit;;
-		-s|--splash) is_splash=1;;
-		-l|--line) is_line=1;;
 		-c|--colorbar) is_color=1;
 	esac
 done
-
-hostname=$(</etc/hostname)
-wslsys=$(wslsys)
-wslvers=$(echo "$wslsys" | grep -Po '^WSL Version: \K.*')
-branch=$(echo "$wslsys" | grep -Po '^Branch: \K.*')
-build=$(echo "$wslsys" | grep -Po '^Build: \K.*')
-release=$(echo "$wslsys" | grep -Po '^WSL Release: \K.*')
-kernel=$(echo "$wslsys" | grep -Po '^WSL Kernel: \K.*')
-uptime=$(echo "$wslsys" | grep -Po '^Windows Uptime: \K.*')
 
 case "$distro" in
 	'ubuntu')
@@ -288,35 +277,26 @@ case "$distro" in
 			"${cyan}|__/     \\__/ \\______/ |________/${reset} ");;
 esac
 
+SAVEIFS=$IFS
+IFS=$'\n'
+info_collect=($(wslsys --wslfetch "${WSLFETCH_INFO_SECTION:-"windows-build,windows-rel-branch,wsl-release,wsl-kernel,windows-uptime"}" "${t}"))
+IFS=$SAVEIFS
 
-info_text=("${t}Windows Subsystem for Linux (WSL${wslvers})${reset}"
-"${t}${USER}${reset}@${t}${hostname}${reset}"
-"${t}Build:${reset} ${build}"
-"${t}Branch:${reset} ${branch}"
-"${t}Release:${reset} ${release}"
-"${t}Kernel:${reset} ${kernel}"
-"${t}Uptime:${reset} ${uptime}"
-"${reset}"
-)
+wslf_ver="${info_collect[0]}"
+
+info_text=("${t}Windows Subsystem for Linux (WSL${wslf_ver})${reset}"
+"${t}${USER}${reset}@${t}$(</etc/hostname)${reset}")
+info_text+=("${info_collect[@]:1}") 
+info_text+=("${reset}")
 
 if [[ "$is_color" == "1" ]]; then
-info_text+=("   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}"
-"   \e[48;5;8m   \e[48;5;9m   \e[48;5;10m   \e[48;5;11m   \e[48;5;12m   \e[48;5;13m   \e[48;5;14m   \e[48;5;15m   ${reset}")
+	info_text+=("   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}"
+	"   \e[48;5;8m   \e[48;5;9m   \e[48;5;10m   \e[48;5;11m   \e[48;5;12m   \e[48;5;13m   \e[48;5;14m   \e[48;5;15m   ${reset}")
 fi
-
-function line {
-	if [[ "$1" == "1" ]]; then
-		CUR_TTY="$(tty)"
-		yes -- "${2:-=}" | tr -d $'\n' | head -c "$(stty -a <"$CUR_TTY" | head -1 | sed -e "s|^.*columns ||g" -e "s|;.*$||g")"
-	else
-		echo ""
-	fi
-}
 
 info_length=${#info_text[@]}
 full_length=${#full_text[@]}
 
-line "$is_line" "-"
 # use for loop to read all values and indexes
 for (( i=0; i<full_length; i++ ));
 do
@@ -326,9 +306,3 @@ do
 	fi
 	echo -e "${full_text[$i]}${tmp}"
 done
-line "$is_line" "-"
-
-if [[ "$is_splash" == "1" ]]; then
-	sleep 2
-	clear
-fi
