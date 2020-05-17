@@ -113,21 +113,91 @@ function printer {
 	fi
 }
 
+# function to find the value using the param/number/option passed
+function dict_finder {
+	# this function should only have two input: the content ($1) and the shortform param ($2).
+	# the dict looks like this:
+	## num|short_param|long_param|option)
+	##	printer "readable name" "value" "$2"
+	##	return;;
+	# num is used for empty input for iteration only
+	# param are for parameter passing
+	# option are for --wslfetch and --name
+	case $1 in
+		1|-I|--sys-installdate|windows-install-date) 
+			printer "Release Install Date" "$(get_install_date)" "$2"
+			return;;
+		2|-b|--branch|windows-rel-branch)
+			printer "Branch" "$(get_branch)" "$2"
+			return;;
+		3|-B|--build|windows-build)
+			printer "Build" "$(get_build)" "$2"
+			return;;
+		4|-F|--full-build|windows-full-build)
+			printer "Full Build" "$(get_full_build)" "$2"
+			return;;
+		5|-S|--display-scaling|display-scaling)
+			printer "Display Scaling" "$(get_display_scaling)" "$2"
+			return;;
+		6|-l|--locale|windows-locale)
+			printer "Locale" "$(get_windows_locale)" "$2"
+			return;;
+		7|-t|--win-theme|windows-theme)
+			printer "Windows Theme" "$(get_theme)" "$2"
+			return;;
+		8|-W|--win-uptime|windows-uptime)
+			printer "Windows Uptime" "$(get_windows_uptime)" "$2"
+			return;;
+		9|-V|--wsl-version|wsl-version) 
+			printer "WSL version" "$(get_wsl_version)" "$2"
+			return;;
+		10|-U|--uptime|wsl-uptime)
+			printer "WSL Uptime" "$uptime" "$2"
+			return;;
+		11|-R|--release|wsl-release)
+			printer "WSL Release" "$(get_release)" "$2"
+			return;;
+		12|-K|--kernel|wsl-kernel)
+			printer "WSL Kernel" "$kernel" "$2"
+			return;;
+		13|-P|--package|wsl-package-count)
+			printer "Packages" "$packages" "$2"
+			return;;
+		*) return 1;;
+	esac
+}
+
+# main handler for wslsys
+function wslsys_main {
+	# If input is empty, print everything available
+	if [[ "$@" == "" ]]; then
+		for i in {1..13}; do
+			dict_finder $i
+		done
+		exit
+	fi
+	# If input start with --wslfetch, doing wslfetch specific print, not intend to use externally
+	if [[ "$1" == "--wslfetch" ]]; then
+		dict_finder "wsl-version" "-s"
+		IFS=',' read -r -a fetch_array <<< "$2"
+		for i in "${fetch_array[@]}"; do
+			dict_finder $i
+		done
+		exit
+	fi
+	# If input start with --name, shift and use input instead
+	if [[ "$1" == "--name" ]] || [[ "$1" == "-n" ]]; then
+		shift
+	fi
+	# pass the param(or value) to dict_finder(), check return, if return -1, print error
+	if ! dict_finder "$1" "$2"; then
+		echo "${error} Invalid input."
+		exit 22
+	fi
+}
+
 case $1 in
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslsys v$version"; exit;;
-		-V|--wsl--version) printer "WSL version" "$(get_wsl_version)" "$2";exit;;
-		-I|--sys-installdate) printer "Release Install Date" "$(call_install_date)" "$2";exit;;
-		-b|--branch) printer "Branch" "$(call_branch)" "$2";exit;;
-		-B|--build) printer "Build" "$(call_build)" "$2";exit;;
-		-F|--full-build) printer "Full Build" "$(call_full_build)" "$2";exit;;
-		-U|--uptime) printer "WSL Uptime" "$uptime" "$2";exit;;
-		-W|--win-uptime) printer "Windows Uptime" "$(call_windows_uptime)" "$2";exit;;
-		-R|--release) printer "WSL Release" "$release" "$2";exit;;
-		-K|--kernel) printer "WSL Kernel" "$kernel" "$2";exit;;
-		-P|--package) printer "Packages Count" "$packages" "$2";exit;;
-		-S|--display-scaling) printer "Display Scaling" "$(call_display_scaling)" "$2";exit;;
-		-l|--locale) printer "Locale" "$(get_windows_locale)" "$2";exit;;
-		-t|--win-theme) printer "Windows Theme" "$(call_theme)" "$2"; exit;;
-		*) echo -e "WSL Version: $(get_wsl_version)\nLocale: $(get_windows_locale)\nRelease Install Date: $(date -d @"$(printf "%d" "$(call_install_date)")")\nBranch: $(call_branch)\nBuild: $(call_build)\nFull Build: $(call_full_build)\nDisplay Scaling: $(call_display_scaling)\nWindows Theme: $(call_theme)\nWindows Uptime: $(call_windows_uptime)\nWSL Uptime: $uptime\nWSL Release: $release\nWSL Kernel: $kernel\nPackages Count: $packages";exit;;
+		*) wslsys_main $@; exit;;
 esac
