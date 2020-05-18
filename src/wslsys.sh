@@ -116,7 +116,9 @@ function get_wsl_packages() {
 
 ## Simple printer defined for fetching information
 function printer {
-	if [[ $3 != "-s" ]]; then
+	if [[ -n "$WSLSYS_WSLFETCH_COLOR" ]]; then
+		echo "$WSLSYS_WSLFETCH_COLOR$1${reset}: $2"
+	elif [[ -n "$WSLSYS_WSLFETCH_SHORTFORM" ]]; then
 		echo "$1: $2"
 	else
 		echo "$2"
@@ -133,45 +135,46 @@ function dict_finder {
 	# num is used for empty input for iteration only
 	# param are for parameter passing
 	# option are for --wslfetch and --name
+	local WSLSYS_WSLFETCH_SHORTFORM="$2"
 	case $1 in
 		1|-I|--sys-installdate|windows-install-date) 
-			printer "Release Install Date" "$(get_install_date)" "$2"
+			printer "Release Install Date" "$(get_install_date)"
 			return;;
 		2|-b|--branch|windows-rel-branch)
-			printer "Branch" "$(get_branch)" "$2"
+			printer "Branch" "$(get_branch)"
 			return;;
 		3|-B|--build|windows-build)
-			printer "Build" "$(get_build)" "$2"
+			printer "Build" "$(get_build)"
 			return;;
 		4|-F|--full-build|windows-full-build)
-			printer "Full Build" "$(get_full_build)" "$2"
+			printer "Full Build" "$(get_full_build)"
 			return;;
 		5|-S|--display-scaling|display-scaling)
-			printer "Display Scaling" "$(get_display_scaling)" "$2"
+			printer "Display Scaling" "$(get_display_scaling)"
 			return;;
 		6|-l|--locale|windows-locale)
-			printer "Locale" "$(get_windows_locale)" "$2"
+			printer "Locale" "$(get_windows_locale)"
 			return;;
 		7|-t|--win-theme|windows-theme)
-			printer "Windows Theme" "$(get_theme)" "$2"
+			printer "Windows Theme" "$(get_theme)"
 			return;;
 		8|-W|--win-uptime|windows-uptime)
-			printer "Windows Uptime" "$(get_windows_uptime)" "$2"
+			printer "Windows Uptime" "$(get_windows_uptime)"
 			return;;
 		9|-V|--wsl-version|wsl-version) 
-			printer "WSL version" "$(get_wsl_version)" "$2"
+			printer "WSL version" "$(get_wsl_version)"
 			return;;
 		10|-U|--uptime|wsl-uptime)
-			printer "WSL Uptime" "$(get_wsl_uptime)" "$2"
+			printer "WSL Uptime" "$(get_wsl_uptime)"
 			return;;
 		11|-R|--release|wsl-release)
-			printer "WSL Release" "$(get_wsl_release)" "$2"
+			printer "WSL Release" "$(get_wsl_release)"
 			return;;
 		12|-K|--kernel|wsl-kernel)
-			printer "WSL Kernel" "$(get_wsl_kernel)" "$2"
+			printer "WSL Kernel" "$(get_wsl_kernel)"
 			return;;
 		13|-P|--package|wsl-package-count)
-			printer "Packages" "$(get_wsl_packages)" "$2"
+			printer "Packages" "$(get_wsl_packages)"
 			return;;
 		*) return 1;;
 	esac
@@ -191,7 +194,7 @@ function wslsys_main {
 		dict_finder "wsl-version" "-s"
 		IFS=',' read -r -a fetch_array <<< "$2"
 		for i in "${fetch_array[@]}"; do
-			dict_finder $i
+			WSLSYS_WSLFETCH_COLOR="$3" dict_finder $i
 		done
 		exit
 	fi
