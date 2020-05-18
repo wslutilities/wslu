@@ -120,6 +120,8 @@ function printer() {
 		echo "$WSLSYS_WSLFETCH_COLOR$1${reset}: $2"
 	elif [[ -z "$WSLSYS_WSLFETCH_SHORTFORM" ]]; then
 		echo "$1: $2"
+	elif [[ "$1" == "Release Install Date" ]]; then
+		echo "$(get_install_date)" # special case for Release Install Date, only shortform use hex unix timestamp
 	else
 		echo "$2"
 	fi
@@ -138,7 +140,7 @@ function dict_finder() {
 	local WSLSYS_WSLFETCH_SHORTFORM="$2"
 	case $1 in
 		1|-I|--sys-installdate|windows-install-date) 
-			printer "Release Install Date" "$(get_install_date)"
+			printer "Release Install Date" "$(date -d @"$(printf "%d" "$(get_install_date)")")" 
 			return;;
 		2|-b|--branch|windows-rel-branch)
 			printer "Branch" "$(get_branch)"
