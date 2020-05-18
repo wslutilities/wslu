@@ -153,25 +153,25 @@ function dict_finder() {
 			printer "Display Scaling" "$(get_display_scaling)"
 			return;;
 		6|-l|--locale|windows-locale)
-			printer "Locale" "$(get_windows_locale)"
+			printer "Locale (Windows)" "$(get_windows_locale)"
 			return;;
 		7|-t|--win-theme|windows-theme)
-			printer "Windows Theme" "$(get_theme)"
+			printer "Theme (Windows)" "$(get_theme)"
 			return;;
 		8|-W|--win-uptime|windows-uptime)
-			printer "Windows Uptime" "$(get_windows_uptime)"
+			printer "Uptime (Windows)" "$(get_windows_uptime)"
 			return;;
 		9|-V|--wsl-version|wsl-version) 
-			printer "WSL version" "$(get_wsl_version)"
+			printer "Version (WSL)" "$(get_wsl_version)"
 			return;;
 		10|-U|--uptime|wsl-uptime)
-			printer "WSL Uptime" "$(get_wsl_uptime)"
+			printer "Uptime (WSL)" "$(get_wsl_uptime)"
 			return;;
 		11|-R|--release|wsl-release)
-			printer "WSL Release" "$(get_wsl_release)"
+			printer "Release" "$(get_wsl_release)"
 			return;;
 		12|-K|--kernel|wsl-kernel)
-			printer "WSL Kernel" "$(get_wsl_kernel)"
+			printer "Kernel" "$(get_wsl_kernel)"
 			return;;
 		13|-P|--package|wsl-package-count)
 			printer "Packages" "$(get_wsl_packages)"
