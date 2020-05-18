@@ -21,7 +21,7 @@
 wslu_version=VERSIONPLACEHOLDER
 wslu_prefix="PREFIXPLACEHOLDER"
 
-# Speed up script by not using unicode.
+# Speed up script by using unicode.
 LC_ALL=C
 LANG=C
 
@@ -68,8 +68,8 @@ light_cyan=$(echo -e '\e[1;36m')
 light_gray=$(echo -e '\e[37m')
 orange=$(echo -e '\e[38;5;202m')
 light_orange=$(echo -e '\e[38;5;214m')
-bold=$(echo -e '\033[1m')
-reset=$(echo -e '\033(B\033[m')
+bold=$(echo -e '\e[1m')
+reset=$(echo -e '\e(B\e[m')
 
 ## indicator
 info="${green}[info]${reset}"
