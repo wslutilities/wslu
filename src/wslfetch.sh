@@ -5,12 +5,13 @@ is_color=0
 is_generic=0
 help_short="wslfetch [-hvlsc]"
 
-for args; do
-	case $args in
+while [ "$1" != "" ]; do
+	case "$1" in
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslfetch v$version"; exit;;
-		-c|--colorbar) is_color=1;;
-		-g|--generic) is_generic=1;;
+		-c|--colorbar) is_color=1; shift;;
+		-g|--generic) is_generic=1; shift;;
+		-o|--options) shift; WSLFETCH_INFO_SECTION="$1"; shift;;
 	esac
 done
 
