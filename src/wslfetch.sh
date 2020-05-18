@@ -286,11 +286,11 @@ wslf_ver="${info_collect[0]}"
 
 info_text=("${t}Windows Subsystem for Linux (WSL${wslf_ver})${reset}"
 "${t}${USER}${reset}@${t}$(</etc/hostname)${reset}")
-info_text+=("${info_collect[@]:1}") 
-info_text+=("${reset}")
+info_text+=("${info_collect[@]:1}")
 
-if [[ "$is_color" == "1" ]]; then
-	info_text+=("   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}"
+if [[ "$is_color" == "1" ]] || [[ "$WSLFETCH_COLORBAR" == "true" ]]; then
+	info_text+=("${reset}"
+	"   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}"
 	"   \e[48;5;8m   \e[48;5;9m   \e[48;5;10m   \e[48;5;11m   \e[48;5;12m   \e[48;5;13m   \e[48;5;14m   \e[48;5;15m   ${reset}")
 fi
 
