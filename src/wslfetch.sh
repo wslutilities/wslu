@@ -1,23 +1,24 @@
 # shellcheck shell=bash
 version=44
 
-is_line=0
-is_splash=0
 is_color=0
+is_generic=0
 help_short="wslfetch [-hvlsc]"
 
 for args; do
 	case $args in
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslfetch v$version"; exit;;
-		-c|--colorbar) is_color=1;
+		-c|--colorbar) is_color=1;;
+		-g|--generic) is_generic=1;;
 	esac
 done
 
+[[ "$is_generic" == "1" ]] && distro=""
 case "$distro" in
 	'ubuntu')
 		t="${red}${bold}"
-		full_text=(
+		ascii_text=(
 			"${bold}${red}               .-/+oossssoo+/-.               ${reset}"
 			"${bold}${red}           \`:+ssssssssssssssssss+:\`           ${reset}"
 			"${bold}${red}         -+ssssssssssssssssssyyssss+-         ${reset}"
@@ -40,7 +41,7 @@ case "$distro" in
 			"${bold}${red}               .-/+oossssoo+/-.               ${reset}");;
 	'debian')
 		t="${light_red}${bold}"
-		full_text=(
+		ascii_text=(
 			"${white}         _,met\$\$\$\$\$gg.               ${reset}"
 			"${white}      ,g\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$P.            ${reset}"
 			"${white}    ,g\$\$P\"\"       \"\"\"Y\$\$.\".          ${reset}"
@@ -60,7 +61,7 @@ case "$distro" in
 			"${white}                \`\"\"\"\"                ${reset}");;
 	'kali')
 		t="${light_blue}${bold}"
-		full_text=(
+		ascii_text=(
 			"${light_blue}..............                                     "
 			"${light_blue}            ..,;:ccc,.                             ${reset}"
 			"${light_blue}          ......''';lxO.                           ${reset}"
@@ -84,7 +85,7 @@ case "$distro" in
 			"${light_blue}                                             .     ${reset}");;
 	'opensuse')
 		t="${light_green}${bold}"
-		full_text=(
+		ascii_text=(
 			"${light_gray}             .;ldkO0000Okdl;.                   ${reset}"
 			"${light_gray}         .;d00xl:^''''''^:ok00d;.               ${reset}"
 			"${light_gray}       .d00l'                'o00d.             ${reset}"
@@ -105,7 +106,7 @@ case "$distro" in
 			"${light_gray}              '^:ldxkkkkxdl:^'                  ${reset}");;
  	'pengwin')
 		t="${purple}${bold}"
-		full_text=(
+		ascii_text=(
 			"${light_purple}                       ...\`               ${reset}"
 			"${light_purple}                       \`-///:-\`           ${reset}"
 			"${light_purple}                         .+${purple}ssys${light_purple}/          ${reset}"
@@ -123,7 +124,7 @@ case "$distro" in
 			"${light_purple}             \`.::/:.                      ${reset}");;
 	'wlinux')
 		t="${light_orange}${bold}"
-		full_text=(
+		ascii_text=(
 			"${light_orange}                 _.._                 ${reset}"
 			"${light_orange}              .-'    \`-.              ${reset}"
 			"${light_orange}             :          ;             ${reset}"
@@ -147,7 +148,7 @@ case "$distro" in
 			"${light_orange}        '-.__.'        '.__.-'        ${reset}");;
 	'sles')
 		t="${green}${bold}"
-		full_text=(
+		ascii_text=(
 			"${green}             .;ldkO0000Okdl;.               ${reset}"
 			"${green}         .;d00xl:^''''''^:ok00d;.           ${reset}"
 			"${green}       .d00l'                'o00d.         ${reset}"
@@ -168,7 +169,7 @@ case "$distro" in
 			"${green}              '^:ldxkkkkxdl:^'              ${reset}");;
 	'alpine')
 		t="${blue}${bold}"
-		full_text=(
+		ascii_text=(
 			"${light_blue}        ................          ${reset}"
 			"${light_blue}       ∴::::::::::::::::∴         ${reset}"
 			"${light_blue}      ∴::::::::::::::::::∴        ${reset}"
@@ -187,7 +188,7 @@ case "$distro" in
 			"${light_blue}       ∵::::::::::::::::∵         ${reset}");;
 	'archlinux')
 		t="${light_cyan}${bold}"
-		full_text=(
+		ascii_text=(
 			"${light_cyan}                   -\`                 ${reset}"
 			"${light_cyan}                  .o+\`                ${reset}"
 			"${light_cyan}                 \`ooo/                ${reset}"
@@ -209,7 +210,7 @@ case "$distro" in
 			"${cyan} .\`                                 \`/${reset}");;
 	'scilinux')
 		t="${light_blue}${bold}"
-		full_text=(
+		ascii_text=(
 			"${light_blue}                  =/;;/-                    ${reset}"
 			"${light_blue}                 +:    //                   ${reset}"
 			"${light_blue}                /;      /;                  ${reset}"
@@ -232,7 +233,7 @@ case "$distro" in
 			"${light_blue}                  '////'                    ${reset}");;
 	'oracle')
 		t="${red}${bold}"
-		full_text=(
+		ascii_text=(
 			"${red}      \`-/+++++++++++++++++/-.\`       ${reset}"
 			"${red}    \`/syyyyyyyyyyyyyyyyyyyyyyys/.    ${reset}"
 			"${red}   :yyyyo/-...............-/oyyyy/   ${reset}"
@@ -246,7 +247,7 @@ case "$distro" in
 			"${red}      \`.:/+ooooooooooooooo+/:.\`      ${reset}");;
 	'oldfedora'|'fedora')
 		t="${light_blue}${bold}"
-		full_text=(
+		ascii_text=(
 			"${light_blue}           /:-------------:\         ${reset}"
 			"${light_blue}        :-------------------::       ${reset}"
 			"${light_blue}      :-----------${white}/shhOHbmp${light_blue}---:\\     ${reset}"
@@ -266,7 +267,7 @@ case "$distro" in
 			"${light_blue} :---------------------://           ${reset}");;
 	*)
 		t="${cyan}${bold}"
-		full_text=(
+		ascii_text=(
 			"${cyan} /\$\$      /\$\$  /\$\$\$\$\$\$  /\$\$       "
 			"${cyan}| \$\$  /\$ | \$\$ /\$\$__  \$\$| \$\$	  "
 			"${cyan}| \$\$ /\$\$\$| \$\$| \$\$${reset}  ${cyan}\\__/| \$\$${reset}       "
@@ -295,14 +296,22 @@ if [[ "$is_color" == "1" ]] || [[ "$WSLFETCH_COLORBAR" == "true" ]]; then
 fi
 
 info_length=${#info_text[@]}
-full_length=${#full_text[@]}
+ascii_length=${#ascii_text[@]}
+if [[ $ascii_length -lt $info_length ]]; then
+	ascii_placeholder="$(yes -- " " | tr -d $'\n' | head -c $(( $(echo "${ascii_text[0]}" | sed -e 's/\x1b\[[0-9;]*m//g' -e 's/\x1b[(]B$//g' | wc -m) - 1 )))"
+	for (( i=0; i<$((info_length - ascii_length)); i++ ));
+	do
+		ascii_text+=("$ascii_placeholder${reset}")
+	done
+	ascii_length=${#ascii_text[@]}
+fi
 
 # use for loop to read all values and indexes
-for (( i=0; i<full_length; i++ ));
+for (( i=0; i<ascii_length; i++ ));
 do
 	tmp=""
 	if [[ $i -le ${info_length} ]]; then
 		tmp="${info_text[$i]}"
 	fi
-	echo -e "${full_text[$i]}${tmp}"
+	echo -e "${ascii_text[$i]}${tmp}"
 done
