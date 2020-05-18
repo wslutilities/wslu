@@ -2,7 +2,7 @@
 
 # wslact
 
-# wslfetch: the sections of info from wslsys to show in wslfetch
+# wslfetch: the sections of info from wslsys to show in wslfetch.
 # Available options: 
 #    windows-install-date
 #    windows-rel-branch
@@ -16,8 +16,11 @@
 #    wsl-release
 #    wsl-kernel
 #    wsl-package-count
-# 'wsl-version' will be always ignored since it is builtin in wslfetch
+# 'wsl-version' will be always ignored since it is builtin in wslfetch.
 WSLFETCH_INFO_SECTION="windows-build,windows-rel-branch,wsl-release,wsl-kernel,windows-uptime"
+
+# wslfetch: whether you want to display colorbar in wslfetch. This will override `-c/--colorbar` param.
+WSLFETCH_COLORBAR=false
 
 # wslsys
 
