@@ -118,7 +118,7 @@ function get_wsl_packages() {
 function printer() {
 	if [[ -n "$WSLSYS_WSLFETCH_COLOR" ]]; then
 		echo "$WSLSYS_WSLFETCH_COLOR$1${reset}: $2"
-	elif [[ -n "$WSLSYS_WSLFETCH_SHORTFORM" ]]; then
+	elif [[ -z "$WSLSYS_WSLFETCH_SHORTFORM" ]]; then
 		echo "$1: $2"
 	else
 		echo "$2"
