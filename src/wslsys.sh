@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-version="34"
+version="40"
 
 help_short="wslsys [-VIbBFUWRKPSlt] [-s]\nwslsys [-hv] [-n NAME]"
 
@@ -115,7 +115,7 @@ function get_wsl_packages() {
 }
 
 ## Simple printer defined for fetching information
-function printer {
+function printer() {
 	if [[ -n "$WSLSYS_WSLFETCH_COLOR" ]]; then
 		echo "$WSLSYS_WSLFETCH_COLOR$1${reset}: $2"
 	elif [[ -n "$WSLSYS_WSLFETCH_SHORTFORM" ]]; then
@@ -126,7 +126,7 @@ function printer {
 }
 
 # function to find the value using the param/number/option passed
-function dict_finder {
+function dict_finder() {
 	# this function should only have two input: the content ($1) and the shortform param ($2).
 	# the dict looks like this:
 	## num|short_param|long_param|option)
@@ -181,7 +181,7 @@ function dict_finder {
 }
 
 # main handler for wslsys
-function wslsys_main {
+function wslsys_main() {
 	# If input is empty, print everything available
 	if [[ "$@" == "" ]]; then
 		for i in {1..13}; do
