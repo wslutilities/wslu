@@ -91,6 +91,9 @@ if [ -f "${wslu_prefix}/share/wslu/conf" ]; then
 fi
 
 # source user-defined config
+if [ -f "${wslu_prefix}/share/wslu/custom.conf" ]; then
+	source "${wslu_prefix}/share/wslu/custom.conf"
+fi
 if [ -f "$HOME/.config/wslu/conf" ]; then
 	source "$HOME/.config/wslu/conf"
 fi
