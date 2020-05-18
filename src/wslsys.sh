@@ -194,7 +194,7 @@ function wslsys_main() {
 		dict_finder "wsl-version" "-s"
 		IFS=',' read -r -a fetch_array <<< "$2"
 		for i in "${fetch_array[@]}"; do
-			WSLSYS_WSLFETCH_COLOR="$3" dict_finder $i
+			[[ "$i" == "wsl-version" ]] || WSLSYS_WSLFETCH_COLOR="$3" dict_finder $i
 		done
 		exit
 	fi
