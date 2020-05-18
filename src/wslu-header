@@ -28,8 +28,6 @@ LANG=C
 # prevent bash -x
 set +x
 
-# checking interopability
-grep enabled /proc/sys/fs/binfmt_misc/WSLInterop >/dev/null || (echo "WSL Interopability is disabled. Please enable it before using WSL."; exit 1)
 # when --verbose, verbose; when --debug, debug.
 #
 # They should not exist at the same time, otherwise
