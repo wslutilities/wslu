@@ -256,25 +256,25 @@ case "$distro" in
 			"${red}    \`/syyyyyyyyyyyyyyyyyyyyyyys+.    ${reset}"
 			"${red}      \`.:/+ooooooooooooooo+/:.\`      ${reset}");;
 	'oldfedora'|'fedora')
-		t="${light_blue}${bold}"
+		purple=$(echo -e '\e[38;5;140m')
+		t="${white}${purple}"
 		full_text=(
-			"${light_blue}           /:-------------:\         ${reset}"
-			"${light_blue}        :-------------------::       ${reset}"
-			"${light_blue}      :-----------${white}/shhOHbmp${light_blue}---:\\     ${reset}"
-			"${light_blue}    /-----------${white}omMMMNNNMMD  ${light_blue}---:    ${reset}"
-			"${light_blue}   :-----------${white}sMMMMNMNMP${light_blue}.    ---:   ${reset}"
-			"${light_blue}  :-----------${white}:MMMdP${light_blue}-------    ---\  ${reset}"
-			"${light_blue} ,------------${white}:MMMd${light_blue}--------    ---:  ${reset}"
-			"${light_blue} :------------${white}:MMMd${light_blue}-------    .---:  ${reset}"
-			"${light_blue} :----    ${white}oNMMMMMMMMMNho${light_blue}     .----:  ${reset}"
-			"${light_blue} :--     .${white}+shhhMMMmhhy++${light_blue}   .------/  ${reset}"
-			"${light_blue} :-    -------${white}:MMMd${light_blue}--------------:   ${reset}"
-			"${light_blue} :-   --------${white}/MMMd${light_blue}-------------;    ${reset}"
-			"${light_blue} :-    ------${white}/hMMMy${light_blue}------------:     ${reset}"
-			"${light_blue} :--${white} :dMNdhhdNMMNo${light_blue}------------;      ${reset}"
-			"${light_blue} :---${white}:sdNMMMMNds:${light_blue}------------:       ${reset}"
-			"${light_blue} :------${white}:://:${light_blue}-------------::         ${reset}"
-			"${light_blue} :---------------------://           ${reset}");;
+			"${white}                                                             ${reset}"
+			"${white}                                                             ${reset}"
+			"${white}                                                             ${reset}"
+			"${white}           wgg              ,g                               ${reset}"
+			"${white}          \$\$                ]$                               ${reset}"
+			"${white}        'A\$\$A  g@PR&,  x\$NR&@$  g\$PR&w  \$N\$P* g&P&&y         ${reset}"
+			"${white}          \$\$  \$\$gggg$  $~   1$ \$\$    &K \$F   \$E   \"\$.        ${reset}"
+			"${white}          \$\$  ]\$w ,gg  &N,,w\$\$ \"\$w,,g$\" \$F   J\$w,,\$\$U        ${reset}"
+			"${white}          \"     *T7'    \`7T' 7   \"TT'   7      ?T7 7 ™       ${reset}"
+			"${purple}         ,@@@@&8@@@@@M&@@@@@8R@@R@@@@@@@@@@@@@@@@@W          ${reset}"
+			"${purple}        .@@@@\`,@@@@F M ]@@@@ @ a@ @@@@ #@@@@,\`,@@@@@         ${reset}"
+			"${purple}         @@@@~]@@@@W *\"]@@@@j@ \$@ @@@@ #@@@F @ \$@@@@         ${reset}"
+			"${purple}          *R@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@RMF          ${reset}"
+			"${white}                                                             ${reset}"
+			"${white}                                                             ${reset}"
+			"${white}                                                             ${reset}");;
 	*)
 		t="${cyan}${bold}"
 		full_text=(
