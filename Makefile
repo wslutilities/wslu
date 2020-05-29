@@ -64,5 +64,8 @@ clean:
 	rm -rf $(OUTPATH)
 	rm -rf $(OUTMANPATH)
 
-test:
-	extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslvar.bats tests/wslfetch.bats tests/wslview.bats tests/wslact.bats
+test: 
+	extras/bats/bin/bats -r tests
+
+coverage: 
+	kcov --include-path="./src,./out" ./tests/coverage ./extras/bats/bin/bats -r tests
