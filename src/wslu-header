@@ -228,6 +228,7 @@ case $distro in
 	Arch*) distro="archlinux";;
 	*Oracle*) distro="oracle";;
 	Scientific*) distro="scilinux";;
+	*Fedora\ Remix\ for\ WSL*) distro="fedoraremix";;
 	*Fedora*) distro="fedora";;
 	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && distro="oldfedora" || distro="unknown";;
 	*) distro="unknown";;
