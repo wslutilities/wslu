@@ -276,7 +276,7 @@ case "$distro" in
 			"${light_blue} :------${white}:://:${light_blue}-------------::         ${reset}"
 			"${light_blue} :---------------------://           ${reset}");;
 	'fedoraremix')
-		t="${white}${purple}"
+		t="${white}${deep_purple}"
 		full_text=(
 			"${white}                                                             ${reset}"
 			"${white}                                                             ${reset}"
