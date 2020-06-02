@@ -67,6 +67,7 @@ light_cyan=$(echo -e '\e[1;36m')
 light_gray=$(echo -e '\e[37m')
 orange=$(echo -e '\e[38;5;202m')
 light_orange=$(echo -e '\e[38;5;214m')
+deep_purple=$(echo -e '\e[38;5;140m')
 bold=$(echo -e '\033[1m')
 reset=$(echo -e '\033(B\033[m')
 
@@ -228,6 +229,7 @@ case $distro in
 	Arch*) distro="archlinux";;
 	*Oracle*) distro="oracle";;
 	Scientific*) distro="scilinux";;
+	*Fedora\ Remix\ for\ WSL*) distro="fedoraremix";;
 	*Fedora*) distro="fedora";;
 	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && distro="oldfedora" || distro="unknown";;
 	*) distro="unknown";;
