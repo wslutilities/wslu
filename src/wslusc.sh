@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-version="40"
+version="37"
 
 cname=""
 iconpath=""
@@ -19,16 +19,14 @@ while [ "$1" != "" ]; do
 		-g|--gui)is_gui=1;shift;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslusc v$version"; exit;;
-		*) cname_header="$1"; shift; cname="$*"; break;;
+		*) cname="$*";break;;
 	esac
 done
 
 # interactive mode
 if [[ $is_interactive -eq 1 ]]; then
 	echo "${info} Welcome to wslu shortcut creator interactive mode."
-	read -r -e -i "$cname_header" -p "${input_info} Command (Without Parameter): " input
-	cname_header="${input:-$cname_header}"
-	read -r -e -i "$cname" -p "${input_info} Command param: " input
+	read -r -e -i "$cname" -p "${input_info} Command to execute: " input
 	cname="${input:-$cname}"
 	read -r -e -i "$customname" -p "${input_info} Shortcut name [optional, ENTER for default]: " input
 	customname="${input:-$customname}"
@@ -40,10 +38,9 @@ if [[ $is_interactive -eq 1 ]]; then
 	iconpath="${input:-$iconpath}"
 fi
 
-if [[ "$cname_header" != "" ]]; then
+if [[ "$cname" != "" ]]; then
 	up_path="$(wslvar -s USERPROFILE)"
 	tpath=$(double_dash_p "$(wslvar -s TMP)") # Windows Temp, Win Double Sty.
-	tpath="${tpath:-$(double_dash_p "$(wslvar -s TEMP)")}" # sometimes TMP is not set for some reason
 	dpath=$(wslpath "$(wslvar -l Desktop)") # Windows Desktop, WSL Sty.
 	script_location="$(wslpath "$up_path")/wslu" # Windows wslu, Linux WSL Sty.
 	script_location_win="$(double_dash_p "$up_path")\\wslu" #  Windows wslu, Win Double Sty.
@@ -52,21 +49,15 @@ if [[ "$cname_header" != "" ]]; then
 	# change param according to the exec.
 	distro_param="run"
 	if [[ "$distro_location_win" == *wsl.exe* ]]; then
-		distro_param="-e"
+		distro_param=""
 	fi
 
-	# always absolute path
-	cname_header=$(readlink -f "$cname_header")
-
 	# handling no name given case
-	new_cname=$(basename "$cname_header")
+	new_cname=$(basename "$(echo "$cname" | awk '{print $1}')")
 	# handling name given case
 	if [[ "$customname" != "" ]]; then
 		new_cname=$customname
 	fi
-
-	# construct full command
-	cname="\"$(echo "$cname_header" | sed "s| |\\\\ |g") $cname\""
 
 	# Check default icon and runHidden.vbs
 	wslu_file_check "$script_location" "wsl.ico"
@@ -120,9 +111,9 @@ if [[ "$cname_header" != "" ]]; then
 	if [[ "$is_gui" == "1" ]]; then
 		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs \"$distro_location_win\" $distro_param \"$customenv /usr/share/wslu/wslusc-helper.sh $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
 	else
-		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='\"$distro_location_win\"';\$s.Arguments='$distro_param $customenv bash -l -c $cname';\$s.IconLocation='$iconpath';\$s.Save();"
+		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='\"$distro_location_win\"';\$s.Arguments='$distro_param \"$customenv bash -l -c $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
 	fi
-	tpath="$(wslpath "$tpath")/$new_cname.lnk"
+	tpath="$(wslpath "$(wslvar -s TMP)")/$new_cname.lnk"
 	mv "$tpath" "$dpath"
 	echo "${info} Create shortcut ${new_cname}.lnk successful"
 else
