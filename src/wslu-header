@@ -82,6 +82,7 @@ readonly BN_APR_EIGHTEEN=17134		#1803, Redstone 4, April 2018 Update
 readonly BN_OCT_EIGHTEEN=17763		#1809, Redstone 5, October 2018 Update
 readonly BN_MAY_NINETEEN=18362		#1903, 19H1, May 2019 Update
 readonly BN_NOV_NINETEEN=18363		#1909, 19H2, November 2019 Update
+readonly BN_MAY_TWENTYTY=19041		#2004, 20H1, May 2020 Update
 
 # source default config
 if [ -f "${wslu_prefix}/share/wslu/conf" ]; then
