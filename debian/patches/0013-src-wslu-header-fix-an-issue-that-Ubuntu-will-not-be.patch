@@ -1,0 +1,22 @@
+From: "Jinming Wu, Patrick" <me@patrickwu.space>
+Date: Tue, 26 May 2020 22:05:11 +0800
+Subject: [PATCH] src/wslu-header: fix an issue that Ubuntu will not be
+ detected properly
+
+---
+ src/wslu-header  | 2 +-
+ 1 files changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/wslu-header b/src/wslu-header
+index 4e86a83..5214f38 100644
+--- a/src/wslu-header
++++ b/src/wslu-header
+@@ -110,7 +110,7 @@ function baseexec_gen {
+ 	wslutmpbuild="$(( $wslutmpbuild + 0 ))"
+ 	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
+ 		# The environment variable only available in 19H1 or later.
+-		wslu_distro_regpath=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | grep -B1 -e "$WSL_DISTRO_NAME" | head -n1 | sed -e 's|\r||g')
++		wslu_distro_regpath=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | sed -e 's|\r||g' | grep -B1 -e "$WSL_DISTRO_NAME$" | head -n1 )
+ 		if $(interop_prefix)c/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName &>/dev/null; then
+ 			# if it is a store distro
+ 			wslu_distro_packagename=$($(interop_prefix)c/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName | tail -n 2 | head -n 1 | sed -e 's|\r||g')
