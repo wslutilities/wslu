@@ -16,7 +16,7 @@ index 8b177da..4e86a83 100644
  
  function baseexec_gen {
 -	wslutmpbuild=$(reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-+	wslutmpbuild=$($(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
++	wslutmpbuild=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
  	wslutmpbuild=${wslutmpbuild##* }
  	wslutmpbuild="$(( $wslutmpbuild + 0 ))"
  	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
