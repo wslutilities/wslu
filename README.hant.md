@@ -18,7 +18,7 @@
 
 這是一套適用於 Windows 10 Linux 子系統的工具組，可以在 Windows 10 Linux 子系統下完成諸如獲取 Windows 環境變數或者建立你最喜愛的 Linux 程式桌面捷徑等工作。
 
-需要 Windows 10 創造者更新; 部分功能需要更高版本的Windows 10；支援 WSL2。
+需要 Windows 10 創造者更新；部分功能需要更高版本的Windows 10；支援 WSL2。
 
 ## 功能
 
