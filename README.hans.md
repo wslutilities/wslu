@@ -18,7 +18,7 @@
 
 这是一套适用于 Windows 10 Linux 子系统的工具组，可以在 Windows 10 Linux 子系统下完成诸如获取 Windows 环境变量或者创建你最喜爱的 Linux 程序桌面快捷方式等工作。
 
-需要 Windows 10 创造者更新; 部分功能需要更高版本的Windows 10；支持 WSL2。
+需要 Windows 10 创造者更新；部分功能需要更高版本的Windows 10；支持 WSL2。
 
 ## 功能
 
