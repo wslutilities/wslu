@@ -275,6 +275,25 @@ case "$distro" in
 			"${light_blue} :---${white}:sdNMMMMNds:${light_blue}------------:       ${reset}"
 			"${light_blue} :------${white}:://:${light_blue}-------------::         ${reset}"
 			"${light_blue} :---------------------://           ${reset}");;
+	'fedoraremix')
+		t="${white}${deep_purple}"
+		full_text=(
+			"${white}                                                             ${reset}"
+			"${white}                                                             ${reset}"
+			"${white}                                                             ${reset}"
+			"${white}           wgg              ,g                               ${reset}"
+			"${white}          \$\$                ]$                               ${reset}"
+			"${white}        'A\$\$A  g@PR&,  x\$NR&@$  g\$PR&w  \$N\$P* g&P&&y         ${reset}"
+			"${white}          \$\$  \$\$gggg$  $~   1$ \$\$    &K \$F   \$E   \"\$.        ${reset}"
+			"${white}          \$\$  ]\$w ,gg  &N,,w\$\$ \"\$w,,g$\" \$F   J\$w,,\$\$U        ${reset}"
+			"${white}          \"     *T7'    \`7T' 7   \"TT'   7      ?T7 7 ™       ${reset}"
+			"${deep_purple}         ,@@@@&8@@@@@M&@@@@@8R@@R@@@@@@@@@@@@@@@@@W          ${reset}"
+			"${deep_purple}        .@@@@\`,@@@@F M ]@@@@ @ a@ @@@@ #@@@@,\`,@@@@@         ${reset}"
+			"${deep_purple}         @@@@~]@@@@W *\"]@@@@j@ \$@ @@@@ #@@@F @ \$@@@@         ${reset}"
+			"${deep_purple}          *R@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@RMF          ${reset}"
+			"${white}                                                             ${reset}"
+			"${white}                                                             ${reset}"
+			"${white}                                                             ${reset}");;
 	*)
 		t="${cyan}${bold}"
 		full_text=(
