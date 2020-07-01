@@ -1,4 +1,4 @@
-wslu (2.3.6-0ubuntu3) UNRELEASED; urgency=medium
+wslu (2.3.6-0ubuntu3) groovy; urgency=medium
 
   * debian/rules:
     - update the svg conversion commands for the current inkscape
