@@ -1,4 +1,4 @@
-wslu (2.3.6-0ubuntu2) UNRELEASED; urgency=medium
+wslu (2.3.6-0ubuntu2) groovy; urgency=medium
 
   * d/p/0011-src-wslu-header-reg.exe-path-not-properly-set.patch:
     - reg.exe path not properly set (LP: #1877016)
