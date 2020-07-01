@@ -1,3 +1,14 @@
+wslu (3.1.1-0kali1) kali-dev; urgency=medium
+
+  * project: add separate Fedora Remix support
+  * header: fix `ubuntu.exe` detection issue
+  * wslview: mistake in calling a variable (fixes #118 again)
+  * wslusc: always use the absolute path (fixes #129)
+  * wslusc: fixes a possible white space path issue
+  * wslusc: When TMP is empty, try TEMP
+
+ -- Jinming Wu, Patrick <me@patrickwu.space>  Wed, 01 Jul 2020 22:22:53 +0800
+
 wslu (3.1.0-0kali1) kali-dev; urgency=medium
 
   * header: use the proper color definition
