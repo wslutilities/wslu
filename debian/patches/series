@@ -3,3 +3,6 @@
 0008-Set-up-sound-when-starting-GUI-programs-via-Windows-.patch
 0009-Fix-empty-.config-wslu-baseexec.patch
 0010-Matching-original-Windows-username-space-fix.patch
+0011-src-wslu-header-reg.exe-path-not-properly-set.patch
+0012-src-wslfetch.sh-update-Ubuntu-logo.patch
+0013-src-wslu-header-fix-an-issue-that-Ubuntu-will-not-be.patch

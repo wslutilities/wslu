@@ -1,0 +1,22 @@
+From: "Jinming Wu, Patrick" <me@patrickwu.space>
+Date: Mon, 11 May 2020 19:52:18 +0800
+Subject: [PATCH] src/wslu-header: reg.exe path not properly set
+
+LP: #1877016
+---
+ src/wslu-header | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/wslu-header b/src/wslu-header
+index 8b177da..4e86a83 100644
+--- a/src/wslu-header
++++ b/src/wslu-header
+@@ -105,7 +105,7 @@ function winps_exec {
+ }
+ 
+ function baseexec_gen {
+-	wslutmpbuild=$(reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
++	wslutmpbuild=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+ 	wslutmpbuild=${wslutmpbuild##* }
+ 	wslutmpbuild="$(( $wslutmpbuild + 0 ))"
+ 	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
