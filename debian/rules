@@ -4,7 +4,7 @@
 	dh $@
 
 debian/wsl.ico: debian/cof_orange_hex.svg
-	for i in 16 32 48 64 128 256; do inkscape --export-area=40:40:385:385 -w $$i -h $$i -f debian/cof_orange_hex.svg -e debian/cof_orange_hex_$$i.png ; done
+	for i in 16 32 48 64 128 256; do inkscape --export-area=40:40:385:385 -w $$i -h $$i -o debian/cof_orange_hex_$$i.png debian/cof_orange_hex.svg; done
 	convert debian/cof_orange_hex_*.png debian/wsl.ico
 
 override_dh_auto_install: debian/wsl.ico

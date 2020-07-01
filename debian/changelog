@@ -1,3 +1,11 @@
+wslu (2.3.6-0ubuntu3) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - update the svg conversion commands for the current inkscape
+      version and fix the build      
+
+ -- Patrick Wu <patrick.wu@canonical.com>  Wed, 01 Jul 2020 16:07:10 +0200
+
 wslu (2.3.6-0ubuntu2) groovy; urgency=medium
 
   * d/p/0011-src-wslu-header-reg.exe-path-not-properly-set.patch:

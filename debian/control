@@ -1,7 +1,7 @@
 Source: wslu
 Section: admin
 Priority: optional
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Maintainer: Balint Reczey <rbalint@ubuntu.com>
 Build-Depends: bats,
                debhelper (>= 10),
                imagemagick,
