@@ -65,7 +65,7 @@ function get_wsl_version() {
 		if "$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Flags &>/dev/null; then
 			wslu_distro_version=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Flags | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 			wslu_distro_version=${wslu_distro_version##* }
-			wslu_distro_version_processed=$(expr $(printf "%d\n" "0xf") / 8)
+			wslu_distro_version_processed=$(expr $(printf "%d\n" "$wslu_distro_version") / 8)
 			if [ "$wslu_distro_version_processed" == "1" ]; then
 				echo "2"
 			elif [ "$wslu_distro_version_processed" == "0" ]; then
