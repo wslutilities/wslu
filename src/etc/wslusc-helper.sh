@@ -86,5 +86,6 @@ export GDK_SCALE=$win_sys_scaling
 export QT_SCALE_FACTOR=$win_sys_scaling
 export GDK_DPI_SCALE=1
 
+[ "$1" = "--no-cmd-mode" ] && exit 0
 cd ~ || exit
 bash -l -c "$*"
