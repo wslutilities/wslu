@@ -54,10 +54,10 @@ if [[ "$cname_header" != "" ]]; then
 	if [[ "$distro_location_win" == *wsl.exe* ]]; then
 		distro_param="-e"
 	fi
-
+ 
 	# always absolute path
 	tmp_cname_header="$(readlink -f "$cname_header")"
-	if [ ! -f "$cname_header" ]; then
+	if [ ! -f "$tmp_cname_header" ]; then
 		cname_header="$(which "$cname_header")"
 	else
 		cname_header="$tmp_cname_header"
