@@ -4,14 +4,24 @@ version=44
 is_color=0
 is_generic=0
 help_short="wslfetch [-hvlsc]"
+_tmp_cmdname="$0"
 
-while [ "$1" != "" ]; do
+PARSED_ARGUMENTS=$(getopt -a -n "$(basename $_tmp_cmdname)" -o hvcgo: --long help,version,colorbar,generic,options: -- "$@")
+[ "$?" != "0" ] && help "$_tmp_cmdname" "$help_short"
+
+eval set -- "$PARSED_ARGUMENTS"
+while :
+do
 	case "$1" in
-		-h|--help) help "$0" "$help_short"; exit;;
+		-h|--help) help "$_tmp_cmdname" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslfetch v$version"; exit;;
 		-c|--colorbar) is_color=1; shift;;
 		-g|--generic) is_generic=1; shift;;
-		-o|--options) shift; WSLFETCH_INFO_SECTION="$1"; shift;;
+		-o|--options) WSLFETCH_INFO_SECTION="$1"; shift 2;;
+		--) shift; break ;;
+		*) echo "Unexpected option: $1"
+			help "$_tmp_cmdname" "$help_short"
+			exit 1;;
 	esac
 done
 
