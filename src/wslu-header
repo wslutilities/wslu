@@ -90,6 +90,11 @@ function debug_echo {
 	[ $wslu_debug -eq 1 ] && echo "${orange}${bold}[debug]${reset} $@"
 }
 
+function error_echo {
+	echo "${error} $1"
+	exit $2
+}
+
 function help {
 	app_name=$(basename "$1")
 	echo -e "$app_name - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux
