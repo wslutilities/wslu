@@ -30,12 +30,11 @@ function caller {
 		case $var_type in
 			1) p="$(cl_destoryer "$(call_sys "$@")")";;
 			2) p="$(cl_destoryer "$(call_shell "$@")")";;
-			*) echo "${error}Invalid variable type. Aborted."; exit 22;;
+			*) error_echo "Invalid variable type. Aborted." 22;;
 		esac
 		echo "$p"
 	else
-		echo "${error} No Input. Aborted."
-		exit 21
+		error_echo "No Input. Aborted." 21
 	fi
 }
 
@@ -51,5 +50,5 @@ while [ "$1" != "" ]; do
 	esac
 done
 
-exit 21
+error_echo "No Input. Aborted." 21
 

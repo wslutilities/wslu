@@ -65,10 +65,7 @@ if [[ "$cname_header" != "" ]]; then
 	fi
 	unset tmp_cname_header
 
-	if [ -z "$cname_header" ]; then
-		echo "${error} Bad or invalid input; Aborting"
-		exit 30
-	fi
+	[ -z "$cname_header" ] && error_echo "Bad or invalid input; Aborting" 30
 
 	# handling no name given case
 	new_cname=$(basename "$cname_header")
@@ -110,8 +107,7 @@ if [[ "$cname_header" != "" ]]; then
 					rm "$script_location/$icon_filename"
 					icon_filename="${icon_filename%.$ext}.ico"
 				else
-					echo "${error} wslusc only support creating shortcut using .png/.svg/.ico icon. Aborted."
-					exit 22
+					error_echo "wslusc only support creating shortcut using .png/.svg/.ico icon. Aborted." 22
 				fi
 			fi
 			iconpath="$script_location_win\\$icon_filename"
@@ -138,6 +134,5 @@ if [[ "$cname_header" != "" ]]; then
 	mv "$tpath" "$dpath"
 	echo "${info} Create shortcut ${new_cname}.lnk successful"
 else
-	echo "${error} No input, aborting"
-	exit 21
+	error_echo "No input, aborting" 21
 fi
