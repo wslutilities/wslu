@@ -65,6 +65,11 @@ if [[ "$cname_header" != "" ]]; then
 	fi
 	unset tmp_cname_header
 
+	if [ -z "$cname_header" ]; then
+		echo "${error} Bad or invalid input; Aborting"
+		exit 30
+	fi
+
 	# handling no name given case
 	new_cname=$(basename "$cname_header")
 	# handling name given case
