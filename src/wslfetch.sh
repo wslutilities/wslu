@@ -276,6 +276,27 @@ case "$distro" in
 			"${light_blue} :---${white}:sdNMMMMNds:${light_blue}------------:       ${reset}"
 			"${light_blue} :------${white}:://:${light_blue}-------------::         ${reset}"
 			"${light_blue} :---------------------://           ${reset}");;
+ 	'gentoo')
+		t="${white}${light_purple}"
+		full_text=(
+			"${light_purple}		 -/oyddmdhs+:.			   ${reset}"
+			"${light_purple}	 -o${white}dNMMMMMMMMNNmhy+${light_purple}-\`			${reset}"
+			"${light_purple}   -y${white}NMMMMMMMMMMMNNNmmdhy${light_purple}+-		  ${reset}"
+			"${light_purple} \`o${white}mMMMMMMMMMMMMNmdmmmmddhhy${light_purple}/\`	   ${reset}"
+			"${light_purple} om${white}MMMMMMMMMMMN${light_purple}hhyyyo${white}hmdddhhhd${light_purple}o\`	 ${reset}"
+			"${light_purple}.y${white}dMMMMMMMMMMd${light_purple}hs++so/s${white}mdddhhhhdm${light_purple}+\`   ${reset}"
+			"${light_purple} oy${white}hdmNMMMMMMMN${light_purple}dyooy${white}dmddddhhhhyhN${light_purple}d.  ${reset}"
+			"${light_purple}  :o${white}yhhdNNMMMMMMMNNNmmdddhhhhhyym${light_purple}Mh  ${reset}"
+			"${light_purple}	.:${white}+sydNMMMMMNNNmmmdddhhhhhhmM${light_purple}my  ${reset}"
+			"${light_purple}	   /m${white}MMMMMMNNNmmmdddhhhhhmMNh${light_purple}s:  ${reset}"
+			"${light_purple}	\`o${white}NMMMMMMMNNNmmmddddhhdmMNhs${light_purple}+\`   ${reset}"
+			"${light_purple}  \`s${white}NMMMMMMMMNNNmmmdddddmNMmhs${light_purple}/.	 ${reset}"
+			"${light_purple} /N${white}MMMMMMMMNNNNmmmdddmNMNdso${light_purple}:\`	   ${reset}"
+			"${light_purple}+M${white}MMMMMMNNNNNmmmmdmNMNdso${light_purple}/-		  ${reset}"
+			"${light_purple}yM${white}MNNNNNNNmmmmmNNMmhs+/${light_purple}-\`			${reset}"
+			"${light_purple}/h${white}MMNNNNNNNNMNdhs++/${light_purple}-\`			   ${reset}"
+			"${light_purple}\`/${white}ohdmmddhys+++/:${light_purple}.\`				  ${reset}"
+			"${light_purple}  \`-//////:--.					   ${reset}");;
 	*)
 		t="${cyan}${bold}"
 		ascii_text=(
