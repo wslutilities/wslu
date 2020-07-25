@@ -83,7 +83,7 @@ function auto_mount {
 
 while [ "$1" != "" ]; do
 	case "$1" in
-		am|auto-mount) auto_mount "$@"; exit;;
+		am|auto-mount|sm|smart-mount) auto_mount "$@"; exit;;
 		ts|time-sync) time_sync "$@"; exit;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslact v$version"; exit;;
