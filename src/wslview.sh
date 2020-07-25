@@ -42,27 +42,22 @@ if [[ "$lname" != "" ]]; then
 	wslutmpbuild=${wslutmpbuild##* }
 	wslutmpbuild="$(( wslutmpbuild + 0 ))"
 	# file:/// protocol used in linux
-	if [[ "$lname" =~ ^file:\/\/\/[^:alpha:][^:][^/]* ]]; then
-		if [ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ]; then
-			properfile_full_path="$(readlink -f "${lname//file:\/\//}")"
-			converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\}"
-			winps_exec Start "\"$converted_file_path\""
-		else
-			echo "${error} This protocol is not supported before version 1903."
-			exit 34
-		fi
-	elif [[ $lname =~ ^(/[^/]+)*(/)?$ ]]; then
-		if [ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ]; then
-			properfile_full_path="$(readlink -f "${lname}")"
-			converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\}"
-			winps_exec Start "\"$converted_file_path\""
-		else
-			echo "${error} This protocol is not supported before version 1903."
-			exit 34
-		fi
-	else
-		winps_exec Start "\"$lname\""
+	if [[ ! "$lname" =~ ^file:\/\/\/[A-Za-z]\:.*$ ]]; then
+		[ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ] || (echo "${error} This protocol is not supported before version 1903."; exit 34; )
+		properfile_full_path="$(readlink -f "${lname//file:\/\//}")"
+		interop_win_type="$(interop_prefix)$(sysdrive_prefix)"
+		converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\}"
+		[[ "$properfile_full_path" =~ ^${interop_win_type//\/$/}.*$ ]] && converted_file_path="$(wslpath -w "$properfile_full_path")"
+		lname="$converted_file_path"
+	elif [[ "$lname" =~ ^(/[^/]+)*(/)?$ ]]; then
+		[ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ] || (echo "${error} This protocol is not supported before version 1903."; exit 34; )
+		properfile_full_path="$(readlink -f "${lname}")"
+		interop_win_type="$(interop_prefix)$(sysdrive_prefix)"
+		converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\}"
+		[[ "$properfile_full_path" =~ ^${interop_win_type//\/$/}.*$ ]] && converted_file_path="$(wslpath -w "$properfile_full_path")"
+		lname="$converted_file_path"
 	fi
+	winps_exec Start "\"$lname\""
 else
 	echo "${error} No input, aborting"
 	exit 21
