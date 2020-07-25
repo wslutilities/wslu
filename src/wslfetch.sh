@@ -278,7 +278,7 @@ case "$distro" in
 			"${light_blue} :---------------------://           ${reset}");;
  	'gentoo')
 		t="${white}${light_purple}"
-		full_text=(
+		ascii_text=(
 			"${light_purple}		 -/oyddmdhs+:.			   ${reset}"
 			"${light_purple}	 -o${white}dNMMMMMMMMNNmhy+${light_purple}-\`			${reset}"
 			"${light_purple}   -y${white}NMMMMMMMMMMMNNNmmdhy${light_purple}+-		  ${reset}"
