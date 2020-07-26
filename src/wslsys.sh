@@ -110,6 +110,8 @@ function get_wsl_packages() {
 			packages=$(apk info | wc -l);;
 		'archlinux')
 			packages=$(pacman -Qq | wc -l);;
+		'gentoo')
+			packages=$(qlist -IRv | wc -l);;
 	esac
 	echo "$packages"
 }

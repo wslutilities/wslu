@@ -245,6 +245,7 @@ case $distro in
 	*Oracle*) distro="oracle";;
 	Scientific*) distro="scilinux";;
 	*Fedora*) distro="fedora";;
+	*Gentoo*) distro="gentoo";;
 	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && distro="oldfedora" || distro="unknown";;
 	*) distro="unknown";;
 esac
