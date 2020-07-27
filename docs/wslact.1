@@ -13,7 +13,7 @@ Currently, we have two features available:
 .in +4n
 .nf
 \fBts, time-sync\fR \- Time Sync
-\fBsm, smart-mount\fR \- Smart Mounting
+\fBsm, auto-mount\fR \- Auto Mounting
 .fi
 .in
 .SH COMMANDS
@@ -31,11 +31,11 @@ OPTIONS
 print a simple help.
 .in
 .fi
-.SS "Smart Mounting"
-Smart Mounting (\fIsmart-mount\fR) feature allows you to mount all drives available on Windows to WSL. Requires sudo.
+.SS "Auto Mounting"
+Smart Mounting (\fIauto-mount\fR) feature allows you to mount all drives available on Windows to WSL. Requires sudo.
 .TP
 SYNOPSIS
-.B wslact smart-mount
+.B wslact auto-mount
 .RB [ \-h ]
 .TP
 OPTIONS
@@ -61,7 +61,8 @@ print current version.
 .SH AUTHOR
 Created by Patrick Wu <me@patrickwu.space>
 .SH REPORTING BUGS
-Report bugs to <https://github.com/wslutilities/wslu/issues>
+Report bugs to <https://github.com/wslutilities/wslu/issues>;
+For Ubuntu specific/related bugs, report to <https://bugs.launchpad.net/ubuntu/+source/wslu>.
 .SH COPYRIGHT
 This is free software; you can redistribute it and/or modify it under
 the terms of the GNU GPL version 3 or (at your option) any later
