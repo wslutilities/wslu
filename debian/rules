@@ -1,28 +1,18 @@
 #!/usr/bin/make -f
 
-INKSCAPE_VER = $(shell apt-cache show inkscape | grep -m1 Version: | sed -e 's|^Version: ||g' -e 's|\..*$$||g')
-
 %:
 	dh $@
-
-debian/wsl.ico: debian/cof_orange_hex.svg
-	if [ "$(INKSCAPE_VER)" = "0" ]; then \
-		for i in 16 32 48 64 128 256; do inkscape --export-area=40:40:385:385 -w $$i -h $$i -e debian/cof_orange_hex_$$i.png debian/cof_orange_hex.svg; done \
-	else \
-		for i in 16 32 48 64 128 256; do inkscape --export-area=40:40:385:385 -w $$i -h $$i -o debian/cof_orange_hex_$$i.png debian/cof_orange_hex.svg; done \
-	fi
-	convert debian/cof_orange_hex_*.png debian/wsl.ico
 
 override_dh_auto_install: debian/wsl.ico
 	dh_auto_install
 
 override_dh_auto_test:
 	if (test -f /proc/sys/fs/binfmt_misc/WSLInterop && grep -q enabled /proc/sys/fs/binfmt_misc/WSLInterop); then \
-		mkdir -p extras/bats/libexec && ln -s /usr/bin/bats extras/bats/libexec/ &&\
+		mkdir -p extras/bats/bin && ln -s /usr/bin/bats extras/bats/bin/ &&\
 		dh_auto_test ; \
 	else \
 		echo "Skipping tests, they pass in WSL only with WSLInterop enabled"; \
 	fi
 
 override_dh_clean:
-	dh_clean debian/cof_orange_hex_*/.png debian/wsl.ico extras/bats/libexec/
+	dh_clean extras/bats/bin/

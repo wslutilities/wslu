@@ -1,15 +1,15 @@
 Source: wslu
 Section: admin
 Priority: optional
-Maintainer: Balint Reczey <rbalint@ubuntu.com>
+Maintainer: Patrick Wu <patrick.wu@canonical.com>
 Build-Depends: bats,
-               debhelper (>= 9),
-               imagemagick,
-               inkscape
+               debhelper (>= 10),
+               gzip,
+               make
 Standards-Version: 4.3.0.3
 Vcs-Git: https://git.launchpad.net/~ubuntu-core-dev/ubuntu/+source/wslu -b ubuntu/master
 Vcs-Browser:  https://git.launchpad.net/~ubuntu-core-dev/ubuntu/+source/wslu
-Homepage: https://wslu.patrickwu.space/
+Homepage: https://wslutiliti.es/wslu
 
 Package: wslu
 Architecture: all
