@@ -4,9 +4,8 @@
 
 teardown() {
   echo "removal for temporary shortcuts"
-  rm -rf "`out/wslupath -D`/test1.lnk"
-  rm -rf "`out/wslupath -D`/test2.lnk"
-
+  rm -rf "$(wslupath -D)/htop.lnk"
+  rm -rf "$(wslupath -D)/gedit.lnk"
 }
 
 @test "wslusc - No parameter" {
@@ -17,21 +16,30 @@ teardown() {
 @test "wslusc - Help" {
   run out/wslusc --help
   [ "${lines[0]}" = "wslusc - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
-  [ "${lines[1]}" = "Usage: wslusc (--env [PATH]|--name [NAME]|--icon [ICO FILE]|--gui|--interactive|--help|--version) [COMMAND]" ]
+  [ "${lines[1]}" = "Usage: wslusc [-gi] [-e PATH] [-n NAME] [-i FILE] COMMAND" ]
+  [ "${lines[2]}" = "wslusc [-hv]" ]
 }
 
 @test "wslusc - Help - Alt." {
   run out/wslusc -h
   [ "${lines[0]}" = "wslusc - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
-  [ "${lines[1]}" = "Usage: wslusc (--env [PATH]|--name [NAME]|--icon [ICO FILE]|--gui|--interactive|--help|--version) [COMMAND]" ]
+  [ "${lines[1]}" = "Usage: wslusc [-gi] [-e PATH] [-n NAME] [-i FILE] COMMAND" ]
+  [ "${lines[2]}" = "wslusc [-hv]" ]
+}
+
+@test "wslusc - non-exist file" {
+  run out/wslusc wryyyyy
+  [ "$status" -eq 30 ]
 }
 
 @test "wslusc - without GUI" {
-  run out/wslusc test1
-  [ -f "`out/wslupath -D`/test1.lnk" ]
+  run out/wslusc htop
+  [ -f "$(wslupath -D)/htop.lnk" ]
 }
 
 @test "wslusc - with GUI" {
-  run out/wslusc -g test2
-  [ -f "`out/wslupath -D`/test2.lnk" ]
+  run out/wslusc -g gedit
+  [ -f "$(wslupath -D)/gedit.lnk" ]
 }
+
+# TODO: Add more tests to cover all possible cases

@@ -1,3 +1,18 @@
+# built files
 out
+out-docs
 target
+
+# folders requird for build
+SOURCES
+SPECS
+SRPMS
+RPMS
+
+## Complied packages
+compiled_rpms
+pkgs
+
+# system and vscode generated files
 .vscode
+**/*/.DS_Store

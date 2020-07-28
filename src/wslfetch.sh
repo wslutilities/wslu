@@ -1,8 +1,10 @@
+# shellcheck shell=bash
 version=44
 
 is_line=0
 is_splash=0
-help_short="wslfetch (--help|--version|--splash|--line)"
+is_color=0
+help_short="wslfetch [-hvlsc]"
 
 for args; do
 	case $args in
@@ -10,38 +12,43 @@ for args; do
 		-v|--version) echo "wslu v$wslu_version; wslfetch v$version"; exit;;
 		-s|--splash) is_splash=1;;
 		-l|--line) is_line=1;;
+		-c|--colorbar) is_color=1;
 	esac
 done
 
 hostname=$(</etc/hostname)
-branch=$(wslsys -b -s)
-build=$(wslsys -B -s)
-release=$(wslsys -R -s)
-kernel=$(wslsys -K -s)
-uptime=$(wslsys -U -s)
+wslsys=$(wslsys)
+wslvers=$(echo "$wslsys" | grep -Po '^WSL Version: \K.*')
+branch=$(echo "$wslsys" | grep -Po '^Branch: \K.*')
+build=$(echo "$wslsys" | grep -Po '^Build: \K.*')
+release=$(echo "$wslsys" | grep -Po '^WSL Release: \K.*')
+kernel=$(echo "$wslsys" | grep -Po '^WSL Kernel: \K.*')
+uptime=$(echo "$wslsys" | grep -Po '^Windows Uptime: \K.*')
 
 case "$distro" in
 	'ubuntu')
 		t="${red}${bold}"
 		full_text=(
-			"${red}                          ./+o+-      ${reset}"
-			"${reset}                  yyyyy. ${red}'yyyyyy+     ${reset}"
-			"${reset}              .;//+/////h ${red}yyyyyyo     ${reset}"
-			"${yellow}           .++ ${reset}.:/++++++/-${red}.\`sss/\`     ${reset}"
-			"${yellow}         .:++o: ${reset}\`\++++++++/:---:/-    ${reset}"
-			"${yellow}        o:+o+:++. ${reset}\`\`\`\`\`'-/ooo+++++\   ${reset}"
-			"${yellow}       .:+o:+o/.          ${reset}\`+sssooo+\  ${reset}"
-			"${reset}  .++/+ ${yellow}+oo+o:\`             ${reset}\sssooo;  ${reset}"
-			"${reset} /+++//+: ${yellow}oo+o                        ${reset}"
-			"${reset} \+/+o+++ ${yellow}o++o               ${red}ydddhh+  ${reset}"
-			"${reset}  .++.o+ ${yellow}+oo+:\`             ${red}/dddhhh;  ${reset}"
-			"${yellow}       .+.o+oo:.           ${red}oddhhhh+   ${reset}"
-			"${yellow}        \+.++o+o\` ${red}-,,,,.:ohdhhhhh+    ${reset}"
-			"${yellow}         \`:o+++  ${red}ohhhhhhhhyo++os:     ${reset}"
-			"${yellow}           .o: ${red}.syhhhhhhh'${yellow}.oo++o.     ${reset}"
-			"${red}               /osyyyyyyy${yellow}.oooo+++\    ${reset}"
-			"${red}                   \`\`\`\`\` ${yellow}+oo+++o:/    ${reset}"
-			"${yellow}                          \`oo++'\`     ${reset}");;
+			"${bold}${red}               .-/+oossssoo+/-.               ${reset}"
+			"${bold}${red}           \`:+ssssssssssssssssss+:\`           ${reset}"
+			"${bold}${red}         -+ssssssssssssssssssyyssss+-         ${reset}"
+			"${bold}${red}       .ossssssssssssssssss${white}dMMMNy${red}sssso.       ${reset}"
+			"${bold}${red}      /sssssssssss${white}hdmmNNmmyNMMMMh${red}ssssss/      ${reset}"
+			"${bold}${red}     +sssssssss${white}hm${red}yd${white}MMMMMMMNddddy${red}ssssssss+     ${reset}"
+			"${bold}${red}    /ssssssss${white}hNMMM${red}yh${white}hyyyyhmNMMMNh${red}ssssssss/    ${reset}"
+			"${bold}${red}   .ssssssss${white}dMMMNh${red}ssssssssss${white}hNMMMd${red}ssssssss.   ${reset}"
+			"${bold}${red}   +ssss${white}hhhyNMMNy${red}ssssssssssss${white}yNMMMy${red}sssssss+   ${reset}"
+			"${bold}${red}   oss${white}yNMMMNyMMh${red}ssssssssssssss${white}hmmmh${red}ssssssso   ${reset}"
+			"${bold}${red}   oss${white}yNMMMNyMMh${red}sssssssssssssshmmmh${red}ssssssso   ${reset}"
+			"${bold}${red}   +ssss${white}hhhyNMMNy${red}ssssssssssss${white}yNMMMy${red}sssssss+   ${reset}"
+			"${bold}${red}   .ssssssss${white}dMMMNh${red}ssssssssss${white}hNMMMd${red}ssssssss.   ${reset}"
+			"${bold}${red}    /ssssssss${white}hNMMM${red}yh${white}hyyyyhdNMMMNh${red}ssssssss/    ${reset}"
+			"${bold}${red}     +sssssssss${white}dm${red}yd${white}MMMMMMMMddddy${red}ssssssss+     ${reset}"
+			"${bold}${red}      /sssssssssss${white}hdmNNNNmyNMMMMh${red}ssssss/      ${reset}"
+			"${bold}${red}       .ossssssssssssssssss${white}dMMMNy${red}sssso.       ${reset}"
+			"${bold}${red}         -+sssssssssssssssss${white}yyy${red}ssss+-         ${reset}"
+			"${bold}${red}           \`:+ssssssssssssssssss+:\`           ${reset}"
+			"${bold}${red}               .-/+oossssoo+/-.               ${reset}");;
 	'debian')
 		t="${light_red}${bold}"
 		full_text=(
@@ -268,6 +275,25 @@ case "$distro" in
 			"${light_blue} :---${white}:sdNMMMMNds:${light_blue}------------:       ${reset}"
 			"${light_blue} :------${white}:://:${light_blue}-------------::         ${reset}"
 			"${light_blue} :---------------------://           ${reset}");;
+	'fedoraremix')
+		t="${white}${deep_purple}"
+		full_text=(
+			"${white}                                                             ${reset}"
+			"${white}                                                             ${reset}"
+			"${white}                                                             ${reset}"
+			"${white}           wgg              ,g                               ${reset}"
+			"${white}          \$\$                ]$                               ${reset}"
+			"${white}        'A\$\$A  g@PR&,  x\$NR&@$  g\$PR&w  \$N\$P* g&P&&y         ${reset}"
+			"${white}          \$\$  \$\$gggg$  $~   1$ \$\$    &K \$F   \$E   \"\$.        ${reset}"
+			"${white}          \$\$  ]\$w ,gg  &N,,w\$\$ \"\$w,,g$\" \$F   J\$w,,\$\$U        ${reset}"
+			"${white}          \"     *T7'    \`7T' 7   \"TT'   7      ?T7 7 ™       ${reset}"
+			"${deep_purple}         ,@@@@&8@@@@@M&@@@@@8R@@R@@@@@@@@@@@@@@@@@W          ${reset}"
+			"${deep_purple}        .@@@@\`,@@@@F M ]@@@@ @ a@ @@@@ #@@@@,\`,@@@@@         ${reset}"
+			"${deep_purple}         @@@@~]@@@@W *\"]@@@@j@ \$@ @@@@ #@@@F @ \$@@@@         ${reset}"
+			"${deep_purple}          *R@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@RMF          ${reset}"
+			"${white}                                                             ${reset}"
+			"${white}                                                             ${reset}"
+			"${white}                                                             ${reset}");;
 	*)
 		t="${cyan}${bold}"
 		full_text=(
@@ -282,15 +308,20 @@ case "$distro" in
 esac
 
 
-info_text=("${t}Windows 10 Linux Subsystem${reset}"
+info_text=("${t}Windows Subsystem for Linux (WSL${wslvers})${reset}"
 "${t}${USER}${reset}@${t}${hostname}${reset}"
-"${t}BUILD:${reset}	${build}"
-"${t}BRANCH:${reset}	${branch}"
-"${t}RELEASE:${reset}	${release}"
-"${t}KERNEL:${reset}	${kernel}"
-"${t}UPTIME:${reset}	${uptime}"
-""
-"   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}")
+"${t}Build:${reset} ${build}"
+"${t}Branch:${reset} ${branch}"
+"${t}Release:${reset} ${release}"
+"${t}Kernel:${reset} ${kernel}"
+"${t}Uptime:${reset} ${uptime}"
+"${reset}"
+)
+
+if [[ "$is_color" == "1" ]]; then
+info_text+=("   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}"
+"   \e[48;5;8m   \e[48;5;9m   \e[48;5;10m   \e[48;5;11m   \e[48;5;12m   \e[48;5;13m   \e[48;5;14m   \e[48;5;15m   ${reset}")
+fi
 
 function line {
 	if [[ "$1" == "1" ]]; then

@@ -1,22 +1,12 @@
-' Mehthod by @mklement0 on Stack Overflow
-' https://stackoverflow.com/questions/41225711/wsl-run-linux-from-windows-without-spawning-a-cmd-window
-' Usage: wscript .\runHidden.vbs bash -c <COMMAND>
-' Simple command-line help.
-select case WScript.Arguments(0)
-case "-?", "/?", "-h", "--help"
-  WScript.echo "Usage: runHidden executable [...]" & vbNewLine & vbNewLine & "Runs the specified command hidden (without a visible window)."
-  WScript.Quit(0)
-end select
+' Method provided by Tobias J by https://superuser.com/questions/140047/how-to-run-a-batch-file-without-launching-a-command-window
+If WScript.Arguments.Count >= 1 Then
+    ReDim arr(WScript.Arguments.Count-1)
+    For i = 0 To WScript.Arguments.Count-1
+        Arg = WScript.Arguments(i)
+        If InStr(Arg, " ") > 0 Then Arg = """" & Arg & """"
+      arr(i) = Arg
+    Next
 
-' Separate the arguments into the executable name
-' and a single string containing all arguments.
-exe = WScript.Arguments(0)
-sep = ""
-for i = 1 to WScript.Arguments.Count -1
-  ' Enclose arguments in "..." to preserve their original partitioning.
-  args = args & sep & """" & WScript.Arguments(i) & """"
-  sep = " "
-next
-
-' Execute the command with its window *hidden* (0)
-WScript.CreateObject("Shell.Application").ShellExecute exe, args, "", "open", 0
+    RunCmd = Join(arr)
+    CreateObject("Wscript.Shell").Run RunCmd, 0, True
+End If

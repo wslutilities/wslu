@@ -18,17 +18,34 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Version
-wslu_version=2.3.6
+wslu_version=VERSIONPLACEHOLDER
 
 # Speed up script by not using unicode.
 LC_ALL=C
 LANG=C
 
-# force bash to not showing code manually.
+# prevent bash -x
 set +x
 
 # checking interopability
 grep enabled /proc/sys/fs/binfmt_misc/WSLInterop >/dev/null || (echo "WSL Interopability is disabled. Please enable it before using WSL."; exit 1)
+# when --verbose, verbose; when --debug, debug.
+#
+# They should not exist at the same time, otherwise
+# the output would be too messy.
+wslu_debug=0
+if [ "$1" == "--verbose" ]; then
+	echo -e '\e[38;5;202m\033[1m[verbose] Showing verbose output. \033(B\033[m'
+	shift
+	set -x
+elif [ "$1" == "--debug" ]; then
+	wslu_debug=1
+	echo -e '\e[38;5;202m\033[1m[debug] Showing debug output. \033(B\033[m'
+	shift
+fi
+
+# checking interoperability
+grep enabled /proc/sys/fs/binfmt_misc/WSLInterop >/dev/null || (echo -e "\e[31m\033[1m[error] WSL Interoperability is disabled. Please enable it before using WSL.\033(B\033[m"; exit 1)
 
 # variables
 ## color
@@ -39,8 +56,8 @@ brown=$(echo -e '\e[33m')
 blue=$(echo -e '\e[34m')
 purple=$(echo -e '\e[35m')
 cyan=$(echo -e '\e[36m')
-yellow=$(echo -e '\e[1;33m')
-white=$(echo -e '\e[1;37m')
+yellow=$(echo -e '\e[33m')
+white=$(echo -e '\e[37m')
 dark_gray=$(echo -e '\e[1;30m')
 light_red=$(echo -e '\e[1;31m')
 light_green=$(echo -e '\e[1;32m')
@@ -50,6 +67,7 @@ light_cyan=$(echo -e '\e[1;36m')
 light_gray=$(echo -e '\e[37m')
 orange=$(echo -e '\e[38;5;202m')
 light_orange=$(echo -e '\e[38;5;214m')
+deep_purple=$(echo -e '\e[38;5;140m')
 bold=$(echo -e '\033[1m')
 reset=$(echo -e '\033(B\033[m')
 
@@ -58,7 +76,6 @@ info="${green}[info]${reset}"
 input_info="${cyan}[input]${reset}"
 error="${red}[error]${reset}"
 warn="${orange}[warn]${reset}"
-debug="${orange}${bold}[debug]${reset}"
 
 ## Windows build number constant
 readonly BN_SPR_CREATORS=15063		#1703, Redstone 2, Creators Update
@@ -66,15 +83,25 @@ readonly BN_FAL_CREATORS=16299		#1709, Redstone 3, Fall Creators Update
 readonly BN_APR_EIGHTEEN=17134		#1803, Redstone 4, April 2018 Update
 readonly BN_OCT_EIGHTEEN=17763		#1809, Redstone 5, October 2018 Update
 readonly BN_MAY_NINETEEN=18362		#1903, 19H1, May 2019 Update
+readonly BN_NOV_NINETEEN=18363		#1909, 19H2, November 2019 Update
 
 # functions
+function debug_echo {
+	[ $wslu_debug -eq 1 ] && echo "${orange}${bold}[debug]${reset} $@"
+}
+
+function error_echo {
+	echo "${error} $1"
+	exit $2
+}
 
 function help {
 	app_name=$(basename "$1")
 	echo -e "$app_name - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux
 Usage: $2
 
-For more help for $app_name, visit the following site: https://github.com/wslutilities/wslu/wiki/$app_name"
+For more help for $app_name, please use the command \`man $app_name\` or visit the following site: https://wslutiliti.es/wslu/man/$app_name.html.
+For overall help, you can use the command \`man wslu\` or visite the following site: https://wslutiliti.es/wslu."
 }
 
 function double_dash_p {
@@ -82,50 +109,94 @@ function double_dash_p {
 }
 
 function interop_prefix {
+
+	win_location="/mnt/"
 	if [ -f /etc/wsl.conf ]; then
-		tmp=$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf | awk '{$1=$1;print}')
-		if [ "$tmp" == "" ]; then
-			echo "/mnt/"
-		else
-			echo "$tmp"
-		fi
-	else
-		echo "/mnt/"
+		tmp="$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf | awk '{$1=$1;print}')"
+		[ "$tmp" == "" ] || win_location="$tmp"
+		[[ "$win_location" =~ ^.*/$ ]] || win_location="$win_location/" # make sure it always end with slash
+		unset tmp
 	fi
+	echo "$win_location"
+
+	unset win_location
+}
+
+function sysdrive_prefix {
+	win_location="$(interop_prefix)"
+	hard_reset=0
+	for pt in $(ls "$win_location"); do
+		if [ $(echo "$pt" | wc -l) -eq 1 ]; then
+			if [ -d "$win_location$pt/Windows/System32" ]; then
+				hard_reset=1
+				win_location="$pt"
+				break
+			fi
+		fi 
+	done
+
+	if [ $hard_reset -eq 0 ]; then
+		win_location="c"
+	fi
+
+	echo "$win_location"
+
+	unset win_location
+	unset hard_reset
 }
 
 function chcp_com {
-	"$(interop_prefix)"c/Windows/System32/chcp.com "$@" >/dev/null
+	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/chcp.com "$@" >/dev/null
 }
 
 function winps_exec {
-	chcp_com $(cat ~/.config/wslu/oemcp)
-	"$(interop_prefix)"c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -Command "$@"
+	chcp_com "$(cat ~/.config/wslu/oemcp)"
+	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive –ExecutionPolicy Bypass -Command "$@"
+	EXIT_STATUS=$?
 	chcp_com 65001
+	return $EXIT_STATUS
 }
 
 function baseexec_gen {
-	wslutmpbuild=$(reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	wslutmpbuild=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 	wslutmpbuild=${wslutmpbuild##* }
 	wslutmpbuild="$(( $wslutmpbuild + 0 ))"
 	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
 		# The environment variable only available in 19H1 or later.
-		wslu_distro_regpath=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | grep -B1 -e "$WSL_DISTRO_NAME" | head -n1 | sed -e 's|\r||g')
-		if $(interop_prefix)c/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName &>/dev/null; then
+		wslu_distro_regpath=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | sed -e 's|\r||g' | grep -B1 -e "$WSL_DISTRO_NAME$" | head -n1 )
+		if "$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName &>/dev/null; then
+			wslu_distro_packagename=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 			# if it is a store distro
-			wslu_distro_packagename=$($(interop_prefix)c/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 			wslu_distro_packagename=${wslu_distro_packagename##* }
 			wslu_base_exec_folder_path="$(wslpath "$(double_dash_p $(winps_exec "Write-Output \$Env:LOCALAPPDATA" | tr -d "\r"))\\Microsoft\\WindowsApps\\$wslu_distro_packagename")"
 			wslpath -w "$(find "$wslu_base_exec_folder_path" -name "*.exe")" > ~/.config/wslu/baseexec
 		else
-			# fallback if it is imported repository or other type
-			echo "C:\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
+			# if it is imported distro
+			echo "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")Windows\\System32\\wsl.exe -d $WSL_DISTRO_NAME" > ~/.config/wslu/baseexec
 		fi
 	else
 		# older version fallback.
-		echo "C:\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
+		echo "$(double_dash_p "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")")\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
 	fi
 }
+
+function wslu_file_check {
+	should_i_show=""
+	[[ "$3" == "?!S" ]] && should_i_show="n"
+
+	if [[ ! -f "$1/$2" ]]; then
+		[[ -z "$should_i_show" ]] && echo "${warn} $2 not found in Windows directory. Copying right now..."
+		[[ -d "$1" ]] || mkdir "$1"
+		if [[ -f "/usr/share/wslu/$2" ]]; then
+			cp "/usr/share/wslu/$2" "$1"
+			[[ -z "$should_i_show" ]] && echo "${info} $2 copied. Located at \"$1\"."
+		else
+			[[ -z "$should_i_show" ]] && echo "${error} $2 not found. Failed to copy."
+			exit 30
+		fi
+	fi
+}
+
 
 # first run, saving some information
 if [ ! -d ~/.config/wslu ]; then
@@ -134,27 +205,20 @@ fi
 
 # generate oem codepage
 if [ ! -f ~/.config/wslu/oemcp ]; then
-	"$(interop_prefix)"c/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*' > ~/.config/wslu/oemcp
+	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*' > ~/.config/wslu/oemcp
 fi
 
 # generate base exe locaiton
-if [ ! -f ~/.config/wslu/baseexec ]; then
+if [ ! -f ~/.config/wslu/baseexec ]|| [ -z "$(cat ~/.config/wslu/baseexec)" ]; then
 	# if it is not generated
 	baseexec_gen
 elif grep -q "/" ~/.config/wslu/baseexec; then
 	# if baseexec is using the old linux style, regenerate
 	baseexec_gen
-elif ! which "$(cat ~/.config/wslu/baseexec)" &>/dev/null; then
+elif which "$(cat ~/.config/wslu/baseexec)" &>/dev/null; then
 	# if baseexec cannnot be executed, regenerate
 	rm ~/.config/wslu/baseexec
 	baseexec_gen
-fi
-
-# when --debug, debug.
-if [ "$1" == "--debug" ]; then
-	echo "${debug}Debug Mode Enabled."
-	shift
-	set -x
 fi
 
 # basic distro detection
@@ -171,6 +235,7 @@ case $distro in
 	Arch*) distro="archlinux";;
 	*Oracle*) distro="oracle";;
 	Scientific*) distro="scilinux";;
+	*Fedora\ Remix\ for\ WSL*) distro="fedoraremix";;
 	*Fedora*) distro="fedora";;
 	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && distro="oldfedora" || distro="unknown";;
 	*) distro="unknown";;

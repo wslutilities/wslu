@@ -1,0 +1,54 @@
+.TH "WSLUSC" "1" "DATEPLACEHOLDER" "VERSIONPLACEHOLDER" "WSL Utilities User Manual"
+.SH NAME
+.B wslusc
+- Component of Windows 10 Linux Subsystem Utility
+.SH SYNOPSIS
+.B wslusc
+.RB [ \-gi ]
+.RB [ \-e
+.IR PATH ]
+.RB [ \-n 
+.IR NAME ]
+.RB [ \-i
+.IR FILE ]
+.I COMMAND
+.PP
+.B wslusc
+.RB [ \-hv ]
+.SH DESCRIPTION
+This is a WSL shortcut creator to create shortcut on Windows Desktop.
+.SH OPTIONS
+.TP
+.B -h, --help
+print a simple help
+.TP
+.B -v, --version
+print current version
+.TP
+.B -g, --gui
+create a shortcut that links to a GUI application
+.TP
+.B -i, --icon
+add an icon to the Windows Shortcut. Supports \fB\.ico\fR/\fB\.png\fR/\fB\.svg\fR\.
+.TP
+.B -n, --name
+add a different name other than the command name.
+.TP
+.B -e, --env
+add a custom environment to your command. For example, if you want HiDPI support for a GTK app, add \fBexport GDK_SCALE=2;\fR in your command, like this: \fBwslusc ... \-e "export GDK_SCALE=2;" ...\fR
+.TP
+.B -I, --interactive
+interactive mode.
+.SH AUTHOR
+Created by Patrick Wu <me@patrickwu.space>
+.SH REPORTING BUGS
+Report bugs to <https://github.com/wslutilities/wslu/issues>;
+For Ubuntu specific/related bugs, report to <https://bugs.launchpad.net/ubuntu/+source/wslu>.
+.SH COPYRIGHT
+This is free software; you can redistribute it and/or modify it under
+the terms of the GNU GPL version 3 or (at your option) any later
+version.
+There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.
+.SH SEE ALSO
+wslu(7)

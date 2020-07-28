@@ -1,4 +1,5 @@
-version="37"
+# shellcheck shell=bash
+version="40"
 
 cname=""
 iconpath=""
@@ -7,7 +8,7 @@ is_interactive=0
 customname=""
 customenv=""
 
-help_short="wslusc (--env [PATH]|--name [NAME]|--icon [ICO FILE]|--gui|--interactive|--help|--version) [COMMAND]"
+help_short="wslusc [-gi] [-e PATH] [-n NAME] [-i FILE] COMMAND\nwslusc [-hv]"
 
 while [ "$1" != "" ]; do
 	case "$1" in
@@ -18,14 +19,16 @@ while [ "$1" != "" ]; do
 		-g|--gui)is_gui=1;shift;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslusc v$version"; exit;;
-		*) cname="$*";break;;
+		*) cname_header="$1"; shift; cname="$*"; break;;
 	esac
 done
 
 # interactive mode
 if [[ $is_interactive -eq 1 ]]; then
 	echo "${info} Welcome to wslu shortcut creator interactive mode."
-	read -r -e -i "$cname" -p "${input_info} Command to execute: " input
+	read -r -e -i "$cname_header" -p "${input_info} Command (Without Parameter): " input
+	cname_header="${input:-$cname_header}"
+	read -r -e -i "$cname" -p "${input_info} Command param: " input
 	cname="${input:-$cname}"
 	read -r -e -i "$customname" -p "${input_info} Shortcut name [optional, ENTER for default]: " input
 	customname="${input:-$customname}"
@@ -37,51 +40,48 @@ if [[ $is_interactive -eq 1 ]]; then
 	iconpath="${input:-$iconpath}"
 fi
 
-if [[ "$cname" != "" ]]; then
+if [[ "$cname_header" != "" ]]; then
+	up_path="$(wslvar -s USERPROFILE)"
 	tpath=$(double_dash_p "$(wslvar -s TMP)") # Windows Temp, Win Double Sty.
-	dpath=$(wslpath "$(wslvar -l Desktop)") # Windows Desktop, Win Sty.
-	script_location="$(wslpath "$(wslvar -s USERPROFILE)")/wslu" # Windows wslu, Linux WSL Sty.
-	localfile_path="/usr/share/wslu" # WSL wslu source file location, Linux Sty.
-	script_location_win="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu" #  Windows wslu, Win Double Sty.
+	tpath="${tpath:-$(double_dash_p "$(wslvar -s TEMP)")}" # sometimes TMP is not set for some reason
+	dpath=$(wslpath "$(wslvar -l Desktop)") # Windows Desktop, WSL Sty.
+	script_location="$(wslpath "$up_path")/wslu" # Windows wslu, Linux WSL Sty.
+	script_location_win="$(double_dash_p "$up_path")\\wslu" #  Windows wslu, Win Double Sty.
 	distro_location_win="$(double_dash_p "$(cat ~/.config/wslu/baseexec)")" # Distro Location, Win Double Sty.
 
 	# change param according to the exec.
 	distro_param="run"
-	if [[ "$distro_location_win" == *wsl.exe ]]; then
+	if [[ "$distro_location_win" == *wsl.exe* ]]; then
 		distro_param="-e"
 	fi
+ 
+	# handling the execuable part, a.k.a., cname_header
+	# always absolute path
+	tmp_cname_header="$(readlink -f "$cname_header")"
+	if [ ! -f "$tmp_cname_header" ]; then
+		cname_header="$(which "$cname_header")"
+	else
+		cname_header="$tmp_cname_header"
+	fi
+	unset tmp_cname_header
+
+	[ -z "$cname_header" ] && error_echo "Bad or invalid input; Aborting" 30
 
 	# handling no name given case
-	new_cname=$(basename "$(echo "$cname" | awk '{print $1}')")
+	new_cname=$(basename "$cname_header")
 	# handling name given case
 	if [[ "$customname" != "" ]]; then
 		new_cname=$customname
 	fi
 
-	# Check default icon location
-	if [[ ! -f $script_location/wsl.ico ]]; then
-		echo "${warn} Default wslusc icon \"wsl.ico\" not found in Windows directory. Copying right now..."
-		[[ -d $script_location ]] || mkdir "$script_location"
-		if [[ -f $localfile_path/wsl.ico ]]; then
-			cp "$localfile_path"/wsl.ico "$script_location"
-			echo "${info} Default wslusc icon \"wsl.ico\" copied. Located at \"$script_location\"."
-		else
-			echo "${error} wsl.ico not found. Failed to copy."
-			exit 30
-		fi
-	fi
-	# Check presence of runHidden.vbs 
-	if [[ ! -f $script_location/runHidden.vbs ]]; then
-		echo "${warn} runHidden.vbs not found in Windows directory. Copying right now..."
-		[[ -d $script_location ]] || mkdir "$script_location"
-		if [[ -f $localfile_path/runHidden.vbs ]]; then
-			cp "$localfile_path"/runHidden.vbs "$script_location"
-			echo "${info} runHidden.vbs copied. Located at \"$script_location\"."
-		else
-			echo "${error} runHidden.vbs not found. Failed to copy."
-			exit 30
-		fi
-	fi
+	# construct full command
+	cname="\"$(echo "$cname_header" | sed "s| |\\\\ |g") $cname\""
+
+	# Check default icon and runHidden.vbs
+	wslu_file_check "$script_location" "wsl.ico"
+	wslu_file_check "$script_location" "wsl-term.ico"
+	wslu_file_check "$script_location" "wsl-gui.ico"
+	wslu_file_check "$script_location" "runHidden.vbs"
 
 	# handling icon
 	if [[ "$iconpath" != "" ]]; then
@@ -89,7 +89,7 @@ if [[ "$cname" != "" ]]; then
 		ext="${iconpath##*.}"
 
 		if [[ ! -f $iconpath ]]; then
-			iconpath="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu\\wsl.ico"
+			iconpath="$(double_dash_p "$up_path")\\wslu\\wsl.ico"
 			echo "${warn} Icon not found. Reset to default icon..."
 		else
 			echo "${info} You choose to use custom icon: $iconpath. Processing..."
@@ -107,14 +107,17 @@ if [[ "$cname" != "" ]]; then
 					rm "$script_location/$icon_filename"
 					icon_filename="${icon_filename%.$ext}.ico"
 				else
-					echo "${error} wslusc only support creating shortcut using .png/.svg/.ico icon. Aborted."
-					exit 22
+					error_echo "wslusc only support creating shortcut using .png/.svg/.ico icon. Aborted." 22
 				fi
 			fi
 			iconpath="$script_location_win\\$icon_filename"
 		fi
 	else
-		iconpath="$(double_dash_p "$(wslvar -s USERPROFILE)")\\wslu\\wsl.ico"
+		if [[ "$is_gui" == "1" ]]; then
+			iconpath="$(double_dash_p "$up_path")\\wslu\\wsl-gui.ico"
+		else
+			iconpath="$(double_dash_p "$up_path")\\wslu\\wsl-term.ico"
+		fi
 	fi
 	
 	# handling custom vairable command
@@ -123,14 +126,13 @@ if [[ "$cname" != "" ]]; then
 	fi
 
 	if [[ "$is_gui" == "1" ]]; then
-		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs \"$distro_location_win\" $distro_param \"cd ~; export DISPLAY=:0; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
+		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs $distro_location_win $distro_param $customenv /usr/share/wslu/wslusc-helper.sh $cname';\$s.IconLocation='$iconpath';\$s.Save();"
 	else
-		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='\"$distro_location_win\"';\$s.Arguments='$distro_param \"cd ~; $customenv $cname\"';\$s.IconLocation='$iconpath';\$s.Save();"
+		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='$distro_location_win';\$s.Arguments='$distro_param $customenv bash -l -c $cname';\$s.IconLocation='$iconpath';\$s.Save();"
 	fi
-	tpath="$(wslpath "$(wslvar -s TMP)")/$new_cname.lnk"
+	tpath="$(wslpath "$tpath")/$new_cname.lnk"
 	mv "$tpath" "$dpath"
 	echo "${info} Create shortcut ${new_cname}.lnk successful"
 else
-	echo "${error}No input, aborting"
-	exit 21
+	error_echo "No input, aborting" 21
 fi

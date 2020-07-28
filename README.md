@@ -6,95 +6,160 @@
 
 [![GitHub license](https://img.shields.io/github/license/wslutilities/wslu?style=flat-square&label=license&color=blue&logo=github)](https://github.com/wslutilities/wslu/blob/master/LICENSE)
 [![GitHub (pre-)release](https://img.shields.io/github/v/release/wslutilities/wslu?include_prereleases&logo=github&style=flat-square)](https://github.com/wslutilities/wslu)
-[![GitLab](https://img.shields.io/static/v1?label=gitlab&logo=gitlab&color=E24329&message=mirrored&style=flat-square)](https://gitlab.com/callmepk/wslu)
+[![GitLab](https://img.shields.io/static/v1?label=gitlab&logo=gitlab&color=E24329&message=mirrored&style=flat-square)](https://gitlab.com/wslutilities/wslu)
+[![Launchpad](https://img.shields.io/static/v1?label=launchpad&logo=launchpad&color=F8C300&message=mirrored&style=flat-square)](https://launchpad.net/wslu)
 [![Gitee](https://img.shields.io/static/v1?label=gitee&color=C71D23&message=mirrored&style=flat-square)](https://gitee.com/mirrors/wslu)
 [![Twitter Follow](https://img.shields.io/twitter/follow/wslutilities?style=flat-square&logo=twitter&color=1DA1F2&label=follow)](https://twitter.com/wslutilities)
 
-English | [简体中文](README.hans.md) | [繁體中文](README.hant.md)
+English | [简体中文](README.hans.md) | [繁體中文](README.hant.md) | [Esperanto](README.eo.md)
 
 </div>
 
-This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux GUI application shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update.
+This is a collection of utilities for Windows 10 Linux Subsystem, such as retrieving Windows 10 environment variables or creating your favorite Linux GUI application shortcuts on Windows 10 Desktop.
+
+Requires Windows 10 Creators Update; Some of the feature requires a higher version of Windows 10; Supports WSL2.
 
 ## Feature
 
 **wslusc**
+
 A WSL shortcut creator to create a shortcut on your Windows 10 Desktop.
 
 **wslsys**
-A WSL system information printer to print out system informations from Windows 10 or Linux.
+
+A WSL system information printer to print out system informations from Windows 10 or WSL.
 
 **wslfetch**
-A WSL Screenshoot Information Tool to print information in an elegant way.
+
+A WSL screenshot information tool to print information in an elegant way.
 
 **wslvar**
+
 A WSL tool to help you get Windows system environment variables.
 
 **wslview**
-A fake WSL browser that can help you open link in default Windows browser.
 
-**wslupath** ⚠ *Deprecated*
+*With alias `wview/wslstart/wstart`*
+
+A fake WSL browser that can help you open link in default Windows browser or open files on Windows.
+
+**wslupath**
+
+*⚠ Deprecated*
+
 A WSL tool to convert path styles.
 
-## Status
+**wslact**
 
-| | Service | Master | Develop |
-| ------ | ------ |:------:|:-------:|
-| License Check | FOSSA | [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fpatrick330602%2Fwslu%2develop?ref=badge_shield) | - |
-| Code Quality | CodeFactor | [![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/master)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/master) | [![CodeFactor Grade Master](https://img.shields.io/codefactor/grade/github/wslutilities/wslu/develop)](https://www.codefactor.io/repository/github/wslutilities/wslu/overview/develop) |
-| Testing | AppVeyor | [![Build status](https://ci.appveyor.com/api/projects/status/gcttf7igb0s40xak/branch/master?svg=true)](https://ci.appveyor.com/project/patrick330602/wslu/branch/master) | [![Build status](https://ci.appveyor.com/api/projects/status/gcttf7igb0s40xak/branch/develop?svg=true)](https://ci.appveyor.com/project/patrick330602/wslu/branch/develop) |
-| Deployment | CircleCI | [![CircleCI](https://img.shields.io/circleci/build/gh/wslutilities/wslu/master)](https://circleci.com/gh/wslutilities/wslu/tree/master) | [![CircleCI](https://img.shields.io/circleci/build/gh/wslutilities/wslu/develop)](https://circleci.com/gh/wslutilities/wslu/tree/develop) |
+A set of quick actions for WSL such as quickly mounting all drives or manually sync time between Windows and WSL.
 
 
 ## Installation
 
-### Pengwin/Fedora Remix
+### Alpine Linux
 
-Preinstalled in WLinux and Fedora Remix for WSL.
+You can install `wslu` from Alpine Linux community with the following command:
+
+```
+$ echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/community/" | sudo tee -a /etc/apk/repositories
+$ sudo apk update
+$ sudo apk add wslu@testing
+```
+
+### Arch Linux
+
+[wslu](https://aur.archlinux.org/packages/wslu/) and [wslu-git](https://aur.archlinux.org/packages/wslu-git/) on AUR.
+
+### CentOS/RHEL
+
+Add the repository for the corresponding Linux distribution:
+
+- **CentOS 7**: `sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/CentOS_7/home:wslutilities.repo`
+- **CentOS 8**: `sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/CentOS_8/home:wslutilities.repo`
+- **Red Hat Enterprise Linux 7**: `sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/RHEL_7/home:wslutilities.repo`
+
+Then install with the command `sudo yum install wslu`.
+
+
+### Debian
+
+You can install `wslu` with the following command:
+
+```
+sudo apt install gnupg2 apt-transport-https
+wget -O - https://access.patrickwu.space/wslu/public.asc | sudo apt-key add -
+echo "deb https://access.patrickwu.space/wslu/debian buster main" | sudo tee -a /etc/apt/sources.list
+sudo apt update
+sudo apt install wslu
+```
+
+### Fedora Remix
+
+You can install `wslu` from `COPR` with the following command:
+
+```
+sudo dnf copr enable wslutilities/wslu
+sudo dnf install wslu
+```
+
+### Kali Linux
+
+You can install `wslu` with the following command:
+
+```
+sudo apt install gnupg2 apt-transport-https
+wget -O - https://access.patrickwu.space/wslu/public.asc | sudo apt-key add -
+echo "deb https://access.patrickwu.space/wslu/kali kali-rolling main" | sudo tee -a /etc/apt/sources.list
+sudo apt update
+sudo apt install wslu
+```
+
+### Pengwin
+
+Preinstalled.
+
+### Pengwin Enterprise
+
+You can install `wslu` with the following command:
+
+```
+sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/ScientificLinux_7/home:wslutilities.repo
+sudo yum install wslu
+```
 
 ### Ubuntu
 
-Preinstalled in the latest apps. On older installations please install ubuntu-wsl that depends on wslu:
+> Attention!
+>
+> The Ubuntu version of `wslu` is a modified version. You should report bug [here](https://bugs.launchpad.net/ubuntu/+source/wslu).
+
+Preinstalled in the latest apps. On older installations of Ubuntu please install `ubuntu-wsl` that depends on `wslu`:
 
 ```
 sudo apt update
 sudo apt install ubuntu-wsl
 ```
 
-### For other Debian-based systems(Debian/Kali Linux)
+### OpenSUSE
 
-You can download the `.deb` package from release and install it using `sudo dpkg -i wslu*`.
-
-#### Debian
-
-You can use the following command for easy installation:
+You can install `wslu` with the following command:
 
 ```
-$ curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.deb.sh | sudo bash
+sudo zypper addrepo https://download.opensuse.org/repositories/home:/wslutilities/openSUSE_Leap_15.1/home:wslutilities.repo
+sudo zypper up
+sudo zypper in wslu
 ```
 
-### For RPM-based systems(OpenSUSE/SLES/Pengwin Enterprise/Oracle Linux)
+### SUSE Linux Enperprise Server
 
-You can use the following command for easy installation:
-
-```
-$ curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/wslu/script.rpm.sh | sudo bash
-```
-
-You can download the `.rpm` package from release and install it using `sudo rpm -ivh "wslu*"`.
-
-### Arch Linux
-
-wslu is live on [AUR](https://aur.archlinux.org/packages/wslu/). You can download *PKGBUILD* and install manually or install via PKGBUILD helpers like yay.
-
-### Alpine Linux
-
-You can now install wslu from Alpine Linux testing with following way:
+You can install `wslu` with the following command:
 
 ```
-$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/" | sudo tee -a /etc/apk/repositories
-$ sudo apk update
-$ sudo apk add wslu@testing
+SLESCUR_VERSION="$(grep VERSION= /etc/os-release | sed -e s/VERSION=//g -e s/\"//g -e s/-/_/g)"
+sudo zypper addrepo https://download.opensuse.org/repositories/home:/wslutilities/SLE_$SLESCUR_VERSION/home:wslutilities.repo
+sudo zypper addrepo https://download.opensuse.org/repositories/graphics/SLE_12_SP3_Backports/graphics.repo
+sudo zypper up
+sudo zypper in wslu
 ```
 
 ### Other distributions
@@ -103,11 +168,11 @@ $ sudo apk add wslu@testing
 > 
 > `curl | bash` method is not secure. [Related article](https://sandstorm.io/news/2015-09-24-is-curl-bash-insecure-pgp-verified-install)
 
-Run the following command in your preferred distro: `curl -sL https://wslu.patrickwu.space/install | bash`
+You can install `wslu` with the following command on your preferred distribution: `curl -sL https://raw.githubusercontent.com/wslutilities/wslu/master/extras/scripts/wslu-install | bash`
 
 ## Contributors
 
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+This project exists thanks to all the people who contribute. [ [Contribute](CONTRIBUTING.md) ].
 <img src="https://opencollective.com/wslu/contributors.svg?width=890&button=false" />
 
 ## License & Credits
@@ -116,14 +181,6 @@ This project exists thanks to all the people who contribute. [[Contribute](CONTR
 
 This project uses [GPLv3](LICENSE) License.
 
-Logo of WSL Utilities is licensed under [CC BY-NC 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).
+Logo of WSL Utilities and icons for `wslusc` desktop shortcuts are licensed under [CC BY 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
 
-### Assets
-
-Tux logo used in `\src\etc\wsl.ico` was originally made by Larry Ewing in the Gimp and re-illustrated in vector by Garrett LeSage, using Inkscape.
-
-Some of `wslfetch` ASCII Arts comes from [`neofetch`](https://github.com/dylanaraps/neofetch/) with [MIT](https://github.com/dylanaraps/neofetch/blob/master/LICENSE.md) License and [`screenFetch`](https://github.com/KittyKatt/screenFetch/) with [GPLv3](https://github.com/KittyKatt/screenFetch/blob/master/COPYING) License.
-
-Pengwin Logo used in `wslfetch` ASCII art is ASCII version of the artwork by [Dennis D. Bednarz](https://twitter.com/DennisBednarz), with use permission from Whitewater Foundry.
-
-WLinux Logo used in `wslfetch` ASCII art is ASCII version of the artwork by Larry Ewing.
+For other third party files and assets used, please refer to [THIRD_PARTY_LICENSE](THIRD_PARTY_LICENSE).

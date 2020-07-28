@@ -1,50 +1,68 @@
 AUTOMAKE_OPTIONS = foreign
+DESTDIR ?=
+PREFIX ?= /usr
+
 HEADER = src/wslu-header
 OUTPATH = out
+MANPATH = docs
+OUTMANPATH = out-docs
 CURPATH = $(shell pwd)
 
 SOURCES := $(wildcard src/*.sh)
 ETCFILES := $(wildcard src/etc/*)
 OUTFILES := $(wildcard out/*)
 MANFILES := $(wildcard docs/*)
-INSTEDEXES := $(wildcard /usr/bin/wsl*)
-INSTEDMANS := $(wildcard /usr/share/man/man1/wsl*)
+INSTEDEXES := $(wildcard $(DESTDIR)$(PREFIX)/bin/wsl*)
+INSTEDMANOS := $(wildcard $(DESTDIR)$(PREFIX)/share/man/man1/wsl*)
 
-all:
+DATETMP = $(shell date +%Y-%m-%d)
+VERTMP = $(shell cat ./VERSION)
+
+all: doc
 	[ -d $(OUTPATH) ] || mkdir $(OUTPATH)
+	sed -e s/VERSIONPLACEHOLDER/"$(VERTMP)"/g $(HEADER) > $(HEADER).tmp; \
 	for file in $(SOURCES); do \
-		cat $(HEADER) $$file > $(OUTPATH)/`basename $$file`; \
+		cat $(HEADER).tmp $$file > $(OUTPATH)/`basename $$file`; \
 		mv $(OUTPATH)/`basename $$file` $(OUTPATH)/`basename $$file .sh`; \
 	done
+	rm $(HEADER).tmp
 	chmod +x $(OUTPATH)/*
 
-link:
-	for file in $(OUTFILES); do \
-		ln -s $(CURPATH)/$$file /usr/bin/`basename $$file`; \
-	done
-	for file in $(MANFILES); do \
-		ln -s $(CURPATH)/$$file /usr/share/man/man1/`basename $$file`; \
-	done
-	ln -s $(CURPATH)/src/etc /usr/share/wslu
-
-install:
-	install -m755 out/* /usr/bin
-	install -m555 docs/* /usr/share/man/man1
-	[ -d /usr/share/wslu ] || mkdir -p /usr/share/wslu
-	cp src/etc/* /usr/share/wslu
+install: doc_install res_install
+	install -Dm 755 out/* -t $(DESTDIR)$(PREFIX)/bin
 
 uninstall: 
 	for f in $(INSTEDEXES); do \
-    	rm -f $$f; \
+		rm -f $$f; \
 	done
-	for f in $(INSTEDMANS); do \
-    	rm -f $$f; \
+	for f in $(INSTEDMANOS); do \
+		rm -f $$f; \
 	done
-	rm -rf /usr/share/wslu
+	rm -rf $(DESTDIR)$(PREFIX)/share/man/man7/wslu.7.gz
+	rm -rf $(DESTDIR)$(PREFIX)/share/wslu
+
+doc:
+	[ -d $(OUTMANPATH) ] || mkdir $(OUTMANPATH)
+	for file in $(MANFILES); do \
+		cp $$file $(OUTMANPATH); \
+		sed -e 's/DATEPLACEHOLDER/'$(DATETMP)'/' -e 's/VERSIONPLACEHOLDER/'$(VERTMP)'/' $(OUTMANPATH)/`basename $$file` > $(OUTMANPATH)/`basename $$file`.tmp; \
+		mv $(OUTMANPATH)/`basename $$file`.tmp $(OUTMANPATH)/`basename $$file`; \
+		gzip -f -q $(OUTMANPATH)/`basename $$file`; \
+	done
+
+doc_install:
+	install -Dm 644 out-docs/*.1.gz -t $(DESTDIR)$(PREFIX)/share/man/man1
+	install -Dm 644 out-docs/*.7.gz -t $(DESTDIR)$(PREFIX)/share/man/man7
+
+res_install:
+	install -Dm 644 src/etc/*.vbs -t $(DESTDIR)$(PREFIX)/share/wslu
+	install -Dm 644 src/etc/*.ps1 -t $(DESTDIR)$(PREFIX)/share/wslu
+	install -Dm 644 src/etc/*.ico -t $(DESTDIR)$(PREFIX)/share/wslu
+	install -Dm 755 src/etc/*.sh -t $(DESTDIR)$(PREFIX)/share/wslu
 
 clean:
 	rm -rf $(OUTPATH)
+	rm -rf $(OUTMANPATH)
 
 test:
-	PATH="$(CURPATH)/src:$(CURPATH)/out:$$PATH"
-	extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslvar.bats tests/wslfetch.bats tests/wslview.bats
+	extras/bats/bin/bats -r tests

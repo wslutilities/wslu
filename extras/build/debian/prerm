@@ -1,3 +1,11 @@
-#!/usr/bin/env bash
-update-alternatives --remove x-www-browser /usr/bin/wslview
-update-alternatives --remove www-browser /usr/bin/wslview
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+if [ "$1" = "remove" ] ; then
+    update-alternatives --remove x-www-browser /usr/bin/wslview
+    update-alternatives --remove www-browser /usr/bin/wslview
+fi
+

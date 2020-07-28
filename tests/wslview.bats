@@ -9,11 +9,49 @@
 @test "wslview - Help" {
   run out/wslview --help
   [ "${lines[0]}" = "wslview - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
-  [ "${lines[1]}" = "Usage: wslview (--register|--unregister|--help|--version) [LINK]" ]
+  [[ "${lines[1]}" =~ ^Usage\:\ .*wslview\ \[\-hvur\]$ ]]
+  [[ "${lines[2]}" =~ ^.*wslview\ LINK/FILE$ ]]
 }
 
 @test "wslview - Help - Alt." {
   run out/wslview -h
   [ "${lines[0]}" = "wslview - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
-  [ "${lines[1]}" = "Usage: wslview (--register|--unregister|--help|--version) [LINK]" ]
+  [[ "${lines[1]}" =~ ^Usage\:\ .*wslview\ \[\-hvur\]$ ]]
+  [[ "${lines[2]}" =~ ^.*wslview\ LINK/FILE$ ]]
 }
+
+@test "wslview - Linux - relative" {
+  run out/wslview .
+  [ "$status" -eq 0 ]
+}
+
+@test "wslview - Linux - absolute" {
+  run out/wslview /home
+  [ "$status" -eq 0 ]
+}
+
+@test "wslview - Linux - file protocol" {
+  run out/wslview file:///etc
+  [ "$status" -eq 0 ]
+}
+
+@test "wslview - Windows folder in Linux - absolute" {
+  run out/wslview /mnt/c/Windows
+  [ "$status" -eq 0 ]
+}
+
+@test "wslview - Windows folder in Linux - file protocol" {
+  run out/wslview file:///mnt/c/Users
+  [ "$status" -eq 0 ]
+}
+
+@test "wslview - Windows - absolute" {
+  run out/wslview "C:/AppData"
+  [ "$status" -eq 0 ]
+}
+
+@test "wslview - Windows - file protocol" {
+  run out/wslview "file:///C:/Windows/System32"
+  [ "$status" -eq 0 ]
+}
+
