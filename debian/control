@@ -3,9 +3,7 @@ Section: admin
 Priority: optional
 Maintainer: Patrick Wu <patrick.wu@canonical.com>
 Build-Depends: bats,
-               debhelper (>= 10),
-               gzip,
-               make
+               debhelper (>= 10)
 Standards-Version: 4.3.0.3
 Vcs-Git: https://git.launchpad.net/~ubuntu-core-dev/ubuntu/+source/wslu -b ubuntu/master
 Vcs-Browser:  https://git.launchpad.net/~ubuntu-core-dev/ubuntu/+source/wslu
