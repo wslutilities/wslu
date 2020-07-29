@@ -96,6 +96,17 @@ if [[ "$cname_header" != "" ]]; then
 			cp "$iconpath" "$script_location"
 		
 			if [[ "$ext" != "ico" ]]; then
+				if ! type convert > /dev/null; then
+					echo "The 'convert' command is needed for converting the icon."
+					if [ -x /usr/lib/command-not-found ]; then
+						echo " It can be installed with:" >&2
+						echo "" >&2
+						/usr/lib/command-not-found convert 2>&1 | egrep -v '(not found|^$)' >&2
+					else
+						echo "It can usally be found in the imagemagick package, please install it."
+					fi
+					exit 22
+				fi
 				if [[ "$ext" == "svg" ]]; then
 					echo "${info} Converting $ext icon to ico..."
 					convert "$script_location/$icon_filename" -trim -background none -resize 256X256 -define 'icon:auto-resize=16,24,32,64,128,256'  "$script_location/${icon_filename%.$ext}.ico"
