@@ -1,3 +1,62 @@
+wslu (3.2.0-0ubuntu1) groovy; urgency=medium
+
+  * Update to 3.2.0 to provide new features and address some issues
+    - Documentation: add section 7 manpage: `wslu`
+    - Documentation: updated manpage system
+    - Documentation: New README language Esperanto
+    - Project: updated build system
+    - Project: versioning system update
+    - Project: add separate Fedora Remix support
+    - header: add `--verbose`
+    - header: refactor the header in order to speed up
+    - header: handling empty ~/.config/wslu/baseexec
+    - header: use the proper color definition
+    - header: fix `ubuntu.exe` detection issue
+    - header: prevent localappdata not found in env
+    - header: improvements on the system drive detection.
+      (GH: #133, LP: #1888869)
+    - wslact: brand new CLI
+    - wslact: adding `--mount-options` for auto-mounting feature
+    - wslact: fix an i18n related issue in time-sync feature 
+      (GH: #113 by @ricardosantos9521)
+    - wslact: add back-compatibility for the auto-mounting feature.
+    - wslusc: brand new helper script (GH: #93)
+    - wslusc: brand new shortcut icon
+    - wslusc: always use the absolute path (fixes #129)
+    - wslusc: fixes a possible white space path issue
+    - wslusc: add convert not found warning
+    - wslusc: fix the problem that the previous version that GUI shortcut
+      generated won't work.
+    - wslusc: When TMP is empty, try TEMP
+    - wslfetch: colorbar expanded
+    - wslfetch: `--no-colorbar` become `--colorbar`
+    - wslfetch: speed up execution time (GH: #100)
+    - wslfetch: new display for WSL with WSL version displayed
+    - wslfetch: use the proper logo for Ubuntu 
+      (Reported by Martin Wimpress, LP: #1883920)
+    - wslview: alias of `wslstart`, `wstart`, `wview` (GH: #64)
+    - wslview: browser registration parameter change
+    - wslview: handling file:/// protocol (GH: #66)
+    - wslview: fix a mistake in `converted_file_path`
+    - wslview: properly detect all different protocols and path styles 
+      (GH: #118)
+    - wslview: mistake in calling a variable (fixes #118 again)
+    - wslview: fix a bug that it won't open `file:///mnt/c/...` 
+      or `/mnt/c/...`
+    - wslsys: Display Scaling Factor (help with Pengwin GH: #559)
+    - wslsys: Windows Locale
+    - wslsys: Windows Theme 
+    - wslsys: speed up execution time 
+    - wslsys: add WSL version option
+    - wslsys: fix an issue in DPI scaling getting wrong value due to the API
+      change in Latest fast ring insider build (Reported by @crramirez)
+    - wslsys: fix an issue that the WSL Version shown is wrong.
+    - package: missing call to `configure.sh`
+    - package: fix alpine dependency issue (GH: #117)
+    - tests: update the test system and tests. (GH: #125)
+
+ -- Patrick Wu <patrick.wu@canonical.com>  Wed, 29 Jul 2020 11:14:51 +0800
+
 wslu (2.3.6-0ubuntu2) groovy; urgency=medium
 
   * debian/{compat,control}: fallback to 9 due to incompatibility with
