@@ -3,7 +3,7 @@
 %:
 	dh $@
 
-override_dh_auto_install: debian/wsl.ico
+override_dh_auto_install:
 	dh_auto_install
 
 override_dh_auto_test:
