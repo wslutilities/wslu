@@ -41,7 +41,7 @@ if [[ "$lname" != "" ]]; then
 	wslutmpbuild=${wslutmpbuild##* }
 	wslutmpbuild="$(( wslutmpbuild + 0 ))"
 	# file:/// protocol used in linux
-	if [[ ! "$lname" =~ ^file:\/\/\/[A-Za-z]\:.*$ ]]; then
+	if [[ "$lname" =~ ^file:\/\/.*$ ]] && [[ ! "$lname" =~ ^file:\/\/(\/)+[A-Za-z]\:.*$ ]]; then
 		[ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ] || error_echo "This protocol is not supported before version 1903." 34
 		properfile_full_path="$(readlink -f "${lname//file:\/\//}")"
 		interop_win_type="$(interop_prefix)$(sysdrive_prefix)"
