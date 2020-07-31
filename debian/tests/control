@@ -1,0 +1,3 @@
+Tests: commands
+Depends: @, @builddeps@
+Restrictions: skippable

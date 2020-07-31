@@ -1,0 +1,27 @@
+Source: wslu
+Section: admin
+Priority: optional
+Maintainer: Patrick Wu <patrick.wu@canonical.com>
+Build-Depends: bats,
+               debhelper (>= 10),
+               gzip,
+               make
+Standards-Version: 4.3.0.3
+Vcs-Git: https://git.launchpad.net/~ubuntu-core-dev/ubuntu/+source/wslu -b ubuntu/master
+Vcs-Browser:  https://git.launchpad.net/~ubuntu-core-dev/ubuntu/+source/wslu
+Homepage: https://wslutiliti.es/wslu
+
+Package: wslu
+Architecture: all
+Depends: ${misc:Depends},
+         bc
+Recommends: pulseaudio-utils,
+            x11-utils
+Suggests: imagemagick
+Provides: www-browser
+Description: collection of utilities for the Windows 10 Linux Subsystem
+ This is a collection of utilities for the Windows 10 Linux Subsystem, such
+ as for converting Linux paths to a Windows paths or creating Linux application
+ shortcuts on the Windows 10 Desktop.
+ .
+ Requires Windows 10 Creators Update and higher.
