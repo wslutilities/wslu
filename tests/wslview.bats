@@ -46,7 +46,7 @@
 }
 
 @test "wslview - Windows - absolute" {
-  run out/wslview "C:/AppData"
+  run out/wslview "C:/Users/Public"
   [ "$status" -eq 0 ]
 }
 
@@ -55,3 +55,17 @@
   [ "$status" -eq 0 ]
 }
 
+@test "wslview - Internet - no protocol" {
+  run out/wslview "www.duckduckgo.com"
+  [ "$status" -eq 0 ]
+}
+
+@test "wslview - Internet - http" {
+  run out/wslview "http://info.cern.ch"
+  [ "$status" -eq 0 ]
+}
+
+@test "wslview - Internet - https" {
+  run out/wslview "https://wslutiliti.es/"
+  [ "$status" -eq 0 ]
+}
