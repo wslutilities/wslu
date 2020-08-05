@@ -172,11 +172,11 @@ function baseexec_gen {
 			wslpath -w "$(find "$wslu_base_exec_folder_path" -name "*.exe")" > ~/.config/wslu/baseexec
 		else
 			# if it is imported distro
-			echo "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")Windows\\System32\\wsl.exe -d $WSL_DISTRO_NAME" > ~/.config/wslu/baseexec
+			echo "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
 		fi
 	else
 		# older version fallback.
-		echo "$(double_dash_p "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")")\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
+		echo "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
 	fi
 }
 
