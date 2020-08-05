@@ -10,8 +10,7 @@ function call_branch() {
 }
 
 function call_build() {
-	build=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-	echo "${build##* }"
+	wslu_get_build
 }
 
 function call_full_build() {

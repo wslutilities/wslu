@@ -37,9 +37,7 @@ for args; do
 done
 
 if [[ "$lname" != "" ]]; then
-	wslutmpbuild=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-	wslutmpbuild=${wslutmpbuild##* }
-	wslutmpbuild="$(( wslutmpbuild + 0 ))"
+	wslutmpbuild=$(wslu_get_build)
 	# file:/// protocol used in linux
 	if [[ "$lname" =~ ^file:\/\/.*$ ]] && [[ ! "$lname" =~ ^file:\/\/(\/)+[A-Za-z]\:.*$ ]]; then
 		[ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ] || error_echo "This protocol is not supported before version 1903." 34

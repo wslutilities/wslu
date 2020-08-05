@@ -51,8 +51,9 @@ if [[ "$cname_header" != "" ]]; then
 
 	# change param according to the exec.
 	distro_param="run"
+
 	if [[ "$distro_location_win" == *wsl\.exe* ]]; then
-		if [ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ]; then
+		if [ $(wslu_get_build) -ge $BN_MAY_NINETEEN ]; then
 			distro_param="-d $WSL_DISTRO_NAME -e"
 		else
 			distro_param="-e"
