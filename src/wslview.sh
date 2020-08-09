@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-version="06"
+version="10"
 
 lname=""
 
@@ -20,8 +20,8 @@ function add_reg_alt {
 	if [ "$distro" == "archlinux" ] || [ "$distro" == "alpine" ]; then
 		error_echo "Unsupported action for this distro. Aborted." 34
 	else
-		sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser "$(readlink -f "$0")" 1
-		sudo update-alternatives --install /usr/bin/www-browser www-browser "$(readlink -f "$0")" 1
+		sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser "$(readlink -f "$0")" 30
+		sudo update-alternatives --install /usr/bin/www-browser www-browser "$(readlink -f "$0")" 30
 		exit
 	fi
 }
