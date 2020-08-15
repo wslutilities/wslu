@@ -58,12 +58,10 @@ A set of quick actions for WSL such as quickly mounting all drives or manually s
 
 ### Alpine Linux
 
-You can install `wslu` from Alpine Linux community with the following command:
+You can install `wslu` on **Alpine Linux 3.12+** with the following command:
 
 ```
-$ echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/community/" | sudo tee -a /etc/apk/repositories
-$ sudo apk update
-$ sudo apk add wslu@testing
+sudo apk add wslu
 ```
 
 ### Arch Linux

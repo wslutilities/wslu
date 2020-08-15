@@ -60,12 +60,10 @@ Aro de rapidaj agoj por WSL, kiel repide surmeti ĉiujn Vindozajn diskingojn aŭ
 
 ### Alpine Linux
 
-Oni povas instali `wslu` el **Alpine Linux community** per la jenaj komandoj:
+Oni povas instali `wslu` el **Alpine Linux 3.12+** per la jenaj komandoj:
 
 ```
-$ echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/community/" | sudo tee -a /etc/apk/repositories
-$ sudo apk update
-$ sudo apk add wslu@testing
+sudo apk add wslu
 ```
 
 ### Arch Linux
