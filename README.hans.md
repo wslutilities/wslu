@@ -58,12 +58,10 @@
 
 ### Alpine Linux
 
-你可以用以下命令安装 `wslu`：
+你可以用以下命令从 **Alpine Linux 3.12+** 安装 `wslu`：
 
 ```
-$ echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/community/" | sudo tee -a /etc/apk/repositories
-$ sudo apk update
-$ sudo apk add wslu@testing
+sudo apk add wslu
 ```
 
 ### Arch Linux

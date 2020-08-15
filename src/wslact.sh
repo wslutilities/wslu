@@ -13,9 +13,8 @@ function time_sync {
 		esac
 	done
 
-	if [ "$EUID" -ne 0 ]
-		then echo "${error} \`wslact time-sync\` requires you to run as root. Aborted."
-		exit 1
+	if [ "$EUID" -ne 0 ]; then
+		error_echo "\`wslact time-sync\` requires you to run as root. Aborted." 1
 	fi
 
 	echo "${info} Before Sync: $(date +"%d %b %Y %T %Z")"
@@ -23,8 +22,7 @@ function time_sync {
 		echo "${info} After Sync: $(date +"%d %b %Y %T %Z")"
 		echo "${info} Manual Time Sync Complete."
 	else
-		echo "${error} Time Sync failed."
-		exit 1
+		error_echo "Time Sync failed." 1
 	fi
 }
 
@@ -42,9 +40,8 @@ function auto_mount {
 		esac
 	done
 
-	if [ "$EUID" -ne 0 ]
-		then echo "${error} \`wslact auto-mount\` requires you to run as root. Aborted."
-		exit 1
+	if [ "$EUID" -ne 0 ]; then
+		error_echo "\`wslact auto-mount\` requires you to run as root. Aborted." 1
 	fi
 
 
@@ -86,10 +83,10 @@ function auto_mount {
 
 while [ "$1" != "" ]; do
 	case "$1" in
-		am|auto-mount) auto_mount "$@"; exit;;
+		am|auto-mount|sm|smart-mount) auto_mount "$@"; exit;;
 		ts|time-sync) time_sync "$@"; exit;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslact v$version"; exit;;
-		*) echo "${error} Invalid Input. Aborted."; exit 22;;
+		*) error_echo "Invalid Input. Aborted." 22;;
 	esac
 done
