@@ -40,6 +40,7 @@ uninstall:
 	done
 	rm -rf $(DESTDIR)$(PREFIX)/share/man/man7/wslu.7.gz
 	rm -rf $(DESTDIR)$(PREFIX)/share/wslu
+	rm -rf $(DESTDIR)$(PREFIX)/share/applications/wslview.desktop
 
 doc:
 	[ -d $(OUTMANPATH) ] || mkdir $(OUTMANPATH)
@@ -59,6 +60,7 @@ res_install:
 	install -Dm 644 src/etc/*.ps1 -t $(DESTDIR)$(PREFIX)/share/wslu
 	install -Dm 644 src/etc/*.ico -t $(DESTDIR)$(PREFIX)/share/wslu
 	install -Dm 755 src/etc/*.sh -t $(DESTDIR)$(PREFIX)/share/wslu
+	install -Dm 644 src/applications/*.desktop $(DESTDIR)$(PREFIX)/share/applications
 
 clean:
 	rm -rf $(OUTPATH)

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=WSLView
+Comment=Open files and addresses in Windows
+Icon=windows
+Exec=/usr/bin/wslview %U
+Terminal=false
+Type=Application
+Categories=Utility;
+MimeTypes=x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/file
