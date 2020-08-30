@@ -34,5 +34,6 @@ bash configure.sh
 make
 sudo make install
 sudo install -m755 extras/scripts/wslu-uninstall /usr/bin
+sudo update-desktop-database
 rm -rf $BUILD_DIR
 echo -e "\e[32m## wslu installation complete. To uninstall, run 'wslu-uninstall'\033(B\033[m"

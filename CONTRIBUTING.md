@@ -19,6 +19,8 @@ sudo make res_install
 ```
 wslu
 |-src
+|  |-applications
+|  |  \- wslview.desktop: XDG-style app definition for wslview
 |  |-etc
 |  |  |-wsl.ico: legacy default icon for wslusc
 |  |  |-wsl-gui.ico: default icon for wslusc GUI shortcut

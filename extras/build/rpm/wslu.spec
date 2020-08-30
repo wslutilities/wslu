@@ -5,7 +5,7 @@ Version: BUILDVERPLACEHOLDER
 Release: RELVERPLACEHOLDER
 Source: wslu-BUILDVERPLACEHOLDER.tar.gz
 BuildArch: noarch
-Requires: bc ImageMagick
+Requires: bc ImageMagick desktop-file-utils
 Requires(post): %{_sbindir}/update-alternatives
 Requires(postun): %{_sbindir}/update-alternatives
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
@@ -26,6 +26,7 @@ make
 mkdir -p %{?buildroot}/usr/share/man/man1/
 mkdir -p %{?buildroot}/usr/share/man/man7/
 mkdir -p %{?buildroot}/usr/share/wslu/
+mkdir -p %{?buildroot}/usr/share/applications/
 mkdir -p %{?buildroot}/usr/bin/
 # normal part
 make PREFIX=/usr DESTDIR=%{?buildroot} install
@@ -39,10 +40,12 @@ ln -sf /usr/share/man/man1/wslview.1.gz %{?buildroot}/usr/share/man/man1/wstart.
 %post
 %{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 1
 %{_sbindir}/update-alternatives --install %{_bindir}/x-www-browser x-www-browser %{_bindir}/wslview 1
+%{_bindir}/update-desktop-database
 
 %postun
 %{_sbindir}/update-alternatives --remove www-browser %{_bindir}/wslview
 %{_sbindir}/update-alternatives --remove x-www-browser %{_bindir}/wslview
+%{_bindir}/update-desktop-database
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -60,6 +63,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wslact
 %{_bindir}/wslvar
 /usr/share/wslu/
+/usr/share/applications/wslview.desktop
 %doc /usr/share/man/
 
 %changelog
