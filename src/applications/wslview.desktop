@@ -6,4 +6,4 @@ Exec=/usr/bin/wslview %U
 Terminal=false
 Type=Application
 Categories=Utility;
-MimeTypes=x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/file
+MimeType=x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/file
