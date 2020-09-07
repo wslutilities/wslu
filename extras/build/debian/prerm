@@ -7,5 +7,6 @@ set -e
 if [ "$1" = "remove" ] ; then
     update-alternatives --remove x-www-browser /usr/bin/wslview
     update-alternatives --remove www-browser /usr/bin/wslview
+    rm /usr/share/wslu/updated_time
 fi
 
