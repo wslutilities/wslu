@@ -129,7 +129,7 @@ sudo yum install wslu
 
 > Attention!
 >
-> The Ubuntu version of `wslu` is a modified version. You should report bug [here](https://bugs.launchpad.net/ubuntu/+source/wslu).
+> For Ubuntu version, you should not only report bug here but also report bug at [Launchpad](https://bugs.launchpad.net/ubuntu/+source/wslu).
 
 Preinstalled in the latest apps. On older installations of Ubuntu please install `ubuntu-wsl` that depends on `wslu`:
 
@@ -137,6 +137,8 @@ Preinstalled in the latest apps. On older installations of Ubuntu please install
 sudo apt update
 sudo apt install ubuntu-wsl
 ```
+
+To install the latest version before `wslu` reaches `main` reporsitory, you can install via our PPA: <https://launchpad.net/~wslutilities/+archive/ubuntu/wslu>
 
 ### OpenSUSE
 

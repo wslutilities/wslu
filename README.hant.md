@@ -139,6 +139,8 @@ sudo apt update
 sudo apt install ubuntu-wsl
 ```
 
+在最新版 `wslu` 進入 `main` 倉庫前，請從以下 PPA 安裝： <https://launchpad.net/~wslutilities/+archive/ubuntu/wslu>
+
 ### OpenSUSE
 
 你可以用以下指令安装 `wslu`：
