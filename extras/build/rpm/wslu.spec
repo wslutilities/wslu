@@ -6,8 +6,8 @@ Release: RELVERPLACEHOLDER
 Source: wslu-BUILDVERPLACEHOLDER.tar.gz
 BuildArch: noarch
 Requires: bc ImageMagick desktop-file-utils
-Requires(post): %{_sbindir}/update-alternatives
-Requires(postun): %{_sbindir}/update-alternatives
+Requires(post): %{_sbindir}/update-alternatives %{_sbindir}/update-desktop-database %{_sbindir}/desktop-file-install
+Requires(postun): %{_sbindir}/update-alternatives %{_sbindir}/update-desktop-database
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 URL: https://github.com/wslutilities/wslu/
 License: GPL-3.0-or-later
@@ -26,7 +26,6 @@ make
 mkdir -p %{?buildroot}/usr/share/man/man1/
 mkdir -p %{?buildroot}/usr/share/man/man7/
 mkdir -p %{?buildroot}/usr/share/wslu/
-mkdir -p %{?buildroot}/usr/share/applications/
 mkdir -p %{?buildroot}/usr/bin/
 # normal part
 make PREFIX=/usr DESTDIR=%{?buildroot} install
@@ -41,13 +40,19 @@ ln -sf /usr/share/man/man1/wslview.1.gz %{?buildroot}/usr/share/man/man1/wstart.
 %{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 1
 %{_sbindir}/update-alternatives --install %{_bindir}/x-www-browser x-www-browser %{_bindir}/wslview 1
 %{_sbindir}/date +"%s" | %{_sbindir}/tee /usr/share/wslu/updated_time >/dev/null
+desktop-file-install --dir=/usr/share/applications /usr/share/wslu/wslview.desktop
 %{_bindir}/update-desktop-database
 
 %postun
-%{_sbindir}/rm /usr/share/wslu/updated_time
+if [ -f /usr/share/wslu/updated_time ]; then
+    %{_sbindir}/rm /usr/share/wslu/updated_time
+fi
+if [ -f /usr/share/applications/wslview.desktop ]; then
+    %{_sbindir}/rm /usr/share/applications/wslview.desktop
+    %{_bindir}/update-desktop-database
+fi
 %{_sbindir}/update-alternatives --remove www-browser %{_bindir}/wslview
 %{_sbindir}/update-alternatives --remove x-www-browser %{_bindir}/wslview
-%{_bindir}/update-desktop-database
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -65,7 +70,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wslact
 %{_bindir}/wslvar
 /usr/share/wslu/
-/usr/share/applications/wslview.desktop
 %doc /usr/share/man/
 
 %changelog
