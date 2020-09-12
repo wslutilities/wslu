@@ -8,5 +8,9 @@ if [ "$1" = "remove" ] ; then
     update-alternatives --remove x-www-browser /usr/bin/wslview
     update-alternatives --remove www-browser /usr/bin/wslview
     rm /usr/share/wslu/updated_time
+    if [ -f /usr/share/applications/wslview.desktop ]; then
+        rm /usr/share/applications/wslview.desktop
+        update-desktop-database
+    fi
 fi
 
