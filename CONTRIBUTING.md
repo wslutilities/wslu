@@ -19,13 +19,13 @@ sudo make res_install
 ```
 wslu
 |-src
-|  |-applications
-|  |  \- wslview.desktop: XDG-style app definition for wslview
 |  |-etc
+|  |  |-wslview.desktop: XDG-style app definition for wslview
 |  |  |-wsl.ico: legacy default icon for wslusc
 |  |  |-wsl-gui.ico: default icon for wslusc GUI shortcut
 |  |  |-wsl-term.ico: default icon for wslusc cli shortcut
-|  |  |-sudo.ps1: helper script for wslgsu 
+|  |  |-sudo.ps1: helper script for wslgsu
+|  |  |-get_dpi.ps1: helper script for dpi function in wslsys
 |  |  |-wslsc-helper.sh: helper script for wslusc on WSL side
 |  |  \-runHidden.vbs: helper script for wslusc on Windows side
 |  |-wslu-header: Header file of all script
