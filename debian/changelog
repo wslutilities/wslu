@@ -1,6 +1,6 @@
-wslu (3.2.0-0ubuntu1ppa6) groovy; urgency=medium
+wslu (3.2.1-0ubuntu1ppa1) groovy; urgency=medium
 
-  * Update from 2.3.6 to 3.2.0 to provide new features and address some issues
+  * Update from 2.3.6 to 3.2.1 to provide new features and address some issues
     - Documentation: add section 7 manpage: `wslu`
     - Documentation: updated manpage system
     - Documentation: New README language Esperanto
@@ -15,6 +15,7 @@ wslu (3.2.0-0ubuntu1ppa6) groovy; urgency=medium
     - header: prevent localappdata not found in env
     - header: improvements on the system drive detection.
       (GH: #133, LP: #1888869)
+    - header: fix badly generated shortcut issue (GH: #141)
     - wslact: brand new CLI
     - wslact: adding `--mount-options` for auto-mounting feature
     - wslact: fix an i18n related issue in time-sync feature 
@@ -45,6 +46,7 @@ wslu (3.2.0-0ubuntu1ppa6) groovy; urgency=medium
     - wslview: mistake in calling a variable (fixes #118 again)
     - wslview: fix a bug that it won't open `file:///mnt/c/...` 
       or `/mnt/c/...`
+    - wslview: add wslview.desktop (GH: #143 and #146)
     - wslsys: Display Scaling Factor (help with Pengwin GH: #559)
     - wslsys: Windows Locale
     - wslsys: Windows Theme 
@@ -57,7 +59,7 @@ wslu (3.2.0-0ubuntu1ppa6) groovy; urgency=medium
     - package: fix alpine dependency issue (GH: #117)
     - tests: update the test system and tests. (GH: #125)
 
- -- Patrick Wu <patrick.wu@canonical.com>  Mon, 17 Aug 2020 14:44:02 +0800
+ -- Patrick Wu <patrick.wu@canonical.com>  Sun, 13 Sep 2020 22:36:33 +0800
 
 wslu (2.3.6-0ubuntu2) groovy; urgency=medium
 
