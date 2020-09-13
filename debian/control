@@ -14,7 +14,8 @@ Architecture: all
 Depends: ${misc:Depends},
          bc
 Recommends: pulseaudio-utils,
-            x11-utils
+            x11-utils,
+            desktop-file-utils
 Suggests: imagemagick
 Provides: www-browser
 Description: collection of utilities for the Windows 10 Linux Subsystem
