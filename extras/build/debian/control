@@ -10,6 +10,6 @@ Vcs-Git: https://github.com/wslutilities/wslu.git
 
 Package: wslu
 Architecture: all
-Depends: bc, imagemagick
+Depends: bc, imagemagick, desktop-file-utils
 Description: A collection of utilities for Windows 10 Linux Subsystem
  This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.

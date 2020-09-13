@@ -59,12 +59,10 @@
 
 ### Alpine Linux
 
-你可以用以下指令安裝 `wslu`：
+你可以用以下指令通過 **Alpine Linux 3.12+** 安裝 `wslu`：
 
 ```
-$ echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/community/" | sudo tee -a /etc/apk/repositories
-$ sudo apk update
-$ sudo apk add wslu@testing
+sudo apk add wslu
 ```
 
 ### Arch Linux
@@ -140,6 +138,8 @@ sudo yum install wslu
 sudo apt update
 sudo apt install ubuntu-wsl
 ```
+
+在最新版 `wslu` 進入 `main` 倉庫前，請從以下 PPA 安裝： <https://launchpad.net/~wslutilities/+archive/ubuntu/wslu>
 
 ### OpenSUSE
 

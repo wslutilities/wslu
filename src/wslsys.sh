@@ -36,7 +36,7 @@ function call_theme() {
 function call_display_scaling() {
 	up_path="$(wslvar -s USERPROFILE)"
 	wslu_file_check "$(wslpath "$up_path")/wslu" "get_dpi.ps1" "?!S"
-	display_scaling="$(winps_exec "$(double_dash_p "$up_path")\\wslu\\get_dpi.ps1" | sed -e 's|\r||g')"
+	display_scaling="$(winps_exec "$(double_dash_p "$up_path" | sed -e 's| |\` |g')\\wslu\\get_dpi.ps1" | sed -e 's|\r||g')"
 	bc -l <<< "$(printf "%d\n" "$display_scaling")/100" | sed -e "s/\.0//g" -e "s/0*$//g"
 }
 

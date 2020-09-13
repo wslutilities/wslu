@@ -5,9 +5,9 @@ Version: BUILDVERPLACEHOLDER
 Release: RELVERPLACEHOLDER
 Source: wslu-BUILDVERPLACEHOLDER.tar.gz
 BuildArch: noarch
-Requires: bc ImageMagick
-Requires(post): %{_sbindir}/update-alternatives
-Requires(postun): %{_sbindir}/update-alternatives
+Requires: bc ImageMagick desktop-file-utils
+Requires(post): %{_sbindir}/update-alternatives %{_bindir}/update-desktop-database %{_bindir}/desktop-file-install
+Requires(postun): %{_sbindir}/update-alternatives %{_bindir}/update-desktop-database
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 URL: https://github.com/wslutilities/wslu/
 License: GPL-3.0-or-later
@@ -39,8 +39,18 @@ ln -sf /usr/share/man/man1/wslview.1.gz %{?buildroot}/usr/share/man/man1/wstart.
 %post
 %{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 1
 %{_sbindir}/update-alternatives --install %{_bindir}/x-www-browser x-www-browser %{_bindir}/wslview 1
+%{_bindir}/date +"%s" | %{_bindir}/tee /usr/share/wslu/updated_time >/dev/null
+%{_bindir}/desktop-file-install --dir=/usr/share/applications /usr/share/wslu/wslview.desktop
+%{_bindir}/update-desktop-database
 
 %postun
+if [ -f /usr/share/wslu/updated_time ]; then
+    %{_sbindir}/rm /usr/share/wslu/updated_time
+fi
+if [ -f /usr/share/applications/wslview.desktop ]; then
+    %{_sbindir}/rm /usr/share/applications/wslview.desktop
+    %{_bindir}/update-desktop-database
+fi
 %{_sbindir}/update-alternatives --remove www-browser %{_bindir}/wslview
 %{_sbindir}/update-alternatives --remove x-www-browser %{_bindir}/wslview
 
