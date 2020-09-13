@@ -28,6 +28,4 @@ done
 
 sudo rm -f /usr/share/man/man7/wsl*
 sudo rm -rf /usr/share/wslu
-sudo rm -rf /usr/share/applications/wslview.desktop
-sudo update-desktop-database
 echo -e "\e[32m## wslu uninstallation complete.\033(B\033[m"
