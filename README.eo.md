@@ -131,14 +131,16 @@ sudo yum install wslu
 
 > Attenu!
 >
-> La Ubuntu versio de `wslu` estas modifita versio. Oni devas raporti cimojn [ĉi tie](https://bugs.launchpad.net/ubuntu/+source/wslu).
+> Por Ubuntu versio, Oni devas ne nur raporti cimojn ĉi tie sed ankaŭ raporti cimojn ĉe [Launchpad](https://bugs.launchpad.net/ubuntu/+source/wslu).
 
-Antaŭinstalita en la plej freŝa versio. Sur pli aĝaj instaloj de Ubuntu, oni povas instali `ubuntu-wsl` kiu dependas de `wslu`:
+Antaŭinstalita en la plej freŝa versio. Sur pli aĝaj instaloj de Ubuntu, oni povas instali `ubuntu-wsl` kiu dependas de `wslu`: <https://launchpad.net/~wslutilities/+archive/ubuntu/wslu>
 
 ```
 sudo apt update
 sudo apt install ubuntu-wsl
 ```
+
+Por instali la plej freŝan version antaŭ ol `wslu` atigas `main` deponejon, vi povas instali per nia PPA: 
 
 ### OpenSUSE
 
