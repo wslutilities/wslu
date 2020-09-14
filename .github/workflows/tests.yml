@@ -6,5 +6,10 @@ jobs:
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v2
-      - name: Doing nothing
-        run: echo "won't work right now, implement until GitHub action properly support WSL. related issue - https://github.com/actions/virtual-environments/issues/50"
+      - name: Clone & import PsUWI
+        run: |
+          git clone https://github.com/patrick330602/PsUWI.git
+          Import-Module PsUWI/PsUWI.psm1
+      - name: Creating running Instance
+          $WSLInstanceName = New-UbuntuWSLInstance -Release focal -Version 1 -NonInteractive -AdditionalPkg "git,make,gzip,desktop-file-utils"
+
