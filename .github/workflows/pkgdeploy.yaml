@@ -92,14 +92,20 @@ jobs:
     needs: rpmbuild
     container: fedora:latest
     runs-on: ubuntu-latest
-            container: circleci/ruby:2.3-jessie
-            steps:
-              - name: Retrive package for deployment
-                uses: actions/download-artifact@v1
-                with:
-                  name: PengwinDEBs
-              - run: gem install package_cloud
-              - name: deploy to the dev
-                env:
-                  PACKAGECLOUD_TOKEN: ${{ secrets.PGW_DEV_DEPLOY_KEY }}
-                run: package_cloud push whitewaterfoundry/wslu/debian/bullseye ./PengwinDEBs/*.deb --skip-errors
+    steps:
+        - name: Retrive package for deployment
+          uses: actions/download-artifact@v1
+          with:
+            name: RPMs
+        - name: Install API token for copr-cli
+          env:
+            API_TOKEN_CONTENT: ${{ secrets.COPR_API_TOKEN }}
+          run: |
+            mkdir -p "$HOME/.config"
+            echo "$API_TOKEN_CONTENT" > "$HOME/.config/copr"
+        - name: Install tooling for source RPM build
+          run: |
+            dnf -y install @development-tools @rpm-development-tools
+            dnf -y install copr-cli make
+        - name: Submit the build by uploading the source RPM
+          run: copr build praiskup/argparse-manpage-ci RPMs/*.src.rpm
