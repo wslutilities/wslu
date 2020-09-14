@@ -1,4 +1,4 @@
-wslu (3.2.1-0ubuntu1ppa1) groovy; urgency=medium
+wslu (3.2.1-0ubuntu1) groovy; urgency=medium
 
   * Update from 2.3.6 to 3.2.1 to provide new features and address some issues
     - Documentation: add section 7 manpage: `wslu`
