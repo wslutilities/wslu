@@ -11,5 +11,6 @@ jobs:
           git clone https://github.com/patrick330602/PsUWI.git
           Import-Module PsUWI/PsUWI.psm1
       - name: Creating running Instance
+        run: |
           $WSLInstanceName = New-UbuntuWSLInstance -Release focal -Version 1 -NonInteractive -AdditionalPkg "git,make,gzip,desktop-file-utils"
 
