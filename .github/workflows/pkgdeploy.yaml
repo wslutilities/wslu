@@ -87,13 +87,19 @@ jobs:
         with:
           name: RPMs
           path: compiled_rpms
-      # - name: deploy RPM source to rpm-wslu
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GIT_DEPLOY_KEY }}
-      #   run: |
-      #     git config --global user.email "me@patrickwu.space"
-      #     git config --global user.name "Jinming Wu, Patrick"
-      #     git clone --depth 1 https://patrick330602:$GH_TOKEN@github.com/wslutilities/rpm-wslu.git rpm-repo
-      #     git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo add -A
-      #     git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo commit -m "RPM Packaging file update: $(date)"
-      #     git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo push
+  coprdeploy:
+    name: COPR Deploying
+    needs: rpmbuild
+    container: fedora:latest
+    runs-on: ubuntu-latest
+            container: circleci/ruby:2.3-jessie
+            steps:
+              - name: Retrive package for deployment
+                uses: actions/download-artifact@v1
+                with:
+                  name: PengwinDEBs
+              - run: gem install package_cloud
+              - name: deploy to the dev
+                env:
+                  PACKAGECLOUD_TOKEN: ${{ secrets.PGW_DEV_DEPLOY_KEY }}
+                run: package_cloud push whitewaterfoundry/wslu/debian/bullseye ./PengwinDEBs/*.deb --skip-errors
