@@ -61,16 +61,22 @@ wslu (3.2.1-0ubuntu1ppa1) groovy; urgency=medium
 
  -- Patrick Wu <patrick.wu@canonical.com>  Sun, 13 Sep 2020 22:36:33 +0800
 
+wslu (2.3.6-0ubuntu3) groovy; urgency=medium
+
+  * debian/rules:
+    - update the svg conversion commands for the current inkscape
+      version and fix the build      
+
+ -- Patrick Wu <patrick.wu@canonical.com>  Wed, 01 Jul 2020 16:07:10 +0200
+
 wslu (2.3.6-0ubuntu2) groovy; urgency=medium
 
-  * debian/{compat,control}: fallback to 9 due to incompatibility with
-    xenial build system
-  * debian/rules: updated script to build with inkscpae 1.0 and higher
-    due to parameter change
-  * src/wslfetch.sh: update Ubuntu logo (LP: #1883920)
-  * src/wslu-header: reg.exe path not properly set (LP: #1877016)
-  * src/wslu-header: fix an issue that Ubuntu will not be detected properly
-    (LP: #1883924)
+  * d/p/0011-src-wslu-header-reg.exe-path-not-properly-set.patch:
+    - reg.exe path not properly set (LP: #1877016)
+  * d/p/0012-src-wslfetch.sh-update-Ubuntu-logo.patch:
+    - update Ubuntu logo (LP: #1883920)
+  * d/p/0013-src-wslu-header-fix-an-issue-that-Ubuntu-will-not-be.patch:
+    - fix an issue that Ubuntu will not be detected properly (LP: #1883924)
 
  -- Patrick Wu <patrick.wu@canonical.com>  Wed, 17 Jun 2020 21:11:36 +0800
 

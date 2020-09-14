@@ -1,7 +1,7 @@
 Source: wslu
 Section: admin
 Priority: optional
-Maintainer: Patrick Wu <patrick.wu@canonical.com>
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Build-Depends: bats,
                debhelper (>= 10)
 Standards-Version: 4.3.0.3
