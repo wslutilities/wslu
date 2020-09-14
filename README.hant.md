@@ -18,7 +18,7 @@
 
 這是一套適用於 Windows 10 Linux 子系統的工具組，可以在 Windows 10 Linux 子系統下完成諸如獲取 Windows 環境變數或者建立你最喜愛的 Linux 程式桌面捷徑等工作。
 
-需要 Windows 10 創造者更新; 部分功能需要更高版本的Windows 10；支援 WSL2。
+需要 Windows 10 創造者更新；部分功能需要更高版本的Windows 10；支援 WSL2。
 
 ## 功能
 
@@ -59,12 +59,10 @@
 
 ### Alpine Linux
 
-你可以用以下指令安裝 `wslu`：
+你可以用以下指令通過 **Alpine Linux 3.12+** 安裝 `wslu`：
 
 ```
-$ echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/community/" | sudo tee -a /etc/apk/repositories
-$ sudo apk update
-$ sudo apk add wslu@testing
+sudo apk add wslu
 ```
 
 ### Arch Linux
@@ -140,6 +138,8 @@ sudo yum install wslu
 sudo apt update
 sudo apt install ubuntu-wsl
 ```
+
+在最新版 `wslu` 進入 `main` 倉庫前，請從以下 PPA 安裝： <https://launchpad.net/~wslutilities/+archive/ubuntu/wslu>
 
 ### OpenSUSE
 
