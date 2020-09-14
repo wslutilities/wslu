@@ -40,17 +40,17 @@ ln -sf /usr/share/man/man1/wslview.1.gz %{?buildroot}/usr/share/man/man1/wstart.
 %post
 %{_sbindir}/update-alternatives --install %{_bindir}/www-browser www-browser %{_bindir}/wslview 1
 %{_sbindir}/update-alternatives --install %{_bindir}/x-www-browser x-www-browser %{_bindir}/wslview 1
-%{_bindir}/date +"%s" | %{_bindir}/tee /usr/share/wslu/updated_time >/dev/null
-%{_bindir}/desktop-file-install --dir=/usr/share/applications /usr/share/wslu/wslview.desktop
-%{_bindir}/update-desktop-database
+date +"%s" | tee /usr/share/wslu/updated_time >/dev/null
+desktop-file-install --dir=/usr/share/applications /usr/share/wslu/wslview.desktop
+update-desktop-database
 
 %postun
 if [ -f /usr/share/wslu/updated_time ]; then
-    %{_sbindir}/rm /usr/share/wslu/updated_time
+    rm /usr/share/wslu/updated_time
 fi
 if [ -f /usr/share/applications/wslview.desktop ]; then
-    %{_sbindir}/rm /usr/share/applications/wslview.desktop
-    %{_bindir}/update-desktop-database
+    rm /usr/share/applications/wslview.desktop
+    update-desktop-database
 fi
 %{_sbindir}/update-alternatives --remove www-browser %{_bindir}/wslview
 %{_sbindir}/update-alternatives --remove x-www-browser %{_bindir}/wslview
