@@ -51,17 +51,26 @@ if [[ "$cname_header" != "" ]]; then
 
 	# change param according to the exec.
 	distro_param="run"
-	if [[ "$distro_location_win" == *wsl.exe* ]]; then
-		distro_param="-e"
-	fi
 
+	if [[ "$distro_location_win" == *wsl\.exe* ]]; then
+		if [ $(wslu_get_build) -ge $BN_MAY_NINETEEN ]; then
+			distro_param="-d $WSL_DISTRO_NAME -e"
+		else
+			distro_param="-e"
+		fi
+	fi
+ 
+	# handling the execuable part, a.k.a., cname_header
 	# always absolute path
 	tmp_cname_header="$(readlink -f "$cname_header")"
-	if [ ! -f "$cname_header" ]; then
+	if [ ! -f "$tmp_cname_header" ]; then
 		cname_header="$(which "$cname_header")"
 	else
 		cname_header="$tmp_cname_header"
 	fi
+	unset tmp_cname_header
+
+	[ -z "$cname_header" ] && error_echo "Bad or invalid input; Aborting" 30
 
 	# handling no name given case
 	new_cname=$(basename "$cname_header")
@@ -92,6 +101,17 @@ if [[ "$cname_header" != "" ]]; then
 			cp "$iconpath" "$script_location"
 		
 			if [[ "$ext" != "ico" ]]; then
+				if ! type convert > /dev/null; then
+					echo "The 'convert' command is needed for converting the icon."
+					if [ -x /usr/lib/command-not-found ]; then
+						echo " It can be installed with:" >&2
+						echo "" >&2
+						/usr/lib/command-not-found convert 2>&1 | egrep -v '(not found|^$)' >&2
+					else
+						echo "It can usally be found in the imagemagick package, please install it."
+					fi
+					exit 22
+				fi
 				if [[ "$ext" == "svg" ]]; then
 					echo "${info} Converting $ext icon to ico..."
 					convert "$script_location/$icon_filename" -trim -background none -resize 256X256 -define 'icon:auto-resize=16,24,32,64,128,256'  "$script_location/${icon_filename%.$ext}.ico"
@@ -103,8 +123,7 @@ if [[ "$cname_header" != "" ]]; then
 					rm "$script_location/$icon_filename"
 					icon_filename="${icon_filename%.$ext}.ico"
 				else
-					echo "${error} wslusc only support creating shortcut using .png/.svg/.ico icon. Aborted."
-					exit 22
+					error_echo "wslusc only support creating shortcut using .png/.svg/.ico icon. Aborted." 22
 				fi
 			fi
 			iconpath="$script_location_win\\$icon_filename"
@@ -123,14 +142,13 @@ if [[ "$cname_header" != "" ]]; then
 	fi
 
 	if [[ "$is_gui" == "1" ]]; then
-		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs \"$distro_location_win\" $distro_param $customenv /usr/share/wslu/wslusc-helper.sh $cname';\$s.IconLocation='$iconpath';\$s.Save();"
+		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs $distro_location_win $distro_param $customenv /usr/share/wslu/wslusc-helper.sh $cname';\$s.IconLocation='$iconpath';\$s.Save();"
 	else
-		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='\"$distro_location_win\"';\$s.Arguments='$distro_param $customenv bash -l -c $cname';\$s.IconLocation='$iconpath';\$s.Save();"
+		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='$distro_location_win';\$s.Arguments='$distro_param $customenv bash -l -c $cname';\$s.IconLocation='$iconpath';\$s.Save();"
 	fi
 	tpath="$(wslpath "$tpath")/$new_cname.lnk"
 	mv "$tpath" "$dpath"
 	echo "${info} Create shortcut ${new_cname}.lnk successful"
 else
-	echo "${error} No input, aborting"
-	exit 21
+	error_echo "No input, aborting" 21
 fi

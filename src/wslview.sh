@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-version="06"
+version="10"
 
 lname=""
 
@@ -18,11 +18,10 @@ function del_reg_alt {
 
 function add_reg_alt {
 	if [ "$distro" == "archlinux" ] || [ "$distro" == "alpine" ]; then
-		echo "${error} Unsupported action for this distro. Aborted. "
-		exit 34
+		error_echo "Unsupported action for this distro. Aborted." 34
 	else
-		sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser "$(readlink -f "$0")" 1
-		sudo update-alternatives --install /usr/bin/www-browser www-browser "$(readlink -f "$0")" 1
+		sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser "$(readlink -f "$0")" 30
+		sudo update-alternatives --install /usr/bin/www-browser www-browser "$(readlink -f "$0")" 30
 		exit
 	fi
 }
@@ -38,32 +37,24 @@ for args; do
 done
 
 if [[ "$lname" != "" ]]; then
-	wslutmpbuild=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-	wslutmpbuild=${wslutmpbuild##* }
-	wslutmpbuild="$(( wslutmpbuild + 0 ))"
+	wslutmpbuild=$(wslu_get_build)
 	# file:/// protocol used in linux
-	if [[ "$lname" =~ ^file:\/\/\/[^:alpha:][^:][^/]* ]]; then
-		if [ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ]; then
-			properfile_full_path="$(readlink -f "${lname//file:\/\//}")"
-			converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\}"
-			winps_exec Start "\"$converted_file_path\""
-		else
-			echo "${error} This protocol is not supported before version 1903."
-			exit 34
-		fi
-	elif [[ $lname =~ ^(/[^/]+)*(/)?$ ]]; then
-		if [ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ]; then
-			properfile_full_path="$(readlink -f "${lname}")"
-			converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\}"
-			winps_exec Start "\"$converted_file_path\""
-		else
-			echo "${error} This protocol is not supported before version 1903."
-			exit 34
-		fi
-	else
-		winps_exec Start "\"$lname\""
+	if [[ "$lname" =~ ^file:\/\/.*$ ]] && [[ ! "$lname" =~ ^file:\/\/(\/)+[A-Za-z]\:.*$ ]]; then
+		[ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ] || error_echo "This protocol is not supported before version 1903." 34
+		properfile_full_path="$(readlink -f "${lname//file:\/\//}")"
+		interop_win_type="$(interop_prefix)$(sysdrive_prefix)"
+		converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\}"
+		[[ "$properfile_full_path" =~ ^${interop_win_type//\/$/}.*$ ]] && converted_file_path="$(wslpath -w "$properfile_full_path")"
+		lname="$converted_file_path"
+	elif [[ "$lname" =~ ^(/[^/]+)*(/)?$ ]]; then
+		[ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ] || error_echo "This protocol is not supported before version 1903." 34
+		properfile_full_path="$(readlink -f "${lname}")"
+		interop_win_type="$(interop_prefix)$(sysdrive_prefix)"
+		converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\}"
+		[[ "$properfile_full_path" =~ ^${interop_win_type//\/$/}.*$ ]] && converted_file_path="$(wslpath -w "$properfile_full_path")"
+		lname="$converted_file_path"
 	fi
+	winps_exec Start "\"$lname\""
 else
-	echo "${error} No input, aborting"
-	exit 21
+	error_echo "No input, aborting" 21
 fi

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+date +"%s" | tee /usr/share/wslu/updated_time >/dev/null
+
+exit 0

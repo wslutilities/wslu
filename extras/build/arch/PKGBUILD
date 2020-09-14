@@ -1,0 +1,26 @@
+# Maintainer: Patrick Wu <me@patrickwu.space>
+
+pkgname=wslu
+pkgver=3.2.1
+pkgrel=0
+pkgdesc="A collection of utilities for Windows 10 Linux Subsystems"
+arch=('any')
+url='https://github.com/wslutilities/wslu'
+license=('GPL-3.0-or-later')
+depends=('bc' 'imagemagick' 'bash-completion')
+source=("git+https://github.com/wslutilities/wslu.git#tag=v${pkgver}")
+sha256sums=('SKIP')
+
+build() {
+  cd wslu
+  bash ./configure.sh --build
+  make
+}
+
+package() {
+  cd wslu
+  make DESTDIR="${pkgdir}" install
+  install -Dm 644 LICENSE -t "${pkgdir}"/usr/share/licenses/wslu/
+}
+
+# vim: ts=2 sw=2 et:

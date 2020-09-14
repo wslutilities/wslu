@@ -10,8 +10,7 @@ function call_branch() {
 }
 
 function call_build() {
-	build=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-	echo "${build##* }"
+	wslu_get_build
 }
 
 function call_full_build() {
@@ -37,7 +36,7 @@ function call_theme() {
 function call_display_scaling() {
 	up_path="$(wslvar -s USERPROFILE)"
 	wslu_file_check "$(wslpath "$up_path")/wslu" "get_dpi.ps1" "?!S"
-	display_scaling="$(winps_exec "$(double_dash_p "$up_path")\\wslu\\get_dpi.ps1" | sed -e 's|\r||g')"
+	display_scaling="$(winps_exec "$(double_dash_p "$up_path" | sed -e 's| |\` |g')\\wslu\\get_dpi.ps1" | sed -e 's|\r||g')"
 	bc -l <<< "$(printf "%d\n" "$display_scaling")/100" | sed -e "s/\.0//g" -e "s/0*$//g"
 }
 
@@ -61,14 +60,15 @@ function get_wsl_version() {
 	wslutmpbuild="$(( $(call_build) + 0 ))"
 	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
 		# The environment variable only available in 19H1 or later.
-		wslu_distro_regpath=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | grep -B1 -e "$WSL_DISTRO_NAME" | head -n1 | sed -e 's|\r||g')
-		if "$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Version &>/dev/null; then
-			wslu_distro_version=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Version | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+		wslu_distro_regpath=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | sed -e 's|\r||g' | grep -B1 -e "$WSL_DISTRO_NAME$" | head -n1 )
+		if "$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Flags &>/dev/null; then
+			wslu_distro_version=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Flags | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 			wslu_distro_version=${wslu_distro_version##* }
-			if [ "$wslu_distro_version" != "0x2" ]; then
-				echo "1"
-			else
+			wslu_distro_version_processed=$(expr $(printf "%d\n" "$wslu_distro_version") / 8)
+			if [ "$wslu_distro_version_processed" == "1" ]; then
 				echo "2"
+			elif [ "$wslu_distro_version_processed" == "0" ]; then
+				echo "1"
 			fi
 		else
 			echo "1"

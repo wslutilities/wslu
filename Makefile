@@ -59,10 +59,11 @@ res_install:
 	install -Dm 644 src/etc/*.ps1 -t $(DESTDIR)$(PREFIX)/share/wslu
 	install -Dm 644 src/etc/*.ico -t $(DESTDIR)$(PREFIX)/share/wslu
 	install -Dm 755 src/etc/*.sh -t $(DESTDIR)$(PREFIX)/share/wslu
+	install -Dm 644 src/etc/*.desktop $(DESTDIR)$(PREFIX)/share/wslu
 
 clean:
 	rm -rf $(OUTPATH)
 	rm -rf $(OUTMANPATH)
 
 test:
-	extras/bats/libexec/bats tests/header.bats tests/wslsys.bats tests/wslusc.bats tests/wslupath.bats tests/wslvar.bats tests/wslfetch.bats tests/wslview.bats tests/wslact.bats
+	extras/bats/bin/bats -r tests
