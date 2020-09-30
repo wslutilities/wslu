@@ -33,30 +33,30 @@ distro="$(head -n1 /etc/os-release | sed -e 's/NAME=\"//g')"
 case $distro in
 	*Pengwin*)
 		sudo dpkg --force-depends --remove wslu
-		sudo apt install -y git gzip make
+		sudo apt install -y git gzip make bats
 		;;
 	*WLinux*|Ubuntu*|*Debian*|*Kali*)
 		sudo apt purge -y wslu
-		sudo apt install -y git bc gzip make imagemagick
+		sudo apt install -y git bc gzip make imagemagick bats
 		;;
 	openSUSE*|SLES*)
 		sudo zypper -n rm wslu
-		sudo zypper -n install git bc gzip make imagemagick
+		sudo zypper -n install git bc gzip make imagemagick bats
 		;;
 	Alpine*)
-		sudo apk add git bc gzip make bash-completion imagemagick
+		sudo apk add git bc gzip make bash-completion imagemagick bats
 		;;
 	Arch*)
-		sudo pacman -Syyu git bc gzip make bash-completion imagemagick
+		sudo pacman -Syyu git bc gzip make bash-completion imagemagick bats
 		;;
 	*Oracle*|Scientific*)
-		sudo yum install -y git bc gzip make bash-completion imagemagick
+		sudo yum install -y git bc gzip make bash-completion imagemagick bats
 		;;
 	*Fedora*)
-		sudo dnf install -y git bc gzip make bash-completion ImageMagick
+		sudo dnf install -y git bc gzip make bash-completion ImageMagick bats
 		;;
 	*Gentoo*)
-		sudo emerge -a n sys-devel/bc media-gfx/imagemagick app-shells/bash-completion sys-devel/make dev-vcs/git app-arch/gzip
+		sudo emerge -a n sys-devel/bc media-gfx/imagemagick app-shells/bash-completion sys-devel/make dev-vcs/git app-arch/gzip bats
 		;;
 	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && sudo dnf install -y git || exit 1;;
 	*) exit 1;;
