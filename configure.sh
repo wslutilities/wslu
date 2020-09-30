@@ -56,7 +56,7 @@ case $distro in
 		sudo dnf install -y git bc gzip make bash-completion ImageMagick bats
 		;;
 	*Gentoo*)
-		sudo emerge -a n sys-devel/bc media-gfx/imagemagick app-shells/bash-completion sys-devel/make dev-vcs/git app-arch/gzip bats
+		sudo emerge -a n sys-devel/bc media-gfx/imagemagick app-shells/bash-completion sys-devel/make dev-vcs/git app-arch/gzip dev-util/bats
 		;;
 	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && sudo dnf install -y git || exit 1;;
 	*) exit 1;;
