@@ -331,7 +331,7 @@ esac
 
 SAVEIFS=$IFS
 IFS=$'\n'
-info_collect=($(wslsys --wslfetch "${WSLFETCH_INFO_SECTION:-"windows-build,windows-rel-branch,wsl-release,wsl-kernel,windows-uptime"}" "${t}"))
+info_collect=($(wslsys --wslfetch "${WSLFETCH_INFO_SECTION:-"windows-build,windows-rel-branch,wsl-release,wsl-kernel,wsl-ip,windows-uptime"}" "${t}"))
 IFS=$SAVEIFS
 
 wslf_ver="${info_collect[0]}"

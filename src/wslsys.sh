@@ -116,6 +116,10 @@ function get_wsl_packages() {
 	echo "$packages"
 }
 
+function get_wsl_ip() {
+	echo "$(hostname -I)"
+}
+
 ## Simple printer defined for fetching information
 function printer() {
 	if [[ -n "$WSLSYS_WSLFETCH_COLOR" ]]; then
@@ -179,6 +183,9 @@ function dict_finder() {
 			return;;
 		13|-P|--package|wsl-package-count)
 			printer "Packages" "$(get_wsl_packages)"
+			return;;
+		14|-i|--ip|wsl-ip)
+			printer "IPv4 Address" "$(get_wsl_ip)"
 			return;;
 		*) return 1;;
 	esac
