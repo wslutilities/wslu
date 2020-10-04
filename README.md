@@ -66,7 +66,9 @@ sudo apk add wslu
 
 ### Arch Linux
 
-[wslu](https://aur.archlinux.org/packages/wslu/) and [wslu-git](https://aur.archlinux.org/packages/wslu-git/) on AUR.
+> AUR version of `wslu` is pulled due to that it violated its policy.
+
+Doanload the latest package from release and install using the command: `sudo pacman -U *.zst`
 
 ### CentOS/RHEL
 
@@ -93,12 +95,7 @@ sudo apt install wslu
 
 ### Fedora Remix
 
-You can install `wslu` from `COPR` with the following command:
-
-```
-sudo dnf copr enable wslutilities/wslu
-sudo dnf install wslu
-```
+Preinstalled.
 
 ### Kali Linux
 
@@ -121,7 +118,6 @@ Preinstalled.
 You can install `wslu` with the following command:
 
 ```
-sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/ScientificLinux_7/home:wslutilities.repo
 sudo yum install wslu
 ```
 
