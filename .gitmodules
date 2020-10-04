@@ -1,0 +1,3 @@
+[submodule "extras/bats"]
+	path = extras/bats
+	url = https://github.com/bats-core/bats-core.git
