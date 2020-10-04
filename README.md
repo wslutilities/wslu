@@ -66,7 +66,9 @@ sudo apk add wslu
 
 ### Arch Linux
 
-[wslu](https://aur.archlinux.org/packages/wslu/) and [wslu-git](https://aur.archlinux.org/packages/wslu-git/) on AUR.
+> AUR version of `wslu` is pulled due to that it violated its policy.
+
+Doanload the latest package from release and install using the command: `sudo pacman -U *.zst`
 
 ### CentOS/RHEL
 
