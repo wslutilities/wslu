@@ -19,16 +19,15 @@
 
 # Version
 wslu_version=VERSIONPLACEHOLDER
+wslu_prefix="PREFIXPLACEHOLDER"
 
-# Speed up script by not using unicode.
+# Speed up script by using unicode.
 LC_ALL=C
 LANG=C
 
 # prevent bash -x
 set +x
 
-# checking interopability
-grep enabled /proc/sys/fs/binfmt_misc/WSLInterop >/dev/null || (echo "WSL Interopability is disabled. Please enable it before using WSL."; exit 1)
 # when --verbose, verbose; when --debug, debug.
 #
 # They should not exist at the same time, otherwise
@@ -84,6 +83,23 @@ readonly BN_APR_EIGHTEEN=17134		#1803, Redstone 4, April 2018 Update
 readonly BN_OCT_EIGHTEEN=17763		#1809, Redstone 5, October 2018 Update
 readonly BN_MAY_NINETEEN=18362		#1903, 19H1, May 2019 Update
 readonly BN_NOV_NINETEEN=18363		#1909, 19H2, November 2019 Update
+readonly BN_MAY_TWENTYTY=19041		#2004, 20H1, May 2020 Update
+
+# source default config
+if [ -f "${wslu_prefix}/share/wslu/conf" ]; then
+	source "${wslu_prefix}/share/wslu/conf"
+fi
+
+# source user-defined config
+if [ -f "${wslu_prefix}/share/wslu/custom.conf" ]; then
+	source "${wslu_prefix}/share/wslu/custom.conf"
+fi
+if [ -f "$HOME/.config/wslu/conf" ]; then
+	source "$HOME/.config/wslu/conf"
+fi
+if [ -f "$HOME/.wslurc" ]; then
+	source "$HOME/.wslurc"
+fi
 
 # functions
 function debug_echo {
@@ -250,6 +266,7 @@ case $distro in
 	Scientific*) distro="scilinux";;
 	*Fedora\ Remix\ for\ WSL*) distro="fedoraremix";;
 	*Fedora*) distro="fedora";;
+	*Gentoo*) distro="gentoo";;
 	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && distro="oldfedora" || distro="unknown";;
 	*) distro="unknown";;
 esac

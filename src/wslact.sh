@@ -3,8 +3,8 @@ version="03"
 
 help_short="wslact COMMAND ..."
 
-function time_sync {
-	local help_short="wslact time-sync [-h]"
+function time_reset {
+	local help_short="wslact time-reset [-h]"
 
 	while [ "$1" != "" ]; do
 		case "$1" in
@@ -18,9 +18,17 @@ function time_sync {
 	fi
 
 	echo "${info} Before Sync: $(date +"%d %b %Y %T %Z")"
-	if date -s "$(winps_exec "Get-Date -UFormat \"%m/%d/%Y %T %Z\"" | tr -d "\r")" >/dev/null; then
+	if [[ "$(wslsys -V -s)" == "2" ]]; then
+		if hwclock -s >/dev/null; then
+			echo "${info} After Sync: $(date +"%d %b %Y %T %Z")"
+			echo "${info} Manual Time Reset Complete."
+		else
+			echo "${error} Time Sync failed."
+			exit 1
+		fi
+	elif date -s "$(winps_exec "Get-Date -UFormat \"%m/%d/%Y %T %Z\"" | tr -d "\r")" >/dev/null; then
 		echo "${info} After Sync: $(date +"%d %b %Y %T %Z")"
-		echo "${info} Manual Time Sync Complete."
+		echo "${info} Manual Time Reset Complete."
 	else
 		error_echo "Time Sync failed." 1
 	fi
@@ -83,8 +91,8 @@ function auto_mount {
 
 while [ "$1" != "" ]; do
 	case "$1" in
+		ts|time-sync|tr|time-reset) time_reset "$@"; exit;;
 		am|auto-mount|sm|smart-mount) auto_mount "$@"; exit;;
-		ts|time-sync) time_sync "$@"; exit;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslact v$version"; exit;;
 		*) error_echo "Invalid Input. Aborted." 22;;

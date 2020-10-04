@@ -65,5 +65,8 @@ clean:
 	rm -rf $(OUTPATH)
 	rm -rf $(OUTMANPATH)
 
-test:
+test: 
 	extras/bats/bin/bats -r tests
+
+coverage: 
+	kcov --include-path="./src,./out" ./tests/coverage ./extras/bats/bin/bats -r tests
