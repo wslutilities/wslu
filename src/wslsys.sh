@@ -9,8 +9,8 @@ function get_branch() {
 	echo "${branch##* }"
 }
 
-	wslu_get_build
 function get_build() {
+	wslu_get_build
 }
 
 function get_full_build() {
@@ -195,7 +195,7 @@ function dict_finder() {
 function wslsys_main() {
 	# If input is empty, print everything available
 	if [[ "$@" == "" ]]; then
-		for i in {1..13}; do
+		for i in {1..14}; do
 			dict_finder $i
 		done
 		exit
