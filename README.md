@@ -68,7 +68,7 @@ sudo apk add wslu
 
 > AUR version of `wslu` is pulled due to that it violated its policy.
 
-Doanload the latest package from release and install using the command: `sudo pacman -U *.zst`
+Download the latest package from release and install using the command: `sudo pacman -U *.zst`
 
 ### CentOS/RHEL
 
