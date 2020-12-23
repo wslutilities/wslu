@@ -1,3 +1,19 @@
+wslu (3.2.1-0kali1) kali-dev; urgency=medium
+
+  * header: improvements on the system drive detection. (closes #133)
+  * tests: update the test system and tests. (closes #125)
+  * wslact: add back-compatibility for the auto-mounting feature.
+  * wslview: fix an issue when handling http/https
+  * wslview: fix a bug that it won't open file:///mnt/c/... or /mnt/c/...
+  * wslusc: fix an issue that wsl.exe execute with wrongly passed param (close #138)
+  * wslusc: fix the problem that the previous version that GUI shortcut generated won't work.
+  * wslsys: fix an issue that the WSL Version shown is wrong.
+  * Includes a wslview.desktop (PR #143 and #146)
+  * Update the script to fix badly generated shortcut issue (fixes #141)
+  * Fix a DPI script related space issue (fixes #144)
+
+ -- Jinming Wu, Patrick <me@patrickwu.space>  Wed, 23 Dec 2020 22:33:07 +0800
+
 wslu (3.1.1-0kali1) kali-dev; urgency=medium
 
   * project: add separate Fedora Remix support
