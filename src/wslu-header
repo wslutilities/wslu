@@ -183,8 +183,8 @@ function baseexec_gen {
 function var_gen {
 	date +"%s" > ~/.config/wslu/triggered_time
 
-	rm ~/.config/wslu/baseexec
-	rm ~/.config/wslu/oemcp
+	rm -f ~/.config/wslu/baseexec
+	rm -f ~/.config/wslu/oemcp
 
 	# generate oem codepage
 	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*' > ~/.config/wslu/oemcp
