@@ -1,0 +1,36 @@
+From 653d67bde966ea360848daa73d43a2cadcc637d6 Mon Sep 17 00:00:00 2001
+From: Carlos Rafael Ramirez <crramirez@users.noreply.github.com>
+Date: Sun, 25 Oct 2020 00:40:12 +0200
+Subject: [PATCH] Avoid error message when the file doesn't exist
+
+When the distribution was just installed, wslsys displays the following error message:
+
+rm: cannot remove '/home/user/.config/wslu/baseexec': No such file or directory
+rm: cannot remove '/home/user/.config/wslu/oemcp': No such file or directory
+
+Adding -f to rm removes this:
+
+       -f, --force
+              ignore nonexistent files and arguments, never prompt
+---
+ src/wslu-header | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/wslu-header b/src/wslu-header
+index e1f3add..fa88fb3 100644
+--- a/src/wslu-header
++++ b/src/wslu-header
+@@ -183,8 +183,8 @@ function baseexec_gen {
+ function var_gen {
+ 	date +"%s" > ~/.config/wslu/triggered_time
+ 
+-	rm ~/.config/wslu/baseexec
+-	rm ~/.config/wslu/oemcp
++	rm -f ~/.config/wslu/baseexec
++	rm -f ~/.config/wslu/oemcp
+ 
+ 	# generate oem codepage
+ 	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*' > ~/.config/wslu/oemcp
+--
+libgit2 0.28.4
+

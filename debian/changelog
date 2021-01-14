@@ -1,3 +1,10 @@
+wslu (3.2.1-0ubuntu2) hirsute; urgency=medium
+
+  * header: Avoid error message when the file doesn't
+    exist (LP: 1911379)
+
+ -- Patrick Wu <patrick.wu@canonical.com>  Wed, 13 Jan 2021 11:26:25 +0800
+
 wslu (3.2.1-0ubuntu1) groovy; urgency=medium
 
   * Update from 2.3.6 to 3.2.1 to provide new features and
