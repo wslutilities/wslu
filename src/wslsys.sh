@@ -104,7 +104,7 @@ function get_wsl_packages() {
 	case "$distro" in
 		'pengwin'|'ubuntu'|'kali'|'debian'|'wlinux')
 			packages=$(dpkg -l | grep -c '^i');;
-		'opensuse'|'sles'|'scilinux'|'oldfedora'|'fedora'|'oracle')
+		'opensuse'|'sles'|'scilinux'|'oldfedora'|'fedora'|'oracle'|'cblm')
 			packages=$(rpm -qa | wc -l);;
 		'alpine')
 			packages=$(apk info | wc -l);;

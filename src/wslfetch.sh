@@ -316,6 +316,14 @@ case "$distro" in
 			"${light_purple}/h${white}MMNNNNNNNNMNdhs++/${light_purple}-\`               ${reset}"
 			"${light_purple}\`/${white}ohdmmddhys+++/:${light_purple}.\`                  ${reset}"
 			"${light_purple}  \`-//////:--.                       ${reset}");;
+	"cblm")
+		t="${blue}${bold}"
+		ascii_text=(
+		"${blue}  ____ ____  _               __  __ ${reset}"
+		"${blue} / ___| __ )| |             |  \\/  |${reset}"
+		"${blue}| |   |  _ \\| |      _____  | |\\/| |${reset}"
+		"${blue}| |___| |_) | |___  |_____| | |  | |${reset}"
+		"${blue} \\____|____/|_____|         |_|  |_|${reset}");;
 	*)
 		t="${cyan}${bold}"
 		ascii_text=(
