@@ -324,6 +324,29 @@ case "$distro" in
 		"${blue}| |   |  _ \\| |      _____  | |\\/| |${reset}"
 		"${blue}| |___| |_) | |___  |_____| | |  | |${reset}"
 		"${blue} \\____|____/|_____|         |_|  |_|${reset}");;
+	"clear")
+		t="${blue}${bold}"
+		ascii_text=(
+		"${blue}          BBB               ${reset}"
+		"${blue}       BBBBBBBBB            ${reset}"
+		"${blue}     BBBBBBBBBBBBBBB        ${reset}"
+		"${blue}   BBBBBBBBBBBBBBBBBBBB     ${reset}"
+		"${blue}   BBBBBBBBBBB         BBB  ${reset}"
+		"${blue}  BBBBBBBB${brown}YYYYY             ${reset}"
+		"${blue}  BBBBBBBB${brown}YYYYYY            ${reset}"
+		"${blue}  BBBBBBBB${brown}YYYYYYY           ${reset}"
+		"${blue}  BBBBBBBBB${brown}YYYYY${white}W           ${reset}"
+		"${cyan} GG${blue}BBBBBBBY${brown}YYYY${white}WWW          ${reset}"
+		"${cyan} GGG${blue}BBBBBBB${brown}YY${white}WWWWWWWW       ${reset}"
+		"${cyan} GGGGGG${blue}BBBBBB${white}WWWWWWWW       ${reset}"
+		"${cyan} GGGGGGGG${blue}BBBB${white}WWWWWWWW       ${reset}"
+		"${cyan}GGGGGGGGGGG${blue}BBB${white}WWWWWWW       ${reset}"
+		"${cyan}GGGGGGGGGGGGG${blue}B${white}WWWWWW        ${reset}"
+		"${cyan}GGGGGGGG${white}WWWWWWWWWWW         ${reset}"
+		"${cyan}GG${white}WWWWWWWWWWWWWWWW          ${reset}"
+		"${white} WWWWWWWWWWWWWWWW           ${reset}"
+		"${white}      WWWWWWWWWW            ${reset}"
+		"${white}          WWW               ${reset}");;
 	*)
 		t="${cyan}${bold}"
 		ascii_text=(

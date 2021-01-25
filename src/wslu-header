@@ -253,6 +253,7 @@ fi
 # basic distro detection
 distro="$(head -n1 /etc/os-release | sed -e 's/NAME=\"//g')"
 case $distro in
+	*Clear\ Linux*) distro="clear";;
 	*Common\ Base\ Linux\ Mariner*) distro="cblm";;
 	*Pengwin*) distro="pengwin";;
 	*WLinux*) distro="wlinux";;
