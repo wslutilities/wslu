@@ -28,6 +28,7 @@ done
 debug_echo "is_color: $is_color"
 debug_echo "is_generic: $is_generic"
 debug_echo "WSLFETCH_INFO_SECTION: $WSLFETCH_INFO_SECTION"
+debug_echo "WSLFETCH_COLORBAR: $WSLFETCH_COLORBAR"
 
 [[ "$is_generic" == "1" ]] && distro=""
 case "$distro" in
@@ -371,7 +372,7 @@ esac
 
 debug_echo "distro: $distro"
 debug_echo "t: ${t}color${reset}"
-debug_echo "ascii_text: $ascii_text"
+debug_echo "ascii_text: ${ascii_text[@]}"
 
 SAVEIFS=$IFS
 IFS=$'\n'
