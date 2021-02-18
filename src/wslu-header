@@ -86,23 +86,7 @@ readonly BN_MAY_NINETEEN=18362		#1903, 19H1, May 2019 Update
 readonly BN_NOV_NINETEEN=18363		#1909, 19H2, November 2019 Update
 readonly BN_MAY_TWENTYTY=19041		#2004, 20H1, May 2020 Update
 
-# source default config
-if [ -f "${wslu_prefix}/share/wslu/conf" ]; then
-	source "${wslu_prefix}/share/wslu/conf"
-fi
-
-# source user-defined config
-if [ -f "${wslu_prefix}/share/wslu/custom.conf" ]; then
-	source "${wslu_prefix}/share/wslu/custom.conf"
-fi
-if [ -f "$HOME/.config/wslu/conf" ]; then
-	source "$HOME/.config/wslu/conf"
-fi
-if [ -f "$HOME/.wslurc" ]; then
-	source "$HOME/.wslurc"
-fi
-
-# functions
+# echo functions
 function debug_echo {
 	[ "$wslu_debug" == "--debug" ] && echo "${orange}${bold}[debug:${wslu_c_p}]${reset} $@" 1>&2;
 }
@@ -111,6 +95,28 @@ function error_echo {
 	echo "${error} $1"
 	exit $2
 }
+
+# source default config
+if [ -f "${wslu_prefix}/share/wslu/conf" ]; then
+	debug_echo "source default setting"
+	source "${wslu_prefix}/share/wslu/conf"
+fi
+
+# source user-defined config
+if [ -f "${wslu_prefix}/share/wslu/custom.conf" ]; then
+	debug_echo "${wslu_prefix}/share/wslu/custom.conf found, sourcing"
+	source "${wslu_prefix}/share/wslu/custom.conf"
+fi
+if [ -f "$HOME/.config/wslu/conf" ]; then
+	debug_echo "$HOME/.config/wslu/conf found, sourcing"
+	source "$HOME/.config/wslu/conf"
+fi
+if [ -f "$HOME/.wslurc" ]; then
+	debug_echo "$HOME/.wslurc found, sourcing"
+	source "$HOME/.wslurc"
+fi
+
+# functions
 
 function help {
 	app_name=$(basename "$1")
