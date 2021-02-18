@@ -25,6 +25,10 @@ do
 	esac
 done
 
+debug_echo "is_color: $is_color"
+debug_echo "is_generic: $is_generic"
+debug_echo "WSLFETCH_INFO_SECTION: $WSLFETCH_INFO_SECTION"
+
 [[ "$is_generic" == "1" ]] && distro=""
 case "$distro" in
 	'ubuntu')
@@ -365,18 +369,25 @@ case "$distro" in
 			"${cyan}|__/     \\__/ \\______/ |________/${reset} ");;
 esac
 
+debug_echo "distro: $distro"
+debug_echo "t: ${t}color${reset}"
+debug_echo "ascii_text: $ascii_text"
+
 SAVEIFS=$IFS
 IFS=$'\n'
 info_collect=($(wslsys $wslu_debug --wslfetch "${WSLFETCH_INFO_SECTION:-"windows-build,windows-rel-branch,wsl-release,wsl-kernel,wsl-ip,windows-uptime"}" "${t}"))
 IFS=$SAVEIFS
 
 wslf_ver="${info_collect[0]}"
+debug_echo "collected wsl version: $wslf_ver"
 
+debug_echo "constructing text"
 info_text=("${t}Windows Subsystem for Linux (WSL${wslf_ver})${reset}"
 "${t}${USER}${reset}@${t}$(</etc/hostname)${reset}")
 info_text+=("${info_collect[@]:1}")
 
 if [[ "$is_color" == "1" ]] || [[ "$WSLFETCH_COLORBAR" == "true" ]]; then
+	debug_echo "constructing colorbar"
 	info_text+=("${reset}"
 	"   \e[40m   \e[41m   \e[42m   \e[43m   \e[44m   \e[45m   \e[46m   \e[47m   ${reset}"
 	"   \e[48;5;8m   \e[48;5;9m   \e[48;5;10m   \e[48;5;11m   \e[48;5;12m   \e[48;5;13m   \e[48;5;14m   \e[48;5;15m   ${reset}")
