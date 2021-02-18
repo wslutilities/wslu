@@ -233,6 +233,13 @@ function var_gen {
 
 }
 
+function wslu_function_check {
+	# from https://stackoverflow.com/questions/85880/determine-if-a-function-exists-in-bash
+	debug_echo "wslu_function_check: called with $@"
+	declare -f -F $1 > /dev/null
+	return $?
+}
+
 function wslu_file_check {
 	debug_echo "wslu_file_check: called with $@"
 	should_i_show=""
