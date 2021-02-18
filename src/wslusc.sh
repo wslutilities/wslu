@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-version="40"
+version="50"
 
 cname=""
 iconpath=""
@@ -8,10 +8,17 @@ is_interactive=0
 customname=""
 customenv=""
 
-help_short="wslusc [-gi] [-e PATH] [-n NAME] [-i FILE] COMMAND\nwslusc [-hv]"
+help_short="wslusc [-dgi] [-e PATH] [-n NAME] [-i FILE] COMMAND\nwslusc [-hv]"
+
+function sc_debug {
+	debug_echo "sc_debug: called with $@"
+	dp="$(double_dash_p "$(wslvar -l Desktop)")"
+	winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$dp\\$@');\$s;"
+}
 
 while [ "$1" != "" ]; do
 	case "$1" in
+		-d|--shortcut-debug) shift; sc_debug "$@"; exit;;
 		-I|--interactive)is_interactive=1;shift;; 
 		-i|--icon)shift;iconpath=$1;shift;;
 		-n|--name)shift;customname=$1;shift;;
