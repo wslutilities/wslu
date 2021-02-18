@@ -137,7 +137,7 @@ function get_wsl_ip() {
 
 ## Simple printer defined for fetching information
 function printer() {
-	debug_echo "printer: called with $1 $2"
+	debug_echo "printer: called with \"$1\" \"$2\""
 	if [[ -n "$WSLSYS_WSLFETCH_COLOR" ]]; then
 		debug_echo "printer: wslfetch printing"
 		echo "$WSLSYS_WSLFETCH_COLOR$1${reset}: $2"
