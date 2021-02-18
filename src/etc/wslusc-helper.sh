@@ -57,23 +57,25 @@ function sysdrive_prefix {
 if [[ -n $WSL_INTEROP ]]; then
   # enable external x display for WSL 2
 
-  
   if ( command -v ipconfig.exe &>/dev/null ); then
     ipconfig_exec=$(command -v ipconfig.exe)
   else
     ipconfig_exec="$(interop_prefix)$(sysdrive_prefix)/Windows/System32/ipconfig.exe"
   fi
 
-  if ( eval "$ipconfig_exec" | grep -n -m 1 "Default Gateway.*: [0-9a-z]" | cut -d : -f 1 ) >/dev/null; then
-    set +H
-    wsl2_d_tmp="$(eval "$ipconfig_exec" | grep -n -m 1 "Default Gateway.*: [0-9a-z]" | cut -d : -f 1)"
-    wsl2_d_tmp="$(eval "$ipconfig_exec" | sed $(( wsl2_d_tmp - 4 ))','$(( wsl2_d_tmp + 0 ))'!d' | grep IPv4 | cut -d : -f 2 | sed -e "s|\s||g" -e "s|\r||g")"
-    set -H
-    export DISPLAY=${wsl2_d_tmp}:0.0
-  else
-    wsl2_d_tmp="$(grep nameserver /etc/resolv.conf | awk '{print $2}')"
-    export DISPLAY=${wsl2_d_tmp}:0
-  fi
+#   if ( eval "$ipconfig_exec" | grep -n -m 1 "Default Gateway.*: [0-9a-z]" | cut -d : -f 1 ) >/dev/null; then
+#     set +H
+#     wsl2_d_tmp="$(eval "$ipconfig_exec" | grep -n -m 1 "Default Gateway.*: [0-9a-z]" | cut -d : -f 1)"
+#     wsl2_d_tmp="$(eval "$ipconfig_exec" | sed $(( wsl2_d_tmp - 4 ))','$(( wsl2_d_tmp + 0 ))'!d' | grep IPv4 | cut -d : -f 2 | sed -e "s|\s||g" -e "s|\r||g")"
+#     set -H
+#     export DISPLAY=${wsl2_d_tmp}:0.0
+#   else
+#     wsl2_d_tmp="$(grep nameserver /etc/resolv.conf | awk '{print $2}')"
+#     export DISPLAY=${wsl2_d_tmp}:0
+#   fi
+
+  wsl2_d_tmp="$(grep nameserver /etc/resolv.conf | awk '{print $2}')"
+  export DISPLAY=${wsl2_d_tmp}:0
 
   unset wsl2_d_tmp
   unset ipconfig_exec
