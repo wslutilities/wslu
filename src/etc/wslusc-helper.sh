@@ -18,69 +18,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-function interop_prefix {
-
-	win_location="/mnt/"
-	if [ -f /etc/wsl.conf ]; then
-		tmp="$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf | awk '{$1=$1;print}')"
-		[ "$tmp" == "" ] || win_location="$tmp"
-		unset tmp
-	fi
-	echo "$win_location"
-
-	unset win_location
-}
-
-function sysdrive_prefix {
-	win_location="$(interop_prefix)"
-	hard_reset=0
-	for pt in $(ls "$win_location"); do
-		if [ $(echo "$pt" | wc -l) -eq 1 ]; then
-			if [ -d "$win_location$pt/Windows/System32" ]; then
-				hard_reset=1
-				win_location="$pt"
-				break
-			fi
-		fi 
-	done
-
-	if [ $hard_reset -eq 0 ]; then
-		win_location="c"
-	fi
-
-	echo "$win_location"
-
-	unset win_location
-	unset hard_reset
-}
-
 if [[ -n $WSL_INTEROP ]]; then
   # enable external x display for WSL 2
-
-  if ( command -v ipconfig.exe &>/dev/null ); then
-    ipconfig_exec=$(command -v ipconfig.exe)
-  else
-    ipconfig_exec="$(interop_prefix)$(sysdrive_prefix)/Windows/System32/ipconfig.exe"
-  fi
-
-#   if ( eval "$ipconfig_exec" | grep -n -m 1 "Default Gateway.*: [0-9a-z]" | cut -d : -f 1 ) >/dev/null; then
-#     set +H
-#     wsl2_d_tmp="$(eval "$ipconfig_exec" | grep -n -m 1 "Default Gateway.*: [0-9a-z]" | cut -d : -f 1)"
-#     wsl2_d_tmp="$(eval "$ipconfig_exec" | sed $(( wsl2_d_tmp - 4 ))','$(( wsl2_d_tmp + 0 ))'!d' | grep IPv4 | cut -d : -f 2 | sed -e "s|\s||g" -e "s|\r||g")"
-#     set -H
-#     export DISPLAY=${wsl2_d_tmp}:0.0
-#   else
-#     wsl2_d_tmp="$(grep nameserver /etc/resolv.conf | awk '{print $2}')"
-#     export DISPLAY=${wsl2_d_tmp}:0
-#   fi
-
   wsl2_d_tmp="$(grep nameserver /etc/resolv.conf | awk '{print $2}')"
   export DISPLAY=${wsl2_d_tmp}:0
 
   unset wsl2_d_tmp
-  unset ipconfig_exec
 else
-    export DISPLAY=:0
+  export DISPLAY=:0
 fi
 
 win_sys_scaling=$(wslsys -S -s)
