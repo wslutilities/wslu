@@ -35,12 +35,12 @@ set +x
 wslu_debug=""
 wslu_c_p="$0"
 if [ "$1" == "--verbose" ]; then
-	echo -e '\e[38;5;202m\033[1m[verbose] Showing verbose output. \033(B\033[m'
+	echo -e '\e[38;5;202m\033[1m[verbose] Showing verbose output. \033(B\033[m' 1>&2
 	shift
 	set -x
 elif [ "$1" == "--debug" ]; then
 	wslu_debug="--debug"
-	echo -e '\e[38;5;202m\033[1m[debug:'${wslu_c_p}'] Showing debug output. \033(B\033[m'
+	echo -e '\e[38;5;202m\033[1m[debug:'${wslu_c_p}'] Showing debug output. \033(B\033[m' 1>&2
 	shift
 fi
 
