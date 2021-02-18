@@ -104,7 +104,7 @@ fi
 
 # functions
 function debug_echo {
-	[ $wslu_debug == "--debug" ] && echo "${orange}${bold}[debug:${wslu_c_p}]${reset} $@" 1>&2;
+	[ "$wslu_debug" == "--debug" ] && echo "${orange}${bold}[debug:${wslu_c_p}]${reset} $@" 1>&2;
 }
 
 function error_echo {
