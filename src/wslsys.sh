@@ -137,15 +137,15 @@ function get_wsl_ip() {
 
 ## Simple printer defined for fetching information
 function printer() {
-	debug_echo "printer(wslsys): called"
+	debug_echo "printer: called with $1 $2"
 	if [[ -n "$WSLSYS_WSLFETCH_COLOR" ]]; then
-		debug_echo "printer(wslsys): wslfetch printing"
+		debug_echo "printer: wslfetch printing"
 		echo "$WSLSYS_WSLFETCH_COLOR$1${reset}: $2"
 	elif [[ -z "$WSLSYS_WSLFETCH_SHORTFORM" ]]; then
-		debug_echo "printer(wslsys): long form printing"
+		debug_echo "printer: long form printing"
 		echo "$1: $2"
 	elif [[ "$1" == "Release Install Date" ]]; then
-		debug_echo "printer(wslsys): get_install_date called"
+		debug_echo "printer: special get_install_date called"
 		echo "$(get_install_date)" # special case for Release Install Date, only shortform use hex unix timestamp
 	else
 		debug_echo "printer(wslsys): short form printing"
