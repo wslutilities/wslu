@@ -32,14 +32,15 @@ set +x
 #
 # They should not exist at the same time, otherwise
 # the output would be too messy.
-wslu_debug=0
+wslu_debug=""
+wslu_c_p="$0"
 if [ "$1" == "--verbose" ]; then
 	echo -e '\e[38;5;202m\033[1m[verbose] Showing verbose output. \033(B\033[m'
 	shift
 	set -x
 elif [ "$1" == "--debug" ]; then
-	wslu_debug=1
-	echo -e '\e[38;5;202m\033[1m[debug] Showing debug output. \033(B\033[m'
+	wslu_debug="--debug"
+	echo -e '\e[38;5;202m\033[1m[debug:'${wslu_c_p}'] Showing debug output. \033(B\033[m'
 	shift
 fi
 
@@ -103,7 +104,7 @@ fi
 
 # functions
 function debug_echo {
-	[ $wslu_debug -eq 1 ] && echo "${orange}${bold}[debug]${reset} $@" 1>&2;
+	[ $wslu_debug == "--debug" ] && echo "${orange}${bold}[debug:${wslu_c_p}]${reset} $@" 1>&2;
 }
 
 function error_echo {
