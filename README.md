@@ -93,6 +93,12 @@ sudo apt update
 sudo apt install wslu
 ```
 
+### Fedora
+```
+sudo dnf copr enable wslutilities/wslu
+sudo dnf install wslu
+```
+
 ### Fedora Remix
 
 Preinstalled.
