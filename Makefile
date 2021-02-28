@@ -66,4 +66,4 @@ clean:
 	rm -rf $(OUTMANPATH)
 
 test:
-	extras/bats/bin/bats -r tests
+	bats -r tests
