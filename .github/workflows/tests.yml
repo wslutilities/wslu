@@ -15,6 +15,7 @@ jobs:
             gzip
             make
             desktop-file-utils
+            bats
       - shell: wsl-bash -u root {0}
         run: |
           make
