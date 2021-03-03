@@ -6,13 +6,19 @@ jobs:
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v2
-      - name: Clone & import PsUWI
+      - uses: Vampire/setup-wsl@v1
+          with:
+            distribution: Ubuntu-20.04
+            update: 'true'
+            set-as-default: 'true'
+            additional-packages:
+              gzip
+              make
+              desktop-utils
+      - shell: wsl-bash -u root {0}
         run: |
-          Set-PSRepository PSGallery -InstallationPolicy Trusted
-          Install-Module -Name PsUWI -Scope CurrentUser -ErrorAction Stop
-          Import-Module PsUWI
-      - name: Creating running Instance
-        run: |
-          $WSLInstanceName = New-UbuntuWSLInstance -Release focal -Version 1 -NonInteractive -AdditionalPkg "make,gzip,desktop-file-utils"
+          make
+          make install
+          make test
 
 
