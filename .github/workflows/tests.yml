@@ -7,14 +7,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: Vampire/setup-wsl@v1
-          with:
-            distribution: Ubuntu-20.04
-            update: 'true'
-            set-as-default: 'true'
-            additional-packages:
-              gzip
-              make
-              desktop-utils
+        with:
+          distribution: Ubuntu-20.04
+          update: 'true'
+          set-as-default: 'true'
+          additional-packages:
+            gzip
+            make
+            desktop-utils
       - shell: wsl-bash -u root {0}
         run: |
           make
