@@ -13,5 +13,6 @@ jobs:
           Import-Module PsUWI
       - name: Creating running Instance
         run: |
-          $WSLInstanceName = New-UbuntuWSLInstance -Release focal -Version 1 -NonInteractive -AdditionalPkg "git,make,gzip,desktop-file-utils"
+          $WSLInstanceName = New-UbuntuWSLInstance -Release focal -Version 1 -NonInteractive -AdditionalPkg "make,gzip,desktop-file-utils"
+
 
