@@ -372,7 +372,7 @@ case "$distro" in
 			"${cyan}|__/     \\__/ \\______/ |________/${reset} ");;
 esac
 
-if [[ -n "$WSLFETCH_THEME_PATH" ]];
+if [[ -n "$WSLFETCH_THEME_PATH" ]]; then
 	debug_echo "custom theme detected: $WSLFETCH_THEME_PATH"
 	source "$WSLFETCH_THEME_PATH"
 fi
