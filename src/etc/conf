@@ -44,6 +44,8 @@ WSLFETCH_INFO_SECTION="windows-build,windows-rel-branch,wsl-release,wsl-kernel,w
 # wslfetch: whether you want to display colorbar in wslfetch. This will override `-c/--colorbar` param.
 WSLFETCH_COLORBAR=false
 
+# wslfetch: This allows you to use your own customized theme.
+WSLFETCH_THEME_PATH=
 # wslsys
 
 # wslusc

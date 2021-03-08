@@ -3,10 +3,10 @@ version=44
 
 is_color=0
 is_generic=0
-help_short="wslfetch [-hvlsc]"
+help_short="wslfetch [-hvcg] [-t THEME] [-o OPTIONS]"
 _tmp_cmdname="$0"
 
-PARSED_ARGUMENTS=$(getopt -a -n "$(basename $_tmp_cmdname)" -o hvcgo: --long help,version,colorbar,generic,options: -- "$@")
+PARSED_ARGUMENTS=$(getopt -a -n "$(basename $_tmp_cmdname)" -o hvtcgo: --long help,version,theme,colorbar,generic,options: -- "$@")
 [ "$?" != "0" ] && help "$_tmp_cmdname" "$help_short"
 
 eval set -- "$PARSED_ARGUMENTS"
@@ -15,6 +15,7 @@ do
 	case "$1" in
 		-h|--help) help "$_tmp_cmdname" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslfetch v$version"; exit;;
+		-t|--theme) WSLFETCH_THEME_PATH="$1"; shift 2;;
 		-c|--colorbar) is_color=1; shift;;
 		-g|--generic) is_generic=1; shift;;
 		-o|--options) WSLFETCH_INFO_SECTION="$1"; shift 2;;
@@ -29,8 +30,9 @@ debug_echo "is_color: $is_color"
 debug_echo "is_generic: $is_generic"
 debug_echo "WSLFETCH_INFO_SECTION: $WSLFETCH_INFO_SECTION"
 debug_echo "WSLFETCH_COLORBAR: $WSLFETCH_COLORBAR"
+debug_echo "WSLFETCH_ASCII_PATH: $WSLFETCH_ASCII_PATH"
 
-[[ "$is_generic" == "1" ]] && distro=""
+([[ "$is_generic" == "1" ]] || [[ -n "$WSLFETCH_THEME_PATH" ]] ) && distro=""
 case "$distro" in
 	'ubuntu')
 		t="${red}${bold}"
@@ -369,6 +371,11 @@ case "$distro" in
 			"${cyan}| \$\$${reset}${cyan}/   \\  \$\$${reset}${cyan}|  \$\$\$\$\$\$${reset}${cyan}/| \$\$\$\$\$\$\$\$${reset} "
 			"${cyan}|__/     \\__/ \\______/ |________/${reset} ");;
 esac
+
+if [[ -n "$WSLFETCH_THEME_PATH" ]];
+	debug_echo "custom theme detected: $WSLFETCH_THEME_PATH"
+	source "$WSLFETCH_THEME_PATH"
+fi
 
 debug_echo "distro: $distro"
 debug_echo "t: ${t}color${reset}"
