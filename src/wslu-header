@@ -150,8 +150,10 @@ function chcp_com {
 }
 
 function winps_exec {
-	chcp_com "$(cat ~/.config/wslu/oemcp)"
-	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive –ExecutionPolicy Bypass -Command "$@"
+	cp="$(cat ~/.config/wslu/oemcp)"
+	chcp_com "$cp"
+	cp=$(($cp+0))
+	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive –ExecutionPolicy Bypass -Command "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::InputEncoding = [System.Text.Encoding]::GetEncoding($cp); $@"
 	EXIT_STATUS=$?
 	chcp_com 65001
 	return $EXIT_STATUS
