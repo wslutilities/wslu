@@ -46,7 +46,16 @@ if [[ "$lname" != "" ]]; then
 		converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\}"
 		[[ "$properfile_full_path" =~ ^${interop_win_type//\/$/}.*$ ]] && converted_file_path="$(wslpath -w "$properfile_full_path")"
 		lname="$converted_file_path"
+	# Linux absolute path
 	elif [[ "$lname" =~ ^(/[^/]+)*(/)?$ ]]; then
+		[ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ] || error_echo "This protocol is not supported before version 1903." 34
+		properfile_full_path="$(readlink -f "${lname}")"
+		interop_win_type="$(interop_prefix)$(sysdrive_prefix)"
+		converted_file_path="\\\\wsl\$\\$WSL_DISTRO_NAME${properfile_full_path//\//\\}"
+		[[ "$properfile_full_path" =~ ^${interop_win_type//\/$/}.*$ ]] && converted_file_path="$(wslpath -w "$properfile_full_path")"
+		lname="$converted_file_path"
+	# Linux relative path
+	elif [[ -d "$(readlink -f "$lname")" ]] || [[ -f "$(readlink -f "$lname")" ]]; then
 		[ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ] || error_echo "This protocol is not supported before version 1903." 34
 		properfile_full_path="$(readlink -f "${lname}")"
 		interop_win_type="$(interop_prefix)$(sysdrive_prefix)"
