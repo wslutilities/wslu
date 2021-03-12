@@ -4,11 +4,17 @@ version="50"
 cname=""
 iconpath=""
 is_gui=0
+gui_type="LEGACY"
 is_interactive=0
 customname=""
 customenv=""
 
-help_short="wslusc [-dgi] [-e PATH] [-n NAME] [-i FILE] COMMAND\nwslusc [-hv]"
+help_short="wslusc [-di] [-e PATH] [-n NAME] [-i FILE] [-g GUI_TYPE] COMMAND\nwslusc [-hv]"
+
+_tmp_cmdname="$0"
+
+PARSED_ARGUMENTS=$(getopt -a -n "$(basename $_tmp_cmdname)" -o hvd:Ie:n:i:g: --long help,version,shortcut-debug:,interactive,path:,name:,icon:,gui: -- "$@")
+[ "$?" != "0" ] && help "$_tmp_cmdname" "$help_short"
 
 function sc_debug {
 	debug_echo "sc_debug: called with $@"
@@ -16,17 +22,19 @@ function sc_debug {
 	winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$dp\\$@');\$s;"
 }
 
-while [ "$1" != "" ]; do
+eval set -- "$PARSED_ARGUMENTS"
+while :
+do
 	case "$1" in
 		-d|--shortcut-debug) shift; sc_debug "$@"; exit;;
-		-I|--interactive)is_interactive=1;shift;; 
-		-i|--icon)shift;iconpath=$1;shift;;
-		-n|--name)shift;customname=$1;shift;;
-		-e|--env)shift;customenv=$1;shift;;
-		-g|--gui)is_gui=1;shift;;
+		-I|--interactive) is_interactive=1;shift;; 
+		-i|--icon) shift; iconpath=$1;shift;;
+		-n|--name) shift;customname=$1;shift;;
+		-e|--env) shift;customenv=$1;shift;;
+		-g|--gui) shift;is_gui=1;gui_type=$1;shift;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslusc v$version"; exit;;
-		*) cname_header="$1"; shift; cname="$*"; break;;
+		*) shift; cname_header="$1"; shift; cname="$*"; break;;
 	esac
 done
 
