@@ -55,6 +55,11 @@ if [[ $is_interactive -eq 1 ]]; then
 	iconpath="${input:-$iconpath}"
 fi
 
+# supported gui check
+if [ $(wslu_get_build) -lt 21332 ] && [[ "$gui_type" == "NATIVE" ]]; then
+	error_echo "Your Windows 10 version do not support Native GUI, You need at least build 21332. Aborted" 35
+fi
+
 if [[ "$cname_header" != "" ]]; then
 	up_path="$(wslvar -s USERPROFILE)"
 	tpath=$(double_dash_p "$(wslvar -s TMP)") # Windows Temp, Win Double Sty.
