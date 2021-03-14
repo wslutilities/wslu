@@ -169,18 +169,18 @@ function sysdrive_prefix {
 }
 
 function chcp_com {
-	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/chcp.com "$@" >/dev/null
+	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/mode.com con cp select="$@" >/dev/null
 }
 
 function winps_exec {
 	debug_echo "winps_exec: called with command $@"
 	cp="$(cat ~/.config/wslu/oemcp)"
 	debug_echo "winps_exec: cp: $cp"
-	#chcp_com "$cp"
+	chcp_com "$cp"
 	cp=$(($cp+0))
 	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive –ExecutionPolicy Bypass -Command "chcp.com $cp | Out-Null;[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::InputEncoding = [System.Text.Encoding]::GetEncoding($cp); $@; chcp.com 65001 | Out-Null;"
 	EXIT_STATUS=$?
-	#chcp_com 65001
+	chcp_com 65001
 	return $EXIT_STATUS
 }
 
