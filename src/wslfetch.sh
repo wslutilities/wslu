@@ -15,10 +15,10 @@ do
 	case "$1" in
 		-h|--help) help "$_tmp_cmdname" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslfetch v$version"; exit;;
-		-t|--theme) WSLFETCH_THEME_PATH="$1"; shift 2;;
+		-t|--theme) shift; WSLFETCH_THEME_PATH="$1"; shift;;
 		-c|--colorbar) is_color=1; shift;;
 		-g|--generic) is_generic=1; shift;;
-		-o|--options) WSLFETCH_INFO_SECTION="$1"; shift 2;;
+		-o|--options) shift; WSLFETCH_INFO_SECTION="$1"; shift;;
 		--) shift; break ;;
 		*) echo "Unexpected option: $1"
 			help "$_tmp_cmdname" "$help_short"
