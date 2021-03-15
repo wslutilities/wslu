@@ -1,3 +1,16 @@
+wslu (3.2.2-0kali1) kali-dev; urgency=medium
+
+  * docs: include available commands in manpage 
+    (GH: #169)
+  * project: fix a problem that Powershell output
+    non-unicode character (GH: #162)
+  * wslview: fix an issue that caused the relative
+    Linux path unable to be opened (GH: #165)
+  * wslusc: fix an issue that some people unable
+    to open their GUI application (GH: #174)
+
+ -- Patrick Wu <patrick.wu@canonical.com>  Mon, 15 Mar 2021 10:52:33 +0800
+
 wslu (3.2.1-0kali1) kali-dev; urgency=medium
 
   * header: improvements on the system drive detection. (closes #133)
