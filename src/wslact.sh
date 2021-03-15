@@ -18,15 +18,7 @@ function time_reset {
 	fi
 
 	echo "${info} Before Sync: $(date +"%d %b %Y %T %Z")"
-	if [[ "$(wslsys -V -s)" == "2" ]]; then
-		if hwclock -s >/dev/null; then
-			echo "${info} After Sync: $(date +"%d %b %Y %T %Z")"
-			echo "${info} Manual Time Reset Complete."
-		else
-			echo "${error} Time Sync failed."
-			exit 1
-		fi
-	elif date -s "$(winps_exec "Get-Date -UFormat \"%m/%d/%Y %T %Z\"" | tr -d "\r")" >/dev/null; then
+	if date -s "$(winps_exec "Get-Date -UFormat \"%m/%d/%Y %T %Z\"" | tr -d "\r")" >/dev/null; then
 		echo "${info} After Sync: $(date +"%d %b %Y %T %Z")"
 		echo "${info} Manual Time Reset Complete."
 	else
