@@ -8,7 +8,12 @@ is_interactive=0
 customname=""
 customenv=""
 
-help_short="wslusc [-dgi] [-e PATH] [-n NAME] [-i FILE] COMMAND\nwslusc [-hv]"
+help_short="wslusc [-di] [-e PATH] [-n NAME] [-i FILE] [-g GUI_TYPE] COMMAND\nwslusc [-hv]"
+
+_tmp_cmdname="$0"
+
+PARSED_ARGUMENTS=$(getopt -a -n "$(basename $_tmp_cmdname)" -o hvd:Ie:n:i:gN --long help,version,shortcut-debug:,interactive,path:,name:,icon:,gui,native -- "$@")
+[ "$?" != "0" ] && help "$_tmp_cmdname" "$help_short"
 
 function sc_debug {
 	debug_echo "sc_debug: called with $@"
@@ -16,17 +21,20 @@ function sc_debug {
 	winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$dp\\$@');\$s;"
 }
 
-while [ "$1" != "" ]; do
+eval set -- "$PARSED_ARGUMENTS"
+while :
+do
 	case "$1" in
 		-d|--shortcut-debug) shift; sc_debug "$@"; exit;;
-		-I|--interactive)is_interactive=1;shift;; 
-		-i|--icon)shift;iconpath=$1;shift;;
-		-n|--name)shift;customname=$1;shift;;
-		-e|--env)shift;customenv=$1;shift;;
-		-g|--gui)is_gui=1;shift;;
+		-I|--interactive) is_interactive=1;shift;; 
+		-i|--icon) shift; iconpath=$1;shift;;
+		-n|--name) shift;customname=$1;shift;;
+		-e|--env) shift;customenv=$1;shift;;
+		-g|--gui) is_gui=1;shift;;
+		-N|--native) shift;WSLUSC_GUITYPE="native";shift;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslusc v$version"; exit;;
-		*) cname_header="$1"; shift; cname="$*"; break;;
+		*) shift; cname_header="$1"; shift; cname="$*"; break;;
 	esac
 done
 
@@ -45,6 +53,11 @@ if [[ $is_interactive -eq 1 ]]; then
 	customenv="${input:-$customenv}"
 	read -r -e -i "$iconpath" -p "${input_info} Custom icon Linux path (support ico/png/xpm/svg) [optional, ENTER for default]: " input
 	iconpath="${input:-$iconpath}"
+fi
+
+# supported gui check
+if [ $(wslu_get_build) -lt 21332 ] && [[ "$gui_type" == "NATIVE" ]]; then
+	error_echo "Your Windows 10 version do not support Native GUI, You need at least build 21332. Aborted" 35
 fi
 
 if [[ "$cname_header" != "" ]]; then
@@ -149,7 +162,13 @@ if [[ "$cname_header" != "" ]]; then
 	fi
 
 	if [[ "$is_gui" == "1" ]]; then
-		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs $distro_location_win $distro_param $customenv /usr/share/wslu/wslusc-helper.sh $cname';\$s.IconLocation='$iconpath';\$s.Save();"
+		if [[ "$WSLUSC_GUITYPE" == "legacy" ]]; then
+			winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs $distro_location_win $distro_param $customenv /usr/share/wslu/wslusc-helper.sh $cname';\$s.IconLocation='$iconpath';\$s.Save();"
+		elif [[ "$WSLUSC_GUITYPE" == "native" ]]; then
+					winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wslg.exe';\$s.Arguments='~ -d $WSL_DISTRO_NAME $customenv $cname';\$s.IconLocation='$iconpath';\$s.Save();"
+		else
+			error_echo "bad GUI type, aborting" 22
+		fi
 	else
 		winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='$distro_location_win';\$s.Arguments='$distro_param $customenv bash -l -c $cname';\$s.IconLocation='$iconpath';\$s.Save();"
 	fi

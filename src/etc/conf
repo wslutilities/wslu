@@ -46,11 +46,10 @@ WSLFETCH_COLORBAR=false
 
 # wslfetch: This allows you to use your own customized theme.
 WSLFETCH_THEME_PATH=
-# wslsys
 
-# wslusc
+# wslusc: Default GUI type. Default type is 'legacy'. Use 'native' for Native GUI generation by default
+WSLUSC_GUITYPE="legacy"
 
 # wslvar
 
 # wslview
-
