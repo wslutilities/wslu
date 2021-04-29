@@ -4,7 +4,6 @@ version="50"
 cname=""
 iconpath=""
 is_gui=0
-gui_type="LEGACY"
 is_interactive=0
 customname=""
 customenv=""
@@ -13,7 +12,7 @@ help_short="wslusc [-di] [-e PATH] [-n NAME] [-i FILE] [-g GUI_TYPE] COMMAND\nws
 
 _tmp_cmdname="$0"
 
-PARSED_ARGUMENTS=$(getopt -a -n "$(basename $_tmp_cmdname)" -o hvd:Ie:n:i:g: --long help,version,shortcut-debug:,interactive,path:,name:,icon:,gui: -- "$@")
+PARSED_ARGUMENTS=$(getopt -a -n "$(basename $_tmp_cmdname)" -o hvd:Ie:n:i:gN --long help,version,shortcut-debug:,interactive,path:,name:,icon:,gui,native -- "$@")
 [ "$?" != "0" ] && help "$_tmp_cmdname" "$help_short"
 
 function sc_debug {
@@ -31,7 +30,8 @@ do
 		-i|--icon) shift; iconpath=$1;shift;;
 		-n|--name) shift;customname=$1;shift;;
 		-e|--env) shift;customenv=$1;shift;;
-		-g|--gui) shift;is_gui=1;gui_type=$1;shift;;
+		-g|--gui) is_gui=1;shift;;
+		-N|--native) shift;WSLUSC_GUITYPE="native";shift;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslusc v$version"; exit;;
 		*) shift; cname_header="$1"; shift; cname="$*"; break;;
@@ -162,9 +162,9 @@ if [[ "$cname_header" != "" ]]; then
 	fi
 
 	if [[ "$is_gui" == "1" ]]; then
-		if [[ "$gui_type" == "LEGACY" ]]; then
+		if [[ "$WSLUSC_GUITYPE" == "legacy" ]]; then
 			winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wscript.exe';\$s.Arguments='$script_location_win\\runHidden.vbs $distro_location_win $distro_param $customenv /usr/share/wslu/wslusc-helper.sh $cname';\$s.IconLocation='$iconpath';\$s.Save();"
-		elif [[ "$gui_type" == "NATIVE" ]]; then
+		elif [[ "$WSLUSC_GUITYPE" == "native" ]]; then
 					winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$tpath\\$new_cname.lnk');\$s.TargetPath='C:\\Windows\\System32\\wslg.exe';\$s.Arguments='~ -d $WSL_DISTRO_NAME $customenv $cname';\$s.IconLocation='$iconpath';\$s.Save();"
 		else
 			error_echo "bad GUI type, aborting" 22
