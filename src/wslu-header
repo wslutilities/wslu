@@ -237,7 +237,7 @@ elif [ $(cat ~/.config/wslu/triggered_time) -lt $(cat /usr/share/wslu/updated_ti
 fi
 
 # basic distro detection
-distro="$(head -n1 /etc/os-release | sed -e 's/NAME=\"//g')"
+distro="$(cat /etc/os-release | sed -n -e '/^NAME=.*/p'| sed -e 's/^NAME=\"//g')"
 case $distro in
 	*Pengwin*) distro="pengwin";;
 	*WLinux*) distro="wlinux";;

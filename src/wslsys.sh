@@ -41,7 +41,7 @@ function call_display_scaling() {
 }
 
 function call_windows_uptime() {
-	win_uptime=$(winps_exec "((get-date) - (gcim Win32_OperatingSystem).LastBootUpTime).TotalSeconds" | sed -e 's|\r||g')
+	win_uptime=$(winps_exec "[int64]((get-date) - (gcim Win32_OperatingSystem).LastBootUpTime).TotalSeconds" | sed -e 's|\r||g')
 	win_uptime=${win_uptime//.*}
 	w_days=$((win_uptime/86400))
 	w_hours=$((win_uptime/3600%24))
