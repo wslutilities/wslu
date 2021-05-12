@@ -4,6 +4,8 @@ wslu (3.2.3-0ubuntu1) impish; urgency=medium
     (GH: #182)
   * header: fix a distro detection issue in 
     Ubuntu Impish (21.10)
+  * debian/control: fix dependency issue in 
+    installing wslu (LP: #1926771)
 
  -- Patrick Wu <patrick.wu@canonical.com>  Wed, 12 May 2021 10:43:48 +0800
 

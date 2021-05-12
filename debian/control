@@ -10,12 +10,12 @@ Vcs-Browser:  https://git.launchpad.net/~ubuntu-core-dev/ubuntu/+source/wslu
 Homepage: https://wslutiliti.es/wslu
 
 Package: wslu
-Architecture: all
+Architecture: amd64 arm64
 Depends: ${misc:Depends},
+         desktop-file-utils
          bc
 Recommends: pulseaudio-utils,
-            x11-utils,
-            desktop-file-utils
+            x11-utils
 Suggests: imagemagick
 Provides: www-browser
 Description: collection of utilities for the Windows 10 Linux Subsystem
