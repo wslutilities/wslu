@@ -1,3 +1,12 @@
+wslu (3.2.3-0ubuntu1) impish; urgency=medium
+
+  * wslsys: fix an issue in call_windows_uptime
+    (GH: #182)
+  * header: fix a distro detection issue in 
+    Ubuntu Impish (21.10)
+
+ -- Patrick Wu <patrick.wu@canonical.com>  Wed, 12 May 2021 10:43:48 +0800
+
 wslu (3.2.2-0ubuntu1) hirsute; urgency=medium
 
   * docs: include available commands in manpage 
