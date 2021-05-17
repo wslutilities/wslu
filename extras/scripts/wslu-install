@@ -22,7 +22,7 @@ case $distro in
 	*WLinux*|Ubuntu*|*Debian*|*Kali*) sudo apt install -y git;;
 	openSUSE*|SLES*) sudo zypper -n install git;;
 	Alpine*) sudo apk add git;;
-	Arch*) sudo pacman -Syyu git;;
+	Arch*) sudo pacman -Syyu git --noconfirm;;
 	Scientific*) sudo yum install -y git;;
 	*Fedora*) sudo dnf install -y git;;
 	*Generic*) [ "fedora" == "$(cat /etc/os-release | grep -e "LIKE=" | sed -e 's/ID_LIKE=//g')" ] && sudo dnf install -y git || exit 1;;
