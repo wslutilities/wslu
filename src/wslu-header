@@ -258,6 +258,30 @@ function wslu_file_check {
 	fi
 }
 
+function wslpy_check {
+	debug_echo "wslpy_check"
+	if type python3 > /dev/null 2>&1; then
+		debug_echo "wslpy_check: python3 installed."
+		tmp_wslpy_ver="$(python3 -c "import wslpy; print(wslpy.__version__)" 2>/dev/null)"
+		if [[ "$tmp_wslpy_ver" != "" ]]; then
+			debug_echo "wslpy_check: wslpy installed."
+			older_ver="$(echo -e "$tmp_wslpy_ver\n0.1.0" | sort -n -t. | head -n1)"
+			if [[ "$older_ver" == "$tmp_wslpy_ver" ]]; then
+				debug_echo "wslpy_check: wslpy installed but a version < 0.1.0 is installed."
+				return 1
+			else
+				debug_echo "wslpy_check: wslpy >= 0.1.0 is installed."
+				return
+		else
+			debug_echo "wslpy_check: wslpy not installed."
+			return 1
+		fi
+	else
+		debug_echo "wslpy_check: python3 not installed."
+		return 1
+	fi
+}
+
 
 # first run, saving some information
 if [ ! -d ~/.config/wslu ]; then
