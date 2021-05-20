@@ -8,7 +8,7 @@ is_interactive=0
 customname=""
 customenv=""
 
-help_short="wslusc [-di] [-e PATH] [-n NAME] [-i FILE] [-g GUI_TYPE] COMMAND\nwslusc [-hv]"
+help_short="wslusc [-dIs] [-e PATH] [-n NAME] [-i FILE] [-g GUI_TYPE] COMMAND\nwslusc [-hv]"
 
 _tmp_cmdname="$0"
 
@@ -28,6 +28,7 @@ do
 		-d|--shortcut-debug) shift; sc_debug "$@"; exit;;
 		-I|--interactive) is_interactive=1;shift;; 
 		-i|--icon) shift; iconpath=$1;shift;;
+		-s|--smart-icon) shift; WSLUSC_SMART_ICON_DETECTION="true";shift;;
 		-n|--name) shift;customname=$1;shift;;
 		-e|--env) shift;customenv=$1;shift;;
 		-g|--gui) is_gui=1;shift;;
@@ -109,7 +110,18 @@ if [[ "$cname_header" != "" ]]; then
 	wslu_file_check "$script_location" "runHidden.vbs"
 
 	# handling icon
-	if [[ "$iconpath" != "" ]]; then
+	if [[ "$iconpath" != "" ]] || [[ "$WSLUSC_SMART_ICON_DETECTION" == "true" ]]; then
+		#handling smart icon first; always first 
+		if [[ "$WSLUSC_SMART_ICON_DETECTION" == "true" ]]; then
+			if wslpy_check; then
+				tmp_fcname="$(basename "$cname_header")"
+				iconpath="$(python3 -c "import wslpy.internal; print(wslpy.internal.findIcon(\"$tmp_fcname\"))")"
+				echo "${warn} Smart Icon Detection found icon $tmp_fcname at: $iconpath"
+			else
+				echo "${warn} Smart Icon Detection cannot find icon."
+		fi
+
+		# normal detection section
 		icon_filename="$(basename "$iconpath")"
 		ext="${iconpath##*.}"
 
