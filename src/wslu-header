@@ -272,6 +272,7 @@ function wslpy_check {
 			else
 				debug_echo "wslpy_check: wslpy >= 0.1.0 is installed."
 				return
+			fi
 		else
 			debug_echo "wslpy_check: wslpy not installed."
 			return 1

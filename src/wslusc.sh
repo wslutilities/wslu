@@ -12,7 +12,7 @@ help_short="wslusc [-dIs] [-e PATH] [-n NAME] [-i FILE] [-g GUI_TYPE] COMMAND\nw
 
 _tmp_cmdname="$0"
 
-PARSED_ARGUMENTS=$(getopt -a -n "$(basename $_tmp_cmdname)" -o hvd:Ie:n:i:gN --long help,version,shortcut-debug:,interactive,path:,name:,icon:,gui,native -- "$@")
+PARSED_ARGUMENTS=$(getopt -a -n "$(basename $_tmp_cmdname)" -o hvd:Ie:n:i:gNs --long help,version,shortcut-debug:,interactive,path:,name:,icon:,gui,native,smart-icon -- "$@")
 [ "$?" != "0" ] && help "$_tmp_cmdname" "$help_short"
 
 function sc_debug {
@@ -21,6 +21,7 @@ function sc_debug {
 	winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$dp\\$@');\$s;"
 }
 
+debug_echo "Parsed: $PARSED_ARGUMENTS"
 eval set -- "$PARSED_ARGUMENTS"
 while :
 do
@@ -32,13 +33,13 @@ do
 		-n|--name) shift;customname=$1;shift;;
 		-e|--env) shift;customenv=$1;shift;;
 		-g|--gui) is_gui=1;shift;;
-		-N|--native) shift;WSLUSC_GUITYPE="native";shift;;
+		-N|--native) WSLUSC_GUITYPE="native";shift;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslusc v$version"; exit;;
-		*) shift; cname_header="$1"; shift; cname="$*"; break;;
+		--) shift; cname_header="$1"; shift; cname="$*"; break;;
 	esac
 done
-
+debug_echo "cname_header: $cname_header cname: $cname"
 # interactive mode
 if [[ $is_interactive -eq 1 ]]; then
 	echo "${info} Welcome to wslu shortcut creator interactive mode."
@@ -116,9 +117,10 @@ if [[ "$cname_header" != "" ]]; then
 			if wslpy_check; then
 				tmp_fcname="$(basename "$cname_header")"
 				iconpath="$(python3 -c "import wslpy.internal; print(wslpy.internal.findIcon(\"$tmp_fcname\"))")"
-				echo "${warn} Smart Icon Detection found icon $tmp_fcname at: $iconpath"
+				echo "${info} Icon Detector found icon $tmp_fcname at: $iconpath"
 			else
-				echo "${warn} Smart Icon Detection cannot find icon."
+				echo "${warn} Icon Detector cannot find icon."
+			fi
 		fi
 
 		# normal detection section
