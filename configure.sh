@@ -47,7 +47,7 @@ case $distro in
 		sudo apk add git bc gzip make bash-completion imagemagick
 		;;
 	Arch*)
-		sudo pacman -Syyu git bc gzip make bash-completion imagemagick
+		sudo pacman -Syyu git bc gzip make bash-completion imagemagick --noconfirm
 		;;
 	*Oracle*|Scientific*)
 		sudo yum install -y git bc gzip make bash-completion imagemagick
