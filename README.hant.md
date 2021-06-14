@@ -62,7 +62,13 @@
 你可以用以下指令通過 **Alpine Linux 3.12+** 安裝 `wslu`：
 
 ```
+<<<<<<< HEAD
+$ echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/community/" | sudo tee -a /etc/apk/repositories
+$ sudo apk update
+$ sudo apk add wslu@testing
+=======
 sudo apk add wslu
+>>>>>>> lts/master
 ```
 
 ### Arch Linux

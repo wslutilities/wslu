@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: wslu
+Source: https://github.com/wslutilities/wslu
+
+Files: *
+Copyright: 2020 Jinming Wu, Patrick <me@patrickwu.space>
+License: GPL-3
+ /usr/share/common-licenses/GPL-3

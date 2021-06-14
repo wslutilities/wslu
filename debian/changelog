@@ -1,0 +1,61 @@
+wslu (3.2.2-0kali1) kali-dev; urgency=medium
+
+  * docs: include available commands in manpage 
+    (GH: #169)
+  * project: fix a problem that Powershell output
+    non-unicode character (GH: #162)
+  * wslview: fix an issue that caused the relative
+    Linux path unable to be opened (GH: #165)
+  * wslusc: fix an issue that some people unable
+    to open their GUI application (GH: #174)
+
+ -- Patrick Wu <patrick.wu@canonical.com>  Mon, 15 Mar 2021 10:52:33 +0800
+
+wslu (3.2.1-0kali1) kali-dev; urgency=medium
+
+  * header: improvements on the system drive detection. (closes #133)
+  * tests: update the test system and tests. (closes #125)
+  * wslact: add back-compatibility for the auto-mounting feature.
+  * wslview: fix an issue when handling http/https
+  * wslview: fix a bug that it won't open file:///mnt/c/... or /mnt/c/...
+  * wslusc: fix an issue that wsl.exe execute with wrongly passed param (close #138)
+  * wslusc: fix the problem that the previous version that GUI shortcut generated won't work.
+  * wslsys: fix an issue that the WSL Version shown is wrong.
+  * Includes a wslview.desktop (PR #143 and #146)
+  * Update the script to fix badly generated shortcut issue (fixes #141)
+  * Fix a DPI script related space issue (fixes #144)
+
+ -- Jinming Wu, Patrick <me@patrickwu.space>  Wed, 23 Dec 2020 22:33:07 +0800
+
+wslu (3.1.1-0kali1) kali-dev; urgency=medium
+
+  * project: add separate Fedora Remix support
+  * header: fix `ubuntu.exe` detection issue
+  * wslview: mistake in calling a variable (fixes #118 again)
+  * wslusc: always use the absolute path (fixes #129)
+  * wslusc: fixes a possible white space path issue
+  * wslusc: When TMP is empty, try TEMP
+
+ -- Jinming Wu, Patrick <me@patrickwu.space>  Wed, 01 Jul 2020 22:22:53 +0800
+
+wslu (3.1.0-0kali1) kali-dev; urgency=medium
+
+  * header: use the proper color definition
+  * wslfetch: new display for WSL with WSL version displayed
+  * wslfetch: use the proper logo for Ubuntu (Reported by @flexiondotorg)
+  * wslsys: add WSL version option
+  * wslsys: fix an issue in DPI scaling getting wrong value due to the API change in Latest fast ring insider build (Reported by @crramirez)
+  * wslact: adding `--mount-options` for auto-mounting feature
+  * wslact: fix an i18n related issue in time-sync feature (fixes #113 by @ricardosantos9521)
+  * wslgsu: removed temporarily
+  * wslgsu: limit the Windows version it can use
+  * wslview: properly detect all different protocols and path styles (fixes #118)
+  * package: fix alpine dependency issue (fixes #117)
+
+ -- Jinming Wu, Patrick <me@patrickwu.space>  Wed, 13 May 2020 22:53:03 +0800
+
+wslu (3.0.1-0kali1) kali-dev; urgency=medium
+
+  * Initial release
+
+ -- Jinming Wu, Patrick <me@patrickwu.space>  Mon, 13 Apr 2020 20:41:40 +0800

@@ -1,7 +1,8 @@
 Source: wslu
 Section: utils
 Priority: optional
-Maintainer: Jinming Wu, Patrick <me@patrickwu.space>
+Maintainer: Kali Developers <devel@kali.org>
+Uploader: Jinming Wu, Patrick <me@patrickwu.space>
 Build-Depends: debhelper (>= 11), gzip, make
 Standards-Version: 4.1.3
 Homepage: https://wslutiliti.es/wslu
@@ -9,7 +10,7 @@ Vcs-Browser: https://github.com/wslutilities/wslu
 Vcs-Git: https://github.com/wslutilities/wslu.git
 
 Package: wslu
-Architecture: all
+Architecture: amd64 arm64
 Depends: bc, imagemagick, desktop-file-utils
 Description: A collection of utilities for Windows 10 Linux Subsystem
  This is a collection of utilities for Windows 10 Linux Subsystem, such as converting WSL path to Windows path or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher.
