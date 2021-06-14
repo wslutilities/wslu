@@ -1,3 +1,24 @@
+wslu (3.2.3-0kali1) kali-dev; urgency=medium
+
+  * wslsys: fix an issue in call_windows_uptime
+    (GH: #182)
+  * header: fix a distro detection issue in 
+    Ubuntu Impish (21.10)
+  * debian/control: fix dependency issue in 
+    installing wslu (LP: #1926771)
+  * docs: include available commands in manpage 
+    (GH: #169)
+  * project: fix a problem that Powershell output
+    non-unicode character (GH: #162)
+  * wslview: fix an issue that caused the relative
+    Linux path unable to be opened (GH: #165)
+  * wslusc: fix an issue that some people unable
+    to open their GUI application (GH: #174)
+  * header: Avoid error message when the file doesn't
+    exist (LP: 1911379)
+
+ -- Patrick Wu <me@patrickwu.space>  Mon, 14 Jun 2021 22:14:49 +0800
+
 wslu (3.2.2-0kali1) kali-dev; urgency=medium
 
   * docs: include available commands in manpage 
@@ -9,7 +30,7 @@ wslu (3.2.2-0kali1) kali-dev; urgency=medium
   * wslusc: fix an issue that some people unable
     to open their GUI application (GH: #174)
 
- -- Patrick Wu <patrick.wu@canonical.com>  Mon, 15 Mar 2021 10:52:33 +0800
+ -- Patrick Wu <me@patrickwu.space>  Mon, 15 Mar 2021 10:52:33 +0800
 
 wslu (3.2.1-0kali1) kali-dev; urgency=medium
 
@@ -25,7 +46,7 @@ wslu (3.2.1-0kali1) kali-dev; urgency=medium
   * Update the script to fix badly generated shortcut issue (fixes #141)
   * Fix a DPI script related space issue (fixes #144)
 
- -- Jinming Wu, Patrick <me@patrickwu.space>  Wed, 23 Dec 2020 22:33:07 +0800
+ -- Patrick Wu <me@patrickwu.space>  Wed, 23 Dec 2020 22:33:07 +0800
 
 wslu (3.1.1-0kali1) kali-dev; urgency=medium
 
@@ -36,7 +57,7 @@ wslu (3.1.1-0kali1) kali-dev; urgency=medium
   * wslusc: fixes a possible white space path issue
   * wslusc: When TMP is empty, try TEMP
 
- -- Jinming Wu, Patrick <me@patrickwu.space>  Wed, 01 Jul 2020 22:22:53 +0800
+ -- Patrick Wu <me@patrickwu.space>  Wed, 01 Jul 2020 22:22:53 +0800
 
 wslu (3.1.0-0kali1) kali-dev; urgency=medium
 
@@ -52,10 +73,10 @@ wslu (3.1.0-0kali1) kali-dev; urgency=medium
   * wslview: properly detect all different protocols and path styles (fixes #118)
   * package: fix alpine dependency issue (fixes #117)
 
- -- Jinming Wu, Patrick <me@patrickwu.space>  Wed, 13 May 2020 22:53:03 +0800
+ -- Patrick Wu <me@patrickwu.space>  Wed, 13 May 2020 22:53:03 +0800
 
 wslu (3.0.1-0kali1) kali-dev; urgency=medium
 
   * Initial release
 
- -- Jinming Wu, Patrick <me@patrickwu.space>  Mon, 13 Apr 2020 20:41:40 +0800
+ -- Patrick Wu <me@patrickwu.space>  Mon, 13 Apr 2020 20:41:40 +0800
