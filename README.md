@@ -99,7 +99,7 @@ sudo dnf copr enable wslutilities/wslu
 sudo dnf install wslu
 ```
 
-### Fedora Remix
+### Fedora Remix for WSL
 
 Preinstalled.
 
@@ -119,7 +119,7 @@ sudo apt install wslu
 
 Preinstalled.
 
-### Pengwin Enterprise
+### Pengwin Enterprise 7
 
 You can install `wslu` with the following command:
 
