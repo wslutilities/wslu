@@ -129,7 +129,7 @@ sudo yum install wslu
 
 > 注意!
 >
-> Ubuntu 版本不仅需要需要在此反馈， 同时也要在 [Launchpad](https://bugs.launchpad.net/ubuntu/+source/wslu) 反馈。
+> Ubuntu 版本不仅需要在此反馈， 同时也要在 [Launchpad](https://bugs.launchpad.net/ubuntu/+source/wslu) 反馈。
 
 最新版本已预装。针对旧版本的安装，请安装依赖于 wslu 的 ubuntu-wsl:
 
