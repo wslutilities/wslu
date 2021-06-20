@@ -87,7 +87,7 @@ You can install `wslu` with the following command:
 
 ```
 sudo apt install gnupg2 apt-transport-https
-wget -O - https://pkg.wslutiliti.es/public.key | sudo apt-key add -
+wget -O - https://pkg.wslutiliti.es/public.key | sudo tee -a /etc/apt/trusted.gpg.d/wslu.asc
 echo "deb https://pkg.wslutiliti.es/debian buster main" | sudo tee -a /etc/apt/sources.list
 sudo apt update
 sudo apt install wslu
@@ -109,7 +109,7 @@ You can install `wslu` with the following command:
 
 ```
 sudo apt install gnupg2 apt-transport-https
-wget -O - https://pkg.wslutiliti.es/public.key | sudo apt-key add -
+wget -O - https://pkg.wslutiliti.es/public.key | sudo tee -a /etc/apt/trusted.gpg.d/wslu.asc
 echo "deb https://pkg.wslutiliti.es/kali kali-rolling main" | sudo tee -a /etc/apt/sources.list
 sudo apt update
 sudo apt install wslu
