@@ -56,3 +56,5 @@ WSLUSC_SMART_ICON_DETECTION=false
 # wslvar
 
 # wslview
+
+WSLVIEW_DEFAULT_ENGINE="powershell"

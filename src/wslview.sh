@@ -3,7 +3,7 @@ version="10"
 
 lname=""
 
-help_short="$0 [-hvur]\n$0 LINK/FILE"
+help_short="$0 [-hvur] [-E ENGINE]\n$0 LINK/FILE"
 
 function del_reg_alt {
 	if [ "$distro" == "archlinux" ] || [ "$distro" == "alpine" ]; then
@@ -32,6 +32,7 @@ for args; do
 		-u|--unreg-as-browser) del_reg_alt;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslview v$version"; exit;;
+		-E|--engine) WSLVIEW_DEFAULT_ENGINE="$1"; shift;;
 		*) lname="$lname$args";;
 	esac
 done
@@ -63,7 +64,13 @@ if [[ "$lname" != "" ]]; then
 		[[ "$properfile_full_path" =~ ^${interop_win_type//\/$/}.*$ ]] && converted_file_path="$(wslpath -w "$properfile_full_path")"
 		lname="$converted_file_path"
 	fi
-	winps_exec Start "\"$lname\""
+	if [[ "$WSLVIEW_DEFAULT_ENGINE" == "powershell" ]]; then
+		winps_exec Start "\"$lname\""
+	elif [[ "$WSLVIEW_DEFAULT_ENGINE" == "cmd" ]]; then
+		cmd_exec start "\"$lname\""
+	elif [[ "$WSLVIEW_DEFAULT_ENGINE" == "cmd_explorer" ]]; then
+		cmd_exec explorer.exe "\"$lname\""
+	fi
 else
 	error_echo "No input, aborting" 21
 fi

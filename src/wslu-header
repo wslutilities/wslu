@@ -184,6 +184,13 @@ function winps_exec {
 	return $EXIT_STATUS
 }
 
+function cmd_exec {
+	debug_echo "cmd_exec: called with command $@"
+	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/cmd.exe /c "$@"
+	EXIT_STATUS=$?
+	return $EXIT_STATUS
+}
+
 function wslu_get_build {
 	debug_echo "wslu_get_build: called"
 	build=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
