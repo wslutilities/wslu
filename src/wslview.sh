@@ -51,7 +51,7 @@ if [[ "$lname" != "" ]]; then
 		[ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ] || error_echo "This protocol is not supported before version 1903." 34
 		properfile_full_path="$(readlink -f "${lname}")"
 	fi
-	winps_exec Start "\"$(wslpath -w "$properfile_full_path")\""
+	winps_exec Start "\"$(wslpath -w "$properfile_full_path" 2>/dev/null || echo "$lname")\""
 else
 	error_echo "No input, aborting" 21
 fi
