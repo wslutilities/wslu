@@ -80,7 +80,8 @@ sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/ho
 ```
 - **CentOS 8**: 
 ```
-sudo dnf install -y epel-release dnf config-manager --set-enabled PowerTools
+sudo dnf install -y epel-release 
+sudo dnf config-manager --set-enabled PowerTools
 sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/CentOS_8/home:wslutilities.repo
 ```
 - **Red Hat Enterprise Linux 7**: 
@@ -90,7 +91,7 @@ sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/ho
 - **Red Hat Enterprise Linux 8**: 
 ```
 sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-sudo subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
+sudo subscription-manager repos --enable codeready-builder-for-rhel-8-$(/bin/arch)-rpms
 sudo yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/CentOS_8/home:wslutilities.repo
 ```
 
@@ -141,6 +142,18 @@ You can install `wslu` with the following command:
 
 ```
 sudo yum install wslu
+```
+
+### Pengwin Enterprise 8
+
+Add the EPEL repository:
+```
+sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+```
+You can install `wslu` with the following command:
+
+```
+sudo dnf install wslu
 ```
 
 ### Ubuntu
