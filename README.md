@@ -87,8 +87,8 @@ You can install `wslu` with the following command:
 
 ```
 sudo apt install gnupg2 apt-transport-https
-wget -O - https://access.patrickwu.space/wslu/public.asc | sudo apt-key add -
-echo "deb https://access.patrickwu.space/wslu/debian buster main" | sudo tee -a /etc/apt/sources.list
+wget -O - https://pkg.wslutiliti.es/public.key | sudo tee -a /etc/apt/trusted.gpg.d/wslu.asc
+echo "deb https://pkg.wslutiliti.es/debian buster main" | sudo tee -a /etc/apt/sources.list
 sudo apt update
 sudo apt install wslu
 ```
@@ -99,7 +99,7 @@ sudo dnf copr enable wslutilities/wslu
 sudo dnf install wslu
 ```
 
-### Fedora Remix
+### Fedora Remix for WSL
 
 Preinstalled.
 
@@ -109,8 +109,8 @@ You can install `wslu` with the following command:
 
 ```
 sudo apt install gnupg2 apt-transport-https
-wget -O - https://access.patrickwu.space/wslu/public.asc | sudo apt-key add -
-echo "deb https://access.patrickwu.space/wslu/kali kali-rolling main" | sudo tee -a /etc/apt/sources.list
+wget -O - https://pkg.wslutiliti.es/public.key | sudo tee -a /etc/apt/trusted.gpg.d/wslu.asc
+echo "deb https://pkg.wslutiliti.es/kali kali-rolling main" | sudo tee -a /etc/apt/sources.list
 sudo apt update
 sudo apt install wslu
 ```
@@ -119,7 +119,7 @@ sudo apt install wslu
 
 Preinstalled.
 
-### Pengwin Enterprise
+### Pengwin Enterprise 7
 
 You can install `wslu` with the following command:
 
