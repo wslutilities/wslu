@@ -64,7 +64,7 @@ if [[ "$cname_header" != "" ]]; then
 	# always absolute path
 	tmp_cname_header="$(readlink -f "$cname_header")"
 	if [ ! -f "$tmp_cname_header" ]; then
-		cname_header="$(which "$cname_header")"
+		cname_header="$(command -v "$cname_header")"
 	else
 		cname_header="$tmp_cname_header"
 	fi
