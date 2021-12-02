@@ -14,7 +14,7 @@ function view_shell {
 }
 
 function call_sys {
-	winps_exec "Write-Output \$Env:$*" | cat
+	winps_exec "Write-Output \${Env:$*}" | cat
 }
 
 function view_sys {
