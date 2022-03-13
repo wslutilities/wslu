@@ -171,7 +171,7 @@ function baseexec_gen {
 			# if it is a store distro
 			wslu_distro_packagename=${wslu_distro_packagename##* }
 			wslu_base_exec_folder_path="$(wslpath "$(winps_exec "[Environment]::GetFolderPath('LocalApplicationData')" | tr -d "\r")\\Microsoft\\WindowsApps\\$wslu_distro_packagename")"
-			wslpath -w "$(find "$wslu_base_exec_folder_path" -name "*.exe")" > ~/.config/wslu/baseexec
+			wslpath -w "$(find "$wslu_base_exec_folder_path" -name "*.exe" -print -quit)" > ~/.config/wslu/baseexec
 		else
 			# if it is imported distro
 			echo "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
