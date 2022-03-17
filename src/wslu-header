@@ -112,7 +112,7 @@ function interop_prefix {
 
 	win_location="/mnt/"
 	if [ -f /etc/wsl.conf ]; then
-		tmp="$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf | awk '{$1=$1;print}')"
+		tmp="$(grep '^\s*root\s*=' /etc/wsl.conf | awk -F '=' '/root/ {print $2}' | awk '{$1=$1;print}')"
 		[ "$tmp" == "" ] || win_location="$tmp"
 		[[ "$win_location" =~ ^.*/$ ]] || win_location="$win_location/" # make sure it always end with slash
 		unset tmp
