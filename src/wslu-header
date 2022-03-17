@@ -78,12 +78,18 @@ error="${red}[error]${reset}"
 warn="${orange}[warn]${reset}"
 
 ## Windows build number constant
+# Windows 10
 readonly BN_SPR_CREATORS=15063		#1703, Redstone 2, Creators Update
 readonly BN_FAL_CREATORS=16299		#1709, Redstone 3, Fall Creators Update
 readonly BN_APR_EIGHTEEN=17134		#1803, Redstone 4, April 2018 Update
 readonly BN_OCT_EIGHTEEN=17763		#1809, Redstone 5, October 2018 Update
 readonly BN_MAY_NINETEEN=18362		#1903, 19H1, May 2019 Update
 readonly BN_NOV_NINETEEN=18363		#1909, 19H2, November 2019 Update
+readonly BN_OCT_NINETEEN=19042		#20H2, Windows 10 October 2020 Update
+readonly BN_MAY_TWNETONE=19043		#21H1, Windows 10 May 2021 Update
+readonly BN_NOV_TWENTONE=19044		#21H2, Windows 10 November 2021 Update
+# Windows 11
+readonly BN_ELEVEN_21H2=22000		#21H2, Windows 11
 
 # functions
 function debug_echo {
