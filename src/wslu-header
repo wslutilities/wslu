@@ -36,12 +36,13 @@ __wsl_conf_read() {
 if __wsl_conf_read interop enabled | grep false >/dev/null; then
 	 echo -e "WSL Interopability is disabled and WSL Utilities won't work. Please enable it by:
 	1. open /etc/wsl.conf using root or equivalent editing permission;
-	2. under [interop] section, set enabled to true."
-	 exit 1
+	2. under [interop] section, set enabled to true;
+	3. restart your distribution."
+	exit 1
 elif grep ^disabled /proc/sys/fs/binfmt_misc/WSLInterop >/dev/null; then
 	 echo -e "WSL Interopability is temporarily disabled and WSL Utilities won't work. Please enable it by:
 	# echo 1 > /proc/sys/fs/binfmt_misc/WSLInterop"
-	 exit 1
+	exit 1
 fi
 
 # when --verbose, verbose; when --debug, debug.
