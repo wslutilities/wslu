@@ -223,6 +223,17 @@ function wslu_get_build {
 	echo "${build##* }"
 }
 
+function set_env_interop {
+	for i in $(pstree -np -s $$ | grep -o -E '[0-9]+'); do
+		if [[ -e "/run/WSL/${i}_interop" ]]; then
+			export WSL_INTEROP=/run/WSL/${i}_interop
+		fi
+	done
+}
+
+# pre_check to make sure WSL_INTEROP is properly set
+[ -z "$WSL_INTEROP" ] && set_env_interop
+
 
 # first run, saving some information
 if [ ! -d ~/.config/wslu ]; then
