@@ -161,24 +161,28 @@ function sysdrive_prefix {
 	unset hard_reset
 }
 
+function wslu_get_build {
+	build=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	echo "${build##* }"
+}
+
 function chcp_com {
 	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/chcp.com "$@" >/dev/null
 }
 
 function winps_exec {
+	wslutmpbuild="$(( $(wslu_get_build) + 0 ))"
 	cp="$(cat ~/.config/wslu/oemcp)"
-	chcp_com "$cp"
+	[ $wslutmpbuild -ge $BN_OCT_NINETEEN ] || chcp_com "$cp"
 	cp=$(($cp+0))
 	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive –ExecutionPolicy Bypass -Command "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::InputEncoding = [System.Text.Encoding]::GetEncoding($cp); $@"
 	EXIT_STATUS=$?
-	chcp_com 65001
+	[ $wslutmpbuild -ge $BN_OCT_NINETEEN ] || chcp_com 65001
 	return $EXIT_STATUS
 }
 
 function baseexec_gen {
-	wslutmpbuild=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-	wslutmpbuild=${wslutmpbuild##* }
-	wslutmpbuild="$(( $wslutmpbuild + 0 ))"
+	wslutmpbuild="$(( $(wslu_get_build) + 0 ))"
 	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
 		# The environment variable only available in 19H1 or later.
 		wslu_distro_regpath=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | sed -e 's|\r||g' | grep -B1 -e "$WSL_DISTRO_NAME$" | head -n1 )
@@ -226,11 +230,6 @@ function wslu_file_check {
 			exit 30
 		fi
 	fi
-}
-
-function wslu_get_build {
-	build=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-	echo "${build##* }"
 }
 
 function set_env_interop {
