@@ -1,5 +1,5 @@
 # A copy of robertdebock/github-action-rpmbuild because that one don't work
-FROM centos:8
+FROM rockylinux/rockylinux:8
 
 WORKDIR /github/workspace
 
