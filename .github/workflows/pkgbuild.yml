@@ -36,7 +36,7 @@ jobs:
           sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper
       - name: Build Debian Package
         run: |
-          bash ./configure.sh --deb buster
+          bash ./configure.sh --deb bullseye
           debuild -i -us -uc -b
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
