@@ -4,8 +4,8 @@ on:
     branches:
       - master
 jobs:
-  deb10build:
-    name: Debian 10
+  debbuild:
+    name: Debian
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -22,25 +22,6 @@ jobs:
       - uses: actions/upload-artifact@v1
         with:
           name: Debian10DEBs
-          path: pkgs
-  deb11build:
-    name: Debian 11
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install Pre-requisites
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper
-      - name: Build Debian Package
-        run: |
-          bash ./configure.sh --deb buster
-          debuild -i -us -uc -b
-          mkdir -p ./pkgs
-          mv ../wsl*.* ./pkgs
-      - uses: actions/upload-artifact@v1
-        with:
-          name: Debian11DEBs
           path: pkgs
   pgwbuild:
     name: Pengwin
@@ -76,8 +57,8 @@ jobs:
         env:
           PACKAGECLOUD_TOKEN: ${{ secrets.PGW_DEV_DEPLOY_KEY }}
         run: package_cloud push whitewaterfoundry/wslu/debian/bullseye ./PengwinDEBs/*.deb --skip-errors
-  rpmbuild:
-    name: RPM
+  rpmobsbuild:
+    name: RPM - OpenSUSE Build Service
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -85,10 +66,10 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -qq build-essential tar
-      - name: 
+      - name: configure
         run: |
           bash ./configure.sh --rpm
-          cp extras/build/rpm/wslu.spec ../wslu.spec
+          cp extras/build/rpm/obs/wslu.spec ../wslu.spec
           rm -rf *
           mkdir -p SOURCES
           mkdir -p SPECS
@@ -104,7 +85,37 @@ jobs:
         #uses: robertdebock/rpmbuild-action@1.1.1
       - uses: actions/upload-artifact@v1
         with:
-          name: RPMs
+          name: OBSRPMs
+          path: compiled_rpms
+  rpmcoprbuild:
+    name: RPM - COPR
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Pre-requisites
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qq build-essential tar
+      - name: configure
+        run: |
+          bash ./configure.sh --rpm
+          cp extras/build/rpm/copr/wslu.spec ../wslu.spec
+          rm -rf *
+          mkdir -p SOURCES
+          mkdir -p SPECS
+          cp ../wslu-*.tar.gz SOURCES
+          cp ../wslu.spec SPECS
+      - name: rpmbuild
+        uses: ./.github/actions/rpmbuild/
+      - name: moving files
+        run: |
+          mkdir compiled_rpms
+          cp SRPMS/* compiled_rpms
+          cp RPMS/noarch/* compiled_rpms
+        #uses: robertdebock/rpmbuild-action@1.1.1
+      - uses: actions/upload-artifact@v1
+        with:
+          name: COPRRPMs
           path: compiled_rpms
       # - name: deploy RPM source to rpm-wslu
       #   env:

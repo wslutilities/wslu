@@ -84,9 +84,11 @@ function deb_build_prep {
 function rpm_build_prep {
 	BUILD_VER_NUM=$(cat ./VERSION | cut -f1 -d-)
 	REL_VER_NUM=$(cat ./VERSION | cut -f2 -d-)
-	sed -i s/BUILDVERPLACEHOLDER/"$BUILD_VER_NUM"/g ./extras/build/rpm/wslu.spec
-	sed -i s/RELVERPLACEHOLDER/"$REL_VER_NUM"/g ./extras/build/rpm/wslu.spec
-	sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a %b %d %Y')"/g ./extras/build/rpm/wslu.spec
+	for f in ./extras/build/rpm/*/wslu.spec; do
+		sed -i s/BUILDVERPLACEHOLDER/"$BUILD_VER_NUM"/g $f
+		sed -i s/RELVERPLACEHOLDER/"$REL_VER_NUM"/g $f
+		sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a %b %d %Y')"/g $f
+	done
 	mkdir -p ../wslu-$BUILD_VER_NUM/
 	cp -r * ../wslu-$BUILD_VER_NUM/
 	cd ../
