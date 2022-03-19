@@ -5,7 +5,8 @@
 teardown() {
   echo "removal for temporary shortcuts"
   rm -rf "$(wslupath -D)/top.lnk"
-  rm -rf "$(wslupath -D)/gedit.lnk"
+  rm -rf "$(wslupath -D)/xeyes.lnk"
+  rm -rf "$(wslupath -D)/lolwhat.lnk"
 }
 
 @test "wslusc - No parameter" {
