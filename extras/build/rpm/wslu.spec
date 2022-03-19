@@ -5,8 +5,9 @@ Version: BUILDVERPLACEHOLDER
 Release: RELVERPLACEHOLDER
 Source: wslu-BUILDVERPLACEHOLDER.tar.gz
 BuildArch: noarch
-PreReq: desktop-file-utils
-Requires: bc ImageMagick
+Requires(pre,preun): desktop-file-utils
+BuildRequires: make gzip
+Requires: bc ImageMagick psmisc
 Requires(post): %{_sbindir}/update-alternatives %{_bindir}/update-desktop-database %{_bindir}/desktop-file-install
 Requires(postun): %{_sbindir}/update-alternatives %{_bindir}/update-desktop-database
 BuildRoot: %{_tmppath}/%{name}-%{version}-build

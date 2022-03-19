@@ -27,8 +27,24 @@ LANG=C
 # prevent bash -x
 set +x
 
+# conf handling module
+__wsl_conf_read() {
+	[ -f /etc/wsl.conf ] && sed -nr "/^\[${1}\]/ { :l /^${2}[ ]*=/ { s/[^=]*=[ ]*//; p; q;}; n; b l;}" /etc/wsl.conf
+}
+
 # checking interopability
-grep enabled /proc/sys/fs/binfmt_misc/WSLInterop >/dev/null || (echo "WSL Interopability is disabled. Please enable it before using WSL."; exit 1)
+if __wsl_conf_read interop enabled | grep false >/dev/null; then
+	 echo -e "WSL Interopability is disabled and WSL Utilities won't work. Please enable it by:
+	1. open /etc/wsl.conf using root or equivalent editing permission;
+	2. under [interop] section, set enabled to true;
+	3. restart your distribution."
+	exit 1
+elif grep ^disabled /proc/sys/fs/binfmt_misc/WSLInterop >/dev/null; then
+	 echo -e "WSL Interopability is temporarily disabled and WSL Utilities won't work. Please enable it by:
+	# echo 1 > /proc/sys/fs/binfmt_misc/WSLInterop"
+	exit 1
+fi
+
 # when --verbose, verbose; when --debug, debug.
 #
 # They should not exist at the same time, otherwise
@@ -43,9 +59,6 @@ elif [ "$1" == "--debug" ]; then
 	echo -e '\e[38;5;202m\033[1m[debug] Showing debug output. \033(B\033[m'
 	shift
 fi
-
-# checking interoperability
-grep enabled /proc/sys/fs/binfmt_misc/WSLInterop >/dev/null || (echo -e "\e[31m\033[1m[error] WSL Interoperability is disabled. Please enable it before using WSL.\033(B\033[m"; exit 1)
 
 # variables
 ## color
@@ -78,12 +91,18 @@ error="${red}[error]${reset}"
 warn="${orange}[warn]${reset}"
 
 ## Windows build number constant
+# Windows 10
 readonly BN_SPR_CREATORS=15063		#1703, Redstone 2, Creators Update
 readonly BN_FAL_CREATORS=16299		#1709, Redstone 3, Fall Creators Update
 readonly BN_APR_EIGHTEEN=17134		#1803, Redstone 4, April 2018 Update
 readonly BN_OCT_EIGHTEEN=17763		#1809, Redstone 5, October 2018 Update
 readonly BN_MAY_NINETEEN=18362		#1903, 19H1, May 2019 Update
 readonly BN_NOV_NINETEEN=18363		#1909, 19H2, November 2019 Update
+readonly BN_OCT_NINETEEN=19042		#20H2, Windows 10 October 2020 Update
+readonly BN_MAY_TWNETONE=19043		#21H1, Windows 10 May 2021 Update
+readonly BN_NOV_TWENTONE=19044		#21H2, Windows 10 November 2021 Update
+# Windows 11
+readonly BN_ELEVEN_21H2=22000		#21H2, Windows 11
 
 # functions
 function debug_echo {
@@ -111,12 +130,10 @@ function double_dash_p {
 function interop_prefix {
 
 	win_location="/mnt/"
-	if [ -f /etc/wsl.conf ]; then
-		tmp="$(awk -F '=' '/root/ {print $2}' /etc/wsl.conf | awk '{$1=$1;print}')"
-		[ "$tmp" == "" ] || win_location="$tmp"
-		[[ "$win_location" =~ ^.*/$ ]] || win_location="$win_location/" # make sure it always end with slash
-		unset tmp
-	fi
+	tmp="$(__wsl_conf_read automount root)"
+	[ "$tmp" == "" ] || win_location="$tmp"
+	[[ "$win_location" =~ ^.*/$ ]] || win_location="$win_location/" # make sure it always end with slash
+	unset tmp
 	echo "$win_location"
 
 	unset win_location
@@ -145,24 +162,50 @@ function sysdrive_prefix {
 	unset hard_reset
 }
 
+function wslu_get_build {
+	build=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+	echo "${build##* }"
+}
+
+function wslu_get_wsl_ver {
+	wslutmpbuild="$(( $(wslu_get_build) + 0 ))"
+	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
+		# The environment variable only available in 19H1 or later.
+		wslu_distro_regpath=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | sed -e 's|\r||g' | grep -B1 -e "$WSL_DISTRO_NAME$" | head -n1 )
+		if "$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Flags &>/dev/null; then
+			wslu_distro_version=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Flags | tail -n 2 | head -n 1 | sed -e 's|\r||g')
+			wslu_distro_version=${wslu_distro_version##* }
+			wslu_distro_version_processed=$(expr $(printf "%d\n" "$wslu_distro_version") / 8)
+			if [ "$wslu_distro_version_processed" == "1" ]; then
+				echo "2"
+			elif [ "$wslu_distro_version_processed" == "0" ]; then
+				echo "1"
+			fi
+		else
+			echo "1"
+		fi
+	else
+		echo "1"
+	fi
+}
+
 function chcp_com {
 	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/chcp.com "$@" >/dev/null
 }
 
 function winps_exec {
+	wslutmpbuild="$(( $(wslu_get_build) + 0 ))"
 	cp="$(cat ~/.config/wslu/oemcp)"
-	chcp_com "$cp"
+	[ $wslutmpbuild -ge $BN_OCT_NINETEEN ] || chcp_com "$cp"
 	cp=$(($cp+0))
 	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive –ExecutionPolicy Bypass -Command "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::InputEncoding = [System.Text.Encoding]::GetEncoding($cp); $@"
 	EXIT_STATUS=$?
-	chcp_com 65001
+	[ $wslutmpbuild -ge $BN_OCT_NINETEEN ] || chcp_com 65001
 	return $EXIT_STATUS
 }
 
 function baseexec_gen {
-	wslutmpbuild=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-	wslutmpbuild=${wslutmpbuild##* }
-	wslutmpbuild="$(( $wslutmpbuild + 0 ))"
+	wslutmpbuild="$(( $(wslu_get_build) + 0 ))"
 	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
 		# The environment variable only available in 19H1 or later.
 		wslu_distro_regpath=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | sed -e 's|\r||g' | grep -B1 -e "$WSL_DISTRO_NAME$" | head -n1 )
@@ -171,7 +214,7 @@ function baseexec_gen {
 			# if it is a store distro
 			wslu_distro_packagename=${wslu_distro_packagename##* }
 			wslu_base_exec_folder_path="$(wslpath "$(winps_exec "[Environment]::GetFolderPath('LocalApplicationData')" | tr -d "\r")\\Microsoft\\WindowsApps\\$wslu_distro_packagename")"
-			wslpath -w "$(find "$wslu_base_exec_folder_path" -name "*.exe")" > ~/.config/wslu/baseexec
+			wslpath -w "$(find "$wslu_base_exec_folder_path" -name "*.exe" -print -quit)" > ~/.config/wslu/baseexec
 		else
 			# if it is imported distro
 			echo "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
@@ -212,11 +255,16 @@ function wslu_file_check {
 	fi
 }
 
-function wslu_get_build {
-	build=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-	echo "${build##* }"
-}
 
+
+# pre_check to make sure WSL_INTEROP is properly set in WSL2
+if [ "$(wslu_get_wsl_ver)" == "2" ] && [ -z "$WSL_INTEROP" ]; then
+	for i in $(pstree -np -s $$ | grep -o -E '[0-9]+'); do
+		if [[ -e "/run/WSL/${i}_interop" ]]; then
+			export WSL_INTEROP=/run/WSL/${i}_interop
+		fi
+	done
+fi
 
 # first run, saving some information
 if [ ! -d ~/.config/wslu ]; then

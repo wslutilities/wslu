@@ -4,8 +4,9 @@
 
 teardown() {
   echo "removal for temporary shortcuts"
-  rm -rf "$(wslupath -D)/htop.lnk"
-  rm -rf "$(wslupath -D)/gedit.lnk"
+  rm -rf "$(wslupath -D)/top.lnk"
+  rm -rf "$(wslupath -D)/xeyes.lnk"
+  rm -rf "$(wslupath -D)/lolwhat.lnk"
 }
 
 @test "wslusc - No parameter" {
@@ -33,13 +34,18 @@ teardown() {
 }
 
 @test "wslusc - without GUI" {
-  run out/wslusc htop
-  [ -f "$(wslupath -D)/htop.lnk" ]
+  run out/wslusc top
+  [ -f "$(wslupath -D)/top.lnk" ]
 }
 
 @test "wslusc - with GUI" {
-  run out/wslusc -g gedit
-  [ -f "$(wslupath -D)/gedit.lnk" ]
+  run out/wslusc -g xeyes
+  [ -f "$(wslupath -D)/xeyes.lnk" ]
+}
+
+@test "wslusc - with Custom Name" {
+  run out/wslusc -n "lolwhat" top
+  [ -f "$(wslupath -D)/lolwhat.lnk" ]
 }
 
 # TODO: Add more tests to cover all possible cases

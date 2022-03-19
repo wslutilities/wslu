@@ -4,8 +4,8 @@ on:
     branches:
       - master
 jobs:
-  debbuild:
-    name: Debian
+  deb10build:
+    name: Debian 10
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -21,7 +21,26 @@ jobs:
           mv ../wsl*.* ./pkgs
       - uses: actions/upload-artifact@v1
         with:
-          name: DebianDEBs
+          name: Debian10DEBs
+          path: pkgs
+  deb11build:
+    name: Debian 11
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Pre-requisites
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper
+      - name: Build Debian Package
+        run: |
+          bash ./configure.sh --deb buster
+          debuild -i -us -uc -b
+          mkdir -p ./pkgs
+          mv ../wsl*.* ./pkgs
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Debian11DEBs
           path: pkgs
   pgwbuild:
     name: Pengwin
