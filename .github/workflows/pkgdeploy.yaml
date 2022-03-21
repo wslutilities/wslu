@@ -87,6 +87,7 @@ jobs:
         with:
           name: OBSRPMs
           path: compiled_rpms
+  rpmcoprbuild:
     name: RPM - COPR
     runs-on: ubuntu-18.04
     steps:
@@ -118,7 +119,7 @@ jobs:
           path: compiled_rpms
   coprdeploy:
     name: COPR Deploying
-    needs: rpmbuild
+    needs: rpmcoprbuild
     container: fedora:latest
     runs-on: ubuntu-latest
     steps:
@@ -137,5 +138,4 @@ jobs:
             dnf -y install @development-tools @rpm-development-tools
             dnf -y install copr-cli make
         - name: Submit the build by uploading the source RPM
-          run: copr build praiskup/argparse-manpage-ci RPMs/*.src.rpm
-          run: copr build praiskup/argparse-manpage-ci RPMs/*.src.rpm
+          run: copr build wslutilities/wslu COPRRPMs/*.src.rpm

@@ -6,8 +6,8 @@ on:
       - dev/**
       - lts/**
 jobs:
-  deb10build:
-    name: Debian 10
+  debbuild:
+    name: Debian
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -24,25 +24,6 @@ jobs:
       - uses: actions/upload-artifact@v1
         with:
           name: Debian10DEBs
-          path: pkgs
-  deb11build:
-    name: Debian 11
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install Pre-requisites
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper
-      - name: Build Debian Package
-        run: |
-          bash ./configure.sh --deb bullseye
-          debuild -i -us -uc -b
-          mkdir -p ./pkgs
-          mv ../wsl*.* ./pkgs
-      - uses: actions/upload-artifact@v1
-        with:
-          name: Debian1DEBs
           path: pkgs
   pgwbuild:
     name: Pengwin
@@ -64,7 +45,7 @@ jobs:
           name: PengwinDEBs
           path: pkgs
   pgwspdeploy:
-    name: Pengwin Dev version Deploying
+    name: Pengwin Deploying
     needs: pgwbuild
     runs-on: ubuntu-18.04
     container: circleci/ruby:2.3-jessie
@@ -77,9 +58,9 @@ jobs:
       - name: deploy to the dev
         env:
           PACKAGECLOUD_TOKEN: ${{ secrets.PGW_DEV_DEPLOY_KEY }}
-        run: package_cloud push whitewaterfoundry/wslu-dev/debian/bullseye ./PengwinDEBs/*.deb --skip-errors
-  rpmbuild:
-    name: RPM
+        run: package_cloud push whitewaterfoundry/wslu/debian/bullseye ./PengwinDEBs/*.deb --skip-errors
+  rpmobsbuild:
+    name: RPM - OpenSUSE Build Service
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -90,7 +71,7 @@ jobs:
       - name: configure
         run: |
           bash ./configure.sh --rpm
-          cp extras/build/rpm/wslu.spec ../wslu.spec
+          cp extras/build/rpm/obs/wslu.spec ../wslu.spec
           rm -rf *
           mkdir -p SOURCES
           mkdir -p SPECS
@@ -106,15 +87,57 @@ jobs:
         #uses: robertdebock/rpmbuild-action@1.1.1
       - uses: actions/upload-artifact@v1
         with:
-          name: RPMs
+          name: OBSRPMs
           path: compiled_rpms
-      # - name: deploy RPM source to rpm-wslu
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GIT_DEPLOY_KEY }}
-      #   run: |
-      #     git config --global user.email "me@patrickwu.space"
-      #     git config --global user.name "Jinming Wu, Patrick"
-      #     git clone --depth 1 https://patrick330602:$GH_TOKEN@github.com/wslutilities/rpm-wslu.git rpm-repo
-      #     git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo add -A
-      #     git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo commit -m "RPM Packaging file update: $(date)"
-      #     git --git-dir=./rpm-repo/.git --work-tree=./rpm-repo push
+  rpmcoprbuild:
+    name: RPM - COPR
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Pre-requisites
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qq build-essential tar
+      - name: configure
+        run: |
+          bash ./configure.sh --rpm
+          cp extras/build/rpm/copr/wslu.spec ../wslu.spec
+          rm -rf *
+          mkdir -p SOURCES
+          mkdir -p SPECS
+          cp ../wslu-*.tar.gz SOURCES
+          cp ../wslu.spec SPECS
+      - name: rpmbuild
+        uses: ./.github/actions/rpmbuild/
+      - name: moving files
+        run: |
+          mkdir compiled_rpms
+          cp SRPMS/* compiled_rpms
+          cp RPMS/noarch/* compiled_rpms
+        #uses: robertdebock/rpmbuild-action@1.1.1
+      - uses: actions/upload-artifact@v1
+        with:
+          name: COPRRPMs
+          path: compiled_rpms
+  coprdeploy:
+    name: COPR Deploying
+    needs: rpmcoprbuild
+    container: fedora:latest
+    runs-on: ubuntu-latest
+    steps:
+        - name: Retrive package for deployment
+          uses: actions/download-artifact@v1
+          with:
+            name: COPRRPMs
+        - name: Install API token for copr-cli
+          env:
+            API_TOKEN_CONTENT: ${{ secrets.COPR_API_TOKEN }}
+          run: |
+            mkdir -p "$HOME/.config"
+            echo "$API_TOKEN_CONTENT" > "$HOME/.config/copr"
+        - name: Install tooling for source RPM build
+          run: |
+            dnf -y install @development-tools @rpm-development-tools
+            dnf -y install copr-cli make
+        - name: Submit the build by uploading the source RPM
+          run: copr-cli build wslutilities/wslu-canary COPRRPMs/*.src.rpm
