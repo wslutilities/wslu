@@ -20,8 +20,8 @@
   [ "${lines[2]}" = "wslvar [-hvSL]" ]
 }
 @test "wslvar - System Variables" {
-  run out/wslvar -s SYSTEMROOT
-  [ "${lines[0]}" = "C:\WINDOWS" ]
+  run out/wslvar -s ProgramFiles
+  [ "${lines[0]}" = "C:\Program Files" ]
 }
 
 @test "wslvar - /w -s parameter - No Input" {
