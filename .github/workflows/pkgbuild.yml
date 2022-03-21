@@ -99,27 +99,27 @@ jobs:
           sudo apt-get install -qq build-essential tar
       - name: configure
         run: |
-          bash ./configure.sh --rpm
-          cp extras/build/rpm/obs/wslu.spec ../wslu.spec
+          bash ./configure.sh --rpm obs_canary
+          cp extras/build/rpm/obs/wslu.spec ../wslu-canary.spec
           rm -rf *
           mkdir -p SOURCES
           mkdir -p SPECS
           cp ../wslu-*.tar.gz SOURCES
-          cp ../wslu.spec SPECS
+          cp ../wslu-canary.spec SPECS
       - name: rpmbuild
         uses: ./.github/actions/rpmbuild/
       - name: moving files
         run: |
           mkdir obs_res
           cp ../wslu-*.tar.gz obs_res
-          cp ../wslu.spec obs_res
+          cp ../wslu-canary.spec obs_res
         #uses: robertdebock/rpmbuild-action@1.1.1
       - uses: actions/upload-artifact@v1
         with:
           name: OBS_RES
           path: obs_res
   obsdeploy:
-    name: OBS Deploying
+    name: OpenSUSE Build Service Deploying
     needs: rpmobsbuild
     runs-on: ubuntu-latest
     steps:
@@ -140,12 +140,12 @@ jobs:
         - name: Uploading OBS source files
           run: |
             osc checkout home:wslutilities
-            cp OBS_RES/* home:wslutilities/wslu-dev/
-            cd home:wslutilities/wslu-dev/
+            cp OBS_RES/* home:wslutilities/wslu-canary/
+            cd home:wslutilities/wslu-canary/
             osc addremove
             osc commit -m "Build at $(date)"
   rpmcoprbuild:
-    name: RPM - COPR
+    name: RPM - Cool Other Package Repo
     runs-on: ubuntu-18.04
     needs: generaltests
     steps:
@@ -156,7 +156,7 @@ jobs:
           sudo apt-get install -qq build-essential tar
       - name: configure
         run: |
-          bash ./configure.sh --rpm
+          bash ./configure.sh --rpm copr
           cp extras/build/rpm/copr/wslu.spec ../wslu.spec
           rm -rf *
           mkdir -p SOURCES
@@ -176,7 +176,7 @@ jobs:
           name: COPRRPMs
           path: compiled_rpms
   coprdeploy:
-    name: COPR Deploying
+    name: Cool Other Package Repo Deploying
     needs: rpmcoprbuild
     container: fedora:latest
     runs-on: ubuntu-latest
