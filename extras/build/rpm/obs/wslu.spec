@@ -70,6 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wstart
 %{_bindir}/wslstart
 %{_bindir}/wslact
+%{_bindir}/wslgsu
 %{_bindir}/wslvar
 /usr/share/wslu/
 %doc /usr/share/man/

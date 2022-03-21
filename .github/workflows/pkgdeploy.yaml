@@ -138,4 +138,4 @@ jobs:
             dnf -y install @development-tools @rpm-development-tools
             dnf -y install copr-cli make
         - name: Submit the build by uploading the source RPM
-          run: copr build wslutilities/wslu COPRRPMs/*.src.rpm
+          run: copr-cli build wslutilities/wslu COPRRPMs/*.src.rpm
