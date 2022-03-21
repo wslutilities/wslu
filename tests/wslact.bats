@@ -16,25 +16,25 @@
 @test "wslact - Time Sync - Help" {
   run out/wslact time-sync --help
   [ "${lines[0]}" = "wslact - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
-  [ "${lines[1]}" = "Usage: wslact time-sync [-h]" ]
+  [ "${lines[1]}" = "Usage: wslact time-reset [-h]" ]
 }
 
 @test "wslact - Time Sync - Help - Alt." {
   run out/wslact time-sync -h
   [ "${lines[0]}" = "wslact - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
-  [ "${lines[1]}" = "Usage: wslact time-sync [-h]" ]
+  [ "${lines[1]}" = "Usage: wslact time-reset [-h]" ]
 }
 
 @test "wslact - Time Sync - short form - Help" {
   run out/wslact ts --help
   [ "${lines[0]}" = "wslact - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
-  [ "${lines[1]}" = "Usage: wslact time-sync [-h]" ]
+  [ "${lines[1]}" = "Usage: wslact time-reset [-h]" ]
 }
 
 @test "wslact - Time Sync - short form - Help - Alt." {
   run out/wslact ts -h
   [ "${lines[0]}" = "wslact - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
-  [ "${lines[1]}" = "Usage: wslact time-sync [-h]" ]
+  [ "${lines[1]}" = "Usage: wslact time-reset [-h]" ]
 }
 
 @test "wslact - Smart Mounting - Help" {
