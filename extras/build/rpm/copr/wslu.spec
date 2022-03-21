@@ -7,7 +7,7 @@ Source: wslu-BUILDVERPLACEHOLDER.tar.gz
 BuildArch: noarch
 Requires(pre,preun): desktop-file-utils
 BuildRequires: make gzip
-Requires: bc ImageMagick
+Requires: bc ImageMagick psmisc
 Requires(post): %{_sbindir}/update-alternatives %{_bindir}/update-desktop-database %{_bindir}/desktop-file-install
 Requires(postun): %{_sbindir}/update-alternatives %{_bindir}/update-desktop-database
 BuildRoot: %{_tmppath}/%{name}-%{version}-build

@@ -65,27 +65,7 @@ function get_windows_locale() {
 ## WSL information
 
 function get_wsl_version() {
-	debug_echo "get_wsl_version: called"
-	wslutmpbuild="$(( $(get_build) + 0 ))"
-	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
-		# The environment variable only available in 19H1 or later.
-		debug_echo "get_wsl_version: 19H1 or later"
-		wslu_distro_regpath=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | sed -e 's|\r||g' | grep -B1 -e "$WSL_DISTRO_NAME$" | head -n1 )
-		if "$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Flags &>/dev/null; then
-			wslu_distro_version=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Flags | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-			wslu_distro_version=${wslu_distro_version##* }
-			wslu_distro_version_processed=$(expr $(printf "%d\n" "$wslu_distro_version") / 8)
-			if [ "$wslu_distro_version_processed" == "1" ]; then
-				echo "2"
-			elif [ "$wslu_distro_version_processed" == "0" ]; then
-				echo "1"
-			fi
-		else
-			echo "1"
-		fi
-	else
-		echo "1"
-	fi
+	wslu_get_wsl_ver
 }
 
 function get_wsl_release() {
