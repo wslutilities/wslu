@@ -3,7 +3,7 @@ version="10"
 
 lname=""
 
-help_short="$0 [-hvur] [-E ENGINE]\n$0 LINK/FILE"
+help_short="$0 [-hvur]\n$0 [-E ENGINE] LINK/FILE"
 
 function del_reg_alt {
 	if [ "$distro" == "archlinux" ] || [ "$distro" == "alpine" ]; then
