@@ -110,14 +110,40 @@ jobs:
         uses: ./.github/actions/rpmbuild/
       - name: moving files
         run: |
-          mkdir compiled_rpms
-          cp SRPMS/* compiled_rpms
-          cp RPMS/noarch/* compiled_rpms
+          mkdir obs_res
+          cp ../wslu-*.tar.gz obs_res
+          cp ../wslu.spec obs_res
         #uses: robertdebock/rpmbuild-action@1.1.1
       - uses: actions/upload-artifact@v1
         with:
-          name: OBSRPMs
-          path: compiled_rpms
+          name: OBS_RES
+          path: obs_res
+  obsdeploy:
+    name: OBS Deploying
+    needs: rpmobsbuild
+    runs-on: ubuntu-latest
+    steps:
+        - name: Retrive package for deployment
+          uses: actions/download-artifact@v1
+          with:
+            name: OBS_RES
+        - name: Install Pre-requisites
+          run: |
+            sudo apt-get update -qq
+            sudo apt-get install -qq osc python3-m2crypto
+        - name: Install API token for osc
+          env:
+            API_TOKEN_CONTENT: ${{ secrets.OBS_API_TOKEN }}
+          run: |
+            mkdir -p "$HOME/.config/osc"
+            echo -e "[general]\napiurl = https://api.opensuse.org\n[https://api.opensuse.org]\nuser = wslutilities\npass = $API_TOKEN_CONTENT" > "$HOME/.config/osc/oscrc"
+        - name: Uploading OBS source files
+          run: |
+            osc checkout home:wslutilities
+            cp OBS_RES/* home:wslutilities/wslu-dev/
+            cd home:wslutilities/wslu-dev/
+            osc addremove
+            osc commit -m "Build at $(date)"
   rpmcoprbuild:
     name: RPM - COPR
     runs-on: ubuntu-18.04
