@@ -3,7 +3,7 @@
 #wslsys testing
 @test "wslsys - No parameter" {
   run out/wslsys
-    [[ "${lines[2]}" =~ ^Build\:\ \d{5}$ ]]
+    [[ "${lines[2]}" =~ ^Build\:\ [0-9]{5}$ ]]
     [[ "${lines[8]}" =~ ^Version\ \(WSL\)\:\ [1-2]$ ]]
   [ "$status" -eq 0 ]
 }
