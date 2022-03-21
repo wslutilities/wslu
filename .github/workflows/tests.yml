@@ -20,6 +20,7 @@ jobs:
             make
             desktop-file-utils
             bats
+            x11-apps
       - shell: wsl-bash -u root {0}
         run: |
           make
