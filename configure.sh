@@ -87,10 +87,10 @@ function deb_build_prep {
 function rpm_build_prep {
 	BUILD_VER_NUM=$(cat ./VERSION | cut -f1 -d-)
 	REL_VER_NUM=$(cat ./VERSION | cut -f2 -d-)
-	is_canary=0
+	is_canary=""
 	if [ "$@" = "obs_canary" ]; then
 		FOR_BUILD="obs"
-		is_canary=1
+		is_canary="-canary"
 	else
 		FOR_BUILD="$@"
 	fi
@@ -98,11 +98,12 @@ function rpm_build_prep {
 	sed -i s/BUILDVERPLACEHOLDER/"$BUILD_VER_NUM"/g ./extras/build/rpm/"$FOR_BUILD"/wslu.spec
 	sed -i s/RELVERPLACEHOLDER/"$REL_VER_NUM"/g ./extras/build/rpm/"$FOR_BUILD"/wslu.spec
 	sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a %b %d %Y')"/g ./extras/build/rpm/"$FOR_BUILD"/wslu.spec
-	[ "$is_canary" == "1" ] && sed -i s/Name\:\ wslu/Name\:\ wslu-canary/g ./extras/build/rpm/"$FOR_BUILD"/wslu.spec
-	mkdir -p ../wslu-$BUILD_VER_NUM/
-	cp -r * ../wslu-$BUILD_VER_NUM/
+	sed -i s/Name\:\ wslu/Name\:\ wslu$is_canary/g ./extras/build/rpm/"$FOR_BUILD"/wslu.spec
+	sed -i s/^Source\:\ wslu/Source\:\ wslu$is_canary/g ./extras/build/rpm/"$FOR_BUILD"/wslu.spec
+	mkdir -p ../wslu$is_canary-$BUILD_VER_NUM/
+	cp -r * ../wslu$is_canary-$BUILD_VER_NUM/
 	cd ../
-	tar -czvf wslu-$BUILD_VER_NUM.tar.gz ./wslu-$BUILD_VER_NUM
+	tar -czvf wslu$is_canary-$BUILD_VER_NUM.tar.gz ./wslu$is_canary-$BUILD_VER_NUM
 	cd ./wslu
 }
 
