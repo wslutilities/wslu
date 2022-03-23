@@ -271,7 +271,7 @@ if [ ! -d ~/.config/wslu ]; then
 	mkdir -p ~/.config/wslu
 fi
 
-# This gets tirggered then:
+# This gets triggered then:
 # 1. if it's the first time the script is triggered, i.e.,
 #    ~/.config/wslu/triggered time
 # 2. if update_time is also not present, i.e.,
