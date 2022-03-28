@@ -19,17 +19,7 @@ for args; do
 done
 
 if [[ "$content" != "" ]]; then
-    cfile=$(mktemp /tmp/wslclip.XXXXXX)
-    echo "$content" > "$cfile"
-
-fi
-
-cfile=${cfile:--}
-
-while IFS= read -r line; do
-    winps_exec "set-clipboard -append -value \"$line\""
-done < <(cat -- "$cfile")
-
-if [[ "$content" != "" ]]; then
-    rm "$cfile"
+    winps_exec "set-clipboard -value \"$content\""
+else
+    winps_exec "set-clipboard -value \"$PIPE\""
 fi

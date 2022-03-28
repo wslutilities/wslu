@@ -28,6 +28,11 @@ LANG=C
 # prevent bash -x
 set +x
 
+# pipeline content to pipe
+if [[ -p /dev/stdin ]]; then
+    PIPE=$(cat -)
+fi
+
 # conf handling module
 __wsl_conf_read() {
 	[ -f /etc/wsl.conf ] && sed -nr "/^\[${1}\]/ { :l /^${2}[ ]*=/ { s/[^=]*=[ ]*//; p; q;}; n; b l;}" /etc/wsl.conf
