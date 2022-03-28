@@ -33,7 +33,7 @@ for args; do
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) echo "wslu v$wslu_version; wslview v$version"; exit;;
 		-E|--engine) WSLVIEW_DEFAULT_ENGINE="$1"; shift;;
-		*) lname="$lname$args";;
+		*) lname="$lname $args";;
 	esac
 done
 
