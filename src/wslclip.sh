@@ -21,11 +21,14 @@ done
 if [[ "$content" != "" ]]; then
     cfile=$(mktemp /tmp/wslclip.XXXXXX)
     echo "$content" > "$cfile"
+
 fi
 
-while read line; do
-    winps_exec "set-clipboard -append -value $content"
-done < "${cfile:-/dev/stdin}"
+cfile=${cfile:--}
+
+while IFS= read -r line; do
+    winps_exec "set-clipboard -append -value \"$line\""
+done < <(cat -- "$cfile")
 
 if [[ "$content" != "" ]]; then
     rm "$cfile"
