@@ -17,6 +17,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# Current utility name
+
+wslu_util_name=$(basename "$1")
+
 # Version
 wslu_version=VERSIONPLACEHOLDER
 wslu_prefix="PREFIXPLACEHOLDER"
@@ -145,7 +149,7 @@ fi
 # functions
 
 function help {
-	app_name=$(basename "$1")
+	app_name=$wslu_util_name
 	echo -e "$app_name - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux
 Usage: $2
 
