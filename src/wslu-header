@@ -117,7 +117,7 @@ readonly BN_ELEVEN_21H2=22000		#21H2, Windows 11
 
 # echo functions
 function debug_echo {
-	[ "$wslu_debug" == "--debug" ] && echo "${orange}${bold}[debug:${wslu_c_p}]${reset} $@" 1>&2;
+	[ "$wslu_debug" == "--debug" ] && echo "${orange}${bold}[debug:${wslu_util_fullpath}]${reset} $@" 1>&2;
 }
 
 function error_echo {
