@@ -383,7 +383,7 @@ debug_echo "ascii_text: ${ascii_text[@]}"
 
 SAVEIFS=$IFS
 IFS=$'\n'
-info_collect=($(wslsys $wslu_debug --wslfetch "${WSLFETCH_INFO_SECTION:-"windows-build,windows-rel-branch,wsl-release,wsl-kernel,wsl-ip,windows-uptime"}" "${t}"))
+info_collect=($(wslsys $wslu_debug --wslfetch "${WSLFETCH_INFO_SECTION}" "${t}"))
 IFS=$SAVEIFS
 
 wslf_ver="${info_collect[0]}"
