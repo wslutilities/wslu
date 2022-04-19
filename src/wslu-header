@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Current utility name
+# Current utility
 wslu_util_fullpath="$0"
 wslu_util_name=$(basename "$wslu_util_fullpath")
 
@@ -32,9 +32,11 @@ LANG=C
 # prevent bash -x
 set +x
 
-# pipeline content to pipe
-if [[ -p /dev/stdin ]]; then
-    PIPE=$(cat -)
+# pipeline content to pipe... if it is wslclip
+if [[ "$wslu_util_name" == "wslclip" ]]; then
+	if [[ -p /dev/stdin ]]; then
+		PIPE=$(cat -)
+	fi
 fi
 
 # conf handling module
