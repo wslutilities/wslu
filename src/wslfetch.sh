@@ -4,10 +4,9 @@ version=44
 is_color=0
 is_generic=0
 help_short="wslfetch [-hvcg] [-t THEME] [-o OPTIONS]"
-_tmp_cmdname="$0"
 
-PARSED_ARGUMENTS=$(getopt -a -n "$(basename $_tmp_cmdname)" -o hvtcgo: --long help,version,theme,colorbar,generic,options: -- "$@")
-[ "$?" != "0" ] && help "$_tmp_cmdname" "$help_short"
+PARSED_ARGUMENTS=$(getopt -a -n "$(basename $wslu_util_name)" -o hvtcgo: --long help,version,theme,colorbar,generic,options: -- "$@")
+[ "$?" != "0" ] && help "$wslu_util_name" "$help_short"
 
 eval set -- "$PARSED_ARGUMENTS"
 while :
