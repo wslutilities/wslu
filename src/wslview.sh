@@ -37,6 +37,9 @@ for args; do
 	esac
 done
 
+debug_echo "lname: $lname"
+debug_echo "WSLVIEW_DEFAULT_ENGINE: $WSLVIEW_DEFAULT_ENGINE"
+
 if [[ "$lname" != "" ]]; then
 	wslutmpbuild=$(wslu_get_build)
 	# file:/// protocol used in linux
@@ -56,14 +59,13 @@ if [[ "$lname" != "" ]]; then
 		properfile_full_path="$(readlink -f "${lname}")"
 	fi
 	debug_echo "properfile_full_path: $properfile_full_path"
-	debug_echo "lname: $lname"
-	debug_echo "WSLVIEW_DEFAULT_ENGINE: $WSLVIEW_DEFAULT_ENGINE"
+	cmd="\"$(wslpath -w "${properfile_full_path:-lname}" 2>/dev/null || echo "$lname")\""
 	if [[ "$WSLVIEW_DEFAULT_ENGINE" == "powershell" ]]; then
-		winps_exec Start "\"$(wslpath -w "$properfile_full_path" 2>/dev/null || echo "$lname")\""
+		winps_exec Start "${cmd}"
 	elif [[ "$WSLVIEW_DEFAULT_ENGINE" == "cmd" ]]; then
-		cmd_exec start "\"$(wslpath -w "$properfile_full_path" 2>/dev/null || echo "$lname")\""
+		cmd_exec start "${cmd}"
 	elif [[ "$WSLVIEW_DEFAULT_ENGINE" == "cmd_explorer" ]]; then
-		cmd_exec explorer.exe "\"$(wslpath -w "$properfile_full_path" 2>/dev/null || echo "$lname")\""
+		cmd_exec explorer.exe "${cmd}"
 	fi
 else
 	error_echo "No input, aborting" 21
