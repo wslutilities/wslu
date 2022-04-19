@@ -38,6 +38,7 @@
 #    wsl-release
 #    wsl-kernel
 #    wsl-package-count
+#    wsl-ip
 # 'wsl-version' will be always ignored since it is builtin in wslfetch.
 WSLFETCH_INFO_SECTION="windows-build,windows-rel-branch,wsl-release,wsl-kernel,windows-uptime"
 
