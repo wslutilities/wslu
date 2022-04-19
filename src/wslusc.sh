@@ -10,10 +10,8 @@ customenv=""
 
 help_short="wslusc [-dIs] [-e PATH] [-n NAME] [-i FILE] [-g GUI_TYPE] COMMAND\nwslusc [-hv]"
 
-_tmp_cmdname="$0"
-
-PARSED_ARGUMENTS=$(getopt -a -n "$(basename $_tmp_cmdname)" -o hvd:Ie:n:i:gNs --long help,version,shortcut-debug:,interactive,path:,name:,icon:,gui,native,smart-icon -- "$@")
-[ "$?" != "0" ] && help "$_tmp_cmdname" "$help_short"
+PARSED_ARGUMENTS=$(getopt -a -n "$(basename $wslu_util_name)" -o hvd:Ie:n:i:gNs --long help,version,shortcut-debug:,interactive,path:,name:,icon:,gui,native,smart-icon -- "$@")
+[ "$?" != "0" ] && help "$wslu_util_name" "$help_short"
 
 function sc_debug {
 	debug_echo "sc_debug: called with $@"
