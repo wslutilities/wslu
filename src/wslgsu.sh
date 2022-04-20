@@ -1,14 +1,12 @@
 # shellcheck shell=bash
-version="22"
-
-help_short="wslgsu [-u USERNAME] [-n NAME] [-S] SERVICE/COMMAND\nwslgsu [-hvw]"
-
 isService=0
 isWakeup=0
 wa_gs_commd=""
 wa_gs_dscp=""
 wa_gs_name=""
 wa_gs_user="root"
+
+help_short="wslgsu [-u USERNAME] [-n NAME] [-S] SERVICE/COMMAND\nwslgsu [-hvw]"
 
 while [ "$1" != "" ]; do
 	case "$1" in
@@ -17,7 +15,7 @@ while [ "$1" != "" ]; do
 		-n|--name) shift; wa_gs_name="$1"; shift;;
 		-S|--service) isService=1; shift;;
 		-h|--help) help "wslact" "$help_short"; exit;;
-		-v|--version) echo "wslu v$wslu_version; wslgsu v$version"; exit;;
+		-v|--version) version; exit;;
 		*) wa_gs_commd="$*";break;;
 	esac
 done

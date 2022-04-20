@@ -1,6 +1,4 @@
 # shellcheck shell=bash
-version="03"
-
 var_type=1
 
 help_short="wslvar [-sl] NAME\nwslvar [-hvSL]"
@@ -45,7 +43,7 @@ while [ "$1" != "" ]; do
 		-S|--getsys) view_sys; exit;;
 		-L|--getshell) view_shell; exit;;
 		-h|--help) help "$0" "$help_short"; exit;;
-		-v|--version) echo "wslu v$wslu_version; wslvar v$version"; exit;;
+		-v|--version) version; exit;;
 		*) caller "$@"; exit;;
 	esac
 done

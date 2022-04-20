@@ -158,6 +158,10 @@ For more help for $app_name, please use the command \`man $app_name\` or visit t
 For overall help, you can use the command \`man wslu\` or visite the following site: https://wslutiliti.es/wslu."
 }
 
+function version {
+	echo "wslu v$wsl_version"
+}
+
 function double_dash_p {
 	echo "${@//\\/\\\\}"
 }

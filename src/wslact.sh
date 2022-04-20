@@ -1,6 +1,4 @@
 # shellcheck shell=bash
-version="03"
-
 help_short="wslact COMMAND ..."
 
 function time_reset {
@@ -105,7 +103,7 @@ while [ "$1" != "" ]; do
 		am|auto-mount|sm|smart-mount) auto_mount "$@"; exit;;
 		mr|mem-reclaim) memory_reclaim "$@"; exit;;
 		-h|--help) help "$0" "$help_short"; exit;;
-		-v|--version) echo "wslu v$wslu_version; wslact v$version"; exit;;
+		-v|--version) version; exit;;
 		*) error_echo "Invalid Input. Aborted." 22;;
 	esac
 done

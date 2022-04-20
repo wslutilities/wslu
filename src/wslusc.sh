@@ -1,6 +1,4 @@
 # shellcheck shell=bash
-version="50"
-
 cname=""
 iconpath=""
 is_gui=0
@@ -33,7 +31,7 @@ do
 		-g|--gui) is_gui=1;shift;;
 		-N|--native) WSLUSC_GUITYPE="native";shift;;
 		-h|--help) help "$0" "$help_short"; exit;;
-		-v|--version) echo "wslu v$wslu_version; wslusc v$version"; exit;;
+		-v|--version) version; exit;;
 		--) shift; cname_header="$1"; shift; cname="$*"; break;;
 	esac
 done

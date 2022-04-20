@@ -1,8 +1,7 @@
 # shellcheck shell=bash
-version=44
-
 is_color=0
 is_generic=0
+
 help_short="wslfetch [-hvcg] [-t THEME] [-o OPTIONS]"
 
 PARSED_ARGUMENTS=$(getopt -a -n "$(basename $wslu_util_name)" -o hvtcgo: --long help,version,theme,colorbar,generic,options: -- "$@")
@@ -13,7 +12,7 @@ while :
 do
 	case "$1" in
 		-h|--help) help "$_tmp_cmdname" "$help_short"; exit;;
-		-v|--version) echo "wslu v$wslu_version; wslfetch v$version"; exit;;
+		-v|--version) version; exit;;
 		-t|--theme) shift; WSLFETCH_THEME_PATH="$1"; shift;;
 		-c|--colorbar) is_color=1; shift;;
 		-g|--generic) is_generic=1; shift;;

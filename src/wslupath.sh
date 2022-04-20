@@ -1,6 +1,4 @@
 # shellcheck shell=bash
-version="09"
-
 ##########   CAUTION   ###########
 ## wslupath is a legacy cli for backward compatbility.
 ## Use it unless it is necessary.
@@ -79,7 +77,7 @@ else
 			set_path="$(style_path "$(wslvar -s ProgramFiles)")"
 			break;;
 			-h|--help) help "$0" "$help_short"; exit;;
-			-v|--version) echo "wslu v$wslu_version; wslupath v$version"; exit;;
+			-v|--version) version; exit;;
 			-R|--avail-reg) echo "Available registery input:"
 			wslvar -L
 			exit;;

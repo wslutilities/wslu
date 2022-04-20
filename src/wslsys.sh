@@ -1,6 +1,4 @@
 # shellcheck shell=bash
-version="40"
-
 help_short="wslsys [-VIbBFUWRKPSlt] [-s]\nwslsys [-hv] [-n NAME]"
 
 ## Windows 10 information
@@ -228,6 +226,6 @@ function wslsys_main() {
 # pre-handler
 case $1 in
 		-h|--help) help "$0" "$help_short"; exit;;
-		-v|--version) echo "wslu v$wslu_version; wslsys v$version"; exit;;
+		-v|--version) version; exit;;
 		*) wslsys_main $@; exit;;
 esac

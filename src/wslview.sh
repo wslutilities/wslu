@@ -1,6 +1,4 @@
 # shellcheck shell=bash
-version="10"
-
 lname=""
 
 help_short="$0 [-hvur]\n$0 [-E ENGINE] LINK/FILE"
@@ -31,7 +29,7 @@ while [ "$1" != "" ]; do
 		-r|--reg-as-browser) add_reg_alt;;
 		-u|--unreg-as-browser) del_reg_alt;;
 		-h|--help) help "$0" "$help_short"; exit;;
-		-v|--version) echo "wslu v$wslu_version; wslview v$version"; exit;;
+		-v|--version) version; exit;;
 		-E|--engine) WSLVIEW_DEFAULT_ENGINE="$1"; shift;;
 		*) lname="$*";break;;
 	esac
