@@ -24,9 +24,6 @@ wslu_version=VERSIONPLACEHOLDER
 LC_ALL=C
 LANG=C
 
-# prevent bash -x
-set +x
-
 # conf handling module
 __wsl_conf_read() {
 	[ -f /etc/wsl.conf ] && sed -nr "/^\[${1}\]/ { :l /^${2}[ ]*=/ { s/[^=]*=[ ]*//; p; q;}; n; b l;}" /etc/wsl.conf
