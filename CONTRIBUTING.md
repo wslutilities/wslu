@@ -72,6 +72,79 @@ Pass necessary environment variables if necessary. The default installation is i
 - `DESTDIR`: You can change the destination installation folder. It is empty by default.
 - `PREFIX`: You can change the prefix for where to install. It is `/usr` by default.
 
+### built-in functions/variables
+For contributing, there are several functions and variables built-in the header that can be used accross all utility source files.
+#### Variables
+
+- Base util information:
+  - `wslu_util_fullpath` - the full path to utility
+  - `wslu_util_name` - current utility name
+  - `wslu_version` - wslu version, written by `VERSION`
+  - `wslu_prefix` - the location `wslu` installed to, written by the `PREFIX` during the make.
+  - `wslu_debug` - the variable used for calling utility across. This will allow calling the `--debug` option for other `wslu` utilities inside script easier.
+
+- Formatting: `black`, `red`, `green`, `brown`, `blue`, `purple`, `cyan`, `yellow`, `white`, `dark_gray`, `light_red`, `light_green`, `light_blue`, `light_purple`, `light_cyan`, `light_gray`, `orange`, `light_orange`, `deep_purple`, `bold`, `reset`
+- Indicator: `info`, `input_info`, `error`, `warn`
+- Windows Builds:
+  - `BN_APR_EIGHTEEN` - Windows 10 Version 1803, Redstone 4, April 2018 Update
+  - `BN_OCT_EIGHTEEN` - Windows 10 Version 1809, Redstone 5, October 2018 Update
+  - `BN_MAY_NINETEEN` - Windows 10 Version 1903, 19H1, May 2019 Update
+  - `BN_NOV_NINETEEN` - Windows 10 Version 1909, 19H2, November 2019 Update
+  - `BN_MAY_TWENTYTY` - Windows 10 Version 2004, 20H1, May 2020 Update
+  - `BN_OCT_NINETEEN` - Windows 10 Version 20H2, Windows 10 October 2020 Update
+  - `BN_MAY_TWNETONE` - Windows 10 Version 21H1, Windows 10 May 2021 Update
+  - `BN_NOV_TWENTONE` - Windows 10 Version 21H2, Windows 10 November 2021 Update
+  - `BN_ELEVEN_21H2` - Windows 11 Version 21H2
+
+#### Functions
+> Note: `baseexec_gen` and `var_gen` are used for headers only, thus not showing here.
+
+- `debug_echo <debug information>` 
+
+  Will print debug information when pass `--debug` in the utility.
+- `error_echo <error information> <error code>`
+
+  Will print error information and return error code. For details of the error code standard for `wslu`, please check [here](https://wslutiliti.es/wslu/faq.html#what-is-the-error-code-returned).
+- `help`
+
+  Get help print-out.
+- `version`
+
+  Get version print-out.
+- `double_dash_p`
+
+  Replace the `\` to `\\`
+- `interop_prefix`
+
+  Return the root folder for the mounted drives.
+- `sysdrive_prefix`
+
+  Return the location of the system drive.
+- `wslu_get_build`
+
+  Return the Windows build number.
+- `wslu_get_wsl_ver`
+
+  Return the WSL version used for the current distribution.
+- `chcp_com <codepage>`
+
+  Set the Codepage by calling `chcp.com`
+- `winps_exec <command>`
+
+  Execute powershell commands by calling Windows PowerShell.
+- `cmd_exec <command>`
+
+  Execute cmd commands by calling `cmd.exe`
+- `wslu_function_check <function_name>`
+
+  Check whether a function exists.
+- `wslu_function_check <check_location> <file>`
+
+  Check whether a file exist in the corresbonding location. If not, it will copy from the source folder (`/<PREFIX>/share/wslu`).
+- `wslpy_check`
+
+  Check whether `wslpy >= 0.1.0` is installed. 
+
 ### Test
 
 `wslu` use [bats](https://github.com/bats-core/bats-core) for testing. Please refer to [its guide](https://github.com/bats-core/bats-core#writing-tests) to write tests.
