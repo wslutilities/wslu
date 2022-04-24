@@ -37,6 +37,8 @@ wslu
    \-build
       |-debian: files for building .deb
       |-rpm: files for building .rpm
+      |  |-copr: COPR specific files (for Fedora Only)
+         \-obs: OBS specific files (Other RPM-based distros)
       |-arch: files for building Arch Linux packages
       \-alpine: files for building Alpine Linux packages
 ```
