@@ -59,21 +59,23 @@ Following parameter is available for package building:
 
 ### Build & Install
 
-run `make` to build executables to `out` folder and manages to `out-docs` folder.
-run `make doc` to build manpage only.
-run `make clean` to remove `out` and `out-docs` folder.
-run `make test` to run tests.
-run `make install` to install.
-run `make res_install` to install just resources.
-run `make uninstall` to uninstall.
-run `cd extras/scripts && ./builder-docs.sh` to build docs to `gendocs`.
+- run `make` to build executables to `out` folder and manages to `out-docs` folder.
+- run `make doc` to build manpage only.
+- run `make clean` to remove `out` and `out-docs` folder.
+- run `make test` to run tests.
+- run `make install` to install.
+- run `make res_install` to install just resources.
+- run `make uninstall` to uninstall.
+- run `cd extras/scripts && ./builder-docs.sh` to build docs to `gendocs`.
 
 Pass necessary environment variables if necessary. The default installation is in `/usr` folder:
 - `DESTDIR`: You can change the destination installation folder. It is empty by default.
 - `PREFIX`: You can change the prefix for where to install. It is `/usr` by default.
 
 ### Built-in Functions/Variables
+
 For contributing, there are several functions and variables built-in the header that can be used accross all utility source files.
+
 #### Variables
 
 - Base util information:
