@@ -2,7 +2,6 @@ name: CI/CD Tests
 on:
   push:
     branches:
-      - develop
       - dev/**
       - lts/**
 
@@ -44,13 +43,13 @@ jobs:
           sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper
       - name: Build Debian Package
         run: |
-          bash ./configure.sh --deb buster
+          bash ./configure.sh --deb unstable
           debuild -i -us -uc -b
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
       - uses: actions/upload-artifact@v1
         with:
-          name: Debian10DEBs
+          name: DebianDEBs
           path: pkgs
   pgwbuild:
     name: Pengwin
@@ -113,7 +112,6 @@ jobs:
           mkdir obs_res
           cp ../wslu-*.tar.gz obs_res
           cp ../wslu-canary.spec obs_res
-        #uses: robertdebock/rpmbuild-action@1.1.1
       - uses: actions/upload-artifact@v1
         with:
           name: OBS_RES

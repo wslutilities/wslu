@@ -1,22 +1,17 @@
-name: Manpage Website Deployment
+name: Documentation Website Deployment
 on:
   push:
     branches:
       - master
     paths:
-      - 'docs/*'
+      - 'CODE_OF_CONDUCT.md'
+      - 'CONTRIBUTING.md'
 jobs:
   build:
-    name: Manpage Generate and Deployment
+    name: Documentation Deployment
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: Install Pre-requisites
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -qq groff
-      - name: Convert manpages
-        run: bash -c "for x in docs/*; do groff \$x -mandoc -Thtml > \${x%.*}.html; done"
       - name: deploy manpages to website
         env:
           GH_TOKEN: ${{ secrets.GIT_DEPLOY_KEY }}
@@ -24,7 +19,8 @@ jobs:
           git config --global user.email "me@patrickwu.space"
           git config --global user.name "Jinming Wu, Patrick"
           git clone --depth 1 https://patrick330602:$GH_TOKEN@github.com/wslutilities/wslutilities.github.io.git website
-          bash -x extras/scripts/manpage_deploy.bash
+          cp -f ./CODE_OF_CONDUCT.md ./website/coc.md
+          cp -f ./CONTRIBUTING.md ./website/contributing.md
           git --git-dir=./website/.git --work-tree=./website add -A
           git --git-dir=./website/.git --work-tree=./website commit -m "Manpage update"
           git --git-dir=./website/.git --work-tree=./website push
