@@ -251,12 +251,6 @@ function cmd_exec {
 	return $EXIT_STATUS
 }
 
-function wslu_get_build {
-	debug_echo "wslu_get_build: called"
-	build=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion" /v CurrentBuild | tail -n 2 | head -n 1 | sed -e 's|\r||g')
-	echo "${build##* }"
-}
-
 function baseexec_gen {
 	debug_echo "baseexec_gen: called"
 	wslutmpbuild="$(( $(wslu_get_build) + 0 ))"
