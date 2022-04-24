@@ -72,7 +72,7 @@ Pass necessary environment variables if necessary. The default installation is i
 - `DESTDIR`: You can change the destination installation folder. It is empty by default.
 - `PREFIX`: You can change the prefix for where to install. It is `/usr` by default.
 
-### built-in functions/variables
+### Built-in Functions/Variables
 For contributing, there are several functions and variables built-in the header that can be used accross all utility source files.
 #### Variables
 
@@ -82,7 +82,6 @@ For contributing, there are several functions and variables built-in the header 
   - `wslu_version` - wslu version, written by `VERSION`
   - `wslu_prefix` - the location `wslu` installed to, written by the `PREFIX` during the make.
   - `wslu_debug` - the variable used for calling utility across. This will allow calling the `--debug` option for other `wslu` utilities inside script easier.
-
 - Formatting: `black`, `red`, `green`, `brown`, `blue`, `purple`, `cyan`, `yellow`, `white`, `dark_gray`, `light_red`, `light_green`, `light_blue`, `light_purple`, `light_cyan`, `light_gray`, `orange`, `light_orange`, `deep_purple`, `bold`, `reset`
 - Indicator: `info`, `input_info`, `error`, `warn`
 - Windows Builds:
@@ -138,7 +137,7 @@ For contributing, there are several functions and variables built-in the header 
 - `wslu_function_check <function_name>`
 
   Check whether a function exists.
-- `wslu_function_check <check_location> <file>`
+- `wslu_file_check <check_location> <file>`
 
   Check whether a file exist in the corresbonding location. If not, it will copy from the source folder (`/<PREFIX>/share/wslu`).
 - `wslpy_check`
