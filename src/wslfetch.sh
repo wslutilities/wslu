@@ -377,11 +377,11 @@ fi
 
 debug_echo "distro: $distro"
 debug_echo "t: ${t}color${reset}"
-debug_echo "ascii_text: ${ascii_text[@]}"
+debug_echo "ascii_text: ${ascii_text[*]}"
 
 SAVEIFS=$IFS
 IFS=$'\n'
-info_collect=($(wslsys $wslu_debug --wslfetch "${WSLFETCH_INFO_SECTION}" "${t}"))
+info_collect=($(wslsys "$wslu_debug" --wslfetch "${WSLFETCH_INFO_SECTION}" "${t}"))
 IFS=$SAVEIFS
 
 wslf_ver="${info_collect[0]}"
