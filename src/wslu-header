@@ -119,7 +119,7 @@ readonly BN_ELEVEN_21H2=22000		#21H2, Windows 11
 
 # echo functions
 function debug_echo {
-	[ "$wslu_debug" == "--debug" ] && echo "${orange}${bold}[debug:${wslu_util_fullpath}]${reset} $@" 1>&2;
+	[ "$wslu_debug" == "--debug" ] && echo "${orange}${bold}[debug:${wslu_util_fullpath}]${reset} $*" 1>&2;
 }
 
 function error_echo {
@@ -181,7 +181,8 @@ function interop_prefix {
 function sysdrive_prefix {
 	win_location="$(interop_prefix)"
 	hard_reset=0
-	for pt in $(ls "$win_location"); do
+	for pt in "$win_location"/*; do
+		[[ -e "$pt" ]] || break
 		if [ $(echo "$pt" | wc -l) -eq 1 ]; then
 			if [ -d "$win_location$pt/Windows/System32" ]; then
 				hard_reset=1
@@ -233,19 +234,19 @@ function chcp_com {
 }
 
 function winps_exec {
-	debug_echo "winps_exec: called with command $@"
+	debug_echo "winps_exec: called with command $*"
 	wslutmpbuild="$(( $(wslu_get_build) + 0 ))"
 	cp="$(cat ~/.config/wslu/oemcp)"
 	[ $wslutmpbuild -ge $BN_OCT_NINETEEN ] || chcp_com "$cp"
 	cp=$(($cp+0))
-	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive –ExecutionPolicy Bypass -Command "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::InputEncoding = [System.Text.Encoding]::GetEncoding($cp); $@"
+	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::InputEncoding = [System.Text.Encoding]::GetEncoding($cp); $*"
 	EXIT_STATUS=$?
 	[ $wslutmpbuild -ge $BN_OCT_NINETEEN ] || chcp_com 65001
 	return $EXIT_STATUS
 }
 
 function cmd_exec {
-	debug_echo "cmd_exec: called with command $@"
+	debug_echo "cmd_exec: called with command $*"
 	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/cmd.exe /c "$@"
 	EXIT_STATUS=$?
 	return $EXIT_STATUS
@@ -295,13 +296,13 @@ function var_gen {
 
 function wslu_function_check {
 	# from https://stackoverflow.com/questions/85880/determine-if-a-function-exists-in-bash
-	debug_echo "wslu_function_check: called with $@"
+	debug_echo "wslu_function_check: called with $*"
 	declare -f -F $1 > /dev/null
 	return $?
 }
 
 function wslu_file_check {
-	debug_echo "wslu_file_check: called with $@"
+	debug_echo "wslu_file_check: called with $*"
 	should_i_show=""
 	[[ "$3" == "?!S" ]] && should_i_show="n"
 
