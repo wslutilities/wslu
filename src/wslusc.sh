@@ -112,7 +112,7 @@ if [[ "$cname_header" != "" ]]; then
 		if [[ "$WSLUSC_SMART_ICON_DETECTION" == "true" ]]; then
 			if wslpy_check; then
 				tmp_fcname="$(basename "$cname_header")"
-				iconpath="$(python3 -c "import wslpy.internal; print(wslpy.internal.findIcon(\"$tmp_fcname\"))")"
+				iconpath="$(python3 -c "import wslpy.__internal__; print(wslpy.__internal__.find_icon(\"$tmp_fcname\"))")"
 				echo "${info} Icon Detector found icon $tmp_fcname at: $iconpath"
 			else
 				echo "${warn} Icon Detector cannot find icon."
