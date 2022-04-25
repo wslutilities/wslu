@@ -43,17 +43,17 @@ if [[ "$lname" != "" ]]; then
 	# file:/// protocol used in linux
 	if [[ "$lname" =~ ^file:\/\/.*$ ]] && [[ ! "$lname" =~ ^file:\/\/(\/)+[A-Za-z]\:.*$ ]]; then
 		debug_echo "Received file:/// protocol used in linux"
-		[ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ] || error_echo "This protocol is not supported before version 1903." 34
+		[ "$wslutmpbuild" -ge "$BN_MAY_NINETEEN" ] || error_echo "This protocol is not supported before version 1903." 34
 		properfile_full_path="$(readlink -f "${lname//file:\/\//}")"
 	# Linux absolute path
 	elif [[ "$lname" =~ ^(/[^/]+)*(/)?$ ]]; then
 		debug_echo "Received linux absolute path"
-		[ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ] || error_echo "This protocol is not supported before version 1903." 34
+		[ "$wslutmpbuild" -ge "$BN_MAY_NINETEEN" ] || error_echo "This protocol is not supported before version 1903." 34
 		properfile_full_path="$(readlink -f "${lname}")"
 	# Linux relative path
 	elif [[ -d "$(readlink -f "$lname")" ]] || [[ -f "$(readlink -f "$lname")" ]]; then
 		debug_echo "Received linux relative path"
-		[ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ] || error_echo "This protocol is not supported before version 1903." 34
+		[ "$wslutmpbuild" -ge "$BN_MAY_NINETEEN" ] || error_echo "This protocol is not supported before version 1903." 34
 		properfile_full_path="$(readlink -f "${lname}")"
 	fi
 	debug_echo "properfile_full_path: $properfile_full_path"
