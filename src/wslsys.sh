@@ -110,7 +110,7 @@ function get_wsl_packages() {
 
 function get_wsl_ip() {
 	debug_echo "get_wsl_ip: called"
-	echo "$(ip -4 -o addr show eth0 | awk '{print $4}' | cut -d "/" -f 1)"
+	ip -4 -o addr show eth0 | awk '{print $4}' | cut -d "/" -f 1
 }
 
 ## Simple printer defined for fetching information
@@ -124,7 +124,7 @@ function printer() {
 		echo "$1: $2"
 	elif [[ "$1" == "Release Install Date" ]]; then
 		debug_echo "printer: special get_install_date called"
-		echo "$(get_install_date)" # special case for Release Install Date, only shortform use hex unix timestamp
+		get_install_date # special case for Release Install Date, only shortform use hex unix timestamp
 	else
 		debug_echo "printer(wslsys): short form printing"
 		echo "$2"
@@ -197,7 +197,7 @@ function wslsys_main() {
 	if [[ "$*" == "" ]]; then
 		debug_echo "wslsys_main: printing everything"
 		for i in {1..14}; do
-			dict_finder $i
+			dict_finder "$i"
 		done
 		exit
 	fi
@@ -207,7 +207,7 @@ function wslsys_main() {
 		dict_finder "wsl-version" "-s"
 		IFS=',' read -r -a fetch_array <<< "$2"
 		for i in "${fetch_array[@]}"; do
-			[[ "$i" == "wsl-version" ]] || WSLSYS_WSLFETCH_COLOR="$3" dict_finder $i
+			[[ "$i" == "wsl-version" ]] || WSLSYS_WSLFETCH_COLOR="$3" dict_finder "$i"
 		done
 		exit
 	fi
