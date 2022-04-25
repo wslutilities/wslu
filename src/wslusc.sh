@@ -12,7 +12,7 @@ PARSED_ARGUMENTS=$(getopt -a -n "$(basename $wslu_util_name)" -o hvd:Ie:n:i:gNs 
 [ "$?" != "0" ] && help "$wslu_util_name" "$help_short"
 
 function sc_debug {
-	debug_echo "sc_debug: called with $@"
+	debug_echo "sc_debug: called with $*"
 	dp="$(double_dash_p "$(wslvar -l Desktop)")"
 	winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$dp\\$@');\$s;"
 }
