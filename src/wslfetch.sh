@@ -4,7 +4,8 @@ is_generic=0
 
 help_short="wslfetch [-hvcg] [-t THEME] [-o OPTIONS]"
 
-PARSED_ARGUMENTS=$(getopt -a -n "$(basename $wslu_util_name)" -o hvtcgo: --long help,version,theme,colorbar,generic,options: -- "$@")
+PARSED_ARGUMENTS=$(getopt -a -n "$(basename "$wslu_util_name")" -o hvtcgo: --long help,version,theme,colorbar,generic,options: -- "$@")
+#shellcheck disable=SC2181
 [ "$?" != "0" ] && help "$wslu_util_name" "$help_short"
 
 eval set -- "$PARSED_ARGUMENTS"
@@ -30,7 +31,9 @@ debug_echo "WSLFETCH_INFO_SECTION: $WSLFETCH_INFO_SECTION"
 debug_echo "WSLFETCH_COLORBAR: $WSLFETCH_COLORBAR"
 debug_echo "WSLFETCH_ASCII_PATH: $WSLFETCH_ASCII_PATH"
 
-([[ "$is_generic" == "1" ]] || [[ -n "$WSLFETCH_THEME_PATH" ]] ) && distro=""
+if [[ "$is_generic" == "1" ]] || [[ -n "$WSLFETCH_THEME_PATH" ]]; then
+	distro=""
+fi
 case "$distro" in
 	'ubuntu')
 		t="${red}${bold}"
@@ -372,6 +375,7 @@ esac
 
 if [[ -n "$WSLFETCH_THEME_PATH" ]]; then
 	debug_echo "custom theme detected: $WSLFETCH_THEME_PATH"
+	#shellcheck disable=SC1090
 	source "$WSLFETCH_THEME_PATH"
 fi
 
@@ -380,8 +384,10 @@ debug_echo "t: ${t}color${reset}"
 debug_echo "ascii_text: ${ascii_text[*]}"
 
 SAVEIFS=$IFS
-IFS=$'\n'
-info_collect=($(wslsys "$wslu_debug" --wslfetch "${WSLFETCH_INFO_SECTION}" "${t}"))
+info_collect=()
+while IFS=$'\n' read -r line; do
+	info_collect+=("$line");
+done < <(wslsys "$wslu_debug" --wslfetch "${WSLFETCH_INFO_SECTION}" "${t}")
 IFS=$SAVEIFS
 
 wslf_ver="${info_collect[0]}"
