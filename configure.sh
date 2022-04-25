@@ -1,4 +1,5 @@
 #!/bin/bash
+#shellcheck disable=SC2198,SC2124,SC2002,SC1001,SC2164,SC2072,SC2086,SC2035
 # configure.sh
 # configure script for wslu
 # <https://github.com/wslutilities/wslu>
@@ -78,7 +79,7 @@ function deb_build_prep {
 	mkdir -p ./debian
 	cp -r ./extras/build/debian/* ./debian
 	chmod +x ./debian/rules
-	sed -i s/DISTROPLACEHOLDER/"$@"/g ./debian/changelog
+	sed -i s/DISTROPLACEHOLDER/"$*"/g ./debian/changelog
 	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g ./debian/changelog
 	sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a, %d %b %Y %T %z')"/g ./debian/changelog
 }
