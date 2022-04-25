@@ -6,9 +6,22 @@ on:
       - lts/**
 
 jobs:
+  sctests:
+    name: ShellCheck Tests
+    runs-on: ubuntu-20.04
+    steps: 
+      - uses: actions/checkout@v2
+      - name: Install Pre-requisites
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qq shellcheck
+      - name: shellcheck
+        run: |
+          make shellcheck
   generaltests:
     name: General Tests
     runs-on: windows-2019
+    needs: sctests
     steps:
       - name: Set git to use LF
         run: |

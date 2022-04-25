@@ -69,5 +69,8 @@ clean:
 test: 
 	bats -r tests
 
+shellcheck:
+	shellcheck -P src/*
+
 coverage: 
 	kcov --include-path="./src,./out" ./tests/coverage bats -r tests
