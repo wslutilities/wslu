@@ -13,6 +13,5 @@ RPMS
 compiled_rpms
 pkgs
 
-# system and vscode generated files
-.vscode
+# system files
 **/*/.DS_Store
