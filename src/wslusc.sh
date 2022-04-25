@@ -8,13 +8,14 @@ customenv=""
 
 help_short="wslusc [-dIs] [-e PATH] [-n NAME] [-i FILE] [-g GUI_TYPE] COMMAND\nwslusc [-hv]"
 
-PARSED_ARGUMENTS=$(getopt -a -n "$(basename $wslu_util_name)" -o hvd:Ie:n:i:gNs --long help,version,shortcut-debug:,interactive,path:,name:,icon:,gui,native,smart-icon -- "$@")
+PARSED_ARGUMENTS=$(getopt -a -n "$(basename "$wslu_util_name")" -o hvd:Ie:n:i:gNs --long help,version,shortcut-debug:,interactive,path:,name:,icon:,gui,native,smart-icon -- "$@")
+#shellcheck disable=SC2181
 [ "$?" != "0" ] && help "$wslu_util_name" "$help_short"
 
 function sc_debug {
 	debug_echo "sc_debug: called with $*"
 	dp="$(double_dash_p "$(wslvar -l Desktop)")"
-	winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$dp\\$@');\$s;"
+	winps_exec "Import-Module 'C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\Microsoft.PowerShell.Utility\\Microsoft.PowerShell.Utility.psd1';\$s=(New-Object -COM WScript.Shell).CreateShortcut('$dp\\$*');\$s;"
 }
 
 debug_echo "Parsed: $PARSED_ARGUMENTS"
@@ -54,7 +55,7 @@ if [[ $is_interactive -eq 1 ]]; then
 fi
 
 # supported gui check
-if [ $(wslu_get_build) -lt 21332 ] && [[ "$gui_type" == "NATIVE" ]]; then
+if [ "$(wslu_get_build)" -lt 21332 ] && [[ "$gui_type" == "NATIVE" ]]; then
 	error_echo "Your Windows 10 version do not support Native GUI, You need at least build 21332. Aborted" 35
 fi
 
@@ -71,7 +72,7 @@ if [[ "$cname_header" != "" ]]; then
 	distro_param="run"
 
 	if [[ "$distro_location_win" == *wsl\.exe* ]]; then
-		if [ $(wslu_get_build) -ge $BN_MAY_NINETEEN ]; then
+		if [ "$(wslu_get_build)" -ge "$BN_MAY_NINETEEN" ]; then
 			distro_param="-d $WSL_DISTRO_NAME -e"
 		else
 			distro_param="-e"
@@ -98,6 +99,7 @@ if [[ "$cname_header" != "" ]]; then
 	fi
 
 	# construct full command
+	#shellcheck disable=SC2001
 	cname="\"$(echo "$cname_header" | sed "s| |\\\\ |g") $cname\""
 
 	# Check default icon and runHidden.vbs
@@ -136,7 +138,7 @@ if [[ "$cname_header" != "" ]]; then
 					if [ -x /usr/lib/command-not-found ]; then
 						echo " It can be installed with:" >&2
 						echo "" >&2
-						/usr/lib/command-not-found convert 2>&1 | egrep -v '(not found|^$)' >&2
+						/usr/lib/command-not-found convert 2>&1 | grep -E -v '(not found|^$)' >&2
 					else
 						echo "It can usally be found in the imagemagick package, please install it."
 					fi
@@ -144,14 +146,14 @@ if [[ "$cname_header" != "" ]]; then
 				fi
 				if [[ "$ext" == "svg" ]]; then
 					echo "${info} Converting $ext icon to ico..."
-					convert "$script_location/$icon_filename" -trim -background none -resize 256X256 -define 'icon:auto-resize=16,24,32,64,128,256'  "$script_location/${icon_filename%.$ext}.ico"
+					convert "$script_location/$icon_filename" -trim -background none -resize 256X256 -define 'icon:auto-resize=16,24,32,64,128,256'  "$script_location/${icon_filename%."$ext"}.ico"
 					rm "$script_location/$icon_filename"
-					icon_filename="${icon_filename%.$ext}.ico"
+					icon_filename="${icon_filename%."$ext"}.ico"
 				elif [[ "$ext" == "png" ]] || [[ "$ext" == "xpm" ]]; then
 					echo "${info} Converting $ext icon to ico..."
-					convert "$script_location/$icon_filename" -resize 256X256 "$script_location/${icon_filename%.$ext}.ico"
+					convert "$script_location/$icon_filename" -resize 256X256 "$script_location/${icon_filename%."$ext"}.ico"
 					rm "$script_location/$icon_filename"
-					icon_filename="${icon_filename%.$ext}.ico"
+					icon_filename="${icon_filename%."$ext"}.ico"
 				else
 					error_echo "wslusc only support creating shortcut using .png/.svg/.ico icon. Aborted." 22
 				fi
