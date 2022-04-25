@@ -194,7 +194,7 @@ function dict_finder() {
 function wslsys_main() {
 	debug_echo "wslsys_main: called"
 	# If input is empty, print everything available
-	if [[ "$@" == "" ]]; then
+	if [[ "$*" == "" ]]; then
 		debug_echo "wslsys_main: printing everything"
 		for i in {1..14}; do
 			dict_finder $i
@@ -227,5 +227,7 @@ function wslsys_main() {
 case $1 in
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) version; exit;;
-		*) wslsys_main $@; exit;;
+		*)
+		#shellcheck disable=SC2068
+		wslsys_main $@; exit;;
 esac
