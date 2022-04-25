@@ -33,32 +33,32 @@ distro="$(head -n1 /etc/os-release | sed -e 's/NAME=\"//g')"
 case $distro in
 	*Pengwin*)
 		sudo dpkg --force-depends --remove wslu
-		sudo apt install -y git gzip make
+		sudo apt install -y git gzip make shellcheck bats
 		;;
 	*WLinux*|Ubuntu*|*Debian*|*Kali*)
 		sudo apt purge -y wslu
-		sudo apt install -y git bc gzip make imagemagick
+		sudo apt install -y git bc gzip make imagemagick shellcheck bats
 		;;
 	openSUSE*|SLES*)
 		sudo zypper -n rm wslu
-		sudo zypper -n install git bc gzip make imagemagick
+		sudo zypper -n install git bc gzip make imagemagick ShellCheck
 		;;
 	Alpine*)
 		sudo apk add git bc gzip make bash-completion imagemagick
 		;;
 	Arch*)
-		sudo pacman -Syyu git bc gzip make bash-completion imagemagick iproute2 --noconfirm
+		sudo pacman -Syyu git bc gzip make bash-completion imagemagick shellcheck iproute2 --noconfirm
 		;;
 	*Oracle*|Scientific*)
-		sudo yum install -y git bc gzip make bash-completion imagemagick iproute
+		sudo yum install -y git bc gzip make bash-completion imagemagick iproute ShellCheck
 		;;
 	*Fedora*)
-		sudo dnf install -y git bc gzip make bash-completion ImageMagick
+		sudo dnf install -y git bc gzip make bash-completion ImageMagick ShellCheck
 		;;
 	*Gentoo*)
-		sudo emerge -a n sys-devel/bc media-gfx/imagemagick app-shells/bash-completion sys-devel/make dev-vcs/git app-arch/gzip
+		sudo emerge -a n sys-devel/bc media-gfx/imagemagick app-shells/bash-completion sys-devel/make dev-vcs/git app-arch/gzip dev-util/shellcheck
 		;;
-	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && sudo dnf install -y git || exit 1;;
+	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && sudo dnf install -y git bc gzip make bash-completion ImageMagick ShellCheck || exit 1;;
 	*) exit 1;;
 esac
 }
@@ -81,7 +81,6 @@ function deb_build_prep {
 	sed -i s/DISTROPLACEHOLDER/"$@"/g ./debian/changelog
 	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g ./debian/changelog
 	sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a, %d %b %Y %T %z')"/g ./debian/changelog
-	#dch --distribution $@ --newversion "$(cat ./VERSION)"
 }
 
 function rpm_build_prep {
