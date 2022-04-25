@@ -12,7 +12,7 @@ for args; do
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) version; exit;;
         -g|--get) get_clipboard; exit;;
-		*) content="${@}";;
+		*) content="${*}";;
 	esac
 done
 
