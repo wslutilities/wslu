@@ -27,7 +27,7 @@ debug_echo "wa_gs_dscp: $wa_gs_dscp"
 debug_echo "wa_gs_name: $wa_gs_name"
 
 wslutmpbuild=$(wslu_get_build)
-[ $wslutmpbuild -ge "$BN_MAY_NINETEEN" ] || (echo "This tool is not supported before version 1903."; exit 34)
+[ "$wslutmpbuild" -ge "$BN_MAY_NINETEEN" ] || (echo "This tool is not supported before version 1903."; exit 34)
 
 if [[ "$wa_gs_commd" != "" ]] || [[ $isWakeup -eq 1 ]]; then
 	debug_echo "command or wakeup exist, executing"
@@ -83,7 +83,7 @@ if [[ "$wa_gs_commd" != "" ]] || [[ $isWakeup -eq 1 ]]; then
 	debug_echo "wa_gs_dscp: $wa_gs_dscp"
 
 	# Keep the name always unique; such random, much wow
-	tmp_rand="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)"
+	tmp_rand="$(tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 6 | head -n 1)"
 
 	debug_echo "tmp_rand: $tmp_rand"
 
