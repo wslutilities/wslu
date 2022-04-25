@@ -26,8 +26,8 @@ function time_reset {
 
 function auto_mount {
 	local help_short="wslact auto-mount [-mh]"
-	local mntpt_prefix="$(interop_prefix)"
-	local sysdrv_prefix="$(sysdrive_prefix)"
+	mntpt_prefix="$(interop_prefix)"
+	sysdrv_prefix="$(sysdrive_prefix)"
 
 	mount_opt=""
 	while [ "$1" != "" ]; do
@@ -42,8 +42,8 @@ function auto_mount {
 		error_echo "\`wslact auto-mount\` requires you to run as root. Aborted." 1
 	fi
 
-
-	drive_list="$("$mntpt_prefix$sysdrv_prefix"/WINDOWS/system32/fsutil.exe fsinfo drives | tail -1 | tr '[:upper:]' '[:lower:]' | tr -d ':\\' | sed -e 's/drives //g' -e 's|'$sysdrv_prefix' ||g' -e 's|\r||g' -e 's| $||g' -e 's| |\n|g')"
+	#shellcheck disable=SC1003
+	drive_list="$("$mntpt_prefix$sysdrv_prefix"/WINDOWS/system32/fsutil.exe fsinfo drives | tail -1 | tr '[:upper:]' '[:lower:]' | tr -d ':\\' | sed -e 's/drives //g' -e "s|$sysdrv_prefix ||g" -e 's|\r||g' -e 's| $||g' -e 's| |\n|g')"
 
 	if [ -n "$mount_opt" ]; then
 		echo "${info} Custom mount option detected: $mount_opt"
@@ -64,7 +64,7 @@ function auto_mount {
 		[[ -d "$mntpt_prefix$drive" ]] || mkdir -p "$mntpt_prefix$drive"
 		if [[ -n $(find "$mntpt_prefix$drive" -maxdepth 0 -type d -empty 2>/dev/null) ]]; then
 			echo "${info} Mounting Drive ${drive^} to $mntpt_prefix$drive..."
-			if mount -t drvfs ${drive}: "$mntpt_prefix$drive" -o "$mount_opt" 2>/dev/null; then
+			if mount -t drvfs "${drive}:" "$mntpt_prefix$drive" -o "$mount_opt" 2>/dev/null; then
 				echo "${info} Mounted Drive ${drive^} to $mntpt_prefix$drive."
 				mount_s=$((mount_s + 1))
 			else
