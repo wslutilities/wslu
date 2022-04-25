@@ -1,4 +1,5 @@
 #!/bin/bash
+#shellcheck disable=SC1091
 # wslu - Windows 10 linux Subsystem Utility
 # Component of Windows 10 linux Subsystem Utility
 # <https://github.com/wslutilities/wslu>
@@ -68,7 +69,7 @@ if [ "$1" == "--verbose" ]; then
 	set -x
 elif [ "$1" == "--debug" ]; then
 	wslu_debug="--debug"
-	echo -e '\e[38;5;202m\033[1m[debug:'${wslu_util_fullpath}'] Showing debug output. \033(B\033[m' 1>&2
+	echo -e '\e[38;5;202m\033[1m[debug:'"${wslu_util_fullpath}"'] Showing debug output. \033(B\033[m' 1>&2
 	shift
 fi
 
@@ -124,7 +125,7 @@ function debug_echo {
 
 function error_echo {
 	echo "${error} $1"
-	exit $2
+	exit "$2"
 }
 
 # source default config
@@ -183,7 +184,7 @@ function sysdrive_prefix {
 	hard_reset=0
 	for pt in "$win_location"/*; do
 		[[ -e "$pt" ]] || break
-		if [ $(echo "$pt" | wc -l) -eq 1 ]; then
+		if [ "$(echo "$pt" | wc -l)" -eq 1 ]; then
 			if [ -d "$win_location$pt/Windows/System32" ]; then
 				hard_reset=1
 				win_location="$pt"
@@ -215,7 +216,7 @@ function wslu_get_wsl_ver {
 		if "$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Flags &>/dev/null; then
 			wslu_distro_version=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Flags | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 			wslu_distro_version=${wslu_distro_version##* }
-			wslu_distro_version_processed=$(expr $(printf "%d\n" "$wslu_distro_version") / 8)
+			wslu_distro_version_processed=$(( "$(printf "%d\n" "$wslu_distro_version")" / 8 ))
 			if [ "$wslu_distro_version_processed" == "1" ]; then
 				echo "2"
 			elif [ "$wslu_distro_version_processed" == "0" ]; then
@@ -235,13 +236,12 @@ function chcp_com {
 
 function winps_exec {
 	debug_echo "winps_exec: called with command $*"
-	wslutmpbuild="$(( $(wslu_get_build) + 0 ))"
+	wslutmpbuild="$(wslu_get_build)"
 	cp="$(cat ~/.config/wslu/oemcp)"
-	[ $wslutmpbuild -ge $BN_OCT_NINETEEN ] || chcp_com "$cp"
-	cp=$(($cp+0))
+	[ "$wslutmpbuild" -ge $BN_OCT_NINETEEN ] || chcp_com "$cp"
 	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::InputEncoding = [System.Text.Encoding]::GetEncoding($cp); $*"
 	EXIT_STATUS=$?
-	[ $wslutmpbuild -ge $BN_OCT_NINETEEN ] || chcp_com 65001
+	[ "$wslutmpbuild" -ge $BN_OCT_NINETEEN ] || chcp_com 65001
 	return $EXIT_STATUS
 }
 
@@ -297,7 +297,7 @@ function var_gen {
 function wslu_function_check {
 	# from https://stackoverflow.com/questions/85880/determine-if-a-function-exists-in-bash
 	debug_echo "wslu_function_check: called with $*"
-	declare -f -F $1 > /dev/null
+	declare -f -F "$1" > /dev/null
 	return $?
 }
 
@@ -370,13 +370,13 @@ if [ ! -f ~/.config/wslu/triggered_time ] || [ ! -f /usr/share/wslu/updated_time
 	var_gen
 # This gets triggered when:
 #    installed time is larger than the last triggered time
-elif [ $(cat ~/.config/wslu/triggered_time) -lt $(cat /usr/share/wslu/updated_time) ]; then
+elif [ "$(cat ~/.config/wslu/triggered_time)" -lt "$(cat /usr/share/wslu/updated_time)" ]; then
 	debug_echo "upgraded package; calling var_gen"
 	var_gen
 fi
 
 # basic distro detection
-distro="$(cat /etc/os-release | sed -n -e '/^NAME=.*/p'| sed -e 's/^NAME=\"//g')"
+distro="$(sed -n -e '/^NAME=.*/p' /etc/os-release | sed -e 's/^NAME=\"//g')"
 case $distro in
 	*Clear\ Linux*) distro="clear";;
 	*Common\ Base\ Linux\ Mariner*) distro="cblm";;
