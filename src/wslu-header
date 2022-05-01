@@ -390,6 +390,7 @@ case $distro in
 	Alpine*) distro="alpine";;
 	Arch*) distro="archlinux";;
 	*Oracle*) distro="oracle";;
+	AlmaLinux*) distro="almalinux";;
 	Scientific*) distro="scilinux";;
 	*Fedora\ Remix\ for\ WSL*) distro="fedoraremix";;
 	*Fedora*) distro="fedora";;

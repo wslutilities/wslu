@@ -360,6 +360,30 @@ case "$distro" in
 		"${white} WWWWWWWWWWWWWWWW           ${reset}"
 		"${white}      WWWWWWWWWW            ${reset}"
 		"${white}          WWW               ${reset}");;
+	"almalinux")
+		t="${blue}${bold}"
+		ascii_text=(
+		"${red}         'c:.                            ${reset}"
+		"${red}        lkkkx, ..       ${brown}..   ,cc,        ${reset}"
+		"${red}        okkkk:ckkx'  ${brown}.lxkkx.okkkkd       ${reset}"
+		"${red}        .:llcokkx'  ${brown}:kkkxkko:xkkd,       ${reset}"
+		"${red}      .xkkkkdood:  ${brown};kx,  .lkxlll;        ${reset}"
+		"${red}       xkkx.       ${brown}xk'     xkkkkk:       ${reset}"
+		"${red}       'xkx.       ${brown}xd      .....,.       ${reset}"
+		"${blue}      .. ${red}:xkl'     ${brown}:c      ..''..        ${reset}"
+		"${blue}    .dkx'  ${red}.:ldl:'. ${brown}'  ${green}':lollldkkxo;     ${reset}"
+		"${blue}  .''lkkko'                     ${green}ckkkx.   ${reset}"
+		"${blue}'xkkkd:kkd.       ..  ${cyan};'        ${green}:kkxo.   ${reset}"
+		"${blue},xkkkd;kk'      ,d;    ${cyan}ld.   ${green}':dkd::cc,  ${reset}"
+		"${blue} .,,.;xkko'.';lxo.      ${cyan}dx,  ${green}:kkk'xkkkkc ${reset}"
+		"${blue}     'dkkkkkxo:.        ${cyan};kx  ${green}.kkk:;xkkd. ${reset}"
+		"${blue}       .....   ${cyan}.;dk:.   ${cyan}lkk.  ${green}:;,        ${reset}"
+		"${cyan}             :kkkkkkkdoxkkx              ${reset}"
+		"${cyan}              ,c,,;;;:xkkd.              ${reset}"
+		"${cyan}                ;kkkkl...                ${reset}"
+		"${cyan}                ;kkkkl                   ${reset}"
+		"${cyan}                 ,od;                    ${reset}"
+		);;
 	*)
 		t="${cyan}${bold}"
 		ascii_text=(
