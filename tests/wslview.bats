@@ -1,5 +1,11 @@
 #!/usr/bin/env bats
 
+setup() {
+  if [[ "$(wslsys -T -s)" != "Desktop" ]]; then
+    skip "unsupported platform"
+  fi
+}
+
 #wslview testing
 @test "wslview - No parameter" {
   run out/wslview
