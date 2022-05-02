@@ -53,6 +53,9 @@ case $distro in
 	*Oracle*|Scientific*)
 		sudo yum install -y git bc gzip make bash-completion imagemagick iproute ShellCheck
 		;;
+	Alma*)
+		sudo yum install -y git bc gzip make bash-completion ImageMagick iproute ShellCheck
+		;;
 	*Fedora*)
 		sudo dnf install -y git bc gzip make bash-completion ImageMagick ShellCheck
 		;;
