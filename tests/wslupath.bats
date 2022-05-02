@@ -10,14 +10,14 @@
 
 @test "wslupath - Help" {
   run out/wslupath --help
-  [ "${lines[0]}" = "wslupath - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
+  [ "${lines[0]}" = "wslupath - Part of wslu, a collection of utilities for Linux Subsystem for Windows (WSL)" ]
   [ "${lines[1]}" = "Usage: wslupath [-dOr] [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]" ]
   [ "${lines[2]}" = "wslupath [-h|-v|-R]" ]
 }
 
 @test "wslupath - Help - Alt." {
   run out/wslupath -h
-  [ "${lines[0]}" = "wslupath - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
+  [ "${lines[0]}" = "wslupath - Part of wslu, a collection of utilities for Linux Subsystem for Windows (WSL)" ]
   [ "${lines[1]}" = "Usage: wslupath [-dOr] [-D|-A|-T|-S|-W|-s|-su|-H|-P|...NAME...]" ]
   [ "${lines[2]}" = "wslupath [-h|-v|-R]" ]
 }

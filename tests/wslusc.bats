@@ -16,14 +16,14 @@ teardown() {
 
 @test "wslusc - Help" {
   run out/wslusc --help
-  [ "${lines[0]}" = "wslusc - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
+  [ "${lines[0]}" = "wslusc - Part of wslu, a collection of utilities for Linux Subsystem for Windows (WSL)" ]
   [ "${lines[1]}" = "Usage: wslusc [-dIs] [-e PATH] [-n NAME] [-i FILE] [-g GUI_TYPE] COMMAND" ]
   [ "${lines[2]}" = "wslusc [-hv]" ]
 }
 
 @test "wslusc - Help - Alt." {
   run out/wslusc -h
-  [ "${lines[0]}" = "wslusc - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
+  [ "${lines[0]}" = "wslusc - Part of wslu, a collection of utilities for Linux Subsystem for Windows (WSL)" ]
   [ "${lines[1]}" = "Usage: wslusc [-dIs] [-e PATH] [-n NAME] [-i FILE] [-g GUI_TYPE] COMMAND" ]
   [ "${lines[2]}" = "wslusc [-hv]" ]
 }

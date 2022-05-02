@@ -8,14 +8,14 @@
 
 @test "wslview - Help" {
   run out/wslview --help
-  [ "${lines[0]}" = "wslview - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
+  [ "${lines[0]}" = "wslview - Part of wslu, a collection of utilities for Linux Subsystem for Windows (WSL)" ]
   [[ "${lines[1]}" =~ ^Usage\:\ .*wslview\ \[\-hvur\]$ ]]
   [[ "${lines[2]}" =~ ^.*wslview\ \[\-E\ ENGINE\]\ LINK/FILE$ ]]
 }
 
 @test "wslview - Help - Alt." {
   run out/wslview -h
-  [ "${lines[0]}" = "wslview - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux" ]
+  [ "${lines[0]}" = "wslview - Part of wslu, a collection of utilities for Linux Subsystem for Windows (WSL)" ]
   [[ "${lines[1]}" =~ ^Usage\:\ .*wslview\ \[\-hvur\]$ ]]
   [[ "${lines[2]}" =~ ^.*wslview\ \[\-E\ ENGINE\]\ LINK/FILE$ ]]
 }
