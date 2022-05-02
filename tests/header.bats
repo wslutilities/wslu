@@ -36,11 +36,6 @@
   [ "$format" = "^[[32m[info]^[(B^[[m$" ]
 }
 
-@test "Header - Error" {
-  . src/wslu-header; error_echo "test" 69
-  [ "$status" -eq 69 ]
-}
-
 @test "Header - Double Dash Parsing" {
   format="$(. src/wslu-header; echo "$(double_dash_p "\\")")"
   [ "$format" = "\\\\" ]
