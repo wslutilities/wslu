@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-help_short="wslsys [-VIbBFUWRKPSlt] [-s]\nwslsys [-hv] [-n NAME]"
+help_short="wslsys [-VIbBFUWRKPSltT] [-s]\nwslsys [-hv] [-n NAME]"
 
 ## Windows 10 information
 function get_branch() {
@@ -113,6 +113,17 @@ function get_wsl_ip() {
 	ip -4 -o addr show eth0 | awk '{print $4}' | cut -d "/" -f 1
 }
 
+function get_win_system_type() {
+	debug_echo "get_win_system_type: called"
+	tp="$(winps_exec "(Get-WmiObject -Class Win32_OperatingSystem -Property ProductType).ProductType" | sed -e 's|\r||g')"
+	case "$tp" in
+		"1")echo "Desktop";;
+		"2")echo "Domain Controller";;
+		"3")echo "Server";;
+		*)echo "Unknown";;
+	esac
+}
+
 ## Simple printer defined for fetching information
 function printer() {
 	debug_echo "printer: called with \"$1\" \"$2\""
@@ -186,6 +197,9 @@ function dict_finder() {
 		14|-i|--ip|wsl-ip)
 			printer "IPv4 Address" "$(get_wsl_ip)"
 			return;;
+		15|-T|--win-system-type|win-system-type)
+			printer "System Type (Windows)" "$(get_win_system_type)"
+			return;;
 		*) return 1;;
 	esac
 }
@@ -196,7 +210,7 @@ function wslsys_main() {
 	# If input is empty, print everything available
 	if [[ "$*" == "" ]]; then
 		debug_echo "wslsys_main: printing everything"
-		for i in {1..14}; do
+		for i in {1..15}; do
 			dict_finder "$i"
 		done
 		exit
