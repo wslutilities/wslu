@@ -26,9 +26,20 @@
   [ "$format" = "^[(B^[[m$" ]
 }
 
+@test "Header - Windows Build" {
+  format="$(. src/wslu-header;echo -e $BN_OCT_EIGHTEEN | cat -A)"
+  [ "$format" = "^17763$" ]
+}
+
 @test "Header - Indicator" {
   format="$(. src/wslu-header;echo -e $info | cat -A)"
   [ "$format" = "^[[32m[info]^[(B^[[m$" ]
+}
+
+@test "Header - Error" {
+  format="$(. src/wslu-header; error_echo "test" 69)"
+  [ "$format" = "[error] test" ]
+  [ "$status" -eq 69 ]
 }
 
 @test "Header - Double Dash Parsing" {
