@@ -72,6 +72,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wslact
 %{_bindir}/wslvar
 %{_bindir}/wslgsu
+%{_bindir}/wslclip
 /usr/share/wslu/
 %doc /usr/share/man/
 
