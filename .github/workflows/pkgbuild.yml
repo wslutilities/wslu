@@ -28,6 +28,8 @@ jobs:
           git config --global core.autocrlf false
           git config --global core.eol lf
       - uses: actions/checkout@v2
+      - name: Disable Windows Server 2022 to use WSL2
+        run: wsl --set-default-version 1
       - uses: Vampire/setup-wsl@v1.2.0
         with:
           distribution: Ubuntu-20.04
