@@ -3,4 +3,4 @@ blank_issues_enabled: true
 contact_links:
   - name: "Ubuntu bugs"
     url: https://bugs.launchpad.net/ubuntu/+source/wslu
-    about: For Ubuntu version, you should not only report bug here but also report bug at Launchpad.
+    about: For Ubuntu version, you should only report bug at Launchpad.
