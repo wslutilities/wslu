@@ -4,6 +4,17 @@ about: Create a report to help us improve
 
 ---
 
+<!--- ATTENTION!
+ Built-in versions of wslu in Ubuntu are no longer supported by me. 
+ If you have problems, please:
+
+ 1. Report to the Ubuntu WSL team; or
+ 2. Try the PPA version of WSL here: 
+     <https://launchpad.net/~wslutilities/+archive/ubuntu/wslu>
+
+ Usually The PPA version of wslu will address most of your problems.
+--->
+
 **Background Information:**
  - Build: [e.g. 17704]
  - WSL: [e.g. Ubuntu 16.04]
