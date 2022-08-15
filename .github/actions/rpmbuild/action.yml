@@ -3,8 +3,7 @@ description: Build an RPM.
 
 runs:
   using: docker
-  #image: 'docker://robertdebock/github-action-rpmbuild:centos-7'
-  image: 'Dockerfile'
+  image: "Dockerfile"
 
 branding:
   icon: box
