@@ -4,7 +4,7 @@
 ## please copy this file to custom.conf and modify in custom.conf
 
 # <https://github.com/wslutilities/wslu>
-# 2021, Patrick Wu <me@patrickwu.space>
+# 2022, Patrick Wu <me@patrickwu.space>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,11 +18,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
-# general
-
-# wslact
 
 # wslfetch: the sections of info from wslsys to show in wslfetch.
 # Available options: 
@@ -51,7 +46,7 @@ WSLFETCH_THEME_PATH=
 # wslusc: Default GUI type. Default type is 'legacy'. Use 'native' for Native GUI generation by default
 WSLUSC_GUITYPE="legacy"
 
-# wslusc: Smart Icon Detection. Requires wslpy (Requires python3S).
+# wslusc: Smart Icon Detection. Requires wslpy (Requires Python 3.5).
 WSLUSC_SMART_ICON_DETECTION=false
 
 # wslvar: Default Type of variable to get when not specifying option. Default type is 1.
