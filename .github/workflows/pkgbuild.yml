@@ -20,6 +20,7 @@ jobs:
           git clone https://github.com/wslutilities/wslu-debian builder
           cd builder/
           bash ./build.sh --ci dev debian unstable
+          cd ../
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
       - uses: actions/upload-artifact@v1
@@ -40,6 +41,7 @@ jobs:
           git clone https://github.com/wslutilities/wslu-debian builder
           cd builder/
           bash ./build.sh --ci dev pengwin
+          cd ../
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
       - uses: actions/upload-artifact@v1
