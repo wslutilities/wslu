@@ -5,7 +5,7 @@
 .SH DESCRIPTION
 This is a collection of utilities for Windows 10 Linux Subsystem, such as enabling sound in WSL or creating your favorite linux app shortcuts on Windows 10 Desktop. Requires Windows 10 Creators Update and higher. Some features require Windows 10 May 2019 Update or later.
 .SH AVAILABLE COMMANDS
-wslusc, wslsys, wslfetch, wslvar, wslview(wview/wslstart/wstart), wslupath(deprecated), wslact
+wslusc, wslsys, wslfetch, wslvar, wslview(wview/wslstart/wstart), wslupath(deprecated), wslact, wslclip, wslgsu
 .PP
 check each manpage to see the detailed usage.
 .SH SUPPORTED DISTRIBUTION
@@ -15,17 +15,18 @@ check each manpage to see the detailed usage.
 - OpenSUSE Leap 42, 12.0 and 15.0
 - SUSE Linux Enterprise Server 12 and 15
 - Ubuntu Latest, 16.04 LTS, 18.04 LTS and 20.04 LTS
-- Pengwin(Formerly WLinux)
+- Pengwin (Formerly WLinux)
 .fi
-
 .SS
 .B Community Supported Distro
 .nf
 - Arch Linux via ArchWSL <https://github.com/yuk7/ArchWSL>
 - Alpine Linux via AlpineWSL <https://github.com/yuk7/AlpineWSL> or Alpine WSL <https://www.microsoft.com/store/productId/9P804CRF0395>
-- Scientific Linux, Oracle Linux* or RedHat Enterprise Linux** via Pengwin Enterprise (Formerly WLinux Enterprise)
-- Fedora via Fedora Remix for WSL
+- Scientific Linux, Oracle Linux* or RedHat Enterprise Linux** via Pengwin Enterprise (Formerly WLinux Enterprise) <https://www.microsoft.com/store/productId/9N8LP0X93VCP>
+- Fedora via Fedora Remix for WSL <https://github.com/WhitewaterFoundry/WSLFedoraRemix>
 - Gentoo Linux via GentooWSL <https://github.com/ThatWeirdAndrew/GentooWSL>
+- Void Linux via VoidWSL <https://github.com/am11/VoidWSL>
+- Clear Linux via ClearWSL <https://github.com/wight554/ClearWSL>
 
 .B *: Will support in the future.
 .B **: you need to request to using RHEL from Pengwin team and have a license of RHEL of your own.
@@ -40,6 +41,9 @@ Entering debug mode.
 .TP
 .B --verbose
 Entering verbose mode.
+.SH CONFIGURATION
+.TP
+The defualt configuration is stored in /usr/share/wslu/conf. You can override the default configuration in  \'/usr/share/wslu/custom.conf\', \'$HOME/.config/wslu/conf\', or \'$HOME/.wslurc\'. They will be read in the direction they are listed.
 .SH EXIT STATUS
 .TP
 .B 1
@@ -76,7 +80,7 @@ unsupported feature (for your Windows 10 build)
 Unknown system input.
 .SH BUG
 Report bugs to <https://github.com/wslutilities/wslu/issues>;
-For Ubuntu specific/related bugs, report to <https://bugs.launchpad.net/ubuntu/+source/wslu>.
+For Ubuntu specific bugs, report to <https://bugs.launchpad.net/ubuntu/+source/wslu>.
 .SH COPYRIGHT
 This is free software; you can redistribute it and/or modify it under the terms of the GNU GPL version 3 or (at your option) any later version. There is NO warranty; not even MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
