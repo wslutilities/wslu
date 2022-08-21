@@ -8,13 +8,13 @@ on:
 jobs:
   debbuild:
     name: Debian
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper
+          sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper bats
       - name: Build Debian Package
         run: |
           git clone https://github.com/wslutilities/wslu-debian builder
@@ -28,13 +28,13 @@ jobs:
           path: pkgs
   pgwbuild:
     name: Pengwin
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper
+          sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper bats
       - name: Build Debian Package
         run: |
           git clone https://github.com/wslutilities/wslu-debian builder
@@ -49,7 +49,7 @@ jobs:
   pgwspdeploy:
     name: Pengwin Deploying
     needs: pgwbuild
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     container: circleci/ruby:2.3-jessie
     steps:
       - name: Retrive package for deployment
@@ -63,7 +63,7 @@ jobs:
         run: package_cloud push whitewaterfoundry/wslu/debian/bullseye ./PengwinDEBs/*.deb --skip-errors
   rpmobsbuild:
     name: RPM - OpenSUSE Build Service
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites
@@ -118,7 +118,7 @@ jobs:
             osc commit -m "Build at $(date)"
   rpmcoprbuild:
     name: RPM - Cool Other Package Repo
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites

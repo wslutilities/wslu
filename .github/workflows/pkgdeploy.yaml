@@ -8,7 +8,7 @@ jobs:
     uses: ./.github/workflows/tests.yaml
   debbuild:
     name: Debian
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites
@@ -27,7 +27,7 @@ jobs:
           path: pkgs
   pgwbuild:
     name: Pengwin
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites
@@ -47,7 +47,7 @@ jobs:
   pgwspdeploy:
     name: Pengwin Deploying
     needs: pgwbuild
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     container: circleci/ruby:2.3-jessie
     steps:
       - name: Retrive package for deployment
@@ -61,7 +61,7 @@ jobs:
         run: package_cloud push whitewaterfoundry/wslu/debian/bullseye ./PengwinDEBs/*.deb --skip-errors
   rpmobsbuild:
     name: RPM - OpenSUSE Build Service
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites
@@ -91,7 +91,7 @@ jobs:
           path: compiled_rpms
   rpmcoprbuild:
     name: RPM - COPR
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites
