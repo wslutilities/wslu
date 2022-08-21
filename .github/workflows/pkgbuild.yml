@@ -56,8 +56,9 @@ jobs:
           sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper
       - name: Build Debian Package
         run: |
-          bash ./configure.sh --deb unstable
-          debuild -i -us -uc -b
+          git clone https://github.com/wslutilities/wslu-debian
+          cd wslu-debian/
+          bash ./build.sh --ci dev debian unstable
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
       - uses: actions/upload-artifact@v1
@@ -76,8 +77,9 @@ jobs:
           sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper
       - name: Build Debian Package
         run: |
-          bash ./configure.sh --deb bullseye
-          debuild -i -us -uc -b
+          git clone https://github.com/wslutilities/wslu-debian
+          cd wslu-debian/
+          bash ./build.sh --ci dev pengwin
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
       - uses: actions/upload-artifact@v1
