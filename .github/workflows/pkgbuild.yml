@@ -1,4 +1,4 @@
-name: CI/CD Tests
+name: CI/CD Dev Build Deployment
 on:
   push:
     branches:
@@ -6,48 +6,9 @@ on:
       - lts/**
 
 jobs:
-  sctests:
-    name: ShellCheck Tests
-    runs-on: ubuntu-20.04
-    steps: 
-      - uses: actions/checkout@v2
-      - name: Install Pre-requisites
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -qq shellcheck
-      - name: shellcheck
-        run: |
-          make shellcheck
-  generaltests:
-    name: General Tests
-    runs-on: windows-2019
-    needs: sctests
-    steps:
-      - name: Set git to use LF
-        run: |
-          git config --global core.autocrlf false
-          git config --global core.eol lf
-      - uses: actions/checkout@v2
-      - uses: Vampire/setup-wsl@v1.2.0
-        with:
-          distribution: Ubuntu-20.04
-          update: 'true'
-          set-as-default: 'true'
-          additional-packages:
-            gzip
-            make
-            desktop-file-utils
-            bats
-            x11-apps
-      - shell: wsl-bash -u root {0}
-        run: |
-          make
-          make install
-          make test
   debbuild:
     name: Debian
     runs-on: ubuntu-18.04
-    needs: generaltests
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites
@@ -56,8 +17,8 @@ jobs:
           sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper
       - name: Build Debian Package
         run: |
-          git clone https://github.com/wslutilities/wslu-debian
-          cd wslu-debian/
+          git clone https://github.com/wslutilities/wslu-debian builder
+          cd builder/
           bash ./build.sh --ci dev debian unstable
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
@@ -68,7 +29,6 @@ jobs:
   pgwbuild:
     name: Pengwin
     runs-on: ubuntu-18.04
-    needs: generaltests
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites
@@ -77,8 +37,8 @@ jobs:
           sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper
       - name: Build Debian Package
         run: |
-          git clone https://github.com/wslutilities/wslu-debian
-          cd wslu-debian/
+          git clone https://github.com/wslutilities/wslu-debian builder
+          cd builder/
           bash ./build.sh --ci dev pengwin
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
@@ -104,7 +64,6 @@ jobs:
   rpmobsbuild:
     name: RPM - OpenSUSE Build Service
     runs-on: ubuntu-18.04
-    needs: generaltests
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites
@@ -160,7 +119,6 @@ jobs:
   rpmcoprbuild:
     name: RPM - Cool Other Package Repo
     runs-on: ubuntu-18.04
-    needs: generaltests
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites
