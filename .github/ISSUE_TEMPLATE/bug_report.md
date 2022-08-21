@@ -16,8 +16,9 @@ about: Create a report to help us improve
 --->
 
 **Background Information:**
- - Build: [e.g. 17704]
- - WSL: [e.g. Ubuntu 16.04]
+ - Windows Version: [Windows 10 or 11]
+ - Windows Build: [e.g. build 17704]
+ - WSL: [e.g. Ubuntu 20.04]
  - Version: [e.g. 1.5]
 
 **Describe the bug**
