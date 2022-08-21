@@ -6,7 +6,7 @@ is_interactive=0
 customname=""
 customenv=""
 
-help_short="wslusc [-dIs] [-e PATH] [-n NAME] [-i FILE] [-g GUI_TYPE] COMMAND\nwslusc [-hv]"
+help_short="wslusc [-IsgN] [-d SHORTCUT_FILE] [-e PATH] [-n NAME] [-i FILE] COMMAND\nwslusc [-hv]"
 
 PARSED_ARGUMENTS=$(getopt -a -n "$(basename "$wslu_util_name")" -o hvd:Ie:n:i:gNs --long help,version,shortcut-debug:,interactive,path:,name:,icon:,gui,native,smart-icon -- "$@")
 #shellcheck disable=SC2181
