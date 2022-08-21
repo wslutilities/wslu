@@ -4,6 +4,8 @@ on:
     branches:
       - master
 jobs:
+  tests:
+    uses: ./.github/workflows/tests.yaml
   debbuild:
     name: Debian
     runs-on: ubuntu-18.04

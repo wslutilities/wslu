@@ -1,5 +1,9 @@
 name: CI/CD tests
-on: [push]
+on:
+  push:
+    branches:
+      - dev/**
+  workflow_call:
 jobs:
   sctests:
     name: ShellCheck Tests
@@ -13,7 +17,7 @@ jobs:
       - name: shellcheck
         run: |
           make shellcheck
-  generaltests:
+  codetests:
     name: General Tests
     runs-on: windows-2019
     needs: sctests
