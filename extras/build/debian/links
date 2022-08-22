@@ -1,6 +1,0 @@
-usr/bin/wslview usr/bin/wview
-usr/bin/wslview usr/bin/wslstart
-usr/bin/wslview usr/bin/wstart
-usr/share/man/man1/wslview.1.gz usr/share/man/man1/wview.1.gz
-usr/share/man/man1/wslview.1.gz usr/share/man/man1/wslstart.1.gz
-usr/share/man/man1/wslview.1.gz usr/share/man/man1/wstart.1.gz
