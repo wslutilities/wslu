@@ -10,7 +10,7 @@
 
 </div>
 
-This is a collection of utilities for Windows 10 Linux Subsystem, such as retrieving Windows 10 environment variables or creating your favorite Linux GUI application shortcuts on Windows 10 Desktop.
+This is a collection of utilities for the Linux Subsystem for Windows (WSL), such as converting Linux paths to Windows paths or creating  Linux application shortcuts on the Windows Desktop.
 
  - Requires at least Windows 10 Creators Update;
  - Some of the features require a higher version of Windows;
