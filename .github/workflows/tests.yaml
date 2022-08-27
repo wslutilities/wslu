@@ -1,0 +1,45 @@
+name: CI/CD tests
+on:
+  push:
+    branches:
+      - dev/**
+  workflow_call:
+jobs:
+  sctests:
+    name: ShellCheck Tests
+    runs-on: ubuntu-20.04
+    steps: 
+      - uses: actions/checkout@v2
+      - name: Install Pre-requisites
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qq shellcheck
+      - name: shellcheck
+        run: |
+          make shellcheck
+  codetests:
+    name: General Tests
+    runs-on: windows-2019
+    needs: sctests
+    steps:
+      - name: Set git to use LF
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v2
+      - uses: Vampire/setup-wsl@v1.2.0
+        with:
+          distribution: Debian
+          update: 'true'
+          set-as-default: 'true'
+          additional-packages:
+            gzip
+            make
+            desktop-file-utils
+            bats
+            x11-apps
+      - shell: wsl-bash -u root {0}
+        run: |
+          make
+          make install
+          make test

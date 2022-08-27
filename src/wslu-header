@@ -1,4 +1,5 @@
 #!/bin/bash
+#shellcheck disable=SC1091
 # wslu - Windows 10 linux Subsystem Utility
 # Component of Windows 10 linux Subsystem Utility
 # <https://github.com/wslutilities/wslu>
@@ -17,15 +18,27 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# Current utility
+wslu_util_fullpath="$0"
+wslu_util_name=$(basename "$wslu_util_fullpath")
+
 # Version
 wslu_version=VERSIONPLACEHOLDER
+wslu_prefix="PREFIXPLACEHOLDER"
 
-# Speed up script by not using unicode.
+# Speed up script by using unicode.
 LC_ALL=C
 LANG=C
 
 # prevent bash -x
 set +x
+
+# pipeline content to pipe... if it is wslclip
+if [[ "$wslu_util_name" == "wslclip" ]]; then
+	if [[ -p /dev/stdin ]]; then
+		PIPE=$(cat -)
+	fi
+fi
 
 # conf handling module
 __wsl_conf_read() {
@@ -49,14 +62,14 @@ fi
 #
 # They should not exist at the same time, otherwise
 # the output would be too messy.
-wslu_debug=0
+wslu_debug=""
 if [ "$1" == "--verbose" ]; then
-	echo -e '\e[38;5;202m\033[1m[verbose] Showing verbose output. \033(B\033[m'
+	echo -e '\e[38;5;202m\033[1m[verbose] Showing verbose output. \033(B\033[m' 1>&2
 	shift
 	set -x
 elif [ "$1" == "--debug" ]; then
-	wslu_debug=1
-	echo -e '\e[38;5;202m\033[1m[debug] Showing debug output. \033(B\033[m'
+	wslu_debug="--debug"
+	echo -e '\e[38;5;202m\033[1m[debug:'"${wslu_util_fullpath}"'] Showing debug output. \033(B\033[m' 1>&2
 	shift
 fi
 
@@ -98,29 +111,56 @@ readonly BN_APR_EIGHTEEN=17134		#1803, Redstone 4, April 2018 Update
 readonly BN_OCT_EIGHTEEN=17763		#1809, Redstone 5, October 2018 Update
 readonly BN_MAY_NINETEEN=18362		#1903, 19H1, May 2019 Update
 readonly BN_NOV_NINETEEN=18363		#1909, 19H2, November 2019 Update
+readonly BN_MAY_TWENTYTY=19041		#2004, 20H1, May 2020 Update
 readonly BN_OCT_NINETEEN=19042		#20H2, Windows 10 October 2020 Update
 readonly BN_MAY_TWNETONE=19043		#21H1, Windows 10 May 2021 Update
 readonly BN_NOV_TWENTONE=19044		#21H2, Windows 10 November 2021 Update
 # Windows 11
 readonly BN_ELEVEN_21H2=22000		#21H2, Windows 11
 
-# functions
+# echo functions
 function debug_echo {
-	[ $wslu_debug -eq 1 ] && echo "${orange}${bold}[debug]${reset} $@"
+	[ "$wslu_debug" == "--debug" ] && echo "${orange}${bold}[debug:${wslu_util_fullpath}]${reset} $*" 1>&2;
 }
 
 function error_echo {
 	echo "${error} $1"
-	exit $2
+	exit "$2"
 }
 
+# source default config
+if [ -f "${wslu_prefix}/share/wslu/conf" ]; then
+	debug_echo "source default setting"
+	source "${wslu_prefix}/share/wslu/conf"
+fi
+
+# source user-defined config
+if [ -f "${wslu_prefix}/share/wslu/custom.conf" ]; then
+	debug_echo "${wslu_prefix}/share/wslu/custom.conf found, sourcing"
+	source "${wslu_prefix}/share/wslu/custom.conf"
+fi
+if [ -f "$HOME/.config/wslu/conf" ]; then
+	debug_echo "$HOME/.config/wslu/conf found, sourcing"
+	source "$HOME/.config/wslu/conf"
+fi
+if [ -f "$HOME/.wslurc" ]; then
+	debug_echo "$HOME/.wslurc found, sourcing"
+	source "$HOME/.wslurc"
+fi
+
+# functions
+
 function help {
-	app_name=$(basename "$1")
-	echo -e "$app_name - Part of wslu, a collection of utilities for Windows 10 Windows Subsystem for Linux
+	app_name=$wslu_util_name
+	echo -e "$app_name - Part of wslu, a collection of utilities for Linux Subsystem for Windows (WSL)
 Usage: $2
 
 For more help for $app_name, please use the command \`man $app_name\` or visit the following site: https://wslutiliti.es/wslu/man/$app_name.html.
 For overall help, you can use the command \`man wslu\` or visite the following site: https://wslutiliti.es/wslu."
+}
+
+function version {
+	echo "wslu v$wsl_version"
 }
 
 function double_dash_p {
@@ -142,8 +182,9 @@ function interop_prefix {
 function sysdrive_prefix {
 	win_location="$(interop_prefix)"
 	hard_reset=0
-	for pt in $(ls "$win_location"); do
-		if [ $(echo "$pt" | wc -l) -eq 1 ]; then
+	for pt in "$win_location"/*; do
+		[[ -e "$pt" ]] || break
+		if [ "$(echo "$pt" | wc -l)" -eq 1 ]; then
 			if [ -d "$win_location$pt/Windows/System32" ]; then
 				hard_reset=1
 				win_location="$pt"
@@ -175,7 +216,7 @@ function wslu_get_wsl_ver {
 		if "$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Flags &>/dev/null; then
 			wslu_distro_version=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v Flags | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 			wslu_distro_version=${wslu_distro_version##* }
-			wslu_distro_version_processed=$(expr $(printf "%d\n" "$wslu_distro_version") / 8)
+			wslu_distro_version_processed=$(( "$(printf "%d\n" "$wslu_distro_version")" / 8 ))
 			if [ "$wslu_distro_version_processed" == "1" ]; then
 				echo "2"
 			elif [ "$wslu_distro_version_processed" == "0" ]; then
@@ -194,38 +235,59 @@ function chcp_com {
 }
 
 function winps_exec {
-	wslutmpbuild="$(( $(wslu_get_build) + 0 ))"
+	debug_echo "winps_exec: called with command $*"
+	wslutmpbuild="$(wslu_get_build)"
 	cp="$(cat ~/.config/wslu/oemcp)"
-	[ $wslutmpbuild -ge $BN_OCT_NINETEEN ] || chcp_com "$cp"
-	cp=$(($cp+0))
-	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive –ExecutionPolicy Bypass -Command "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::InputEncoding = [System.Text.Encoding]::GetEncoding($cp); $@"
+	[ "$wslutmpbuild" -ge $BN_OCT_NINETEEN ] || chcp_com "$cp"
+	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::InputEncoding = [System.Text.Encoding]::GetEncoding($cp); $*"
 	EXIT_STATUS=$?
-	[ $wslutmpbuild -ge $BN_OCT_NINETEEN ] || chcp_com 65001
+	[ "$wslutmpbuild" -ge $BN_OCT_NINETEEN ] || chcp_com 65001
+	return $EXIT_STATUS
+}
+
+function cmd_exec {
+	debug_echo "cmd_exec: called with command $*"
+	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/cmd.exe /c "$@"
+	EXIT_STATUS=$?
 	return $EXIT_STATUS
 }
 
 function baseexec_gen {
+	debug_echo "baseexec_gen: called"
 	wslutmpbuild="$(( $(wslu_get_build) + 0 ))"
+	debug_echo "baseexec_gen: winbuild: $wslutmpbuild"
 	if [ $wslutmpbuild -ge $BN_MAY_NINETEEN ]; then
 		# The environment variable only available in 19H1 or later.
+		debug_echo "baseexec_gen: 19H1 or higher"
 		wslu_distro_regpath=$("$(interop_prefix)"c/Windows/System32/reg.exe query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Lxss" /s /f DistributionName 2>&1 | sed -e 's|\r||g' | grep -B1 -e "$WSL_DISTRO_NAME$" | head -n1 )
 		if "$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName &>/dev/null; then
 			wslu_distro_packagename=$("$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "$wslu_distro_regpath" /v PackageFamilyName | tail -n 2 | head -n 1 | sed -e 's|\r||g')
 			# if it is a store distro
+			debug_echo "baseexec_gen: store distro: $wslu_distro_packagename"
 			wslu_distro_packagename=${wslu_distro_packagename##* }
 			wslu_base_exec_folder_path="$(wslpath "$(winps_exec "[Environment]::GetFolderPath('LocalApplicationData')" | tr -d "\r")\\Microsoft\\WindowsApps\\$wslu_distro_packagename")"
-			wslpath -w "$(find "$wslu_base_exec_folder_path" -name "*.exe" -print -quit)" > ~/.config/wslu/baseexec
+			debug_echo "baseexec_gen: base_exe_folder_path: $wslu_base_exec_folder_path"
+			if find "$wslu_base_exec_folder_path" -name "*.exe" -print -quit &>/dev/null; then
+				debug_echo "baseexec_gen: found exe in wslu_base_exec_folder_path"
+				wslpath -w "$(find "$wslu_base_exec_folder_path" -name "*.exe" -print -quit)" > ~/.config/wslu/baseexec
+			else
+				debug_echo "baseexec_gen: do not have base exec in the folder; use fallback"
+				echo "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
+			fi
 		else
+			debug_echo "baseexec_gen: imported distro"
 			# if it is imported distro
 			echo "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
 		fi
 	else
+		debug_echo "baseexec_gen: fallback mode"
 		# older version fallback.
 		echo "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
 	fi
 }
 
 function var_gen {
+	debug_echo "var_gen: called"
 	date +"%s" > ~/.config/wslu/triggered_time
 
 	rm -f ~/.config/wslu/baseexec
@@ -238,7 +300,15 @@ function var_gen {
 
 }
 
+function wslu_function_check {
+	# from https://stackoverflow.com/questions/85880/determine-if-a-function-exists-in-bash
+	debug_echo "wslu_function_check: called with $*"
+	declare -f -F "$1" > /dev/null
+	return $?
+}
+
 function wslu_file_check {
+	debug_echo "wslu_file_check: called with $*"
 	should_i_show=""
 	[[ "$3" == "?!S" ]] && should_i_show="n"
 
@@ -255,6 +325,30 @@ function wslu_file_check {
 	fi
 }
 
+function wslpy_check {
+	debug_echo "wslpy_check"
+	if type python3 > /dev/null 2>&1; then
+		debug_echo "wslpy_check: python3 installed."
+		tmp_wslpy_ver="$(python3 -c "import wslpy; print(wslpy.__version__)" 2>/dev/null)"
+		if [[ "$tmp_wslpy_ver" != "" ]]; then
+			debug_echo "wslpy_check: wslpy installed."
+			older_ver="$(echo -e "$tmp_wslpy_ver\n0.1.0" | sort -n -t. | head -n1)"
+			if [[ "$older_ver" == "$tmp_wslpy_ver" ]]; then
+				debug_echo "wslpy_check: wslpy installed but a version < 0.1.0 is installed."
+				return 1
+			else
+				debug_echo "wslpy_check: wslpy >= 0.1.0 is installed."
+				return
+			fi
+		else
+			debug_echo "wslpy_check: wslpy not installed."
+			return 1
+		fi
+	else
+		debug_echo "wslpy_check: python3 not installed."
+		return 1
+	fi
+}
 
 
 # pre_check to make sure WSL_INTEROP is properly set in WSL2
@@ -268,6 +362,7 @@ fi
 
 # first run, saving some information
 if [ ! -d ~/.config/wslu ]; then
+	debug_echo "first run; creating ~/.config/wslu"
 	mkdir -p ~/.config/wslu
 fi
 
@@ -277,16 +372,20 @@ fi
 # 2. if update_time is also not present, i.e.,
 #    badly installed packages or installed via install script
 if [ ! -f ~/.config/wslu/triggered_time ] || [ ! -f /usr/share/wslu/updated_time ]; then
+	debug_echo "first run or update_time not present; calling var_gen"
 	var_gen
 # This gets triggered when:
 #    installed time is larger than the last triggered time
-elif [ $(cat ~/.config/wslu/triggered_time) -lt $(cat /usr/share/wslu/updated_time) ]; then
+elif [ "$(cat ~/.config/wslu/triggered_time)" -lt "$(cat /usr/share/wslu/updated_time)" ]; then
+	debug_echo "upgraded package; calling var_gen"
 	var_gen
 fi
 
 # basic distro detection
-distro="$(cat /etc/os-release | sed -n -e '/^NAME=.*/p'| sed -e 's/^NAME=\"//g')"
+distro="$(sed -n -e '/^NAME=.*/p' /etc/os-release | sed -e 's/^NAME=\"//g')"
 case $distro in
+	*Clear\ Linux*) distro="clear";;
+	*Common\ Base\ Linux\ Mariner*) distro="cblm";;
 	*Pengwin*) distro="pengwin";;
 	*WLinux*) distro="wlinux";;
 	Ubuntu*) distro="ubuntu";;
@@ -297,9 +396,13 @@ case $distro in
 	Alpine*) distro="alpine";;
 	Arch*) distro="archlinux";;
 	*Oracle*) distro="oracle";;
+	AlmaLinux*) distro="almalinux";;
 	Scientific*) distro="scilinux";;
 	*Fedora\ Remix\ for\ WSL*) distro="fedoraremix";;
 	*Fedora*) distro="fedora";;
+	*Gentoo*) distro="gentoo";;
 	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && distro="oldfedora" || distro="unknown";;
 	*) distro="unknown";;
 esac
+
+debug_echo "distro: $distro"

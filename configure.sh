@@ -1,4 +1,5 @@
 #!/bin/bash
+#shellcheck disable=SC2198,SC2124,SC2002,SC1001,SC2164,SC2072,SC2086,SC2035
 # configure.sh
 # configure script for wslu
 # <https://github.com/wslutilities/wslu>
@@ -33,29 +34,35 @@ distro="$(head -n1 /etc/os-release | sed -e 's/NAME=\"//g')"
 case $distro in
 	*Pengwin*)
 		sudo dpkg --force-depends --remove wslu
-		sudo apt install -y git gzip make
+		sudo apt install -y git gzip make shellcheck bats
 		;;
 	*WLinux*|Ubuntu*|*Debian*|*Kali*)
 		sudo apt purge -y wslu
-		sudo apt install -y git bc gzip make imagemagick
+		sudo apt install -y git bc gzip make imagemagick shellcheck bats
 		;;
 	openSUSE*|SLES*)
 		sudo zypper -n rm wslu
-		sudo zypper -n install git bc gzip make imagemagick
+		sudo zypper -n install git bc gzip make imagemagick ShellCheck
 		;;
 	Alpine*)
 		sudo apk add git bc gzip make bash-completion imagemagick
 		;;
 	Arch*)
-		sudo pacman -Syyu git bc gzip make bash-completion imagemagick --noconfirm
+		sudo pacman -Syyu git bc gzip make bash-completion imagemagick shellcheck iproute2 --noconfirm
 		;;
 	*Oracle*|Scientific*)
-		sudo yum install -y git bc gzip make bash-completion imagemagick
+		sudo yum install -y git bc gzip make bash-completion imagemagick iproute ShellCheck
+		;;
+	Alma*)
+		sudo yum install -y git bc gzip make bash-completion ImageMagick iproute ShellCheck
 		;;
 	*Fedora*)
-		sudo dnf install -y git bc gzip make bash-completion ImageMagick
+		sudo dnf install -y git bc gzip make bash-completion ImageMagick ShellCheck
 		;;
-	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && sudo dnf install -y git || exit 1;;
+	*Gentoo*)
+		sudo emerge -a n sys-devel/bc media-gfx/imagemagick app-shells/bash-completion sys-devel/make dev-vcs/git app-arch/gzip dev-util/shellcheck
+		;;
+	*Generic*) [ "fedora" == "$(grep -e "LIKE=" /etc/os-release | sed -e 's/ID_LIKE=//g')" ] && sudo dnf install -y git bc gzip make bash-completion ImageMagick ShellCheck || exit 1;;
 	*) exit 1;;
 esac
 }
@@ -75,31 +82,38 @@ function deb_build_prep {
 	mkdir -p ./debian
 	cp -r ./extras/build/debian/* ./debian
 	chmod +x ./debian/rules
-	sed -i s/DISTROPLACEHOLDER/"$@"/g ./debian/changelog
+	sed -i s/DISTROPLACEHOLDER/"$*"/g ./debian/changelog
 	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g ./debian/changelog
 	sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a, %d %b %Y %T %z')"/g ./debian/changelog
-	#dch --distribution $@ --newversion "$(cat ./VERSION)"
 }
 
 function rpm_build_prep {
 	BUILD_VER_NUM=$(cat ./VERSION | cut -f1 -d-)
 	REL_VER_NUM=$(cat ./VERSION | cut -f2 -d-)
-	for f in ./extras/build/rpm/*/wslu.spec; do
-		sed -i s/BUILDVERPLACEHOLDER/"$BUILD_VER_NUM"/g $f
-		sed -i s/RELVERPLACEHOLDER/"$REL_VER_NUM"/g $f
-		sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a %b %d %Y')"/g $f
-	done
-	mkdir -p ../wslu-$BUILD_VER_NUM/
-	cp -r * ../wslu-$BUILD_VER_NUM/
+	is_canary=""
+	if [ "$@" = "obs_canary" ]; then
+		FOR_BUILD="obs"
+		is_canary="-canary"
+	else
+		FOR_BUILD="$@"
+	fi
+
+	sed -i s/BUILDVERPLACEHOLDER/"$BUILD_VER_NUM"/g ./extras/build/rpm/"$FOR_BUILD"/wslu.spec
+	sed -i s/RELVERPLACEHOLDER/"$REL_VER_NUM"/g ./extras/build/rpm/"$FOR_BUILD"/wslu.spec
+	sed -i s/DATETIMEPLACEHOLDER/"$(date +'%a %b %d %Y')"/g ./extras/build/rpm/"$FOR_BUILD"/wslu.spec
+	sed -i s/Name\:\ wslu/Name\:\ wslu$is_canary/g ./extras/build/rpm/"$FOR_BUILD"/wslu.spec
+	sed -i s/^Source\:\ wslu/Source\:\ wslu$is_canary/g ./extras/build/rpm/"$FOR_BUILD"/wslu.spec
+	mkdir -p ../wslu$is_canary-$BUILD_VER_NUM/
+	cp -r * ../wslu$is_canary-$BUILD_VER_NUM/
 	cd ../
-	tar -czvf wslu-$BUILD_VER_NUM.tar.gz ./wslu-$BUILD_VER_NUM
+	tar -czvf wslu$is_canary-$BUILD_VER_NUM.tar.gz ./wslu$is_canary-$BUILD_VER_NUM
 	cd ./wslu
 }
 
 for args; do
 	case $args in
 		--build) general_build_prep; exit;;
-		--rpm) rpm_build_prep; exit;;
+		--rpm) rpm_build_prep $2; exit;;
 		--deb) deb_build_prep $2; exit;;
 		-e|--env) env_check; exit;;
 		-P|--pkg) pkg_inst; exit;;

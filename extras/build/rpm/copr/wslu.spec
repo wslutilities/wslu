@@ -1,5 +1,5 @@
 %define packager       Jinming Wu, Patrick <me@patrickwu.space>
-Summary: Windows 10 Linux Subsystem Utilities
+Summary: A collection of utilities for the Linux Subsystem for Windows
 Name: wslu
 Version: BUILDVERPLACEHOLDER
 Release: RELVERPLACEHOLDER
@@ -7,7 +7,7 @@ Source: wslu-BUILDVERPLACEHOLDER.tar.gz
 BuildArch: noarch
 Requires(pre,preun): desktop-file-utils
 BuildRequires: make gzip
-Requires: bc ImageMagick psmisc
+Requires: bc psmisc
 Requires(post): %{_sbindir}/update-alternatives %{_bindir}/update-desktop-database %{_bindir}/desktop-file-install
 Requires(postun): %{_sbindir}/update-alternatives %{_bindir}/update-desktop-database
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
@@ -71,6 +71,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wslstart
 %{_bindir}/wslact
 %{_bindir}/wslvar
+%{_bindir}/wslgsu
+%{_bindir}/wslclip
 /usr/share/wslu/
 %doc /usr/share/man/
 

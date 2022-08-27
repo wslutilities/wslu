@@ -1,7 +1,7 @@
 .TH "WSLVAR" "1" "DATEPLACEHOLDER" "VERSIONPLACEHOLDER" "WSL Utilities User Manual"
 .SH NAME
 .B wslvar
-- Component of Windows 10 Linux Subsystem Utility
+- Component of WSL Utilities
 .SH SYNOPSIS
 .B wslvar
 .RB [ \-sl ]
@@ -31,6 +31,16 @@ show available system local & global variables.
 .TP
 .B -L, --getshell
 show available Shell folder environment variables.
+.SH CONFIGURATION
+.TP
+.B WSLVAR_DEFAULT_VARTYPE
+ Default Type of variable to get when not specifying option. Default type is 1. Here are the available Types:
+.nf
+.in +4
+1: User Shell Folders
+2: Windows Environment Variables
+.in
+.fi
 .SH AUTHOR
 Created by Patrick Wu <me@patrickwu.space>
 .SH REPORTING BUGS

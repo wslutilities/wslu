@@ -26,6 +26,11 @@
   [ "$format" = "^[(B^[[m$" ]
 }
 
+@test "Header - Windows Build" {
+  format="$(. src/wslu-header;echo -e $BN_OCT_EIGHTEEN)"
+  [ "$format" = "17763" ]
+}
+
 @test "Header - Indicator" {
   format="$(. src/wslu-header;echo -e $info | cat -A)"
   [ "$format" = "^[[32m[info]^[(B^[[m$" ]

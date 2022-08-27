@@ -9,10 +9,12 @@ SPECS
 SRPMS
 RPMS
 
-## Complied packages
+# Complied packages
 compiled_rpms
 pkgs
 
-# system and vscode generated files
-.vscode
+# system files
 **/*/.DS_Store
+
+# Synk Scanning Cache
+.dccache

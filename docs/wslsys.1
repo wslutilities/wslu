@@ -1,14 +1,16 @@
 .TH "WSLSYS" "1" "DATEPLACEHOLDER" "VERSIONPLACEHOLDER" "WSL Utilities User Manual"
 .SH NAME
 .B wslsys
-- Component of Windows 10 Linux Subsystem Utility
+- Component of WSL Utilities
 .SH SYNOSIS
 .B wslsys
-.RB [ \-VIbBFUWRKPSlt ]
+.RB [ \-VIbBFUWRKPSltT ]
 .RB [ \-s ]
 .PP
 .B wslsys
 .RB [ \-hv ]
+.RB [ \-n 
+.IR NAME ]
 .SH DESCRIPTION
 This is a WSL system information printer to print out some basic system
 information.
@@ -22,6 +24,9 @@ Print a simple help.
 .TP
 .B -v, --version
 Print current version.
+.TP
+.B -n \fBNAME\fR
+Print the system information of \fBNAME\fR.
 .TP
 .B -V, --wsl-version
 Print the the WSL version your current distribution is using.
@@ -63,6 +68,10 @@ For example, \fB"Linux 4.19.81-microsoft-standard"\fR.
 Print total number of installed packages.
 For example, \fB"1047"\fR for 1047 packages installed.
 .TP
+.B -i, --ip
+Print the current IPv4 address for your WSL distro.
+For example, \fB"127.37.41.23"\fR.
+.TP
 .B -S, --display-scaling
 Print the current disply scaling from your display setting.
 For example, \fB"2"\fR for 200% scaling.
@@ -72,8 +81,12 @@ Print the Windows locale information.
 For example, \fB"en-US"\fR for English (United States).
 .TP
 .B -t, --win-theme
-Print the Windows 10 Theme.
+Print the Windows Theme.
 For example, \fB"light"\fR.
+.TP
+.B -T, --win-system-type
+Print whether the system is running in Windows Desktop, Windows Server, or Windows Domain Controller.
+For example, \fB"Server"\fR.
 .SH AUTHOR
 Created by Patrick Wu <me@patrickwu.space>
 .SH REPORTING BUGS

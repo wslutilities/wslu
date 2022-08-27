@@ -1,10 +1,14 @@
 .TH "WSLFETCH" "1" "DATEPLACEHOLDER" "VERSIONPLACEHOLDER" "WSL Utilities User Manual"
 .SH NAME
 .B wslfetch
-- Component of Windows 10 Linux Subsystem Utility
+- Component of WSL Utilities
 .SH SYNOPSIS
 .B wslfetch
-.RB [ \-hvlsc ]
+.RB [ \-hvcg ]
+.RB [ \-t 
+.IR THEME ]
+.RB [ \-o 
+.IR OPTIONS ]
 .SH DESCRIPTION
 This is a WSL Screenshot Information Tool to print information in a elegant way.
 .SH OPTIONS
@@ -15,14 +19,46 @@ print a simple help.
 .B -v, --version
 print current version.
 .TP
-.B -l, --line
-print a separate line before and after
-.TP
-.B -s, --splash
-use wslfetch as splash when startup; add 'wslfetch --splash' to the end of the rc file
-.TP
 .B -c, --colorbar
-add a colorbar to the printed information.
+add a colorbar to the printed information. This can also be set with the configuration \fIWSLFETCH_COLORBAR\fR.
+.TP
+.B -g, --generic
+Force to print information with generic WSL logo.
+.TP
+.B -t, --theme \fITHEME\fR
+set a cutom theme from the file \fITHEME\fR. This can also be set with the configuration \fIWSLFETCH_THEME_PATH\fR.
+.TP
+.B -o, --options \fIOPTIONS\fR
+set custom options from the file \fIOPTIONS\fR. Please refer to the WSLFETCH_INFO_SECTION in the CONFIGURATION section for more information.
+.SH CONFIGURATION
+.TP
+.B WSLFETCH_INFO_SECTION
+the sections of info from wslsys to show in wslfetch. the following are all the available options:
+.nf
+.in +4n
+windows-install-date
+windows-rel-branch
+windows-build
+windows-full-build
+display-scaling
+windows-locale
+windows-theme
+windows-uptime
+wsl-uptime
+wsl-release
+wsl-kernel
+wsl-package-count
+wsl-ip
+.in
+.TP
+\'wsl-version\' will be always ignored since it is builtin in wslfetch. The default value is "windows-build,windows-rel-branch,wsl-release,wsl-kernel,windows-uptime".
+.fi
+.TP
+.B WSLFETCH_THEME_PATH
+This allows you to use your own customized theme.
+.TP
+.B WSLFETCH_COLORBAR
+whether you want to display colorbar in wslfetch. This will override \`\-c, \-\-colorbar\` param.
 .SH AUTHOR
 Created by Patrick Wu <me@patrickwu.space>
 .SH REPORTING BUGS

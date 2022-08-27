@@ -1,6 +1,4 @@
 # shellcheck shell=bash
-version="03"
-
 var_type=1
 
 help_short="wslvar [-sl] NAME\nwslvar [-hvSL]"
@@ -27,7 +25,7 @@ function cl_destoryer {
 
 function caller {
 	if [ "$*" != "" ]; then
-		case $var_type in
+		case $WSLVAR_DEFAULT_VARTYPE in
 			1) p="$(cl_destoryer "$(call_sys "$@")")";;
 			2) p="$(cl_destoryer "$(call_shell "$@")")";;
 			*) error_echo "Invalid variable type. Aborted." 22;;
@@ -40,12 +38,12 @@ function caller {
 
 while [ "$1" != "" ]; do
 	case "$1" in
-		-s|--sys) var_type=1; shift;;
-		-l|--shell) var_type=2; shift;;
+		-s|--sys) WSLVAR_DEFAULT_VARTYPE=1; shift;;
+		-l|--shell) WSLVAR_DEFAULT_VARTYPE=2; shift;;
 		-S|--getsys) view_sys; exit;;
 		-L|--getshell) view_shell; exit;;
 		-h|--help) help "$0" "$help_short"; exit;;
-		-v|--version) echo "wslu v$wslu_version; wslvar v$version"; exit;;
+		-v|--version) version; exit;;
 		*) caller "$@"; exit;;
 	esac
 done
