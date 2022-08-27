@@ -10,40 +10,39 @@ jobs:
   debbuild:
     name: Debian
     runs-on: ubuntu-20.04
+    needs: tests
     steps:
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper bats
+          sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper bats wget
       - name: Build Debian Package
         run: |
           git clone https://github.com/wslutilities/wslu-debian builder
+          cd ./builder
           bash ./build.sh latest debian buster
-          mkdir -p ./pkgs
-          mv ../wsl*.* ./pkgs
       - uses: actions/upload-artifact@v1
         with:
           name: DebianDEBs
-          path: pkgs
+          path: builder/pkgs
   pgwbuild:
     name: Pengwin
     runs-on: ubuntu-20.04
+    needs: tests
     steps:
-      - uses: actions/checkout@v2
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper
+          sudo apt-get install -qq apt-utils build-essential gzip devscripts debhelper bats wget
       - name: Build Debian Package
         run: |
-          bash ./configure.sh --deb bullseye
-          debuild -i -us -uc -b
-          mkdir -p ./pkgs
-          mv ../wsl*.* ./pkgs
+          git clone https://github.com/wslutilities/wslu-debian builder
+          cd ./builder
+          bash ./build.sh latest pengwin
       - uses: actions/upload-artifact@v1
         with:
-          name: PengwinDEBs
-          path: pkgs
+          name: DebianDEBs
+          path: builder/pkgs
   pgwspdeploy:
     name: Pengwin Deploying
     needs: pgwbuild
@@ -62,6 +61,7 @@ jobs:
   rpmobsbuild:
     name: RPM - OpenSUSE Build Service
     runs-on: ubuntu-20.04
+    needs: tests
     steps:
       - uses: actions/checkout@v2
       - name: Install Pre-requisites
@@ -70,7 +70,7 @@ jobs:
           sudo apt-get install -qq build-essential tar
       - name: configure
         run: |
-          bash ./configure.sh --rpm
+          bash ./configure.sh --rpm obs
           cp extras/build/rpm/obs/wslu.spec ../wslu.spec
           rm -rf *
           mkdir -p SOURCES
@@ -81,16 +81,42 @@ jobs:
         uses: ./.github/actions/rpmbuild/
       - name: moving files
         run: |
-          mkdir compiled_rpms
-          cp SRPMS/* compiled_rpms
-          cp RPMS/noarch/* compiled_rpms
-        #uses: robertdebock/rpmbuild-action@1.1.1
+          mkdir obs_res
+          cp ../wslu-*.tar.gz obs_res
+          cp ../wslu.spec obs_res
       - uses: actions/upload-artifact@v1
         with:
-          name: OBSRPMs
-          path: compiled_rpms
+          name: OBS_RES
+          path: obs_res
+  obsdeploy:
+    name: OpenSUSE Build Service Deploying
+    needs: rpmobsbuild
+    runs-on: ubuntu-latest
+    steps:
+        - name: Retrive package for deployment
+          uses: actions/download-artifact@v1
+          with:
+            name: OBS_RES
+        - name: Install Pre-requisites
+          run: |
+            sudo apt-get update -qq
+            sudo apt-get install -qq osc python3-m2crypto
+        - name: Install API token for osc
+          env:
+            API_TOKEN_CONTENT: ${{ secrets.OBS_API_TOKEN }}
+          run: |
+            mkdir -p "$HOME/.config/osc"
+            echo -e "[general]\napiurl = https://api.opensuse.org\n[https://api.opensuse.org]\nuser = wslutilities\npass = $API_TOKEN_CONTENT" > "$HOME/.config/osc/oscrc"
+        - name: Uploading OBS source files
+          run: |
+            osc checkout home:wslutilities
+            cp OBS_RES/* home:wslutilities/wslu/
+            cd home:wslutilities/wslu/
+            osc addremove
+            osc commit -m "Build at $(date)"
   rpmcoprbuild:
-    name: RPM - COPR
+    name: RPM - Cool Other Package Repo
+    needs: tests
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -100,7 +126,7 @@ jobs:
           sudo apt-get install -qq build-essential tar
       - name: configure
         run: |
-          bash ./configure.sh --rpm
+          bash ./configure.sh --rpm copr
           cp extras/build/rpm/copr/wslu.spec ../wslu.spec
           rm -rf *
           mkdir -p SOURCES
@@ -114,13 +140,12 @@ jobs:
           mkdir compiled_rpms
           cp SRPMS/* compiled_rpms
           cp RPMS/noarch/* compiled_rpms
-        #uses: robertdebock/rpmbuild-action@1.1.1
       - uses: actions/upload-artifact@v1
         with:
           name: COPRRPMs
           path: compiled_rpms
   coprdeploy:
-    name: COPR Deploying
+    name: Cool Other Package Repo Deploying
     needs: rpmcoprbuild
     container: fedora:latest
     runs-on: ubuntu-latest
@@ -128,7 +153,7 @@ jobs:
         - name: Retrive package for deployment
           uses: actions/download-artifact@v1
           with:
-            name: RPMs
+            name: COPRRPMs
         - name: Install API token for copr-cli
           env:
             API_TOKEN_CONTENT: ${{ secrets.COPR_API_TOKEN }}
