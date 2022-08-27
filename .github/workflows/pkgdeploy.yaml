@@ -41,7 +41,7 @@ jobs:
           bash ./build.sh latest pengwin
       - uses: actions/upload-artifact@v1
         with:
-          name: DebianDEBs
+          name: PengwinDEBs
           path: builder/pkgs
   pgwspdeploy:
     name: Pengwin Deploying

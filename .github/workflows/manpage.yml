@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - 'docs/*'
 jobs:
   build:
     name: Manpage Generate and Deployment
