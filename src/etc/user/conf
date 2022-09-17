@@ -1,0 +1,55 @@
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# wslfetch: the sections of info from wslsys to show in wslfetch.
+# Available options: 
+#    windows-install-date
+#    windows-rel-branch
+#    windows-build
+#    windows-full-build
+#    display-scaling
+#    windows-locale
+#    windows-theme
+#    windows-uptime
+#    wsl-uptime
+#    wsl-release
+#    wsl-kernel
+#    wsl-package-count
+#    wsl-ip
+# 'wsl-version' will be always ignored since it is builtin in wslfetch.
+# WSLFETCH_INFO_SECTION="windows-build,windows-rel-branch,wsl-release,wsl-kernel,windows-uptime"
+
+# wslfetch: whether you want to display colorbar in wslfetch. This will override `-c/--colorbar` param.
+# WSLFETCH_COLORBAR=false
+
+# wslfetch: This allows you to use your own customized theme.
+# WSLFETCH_THEME_PATH=
+
+# wslusc: Default GUI type. Default type is 'legacy'. Use 'native' for Native GUI generation by default
+# WSLUSC_GUITYPE="legacy"
+
+# wslusc: Smart Icon Detection. Requires wslpy (Requires Python 3.5).
+# WSLUSC_SMART_ICON_DETECTION=false
+
+# wslvar: Default Type of variable to get when not specifying option. Default type is 1.
+# Available Types:
+#    1: User Shell Folders
+#    2: Windows Environment Variables
+# WSLVAR_DEFAULT_VARTYPE=1
+
+# wslview: default method to start websites/folders/files. Default type is "powershell".
+# Available options:
+#    powershell: use powershell.exe to start website/folder/file
+#    cmd: use cmd.exe to start website/folder/file
+#    cmd_explorer: use explorer.exe via cmd.exe to start website/folder/file
+# WSLVIEW_DEFAULT_ENGINE="powershell"

@@ -28,7 +28,7 @@ all: doc
 	rm $(HEADER).tmp
 	chmod +x $(OUTPATH)/*
 
-install: doc_install res_install
+install: doc_install res_install conf_install
 	install -Dm 755 out/* -t $(DESTDIR)$(PREFIX)/bin
 
 uninstall: 
@@ -61,6 +61,9 @@ res_install:
 	install -Dm 755 src/etc/*.sh -t $(DESTDIR)$(PREFIX)/share/wslu
 	install -Dm 644 src/etc/*.desktop $(DESTDIR)$(PREFIX)/share/wslu
 	install -Dm 644 src/etc/conf $(DESTDIR)$(PREFIX)/share/wslu
+
+conf_install:
+	install -Dm 644 src/etc/user/conf $(DESTDIR)/etc/wslu
 
 clean:
 	rm -rf $(OUTPATH)
