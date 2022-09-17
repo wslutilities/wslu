@@ -57,7 +57,7 @@ if [[ "$lname" != "" ]]; then
 		properfile_full_path="$(readlink -f "${lname}")"
 	fi
 	debug_echo "properfile_full_path: $properfile_full_path"
-	cmd="\"$(wslpath -w "${properfile_full_path:-lname}" 2>/dev/null || echo "$lname")\""
+	cmd="\"$(wslpath -w "${properfile_full_path:-$lname}" 2>/dev/null || echo "$lname")\""
 	if [[ "$WSLVIEW_DEFAULT_ENGINE" == "powershell" ]]; then
 		winps_exec Start "${cmd}"
 	elif [[ "$WSLVIEW_DEFAULT_ENGINE" == "cmd" ]]; then
