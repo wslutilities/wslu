@@ -41,6 +41,9 @@
 # wslusc: Smart Icon Detection. Requires wslpy (Requires Python 3.5).
 # WSLUSC_SMART_ICON_DETECTION=false
 
+# wslusc: Converter engine. You can choose either `ffmpeg` or `imagemagick`. By default it is `imagemagick`.
+# WSLUSC_BASE_CONVERTER_ENGINE=imagemagick
+
 # wslvar: Default Type of variable to get when not specifying option. Default type is 1.
 # Available Types:
 #    1: User Shell Folders
