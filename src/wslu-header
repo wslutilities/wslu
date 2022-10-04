@@ -171,7 +171,7 @@ For overall help, you can use the command \`man wslu\` or visite the following s
 }
 
 function version {
-	echo "wslu v$wsl_version"
+	echo "wslu v$wslu_version"
 }
 
 function double_dash_p {
