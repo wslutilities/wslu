@@ -24,13 +24,15 @@ function add_reg_alt {
 	fi
 }
 
+WSLVIEW_DEFAULT_ENGINE="powershell"
+
 while [ "$1" != "" ]; do
 	case "$1" in
 		-r|--reg-as-browser) add_reg_alt;;
 		-u|--unreg-as-browser) del_reg_alt;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) version; exit;;
-		-E|--engine) WSLVIEW_DEFAULT_ENGINE="$1"; shift;;
+		-E|--engine) WSLVIEW_DEFAULT_ENGINE="$2"; shift; shift;;
 		*) lname="$*";break;;
 	esac
 done
