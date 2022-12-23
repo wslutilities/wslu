@@ -60,6 +60,7 @@ res_install:
 	install -Dm 644 src/etc/*.ico -t $(DESTDIR)$(PREFIX)/share/wslu
 	install -Dm 755 src/etc/*.sh -t $(DESTDIR)$(PREFIX)/share/wslu
 	install -Dm 644 src/etc/*.desktop $(DESTDIR)$(PREFIX)/share/applications
+	install -Dm 644 src/etc/*.desktop $(DESTDIR)$(PREFIX)/share/wslu
 	install -Dm 644 src/etc/conf $(DESTDIR)$(PREFIX)/share/wslu
 
 conf_install:
