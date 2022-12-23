@@ -1,0 +1,104 @@
+name: Bug Report
+description: Create a report to help us improve
+labels: ["Bug"]
+assignees:
+  - patrick330602
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+
+        > **ATTENTION!**
+        >
+        >  Built-in versions of wslu in Ubuntu are no longer supported by me. 
+        >
+        > If you have problems, please:
+        > 1. Report to the Ubuntu WSL team; or
+        > 2. Try the PPA version of WSL here: <https://launchpad.net/~wslutilities/+archive/ubuntu/wslu>
+        >
+        > Usually The PPA version of wslu will address most of your problems.
+  - type: dropdown
+    id: win-version
+    attributes:
+      label: Windows Version
+      description: What version of Windows are you running?
+      options:
+        - Windows 10
+        - Windows 11
+    validations:
+      required: true
+  - type: input
+    id: win-build
+    attributes:
+      label: Windows Build Number
+      description: What's your Windows build number?
+      placeholder: e.g. build 17704
+    validations:
+      required: true
+  - type: dropdown
+    id: wsl-version
+    attributes:
+      label: WSL Version
+      description: What version of WSL are you running?
+      options:
+        - WSL 1
+        - WSL 2
+        - Not Applicable
+    validations:
+      required: true
+  - type: input
+    id: wsl-distro
+    attributes:
+      label: Distro Version
+      description: What's the distro? If it happens on multiple distros, please list them.
+      placeholder: e.g. Ubuntu 20.04
+    validations:
+      required: true
+  - type: input
+    id: wslu-version
+    attributes:
+      label: WSL Utilities Version
+      description: What's the version of WSL Utilities?
+      placeholder: e.g. 2.3.4
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/wslutilities/wslu/blob/7920eb4f94873666477032a33ab57a9b6ee9ad96/CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
