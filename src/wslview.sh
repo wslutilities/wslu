@@ -30,7 +30,7 @@ while [ "$1" != "" ]; do
 		-u|--unreg-as-browser) del_reg_alt;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) version; exit;;
-		-E|--engine) WSLVIEW_DEFAULT_ENGINE="$1"; shift;;
+		-E|--engine) shift; WSLVIEW_DEFAULT_ENGINE="$1"; shift;;
 		*) lname="$*";break;;
 	esac
 done
