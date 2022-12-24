@@ -24,6 +24,15 @@ function add_reg_alt {
 	fi
 }
 
+function url_validator {
+ if curl --head --silent "$*" | head -n 1; then
+ 	return 0
+ else
+ 	return 1
+ fi
+}
+
+
 while [ "$1" != "" ]; do
 	case "$1" in
 		-r|--reg-as-browser) add_reg_alt;;
@@ -57,7 +66,14 @@ if [[ "$lname" != "" ]]; then
 		properfile_full_path="$(readlink -f "${lname}")"
 	fi
 	debug_echo "properfile_full_path: $properfile_full_path"
+	debug_echo "validating whether if it is a link"
+	if url_validator "$lname"; then
+		debug_echo "It is a link"
+		cmd="\"$lname\""
+	else
+		debug_echo "It is not a link"
 	cmd="\"$(wslpath -w "${properfile_full_path:-$lname}" 2>/dev/null || echo "$lname")\""
+	fi
 	if [[ "$WSLVIEW_DEFAULT_ENGINE" == "powershell" ]]; then
 		winps_exec Start "${cmd}"
 	elif [[ "$WSLVIEW_DEFAULT_ENGINE" == "cmd" ]]; then
