@@ -50,6 +50,8 @@ WSLUSC_GUITYPE="legacy"
 WSLUSC_SMART_ICON_DETECTION=false
 
 # wslusc: Converter engine. You can choose either `ffmpeg` or `imagemagick`. By default it is `imagemagick`.
+# - `ffmpeg` engine supports .png and .svg; However, svg support is usually not included by default;
+# - `imagemagick` engine supports .png, .svg, .ico, and .xpm.
 WSLUSC_BASE_CONVERTER_ENGINE=imagemagick
 
 # wslvar: Default Type of variable to get when not specifying option. Default type is 1.
