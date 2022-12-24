@@ -155,27 +155,39 @@ if [[ "$cname_header" != "" ]]; then
 					fi
 					exit 22
 				fi
-				if [[ "$ext" == "svg" ]]; then
-					echo "${info} Converting $ext icon to ico..."
-					if [[ "${base_converter_engine}" = "ffmpeg" ]]; then
+				if [[ "${base_converter_engine}" = "ffmpeg" ]]; then
+					if [[ "$ext" == "svg" ]]; then
+						echo "${info} Converting $ext icon to ico..."
 						echo "${warn} ffmpeg is not designed for converting svg to ico, the result may not be satisfactory."
-						ffmpeg -i "$script_location/$icon_filename" -width 256 -height 256 -keep_ar false -vf scale=256:256 "$script_location/${icon_filename%."$ext"}.ico"
+						if ffmpeg -encoders | grep svg > /dev/null; then
+							ffmpeg -hide_banner -loglevel panic -i "$script_location/$icon_filename" -width 256 -height 256 -keep_ar false -vf scale=256:256 "$script_location/${icon_filename%."$ext"}.ico"
+						else
+							error_echo "${warn} ffmpeg is not compiled with svg support, please compile it with svg support. Aborted." 22
+						fi
+						rm "$script_location/$icon_filename"
+						icon_filename="${icon_filename%."$ext"}.ico"
+					elif [[ "$ext" == "png" ]] || [[ "$ext" == "xpm" ]]; then
+						echo "${info} Converting $ext icon to ico..."
+						ffmpeg -hide_banner -loglevel panic -i "$script_location/$icon_filename" -vf scale=256:256 "$script_location/${icon_filename%."$ext"}.ico"
+						rm "$script_location/$icon_filename"
+						icon_filename="${icon_filename%."$ext"}.ico"
 					else
-						convert "$script_location/$icon_filename" -trim -background none -resize 256X256 -define 'icon:auto-resize=16,24,32,64,128,256'  "$script_location/${icon_filename%."$ext"}.ico"
+						error_echo "wslusc only support creating shortcut using .png/.svg/.ico icon with ffmpeg engine. Aborted." 22
 					fi
-					rm "$script_location/$icon_filename"
-					icon_filename="${icon_filename%."$ext"}.ico"
-				elif [[ "$ext" == "png" ]] || [[ "$ext" == "xpm" ]]; then
-					echo "${info} Converting $ext icon to ico..."
-					if [[ "${base_converter_engine}" = "ffmpeg" ]]; then
-						ffmpeg -i "$script_location/$icon_filename" -vf scale=256:256 "$script_location/${icon_filename%."$ext"}.ico"
-					else
-						convert "$script_location/$icon_filename" -resize 256X256 "$script_location/${icon_filename%."$ext"}.ico"
-					fi
-					rm "$script_location/$icon_filename"
-					icon_filename="${icon_filename%."$ext"}.ico"
 				else
-					error_echo "wslusc only support creating shortcut using .png/.svg/.ico icon. Aborted." 22
+					if [[ "$ext" == "svg" ]]; then
+						echo "${info} Converting $ext icon to ico..."
+						convert "$script_location/$icon_filename" -trim -background none -resize 256X256 -define 'icon:auto-resize=16,24,32,64,128,256'  "$script_location/${icon_filename%."$ext"}.ico"
+						rm "$script_location/$icon_filename"
+						icon_filename="${icon_filename%."$ext"}.ico"
+					elif [[ "$ext" == "png" ]] || [[ "$ext" == "xpm" ]]; then
+						echo "${info} Converting $ext icon to ico..."
+						convert "$script_location/$icon_filename" -resize 256X256 "$script_location/${icon_filename%."$ext"}.ico"
+						rm "$script_location/$icon_filename"
+						icon_filename="${icon_filename%."$ext"}.ico"
+					else
+						error_echo "wslusc only support creating shortcut using .png/.svg/.xpm/.ico icon with imagemagick engine. Aborted." 22
+					fi
 				fi
 			fi
 			iconpath="$script_location_win\\$icon_filename"
