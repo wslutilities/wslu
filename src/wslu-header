@@ -42,7 +42,22 @@ fi
 
 # conf handling module
 __wsl_conf_read() {
-	[ -f /etc/wsl.conf ] && sed -nr "/^\[${1}\]/ { :l /^${2}[ ]*=/ { s/[^=]*=[ ]*//; p; q;}; n; b l;}" /etc/wsl.conf
+	if [ -f /etc/wsl.conf ]; then
+		tmp="$(sed -nr "/^\[${1}\]/ { :l /^${2}[ ]*=/ { s/[^=]*=[ ]*//; p; q;}; n; b l;}" /etc/wsl.conf)"
+		if [ -n "$tmp" ]; then
+			if [ ${#tmp} -ge 2 ]; then
+				if [ "${tmp:0:1}" == '"' ] && [ "${tmp: -1}" == '"' ]; then
+					echo "${tmp:1:-1}"
+				elif [ "${tmp:0:1}" == "'" ] && [ "${tmp: -1}" == "'" ]; then
+					echo "${tmp:1:-1}"
+				else
+					echo "$tmp"
+				fi
+			else
+				echo "$tmp"
+			fi
+		fi
+	fi
 }
 
 # checking interopability
