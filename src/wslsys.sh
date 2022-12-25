@@ -124,6 +124,19 @@ function get_win_system_type() {
 	esac
 }
 
+function get_systemd() {
+	debug_echo "get_systemd: called"
+	if [ "$(get_wsl_version)" == "2" ]; then
+		if __wsl_conf_read boot systemd | grep "true" >/dev/null; then
+			echo "enabled"
+		else
+			echo "disabled"
+		fi
+	else
+		echo "N/A"
+	fi
+}
+
 ## Simple printer defined for fetching information
 function printer() {
 	debug_echo "printer: called with \"$1\" \"$2\""
@@ -200,6 +213,9 @@ function dict_finder() {
 		15|-T|--win-system-type|win-system-type)
 			printer "System Type (Windows)" "$(get_win_system_type)"
 			return;;
+		16|-s|--systemd-status|wsl-systemd-status)
+			printer "SystemD Status" "$(get_systemd)"
+			return;;
 		*) return 1;;
 	esac
 }
@@ -210,7 +226,7 @@ function wslsys_main() {
 	# If input is empty, print everything available
 	if [[ "$*" == "" ]]; then
 		debug_echo "wslsys_main: printing everything"
-		for i in {1..15}; do
+		for i in {1..16}; do
 			dict_finder "$i"
 		done
 		exit
