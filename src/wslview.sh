@@ -69,12 +69,12 @@ if [[ "$lname" != "" ]]; then
 	debug_echo "properfile_full_path: $properfile_full_path"
 	debug_echo "lname: $lname"
 	debug_echo "validating whether if it is a link"
-	if url_validator "$lname"; then
+	if (url_validator "$lname") && [ -n "$properfile_full_path" ]; then
 		debug_echo "It is a link"
 		cmd="\"$lname\""
 	else
 		debug_echo "It is not a link"
-	cmd="\"$(wslpath -w "${properfile_full_path:-$lname}" 2>/dev/null || echo "$lname")\""
+		cmd="\"$(wslpath -w "${properfile_full_path:-$lname}" 2>/dev/null || echo "$lname")\""
 	fi
 	if [[ "$WSLVIEW_DEFAULT_ENGINE" == "powershell" ]]; then
 		winps_exec Start "${cmd}"
