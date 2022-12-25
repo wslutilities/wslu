@@ -69,7 +69,7 @@ if [[ "$lname" != "" ]]; then
 	debug_echo "properfile_full_path: $properfile_full_path"
 	debug_echo "lname: $lname"
 	debug_echo "validating whether if it is a link"
-	if (url_validator "$lname") && [ -n "$properfile_full_path" ]; then
+	if (url_validator "$lname") && [ -z "$properfile_full_path" ]; then
 		debug_echo "It is a link"
 		cmd="\"$lname\""
 	else
