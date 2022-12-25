@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-help_short="wslsys [-VIbBFUWRKPSltT] [-s]\nwslsys [-hv] [-n NAME]"
+help_short="wslsys [-VIbBFUWRKPSltTd] [-s]\nwslsys [-hv] [-n NAME]"
 
 ## Windows 10 information
 function get_branch() {
@@ -213,7 +213,7 @@ function dict_finder() {
 		15|-T|--win-system-type|win-system-type)
 			printer "System Type (Windows)" "$(get_win_system_type)"
 			return;;
-		16|-s|--systemd-status|wsl-systemd-status)
+		16|-d|--systemd-status|wsl-systemd-status)
 			printer "SystemD Status" "$(get_systemd)"
 			return;;
 		*) return 1;;
