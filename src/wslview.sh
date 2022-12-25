@@ -72,6 +72,9 @@ if [[ "$lname" != "" ]]; then
 	if (url_validator "$lname") && [ -z "$properfile_full_path" ]; then
 		debug_echo "It is a link"
 		cmd="\"$lname\""
+	elif [[ "$lname" =~ ^file:\/\/(\/)+[A-Za-z]\:.*$ ]] || [[ "$lname" =~ ^[A-Za-z]\:.*$ ]]; then
+		debug_echo "It is not a link; received windows absolute path/file protocol windows absolute path"
+		cmd="\"${properfile_full_path}\""
 	else
 		debug_echo "It is not a link"
 		cmd="\"$(wslpath -w "${properfile_full_path:-$lname}" 2>/dev/null || echo "$lname")\""
