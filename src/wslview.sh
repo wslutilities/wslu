@@ -25,7 +25,8 @@ function add_reg_alt {
 }
 
 function url_validator {
- if curl --head --silent "$*" | head -n 1; then
+ content=$(curl --head --silent "$*" | head -n 1)
+ if [ -n "$content" ]; then
  	return 0
  else
  	return 1
@@ -66,6 +67,7 @@ if [[ "$lname" != "" ]]; then
 		properfile_full_path="$(readlink -f "${lname}")"
 	fi
 	debug_echo "properfile_full_path: $properfile_full_path"
+	debug_echo "lname: $lname"
 	debug_echo "validating whether if it is a link"
 	if url_validator "$lname"; then
 		debug_echo "It is a link"
