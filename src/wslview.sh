@@ -24,13 +24,23 @@ function add_reg_alt {
 	fi
 }
 
+function url_validator {
+ content=$(curl --head --silent "$*" | head -n 1)
+ if [ -n "$content" ]; then
+ 	return 0
+ else
+ 	return 1
+ fi
+}
+
+
 while [ "$1" != "" ]; do
 	case "$1" in
 		-r|--reg-as-browser) add_reg_alt;;
 		-u|--unreg-as-browser) del_reg_alt;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) version; exit;;
-		-E|--engine) WSLVIEW_DEFAULT_ENGINE="$1"; shift;;
+		-E|--engine) shift; WSLVIEW_DEFAULT_ENGINE="$1"; shift;;
 		*) lname="$*";break;;
 	esac
 done
@@ -57,7 +67,18 @@ if [[ "$lname" != "" ]]; then
 		properfile_full_path="$(readlink -f "${lname}")"
 	fi
 	debug_echo "properfile_full_path: $properfile_full_path"
-	cmd="\"$(wslpath -w "${properfile_full_path:-lname}" 2>/dev/null || echo "$lname")\""
+	debug_echo "validating whether if it is a link"
+	if (url_validator "$lname") && [ -z "$properfile_full_path" ]; then
+		debug_echo "It is a link"
+		cmd="\"$lname\""
+	elif [[ "$lname" =~ ^file:\/\/(\/)+[A-Za-z]\:.*$ ]] || [[ "$lname" =~ ^[A-Za-z]\:.*$ ]]; then
+		debug_echo "It is not a link; received windows absolute path/file protocol windows absolute path"
+		cmd="\"$lname\""
+	else
+		debug_echo "It is not a link"
+		cmd="\"$(wslpath -w "${properfile_full_path:-$lname}" 2>/dev/null || echo "$lname")\""
+	fi
+	debug_echo "cmd: $cmd"
 	if [[ "$WSLVIEW_DEFAULT_ENGINE" == "powershell" ]]; then
 		winps_exec Start "${cmd}"
 	elif [[ "$WSLVIEW_DEFAULT_ENGINE" == "cmd" ]]; then

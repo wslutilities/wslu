@@ -1,11 +1,3 @@
-# wslu - Windows 10 linux Subsystem Utility
-# conf - default configuration of wslu
-## DO NOT MODIFY THIS FILE!
-## please copy this file to custom.conf and modify in custom.conf
-
-# <https://github.com/wslutilities/wslu>
-# 2022, Patrick Wu <me@patrickwu.space>
-#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -36,34 +28,34 @@
 #    wsl-ip
 #    wsl-systemd-status
 # 'wsl-version' will be always ignored since it is builtin in wslfetch.
-WSLFETCH_INFO_SECTION="windows-build,windows-rel-branch,wsl-release,wsl-kernel,windows-uptime"
+# WSLFETCH_INFO_SECTION="windows-build,windows-rel-branch,wsl-release,wsl-kernel,windows-uptime"
 
 # wslfetch: whether you want to display colorbar in wslfetch. This will override `-c/--colorbar` param.
-WSLFETCH_COLORBAR=false
+# WSLFETCH_COLORBAR=false
 
 # wslfetch: This allows you to use your own customized theme.
-WSLFETCH_THEME_PATH=
+# WSLFETCH_THEME_PATH=
 
 # wslusc: Default GUI type. Default type is 'legacy'. Use 'native' for Native GUI generation by default
-WSLUSC_GUITYPE="legacy"
+# WSLUSC_GUITYPE="legacy"
 
 # wslusc: Smart Icon Detection. Requires wslpy (Requires Python 3.5).
-WSLUSC_SMART_ICON_DETECTION=false
+# WSLUSC_SMART_ICON_DETECTION=false
 
 # wslusc: Converter engine. You can choose either `ffmpeg` or `imagemagick`. By default it is `imagemagick`.
 # - `ffmpeg` engine supports .png and .svg; However, svg support is usually not included by default;
 # - `imagemagick` engine supports .png, .svg, .ico, and .xpm.
-WSLUSC_BASE_CONVERTER_ENGINE=imagemagick
+# WSLUSC_BASE_CONVERTER_ENGINE=imagemagick
 
 # wslvar: Default Type of variable to get when not specifying option. Default type is 1.
 # Available Types:
 #    1: User Shell Folders
 #    2: Windows Environment Variables
-WSLVAR_DEFAULT_VARTYPE=1
+# WSLVAR_DEFAULT_VARTYPE=1
 
 # wslview: default method to start websites/folders/files. Default type is "powershell".
 # Available options:
 #    powershell: use powershell.exe to start website/folder/file
 #    cmd: use cmd.exe to start website/folder/file
 #    cmd_explorer: use explorer.exe via cmd.exe to start website/folder/file
-WSLVIEW_DEFAULT_ENGINE="powershell"
+# WSLVIEW_DEFAULT_ENGINE="powershell"

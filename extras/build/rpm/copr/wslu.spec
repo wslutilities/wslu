@@ -27,8 +27,10 @@ make
 # for os <= 7
 mkdir -p %{?buildroot}/usr/share/man/man1/
 mkdir -p %{?buildroot}/usr/share/man/man7/
+mkdir -p %{?buildroot}/usr/share/applications/
 mkdir -p %{?buildroot}/usr/share/wslu/
 mkdir -p %{?buildroot}/usr/bin/
+mkdir -p %{?buildroot}/etc/wslu/
 # normal part
 make PREFIX=/usr DESTDIR=%{?buildroot} install
 ln -sf /usr/bin/wslview %{?buildroot}/usr/bin/wview
@@ -74,6 +76,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/wslgsu
 %{_bindir}/wslclip
 /usr/share/wslu/
+/usr/share/applications/
+/etc/wslu
 %doc /usr/share/man/
 
 %changelog

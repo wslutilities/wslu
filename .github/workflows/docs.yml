@@ -19,6 +19,6 @@ jobs:
           cp -f ./CODE_OF_CONDUCT.md ./website/coc.md
           cp -f ./CONTRIBUTING.md ./website/contributing.md
           git --git-dir=./website/.git --work-tree=./website add -A
-          git --git-dir=./website/.git --work-tree=./website commit -m "Manpage update"
+          git --git-dir=./website/.git --work-tree=./website commit -m "Document update"
           git --git-dir=./website/.git --work-tree=./website push
 

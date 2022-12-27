@@ -5,6 +5,7 @@ is_gui=0
 is_interactive=0
 customname=""
 customenv=""
+base_converter_engine=${WSLUSC_BASE_CONVERTER_ENGINE:-"imagemagick"}
 
 help_short="wslusc [-IsgN] [-d SHORTCUT_FILE] [-e PATH] [-n NAME] [-i FILE] COMMAND\nwslusc [-hv]"
 
@@ -133,8 +134,18 @@ if [[ "$cname_header" != "" ]]; then
 			cp "$iconpath" "$script_location"
 		
 			if [[ "$ext" != "ico" ]]; then
-				if ! type convert > /dev/null; then
-					echo "The 'convert' command is needed for converting the icon."
+				if [[ "${base_converter_engine}" = "ffmpeg" ]] && ! type ffmpeg > /dev/null; then
+					echo "The 'ffmpeg' command is needed for converting the icon with 'ffmpeg' Engine."
+					if [ -x /usr/lib/command-not-found ]; then
+						echo " It can be installed with:" >&2
+						echo "" >&2
+						/usr/lib/command-not-found ffmpeg 2>&1 | grep -E -v '(not found|^$)' >&2
+					else
+						echo "It can usally be installed in your package manager as 'ffmpeg'."
+					fi
+					exit 22
+				elif ! type convert > /dev/null; then
+					echo "The 'convert' command is needed for converting the icon with 'imagemagick' Engine."
 					if [ -x /usr/lib/command-not-found ]; then
 						echo " It can be installed with:" >&2
 						echo "" >&2
@@ -144,18 +155,39 @@ if [[ "$cname_header" != "" ]]; then
 					fi
 					exit 22
 				fi
-				if [[ "$ext" == "svg" ]]; then
-					echo "${info} Converting $ext icon to ico..."
-					convert "$script_location/$icon_filename" -trim -background none -resize 256X256 -define 'icon:auto-resize=16,24,32,64,128,256'  "$script_location/${icon_filename%."$ext"}.ico"
-					rm "$script_location/$icon_filename"
-					icon_filename="${icon_filename%."$ext"}.ico"
-				elif [[ "$ext" == "png" ]] || [[ "$ext" == "xpm" ]]; then
-					echo "${info} Converting $ext icon to ico..."
-					convert "$script_location/$icon_filename" -resize 256X256 "$script_location/${icon_filename%."$ext"}.ico"
-					rm "$script_location/$icon_filename"
-					icon_filename="${icon_filename%."$ext"}.ico"
+				if [[ "${base_converter_engine}" = "ffmpeg" ]]; then
+					if [[ "$ext" == "svg" ]]; then
+						echo "${info} Converting $ext icon to ico..."
+						echo "${warn} ffmpeg is not designed for converting svg to ico, the result may not be satisfactory."
+						if ffmpeg -encoders | grep svg > /dev/null; then
+							ffmpeg -hide_banner -loglevel panic -i "$script_location/$icon_filename" -width 256 -height 256 -keep_ar false -vf scale=256:256 "$script_location/${icon_filename%."$ext"}.ico"
+						else
+							error_echo "${warn} ffmpeg is not compiled with svg support, please compile it with svg support. Aborted." 22
+						fi
+						rm "$script_location/$icon_filename"
+						icon_filename="${icon_filename%."$ext"}.ico"
+					elif [[ "$ext" == "png" ]] || [[ "$ext" == "xpm" ]]; then
+						echo "${info} Converting $ext icon to ico..."
+						ffmpeg -hide_banner -loglevel panic -i "$script_location/$icon_filename" -vf scale=256:256 "$script_location/${icon_filename%."$ext"}.ico"
+						rm "$script_location/$icon_filename"
+						icon_filename="${icon_filename%."$ext"}.ico"
+					else
+						error_echo "wslusc only support creating shortcut using .png/.svg/.ico icon with ffmpeg engine. Aborted." 22
+					fi
 				else
-					error_echo "wslusc only support creating shortcut using .png/.svg/.ico icon. Aborted." 22
+					if [[ "$ext" == "svg" ]]; then
+						echo "${info} Converting $ext icon to ico..."
+						convert "$script_location/$icon_filename" -trim -background none -resize 256X256 -define 'icon:auto-resize=16,24,32,64,128,256'  "$script_location/${icon_filename%."$ext"}.ico"
+						rm "$script_location/$icon_filename"
+						icon_filename="${icon_filename%."$ext"}.ico"
+					elif [[ "$ext" == "png" ]] || [[ "$ext" == "xpm" ]]; then
+						echo "${info} Converting $ext icon to ico..."
+						convert "$script_location/$icon_filename" -resize 256X256 "$script_location/${icon_filename%."$ext"}.ico"
+						rm "$script_location/$icon_filename"
+						icon_filename="${icon_filename%."$ext"}.ico"
+					else
+						error_echo "wslusc only support creating shortcut using .png/.svg/.xpm/.ico icon with imagemagick engine. Aborted." 22
+					fi
 				fi
 			fi
 			iconpath="$script_location_win\\$icon_filename"
