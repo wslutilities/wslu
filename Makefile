@@ -63,7 +63,7 @@ res_install:
 	install -Dm 644 src/etc/conf $(DESTDIR)$(PREFIX)/share/wslu
 
 conf_install:
-	install -Dm 644 src/etc/user/conf -t $(DESTDIR)/etc/wslu
+	install -Dm 644 src/etc/user/conf -t $(DESTDIR)$(PREFIX)/etc/wslu
 
 clean:
 	rm -rf $(OUTPATH)
