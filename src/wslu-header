@@ -206,14 +206,13 @@ function interop_prefix {
 }
 
 function sysdrive_prefix {
-	win_location="$(interop_prefix)"
 	hard_reset=0
-	for pt in "$win_location"/*; do
+	for pt in "$(interop_prefix)"/*; do
 		[[ -e "$pt" ]] || break
 		if [ "$(echo "$pt" | wc -l)" -eq 1 ]; then
-			if [ -d "$win_location$pt/Windows/System32" ]; then
+			if [ -d "$pt/Windows/System32" ]; then
 				hard_reset=1
-				win_location="$pt"
+				win_location="$(echo "$pt" | sed -e 's,^'"$(interop_prefix)"'/,,')"
 				break
 			fi
 		fi 
