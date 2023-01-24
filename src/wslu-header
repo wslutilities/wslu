@@ -212,7 +212,7 @@ function sysdrive_prefix {
 		if [ "$(echo "$pt" | wc -l)" -eq 1 ]; then
 			if [ -d "$pt/Windows/System32" ]; then
 				hard_reset=1
-				win_location="$(echo "$pt" | sed -e 's,^'"$(interop_prefix)"'/,,')"
+				win_location="$(basename "$pt")"
 				break
 			fi
 		fi 
