@@ -93,6 +93,7 @@ function memory_reclaim {
 		error_echo "\`wslact memory-reclaim\` requires you to run as root. Aborted." 1
 	fi
 
+	sync
 	echo 1 > /proc/sys/vm/drop_caches
 	echo "${info} Memory Reclaimed."
 }
