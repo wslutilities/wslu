@@ -54,10 +54,14 @@ jobs:
         with:
           name: PengwinDEBs
       - run: gem install package_cloud
-      - name: deploy to the dev
+      - name: deploy to bullseye repo
         env:
           PACKAGECLOUD_TOKEN: ${{ secrets.PGW_DEV_DEPLOY_KEY }}
         run: package_cloud push whitewaterfoundry/wslu/debian/bullseye ./PengwinDEBs/*.deb --skip-errors
+      - name: deploy to bookworm 
+        env:
+          PACKAGECLOUD_TOKEN: ${{ secrets.PGW_DEV_DEPLOY_KEY }}
+        run: package_cloud push whitewaterfoundry/wslu/debian/bookworm ./PengwinDEBs/*.deb --skip-errors
   rpmobsbuild:
     name: RPM - OpenSUSE Build Service
     runs-on: ubuntu-20.04
