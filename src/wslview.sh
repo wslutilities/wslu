@@ -25,7 +25,7 @@ function add_reg_alt {
 }
 
 function url_validator {
- content=$(curl --head --silent "$*" | head -n 1)
+ content=$(curl --head --silent -g "$*" | head -n 1)
  if [ -n "$content" ]; then
  	return 0
  else

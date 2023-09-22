@@ -95,3 +95,8 @@ setup() {
   run out/wslview "https://wslutiliti.es/"
   [ "$status" -eq 0 ]
 }
+
+@test "wslview - Internet - with brackets" {
+  run out/wslview "https://www.duckduckgo.com/?q=[wslu]"
+  [ "$status" -eq 0 ]
+}
