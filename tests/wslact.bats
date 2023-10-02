@@ -60,3 +60,27 @@
   [ "${lines[0]}" = "wslact - Part of wslu, a collection of utilities for Linux Subsystem for Windows (WSL)" ]
   [ "${lines[1]}" = "Usage: wslact auto-mount [-mh]" ]
 }
+
+@test "wslact - Memory Reclamation - Help" {
+  run out/wslact memory-reclaim --help
+  [ "${lines[0]}" = "wslact - Part of wslu, a collection of utilities for Linux Subsystem for Windows (WSL)" ]
+  [ "${lines[1]}" = "Usage: wslact memory-reclaim [-h]" ]
+}
+
+@test "wslact - Memory Reclamation - Help - Alt." {
+  run out/wslact memory-reclaim -h
+  [ "${lines[0]}" = "wslact - Part of wslu, a collection of utilities for Linux Subsystem for Windows (WSL)" ]
+  [ "${lines[1]}" = "Usage: wslact memory-reclaim [-h]" ]
+}
+
+@test "wslact - Memory Reclamation - short form - Help" {
+  run out/wslact mr --help
+  [ "${lines[0]}" = "wslact - Part of wslu, a collection of utilities for Linux Subsystem for Windows (WSL)" ]
+  [ "${lines[1]}" = "Usage: wslact memory-reclaim [-h]" ]
+}
+
+@test "wslact - Memory Reclamation - short form - Help - Alt." {
+  run out/wslact mr -h
+  [ "${lines[0]}" = "wslact - Part of wslu, a collection of utilities for Linux Subsystem for Windows (WSL)" ]
+  [ "${lines[1]}" = "Usage: wslact memory-reclaim [-h]" ]
+}
