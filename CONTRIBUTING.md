@@ -2,6 +2,12 @@
 
 We love pull requests from everyone. By participating in this project, you agree to abide by [Code of Conduct](CODE_OF_CONDUCT.md).
 
+> **ATTENTION!**
+> 
+> Built-in versions of wslu in Ubuntu are no longer supported by me.
+>
+> If you have problems, please check whther you are using the [PPA version of wslu](https://launchpad.net/~wslutilities/+archive/ubuntu/wslu). If not, please report to the Ubuntu WSL team; However, the PPA version of wslu will address most issue that come from the built-in version.
+
 ## Code contributions
 
 ### Setup
