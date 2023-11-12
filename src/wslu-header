@@ -30,6 +30,12 @@ wslu_prefix="PREFIXPLACEHOLDER"
 LC_ALL=C
 LANG=C
 
+# current state location
+wslu_state_dir=${XDG_STATE_HOME:-$HOME/.local/state}/wslu
+if [ ! -d "$wslu_state_dir" ]; then
+	mkdir -p "$wslu_state_dir"
+fi
+
 # prevent bash -x
 set +x
 
@@ -262,7 +268,7 @@ function chcp_com {
 function winps_exec {
 	debug_echo "winps_exec: called with command $*"
 	wslutmpbuild="$(wslu_get_build)"
-	cp="$(cat ~/.config/wslu/oemcp)"
+	cp="$(cat "${wslu_state_dir}"/oemcp)"
 	[ "$wslutmpbuild" -ge $BN_OCT_NINETEEN ] || chcp_com "$cp"
 	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::InputEncoding = [System.Text.Encoding]::GetEncoding($cp); $*"
 	EXIT_STATUS=$?
@@ -294,32 +300,32 @@ function baseexec_gen {
 			debug_echo "baseexec_gen: base_exe_folder_path: $wslu_base_exec_folder_path"
 			if find "$wslu_base_exec_folder_path" -name "*.exe" -print -quit &>/dev/null; then
 				debug_echo "baseexec_gen: found exe in wslu_base_exec_folder_path"
-				wslpath -w "$(find "$wslu_base_exec_folder_path" -name "*.exe" -print -quit)" > ~/.config/wslu/baseexec
+				wslpath -w "$(find "$wslu_base_exec_folder_path" -name "*.exe" -print -quit)" > "${wslu_state_dir}"/baseexec
 			else
 				debug_echo "baseexec_gen: do not have base exec in the folder; use fallback"
-				echo "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
+				echo "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")\\Windows\\System32\\wsl.exe" > "${wslu_state_dir}"/baseexec
 			fi
 		else
 			debug_echo "baseexec_gen: imported distro"
 			# if it is imported distro
-			echo "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
+			echo "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")Windows\\System32\\wsl.exe" > "${wslu_state_dir}"/baseexec
 		fi
 	else
 		debug_echo "baseexec_gen: fallback mode"
 		# older version fallback.
-		echo "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")\\Windows\\System32\\wsl.exe" > ~/.config/wslu/baseexec
+		echo "$(wslpath -w "$(interop_prefix)$(sysdrive_prefix)")\\Windows\\System32\\wsl.exe" > "${wslu_state_dir}"/baseexec
 	fi
 }
 
 function var_gen {
 	debug_echo "var_gen: called"
-	date +"%s" > ~/.config/wslu/triggered_time
+	date +"%s" > "${wslu_state_dir}"/triggered_time
 
-	rm -f ~/.config/wslu/baseexec
-	rm -f ~/.config/wslu/oemcp
+	rm -f "${wslu_state_dir}"/baseexec
+	rm -f "${wslu_state_dir}"/oemcp
 
 	# generate oem codepage
-	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*' > ~/.config/wslu/oemcp
+	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/reg.exe query "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage" /v OEMCP 2>&1 | sed -n 3p | sed -e 's|\r||g' | grep -o '[[:digit:]]*' > "${wslu_state_dir}"/oemcp
 	# generate base exe location
 	baseexec_gen
 
@@ -393,15 +399,15 @@ fi
 
 # This gets tirggered then:
 # 1. if it's the first time the script is triggered, i.e.,
-#    ~/.config/wslu/triggered time
+#    ${wslu_state_dir}/triggered time
 # 2. if update_time is also not present, i.e.,
 #    badly installed packages or installed via install script
-if [ ! -f ~/.config/wslu/triggered_time ] || [ ! -f /usr/share/wslu/updated_time ]; then
+if [ ! -f "${wslu_state_dir}"/triggered_time ] || [ ! -f /usr/share/wslu/updated_time ]; then
 	debug_echo "first run or update_time not present; calling var_gen"
 	var_gen
 # This gets triggered when:
 #    installed time is larger than the last triggered time
-elif [ "$(cat ~/.config/wslu/triggered_time)" -lt "$(cat /usr/share/wslu/updated_time)" ]; then
+elif [ "$(cat "${wslu_state_dir}"/triggered_time)" -lt "$(cat /usr/share/wslu/updated_time)" ]; then
 	debug_echo "upgraded package; calling var_gen"
 	var_gen
 fi
