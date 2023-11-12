@@ -25,6 +25,7 @@ wslu_util_name=$(basename "$wslu_util_fullpath")
 # Version
 wslu_version=VERSIONPLACEHOLDER
 wslu_prefix="PREFIXPLACEHOLDER"
+wslu_dest_dir="DESTDIRPLACEHOLDER"
 
 # Speed up script by using unicode.
 LC_ALL=C
@@ -150,20 +151,20 @@ function error_echo {
 }
 
 # source default config
-if [ -f "${wslu_prefix}/share/wslu/conf" ]; then
+if [ -f "${wslu_dest_dir}${wslu_prefix}/share/wslu/conf" ]; then
 	debug_echo "source default setting"
-	source "${wslu_prefix}/share/wslu/conf"
+	source "${wslu_dest_dir}${wslu_prefix}/share/wslu/conf"
 fi
 
 # source user-defined config
-if [ -f "${wslu_prefix}/share/wslu/custom.conf" ]; then
-	debug_echo "${wslu_prefix}/share/wslu/custom.conf found, sourcing"
-	source "${wslu_prefix}/share/wslu/custom.conf"
+if [ -f "${wslu_dest_dir}${wslu_prefix}/share/wslu/custom.conf" ]; then
+	debug_echo "${wslu_dest_dir}${wslu_prefix}/share/wslu/custom.conf found, sourcing"
+	source "${wslu_dest_dir}${wslu_prefix}/share/wslu/custom.conf"
 fi
 
-if [ -f "/etc/wslu/conf" ]; then
-	debug_echo "/etc/wslu/conf found, sourcing"
-	source "/etc/wslu/conf"
+if [ -f "${wslu_dest_dir}/etc/wslu/conf" ]; then
+	debug_echo "${wslu_dest_dir}/etc/wslu/conf found, sourcing"
+	source "${wslu_dest_dir}/etc/wslu/conf"
 fi
 
 if [ -f "/etc/wslu/custom.conf" ]; then
