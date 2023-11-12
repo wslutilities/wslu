@@ -1,7 +1,8 @@
 # shellcheck shell=bash
 lname=""
+skip_validation_check=${WSLVIEW_SKIP_VALIDATION_CHECK:-1}
 
-help_short="$0 [-hvur]\n$0 [-E ENGINE] LINK/FILE"
+help_short="$0 [-hsvur]\n$0 [-E ENGINE] LINK/FILE"
 
 function del_reg_alt {
 	if [ "$distro" == "archlinux" ] || [ "$distro" == "alpine" ]; then
@@ -36,6 +37,7 @@ function url_validator {
 
 while [ "$1" != "" ]; do
 	case "$1" in
+		-s|--skip-validation-check) skip_validation_check=0; shift;;
 		-r|--reg-as-browser) add_reg_alt;;
 		-u|--unreg-as-browser) del_reg_alt;;
 		-h|--help) help "$0" "$help_short"; exit;;
@@ -68,7 +70,12 @@ if [[ "$lname" != "" ]]; then
 	fi
 	debug_echo "properfile_full_path: $properfile_full_path"
 	debug_echo "validating whether if it is a link"
-	if (url_validator "$lname") && [ -z "$properfile_full_path" ]; then
+	is_valid_url=$(url_validator "$lname")
+	if [ "$skip_validation_check" -eq 0 ]; then
+		debug_echo "Skipping validation check"
+		is_valid_url=0
+	fi
+	if [[ "$is_valid_url" -eq 0 ]] && [ -z "$properfile_full_path" ]; then
 		debug_echo "It is a link"
 		cmd="\"$lname\""
 	elif [[ "$lname" =~ ^file:\/\/(\/)+[A-Za-z]\:.*$ ]] || [[ "$lname" =~ ^[A-Za-z]\:.*$ ]]; then

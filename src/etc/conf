@@ -67,3 +67,6 @@ WSLVAR_DEFAULT_VARTYPE=1
 #    cmd: use cmd.exe to start website/folder/file
 #    cmd_explorer: use explorer.exe via cmd.exe to start website/folder/file
 WSLVIEW_DEFAULT_ENGINE="powershell"
+
+# wslview: whether to skip validation check. Default is 1, which is not skipping. Can be either `0` or `1`.
+WSLVIEW_SKIP_VALIDATION_CHECK=1

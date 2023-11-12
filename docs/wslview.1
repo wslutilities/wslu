@@ -5,7 +5,7 @@
 - Component of WSL Utilities
 .SH SYNOPSIS
 .B wslview, wview, wslstart, wstart
-.RB [ \-hvur ]
+.RB [ \-hsvur ]
 .PP
 .B wslview, wview, wslstart, wstart
 .I LINK/FILE
@@ -18,6 +18,9 @@ print a simple help.
 .TP
 .B -v, --version
 print current version.
+.TP
+.B -s, --skip-validation-check
+skip url validation check.
 .TP
 .B -u, --unreg-as-browser
 remove \fBwslview\fR as the default WSL web browser.
@@ -35,6 +38,9 @@ cmd: use cmd.exe to start website/folder/file
 cmd_explorer: use explorer.exe via cmd.exe to start website/folder/file
 .in
 .fi
+.TP
+.B WSLVIEW_SKIP_VALIDATION_CHECK
+whether to skip validation check. Default is 1, which is not skipping. Can be either `0` or `1`.
 .SH AUTHOR
 Created by Patrick Wu <me@patrickwu.space>
 .SH REPORTING BUGS
