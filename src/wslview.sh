@@ -4,6 +4,8 @@ skip_validation_check=${WSLVIEW_SKIP_VALIDATION_CHECK:-1}
 
 help_short="$0 [-hsvur]\n$0 [-E ENGINE] LINK/FILE"
 
+function fileprotocoldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
+
 function del_reg_alt {
 	if [ "$distro" == "archlinux" ] || [ "$distro" == "alpine" ]; then
 		error_echo "Unsupported action for this distro. Aborted." 34
@@ -55,6 +57,8 @@ if [[ "$lname" != "" ]]; then
 	# file:/// protocol used in linux
 	if [[ "$lname" =~ ^file:\/\/.*$ ]] && [[ ! "$lname" =~ ^file:\/\/(\/)+[A-Za-z]\:.*$ ]]; then
 		debug_echo "Received file:/// protocol used in linux"
+		# convert before set
+		lname="$(fileprotocoldecode "$lname")"
 		[ "$wslutmpbuild" -ge "$BN_MAY_NINETEEN" ] || error_echo "This protocol is not supported before version 1903." 34
 		properfile_full_path="$(readlink -f "${lname//file:\/\//}")"
 	# Linux absolute path
