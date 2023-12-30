@@ -2,7 +2,7 @@
 lname=""
 skip_validation_check=${WSLVIEW_SKIP_VALIDATION_CHECK:-1}
 
-help_short="$0 [-hsvur]\n$0 [-E ENGINE] LINK/FILE"
+help_short="$0 [-ehsvurE]\n$0 [-E ENGINE] LINK/FILE"
 
 function fileprotocoldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
 
@@ -27,6 +27,30 @@ function add_reg_alt {
 	fi
 }
 
+function add_browser_export {
+	# find all possible shell rc file and append export BROWSER="/usr/bin/wslview" at the end; if found existing export, comment it out
+	# Define the shell rc files to search
+	rc_files=(".bashrc" ".zshrc" ".kshrc" ".cshrc" ".tcshrc")
+
+	# Loop over each file
+	for rc_file in "${rc_files[@]}"; do
+		# Check if the file exists
+		if [ -f "$HOME/$rc_file" ]; then
+			echo "Processing $rc_file..."
+
+			# Comment out existing BROWSER export
+			if grep -q "export BROWSER=" "$HOME/$rc_file"; then
+				echo "Commenting out existing BROWSER export in $rc_file..."
+				$SED -i 's/^export BROWSER=/#export BROWSER=/' "$HOME/$rc_file"
+			fi
+
+			# Append new BROWSER export
+			echo "Appending new BROWSER export to $rc_file..."
+			echo 'export BROWSER="/usr/bin/wslview"' >> "$HOME/$rc_file"
+		fi
+	done
+}
+
 function url_validator {
  content=$(curl --head --silent -g "$*" | head -n 1)
  if [ -n "$content" ]; then
@@ -42,6 +66,7 @@ while [ "$1" != "" ]; do
 		-s|--skip-validation-check) skip_validation_check=0; shift;;
 		-r|--reg-as-browser) add_reg_alt;;
 		-u|--unreg-as-browser) del_reg_alt;;
+		-e|--export-as-browser) add_browser_export;;
 		-h|--help) help "$0" "$help_short"; exit;;
 		-v|--version) version; exit;;
 		-E|--engine) shift; WSLVIEW_DEFAULT_ENGINE="$1"; shift;;
