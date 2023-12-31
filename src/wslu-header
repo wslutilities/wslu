@@ -40,7 +40,7 @@ fi
 # prevent bash -x
 set +x
 
-bash_version_major=$(echo $BASH_VERSION | cut -d'.' -f1)
+bash_version_major=$(echo "$BASH_VERSION" | cut -d'.' -f1)
 
 # pipeline content to pipe... if it is wslclip
 if [[ "$wslu_util_name" == "wslclip" ]]; then
@@ -153,7 +153,7 @@ function error_echo {
 }
 
 # Check if the major version number is greater than 5
-if [ $(expr $bash_version_major \> 5) -ne 1 ]; then
+if [ "$(expr "$bash_version_major" \>= 5)" -ne 1 ]; then
     error_echo "You should use Bash 5 and higher; exiting." 1
 fi
 
