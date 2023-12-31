@@ -275,13 +275,19 @@ function chcp_com {
 
 function winps_exec {
 	debug_echo "winps_exec: called with command $*"
-	wslutmpbuild="$(wslu_get_build)"
-	cp="$(cat "${wslu_state_dir}"/oemcp)"
-	[ "$wslutmpbuild" -ge $BN_OCT_NINETEEN ] || chcp_com "$cp"
-	"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::InputEncoding = [System.Text.Encoding]::GetEncoding($cp); $*"
-	EXIT_STATUS=$?
-	[ "$wslutmpbuild" -ge $BN_OCT_NINETEEN ] || chcp_com 65001
-	return $EXIT_STATUS
+	if [[ "$WSLU_POWERSHELL_CHCP_WORKAROUND" == "true" ]]; then
+		wslutmpbuild="$(wslu_get_build)"
+		cp="$(cat "${wslu_state_dir}"/oemcp)"
+		[ "$wslutmpbuild" -ge $BN_OCT_NINETEEN ] || chcp_com "$cp"
+		"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; [Console]::InputEncoding = [System.Text.Encoding]::GetEncoding($cp); $*"
+		EXIT_STATUS=$?
+		[ "$wslutmpbuild" -ge $BN_OCT_NINETEEN ] || chcp_com 65001
+		return $EXIT_STATUS
+	else
+		"$(interop_prefix)$(sysdrive_prefix)"/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "$*"
+		EXIT_STATUS=$?
+		return $EXIT_STATUS
+	fi
 }
 
 function cmd_exec {

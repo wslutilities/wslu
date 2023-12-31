@@ -19,6 +19,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# wslu: control whether to enable the chcp workaround for powershell. 
+# By default it is true; if you encounter any PowerShell issues, you can try to disable it.
+WSLU_POWERSHELL_CHCP_WORKAROUND=true
+
 # wslfetch: the sections of info from wslsys to show in wslfetch.
 # Available options: 
 #    windows-install-date
