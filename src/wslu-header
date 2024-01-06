@@ -20,7 +20,7 @@
 
 # Current utility
 wslu_util_fullpath="$0"
-wslu_util_name=$(basename "$wslu_util_fullpath")
+wslu_util_name="${wslu_util_fullpath##*/}"
 
 # Version
 wslu_version=VERSIONPLACEHOLDER
@@ -226,7 +226,8 @@ function sysdrive_prefix {
 		if [ "$(echo "$pt" | wc -l)" -eq 1 ]; then
 			if [ -d "$pt/Windows/System32" ]; then
 				hard_reset=1
-				win_location="$(basename "$pt")"
+				pt=${pt%/}
+				win_location="${pt##*/}"
 				break
 			fi
 		fi 
