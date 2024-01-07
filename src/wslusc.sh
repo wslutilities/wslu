@@ -9,7 +9,7 @@ base_converter_engine=${WSLUSC_BASE_CONVERTER_ENGINE:-"imagemagick"}
 
 help_short="wslusc [-IsgN] [-d SHORTCUT_FILE] [-e PATH] [-n NAME] [-i FILE] COMMAND\nwslusc [-hv]"
 
-PARSED_ARGUMENTS=$(getopt -a -n "$(basename "$wslu_util_name")" -o hvd:Ie:n:i:gNs --long help,version,shortcut-debug:,interactive,path:,name:,icon:,gui,native,smart-icon -- "$@")
+PARSED_ARGUMENTS=$(getopt -a -n "${wslu_util_name##*/}" -o hvd:Ie:n:i:gNs --long help,version,shortcut-debug:,interactive,path:,name:,icon:,gui,native,smart-icon -- "$@")
 #shellcheck disable=SC2181
 [ "$?" != "0" ] && help "$wslu_util_name" "$help_short"
 
@@ -93,7 +93,7 @@ if [[ "$cname_header" != "" ]]; then
 	[ -z "$cname_header" ] && error_echo "Bad or invalid input; Aborting" 30
 
 	# handling no name given case
-	new_cname=$(basename "$cname_header")
+	new_cname="${cname_header##*/}"
 	# handling name given case
 	if [[ "$customname" != "" ]]; then
 		new_cname=$customname
@@ -114,7 +114,7 @@ if [[ "$cname_header" != "" ]]; then
 		#handling smart icon first; always first 
 		if [[ "$WSLUSC_SMART_ICON_DETECTION" == "true" ]]; then
 			if wslpy_check; then
-				tmp_fcname="$(basename "$cname_header")"
+				tmp_fcname="${cname_header##*/}"
 				iconpath="$(python3 -c "import wslpy.__internal__; print(wslpy.__internal__.find_icon(\"$tmp_fcname\"))")"
 				echo "${info} Icon Detector found icon $tmp_fcname at: $iconpath"
 			else
@@ -123,7 +123,7 @@ if [[ "$cname_header" != "" ]]; then
 		fi
 
 		# normal detection section
-		icon_filename="$(basename "$iconpath")"
+		icon_filename="${iconpath##*/}"
 		ext="${iconpath##*.}"
 
 		if [[ ! -f $iconpath ]]; then
