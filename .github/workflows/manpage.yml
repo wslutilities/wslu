@@ -17,11 +17,11 @@ jobs:
         run: bash -c "for x in docs/*; do groff \$x -mandoc -Thtml > \${x%.*}.html; done"
       - name: deploy manpages to website
         env:
-          GH_TOKEN: ${{ secrets.GIT_DEPLOY_KEY }}
+          GH_TOKEN: ${{ secrets.GITLAB_DEPLOY_KEY }}
         run: |
           git config --global user.email "me@patrickwu.space"
           git config --global user.name "Jinming Wu, Patrick"
-          git clone --depth 1 https://patrick330602:$GH_TOKEN@github.com/wslutilities/wslutilities.github.io.git website
+          git clone --depth 1 https://patrick:$GH_TOKEN@git.wedotstud.io/wslu/website website
           bash -x extras/scripts/manpage_deploy.bash
           git --git-dir=./website/.git --work-tree=./website add -A
           git --git-dir=./website/.git --work-tree=./website commit -m "Manpage update"
