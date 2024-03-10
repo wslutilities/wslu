@@ -98,11 +98,12 @@ if [[ "$lname" != "" ]]; then
 		properfile_full_path="$(readlink -f "${lname}")"
 	fi
 	debug_echo "properfile_full_path: $properfile_full_path"
-	debug_echo "validating whether if it is a link"
-	is_valid_url=$(url_validator "$lname")
 	if [ "$skip_validation_check" -eq 0 ]; then
 		debug_echo "Skipping validation check"
 		is_valid_url=0
+  	else
+   		debug_echo "Validating whether if it is a link"
+   		is_valid_url=$(url_validator "$lname")
 	fi
 	if [[ "$is_valid_url" -eq 0 ]] && [ -z "$properfile_full_path" ]; then
 		debug_echo "It is a link"
