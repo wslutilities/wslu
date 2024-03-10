@@ -2,6 +2,12 @@
 
 We love pull requests from everyone. By participating in this project, you agree to abide by [Code of Conduct](CODE_OF_CONDUCT.md).
 
+> **ATTENTION!**
+> 
+> Built-in versions of wslu in Ubuntu are no longer supported by me.
+>
+> If you have problems, please check whther you are using the [PPA version of wslu](https://launchpad.net/~wslutilities/+archive/ubuntu/wslu). If not, please report to the Ubuntu WSL team; However, the PPA version of wslu will address most issue that come from the built-in version.
+
 ## Code contributions
 
 ### Setup
@@ -83,6 +89,7 @@ For contributing, there are several functions and variables built-in the header 
   - `wslu_util_name` - current utility name
   - `wslu_version` - wslu version, written by `VERSION`
   - `wslu_prefix` - the location `wslu` installed to, written by the `PREFIX` during the make.
+  - `wslu_dest_dir` - the location `wslu` installed to, written by the `DESTDIR` during the make.
   - `wslu_debug` - the variable used for calling utility across. This will allow calling the `--debug` option for other `wslu` utilities inside script easier.
 - Formatting: `black`, `red`, `green`, `brown`, `blue`, `purple`, `cyan`, `yellow`, `white`, `dark_gray`, `light_red`, `light_green`, `light_blue`, `light_purple`, `light_cyan`, `light_gray`, `orange`, `light_orange`, `deep_purple`, `bold`, `reset`
 - Indicator: `info`, `input_info`, `error`, `warn`

@@ -52,7 +52,7 @@ jobs:
     name: Pengwin Deploying
     needs: pgwbuild
     runs-on: ubuntu-20.04
-    container: circleci/ruby:2.3-jessie
+    container: cimg/ruby:2.7
     steps:
       - name: Retrive package for deployment
         uses: actions/download-artifact@v1

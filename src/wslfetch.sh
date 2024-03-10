@@ -4,7 +4,7 @@ is_generic=0
 
 help_short="wslfetch [-hvcg] [-t THEME] [-o OPTIONS]"
 
-PARSED_ARGUMENTS=$(getopt -a -n "$(basename "$wslu_util_name")" -o hvtcgo: --long help,version,theme,colorbar,generic,options: -- "$@")
+PARSED_ARGUMENTS=$(getopt -a -n "${wslu_util_name##*/}" -o hvtcgo: --long help,version,theme,colorbar,generic,options: -- "$@")
 #shellcheck disable=SC2181
 [ "$?" != "0" ] && help "$wslu_util_name" "$help_short"
 

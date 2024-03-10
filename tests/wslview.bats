@@ -15,14 +15,14 @@ setup() {
 @test "wslview - Help" {
   run out/wslview --help
   [ "${lines[0]}" = "wslview - Part of wslu, a collection of utilities for Linux Subsystem for Windows (WSL)" ]
-  [[ "${lines[1]}" =~ ^Usage\:\ .*wslview\ \[\-hvur\]$ ]]
+  [[ "${lines[1]}" =~ ^Usage\:\ .*wslview\ \[\-ehsvurE\]$ ]]
   [[ "${lines[2]}" =~ ^.*wslview\ \[\-E\ ENGINE\]\ LINK/FILE$ ]]
 }
 
 @test "wslview - Help - Alt." {
   run out/wslview -h
   [ "${lines[0]}" = "wslview - Part of wslu, a collection of utilities for Linux Subsystem for Windows (WSL)" ]
-  [[ "${lines[1]}" =~ ^Usage\:\ .*wslview\ \[\-hvur\]$ ]]
+  [[ "${lines[1]}" =~ ^Usage\:\ .*wslview\ \[\-ehsvurE\]$ ]]
   [[ "${lines[2]}" =~ ^.*wslview\ \[\-E\ ENGINE\]\ LINK/FILE$ ]]
 }
 
@@ -93,5 +93,10 @@ setup() {
 
 @test "wslview - Internet - https" {
   run out/wslview "https://wslutiliti.es/"
+  [ "$status" -eq 0 ]
+}
+
+@test "wslview - Internet - with brackets" {
+  run out/wslview "https://www.duckduckgo.com/?q=[wslu]"
   [ "$status" -eq 0 ]
 }

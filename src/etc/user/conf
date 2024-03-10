@@ -11,6 +11,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# wslu: control whether to enable the chcp workaround for powershell. 
+# By default it is true; if you encounter any PowerShell issues, you can try to disable it.
+# WSLU_POWERSHELL_CHCP_WORKAROUND=true
+
 # wslfetch: the sections of info from wslsys to show in wslfetch.
 # Available options: 
 #    windows-install-date
@@ -59,3 +63,6 @@
 #    cmd: use cmd.exe to start website/folder/file
 #    cmd_explorer: use explorer.exe via cmd.exe to start website/folder/file
 # WSLVIEW_DEFAULT_ENGINE="powershell"
+
+# wslview: whether to skip validation check. Default is 1, which is not skipping. Can be either `0` or `1`.
+# WSLVIEW_SKIP_VALIDATION_CHECK=1

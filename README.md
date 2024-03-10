@@ -6,10 +6,15 @@
 
 [![GitHub license](https://img.shields.io/github/license/wslutilities/wslu?style=flat-square&label=license&color=blue&logo=github)](https://github.com/wslutilities/wslu/blob/master/LICENSE)
 [![GitHub (pre-)release](https://img.shields.io/github/v/release/wslutilities/wslu?include_prereleases&logo=github&style=flat-square)](https://github.com/wslutilities/wslu)
-[![Twitter Follow](https://img.shields.io/twitter/follow/wslutilities?style=flat-square&logo=twitter&color=1DA1F2&label=follow)](https://twitter.com/wslutilities)
 [![Mastodon Follow](https://img.shields.io/mastodon/follow/108802672885079993?color=6364FF&domain=https%3A%2F%2Ffosstodon.org&label=follow&logo=mastodon&logoColor=6364FF&style=flat-square)](https://fosstodon.org/@wslutilities)
 
 </div>
+
+> **ATTENTION!**
+> 
+> Built-in versions of wslu in Ubuntu are no longer supported by me.
+>
+> If you have problems, please check whther you are using the [PPA version of wslu](https://launchpad.net/~wslutilities/+archive/ubuntu/wslu). If not, please report to the Ubuntu WSL team; However, the PPA version of wslu will address most issue that come from the built-in version.
 
 This is a collection of utilities for the Linux Subsystem for Windows (WSL), such as converting Linux paths to Windows paths or creating  Linux application shortcuts on the Windows Desktop.
 
