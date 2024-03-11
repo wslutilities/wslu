@@ -192,7 +192,7 @@ fi
 
 function help {
 	app_name=$wslu_util_name
-	echo -e "$app_name - Part of wslu, a collection of utilities for Linux Subsystem for Windows (WSL)
+	echo -e "$app_name - Part of wslu, a collection of utilities for Windows Subsystem for Linux (WSL)
 Usage: $2
 
 For more help for $app_name, please use the command \`man $app_name\` or visit the following site: https://wslutiliti.es/wslu/man/$app_name.html.

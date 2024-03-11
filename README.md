@@ -16,7 +16,7 @@
 >
 > If you have problems, please check whther you are using the [PPA version of wslu](https://launchpad.net/~wslutilities/+archive/ubuntu/wslu). If not, please report to the Ubuntu WSL team; However, the PPA version of wslu will address most issue that come from the built-in version.
 
-This is a collection of utilities for the Linux Subsystem for Windows (WSL), such as converting Linux paths to Windows paths or creating  Linux application shortcuts on the Windows Desktop.
+This is a collection of utilities for the Windows Subsystem for Linux (WSL), such as converting Linux paths to Windows paths or creating  Linux application shortcuts on the Windows Desktop.
 
  - Requires at least Windows 10 Creators Update;
  - Some of the features require a higher version of Windows;
