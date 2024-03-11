@@ -1,5 +1,5 @@
 %define packager       Jinming Wu, Patrick <me@patrickwu.space>
-Summary: A collection of utilities for the Linux Subsystem for Windows
+Summary: A collection of utilities for the Windows Subsystem for Linux
 Name: wslu
 Version: BUILDVERPLACEHOLDER
 Release: RELVERPLACEHOLDER
