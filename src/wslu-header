@@ -40,7 +40,9 @@ fi
 # prevent bash -x
 set +x
 
-bash_version_major=$(echo "$BASH_VERSION" | cut -d'.' -f1)
+bash_version_full=$(bash --version | head -n 1)
+bash_version_major=$(echo "$bash_version_full" | cut -d ' ' -f 4 | cut -d '.' -f 1)
+bash_version_minor=$(echo "$bash_version_full" | cut -d ' ' -f 4 | cut -d '.' -f 2)
 
 # pipeline content to pipe... if it is wslclip
 if [[ "$wslu_util_name" == "wslclip" ]]; then
@@ -152,10 +154,11 @@ function error_echo {
 	exit "$2"
 }
 
-# Check if the major version number is greater than 5
-if [ "$(expr "$bash_version_major" \>= 5)" -ne 1 ]; then
-    error_echo "You should use Bash 5 and higher; exiting." 1
+# Check if the version number of bash is greater or equal to 4.4
+if [ "$bash_version_major" -lt 4 ] || { [ "$bash_version_major" -eq 4 ] && [ "$bash_version_minor" -lt 4 ]; }; then
+	error_echo "Bash version is too old. Please upgrade to 4.4 or later." 1
 fi
+
 
 # source default config
 if [ -f "${wslu_dest_dir}${wslu_prefix}/share/wslu/conf" ]; then
