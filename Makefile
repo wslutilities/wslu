@@ -33,7 +33,9 @@ install: doc_install res_install conf_install
 
 uninstall: 
 	for f in $(INSTEDEXES); do \
-		rm -f $$f; \
+		if [ `basename $$f` != "wslpath" ]; then \
+			rm -f $$f; \
+		fi; \
 	done
 	for f in $(INSTEDMANOS); do \
 		rm -f $$f; \
