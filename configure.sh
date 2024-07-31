@@ -67,13 +67,6 @@ case $distro in
 esac
 }
 
-function main_inst {
-env_check
-pkg_inst
-make
-sudo make DESTDIR=/usr install
-}
-
 function general_build_prep {
 	sed -i s/VERSIONPLACEHOLDER/"$(cat ./VERSION)"/g ./src/wslu-header
 }
@@ -117,7 +110,6 @@ for args; do
 		--deb) deb_build_prep $2; exit;;
 		-e|--env) env_check; exit;;
 		-P|--pkg) pkg_inst; exit;;
-		-i|--install) main_inst; exit;;
 		*) exit 1;;
 	esac
 done
