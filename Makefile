@@ -33,7 +33,7 @@ install: doc_install res_install conf_install
 
 uninstall: 
 	for f in $(INSTEDEXES); do \
-		if [ `basename $$f` != "wslpath" ]; then \
+		if [ `basename $$f` != "wslpath" ] && [ `basename $$f` != "wslinfo" ]; then \
 			rm -f $$f; \
 		fi; \
 	done
