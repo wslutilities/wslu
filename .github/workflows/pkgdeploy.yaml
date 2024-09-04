@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-20.04
     needs: tests
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq
@@ -123,7 +123,7 @@ jobs:
     needs: tests
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq

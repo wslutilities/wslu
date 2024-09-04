@@ -10,7 +10,7 @@ jobs:
     name: Debian
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq
@@ -31,7 +31,7 @@ jobs:
     name: Pengwin
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq
@@ -67,7 +67,7 @@ jobs:
     name: RPM - OpenSUSE Build Service
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq
@@ -122,7 +122,7 @@ jobs:
     name: RPM - Cool Other Package Repo
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq
