@@ -55,7 +55,7 @@ jobs:
     container: cimg/ruby:2.7
     steps:
       - name: Retrive package for deployment
-        uses: actions/download-artifact@4.1.7
+        uses: actions/download-artifact@v4
         with:
           name: PengwinDEBs
       - run: gem install package_cloud
@@ -98,7 +98,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: Retrive package for deployment
-          uses: actions/download-artifact@4.1.7
+          uses: actions/download-artifact@v4
           with:
             name: OBS_RES
         - name: Install Pre-requisites
@@ -155,7 +155,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: Retrive package for deployment
-          uses: actions/download-artifact@4.1.7
+          uses: actions/download-artifact@v4
           with:
             name: COPRRPMs
         - name: Install API token for copr-cli
