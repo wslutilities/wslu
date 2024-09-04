@@ -58,6 +58,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: PengwinDEBs
+          path: PengwinDEBs
       - run: gem install package_cloud
       - name: deploy to the dev
         env:
@@ -101,6 +102,7 @@ jobs:
           uses: actions/download-artifact@v4
           with:
             name: OBS_RES
+            path: OBS_RES
         - name: Install Pre-requisites
           run: |
             sudo apt-get update -qq
@@ -158,6 +160,7 @@ jobs:
           uses: actions/download-artifact@v4
           with:
             name: COPRRPMs
+            path: COPRRPMs
         - name: Install API token for copr-cli
           env:
             API_TOKEN_CONTENT: ${{ secrets.COPR_API_TOKEN }}
