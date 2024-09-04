@@ -23,7 +23,7 @@ jobs:
           cd ../
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: DebianDEBs
           path: pkgs
@@ -44,7 +44,7 @@ jobs:
           cd ../
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: PengwinDEBs
           path: pkgs
@@ -88,7 +88,7 @@ jobs:
           mkdir obs_res
           cp ../wslu-*.tar.gz obs_res
           cp ../wslu-canary.spec obs_res
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: OBS_RES
           path: obs_res
@@ -144,7 +144,7 @@ jobs:
           cp SRPMS/* compiled_rpms
           cp RPMS/noarch/* compiled_rpms
         #uses: robertdebock/rpmbuild-action@1.1.1
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: COPRRPMs
           path: compiled_rpms

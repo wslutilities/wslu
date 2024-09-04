@@ -21,7 +21,7 @@ jobs:
           git clone https://github.com/wslutilities/wslu-debian builder
           cd ./builder
           bash ./build.sh latest debian buster
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: DebianDEBs
           path: builder/pkgs
@@ -39,7 +39,7 @@ jobs:
           git clone https://github.com/wslutilities/wslu-debian builder
           cd ./builder
           bash ./build.sh latest pengwin
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: PengwinDEBs
           path: builder/pkgs
@@ -88,7 +88,7 @@ jobs:
           mkdir obs_res
           cp ../wslu-*.tar.gz obs_res
           cp ../wslu.spec obs_res
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: OBS_RES
           path: obs_res
@@ -144,7 +144,7 @@ jobs:
           mkdir compiled_rpms
           cp SRPMS/* compiled_rpms
           cp RPMS/noarch/* compiled_rpms
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: COPRRPMs
           path: compiled_rpms
