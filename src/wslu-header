@@ -78,10 +78,14 @@ if __wsl_conf_read interop enabled | grep false >/dev/null; then
 	2. under [interop] section, set enabled to true;
 	3. restart your distribution."
 	exit 1
-elif grep ^disabled /proc/sys/fs/binfmt_misc/WSLInterop >/dev/null; then
-	 echo -e "WSL Interopability is temporarily disabled and WSL Utilities won't work. Please enable it by:
-	# echo 1 > /proc/sys/fs/binfmt_misc/WSLInterop"
-	exit 1
+elif [ -f /proc/sys/fs/binfmt_misc/WSLInterop ] && grep -q '^disabled' /proc/sys/fs/binfmt_misc/WSLInterop; then
+    echo "WSL Interopability is temporarily disabled and WSL Utilities won't work. Please enable it by:
+    # echo 1 > /proc/sys/fs/binfmt_misc/WSLInterop"
+    exit 1
+elif [ -f /proc/sys/fs/binfmt_misc/WSLInterop-late ] && grep -q '^disabled' /proc/sys/fs/binfmt_misc/WSLInterop-late; then
+    echo "WSL Interopability is temporarily disabled and WSL Utilities won't work. Please enable it by:
+    # echo 1 > /proc/sys/fs/binfmt_misc/WSLInterop-late"
+    exit 1
 fi
 
 # when --verbose, verbose; when --debug, debug.
