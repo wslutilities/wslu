@@ -10,7 +10,7 @@ jobs:
     name: Debian
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq
@@ -23,7 +23,7 @@ jobs:
           cd ../
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: DebianDEBs
           path: pkgs
@@ -31,7 +31,7 @@ jobs:
     name: Pengwin
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq
@@ -44,7 +44,7 @@ jobs:
           cd ../
           mkdir -p ./pkgs
           mv ../wsl*.* ./pkgs
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: PengwinDEBs
           path: pkgs
@@ -55,9 +55,10 @@ jobs:
     container: cimg/ruby:2.7
     steps:
       - name: Retrive package for deployment
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v4
         with:
           name: PengwinDEBs
+          path: PengwinDEBs
       - run: gem install package_cloud
       - name: deploy to the dev
         env:
@@ -67,7 +68,7 @@ jobs:
     name: RPM - OpenSUSE Build Service
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq
@@ -88,7 +89,7 @@ jobs:
           mkdir obs_res
           cp ../wslu-*.tar.gz obs_res
           cp ../wslu-canary.spec obs_res
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: OBS_RES
           path: obs_res
@@ -98,9 +99,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: Retrive package for deployment
-          uses: actions/download-artifact@v1
+          uses: actions/download-artifact@v4
           with:
             name: OBS_RES
+            path: OBS_RES
         - name: Install Pre-requisites
           run: |
             sudo apt-get update -qq
@@ -122,7 +124,7 @@ jobs:
     name: RPM - Cool Other Package Repo
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install Pre-requisites
         run: |
           sudo apt-get update -qq
@@ -144,7 +146,7 @@ jobs:
           cp SRPMS/* compiled_rpms
           cp RPMS/noarch/* compiled_rpms
         #uses: robertdebock/rpmbuild-action@1.1.1
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: COPRRPMs
           path: compiled_rpms
@@ -155,9 +157,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: Retrive package for deployment
-          uses: actions/download-artifact@v1
+          uses: actions/download-artifact@v4
           with:
             name: COPRRPMs
+            path: COPRRPMs
         - name: Install API token for copr-cli
           env:
             API_TOKEN_CONTENT: ${{ secrets.COPR_API_TOKEN }}

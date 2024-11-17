@@ -15,6 +15,3 @@ pkgs
 
 # system files
 **/*/.DS_Store
-
-# Synk Scanning Cache
-.dccache

@@ -33,13 +33,16 @@ install: doc_install res_install conf_install
 
 uninstall: 
 	for f in $(INSTEDEXES); do \
-		rm -f $$f; \
+		if [ `basename $$f` != "wslpath" ] && [ `basename $$f` != "wslinfo" ]; then \
+			rm -f $$f; \
+		fi; \
 	done
 	for f in $(INSTEDMANOS); do \
 		rm -f $$f; \
 	done
 	rm -rf $(DESTDIR)$(PREFIX)/share/man/man7/wslu.7.gz
 	rm -rf $(DESTDIR)$(PREFIX)/share/wslu
+	rm -f $(DESTDIR)$(PREFIX)/share/applications/wslview.desktop
 
 doc:
 	[ -d $(OUTMANPATH) ] || mkdir $(OUTMANPATH)
@@ -59,7 +62,7 @@ res_install:
 	install -Dm 644 src/etc/*.ps1 -t $(DESTDIR)$(PREFIX)/share/wslu
 	install -Dm 644 src/etc/*.ico -t $(DESTDIR)$(PREFIX)/share/wslu
 	install -Dm 755 src/etc/*.sh -t $(DESTDIR)$(PREFIX)/share/wslu
-	install -Dm 644 src/etc/*.desktop $(DESTDIR)$(PREFIX)/share/wslu
+	install -Dm 644 src/etc/wslview.desktop -t $(DESTDIR)$(PREFIX)/share/applications
 	install -Dm 644 src/etc/conf $(DESTDIR)$(PREFIX)/share/wslu
 
 conf_install:
