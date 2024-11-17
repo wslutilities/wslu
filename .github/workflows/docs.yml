@@ -15,7 +15,7 @@ jobs:
         run: |
           git config --global user.email "me@patrickwu.space"
           git config --global user.name "Jinming Wu, Patrick"
-          git clone --depth 1 https://patrick:$GH_TOKEN@git.wedotstud.io/wslu/documentation website
+          git clone --depth 1 https://patrick:$GH_TOKEN@code.wedotstud.io/wslu/documentation website
           cp -f ./CODE_OF_CONDUCT.md ./website/coc.md
           cp -f ./CONTRIBUTING.md ./website/contributing.md
           git --git-dir=./website/.git --work-tree=./website add -A
